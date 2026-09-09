@@ -1,0 +1,7 @@
+# Model weights are external cached artifacts. Do not put weights in Git or uv.lock.
+# Fill only after compatibility and download approval.
+
+[dynamic_degree.raft]
+path = ""
+sha256 = ""
+upstream_url = ""
