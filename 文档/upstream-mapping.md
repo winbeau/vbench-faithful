@@ -18,7 +18,7 @@
 | motion-smoothness | `vbench/motion_smoothness.py` | `compute_motion_smoothness` | adapter pending dependency audit |
 | subject-consistency | `vbench/subject_consistency.py` | `compute_subject_consistency` | adapter pending semantic input mapping |
 | scene | `vbench/scene.py` | `compute_scene` | adapter pending semantic input mapping |
-| human-action | `vbench/human_action.py` | `compute_human_action` | adapter pending UMT dependency audit |
+| human-action | `vbench/human_action.py` | `compute_human_action` | official filename baseline and explicit-target temporal-evidence audit implemented; real CUDA parity pending |
 | spatial-relationship | `vbench/spatial_relationship.py` | `compute_spatial_relationship` | official plumbing adapter and ordered-role audit implemented; real GPU parity pending |
 | overall-consistency | `vbench/overall_consistency.py` | `compute_overall_consistency` | adapter pending ViCLIP dependency audit |
 | multiple-objects | `vbench/multiple_objects.py` | `compute_multiple_objects` | adapter pending dense-caption dependency audit |
@@ -50,6 +50,14 @@ The direct dependencies are OpenCV, NumPy, PyTorch, EasyDict, tqdm, SciPy throug
 ## Dependency gate
 
 The reference requirements include unpinned scientific/model packages and `transformers==4.33.2`; its setup check requires a CUDA-enabled PyTorch installation. Dynamic Degree declares the direct dependency names and the upstream NumPy `<2` constraint, but does not invent exact model-library versions. The current environment has Python 3.10 and PyTorch `2.13.0+cu130`, but CUDA/NVML is unavailable. `uv.lock` remains absent pending a verified cross-metric model dependency solution.
+
+## Human Action mapping
+
+Locked path: `compute_human_action -> load_dimension_info -> human_action -> load_video(num_frames=16) -> UMT ViT-L/16 K400 -> sigmoid -> rounded Top-5 >= 0.85 -> exact filename-label match -> video bool -> dataset mean`.
+
+The prompt returned by `load_dimension_info` is discarded at the call site. Official derives its target from the basename and this remains unchanged in `--vbench`. Audit requires explicit `target_action` or an exact K400 prompt, preserves target probability/rank, and adds up to four deterministic temporal windows. Its weighted target-probability mean and threshold coverage remain structured and unsummed because no scalar mapping is calibrated.
+
+The existing UMT checkpoint is `/home/msy625/.cache/vbench/umt_model/l16_ptk710_ftk710_ftk400_f16_res224.pth`, size about 579 MiB, SHA-256 `bfee78a03bf806fbc0c216309e8f92792011b7db6556fa860e9d869c1e69fecd`. No weight was downloaded or copied into Git.
 
 ## Spatial Relationship mapping
 

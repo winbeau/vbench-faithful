@@ -2,7 +2,19 @@
 name = "human-action"
 version = "0.1.0"
 requires-python = ">=3.10,<3.13"
-dependencies = ["audit-core"]
+dependencies = [
+  "audit-core",
+  "decord",
+  "einops",
+  "numpy<2",
+  "opencv-python",
+  "openai-clip",
+  "pillow",
+  "timm",
+  "torch",
+  "torchvision",
+  "tqdm",
+]
 [project.scripts]
 human-action = "human_action.cli:main"
 [build-system]

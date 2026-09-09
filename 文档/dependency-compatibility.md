@@ -19,6 +19,10 @@
 | EasyDict | `1.13` | available for the upstream Dynamic Degree argument object |
 | tqdm | `4.70.0` | available |
 | RAFT Things checkpoint | 21,108,000 bytes; SHA-256 `fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1` | present outside Git; real inference still blocked by CUDA |
+| timm | `1.0.12` | locked Human Action module imports and registers its UMT model successfully |
+| OpenAI CLIP | installed; emits a deprecated `pkg_resources` warning | imported by upstream Human Action although not used in its scoring function |
+| einops | `0.8.2` | available for the vendored UMT import closure |
+| UMT K400 checkpoint | about 579 MiB; SHA-256 `bfee78a03bf806fbc0c216309e8f92792011b7db6556fa860e9d869c1e69fecd` | present outside Git; real inference remains blocked by CUDA |
 
 ## Reference dependency evidence
 
@@ -29,6 +33,7 @@ These observations are not enough to select final exact uv versions: the referen
 ## Current decision
 
 - Dynamic Degree declares `easydict`, `numpy<2`, `opencv-python`, `scipy`, `torch`, and `tqdm` as direct dependencies in addition to `audit-core`; imports remain lazy enough for packaged CLI help validation.
+- Human Action declares its direct UMT import/runtime closure (`decord`, `einops`, `numpy<2`, OpenCV, `openai-clip`, Pillow, timm, torch, torchvision, tqdm) without inventing exact versions. The locked module imports in the current Python 3.10 environment, but no CUDA inference compatibility is claimed.
 - The locked RAFT architecture and Things checkpoint load successfully on CPU with the installed PyTorch build. This checks checkpoint compatibility only; the CLI still rejects unavailable CUDA and never falls back to CPU.
 - Official backends fail explicitly until their per-metric closure, license handling, CUDA combination, and weight hashes are approved.
 - Spatial Relationship additionally requires the locked fork's vendored GRiT/CenterNet2 source and a compatible Detectron2 build. The reference requirements comment out an unpinned Detectron2 Git dependency, so no version is invented in this workspace.
