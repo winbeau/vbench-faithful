@@ -14,7 +14,7 @@
 
 | Metric | Upstream module | Entry point | Current status |
 |---|---|---|---|
-| dynamic-degree | `vbench/dynamic_degree.py` | `compute_dynamic_degree` | adapter pending RAFT/torch/CUDA closure |
+| dynamic-degree | `vbench/dynamic_degree.py` | `compute_dynamic_degree` | official adapter and source/time/persistence-aware audit implemented; real CUDA parity pending |
 | motion-smoothness | `vbench/motion_smoothness.py` | `compute_motion_smoothness` | adapter pending dependency audit |
 | subject-consistency | `vbench/subject_consistency.py` | `compute_subject_consistency` | adapter pending semantic input mapping |
 | scene | `vbench/scene.py` | `compute_scene` | adapter pending semantic input mapping |
@@ -23,15 +23,33 @@
 | overall-consistency | `vbench/overall_consistency.py` | `compute_overall_consistency` | adapter pending ViCLIP dependency audit |
 | multiple-objects | `vbench/multiple_objects.py` | `compute_multiple_objects` | adapter pending dense-caption dependency audit |
 
-## Dynamic degree evidence
+## Dynamic Degree mapping
 
-The reference implementation imports `cv2`, `numpy`, `torch`, `tqdm`, `easydict`, and the bundled RAFT implementation. It samples frames with `max(1, round(fps / 8))`, uses RAFT with 20 iterations, computes the top 5% flow magnitude mean, applies a resolution-scaled threshold, and averages per-video boolean results. These facts are source observations only; no real inference was run in this implementation.
+Inspection was repeated against the reference gate above. Only root `vbench/dynamic_degree.py` and its root VBench 1.0 call chain are used; similarly named VBench 2.0 and beta modules are excluded.
 
-The adapter must preserve this behavior and vendor or otherwise package the required RAFT source under its license. It must not replace RAFT with OpenCV flow and call the result official.
+### Paper and source facts
+
+The local `VBench1.0_paper.pdf` is a 284-byte 404 HTML response and cannot be rendered as PDF. The official [arXiv paper](https://arxiv.org/abs/2311.17982) was checked through its official HTML rendering. It describes Dynamic Degree as detecting large motion with RAFT, averaging the largest 5% optical-flow strengths to decide whether a video is static, and reporting the proportion of non-static videos. Exact sampling, thresholds, and short-video behavior below are source facts, not paper claims.
+
+The locked source path is:
+
+`compute_dynamic_degree -> DynamicDegree -> OpenCV decode -> interval=max(1, round(fps/8)) -> adjacent sampled pairs -> InputPadder -> RAFT(iters=20, test_mode=True) -> flow magnitude -> largest int(H*W*0.05) pixels -> mean -> threshold=6*min(H,W)/256 -> score>threshold -> count -> count_num=round(4*sampled_count/16) -> video bool -> mean of video bools`.
+
+Python's rounding makes `count_num` zero for some very short sampled sequences. `check_move()` tests `count >= count_num` inside the transition loop, so a two-sampled-frame video can return true even for a zero score. This behavior remains unchanged in `--vbench`. Audit records corrected effective-count information only as compatibility diagnostics; neither count participates in its structured intensity/persistence evidence or optional scalarization.
+
+The direct dependencies are OpenCV, NumPy, PyTorch, EasyDict, tqdm, SciPy through RAFT utilities, and the bundled RAFT source. The root RAFT code carries the BSD 3-Clause license. The existing Things checkpoint is `/home/msy625/.cache/vbench/raft_model/models/raft-things.pth`, size 21,108,000 bytes, SHA-256 `fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1`.
+
+### Plumbing adaptations
+
+- `dynamic_degree.backends.vbench` validates remote, branch, SHA, clean worktree, and import origin before model loading.
+- Runtime workers initialize the locked upstream `DynamicDegree` once and reproduce `infer()` while retaining official transition diagnostics. The opt-in parity test compares the adapter boolean with direct upstream `infer()` on the same model, video, checkpoint, and device.
+- Audit reuses the same upstream RAFT architecture, checkpoint loading, InputPadder, and 20-iteration inference. It unpads flow back to the decoded image shape before audit-only affine and normalization logic.
+- Audit decoding preserves source frame indices and OpenCV timestamps when strictly increasing, with an explicit nominal-FPS fallback. Sampling remains approximately 8 FPS.
+- GPU workers use the shared deterministic round-robin partition and temporary JSON result protocol; the parent rejects duplicate or missing videos and restores input order.
 
 ## Dependency gate
 
-The reference requirements include unpinned scientific/model packages and `transformers==4.33.2`; its setup check requires a CUDA-enabled PyTorch installation. The current inspected environment has Python 3.10 in `/home/msy625/miniconda3/envs/vbench`, PyTorch `2.13.0+cu130`, CUDA unavailable, and no `nvidia-smi` access. Therefore model dependencies are intentionally not added to the workspace or lock file yet.
+The reference requirements include unpinned scientific/model packages and `transformers==4.33.2`; its setup check requires a CUDA-enabled PyTorch installation. Dynamic Degree declares the direct dependency names and the upstream NumPy `<2` constraint, but does not invent exact model-library versions. The current environment has Python 3.10 and PyTorch `2.13.0+cu130`, but CUDA/NVML is unavailable. `uv.lock` remains absent pending a verified cross-metric model dependency solution.
 
 ## Spatial Relationship mapping
 
