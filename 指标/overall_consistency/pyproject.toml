@@ -2,7 +2,18 @@
 name = "overall-consistency"
 version = "0.1.0"
 requires-python = ">=3.10,<3.13"
-dependencies = ["audit-core"]
+dependencies = [
+  "audit-core",
+  "decord",
+  "einops",
+  "numpy<2",
+  "openai-clip",
+  "pillow",
+  "setuptools<81",
+  "torch",
+  "torchvision",
+  "tqdm",
+]
 [project.scripts]
 overall-consistency = "overall_consistency.cli:main"
 [build-system]
