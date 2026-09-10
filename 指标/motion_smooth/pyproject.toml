@@ -2,7 +2,7 @@
 name = "motion-smoothness"
 version = "0.1.0"
 requires-python = ">=3.10,<3.13"
-dependencies = ["audit-core"]
+dependencies = ["audit-core", "numpy<2", "opencv-python", "dynamic-degree"]
 [project.scripts]
 motion-smoothness = "motion_smoothness.cli:main"
 [build-system]
