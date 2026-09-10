@@ -2,7 +2,7 @@
 name = "multiple-objects"
 version = "0.1.0"
 requires-python = ">=3.10,<3.13"
-dependencies = ["audit-core"]
+dependencies = ["audit-core", "numpy<2"]
 [project.scripts]
 multiple-objects = "multiple_objects.cli:main"
 [build-system]
