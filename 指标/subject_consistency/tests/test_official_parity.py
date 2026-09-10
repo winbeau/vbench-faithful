@@ -17,7 +17,7 @@ class OfficialParityTests(unittest.TestCase):
         self.assertEqual(state.sha, UPSTREAM_SHA)
         self.assertFalse(state.dirty)
 
-    def test_formula_matches_previous_plus_fixed_first_anchor(self):
+    def test_original_formula_matches_adjacent_plus_first_anchor(self):
         features = F.normalize(torch.tensor([[1.0, 0.0], [0.8, 0.6], [0.0, 1.0]]), dim=-1)
         previous = [max(0.0, F.cosine_similarity(features[i - 1], features[i], dim=0).item()) for i in range(1, 3)]
         first = [max(0.0, F.cosine_similarity(features[0], features[i], dim=0).item()) for i in range(1, 3)]
