@@ -7,3 +7,14 @@ output/
 dist/
 build/
 *.egg-info/
+
+# External/raw VBench data
+data/raw/
+
+# Reproducible intermediate E0 outputs
+data/processed/pairs/
+data/processed/audit/*.csv
+
+# Keep selected frozen audit summaries
+!data/processed/audit/global_consistency.csv
+!data/processed/audit/main_dimension_coverage.csv

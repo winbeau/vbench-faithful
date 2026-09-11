@@ -1,0 +1,5 @@
+dimension,groups,pairs,prompts,unique_video_paths,unique_video_ids,all_groups_four_models,groups_times_6_equals_pairs
+dynamics_degree,360,2160,72,1440,4,1,1
+human_action,500,3000,100,2000,4,1,1
+spatial_relationship,540,3240,108,2160,4,1,1
+subject_consistency,360,2160,72,1440,4,1,1
