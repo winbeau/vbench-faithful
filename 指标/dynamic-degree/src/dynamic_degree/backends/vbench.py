@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -13,9 +14,7 @@ import numpy as np
 
 from ..schemas import OfficialVideoResult
 
-UPSTREAM_PATH = Path("/home/msy625/vbench1")
-UPSTREAM_REMOTE = "https://github.com/msy625/VBench.git"
-UPSTREAM_BRANCH = "master"
+UPSTREAM_PATH = Path(os.environ.get("VBENCH1_ROOT", "/root/vbench1"))
 UPSTREAM_SHA = "13dee903cc97e2633ed6e8f50dea61bc90717935"
 DEFAULT_WEIGHT = Path.home() / ".cache/vbench/raft_model/models/raft-things.pth"
 
@@ -31,6 +30,12 @@ class UpstreamState:
 
 
 def inspect_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
+    path = Path(path)
+    source = path / "vbench/dynamic_degree.py"
+    if not path.is_dir():
+        raise FileNotFoundError(f"official upstream root does not exist: {path}")
+    if not source.is_file():
+        raise FileNotFoundError(f"official Dynamic Degree source is missing: {source}")
     def git(*args: str) -> str:
         return subprocess.check_output(["git", "-C", str(path), *args], text=True, stderr=subprocess.STDOUT).strip()
 
@@ -46,10 +51,8 @@ def inspect_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
 
 def verify_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
     state = inspect_upstream(path)
-    expected = (UPSTREAM_REMOTE, UPSTREAM_BRANCH, UPSTREAM_SHA)
-    actual = (state.remote, state.branch, state.sha)
-    if actual != expected:
-        raise RuntimeError(f"upstream identity mismatch: expected={expected}, actual={actual}")
+    if state.sha != UPSTREAM_SHA:
+        raise RuntimeError(f"upstream SHA mismatch: expected={UPSTREAM_SHA}, actual={state.sha}")
     if state.dirty:
         raise RuntimeError("upstream worktree is dirty; refusing Dynamic Degree evaluation")
     return state

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib
+import hashlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -9,10 +11,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
-UPSTREAM_PATH = Path("/home/msy625/vbench1")
-UPSTREAM_REMOTE = "https://github.com/msy625/VBench.git"
-UPSTREAM_BRANCH = "master"
+UPSTREAM_PATH = Path(os.environ.get("VBENCH1_ROOT", "/root/vbench1"))
 UPSTREAM_SHA = "13dee903cc97e2633ed6e8f50dea61bc90717935"
+UPSTREAM_SOURCE_SHA256 = "26f09a111dac904d1a92ae5bd1c332a029cebd22610d62376a09d7d634950270"
 DEFAULT_WEIGHT = Path.home() / ".cache/vbench/grit_model/grit_b_densecap_objectdet.pth"
 
 
@@ -24,26 +25,38 @@ class UpstreamState:
     sha: str
     dirty: bool
     submodules: tuple[str, ...]
+    source_sha256: str
 
 
 def inspect_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
+    path = Path(path)
+    source = path / "vbench/spatial_relationship.py"
+    if not path.is_dir():
+        raise FileNotFoundError(f"official upstream root does not exist: {path}")
+    if not source.is_file():
+        raise FileNotFoundError(f"official Spatial Relationship source is missing: {source}")
+
     def git(*args: str) -> str:
         return subprocess.check_output(["git", "-C", str(path), *args], text=True, stderr=subprocess.STDOUT).strip()
 
-    remote = git("remote", "get-url", "origin")
+    try:
+        remote = git("remote", "get-url", "origin")
+    except subprocess.CalledProcessError:
+        remote = ""
     branch = git("branch", "--show-current")
     sha = git("rev-parse", "HEAD")
     dirty = bool(git("status", "--porcelain"))
     submodule_text = git("submodule", "status")
-    return UpstreamState(str(path.resolve()), remote, branch, sha, dirty, tuple(line for line in submodule_text.splitlines() if line))
+    source_sha256 = hashlib.sha256(source.read_bytes()).hexdigest()
+    return UpstreamState(str(path.resolve()), remote, branch, sha, dirty, tuple(line for line in submodule_text.splitlines() if line), source_sha256)
 
 
 def verify_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
     state = inspect_upstream(path)
-    expected = (UPSTREAM_REMOTE, UPSTREAM_BRANCH, UPSTREAM_SHA)
-    actual = (state.remote, state.branch, state.sha)
-    if actual != expected:
-        raise RuntimeError(f"upstream identity mismatch: expected={expected}, actual={actual}")
+    if state.sha != UPSTREAM_SHA:
+        raise RuntimeError(f"upstream SHA mismatch: expected={UPSTREAM_SHA}, actual={state.sha}")
+    if state.source_sha256 != UPSTREAM_SOURCE_SHA256:
+        raise RuntimeError(f"official source hash mismatch: expected={UPSTREAM_SOURCE_SHA256}, actual={state.source_sha256}")
     if state.dirty:
         raise RuntimeError("upstream worktree is dirty; refusing official evaluation")
     return state
@@ -174,8 +187,9 @@ class OfficialGritDetector:
             scale = 720.0 / min(height, width)
             video_tensor = self.module.transforms.Resize(size=(int(scale * height), int(scale * width)))(video_tensor)
         predictions = []
+        frame_arrays = video_tensor.permute(0, 2, 3, 1).numpy()
         with self.module.torch.no_grad():
-            for frame in video_tensor.permute(0, 2, 3, 1):
+            for frame in frame_arrays:
                 raw_predictions, _ = self.model.run_det_tensor(frame)
                 instances = raw_predictions["instances"]
                 predictions.append(detections_from_instances(instances))

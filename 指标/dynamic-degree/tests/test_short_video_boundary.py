@@ -45,7 +45,7 @@ class ShortVideoBoundaryTests(unittest.TestCase):
             "two.mp4", "a person running", sequence(2), lambda left, right: np.zeros((16, 16, 2))
         )
         self.assertEqual(result.status, "succeeded")
-        self.assertIsNone(result.score)
+        self.assertAlmostEqual(result.score, 0.0)
         self.assertAlmostEqual(result.task_relevant_motion_evidence["motion_intensity"], 0.0)
         self.assertAlmostEqual(result.task_relevant_motion_evidence["temporal_coverage"], 0.0)
         self.assertTrue(result.boundary_fix_applied)
@@ -58,7 +58,7 @@ class ShortVideoBoundaryTests(unittest.TestCase):
         )
         self.assertEqual(result.audit_effective_count_num, 0)
         self.assertFalse(result.boundary_fix_applied)
-        self.assertIsNone(result.score)
+        self.assertAlmostEqual(result.score, 0.0)
         self.assertAlmostEqual(result.task_relevant_motion_evidence["motion_intensity"], 0.0)
 
     def test_boundary_diagnostic_does_not_change_task_evidence(self):

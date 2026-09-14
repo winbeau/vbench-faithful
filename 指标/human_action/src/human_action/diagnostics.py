@@ -87,7 +87,9 @@ def audit_result_payload(
         "temporal_coverage": result.temporal_coverage,
         "task_relevant_action_evidence": task_evidence,
         "score_metadata": {
-            "status": "not_calibrated",
+            "status": "succeeded_scalarized" if result.score is not None else "not_available",
+            "source": "temporal_mean_target_probability",
+            "formula": "sum(window_weight * target_probability) / sum(window_weight)",
             "scalarization": result.scalarization,
         },
         "diagnostics": audit_diagnostics(result, level),

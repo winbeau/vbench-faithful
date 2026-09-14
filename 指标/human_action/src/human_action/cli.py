@@ -144,7 +144,7 @@ def execute(args: argparse.Namespace) -> int:
             formula_version=(
                 "vbench1-filename-target-top5-threshold-video-boolean-mean"
                 if backend == "vbench"
-                else "structured-target-probability-and-temporal-coverage-no-default-scalar"
+                else "duration-weighted-temporal-mean-target-probability-benchmark-scalar"
             ),
         )
         destination = output_base / "human-action" / backend / current_run

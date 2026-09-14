@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -12,9 +13,10 @@ from typing import Any, Callable, Mapping
 from ..conditions import parse_target_objects
 from ..schemas import DetectionEvidence, FrameDetections
 
-UPSTREAM_PATH = Path("/home/msy625/vbench1")
+UPSTREAM_PATH = Path(os.environ.get("VBENCH_AUDIT_UPSTREAM", "/root/vbench1"))
 UPSTREAM_REMOTE = "https://github.com/msy625/VBench.git"
 UPSTREAM_SHA = "13dee903cc97e2633ed6e8f50dea61bc90717935"
+OFFLINE_BUNDLE_ORIGIN = "/root/vbench1.bundle"
 DEFAULT_WEIGHT = Path.home() / ".cache/vbench/grit_model/grit_b_densecap_objectdet.pth"
 OFFICIAL_THRESHOLD = 0.5
 OFFICIAL_NUM_FRAMES = 16
@@ -28,8 +30,9 @@ def inspect_upstream(path: Path = UPSTREAM_PATH) -> dict[str, Any]:
 
 def import_official_module(path: Path = UPSTREAM_PATH):
     state = inspect_upstream(path)
-    if (state["remote"], state["branch"], state["sha"]) != (UPSTREAM_REMOTE, "master", UPSTREAM_SHA):
-        raise RuntimeError("upstream VBench identity mismatch")
+    origin_ok = state["remote"] in {UPSTREAM_REMOTE, OFFLINE_BUNDLE_ORIGIN}
+    if not (origin_ok and state["branch"] == "master" and state["sha"] == UPSTREAM_SHA):
+        raise RuntimeError(f"upstream VBench identity mismatch: {state}")
     if state["dirty"]:
         raise RuntimeError("upstream VBench worktree is dirty")
     resolved = str(path.resolve())
@@ -48,7 +51,7 @@ def metadata_to_official_entries(videos: list[Path], metadata: Mapping[str, Mapp
         targets = parse_target_objects(item)
         if len(targets) != 2:
             raise ValueError("official VBench multiple_objects requires exactly two ' and '-separated targets")
-        entries.append({"prompt_en": item.get("prompt", ""), "dimension": ["multiple_objects"], "video_list": [str(video.resolve())], "auxiliary_info": {"object": " and ".join(targets)}})
+        entries.append({"prompt_en": item.get("prompt", ""), "dimension": ["multiple_objects"], "video_list": [str(video.resolve())], "auxiliary_info": {"multiple_objects": {"object": " and ".join(targets)}}})
     return entries
 
 
@@ -229,12 +232,12 @@ class OfficialGrITDetector:
         output: list[FrameDetections] = []
         for frame in video_tensor.permute(0, 2, 3, 1):
             self._set_roi_threshold(self.repair_candidate_threshold)
-            repair_predictions, _ = self.model.run_det_tensor(frame)
+            repair_predictions, _ = self.model.run_det_tensor(frame.detach().cpu().numpy())
             detections = self._extract(
                 repair_predictions, self._last_object_threshold_scores
             )
             self._set_roi_threshold(OFFICIAL_THRESHOLD)
-            official_predictions, _ = self.model.run_det_tensor(frame)
+            official_predictions, _ = self.model.run_det_tensor(frame.detach().cpu().numpy())
             official_labels = tuple(
                 item.label
                 for item in self._extract(

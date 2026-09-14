@@ -45,7 +45,7 @@ class TemporalEvidenceTests(unittest.TestCase):
         self.assertTrue(all(len(indices) == 16 for _, _, indices in windows))
         self.assertEqual(sum(stop - start for start, stop, _ in windows), 10)
 
-    def test_audit_evaluator_emits_structured_evidence_without_scalar(self):
+    def test_audit_evaluator_emits_structured_evidence_with_scalar(self):
         class FakeClassifier:
             categories = categories()
 
@@ -64,6 +64,7 @@ class TemporalEvidenceTests(unittest.TestCase):
             ActionQuery("A person is ironing", "ironing", "metadata_target_action"),
         )
         self.assertEqual(result.status, "succeeded")
-        self.assertIsNone(result.score)
+        self.assertAlmostEqual(result.score, result.temporal_mean_probability)
+        self.assertTrue(np.isfinite(result.score))
         self.assertEqual(len(result.windows), 4)
         self.assertIn("temporal_coverage", result.task_evidence())

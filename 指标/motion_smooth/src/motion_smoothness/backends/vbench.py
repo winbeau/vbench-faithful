@@ -2,17 +2,19 @@ from __future__ import annotations
 
 import importlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 from typing import Any, Callable
 
-UPSTREAM_PATH = Path("/home/msy625/vbench1")
+UPSTREAM_PATH = Path(os.environ.get("VBENCH_AUDIT_UPSTREAM", "/root/vbench1"))
 UPSTREAM_REMOTE = "https://github.com/msy625/VBench.git"
 UPSTREAM_SHA = "13dee903cc97e2633ed6e8f50dea61bc90717935"
+OFFLINE_BUNDLE_ORIGIN = "/root/vbench1.bundle"
 DEFAULT_CONFIG = UPSTREAM_PATH / "vbench/third_party/amt/cfgs/AMT-S.yaml"
-DEFAULT_WEIGHT = Path.home() / ".cache/vbench/amt_model/amt-s.pth"
+DEFAULT_WEIGHT = Path(os.environ.get("VBENCH_AUDIT_AMT_WEIGHT", str(Path.home() / ".cache/vbench/amt_model/amt-s.pth")))
 
 
 def inspect_upstream(path: Path = UPSTREAM_PATH) -> dict[str, Any]:
@@ -23,8 +25,9 @@ def inspect_upstream(path: Path = UPSTREAM_PATH) -> dict[str, Any]:
 
 def import_official_module(path: Path = UPSTREAM_PATH):
     state = inspect_upstream(path)
-    if (state["remote"], state["branch"], state["sha"]) != (UPSTREAM_REMOTE, "master", UPSTREAM_SHA):
-        raise RuntimeError("upstream VBench identity mismatch")
+    origin_ok = state["remote"] in {UPSTREAM_REMOTE, OFFLINE_BUNDLE_ORIGIN}
+    if not (origin_ok and state["branch"] == "master" and state["sha"] == UPSTREAM_SHA):
+        raise RuntimeError(f"upstream VBench identity mismatch: {state}")
     if state["dirty"]:
         raise RuntimeError("upstream VBench worktree is dirty")
     resolved = str(path.resolve())

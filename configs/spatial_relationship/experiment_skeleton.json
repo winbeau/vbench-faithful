@@ -1,0 +1,46 @@
+{
+  "schema_version": "spatial-counterfactual-v1",
+  "independent_unit": "base_id",
+  "python": "/root/vbench-audit/.venv/bin/python",
+  "uv": "/root/.local/bin/uv",
+  "upstream_root": "/root/vbench1",
+  "grit_overlay": "/root/autodl-tmp/vbench-audit-storage/envs/spatial-grit/site-packages",
+  "grit_weight": "/root/autodl-tmp/vbench-audit-storage/models/grit/grit_b_densecap_objectdet.pth",
+  "variants": {
+    "official": {
+      "ready": true,
+      "implementation": "locked upstream vbench.spatial_relationship"
+    },
+    "signed_direction": {
+      "ready": true,
+      "implementation": "AblationMode.SIGNED_ONLY"
+    },
+    "role_preserving": {
+      "ready": true,
+      "implementation": "AblationMode.ORDERED_ROLE_IDENTITY_ASSIGNMENT"
+    },
+    "full_temporal": {
+      "ready": false,
+      "implementation": null,
+      "blocker": "No temporal persistence evaluator component exists in the current repository"
+    }
+  },
+  "families": {
+    "directional_inversion": ["original", "hflip"],
+    "role_swap": ["correct", "swapped"],
+    "temporal_persistence": ["coverage_0", "coverage_25", "coverage_50", "coverage_75", "coverage_100"],
+    "multi_instance": ["clean", "with_distractor"],
+    "detection_control": ["default"]
+  },
+  "locked_official_behavior": {
+    "frame_count": 16,
+    "frame_sampling": "middle",
+    "detector_confidence_threshold": 0.5,
+    "relation_iou_threshold": 0.1,
+    "video_aggregation": "arithmetic_mean_over_sampled_frames"
+  },
+  "diagnostics": {
+    "official_detection_conditioned": "unsupported",
+    "repair_detection_conditioned": "ready_with_full_diagnostics"
+  }
+}

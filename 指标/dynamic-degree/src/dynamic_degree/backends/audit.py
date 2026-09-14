@@ -8,7 +8,7 @@ from typing import Any, Callable
 import numpy as np
 
 from ..diagnostics import DiagnosticsLevel, aggregate_channel, serialize_audit_result
-from ..motion import AffineEstimatorConfig, decompose_motion
+from ..motion import AffineEstimatorConfig, decompose_motion, motion_statistics
 from ..prompt_target import MotionTarget, parse_motion_target
 from ..schemas import (
     AuditVideoResult,
@@ -27,8 +27,17 @@ class AuditAblation(str, Enum):
     WITHOUT_CONTINUOUS_PERSISTENCE_AGGREGATION = "without_continuous_persistence_aggregation"
 
 
+class AuditVariant(str, Enum):
+    FULL = "full"
+    TIME_ONLY = "time_only"
+    SOURCE_ONLY = "source_only"
+    DURATION_ONLY = "duration_only"
+    SOURCE_TIME = "source_time"
+
+
 @dataclass(frozen=True)
 class AuditConfig:
+    variant: AuditVariant = AuditVariant.FULL
     ablation: AuditAblation = AuditAblation.FULL
     significant_motion_threshold: float | None = None
     threshold_source: str | None = None
@@ -38,6 +47,17 @@ class AuditConfig:
     scalar_score_hook: Callable[[dict[str, Any]], float] | None = None
     scalar_score_source: str | None = None
     scalar_score_independently_calibrated: bool = False
+
+    def components(self) -> dict[str, bool]:
+        if self.variant == AuditVariant.TIME_ONLY:
+            return {"time_normalization": True, "source_decomposition": False, "duration_persistence": False, "task_routing": False}
+        if self.variant == AuditVariant.SOURCE_ONLY:
+            return {"time_normalization": False, "source_decomposition": True, "duration_persistence": False, "task_routing": False}
+        if self.variant == AuditVariant.DURATION_ONLY:
+            return {"time_normalization": False, "source_decomposition": False, "duration_persistence": True, "task_routing": False}
+        if self.variant == AuditVariant.SOURCE_TIME:
+            return {"time_normalization": True, "source_decomposition": True, "duration_persistence": False, "task_routing": False}
+        return {"time_normalization": True, "source_decomposition": True, "duration_persistence": True, "task_routing": True}
 
 
 def official_count_num(sampled_frame_count: int) -> int:
@@ -66,7 +86,7 @@ def derive_motion_threshold(frame_shape: tuple[int, int], config: AuditConfig) -
     height, width = frame_shape
     diagonal = math.hypot(height, width)
     official_pixels = 6.0 * min(height, width) / 256.0
-    if config.ablation == AuditAblation.WITHOUT_TIME_NORMALIZATION:
+    if not config.components()["time_normalization"] or config.ablation == AuditAblation.WITHOUT_TIME_NORMALIZATION:
         return MotionThreshold(
             value=float(official_pixels / diagonal),
             units="image_diagonals_per_transition",
@@ -171,6 +191,16 @@ def _optional_scalar_score(
     return value
 
 
+def _benchmark_scalar_score(evidence: dict[str, Any] | None) -> float | None:
+    """Formal Full-Audit scalar: routed task-relevant motion intensity."""
+    if not evidence or "motion_intensity" not in evidence:
+        return None
+    value = float(evidence["motion_intensity"])
+    if not math.isfinite(value):
+        raise ValueError("task-relevant motion intensity must be finite")
+    return value
+
+
 def analyze_timed_flow_sequence(
     video: str,
     prompt: str,
@@ -181,10 +211,11 @@ def analyze_timed_flow_sequence(
     config: AuditConfig | None = None,
 ) -> AuditVideoResult:
     config = config or AuditConfig()
+    components = config.components()
     if config.scalar_score_hook is not None and not config.scalar_score_source:
         raise ValueError("scalar_score_hook requires scalar_score_source")
     target = parse_motion_target(prompt, motion_target_override)
-    if config.ablation == AuditAblation.WITHOUT_PROMPT_ROUTING:
+    if not components["task_routing"] or config.ablation == AuditAblation.WITHOUT_PROMPT_ROUTING:
         target = PromptTargetDecision(MotionTarget.GENERIC.value, "ablation_without_prompt_routing")
     threshold = derive_motion_threshold(sequence.frame_shape, config)
     transitions: list[TransitionEvidence] = []
@@ -202,24 +233,24 @@ def analyze_timed_flow_sequence(
             flow = np.asarray(compute_flow(frame_a.frame, frame_b.frame), dtype=np.float64)
             if flow.shape[:2] != sequence.frame_shape or flow.ndim != 3 or flow.shape[2] != 2:
                 raise ValueError(f"flow shape {flow.shape} does not match frame shape {sequence.frame_shape}")
-            decomposition = decompose_motion(
-                flow,
-                config.affine,
-                compensate_global=config.ablation != AuditAblation.WITHOUT_GLOBAL_COMPENSATION,
-            )
+            decomposition = None
+            if components["source_decomposition"]:
+                decomposition = decompose_motion(flow, config.affine, compensate_global=config.ablation != AuditAblation.WITHOUT_GLOBAL_COMPENSATION)
+                apparent_stats, global_stats, residual_stats = decomposition.apparent_statistics, decomposition.global_statistics, decomposition.residual_statistics
+            else:
+                apparent_stats, global_stats, residual_stats = motion_statistics(flow), None, None
             apparent_displacement, apparent_speed = normalized_speed(
-                decomposition.apparent_statistics.top5_mean, sequence.frame_shape, dt
+                apparent_stats.top5_mean, sequence.frame_shape, dt
             )
-            global_displacement, global_speed = normalized_speed(
-                decomposition.global_statistics.top5_mean, sequence.frame_shape, dt
-            )
-            residual_displacement, residual_speed = normalized_speed(
-                decomposition.residual_statistics.top5_mean, sequence.frame_shape, dt
-            )
-            if config.ablation == AuditAblation.WITHOUT_TIME_NORMALIZATION:
+            if components["source_decomposition"]:
+                global_displacement, global_speed = normalized_speed(global_stats.top5_mean, sequence.frame_shape, dt)
+                residual_displacement, residual_speed = normalized_speed(residual_stats.top5_mean, sequence.frame_shape, dt)
+            else:
+                global_displacement = global_speed = residual_displacement = residual_speed = None
+            if not components["time_normalization"] or config.ablation == AuditAblation.WITHOUT_TIME_NORMALIZATION:
                 apparent_speed = apparent_displacement
-                global_speed = global_displacement
-                residual_speed = residual_displacement
+                if components["source_decomposition"]:
+                    global_speed, residual_speed = global_displacement, residual_displacement
             transitions.append(
                 TransitionEvidence(
                     source_frame_index_a=frame_a.source_frame_index,
@@ -238,20 +269,21 @@ def analyze_timed_flow_sequence(
                     residual_speed=residual_speed,
                     significant_motion_threshold=threshold.value,
                     apparent_significant=apparent_speed > threshold.value,
-                    global_significant=global_speed > threshold.value,
-                    residual_significant=residual_speed > threshold.value,
-                    apparent_magnitude_statistics=decomposition.apparent_statistics,
-                    global_magnitude_statistics=decomposition.global_statistics,
-                    residual_magnitude_statistics=decomposition.residual_statistics,
-                    affine=decomposition.affine,
+                    global_significant=None if global_speed is None else global_speed > threshold.value,
+                    residual_significant=None if residual_speed is None else residual_speed > threshold.value,
+                    apparent_magnitude_statistics=apparent_stats,
+                    global_magnitude_statistics=global_stats,
+                    residual_magnitude_statistics=residual_stats,
+                    affine=None if decomposition is None else decomposition.affine,
                 )
             )
         except ValueError as exc:
             transitions.append(_invalid_transition(frame_a, frame_b, sequence.frame_shape, f"{type(exc).__name__}: {exc}"))
 
-    apparent = aggregate_channel(transitions, "apparent", threshold.value)
-    camera = aggregate_channel(transitions, "camera", threshold.value)
-    residual = aggregate_channel(transitions, "residual", threshold.value)
+    coverage_threshold = threshold.value if components["duration_persistence"] else None
+    apparent = aggregate_channel(transitions, "apparent", coverage_threshold, duration_weighted=components["duration_persistence"])
+    camera = aggregate_channel(transitions, "camera", coverage_threshold, duration_weighted=components["duration_persistence"])
+    residual = aggregate_channel(transitions, "residual", coverage_threshold, duration_weighted=components["duration_persistence"])
     if config.ablation == AuditAblation.WITHOUT_CONTINUOUS_PERSISTENCE_AGGREGATION:
         from ..schemas import ChannelEvidence
 
@@ -267,6 +299,7 @@ def analyze_timed_flow_sequence(
         include_persistence=include_persistence,
     )
     score = None
+    scalar_score_source = None
     sampled_count = len(sequence.frames)
     official_count = official_count_num(sampled_count)
     effective_count = (
@@ -286,7 +319,15 @@ def analyze_timed_flow_sequence(
     else:
         status = "succeeded"
         failure_reason = None
-        score = _optional_scalar_score(task_evidence, config)
+        score = _benchmark_scalar_score(task_evidence)
+        scalar_score_source = (
+            "task_relevant_motion_evidence.motion_intensity"
+            if score is not None
+            else None
+        )
+        if config.scalar_score_hook is not None:
+            score = _optional_scalar_score(task_evidence, config)
+            scalar_score_source = config.scalar_score_source
     return AuditVideoResult(
         video=video,
         prompt=prompt,
@@ -308,7 +349,7 @@ def analyze_timed_flow_sequence(
         selected_evidence_channel=selected_channel,
         task_relevant_motion_evidence=task_evidence,
         scalar_score_source=(
-            config.scalar_score_source if config.scalar_score_hook is not None else None
+            scalar_score_source
         ),
         scalar_score_independently_calibrated=(
             config.scalar_score_independently_calibrated
@@ -318,6 +359,7 @@ def analyze_timed_flow_sequence(
         official_count_num=official_count,
         audit_effective_count_num=effective_count,
         boundary_fix_applied=config.boundary_fix_enabled and sampled_count > 1 and official_count == 0,
+        component_provenance=components,
     )
 
 
@@ -343,10 +385,11 @@ def audit_result_payload(result: AuditVideoResult, level: DiagnosticsLevel) -> d
             "source": result.scalar_score_source,
             "independently_calibrated": result.scalar_score_independently_calibrated,
             "status": (
-                "available"
+                "succeeded_scalarized"
                 if result.score is not None
-                else ("configured_but_not_applicable" if result.scalar_score_source else "not_configured")
+                else ("configured_but_not_applicable" if result.scalar_score_source else "not_available")
             ),
+            "scalarization": "task_relevant_motion_evidence.motion_intensity",
         },
         "diagnostics": serialize_audit_result(result, level),
     }

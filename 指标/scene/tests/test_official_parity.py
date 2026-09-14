@@ -3,6 +3,7 @@ from pathlib import Path
 
 from scene.backends.vbench import (
     UPSTREAM_SHA,
+    UPSTREAM_PATH,
     extract_scene_label,
     official_frame_match,
     sample_middle_indices,
@@ -67,7 +68,7 @@ class OfficialParityTests(unittest.TestCase):
             return 0.5, [{"video_path": "/tmp/video_000.mp4", "video_results": 0.5, "frame_results": [1, 0], "frame_count": 2}]
 
         evaluator = OfficialVBenchSceneEvaluator(
-            "cuda:0", upstream=Path("/home/msy625/vbench1"), compute=compute
+            "cuda:0", upstream=UPSTREAM_PATH, compute=compute
         )
         result = evaluator.evaluate_video(
             Path("/tmp/video_000.mp4"),

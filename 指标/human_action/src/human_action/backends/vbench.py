@@ -10,11 +10,10 @@ from typing import Any
 from ..models import LockedUmtClassifier, OFFICIAL_NUM_FRAMES, OFFICIAL_THRESHOLD, OFFICIAL_TOP_K
 from ..schemas import OfficialActionResult
 
-UPSTREAM_PATH = Path("/home/msy625/vbench1")
-UPSTREAM_REMOTE = "https://github.com/msy625/VBench.git"
+UPSTREAM_PATH = Path("/root/vbench1")
 UPSTREAM_BRANCH = "master"
 UPSTREAM_SHA = "13dee903cc97e2633ed6e8f50dea61bc90717935"
-DEFAULT_WEIGHT = Path.home() / ".cache/vbench/umt_model/l16_ptk710_ftk710_ftk400_f16_res224.pth"
+DEFAULT_WEIGHT = Path("/root/autodl-tmp/vbench-audit-storage/models/umt/l16_ptk710_ftk710_ftk400_f16_res224.pth")
 
 
 @dataclass(frozen=True)
@@ -28,6 +27,11 @@ class UpstreamState:
 
 
 def inspect_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
+    if not path.is_dir():
+        raise RuntimeError(f"upstream repository does not exist: {path}")
+    required_source = path / "vbench" / "human_action.py"
+    if not required_source.is_file():
+        raise RuntimeError(f"locked Human Action source is missing: {required_source}")
     def git(*args: str) -> str:
         return subprocess.check_output(
             ["git", "-C", str(path), *args], text=True, stderr=subprocess.STDOUT
@@ -45,8 +49,8 @@ def inspect_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
 
 def verify_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
     state = inspect_upstream(path)
-    expected = (UPSTREAM_REMOTE, UPSTREAM_BRANCH, UPSTREAM_SHA)
-    actual = (state.remote, state.branch, state.sha)
+    expected = (UPSTREAM_BRANCH, UPSTREAM_SHA)
+    actual = (state.branch, state.sha)
     if actual != expected:
         raise RuntimeError(f"upstream identity mismatch: expected={expected}, actual={actual}")
     if state.dirty:

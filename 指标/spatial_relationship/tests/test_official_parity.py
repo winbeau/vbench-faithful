@@ -3,8 +3,9 @@ import json
 import os
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-from spatial_relationship.backends.vbench import OfficialVBenchEvaluator, UPSTREAM_PATH, detections_from_instances, evaluate_official, verify_upstream
+from spatial_relationship.backends.vbench import OfficialGritDetector, OfficialVBenchEvaluator, UPSTREAM_PATH, UpstreamState, detections_from_instances, evaluate_official, verify_upstream
 from spatial_relationship.metric import evaluate_vbench_batch, parse_query
 from spatial_relationship.relation import official_position_score
 
@@ -22,7 +23,25 @@ class OfficialParityTests(unittest.TestCase):
     def test_locked_upstream_identity(self):
         state = verify_upstream()
         self.assertEqual(state.sha, "13dee903cc97e2633ed6e8f50dea61bc90717935")
+        self.assertEqual(state.source_sha256, "26f09a111dac904d1a92ae5bd1c332a029cebd22610d62376a09d7d634950270")
         self.assertFalse(state.dirty)
+
+    def test_local_bundle_remote_is_provenance_not_identity(self):
+        local = UpstreamState("/tmp/upstream", "file:///bundle", "master", "13dee903cc97e2633ed6e8f50dea61bc90717935", False, (), "26f09a111dac904d1a92ae5bd1c332a029cebd22610d62376a09d7d634950270")
+        with patch("spatial_relationship.backends.vbench.inspect_upstream", return_value=local):
+            self.assertEqual(verify_upstream(Path("/tmp/upstream")).remote, "file:///bundle")
+
+    def test_wrong_commit_is_rejected(self):
+        wrong = UpstreamState("/tmp/upstream", "file:///bundle", "master", "wrong", False, (), "26f09a111dac904d1a92ae5bd1c332a029cebd22610d62376a09d7d634950270")
+        with patch("spatial_relationship.backends.vbench.inspect_upstream", return_value=wrong):
+            with self.assertRaisesRegex(RuntimeError, "upstream SHA mismatch"):
+                verify_upstream(Path("/tmp/upstream"))
+
+    def test_missing_official_source_is_rejected(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as root:
+            with self.assertRaisesRegex(FileNotFoundError, "source is missing"):
+                verify_upstream(Path(root))
 
     def test_geometry_matches_locked_upstream_source(self):
         upstream_score = load_locked_upstream_position_score()
@@ -90,6 +109,44 @@ class OfficialParityTests(unittest.TestCase):
             detections_from_instances(Instances()),
             [("cat", [0, 0, 2, 2], 0.95), ("dog", [8, 0, 10, 2], 0.51)],
         )
+
+    def test_detector_converts_sampled_tensor_frames_to_numpy(self):
+        import numpy as np
+        import torch
+
+        class VideoTensor:
+            def size(self):
+                return (16, 3, 2, 2)
+            def permute(self, *order):
+                return self
+            def numpy(self):
+                return np.zeros((16, 2, 2, 3), dtype=np.uint8)
+
+        class Instances:
+            pred_object_descriptions = type("Descriptions", (), {"data": []})()
+            pred_boxes = type("Boxes", (), {"tensor": torch.empty((0, 4))})()
+            scores = torch.empty((0,))
+            @staticmethod
+            def has(name):
+                return name == "scores"
+
+        class Model:
+            calls = 0
+            def run_det_tensor(self, frame):
+                self.calls += 1
+                self_outer.assertIsInstance(frame, np.ndarray)
+                return {"instances": Instances()}, None
+
+        self_outer = self
+        detector = OfficialGritDetector.__new__(OfficialGritDetector)
+        detector.module = type("Module", (), {"load_video": staticmethod(lambda *_args, **_kwargs: VideoTensor()), "torch": torch})()
+        detector.model = Model()
+        utils = type("Utils", (), {"VideoReader": type("Reader", (), {"__init__": lambda self, *_args, **_kwargs: None, "__len__": lambda self: 16}), "get_frame_indices": staticmethod(lambda *args, **kwargs: list(range(16)))})()
+        with patch("spatial_relationship.backends.vbench.importlib.import_module", return_value=utils):
+            indices, predictions = detector.detect_video(Path('/tmp/sample.mp4'))
+        self.assertEqual(detector.model.calls, 16)
+        self.assertEqual(indices, list(range(16)))
+        self.assertEqual(predictions, [[] for _ in range(16)])
 
     def test_official_batch_isolates_one_video_failure(self):
         videos = [Path("/tmp/video_000.mp4"), Path("/tmp/video_001.mp4")]

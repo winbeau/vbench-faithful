@@ -15,7 +15,13 @@ class OfficialDinoFeatureExtractor:
         self.config = dict(config)
         if self.config.get("read_frame") is not False:
             raise ValueError("ordinary mp4 evaluation requires read_frame=false")
-        self.model = self.module.torch.hub.load(**self.config).to(device)
+        self.model = self.module.torch.hub.load(
+            repo_or_dir=self.config["repo_or_dir"], model=self.config["model"],
+            source=self.config["source"], pretrained=False,
+        )
+        state_dict = self.module.torch.load(self.config["path"], map_location="cpu", weights_only=True)
+        self.model.load_state_dict(state_dict, strict=True)
+        self.model = self.model.to(device)
         self.model.eval()
 
     def extract(self, video: Path):

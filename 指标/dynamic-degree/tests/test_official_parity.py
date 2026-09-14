@@ -1,9 +1,11 @@
 import ast
 import json
 import os
+import tempfile
 import types
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 import torch
@@ -11,6 +13,7 @@ import torch
 from dynamic_degree.backends.vbench import (
     OfficialDynamicEvaluator,
     UPSTREAM_PATH,
+    UpstreamState,
     evaluate_official_reference,
     official_check_move,
     official_parameters,
@@ -36,6 +39,24 @@ class OfficialParityTests(unittest.TestCase):
         state = verify_upstream()
         self.assertEqual(state.sha, "13dee903cc97e2633ed6e8f50dea61bc90717935")
         self.assertFalse(state.dirty)
+
+    def test_root_style_path_and_non_github_origin_are_accepted_at_locked_sha(self):
+        state = verify_upstream(Path("/root/vbench1"))
+        self.assertEqual(state.path, "/root/vbench1")
+        self.assertEqual(state.remote, "/root/vbench1.bundle")
+
+    def test_wrong_sha_is_rejected(self):
+        with patch(
+            "dynamic_degree.backends.vbench.inspect_upstream",
+            return_value=UpstreamState("/root/vbench1", "local.bundle", "master", "wrong", False, ()),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "SHA mismatch"):
+                verify_upstream(Path("/root/vbench1"))
+
+    def test_missing_official_source_is_rejected(self):
+        with tempfile.TemporaryDirectory() as root:
+            with self.assertRaisesRegex(FileNotFoundError, "source is missing"):
+                verify_upstream(Path(root))
 
     def test_top5_matches_locked_upstream_method(self):
         flow = np.zeros((16, 24, 2), dtype=np.float32)

@@ -187,7 +187,8 @@ def environment_record(videos: list[Path], metadata_path: Path | None, dino_conf
     weight = Path(str(dino_config["path"]))
     return {
         "python": sys.version, "python_executable": sys.executable, "platform": platform.platform(), "code_sha": code_sha,
-        "upstream_path": state.path, "upstream_remote": state.remote, "upstream_branch": state.branch,
+        "upstream_path": state.path, "upstream_remote": state.remote, "upstream_source_type": state.source_type,
+        "upstream_branch": state.branch,
         "upstream_sha": state.sha, "upstream_dirty": state.dirty,
         "input_sha256": {str(video): sha256_file(video) for video in videos},
         "metadata_sha256": sha256_file(metadata_path) if metadata_path else None,

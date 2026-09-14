@@ -31,7 +31,7 @@ def fake_backend(backend, videos, metadata, gpu_ids, model_weight, category_name
             "prompt": metadata[video.name]["prompt"],
             "target_action": "cutting watermelon",
             "backend": backend,
-            "score": 1.0 if backend == "vbench" else None,
+            "score": 1.0 if backend == "vbench" else 0.8,
             "status": "succeeded",
             "failure_reason": None,
             "error": None,
@@ -82,7 +82,7 @@ class CliSmokeTests(unittest.TestCase):
             result_path = next((root / "out").glob("human-action/audit/*/results.json"))
             result = json.loads(result_path.read_text(encoding="utf-8"))[0]
             self.assertEqual(result["target_action"], "cutting watermelon")
-            self.assertIsNone(result["score"])
+            self.assertAlmostEqual(result["score"], 0.8)
             self.assertTrue(result_path.with_name("run.log").is_file())
 
     def test_both_uses_shared_run_id_and_gpu_list(self):

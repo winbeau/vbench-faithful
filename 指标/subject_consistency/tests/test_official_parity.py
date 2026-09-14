@@ -1,3 +1,5 @@
+import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -5,7 +7,7 @@ from unittest.mock import patch
 import torch
 import torch.nn.functional as F
 
-from subject_consistency.backends.vbench import UPSTREAM_SHA, official_subject_consistency, verify_upstream
+from subject_consistency.backends.vbench import UPSTREAM_BRANCH, UPSTREAM_REMOTE, UPSTREAM_SHA, UpstreamState, inspect_upstream, official_subject_consistency, verify_upstream
 from subject_consistency.cli import _official_dataset_score
 from subject_consistency.metric import evaluate_batch
 from subject_consistency.models import OfficialDinoFeatureExtractor
@@ -60,6 +62,10 @@ class OfficialParityTests(unittest.TestCase):
             def eval(self):
                 return self
 
+            def load_state_dict(self, state_dict, strict):
+                calls["load_state_dict"] = (state_dict, strict)
+                return self
+
             def __call__(self, image):
                 return torch.cat([image.flatten(1), torch.ones((1, 1))], dim=1)
 
@@ -80,6 +86,7 @@ class OfficialParityTests(unittest.TestCase):
         config = {"repo_or_dir": "/tmp/dino", "path": "/tmp/dino.pth", "model": "dino_vitb16", "source": "local", "read_frame": False}
         with (
             patch("subject_consistency.backends.vbench.import_official_module", return_value=(Module, object())),
+            patch.object(torch, "load", return_value={}),
             patch.object(torch.hub, "load", return_value=Model()) as load,
         ):
             extractor = OfficialDinoFeatureExtractor("cpu", config, Path("/tmp/upstream"))
@@ -87,6 +94,8 @@ class OfficialParityTests(unittest.TestCase):
         self.assertEqual(calls["load_video"], ("/tmp/video.mp4", (), {}))
         self.assertEqual(calls["transform_size"], 224)
         self.assertEqual(load.call_args.kwargs["model"], "dino_vitb16")
+        self.assertFalse(load.call_args.kwargs["pretrained"])
+        self.assertEqual(calls["load_state_dict"], ({}, True))
         self.assertEqual(features.shape, (3, 2))
         self.assertTrue(torch.allclose(features.norm(dim=-1), torch.ones(3)))
 
@@ -98,6 +107,28 @@ class OfficialParityTests(unittest.TestCase):
         self.assertEqual(_official_dataset_score(results, 1), (0.25, 4))
         self.assertEqual(_official_dataset_score(results, 2), (0.5, 2))
 
+
+    def test_official_github_upstream_is_allowed(self):
+        state = UpstreamState("/tmp/upstream", UPSTREAM_REMOTE, UPSTREAM_BRANCH, UPSTREAM_SHA, False, "github")
+        with patch("subject_consistency.backends.vbench.inspect_upstream", return_value=state):
+            self.assertEqual(verify_upstream().source_type, "github")
+
+    def test_local_bundle_with_wrong_sha_is_rejected(self):
+        state = UpstreamState("/tmp/upstream", "/tmp/vbench1.bundle", UPSTREAM_BRANCH, "0" * 40, False, "local_bundle")
+        with patch("subject_consistency.backends.vbench.inspect_upstream", return_value=state):
+            with self.assertRaisesRegex(RuntimeError, "identity mismatch"):
+                verify_upstream()
+
+    def test_local_bundle_with_dirty_worktree_is_rejected(self):
+        state = UpstreamState("/tmp/upstream", "/tmp/vbench1.bundle", UPSTREAM_BRANCH, UPSTREAM_SHA, True, "local_bundle")
+        with patch("subject_consistency.backends.vbench.inspect_upstream", return_value=state):
+            with self.assertRaisesRegex(RuntimeError, "worktree is dirty"):
+                verify_upstream()
+
+    def test_non_git_directory_is_rejected(self):
+        with tempfile.TemporaryDirectory() as root:
+            with self.assertRaises(subprocess.CalledProcessError):
+                inspect_upstream(Path(root))
 
 if __name__ == "__main__":
     unittest.main()
