@@ -38,17 +38,33 @@ class OpenClipSceneScorer:
     """
 
     def __init__(self, model_name: str = "ViT-B-32", pretrained: str = "openai", device: Any = "cuda"):
-        try:
-            import open_clip
-            import torch
-        except ImportError as exc:  # pragma: no cover - environment dependent
-            raise RuntimeError("OpenCLIP scorer requires the optional open_clip_torch and torch packages") from exc
+        import torch
+
         self._torch = torch
         self.device = device
-        self.model, _, self.preprocess = open_clip.create_model_and_transforms(
-            model_name, pretrained=pretrained, device=device
-        )
-        self.tokenizer = open_clip.get_tokenizer(model_name)
+        try:
+            import open_clip
+        except ImportError:
+            # The uploaded OpenAI ViT-B/32 checkpoint is also natively supported
+            # by the installed OpenAI CLIP package.  This preserves the same
+            # image/text encoder and cosine-to-support mapping without any download.
+            try:
+                import clip
+            except ImportError as exc:  # pragma: no cover - environment dependent
+                raise RuntimeError(
+                    "Scene scorer requires open_clip_torch or the OpenAI clip package"
+                ) from exc
+            if pretrained == "openai":
+                raise RuntimeError(
+                    "open_clip_torch is unavailable; pass a local OpenAI CLIP checkpoint path"
+                )
+            self.model, self.preprocess = clip.load(pretrained, device=device, jit=False)
+            self.tokenizer = clip.tokenize
+        else:
+            self.model, _, self.preprocess = open_clip.create_model_and_transforms(
+                model_name, pretrained=pretrained, device=device
+            )
+            self.tokenizer = open_clip.get_tokenizer(model_name)
         self.model.eval()
 
     def score(self, image: Any, scene_text: str) -> float:

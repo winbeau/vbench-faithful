@@ -15,12 +15,18 @@ class FrameDiagnostic:
     mode: str
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        data = asdict(self)
+        data["frame_index"] = int(self.frame_index)
+        data["global_score"] = float(self.global_score)
+        data["regional_scores"] = [float(value) for value in self.regional_scores]
+        data["environment_mean"] = float(self.environment_mean)
+        data["final_frame_score"] = float(self.final_frame_score)
+        return data
 
 
 def diagnostics_payload(frame_diagnostics: list[FrameDiagnostic], sampled_frame_indices: list[int]) -> dict[str, Any]:
     return {
-        "sampled_frame_indices": list(sampled_frame_indices),
+        "sampled_frame_indices": [int(index) for index in sampled_frame_indices],
         "frame_diagnostics": [item.to_dict() for item in frame_diagnostics],
         "frame_scores": [item.final_frame_score for item in frame_diagnostics],
     }
