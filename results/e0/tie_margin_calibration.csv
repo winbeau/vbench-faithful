@@ -1,0 +1,5 @@
+dimension,delta,dev_accuracy,dev_pair_count,dev_prompt_count,selection_rule,seed
+dynamics_degree,0.0,0.603448275862069,870,29,maximize dev tie-aware accuracy over unique dev absolute score differences; smallest delta on tie,20260911
+subject_consistency,0.0003019571304321289,0.6298850574712643,870,29,maximize dev tie-aware accuracy over unique dev absolute score differences; smallest delta on tie,20260911
+human_action,0.0,0.6633333333333333,1200,40,maximize dev tie-aware accuracy over unique dev absolute score differences; smallest delta on tie,20260911
+spatial_relationship,0.34488998308015545,0.5942857142857143,1050,35,maximize dev tie-aware accuracy over unique dev absolute score differences; smallest delta on tie,20260911

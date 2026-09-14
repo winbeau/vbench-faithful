@@ -1,0 +1,2 @@
+video_uid,dimension,split,prompt_id,group_id,generator,relative_video_path,score,status,elapsed_s,error,official_video_boolean
+v_ece4589fbbe9bc4f033e,dynamics_degree,dev,a bear catching a salmon in its powerful jaws,310,cogvideo,cogvideo/subject_consistency/a bear catching a salmon in its powerful jaws-0.gif,0.0,success,4.569755,,false

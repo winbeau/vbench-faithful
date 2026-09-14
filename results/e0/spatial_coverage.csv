@@ -1,0 +1,2 @@
+total_records,supported_records,unsupported_records,record_coverage,total_prompts,supported_prompts,unsupported_prompts,prompt_coverage,unsupported_relation,dev_total,dev_unsupported,dev_supported,test_total,test_unsupported,test_supported,total_pairs,supported_pairs,unsupported_pairs,pair_coverage,dev_total_pairs,dev_supported_pairs,test_total_pairs,test_supported_pairs
+2160,1680,480,0.7777777777777778,108,84,24,0.7777777777777778,inside of,860,160,700,1300,320,980,3240,2520,720,0.7777777777777778,1290,1050,1950,1470

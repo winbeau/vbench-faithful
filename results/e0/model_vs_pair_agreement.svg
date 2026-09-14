@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="650" viewBox="0 0 1100 650">
+<rect width="100%" height="100%" fill="#fbfaf7"/>
+<text x="550" y="42" text-anchor="middle" font-family="sans-serif" font-size="25" fill="#20242a">E0: model-level versus clip-level agreement</text>
+<line x1="90" y1="560.0" x2="1010" y2="560.0" stroke="#d9d6cf"/>
+<text x="78" y="565.0" text-anchor="end" font-family="sans-serif" font-size="14">0.0</text>
+<line x1="90" y1="466.0" x2="1010" y2="466.0" stroke="#d9d6cf"/>
+<text x="78" y="471.0" text-anchor="end" font-family="sans-serif" font-size="14">0.2</text>
+<line x1="90" y1="372.0" x2="1010" y2="372.0" stroke="#d9d6cf"/>
+<text x="78" y="377.0" text-anchor="end" font-family="sans-serif" font-size="14">0.4</text>
+<line x1="90" y1="278.0" x2="1010" y2="278.0" stroke="#d9d6cf"/>
+<text x="78" y="283.0" text-anchor="end" font-family="sans-serif" font-size="14">0.6</text>
+<line x1="90" y1="184.0" x2="1010" y2="184.0" stroke="#d9d6cf"/>
+<text x="78" y="189.0" text-anchor="end" font-family="sans-serif" font-size="14">0.8</text>
+<line x1="90" y1="90.0" x2="1010" y2="90.0" stroke="#d9d6cf"/>
+<text x="78" y="95.0" text-anchor="end" font-family="sans-serif" font-size="14">1.0</text>
+<rect x="162.0" y="176.73719783650392" width="40" height="383.2628021634961" fill="#315c8c" rx="3"/>
+<text x="182.0" y="168.73719783650392" text-anchor="middle" font-family="sans-serif" font-size="13">0.815</text>
+<rect x="210.0" y="238.28682170542635" width="40" height="321.71317829457365" fill="#d4783c" rx="3"/>
+<text x="230.0" y="230.28682170542635" text-anchor="middle" font-family="sans-serif" font-size="13">0.684</text>
+<text x="205.0" y="590" text-anchor="middle" font-family="sans-serif" font-size="15">Dynamic&#10;Degree</text>
+<rect x="392.0" y="108.52748248780527" width="40" height="451.4725175121947" fill="#315c8c" rx="3"/>
+<text x="412.0" y="100.52748248780527" text-anchor="middle" font-family="sans-serif" font-size="13">0.961</text>
+<rect x="440.0" y="285.2868217054264" width="40" height="274.7131782945736" fill="#d4783c" rx="3"/>
+<text x="460.0" y="277.2868217054264" text-anchor="middle" font-family="sans-serif" font-size="13">0.584</text>
+<text x="435.0" y="590" text-anchor="middle" font-family="sans-serif" font-size="15">Subject&#10;Consistency</text>
+<rect x="622.0" y="135.00493719606789" width="40" height="424.9950628039321" fill="#315c8c" rx="3"/>
+<text x="642.0" y="127.00493719606789" text-anchor="middle" font-family="sans-serif" font-size="13">0.904</text>
+<rect x="670.0" y="299.93333333333334" width="40" height="260.06666666666666" fill="#d4783c" rx="3"/>
+<text x="690.0" y="291.93333333333334" text-anchor="middle" font-family="sans-serif" font-size="13">0.553</text>
+<text x="665.0" y="590" text-anchor="middle" font-family="sans-serif" font-size="15">Human&#10;Action</text>
+<rect x="852.0" y="218.90397911286985" width="40" height="341.0960208871302" fill="#315c8c" rx="3"/>
+<text x="872.0" y="210.90397911286985" text-anchor="middle" font-family="sans-serif" font-size="13">0.726</text>
+<rect x="900.0" y="322.4421768707483" width="40" height="237.5578231292517" fill="#d4783c" rx="3"/>
+<text x="920.0" y="314.4421768707483" text-anchor="middle" font-family="sans-serif" font-size="13">0.505</text>
+<text x="895.0" y="590" text-anchor="middle" font-family="sans-serif" font-size="15">Spatial&#10;Relationship</text>
+<rect x="740" y="55" width="15" height="15" fill="#315c8c"/><text x="762" y="68" font-family="sans-serif" font-size="14">Model-level Pearson</text>
+<rect x="910" y="55" width="15" height="15" fill="#d4783c"/><text x="932" y="68" font-family="sans-serif" font-size="14">Test pair accuracy</text>
+</svg>

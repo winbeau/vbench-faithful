@@ -1,0 +1,2 @@
+video_uid,dimension,split,prompt_id,group_id,generator,relative_video_path,score,status,elapsed_s,error,official_video_boolean
+v_c62afa58ec5c876f50ec,human_action,test,A person is air drumming,210,cogvideo,cogvideo/human_action/A person is air drumming-0.gif,1.0,success,11.479246,,true
