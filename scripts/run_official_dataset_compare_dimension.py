@@ -89,6 +89,9 @@ def report(out,m,off):
  (out/'summary.json').write_text(json.dumps(s,indent=2)+'\n');return s
 def run(a):
  full=[x for x in read(R/'data/processed/e0_scoring_manifest.csv') if x['dimension']==DM[a.dimension]]
+ if a.video_uid:
+  full=[x for x in full if x['video_uid']==a.video_uid]
+  if len(full)!=1:raise RuntimeError(f'expected exactly one manifest row for video_uid={a.video_uid!r}, got {len(full)}')
  if len({x['video_uid'] for x in full})!=len(full):raise RuntimeError('duplicate video_uid')
  for x in full:
   if not (D/x['relative_video_path']).is_file():raise RuntimeError('manifest video missing '+x['relative_video_path'])
@@ -123,5 +126,5 @@ def run(a):
     r=base(x);r.update(repair_status='failed',failure_or_abstention=f'{type(e).__name__}: {e}');append(out/'repair_results.jsonl',r);n+=1
  s=report(out,m,off);write_predictions(out,m,sp);print(json.dumps({'dimension':a.dimension,'evaluated':n,'skipped':skipped,'model_load_count':1 if go else 0,'summary':s}),flush=True)
 def main():
- p=argparse.ArgumentParser();p.add_argument('--dimension',required=True,choices=DM);p.add_argument('--limit',type=int);p.add_argument('--smoke',action='store_true');p.add_argument('--retry-failed',action='store_true');p.add_argument('--output-root',default=str(OUT));a=p.parse_args();run(a)
+ p=argparse.ArgumentParser();p.add_argument('--dimension',required=True,choices=DM);p.add_argument('--limit',type=int);p.add_argument('--video-uid',help='evaluate one frozen-manifest record for a targeted smoke');p.add_argument('--smoke',action='store_true');p.add_argument('--retry-failed',action='store_true');p.add_argument('--output-root',default=str(OUT));a=p.parse_args();run(a)
 if __name__=='__main__':main()

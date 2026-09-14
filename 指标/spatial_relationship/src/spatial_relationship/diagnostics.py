@@ -5,6 +5,7 @@ from enum import Enum
 from typing import Iterable
 
 from .schemas import FrameAuditResult, OrderedRelationQuery, VideoAuditResult
+from .serialization import to_jsonable
 
 
 class DiagnosticsLevel(str, Enum):
@@ -38,4 +39,4 @@ def aggregate_video(
 def serialize_video_diagnostics(result: VideoAuditResult, level: DiagnosticsLevel) -> dict[str, object] | None:
     if level == DiagnosticsLevel.OFF:
         return None
-    return result.to_dict(include_frames=level == DiagnosticsLevel.FULL)
+    return to_jsonable(result.to_dict(include_frames=level == DiagnosticsLevel.FULL))

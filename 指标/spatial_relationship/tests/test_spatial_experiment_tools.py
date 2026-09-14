@@ -7,6 +7,8 @@ import tempfile
 import unittest
 import numpy as np
 
+from spatial_relationship.serialization import to_jsonable
+
 
 REPO = Path(__file__).resolve().parents[3]
 
@@ -21,6 +23,21 @@ def load_script(name):
 
 
 class SpatialExperimentToolTests(unittest.TestCase):
+    def test_spatial_to_jsonable_preserves_numpy_values_and_zero_score(self):
+        payload = {
+            "frame_index": np.int64(7),
+            "score": np.float32(0.0),
+            "relation_valid": np.bool_(True),
+            "nested": [np.float64(.25), {"boxes": np.asarray([[1, 2, 3, 4]])}],
+        }
+        converted = to_jsonable(payload)
+        self.assertEqual(converted["frame_index"], 7)
+        self.assertEqual(converted["score"], 0.0)
+        self.assertIsInstance(converted["score"], float)
+        self.assertIs(converted["relation_valid"], True)
+        self.assertEqual(converted["nested"][1]["boxes"], [[1, 2, 3, 4]])
+        self.assertEqual(json.loads(json.dumps(converted)), converted)
+
     def test_numpy_diagnostics_are_json_serializable(self):
         runner = load_script('run_spatial_experiments.py')
         encoded = json.dumps({'frame_index': np.int64(7), 'score': np.float32(.5)}, default=runner.json_default)
