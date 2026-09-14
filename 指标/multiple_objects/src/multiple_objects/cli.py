@@ -18,7 +18,14 @@ from vbench_audit_core.inputs import enumerate_videos, find_metadata, load_metad
 from vbench_audit_core.outputs import run_id, write_results
 from vbench_audit_core.schemas import RunSummary, VideoResult
 
-from .backends.vbench import DEFAULT_WEIGHT, inspect_upstream, metadata_to_official_entries
+from .backends.vbench import (
+    DEFAULT_WEIGHT,
+    OFFLINE_BUNDLE_ORIGIN,
+    UPSTREAM_REMOTE,
+    UPSTREAM_SHA,
+    inspect_upstream,
+    metadata_to_official_entries,
+)
 from .conditions import parse_target_objects
 from .metric import aggregate_frame_totals, evaluate_backend_sharded
 from .schemas import MultipleObjectsConfig
@@ -82,9 +89,9 @@ def execute(args: argparse.Namespace) -> int:
             metadata_to_official_entries(videos, metadata)
         upstream_state = inspect_upstream()
         if (
-            upstream_state["remote"] != "https://github.com/msy625/VBench.git"
+            upstream_state["remote"] not in {UPSTREAM_REMOTE, OFFLINE_BUNDLE_ORIGIN}
             or upstream_state["branch"] != "master"
-            or upstream_state["sha"] != "13dee903cc97e2633ed6e8f50dea61bc90717935"
+            or upstream_state["sha"] != UPSTREAM_SHA
             or upstream_state["dirty"]
         ):
             raise RuntimeError(f"upstream VBench identity mismatch: {upstream_state}")

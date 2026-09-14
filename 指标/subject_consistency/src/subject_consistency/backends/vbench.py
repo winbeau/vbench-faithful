@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib
+import os
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -19,25 +20,40 @@ class UpstreamState:
     branch: str
     sha: str
     dirty: bool
+    source_type: str
 
 
-def inspect_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
+def _source_type(origin: str) -> str:
+    if origin == UPSTREAM_REMOTE:
+        return "github"
+    candidate = Path(origin).expanduser()
+    if candidate.suffix == ".bundle" and candidate.is_file():
+        return "local_bundle"
+    return "untrusted"
+
+
+def inspect_upstream(path: Path | None = None) -> UpstreamState:
+    path = path or Path(os.environ.get("VBENCH_AUDIT_UPSTREAM", str(UPSTREAM_PATH))).expanduser()
     def git(*args: str) -> str:
         return subprocess.check_output(["git", "-C", str(path), *args], text=True, stderr=subprocess.STDOUT).strip()
 
+    origin = git("remote", "get-url", "origin")
     return UpstreamState(
         path=str(path.resolve()),
-        remote=git("remote", "get-url", "origin"),
+        remote=origin,
         branch=git("branch", "--show-current"),
         sha=git("rev-parse", "HEAD"),
         dirty=bool(git("status", "--porcelain")),
+        source_type=_source_type(origin),
     )
 
 
-def verify_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
+def verify_upstream(path: Path | None = None) -> UpstreamState:
     state = inspect_upstream(path)
-    expected = (UPSTREAM_REMOTE, UPSTREAM_BRANCH, UPSTREAM_SHA)
-    actual = (state.remote, state.branch, state.sha)
+    if state.source_type not in {"github", "local_bundle"}:
+        raise RuntimeError(f"untrusted upstream origin: {state.remote!r}")
+    expected = (UPSTREAM_BRANCH, UPSTREAM_SHA)
+    actual = (state.branch, state.sha)
     if actual != expected:
         raise RuntimeError(f"upstream identity mismatch: expected={expected}, actual={actual}")
     if state.dirty:
@@ -45,7 +61,8 @@ def verify_upstream(path: Path = UPSTREAM_PATH) -> UpstreamState:
     return state
 
 
-def import_official_module(path: Path = UPSTREAM_PATH):
+def import_official_module(path: Path | None = None):
+    path = path or Path(os.environ.get("VBENCH_AUDIT_UPSTREAM", str(UPSTREAM_PATH))).expanduser()
     state = verify_upstream(path)
     resolved = str(path.resolve())
     if resolved not in sys.path:

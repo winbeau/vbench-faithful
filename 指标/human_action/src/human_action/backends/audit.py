@@ -124,7 +124,7 @@ class AuditHumanActionEvaluator:
             query=query,
             status="succeeded",
             failure_reason=None,
-            score=None,
+            score=mean_probability,
             full_clip=full,
             windows=windows,
             temporal_mean_probability=mean_probability,
@@ -133,5 +133,5 @@ class AuditHumanActionEvaluator:
             threshold_source="preserved_vbench1_acceptance_threshold_uncalibrated_for_window_coverage",
             source_frame_count=len(frames),
             source_fps=fps,
-            scalarization="not_calibrated_structured_evidence_only",
+            scalarization="duration_weighted_temporal_mean_target_probability_benchmark_scalar",
         )

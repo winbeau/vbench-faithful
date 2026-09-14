@@ -114,6 +114,7 @@ def evaluate_audit_batch(
     *,
     flow_model: Any | None = None,
     decoder: Any | None = None,
+    config: Any | None = None,
 ) -> list[dict[str, Any]]:
     from .backends.audit import analyze_timed_flow_sequence, audit_result_payload
     from .models import RaftFlowModel, decode_timed_frames
@@ -126,7 +127,7 @@ def evaluate_audit_batch(
         try:
             sequence = decoder(video)
             audit = analyze_timed_flow_sequence(
-                str(video), prompt, sequence, flow_model, motion_target_override=override
+                str(video), prompt, sequence, flow_model, motion_target_override=override, config=config
             )
             results.append(audit_result_payload(audit, diagnostics_level))
         except Exception as exc:

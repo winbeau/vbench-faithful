@@ -111,15 +111,42 @@ class LockedUmtClassifier:
         return self.predict_transformed_tensor(clip)
 
     def decode_video(self, video: Path) -> tuple[np.ndarray, float | None]:
-        import decord
+        """Decode in source order; use Pillow only when decord cannot open a GIF."""
+        try:
+            import decord
 
-        decord.bridge.set_bridge("native")
-        reader = decord.VideoReader(str(video), num_threads=1)
-        if len(reader) == 0:
-            raise ValueError(f"video contains no decodable frames: {video}")
-        frames = reader.get_batch(range(len(reader))).asnumpy().astype(np.uint8)
-        fps = float(reader.get_avg_fps())
-        return frames, fps if np.isfinite(fps) and fps > 0 else None
+            decord.bridge.set_bridge("native")
+            reader = decord.VideoReader(str(video), num_threads=1)
+            if len(reader) == 0:
+                raise ValueError(f"video contains no decodable frames: {video}")
+            frames = reader.get_batch(range(len(reader))).asnumpy().astype(np.uint8)
+            fps = float(reader.get_avg_fps())
+            return frames, fps if np.isfinite(fps) and fps > 0 else None
+        except Exception as decord_error:
+            if video.suffix.lower() != ".gif":
+                raise
+            try:
+                from PIL import Image, ImageSequence
+
+                with Image.open(video) as image:
+                    frames = []
+                    durations_ms = []
+                    for frame in ImageSequence.Iterator(image):
+                        frames.append(np.asarray(frame.convert("RGB"), dtype=np.uint8))
+                        duration = frame.info.get("duration")
+                        if isinstance(duration, (int, float)) and duration > 0:
+                            durations_ms.append(float(duration))
+                if not frames:
+                    raise ValueError("GIF contains no decodable frames")
+                decoded = np.stack(frames, axis=0)
+                fps = 1000.0 / float(np.mean(durations_ms)) if durations_ms else None
+                return decoded, fps
+            except Exception as fallback_error:
+                raise ValueError(
+                    f"decord and GIF fallback failed for {video}: "
+                    f"{type(decord_error).__name__}: {decord_error}; "
+                    f"{type(fallback_error).__name__}: {fallback_error}"
+                ) from fallback_error
 
     def predict_frame_indices(self, frames: np.ndarray, indices: tuple[int, ...]) -> np.ndarray:
         clip = self.transform(frames[list(indices)])

@@ -7,10 +7,11 @@ import sys
 from pathlib import Path
 from typing import Any, Mapping
 
-UPSTREAM_PATH = Path("/home/msy625/vbench1")
+UPSTREAM_PATH = Path(os.environ.get("VBENCH_AUDIT_UPSTREAM", "/root/vbench1"))
 UPSTREAM_REMOTE = "https://github.com/msy625/VBench.git"
 UPSTREAM_BRANCH = "master"
 UPSTREAM_SHA = "13dee903cc97e2633ed6e8f50dea61bc90717935"
+OFFLINE_BUNDLE_ORIGIN = "/root/vbench1.bundle"
 DEFAULT_CHECKPOINT = Path.home() / ".cache/vbench/ViCLIP/ViClip-InternVid-10M-FLT.pth"
 NUM_FRAMES = 8
 SAMPLE_MODE = "middle"
@@ -42,7 +43,8 @@ def inspect_upstream(path: Path | None = None) -> dict[str, Any]:
 
 def verify_upstream(path: Path | None = None) -> dict[str, Any]:
     state = inspect_upstream(path)
-    if (state["remote"], state["branch"], state["sha"]) != (UPSTREAM_REMOTE, UPSTREAM_BRANCH, UPSTREAM_SHA):
+    origin_ok = state["remote"] in {UPSTREAM_REMOTE, OFFLINE_BUNDLE_ORIGIN}
+    if not (origin_ok and state["branch"] == UPSTREAM_BRANCH and state["sha"] == UPSTREAM_SHA):
         raise RuntimeError(f"upstream identity mismatch: {state}")
     if state["dirty"]:
         raise RuntimeError("upstream worktree is dirty; refusing official evaluation")

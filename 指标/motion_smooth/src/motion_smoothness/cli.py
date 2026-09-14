@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 from vbench_audit_core.inputs import enumerate_videos, find_metadata, load_metadata
@@ -9,6 +10,7 @@ from vbench_audit_core.outputs import run_id, write_results
 from vbench_audit_core.schemas import RunSummary, VideoResult
 
 from .backends.audit import evaluate_timed_frames
+from .backends.vbench import UPSTREAM_PATH
 from .models import RaftFlowEstimator, decode_timed_frames
 from .schemas import MotionSmoothnessConfig
 
@@ -50,8 +52,8 @@ def main(argv: list[str] | None = None) -> int:
                 device = torch.device(f"cuda:{args.gpu}" if torch.cuda.is_available() else "cpu")
             except ImportError:
                 device = "cpu"
-            weight = Path(args.model_weight or Path.home() / ".cache/vbench/raft_model/models/raft-things.pth")
-            estimator = RaftFlowEstimator(device, weight, Path("/home/msy625/vbench1"))
+            weight = Path(args.model_weight or os.environ.get("VBENCH_AUDIT_RAFT_WEIGHT", str(Path.home() / ".cache/vbench/raft_model/models/raft-things.pth")))
+            estimator = RaftFlowEstimator(device, weight, UPSTREAM_PATH)
             config = MotionSmoothnessConfig(tail_quantile=args.tail_quantile, tail_weight=args.tail_weight)
             outputs = []
             for video in videos:

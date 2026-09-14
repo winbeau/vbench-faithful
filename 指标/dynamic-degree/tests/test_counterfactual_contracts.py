@@ -28,8 +28,10 @@ class CounterfactualContractTests(unittest.TestCase):
         generic = analyze_timed_flow_sequence(
             "camera.mp4", "a dynamic scene", two_frame_sequence(), lambda left, right: flow
         )
-        self.assertIsNone(subject.score)
-        self.assertIsNone(generic.score)
+        self.assertAlmostEqual(subject.score, subject.task_relevant_motion_evidence["motion_intensity"])
+        self.assertAlmostEqual(generic.score, generic.task_relevant_motion_evidence["motion_intensity"])
+        self.assertNotEqual(subject.score, subject.apparent.motion_intensity)
+        self.assertTrue(np.isfinite(subject.score))
         self.assertLess(
             subject.task_relevant_motion_evidence["motion_intensity"],
             generic.task_relevant_motion_evidence["motion_intensity"],
@@ -100,7 +102,7 @@ class CounterfactualContractTests(unittest.TestCase):
             lambda left, right: flow,
             config=AuditConfig(ablation=AuditAblation.WITHOUT_CONTINUOUS_PERSISTENCE_AGGREGATION),
         )
-        self.assertIsNone(result.score)
+        self.assertAlmostEqual(result.score, result.task_relevant_motion_evidence["motion_intensity"])
         self.assertGreater(result.residual.motion_intensity, 0.0)
         self.assertIsNone(result.residual.temporal_coverage)
         self.assertGreater(result.task_relevant_motion_evidence["motion_intensity"], 0.0)

@@ -27,6 +27,8 @@ def aggregate_channel(
     transitions: Iterable[TransitionEvidence],
     channel: str,
     significant_threshold: float | None,
+    *,
+    duration_weighted: bool = True,
 ) -> ChannelEvidence:
     speed_field = {"apparent": "apparent_speed", "camera": "global_speed", "residual": "residual_speed"}[channel]
     valid = [
@@ -37,7 +39,10 @@ def aggregate_channel(
     duration = sum(transition.dt_seconds for transition in valid)
     if not valid or duration <= 0:
         return ChannelEvidence(channel, None, None, 0, 0.0)
-    intensity = sum(float(getattr(transition, speed_field)) * transition.dt_seconds for transition in valid) / duration
+    if duration_weighted:
+        intensity = sum(float(getattr(transition, speed_field)) * transition.dt_seconds for transition in valid) / duration
+    else:
+        intensity = sum(float(getattr(transition, speed_field)) for transition in valid) / len(valid)
     coverage = None
     if significant_threshold is not None:
         coverage = sum(
@@ -75,7 +80,12 @@ def serialize_audit_result(result: AuditVideoResult, level: DiagnosticsLevel) ->
             "scalar_score": result.score,
             "scalar_score_source": result.scalar_score_source,
             "scalar_score_independently_calibrated": result.scalar_score_independently_calibrated,
-            "aggregation_method": "duration_weighted_mean_speed_and_duration_fraction",
+            "aggregation_method": (
+                "duration_weighted_mean_speed_and_duration_fraction"
+                if result.component_provenance["duration_persistence"]
+                else "unweighted_mean_transition_motion_intensity_no_temporal_coverage"
+            ),
+            "component_provenance": result.component_provenance,
         },
         "threshold": {
             "value": result.threshold.value,

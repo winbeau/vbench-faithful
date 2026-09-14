@@ -9,10 +9,11 @@ import tempfile
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
-UPSTREAM_PATH = Path("/home/msy625/vbench1")
+UPSTREAM_PATH = Path(os.environ.get("VBENCH_AUDIT_UPSTREAM", "/root/vbench1"))
 UPSTREAM_REMOTE = "https://github.com/msy625/VBench.git"
 UPSTREAM_BRANCH = "master"
 UPSTREAM_SHA = "13dee903cc97e2633ed6e8f50dea61bc90717935"
+OFFLINE_BUNDLE_ORIGIN = "/root/vbench1.bundle"
 DEFAULT_TAG2TEXT_CONFIG = {
     "pretrained": "caption_model/tag2text_swin_14m.pth",
     "image_size": 384,
@@ -34,7 +35,8 @@ def verify_upstream(path: Path | None = None) -> dict[str, Any]:
     branch = git("branch", "--show-current")
     sha = git("rev-parse", "HEAD")
     dirty = bool(git("status", "--porcelain"))
-    if (remote, branch, sha) != (UPSTREAM_REMOTE, UPSTREAM_BRANCH, UPSTREAM_SHA):
+    origin_ok = remote in {UPSTREAM_REMOTE, OFFLINE_BUNDLE_ORIGIN}
+    if not (origin_ok and branch == UPSTREAM_BRANCH and sha == UPSTREAM_SHA):
         raise RuntimeError(f"upstream identity mismatch: {(remote, branch, sha)}")
     if dirty:
         raise RuntimeError("upstream worktree is dirty; refusing official evaluation")
@@ -118,8 +120,11 @@ class OfficialVBenchSceneEvaluator:
         self.compute = compute
         config = dict(DEFAULT_TAG2TEXT_CONFIG)
         config.update(tag2text_config or {})
+        explicit_weight = os.environ.get("VBENCH_AUDIT_TAG2TEXT_WEIGHT")
         cache_dir = os.environ.get("VBENCH_CACHE_DIR", str(Path.home() / ".cache" / "vbench"))
-        if config["pretrained"] == DEFAULT_TAG2TEXT_CONFIG["pretrained"]:
+        if explicit_weight:
+            config["pretrained"] = explicit_weight
+        elif config["pretrained"] == DEFAULT_TAG2TEXT_CONFIG["pretrained"]:
             config["pretrained"] = str(Path(cache_dir) / config["pretrained"])
         self.config = config
         self.model = None

@@ -111,8 +111,8 @@ class TransitionEvidence:
         if self.apparent_magnitude_statistics is not None:
             result["magnitude_statistics"] = {
                 "apparent": asdict(self.apparent_magnitude_statistics),
-                "camera": asdict(self.global_magnitude_statistics),
-                "residual": asdict(self.residual_magnitude_statistics),
+                "camera": None if self.global_magnitude_statistics is None else asdict(self.global_magnitude_statistics),
+                "residual": None if self.residual_magnitude_statistics is None else asdict(self.residual_magnitude_statistics),
             }
         if include_affine and self.affine is not None:
             result["global_estimation"] = {
@@ -191,6 +191,7 @@ class AuditVideoResult:
     official_count_num: int
     audit_effective_count_num: int | None
     boundary_fix_applied: bool
+    component_provenance: dict[str, bool]
 
 
 @dataclass(frozen=True)
