@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT=/root/vbench-audit
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 DATA=/root/autodl-tmp/vbench-audit-storage/datasets/counterfactual/dynamic_degree
 RUN=/root/autodl-tmp/vbench-audit-storage/runs/dynamic_degree
 LOG=/root/autodl-tmp/vbench-audit-storage/logs/dynamic_degree
-PY=/root/vbench-audit/.venv/bin/python
+PY="$ROOT/.venv/bin/python"
 RAFT=/root/autodl-tmp/vbench-audit-storage/models/raft/raft-things.pth
 EVAL="$RUN/evaluations.jsonl"
 EVIDENCE="$RUN/structured_evidence.jsonl"
 STATUS="$RUN/stage_status"
-export VBENCH1_ROOT=/root/vbench1
-export PYTHONPATH="$ROOT/指标/dynamic-degree/src:$ROOT/公共/audit-core/src"
+export VBENCH_AUDIT_UPSTREAM="${VBENCH_AUDIT_UPSTREAM:-$ROOT/../VBench}"
+export PYTHONPATH="$ROOT/metrics/dynamic-degree/src:$ROOT/packages/audit-core/src:$VBENCH_AUDIT_UPSTREAM"
 
 mkdir -p "$RUN" "$LOG" "$STATUS" "$RUN/statistics"
 exec 9>"$RUN/.matrix.lock"

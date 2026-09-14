@@ -1,0 +1,43 @@
+name: workspace-ci
+
+on:
+  pull_request:
+  push:
+    branches: [winbeau, main]
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout locked VBench source
+        env:
+          UPSTREAM_SHA: fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490
+        run: |
+          git clone --no-checkout https://github.com/Vchitect/VBench.git "$GITHUB_WORKSPACE/../VBench"
+          git -C "$GITHUB_WORKSPACE/../VBench" checkout --detach "$UPSTREAM_SHA"
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.9.17"
+      - run: uv lock --check
+      - run: uv sync --locked --group test
+      - run: uv pip install --python .venv --index https://download.pytorch.org/whl/cpu 'torch==2.14.0+cpu'
+      - run: uv run --no-sync --group test pytest --import-mode=importlib tests metrics
+      - name: Check metric entrypoints
+        run: |
+          for entry in dynamic-degree motion-smoothness subject-consistency scene human-action spatial-relationship overall-consistency multiple-objects; do
+            uv run --no-sync "$entry" --help >/dev/null
+          done
+
+  commit-message:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate pull request title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: python scripts/check_commit_message.py "$PR_TITLE"

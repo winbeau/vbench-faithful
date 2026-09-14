@@ -1,0 +1,27 @@
+[project]
+name = "audit-models"
+version = "0.1.0"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "audit-core",
+  "numpy<2",
+  "opencv-python",
+  "scipy",
+  "tqdm",
+]
+
+[project.optional-dependencies]
+models = [
+  "decord",
+  "easydict",
+  "pillow",
+  "torch",
+  "torchvision",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -4,6 +4,7 @@ version = "0.1.0"
 requires-python = ">=3.10,<3.13"
 dependencies = [
   "audit-core",
+  "audit-models",
   "dynamic-degree",
   "motion-smoothness",
   "subject-consistency",
@@ -14,14 +15,37 @@ dependencies = [
   "multiple-objects",
 ]
 
+[dependency-groups]
+dev = ["pytest>=8,<9"]
+test = [
+  "pytest>=8,<9",
+  "numpy<2",
+  "opencv-python<4.12",
+  "scipy",
+]
+
+[project.optional-dependencies]
+models = [
+  "audit-models[models]",
+  "dynamic-degree[models]",
+  "motion-smoothness[models]",
+  "subject-consistency[models]",
+  "scene[models]",
+  "human-action[models]",
+  "spatial-relationship[models]",
+  "overall-consistency[models]",
+  "multiple-objects[models]",
+]
+
 [tool.uv]
 package = false
 
 [tool.uv.workspace]
-members = ["指标/*", "公共/audit-core"]
+members = ["metrics/*", "packages/*"]
 
 [tool.uv.sources]
 audit-core = { workspace = true }
+audit-models = { workspace = true }
 dynamic-degree = { workspace = true }
 motion-smoothness = { workspace = true }
 subject-consistency = { workspace = true }
@@ -30,3 +54,7 @@ human-action = { workspace = true }
 spatial-relationship = { workspace = true }
 overall-consistency = { workspace = true }
 multiple-objects = { workspace = true }
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "metrics"]
+addopts = ["--import-mode=importlib"]

@@ -5,8 +5,8 @@ from __future__ import annotations
 import argparse, csv, datetime as dt, hashlib, json, os, subprocess, sys, time, traceback
 from pathlib import Path
 
-ROOT = Path('/root/vbench-audit')
-UPSTREAM = Path('/root/vbench1')
+ROOT = Path(__file__).resolve().parents[1]
+UPSTREAM = Path(os.environ.get('VBENCH_AUDIT_UPSTREAM', str(ROOT.parent / 'VBench')))
 MANIFEST = ROOT / 'data/processed/e0_scoring_manifest.csv'
 DATA = Path('/root/autodl-tmp/vbench-audit-storage/datasets/e0_public')
 OUT = Path('/root/autodl-tmp/vbench-audit-storage/scores/official/e0')
@@ -62,7 +62,7 @@ def persist(dim, ordered, result):
 def base_result(x): return {**x,'score':'','status':'error','elapsed_s':'0','error':'','official_video_boolean':''}
 def import_paths(dim):
     src={'human_action':'human_action','subject_consistency':'subject_consistency','dynamics_degree':'dynamic-degree','spatial_relationship':'spatial_relationship'}[dim]
-    sys.path[:0]=[str(ROOT/'指标'/src/'src'),str(UPSTREAM)]
+    sys.path[:0]=[str(ROOT/'metrics'/src/'src'),str(UPSTREAM)]
 def patch_remote(module):
     module.UPSTREAM_REMOTE=command('git','-C',str(UPSTREAM),'remote','get-url','origin')
 def spatial_metadata():

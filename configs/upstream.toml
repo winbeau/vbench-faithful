@@ -1,0 +1,51 @@
+[upstream]
+url = "https://github.com/Vchitect/VBench.git"
+sha = "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+
+[dimensions.dynamic_degree]
+module = "vbench.dynamic_degree"
+entrypoint = "compute_dynamic_degree"
+source = "vbench/dynamic_degree.py"
+source_sha256 = "2e93d3a7af38bfbe459c19c9d127894f687424a0bc534dbf7e6571d17b24dff7"
+
+[dimensions.motion_smoothness]
+module = "vbench.motion_smoothness"
+entrypoint = "compute_motion_smoothness"
+source = "vbench/motion_smoothness.py"
+source_sha256 = "5ddc43f246b64e23d10540b8f9e6c302686e6a1ac9fa4e9942b5bd043d89e0b9"
+
+[dimensions.subject_consistency]
+module = "vbench.subject_consistency"
+entrypoint = "compute_subject_consistency"
+source = "vbench/subject_consistency.py"
+source_sha256 = "55f5c9a3e5be543380a709b94712903fa67a76340c3c0cb2414ac090dbd1b78d"
+
+[dimensions.scene]
+module = "vbench.scene"
+entrypoint = "compute_scene"
+source = "vbench/scene.py"
+source_sha256 = "f14c423710c812af2be953db619ed6e8b478acdc44f1df775815adfa30171965"
+
+[dimensions.human_action]
+module = "vbench.human_action"
+entrypoint = "compute_human_action"
+source = "vbench/human_action.py"
+source_sha256 = "4cee71a1e09e0b2f7e1a8126300c9250be19e3866f49004c8b69b4a5a15e8945"
+
+[dimensions.spatial_relationship]
+module = "vbench.spatial_relationship"
+entrypoint = "compute_spatial_relationship"
+source = "vbench/spatial_relationship.py"
+source_sha256 = "26f09a111dac904d1a92ae5bd1c332a029cebd22610d62376a09d7d634950270"
+
+[dimensions.overall_consistency]
+module = "vbench.overall_consistency"
+entrypoint = "compute_overall_consistency"
+source = "vbench/overall_consistency.py"
+source_sha256 = "325beb4503699b08d441a467710240097c15c2267fe92dbed1ed8cdfaa96103e"
+
+[dimensions.multiple_objects]
+module = "vbench.multiple_objects"
+entrypoint = "compute_multiple_objects"
+source = "vbench/multiple_objects.py"
+source_sha256 = "fa5047aa560158f017e46dea3ae763ed083df08ece63e47f61a7ea4fc55be672"

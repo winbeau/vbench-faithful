@@ -1,0 +1,31 @@
+[project]
+name = "overall-consistency"
+version = "0.1.0"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "audit-core",
+  "numpy<2",
+]
+
+[project.optional-dependencies]
+models = [
+  "decord",
+  "einops",
+  "ftfy",
+  "openai-clip",
+  "pillow",
+  "regex",
+  "setuptools<81",
+  "torch",
+  "torchvision",
+  "timm<=1.0.12",
+  "tqdm",
+  "transformers==4.33.2",
+]
+[project.scripts]
+overall-consistency = "overall_consistency.cli:main"
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[tool.setuptools.packages.find]
+where = ["src"]

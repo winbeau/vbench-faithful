@@ -10,8 +10,8 @@ from collections import defaultdict
 from pathlib import Path
 from scipy.stats import kendalltau, pearsonr
 
-ROOT = Path('/root/vbench-audit')
-SCORES = Path('/root/autodl-tmp/vbench-audit-storage/scores/official/e0')
+ROOT = Path(__file__).resolve().parents[1]
+SCORES = ROOT / 'results/e0/raw_official_scores'
 DIMS = {
     'dynamic_degree': 'dynamics_degree',
     'subject_consistency': 'subject_consistency',

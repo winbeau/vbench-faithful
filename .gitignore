@@ -2,11 +2,18 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
 output/
 模型缓存/
 dist/
 build/
 *.egg-info/
+*.pth
+*.pt
+*.ckpt
 
 # External/raw VBench data
 data/raw/

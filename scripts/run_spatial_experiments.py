@@ -18,7 +18,7 @@ from typing import Any, Mapping
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OVERLAY = Path(os.environ.get('SPATIAL_GRIT_OVERLAY', '/root/autodl-tmp/vbench-audit-storage/envs/spatial-grit/site-packages'))
-for path in (OVERLAY, REPO_ROOT / '指标/spatial_relationship/src', REPO_ROOT / '公共/audit-core/src'):
+for path in (OVERLAY, REPO_ROOT / 'metrics/spatial-relationship/src', REPO_ROOT / 'packages/audit-core/src'):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
@@ -199,7 +199,7 @@ def main() -> int:
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--data-root', type=Path)
     parser.add_argument('--weight', type=Path, default=Path(os.environ.get('VBENCH_AUDIT_GRIT_WEIGHT', '/root/autodl-tmp/vbench-audit-storage/models/grit/grit_b_densecap_objectdet.pth')))
-    parser.add_argument('--upstream', type=Path, default=Path(os.environ.get('VBENCH1_ROOT', '/root/vbench1')))
+    parser.add_argument('--upstream', type=Path, default=Path(os.environ.get('VBENCH_AUDIT_UPSTREAM', str(REPO_ROOT.parent / 'VBench'))))
     parser.add_argument('--device', default='cuda:0')
     parser.add_argument('--diagnostics', choices=('full', 'compact'), default='compact')
     parser.add_argument('--validate-only', action='store_true')

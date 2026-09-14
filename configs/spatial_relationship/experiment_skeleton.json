@@ -1,11 +1,12 @@
 {
   "schema_version": "spatial-counterfactual-v1",
   "independent_unit": "base_id",
-  "python": "/root/vbench-audit/.venv/bin/python",
-  "uv": "/root/.local/bin/uv",
-  "upstream_root": "/root/vbench1",
-  "grit_overlay": "/root/autodl-tmp/vbench-audit-storage/envs/spatial-grit/site-packages",
-  "grit_weight": "/root/autodl-tmp/vbench-audit-storage/models/grit/grit_b_densecap_objectdet.pth",
+  "python": ".venv/bin/python",
+  "uv": "uv",
+  "upstream_root": "../VBench",
+  "grit_overlay": null,
+  "grit_weight": null,
+  "environment_note": "Portable skeleton only. Historical runs used private machine-specific checkouts and external storage; set VBENCH_AUDIT_UPSTREAM, VBENCH_AUDIT_GRIT_WEIGHT and any external GRiT overlay explicitly for a real run.",
   "variants": {
     "official": {
       "ready": true,

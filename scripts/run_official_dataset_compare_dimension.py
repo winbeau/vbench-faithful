@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse,csv,json,os,sys
 from collections import defaultdict,Counter
 from pathlib import Path
-R=Path('/root/vbench-audit'); D=Path('/root/autodl-tmp/vbench-audit-storage/datasets/e0_public'); O=Path('/root/autodl-tmp/vbench-audit-storage/scores/official/e0'); OUT=Path('/root/autodl-tmp/vbench-audit-storage/runs/official_dataset_compare_4dims'); U=Path('/root/vbench1')
+R=Path(__file__).resolve().parents[1]; D=Path('/root/autodl-tmp/vbench-audit-storage/datasets/e0_public'); O=Path('/root/autodl-tmp/vbench-audit-storage/scores/official/e0'); OUT=Path('/root/autodl-tmp/vbench-audit-storage/runs/official_dataset_compare_4dims'); U=Path(os.environ.get('VBENCH_AUDIT_UPSTREAM', str(R.parent / 'VBench')))
 DM={'dynamic_degree':'dynamics_degree','spatial_relationship':'spatial_relationship','human_action':'human_action','subject_consistency':'subject_consistency'}; K=('video_uid','dimension','prompt_id','generator','relative_video_path'); S={'pending','succeeded_scalar','succeeded_structured','unsupported','failed'}
 def append(p,x):
  p.parent.mkdir(parents=True,exist_ok=True)
@@ -23,7 +23,7 @@ def join(m,o):
   if len(a)!=1:raise RuntimeError(f'Official strict join {len(a)} matches: {tuple(x[k] for k in K)}')
   z[x['video_uid']]=a[0]
  return z
-def paths():sys.path[:0]=[str(R/x) for x in ['公共/audit-core/src','指标/dynamic-degree/src','指标/spatial_relationship/src','指标/human_action/src','指标/subject_consistency/src']]+[str(U)]
+def paths():sys.path[:0]=[str(R/x) for x in ['packages/audit-core/src','metrics/dynamic-degree/src','metrics/spatial-relationship/src','metrics/human-action/src','metrics/subject-consistency/src']]+[str(U)]
 def spatial():
  z={}
  for x in json.loads((U/'vbench/VBench_full_info.json').read_text(encoding='utf8')):

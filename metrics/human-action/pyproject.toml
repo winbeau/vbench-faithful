@@ -1,0 +1,29 @@
+[project]
+name = "human-action"
+version = "0.1.0"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "audit-core",
+  "numpy<2",
+]
+
+[project.optional-dependencies]
+models = [
+  "decord",
+  "einops",
+  "opencv-python",
+  "openai-clip",
+  "pillow",
+  "timm<=1.0.12",
+  "torch",
+  "torchvision",
+  "tqdm",
+  "transformers==4.33.2",
+]
+[project.scripts]
+human-action = "human_action.cli:main"
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -19,6 +19,7 @@ from dynamic_degree.evaluation_records import EvaluationRecordWriter, record_key
 from dynamic_degree.formal_results import normalize_batch_result
 from dynamic_degree.models import RaftFlowModel, decode_timed_frames
 from dynamic_degree.prompt_target import parse_motion_target
+from vbench_audit_core.upstream import resolve_upstream_path
 
 FAMILIES = ('fps_resampling', 'resolution', 'subject_speed', 'motion_coverage', 'camera_shake', 'subject_camera', 'static_flicker')
 VARIANTS = ('official', 'time_only', 'source_only', 'duration_only', 'source_time', 'full')
@@ -145,7 +146,7 @@ def main() -> int:
         if args.variant == 'official':
             backend, config = OfficialDynamicEvaluator(device, args.weight), None
         else:
-            backend, config = RaftFlowModel(device, args.weight, Path('/root/vbench1')), AuditConfig(variant=AUDIT_VARIANTS[args.variant])
+            backend, config = RaftFlowModel(device, args.weight, resolve_upstream_path()), AuditConfig(variant=AUDIT_VARIANTS[args.variant])
     else:
         print(json.dumps({'event': 'existing_records_skipped', 'split': args.split, 'variant': args.variant, 'count': len(selected)}), flush=True)
 

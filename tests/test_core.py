@@ -1,4 +1,5 @@
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -6,6 +7,7 @@ from pathlib import Path
 from vbench_audit_core.devices import parse_gpu, round_robin_shards
 from vbench_audit_core.errors import InputError
 from vbench_audit_core.inputs import enumerate_videos, load_metadata
+from vbench_audit_core.paths import output_base, workspace_root
 
 
 class CoreContractTests(unittest.TestCase):
@@ -41,3 +43,11 @@ class CoreContractTests(unittest.TestCase):
             metadata.write_text(json.dumps({"videos": [{"video": "video_000.mp4"}, {"video": "video_000.mp4"}]}), encoding="utf-8")
             with self.assertRaises(InputError):
                 load_metadata(metadata, [video])
+
+    def test_default_output_is_workspace_root_not_caller_directory(self):
+        original = Path.cwd()
+        try:
+            os.chdir(Path(__file__).resolve().parents[1] / "metrics" / "scene")
+            self.assertEqual(output_base(), workspace_root() / "output")
+        finally:
+            os.chdir(original)

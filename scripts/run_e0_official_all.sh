@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -uo pipefail
-ROOT=/root/vbench-audit
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 PY="$ROOT/.venv/bin/python"
 RUNNER="$ROOT/scripts/run_e0_official_dimension.py"
 OUT=/root/autodl-tmp/vbench-audit-storage/scores/official/e0
 LOG=/root/autodl-tmp/vbench-audit-storage/logs/e0_official
 mkdir -p "$OUT" "$LOG"
 rm -f "$OUT/status.txt"
-export VBENCH_AUDIT_UPSTREAM=/root/vbench1
+export VBENCH_AUDIT_UPSTREAM="${VBENCH_AUDIT_UPSTREAM:-$ROOT/../VBench}"
 export VBENCH_AUDIT_UMT_WEIGHT=/root/autodl-tmp/vbench-audit-storage/models/umt/l16_ptk710_ftk710_ftk400_f16_res224.pth
 export VBENCH_AUDIT_DINO_REPO=/root/autodl-tmp/vbench-audit-storage/models/dino/facebookresearch_dino_main
 export VBENCH_AUDIT_DINO_WEIGHT=/root/autodl-tmp/vbench-audit-storage/models/dino/dino_vitbase16_pretrain.pth
@@ -19,9 +19,9 @@ dims=(human_action subject_consistency dynamics_degree spatial_relationship)
 run_one () {
   local stage="$1" dim="$2"; shift 2
   if [[ "$dim" == spatial_relationship ]]; then
-    CUDA_HOME=/root/autodl-tmp/vbench-audit-storage/toolchains/cuda-12.8 PATH=/root/autodl-tmp/vbench-audit-storage/toolchains/cuda-12.8/bin:$PATH LD_LIBRARY_PATH=/root/autodl-tmp/vbench-audit-storage/toolchains/cuda-12.8/lib64:${LD_LIBRARY_PATH:-} TORCH_CUDA_ARCH_LIST=12.0 MAX_JOBS=12 PYTHONPATH=/root/autodl-tmp/vbench-audit-storage/envs/spatial-grit/site-packages:/root/vbench1:/root/vbench1/vbench/third_party/grit_src:/root/vbench1/vbench/third_party/grit_src/centernet2 "$PY" "$RUNNER" "$stage" --dimension "$dim" 2>&1 | tee -a "$LOG/$dim.log" | tee -a "$LOG/e0_all.log"
+    CUDA_HOME=/root/autodl-tmp/vbench-audit-storage/toolchains/cuda-12.8 PATH=/root/autodl-tmp/vbench-audit-storage/toolchains/cuda-12.8/bin:$PATH LD_LIBRARY_PATH=/root/autodl-tmp/vbench-audit-storage/toolchains/cuda-12.8/lib64:${LD_LIBRARY_PATH:-} TORCH_CUDA_ARCH_LIST=12.0 MAX_JOBS=12 PYTHONPATH=/root/autodl-tmp/vbench-audit-storage/envs/spatial-grit/site-packages:$VBENCH_AUDIT_UPSTREAM:$VBENCH_AUDIT_UPSTREAM/vbench/third_party/grit_src:$VBENCH_AUDIT_UPSTREAM/vbench/third_party/grit_src/centernet2 "$PY" "$RUNNER" "$stage" --dimension "$dim" 2>&1 | tee -a "$LOG/$dim.log" | tee -a "$LOG/e0_all.log"
   else
-    PYTHONPATH="$ROOT/指标/human_action/src:$ROOT/指标/subject_consistency/src:$ROOT/指标/dynamic-degree/src:$ROOT/指标/spatial_relationship/src:/root/vbench1" "$PY" "$RUNNER" "$stage" --dimension "$dim" 2>&1 | tee -a "$LOG/$dim.log" | tee -a "$LOG/e0_all.log"
+    PYTHONPATH="$ROOT/metrics/human-action/src:$ROOT/metrics/subject-consistency/src:$ROOT/metrics/dynamic-degree/src:$ROOT/metrics/spatial-relationship/src:$VBENCH_AUDIT_UPSTREAM" "$PY" "$RUNNER" "$stage" --dimension "$dim" 2>&1 | tee -a "$LOG/$dim.log" | tee -a "$LOG/e0_all.log"
   fi
   return ${PIPESTATUS[0]}
 }

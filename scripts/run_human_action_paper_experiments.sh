@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
-PROJECT=/root/vbench-audit
+PROJECT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 DATA=/root/autodl-tmp/vbench-audit-storage/datasets/counterfactual/human_action/action_execution
 RUN=/root/autodl-tmp/vbench-audit-storage/runs/human_action/action_execution
 PY="$PROJECT/.venv/bin/python"
-export PYTHONPATH="$PROJECT/指标/human_action/src:$PROJECT/公共/audit-core/src"
+export PYTHONPATH="$PROJECT/metrics/human-action/src:$PROJECT/packages/audit-core/src"
 mkdir -p "$RUN/logs" "$DATA/inputs" "$DATA/metadata"
 validation="$($PY "$PROJECT/scripts/prepare_human_action_execution.py")"
 printf '%s\n' "$validation" | tee "$RUN/logs/validation.json"
