@@ -16,6 +16,11 @@ worth after independent review.
 
 ## Raw result
 
+**This section is maintained at the latest revision and is the canonical table.**
+Update it in place whenever a dimension is re-scored; do not add parallel copies.
+Current snapshot: scoring code `a044ac9`, coverage 100% on both backends for all
+seven dimensions, plus the `dynamics_degree` v2 re-measurement marked below.
+
 CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`.
 
 | dimension | family | type | bases | clips | Official | Repair | delta | Repair 95% CI |
@@ -23,10 +28,15 @@ CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`.
 | scene | environment_coverage | ordered | 25 | 125 | 0.3850 | 0.9300 | +0.5450 | [0.840, 0.985] |
 | subject_consistency | temporal_relocation | mixed | 25 | 100 | 0.5917 | 0.8500 | +0.2583 | [0.758, 0.933] |
 | multiplt_object | weakest_object_visibility | mixed | 25 | 150 | 0.5967 | 0.7633 | +0.1666 | [0.677, 0.830] |
-| dynamics_degree | fps_resampling | invariance | 40 | 160 | 0.8333 | 0.8444 | +0.0111 | [0.739, 0.933] |
+| dynamics_degree | fps_resampling | invariance | 40 | 160 | 0.8333 | 0.8444 † | +0.0111 | [0.739, 0.933] |
 | human_action | filename_invariance | invariance | 25 | 75 | 1.0000 | 1.0000 | +0.0000 | — |
 | motion_smoothness | temporal_jerk | ordered | 25 | 125 | 0.8300 | 0.7250 | −0.1050 | [0.650, 0.790] |
 | spatial_relationship | directional_flip | ordered | 40 | 80 | 0.3667 | 0.0667 | −0.3000 | [0.000, 0.167] |
+
+† The `dynamics_degree` Repair column is the **archived v1** (`d/dt`) measurement.
+The v2 repair (`d/dt**0.5`) is the one that satisfies the contract; its numbers,
+and why its CPA is *lower* despite being correct, are in the v1/v2 section below.
+For this invariance family CPA is non-diagnostic — read the exponent, not the CPA.
 
 **This table must not be read on its own.** Seven independent reviews
 (`<dimension>.review.md`) found that for most rows the composite CPA is either

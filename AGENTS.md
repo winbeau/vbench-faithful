@@ -18,6 +18,9 @@
 反事实（metamorphic）审计已完成一轮全量测量，结论与产物见
 `docs/counterfactual-reports/CONSOLIDATED.md`。要点：
 
+- **`CONSOLIDATED.md` 的 "Raw result" 一节是最新版本的唯一权威表**：任何维度
+  重跑后**原地更新**该表（并同步 `table2.csv`/`SUMMARY.md`），不要另存平行副本。
+  表下的脚注必须保留，因为 `dynamics_degree` 那一行是 v1 归档值。
 - **数据集** `counterfactual-vbench`：7 维、205 base、815 条派生片段，已发布到
   `xjuIcthub/counterfactual-vbench`；`Overall Consistency` 因需要人工撰写
   prompt 条件（计划 §12.2）本轮未做。构造代码在 `scripts/counterfactual/`。
