@@ -6,7 +6,8 @@
 - bases: 25 (dev 5, test 20)
 - derived clips: 125 (dev 25, test 100)
 - levels: `jerk_4_multiple`, `jerk_3_local_reverse`, `jerk_2_duplicate_skip`, `jerk_1_duplicate`, `jerk_0_original`
-- code SHA: `bdfda5cc6e31725cddb6f45ce194ff1333f7c05d`
+- code SHA: `feeb77028c5c987b18a6cb2f27a402d757241d5d`
+- repair variant: `ordered_role_identity_assignment` (detection-conditioned: false)
 
 ## Score coverage
 
@@ -19,17 +20,6 @@
 | repair (dev) | 25 | 25 | — |
 | repair (test) | 100 | 100 | — |
 
-## CPA by contract half
-
-This family mixes an inequality half (the counterfactual must move the
-score) with an invariance half (relocated variants must tie). A pooled CPA
-is dominated by whichever half is easier, so each is scored separately.
-
-| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |
-|---|---|---:|---:|---:|
-| official | sensitivity | 250 | 0.8160 | 0.8160 |
-| repair | sensitivity | 250 | 0.7200 | 0.7200 |
-
 ## CPA
 
 `zero-margin` predicts the sign directly; `tie-aware` uses the dev-calibrated
@@ -40,47 +30,31 @@ margin. Intervals are 95% cluster-bootstrap CIs over `base_id`.
 | official | dev (zero-margin) | 0 | 50 | 0.7600 | [0.5200, 0.9600] |
 | official | test (zero-margin) | 0 | 200 | 0.8300 | [0.7700, 0.8900] |
 | official | test (tie-aware) | 0 | 200 | 0.8300 | [0.7700, 0.8900] |
-| repair | dev (zero-margin) | 0 | 50 | 0.7000 | [0.5200, 0.8600] |
-| repair | test (zero-margin) | 0 | 200 | 0.7250 | [0.6500, 0.7900] |
-| repair | test (tie-aware) | 0 | 200 | 0.7250 | [0.6500, 0.7900] |
+| repair | dev (zero-margin) | 0 | 50 | 0.8600 | [0.6800, 0.9800] |
+| repair | test (zero-margin) | 0 | 200 | 0.8800 | [0.8050, 0.9450] |
+| repair | test (tie-aware) | 0 | 200 | 0.8800 | [0.8050, 0.9450] |
 
-## Contract decomposition
+## Sequence-level order statistics
 
-This family declares more than one expected rank, so its CPA is a
-mixture of two contracts and is dominated by whichever is easier. Rank
-gap > 0 pairs test sensitivity; rank gap 0 pairs test the invariance of
-the levels declared equal, and there the only correct prediction is a
-tie, so a widening dev margin raises this half without measuring
-anything. Read the two halves separately, never the composite alone.
+Per-base Spearman correlation between the declared rank and the score,
+and the fraction of bases whose levels come out in the declared strict
+order (plan 5.2 and 13.3). Unlike CPA this does not weight small rank
+gaps more heavily; levels the family declares equal are not required
+to be strictly ordered, and a base with a missing score is excluded
+rather than counted as a violation.
 
-| backend | split | rank gap | pairs | match rate | tie rate |
+| backend | split | bases | mean Spearman | median Spearman | strict order |
 |---|---|---:|---:|---:|---:|
-| official | test (zero-margin) | 1 | 80 | 0.7250 | 0.0000 |
-| official | test (zero-margin) | 2 | 60 | 0.8167 | 0.0000 |
-| official | test (zero-margin) | 3 | 40 | 0.9750 | 0.0000 |
-| official | test (zero-margin) | 4 | 20 | 1.0000 | 0.0000 |
-| official | test (tie-aware) | 1 | 80 | 0.7250 | 0.0000 |
-| official | test (tie-aware) | 2 | 60 | 0.8167 | 0.0000 |
-| official | test (tie-aware) | 3 | 40 | 0.9750 | 0.0000 |
-| official | test (tie-aware) | 4 | 20 | 1.0000 | 0.0000 |
-| repair | test (zero-margin) | 1 | 80 | 0.6625 | 0.0000 |
-| repair | test (zero-margin) | 2 | 60 | 0.7167 | 0.0000 |
-| repair | test (zero-margin) | 3 | 40 | 0.8000 | 0.0000 |
-| repair | test (zero-margin) | 4 | 20 | 0.8500 | 0.0000 |
-| repair | test (tie-aware) | 1 | 80 | 0.6625 | 0.0000 |
-| repair | test (tie-aware) | 2 | 60 | 0.7167 | 0.0000 |
-| repair | test (tie-aware) | 3 | 40 | 0.8000 | 0.0000 |
-| repair | test (tie-aware) | 4 | 20 | 0.8500 | 0.0000 |
-
-Rank-gap-0 pairs are the family's actual target. Splitting them out
-shows whether a Repair gain in the composite comes from sensitivity
-(which both backends usually already have) or from the invariant half.
+| official | dev | 5 | 0.5600 | 0.7000 | 2/5 (0.4000) |
+| official | test | 20 | 0.7650 | 0.7500 | 7/20 (0.3500) |
+| repair | dev | 5 | 0.7400 | 0.9000 | 2/5 (0.4000) |
+| repair | test | 20 | 0.8150 | 0.9500 | 10/20 (0.5000) |
 
 ## Score sensitivity
 
-Per-level score distribution. A metric with a single distinct value is
-insensitive rather than invariant: it cannot detect the transformation at
-all, so its CPA on an invariance family is vacuous (plan section 7.4).
+Per-level score distribution. A metric with a single distinct value at
+every level is insensitive rather than ordered: it cannot detect the
+transformation at all, so no level pair can match.
 
 | backend | level | n | mean | std | min | max | distinct |
 |---|---|---:|---:|---:|---:|---:|---:|
@@ -89,17 +63,40 @@ all, so its CPA on an invariance family is vacuous (plan section 7.4).
 | official | `jerk_2_duplicate_skip` | 25 | 0.9545 | 0.0338 | 0.8446 | 0.9866 | 25 |
 | official | `jerk_3_local_reverse` | 25 | 0.9482 | 0.0383 | 0.8418 | 0.9845 | 25 |
 | official | `jerk_4_multiple` | 25 | 0.9378 | 0.0474 | 0.8035 | 0.9835 | 25 |
-| repair | `jerk_0_original` | 25 | 0.7562 | 0.0481 | 0.6833 | 0.9241 | 25 |
-| repair | `jerk_1_duplicate` | 25 | 0.7292 | 0.0310 | 0.6531 | 0.7827 | 25 |
-| repair | `jerk_2_duplicate_skip` | 25 | 0.6586 | 0.0378 | 0.6071 | 0.7292 | 25 |
-| repair | `jerk_3_local_reverse` | 25 | 0.7094 | 0.0458 | 0.6101 | 0.7804 | 25 |
-| repair | `jerk_4_multiple` | 25 | 0.6732 | 0.0653 | 0.5031 | 0.7655 | 25 |
+| repair | `jerk_0_original` | 25 | 0.5407 | 0.1156 | 0.4067 | 0.9207 | 25 |
+| repair | `jerk_1_duplicate` | 25 | 0.5011 | 0.0689 | 0.4184 | 0.6838 | 25 |
+| repair | `jerk_2_duplicate_skip` | 25 | 0.4855 | 0.0515 | 0.4198 | 0.6232 | 25 |
+| repair | `jerk_3_local_reverse` | 25 | 0.4760 | 0.0523 | 0.4100 | 0.6077 | 25 |
+| repair | `jerk_4_multiple` | 25 | 0.4268 | 0.0330 | 0.3875 | 0.5242 | 25 |
+
+## Repair continuity components (dev + test)
+
+The repair's own mean and upper-tail discontinuity per level (plan 13.3).
+`D_video = (1 - tail_weight) * D_mean + tail_weight * D_tail`, so a level
+whose mean is flat while its tail rises is a localised failure the score
+alone would hide.
+
+| level | n | mean D_mean | mean D_tail | sd(D_mean) |
+|---|---:|---:|---:|---:|
+| `jerk_0_original` | 25 | 0.5646 | 0.8433 | 0.1856 |
+| `jerk_1_duplicate` | 25 | 0.6056 | 0.9818 | 0.1582 |
+| `jerk_2_duplicate_skip` | 25 | 0.6314 | 1.0173 | 0.1310 |
+| `jerk_3_local_reverse` | 25 | 0.6393 | 1.0744 | 0.1473 |
+| `jerk_4_multiple` | 25 | 0.7515 | 1.1627 | 0.0991 |
 
 ## Official vs Repair (test, tie-aware)
 
-| metric | official | repair | repair - official |
-|---|---:|---:|---:|
-| temporal_jerk | 0.8300 | 0.7250 | -0.1050 |
+`repair - official` is the paired difference over the same `base_id`
+clusters; its 95% CI resamples those clusters once and re-scores both
+backends on each resample (plan 5.4). The interval is what decides whether
+the delta is distinguishable from zero — the two marginal intervals in the
+`CPA` table do not.
+
+| metric | official | repair | repair - official | paired 95% CI |
+|---|---:|---:|---:|---|
+| temporal_jerk | 0.8300 | 0.8800 | +0.0500 | [-0.0150, +0.1100] |
+
+Paired zero-margin delta: `+0.0500` over 20 test bases; paired tie-aware delta: `+0.0500`.
 
 ## Status and limitations
 

@@ -7,15 +7,15 @@ Official on the test split.
 
 Scoring code SHA: `66c4a99dba05aceaebe80276ffbffc607c3d2e40`.
 
-| dimension | family | bases | clips (test) | Official CPA | Repair CPA | delta |
-|---|---|---:|---:|---:|---:|---:|
-| dynamics_degree | `fps_resampling` | 40 | 120 | 0.8333 | 0.7722 | -0.0611 |
-| subject_consistency | `temporal_relocation` | 25 | 80 | 0.5917 | 0.8500 | +0.2583 |
-| human_action | `filename_invariance` | 25 | 60 | 1.0000 | 1.0000 | +0.0000 |
-| spatial_relationship | `directional_flip` | 40 | 60 | 0.3667 | 0.0667 | -0.3000 |
-| scene | `environment_coverage` | 25 | 100 | 0.3850 | 0.9300 | +0.5450 |
-| multiplt_object | `weakest_object_visibility` | 25 | 120 | 0.5967 | 0.7633 | +0.1666 |
-| motion_smoothness | `temporal_jerk` | 25 | 100 | 0.8300 | 0.7250 | -0.1050 |
+| dimension | family | bases | clips (test) | Official CPA | Repair CPA | delta | delta 95% CI (paired) |
+|---|---|---:|---:|---:|---:|---:|---|
+| dynamics_degree | `fps_resampling` | 40 | 120 | 0.8333 | 0.7722 | -0.0611 | — |
+| subject_consistency | `temporal_relocation` | 25 | 80 | 0.5917 | 0.8500 | +0.2583 | — |
+| human_action | `filename_invariance` | 25 | 60 | 1.0000 | 1.0000 | +0.0000 | — |
+| spatial_relationship | `directional_flip` | 40 | 60 | 0.3667 | 0.0667 | -0.3000 | — |
+| scene | `environment_coverage` | 25 | 100 | 0.3850 | 0.9300 | +0.5450 | — |
+| multiplt_object | `weakest_object_visibility` | 25 | 120 | 0.5967 | 0.7633 | +0.1666 | — |
+| motion_smoothness | `temporal_jerk` | 25 | 100 | 0.8300 | 0.8800 | +0.0500 | [-0.0150, +0.1100] |
 
 ## Invariance families — dispersion, not CPA
 

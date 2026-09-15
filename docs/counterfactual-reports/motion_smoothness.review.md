@@ -267,3 +267,43 @@ clean motion, and the ladder's own severity ordering has not been validated.*
 - The probe scripts are gitignored under `output/counterfactual/_scratch/`
   (consistent with the sibling reviews); `ms_level_response.py` reruns in
   seconds with `.venv/bin/python` and no model assets.
+
+## 7. Addendum (2026-09-15): all three defects fixed and the dimension re-scored
+
+The findings above describe the shipped estimator and report at `a044ac9`. Both
+have since been repaired, and the dimension was re-scored at `feeb770`:
+
+- **Estimator (issue 2, commit `907bc31`).** `D_t` now follows the plan 13.5 Full
+  variant, `magnitude_weight * flow acceleration + direction_weight * direction
+  change`, aggregated with mean + upper tail; the previously computed but unused
+  `direction_change_t` is now load-bearing. `magnitude_weight`/`direction_weight`
+  are configurable (`0.7`/`0.3`) and threaded through the CLI and the sharded
+  worker. `metrics/motion-smoothness/tests/test_temporal_jerk_ladder.py` pins the
+  strict `L0 > L1 > L2 > L3 > L4` order on canonical constant/ramp/sinusoid
+  trajectories; the `L2 - L3` margin moves from `[−0.040, 0.000]` to
+  `[+0.040, +0.122]` across the 18-setting sweep. The claim in section 2 that the
+  estimator "cannot realise the declared ordering" therefore describes v1 only.
+- **Report generator (issue 1, commit `b2117a5`).** The mixed-contract template
+  is now emitted only when a family has more than one rank *and* a rank shared by
+  several levels. `temporal_jerk` gets no `Contract decomposition` and no
+  `CPA by contract half` section; the ordered-family regression is pinned in
+  `tests/test_counterfactual_cpa.py`.
+- **Missing statistics (issue 3, commits `dc3739c`, `feeb770`).** The report now
+  carries per-base Spearman and strict-order rate (plan 5.2/13.3), the repair's
+  per-level `D_mean`/`D_tail` (plan 13.3), and a **paired** cluster-bootstrap
+  `Repair − Official` interval (plan 5.4). The v1 paired interval was
+  `[−0.200, −0.020]`: the −0.1050 deficit the review could only call
+  "under-evidenced" was in fact significant.
+- **Re-scored numbers (`feeb770`, 125/125 clips both backends).** Official
+  0.8300 `[0.770, 0.890]`; Repair 0.8800 `[0.805, 0.945]`; delta +0.0500 with
+  paired 95% CI `[−0.015, +0.110]` (crosses zero). Sequence-level: strict order
+  10/20 (Repair) vs 7/20 (Official), mean Spearman 0.815 vs 0.765. The repair's
+  per-level means are now monotone (`0.5407 > 0.5011 > 0.4855 > 0.4760 > 0.4268`),
+  and its `D_mean`/`D_tail` rise with severity (`0.5646 → 0.7515` and
+  `0.8433 → 1.1627`). The v1 repair scores are archived at
+  `scores/archive/motion_smoothness__repair_v1_archived.jsonl`.
+- **What the result now supports.** The v1 deficit is gone; the honest reading is
+  *parity*, not a win — the paired interval crosses zero and the family's severity
+  ladder (in particular the `L2 > L3` declaration, section 4) still has no human
+  validation. `CONSOLIDATED.md` and `table2.csv` carry these numbers and the
+  paired interval.
