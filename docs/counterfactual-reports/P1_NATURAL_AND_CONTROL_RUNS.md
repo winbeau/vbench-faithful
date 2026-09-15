@@ -56,3 +56,65 @@ so only the last shard's rows survive; `repair_results.jsonl` is appended by all
 shards and is complete. `finalize_natural.py` now rebuilds `predictions.csv` from
 it and emits the Official `results.csv` needed by the pair statistics. The first
 P1.1 attempt reported coverage 0.2 (432/2 160 pairs) purely from this overwrite.
+
+## P1.2 Motion Smoothness — natural preference set
+
+**Status: running.** Both backends are needed because no frozen Official natural
+scores exist for this dimension (`results/e0/raw_official_scores/` has only
+dynamics, human_action, spatial_relationship, subject_consistency).
+
+Scoring started 2026-09-15 21:33 on GPUs 1–5 via `run_natural.sh
+motion_smoothness official|repair`, which now calls `finalize_natural.py` so the
+sharded `predictions.csv` overwrite cannot recur.
+
+**Observed rate is the problem**: the Official backend wraps upstream VBench
+`MotionSmoothness.motion_score` (AMT interpolation), which costs ~72 s per
+1 440-video shard-slot on an H100 already saturated at 80–100% utilisation and
+51 GB. That projects to roughly 29 h for the Official pass alone, plus the RAFT
+repair pass. The job is durable in tmux `nat2`; the numbers go here when it lands.
+
+Two caveats that hold regardless of when it finishes:
+
+- The pre-existing natural numbers in the status document (Official .636 /
+  Repair .395) come from an **older estimator**, so they cannot be compared with
+  the direction-aware shipped repair without this rerun.
+- The natural-set question is separate from the counterfactual one. The shipped
+  repair already moved the counterfactual row from −0.105 to +0.050 (parity); the
+  natural run decides whether that came with any human-agreement cost.
+
+## P1.4 Multiple Objects — corrected ordered/control statistics
+
+Done. What changed relative to the earlier report:
+
+1. **The ordered ladder is now occlusion-only.** The never-co-present
+   `conjunction_control` used to sit at the same rank as `occlusion_100`, so the
+   composite CPA counted "control == full occlusion" as a severity tie. All
+   rank-based statistics (CPA, rank-gap decomposition, contract halves, order
+   statistics, dev margin calibration) now run on the ladder alone; the report
+   header names the excluded control level, and the control is still reported by
+   its own §11.4 predicate.
+2. **Weak-target construction check (new).** Per-base median area of the
+   suppressed target as a fraction of the frame, test split:
+
+   | statistic | value |
+   |---|---:|
+   | bases | 20 |
+   | median | **0.1575** |
+   | IQR | 0.0350 – 0.3446 |
+   | range | **0.0066 – 0.4101** |
+
+   The premise is only sound if suppressing B is visible, and here the box spans
+   a **62× range**: the tightest base suppresses 0.66% of the frame (essentially
+   nothing) while the widest covers 41%. The severity levels are therefore not
+   comparable across bases as constructed, which is a fixture finding of the
+   same kind as the Spatial premise failure — the ladder needs a per-base
+   minimum-area filter or an area-normalised occlusion.
+
+3. Detection confidence/profile, paired CI, Spearman and strict-order rate were
+   already present from the review round and are unchanged.
+4. Construction rejection count: the detector-eligibility pass
+   (`scripts/counterfactual/pick_detectable.py`) scanned 49 candidate prompts and
+   kept 25 for this dimension (24 rejected for undetectable targets). That number
+   was printed during construction but is **not durably recorded** — re-running
+   `pick_detectable.py` is currently the only way to reproduce it, and it should
+   write a summary file next time.

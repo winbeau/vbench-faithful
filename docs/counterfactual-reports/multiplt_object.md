@@ -5,8 +5,9 @@
 - expected relation: Monotone decreasing as the weak target disappears.
 - bases: 25 (dev 5, test 20)
 - derived clips: 150 (dev 30, test 120)
-- levels: `conjunction_control`, `occlusion_100`, `occlusion_075`, `occlusion_050`, `occlusion_025`, `occlusion_000`
-- code SHA: `5c4a13091893273510794e45872eac3c59c3ad21`
+- levels: `occlusion_100`, `conjunction_control`, `occlusion_075`, `occlusion_050`, `occlusion_025`, `occlusion_000`
+- control levels (excluded from the ordered ladder): `conjunction_control`
+- code SHA: `c73495e6ffdc44b96d55e1e29d7eab21766c080b`
 - repair variant: `ordered_role_identity_assignment` (detection-conditioned: false)
 
 ## Score coverage
@@ -31,14 +32,10 @@ the composite's interval says nothing about either half.
 
 | backend | split | half | pairs | CPA (dev margin) | CPA (zero margin) | 95% CI |
 |---|---|---|---:|---:|---:|---|
-| official | dev | sensitivity | 70 | 0.3000 | 0.3000 | [0.0571, 0.5429] |
-| official | dev | invariance | 5 | 0.6000 | 0.6000 | [0.2000, 1.0000] |
-| official | test | sensitivity | 280 | 0.5964 | 0.5964 | [0.4750, 0.7036] |
-| official | test | invariance | 20 | 0.6000 | 0.6000 | [0.4000, 0.8000] |
-| repair | dev | sensitivity | 70 | 0.8143 | 0.8143 | [0.6143, 0.9714] |
-| repair | dev | invariance | 5 | 0.0000 | 0.0000 | [0.0000, 0.0000] |
-| repair | test | sensitivity | 280 | 0.8179 | 0.8179 | [0.7250, 0.8893] |
-| repair | test | invariance | 20 | 0.0000 | 0.0000 | [0.0000, 0.0000] |
+| official | dev | sensitivity | 50 | 0.2200 | 0.2200 | [0.0000, 0.5000] |
+| official | test | sensitivity | 200 | 0.5450 | 0.5450 | [0.4300, 0.6500] |
+| repair | dev | sensitivity | 50 | 0.8200 | 0.8200 | [0.6400, 0.9800] |
+| repair | test | sensitivity | 200 | 0.7850 | 0.7850 | [0.6900, 0.8650] |
 
 Per-half paired difference (the same `base_id` clusters resampled once
 and both backends re-scored on each resample, plan 5.4). This is the
@@ -72,6 +69,18 @@ an exact tie requires the metric to be blind to the difference between
 them, which is a property of saturation rather than of contract
 fidelity.
 
+## Weak-target construction check
+
+Median area of the suppressed target B as a fraction of the frame, over
+the test bases. This is the premise check for the occlusion ladder: the
+severity levels only mean something if B occupies enough of the frame
+that suppressing it is visible at all.
+
+- bases: 20
+- median area ratio: **0.1575** (IQR 0.0350–0.3446)
+- range: 0.0066 – 0.4101
+
+
 ## CPA
 
 `zero-margin` predicts the sign directly; `tie-aware` uses the dev-calibrated
@@ -79,12 +88,12 @@ margin. Intervals are 95% cluster-bootstrap CIs over `base_id`.
 
 | backend | split | margin | pairs | CPA | 95% CI |
 |---|---|---:|---:|---:|---|
-| official | dev (zero-margin) | 0 | 75 | 0.3200 | [0.0800, 0.5600] |
-| official | test (zero-margin) | 0 | 300 | 0.5967 | [0.4833, 0.6967] |
-| official | test (tie-aware) | 0 | 300 | 0.5967 | [0.4833, 0.6967] |
-| repair | dev (zero-margin) | 0 | 75 | 0.7600 | [0.5733, 0.9067] |
-| repair | test (zero-margin) | 0 | 300 | 0.7633 | [0.6767, 0.8300] |
-| repair | test (tie-aware) | 0 | 300 | 0.7633 | [0.6767, 0.8300] |
+| official | dev (zero-margin) | 0 | 50 | 0.2200 | [0.0000, 0.5000] |
+| official | test (zero-margin) | 0 | 200 | 0.5450 | [0.4300, 0.6500] |
+| official | test (tie-aware) | 0 | 200 | 0.5450 | [0.4300, 0.6500] |
+| repair | dev (zero-margin) | 0 | 50 | 0.8200 | [0.6400, 0.9800] |
+| repair | test (zero-margin) | 0 | 200 | 0.7850 | [0.6900, 0.8650] |
+| repair | test (tie-aware) | 0 | 200 | 0.7850 | [0.6900, 0.8650] |
 
 ## Sequence-level order statistics
 
@@ -97,10 +106,10 @@ rather than counted as a violation.
 
 | backend | split | bases | mean Spearman | median Spearman | strict order |
 |---|---|---:|---:|---:|---:|
-| official | dev | 5 | 0.4244 | 0.6858 | 0/5 (0.0000) |
-| official | test | 20 | 0.6657 | 0.8402 | 0/20 (0.0000) |
-| repair | dev | 5 | 0.6783 | 0.8117 | 2/5 (0.4000) |
-| repair | test | 20 | 0.7131 | 0.9131 | 3/20 (0.1500) |
+| official | dev | 5 | 0.8008 | 0.8008 | 0/5 (0.0000) |
+| official | test | 20 | 0.6204 | 0.7225 | 0/20 (0.0000) |
+| repair | dev | 5 | 0.7000 | 0.9000 | 2/5 (0.4000) |
+| repair | test | 20 | 0.6550 | 0.9000 | 3/20 (0.1500) |
 
 ## Contract decomposition
 
@@ -113,26 +122,22 @@ anything. Read the two halves separately, never the composite alone.
 
 | backend | split | rank gap | pairs | match rate | tie rate |
 |---|---|---:|---:|---:|---:|
-| official | test (zero-margin) | 0 | 20 | 0.6000 | 0.6000 |
-| official | test (zero-margin) | 1 | 100 | 0.4900 | 0.3900 |
-| official | test (zero-margin) | 2 | 80 | 0.5750 | 0.3000 |
-| official | test (zero-margin) | 3 | 60 | 0.6500 | 0.2333 |
-| official | test (zero-margin) | 4 | 40 | 0.8250 | 0.1000 |
-| official | test (tie-aware) | 0 | 20 | 0.6000 | 0.6000 |
-| official | test (tie-aware) | 1 | 100 | 0.4900 | 0.3900 |
-| official | test (tie-aware) | 2 | 80 | 0.5750 | 0.3000 |
-| official | test (tie-aware) | 3 | 60 | 0.6500 | 0.2333 |
-| official | test (tie-aware) | 4 | 40 | 0.8250 | 0.1000 |
-| repair | test (zero-margin) | 0 | 20 | 0.0000 | 0.0000 |
-| repair | test (zero-margin) | 1 | 100 | 0.7300 | 0.0000 |
-| repair | test (zero-margin) | 2 | 80 | 0.8125 | 0.0000 |
-| repair | test (zero-margin) | 3 | 60 | 0.8833 | 0.0000 |
-| repair | test (zero-margin) | 4 | 40 | 0.9500 | 0.0000 |
-| repair | test (tie-aware) | 0 | 20 | 0.0000 | 0.0000 |
-| repair | test (tie-aware) | 1 | 100 | 0.7300 | 0.0000 |
-| repair | test (tie-aware) | 2 | 80 | 0.8125 | 0.0000 |
-| repair | test (tie-aware) | 3 | 60 | 0.8833 | 0.0000 |
-| repair | test (tie-aware) | 4 | 40 | 0.9500 | 0.0000 |
+| official | test (zero-margin) | 1 | 80 | 0.4500 | 0.4250 |
+| official | test (zero-margin) | 2 | 60 | 0.5167 | 0.3500 |
+| official | test (zero-margin) | 3 | 40 | 0.6250 | 0.2500 |
+| official | test (zero-margin) | 4 | 20 | 0.8500 | 0.1000 |
+| official | test (tie-aware) | 1 | 80 | 0.4500 | 0.4250 |
+| official | test (tie-aware) | 2 | 60 | 0.5167 | 0.3500 |
+| official | test (tie-aware) | 3 | 40 | 0.6250 | 0.2500 |
+| official | test (tie-aware) | 4 | 20 | 0.8500 | 0.1000 |
+| repair | test (zero-margin) | 1 | 80 | 0.7000 | 0.0000 |
+| repair | test (zero-margin) | 2 | 60 | 0.7833 | 0.0000 |
+| repair | test (zero-margin) | 3 | 40 | 0.8750 | 0.0000 |
+| repair | test (zero-margin) | 4 | 20 | 0.9500 | 0.0000 |
+| repair | test (tie-aware) | 1 | 80 | 0.7000 | 0.0000 |
+| repair | test (tie-aware) | 2 | 60 | 0.7833 | 0.0000 |
+| repair | test (tie-aware) | 3 | 40 | 0.8750 | 0.0000 |
+| repair | test (tie-aware) | 4 | 20 | 0.9500 | 0.0000 |
 
 Rank-gap-0 pairs are the declared-equal contract. Splitting them out
 shows whether a Repair gain in the composite comes from sensitivity
@@ -164,25 +169,21 @@ transformation at all, so no level pair can match.
 
 | backend | split | level | n | mean | std | min | max | distinct |
 |---|---|---|---:|---:|---:|---:|---:|---:|
-| official | dev | `conjunction_control` | 5 | 0.1250 | 0.1936 | 0.0000 | 0.5000 | 3 |
 | official | dev | `occlusion_000` | 5 | 0.4500 | 0.4583 | 0.0000 | 1.0000 | 3 |
 | official | dev | `occlusion_025` | 5 | 0.4250 | 0.4717 | 0.0000 | 1.0000 | 3 |
 | official | dev | `occlusion_050` | 5 | 0.4000 | 0.4899 | 0.0000 | 1.0000 | 2 |
 | official | dev | `occlusion_075` | 5 | 0.4000 | 0.4899 | 0.0000 | 1.0000 | 2 |
 | official | dev | `occlusion_100` | 5 | 0.2000 | 0.4000 | 0.0000 | 1.0000 | 2 |
-| official | test | `conjunction_control` | 20 | 0.1281 | 0.2030 | 0.0000 | 0.5000 | 4 |
 | official | test | `occlusion_000` | 20 | 0.5844 | 0.4175 | 0.0000 | 1.0000 | 9 |
 | official | test | `occlusion_025` | 20 | 0.4938 | 0.4248 | 0.0000 | 1.0000 | 9 |
 | official | test | `occlusion_050` | 20 | 0.4781 | 0.4071 | 0.0000 | 1.0000 | 11 |
 | official | test | `occlusion_075` | 20 | 0.4188 | 0.3782 | 0.0000 | 1.0000 | 11 |
 | official | test | `occlusion_100` | 20 | 0.1781 | 0.3083 | 0.0000 | 0.9375 | 8 |
-| repair | dev | `conjunction_control` | 5 | 0.1493 | 0.1317 | 0.0417 | 0.3897 | 5 |
 | repair | dev | `occlusion_000` | 5 | 0.4435 | 0.3124 | 0.1609 | 0.9278 | 5 |
 | repair | dev | `occlusion_025` | 5 | 0.4252 | 0.3326 | 0.1493 | 0.9275 | 5 |
 | repair | dev | `occlusion_050` | 5 | 0.4047 | 0.3427 | 0.0693 | 0.9221 | 5 |
 | repair | dev | `occlusion_075` | 5 | 0.3846 | 0.3506 | 0.0614 | 0.9036 | 5 |
 | repair | dev | `occlusion_100` | 5 | 0.2235 | 0.2380 | 0.0693 | 0.6967 | 5 |
-| repair | test | `conjunction_control` | 20 | 0.2138 | 0.1536 | 0.0473 | 0.4759 | 20 |
 | repair | test | `occlusion_000` | 20 | 0.5368 | 0.2409 | 0.0583 | 0.8780 | 20 |
 | repair | test | `occlusion_025` | 20 | 0.5097 | 0.2494 | 0.0749 | 0.8769 | 20 |
 | repair | test | `occlusion_050` | 20 | 0.4959 | 0.2454 | 0.0744 | 0.8477 | 20 |
@@ -199,9 +200,9 @@ the delta is distinguishable from zero — the two marginal intervals in the
 
 | metric | official | repair | repair - official | paired 95% CI |
 |---|---:|---:|---:|---|
-| weakest_object_visibility | 0.5967 | 0.7633 | +0.1666 | [+0.0900, +0.2500] |
+| weakest_object_visibility | 0.5450 | 0.7850 | +0.2400 | [+0.1550, +0.3300] |
 
-Paired zero-margin delta: `+0.1667` over 20 test bases; paired tie-aware delta: `+0.1667`.
+Paired zero-margin delta: `+0.2400` over 20 test bases; paired tie-aware delta: `+0.2400`.
 
 ## Frame evidence (test split)
 
