@@ -14,7 +14,7 @@ PY=/root/shuyuan_meng/projects/VBench/.venv/bin/python
 DATA=/root/wenbiao_zhao/datasets/vbench-1.0-human-preference
 CF=/root/wenbiao_zhao/datasets/counterfactual-vbench
 MANIFEST="$CF/manifest.jsonl"
-UPSTREAM=/root/shuyuan_meng/projects/VBench-official-locked
+UPSTREAM=/root/wenbiao_zhao/VBench
 SCORES="$CF/scores"
 mkdir -p "$SCORES"
 
