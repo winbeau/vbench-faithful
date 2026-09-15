@@ -11,7 +11,10 @@ worth after independent review.
 - Coverage: **100%** on both backends for all 7 dimensions.
 - Code revision for the scoring run: `a044ac9`, with two later re-scores noted in
   place: `dynamics_degree` (v2 repair, `d/dt**p`) and `motion_smoothness`
-  (direction-aware estimator, `feeb770`).
+  (direction-aware estimator, `feeb770`). **The motion-smoothness defaults have
+  since changed** (`4d53fa2`: unaligned pixel-wise direction, top-k temporal
+  aggregation k=3, 0.5/0.5 weights), so that row describes the pre-`4d53fa2`
+  revision and needs a re-score before it is quoted as the shipped estimator.
 - `Overall Consistency` is out of scope: the plan requires human-authored prompt
   conditions (MD section 12.2) and no annotation round was run.
 
@@ -93,6 +96,13 @@ significant; the shipped row's paired delta is **+0.0500 with 95% CI
 parity* with Official on this family, not a demonstrated win. The paired
 interval is carried in `table2.csv` (`delta_ci_low`/`delta_ci_high`).
 
+**Revision caveat —** `4d53fa2` changed this estimator's defaults (unaligned
+pixel-wise direction, top-k temporal aggregation with k=3, 0.5/0.5
+magnitude/direction weights). Every number on this row, and the natural-set
+measurement in `P1_NATURAL_AND_CONTROL_RUNS.md` (tie-aware accuracy 0.3248 against
+Official 0.6364), was measured **before** that change and describes the
+`feeb770` revision. Re-score before quoting either as the shipped behaviour.
+
 **This table must not be read on its own.** Seven independent reviews
 (`<dimension>.review.md`) found that for most rows the composite CPA is either
 non-diagnostic or measures something other than the contract.
@@ -106,7 +116,7 @@ non-diagnostic or measures something other than the contract.
 | `multiplt_object` | On the occlusion-only ladder this is a **clean ordered Repair win**: +0.2400 [+0.155, +0.330], with the composite equal to the ordered half because the ladder holds no same-rank pair. The **tie-based invariance criterion is 0.00 vs Official 0.60 and is not satisfiable by a continuous estimator**, so it is reported as the separate control statistic, not as a contract half. The plan's §11.4 "score the never-co-present control as incomplete" predicate passes on both backends. | win on ordering; the temporal-conjunction contract must be read as a level predicate, not a tie |
 | `dynamics_degree` | Composite CPA is non-diagnostic and its sign is not trustworthy. Signed exponent (target 0): Official `+0.491`, archived v1 repair `−0.511` — the same violation mirrored — and the shipped v2 repair `+0.019`. v2 satisfies the contract yet scores the **lower** CPA. | v2 fixes the exponent; CPA cannot see it |
 | `human_action` | **Unfalsifiable by construction.** The filename *is* the Official target label, so the invariance expectation is unsatisfiable for Official; the Repair target comes from metadata, so all three levels share one query and one byte-identical video and CV 0 is an identity. | the family tests nothing; needs redesign |
-| `motion_smoothness` | The review found a **structural estimator defect**: it never scored direction change, so a hold-and-jump (`jerk_2`) tied or inverted a local reversal (`jerk_3`), which the contract requires to be strict. That is fixed (`feeb770`) and the dimension re-scored: the repair now beats Official on CPA (0.8800 vs 0.8300), on strict order (10/20 vs 7/20) and on Spearman (0.815 vs 0.765). The paired delta CI crosses zero ([−0.015, +0.110]), so this is parity, not a win. | the v1 deficit is fixed; the shipped repair matches Official on the declared ladder |
+| `motion_smoothness` | The review found a **structural estimator defect**: it never scored direction change, so a hold-and-jump (`jerk_2`) tied or inverted a local reversal (`jerk_3`), which the contract requires to be strict. That is fixed (`feeb770`) and the dimension re-scored: the repair now beats Official on CPA (0.8800 vs 0.8300), on strict order (10/20 vs 7/20) and on Spearman (0.815 vs 0.765). The paired delta CI crosses zero ([−0.015, +0.110]), so this is parity, not a win. | the v1 deficit is fixed; the repair of the `feeb770` revision matches Official on the declared ladder — **re-score before quoting, `4d53fa2` changed the defaults** |
 | `subject_consistency` | Pooled CPA is dominated by the easy sensitivity half. Split by contract half on test, the trade is explicit: sensitivity 0.9333 (Official) vs 0.7833 (Repair) — Official is *better* at what is easy — but **position invariance 0.2500, 95% CI [0.150, 0.350] (15/60 pairs, well below chance) — vs Repair 0.9167 [0.817, 1.000] (55/60)**. Official is systematically *anti*-invariant (its fixed first-frame anchor makes the same corruption score differently by position); Repair nearly removes it. | the invariance half is the win, and it must be quoted on its own |
 
 ## `dynamics_degree`: archived v1 vs shipped v2 (measured exponent)
@@ -188,3 +198,4 @@ here.
 | reports | `<dataset>/reports/`, mirrored in this directory |
 | machine-readable table | `table2.csv`, `table2.json`, `SUMMARY.md` |
 | scoring code | `scripts/counterfactual/` at `a044ac9` |
+| motion-smoothness defaults | row measured at `feeb770`; defaults changed at `4d53fa2` (see the revision caveat above) |

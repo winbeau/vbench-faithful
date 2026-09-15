@@ -115,7 +115,10 @@ Three diagnostics, because a below-chance number invites a sign-bug hypothesis:
 Read together with the counterfactual row, this is the strongest instance of the
 plan's "audit, not replacement" cell: the shipped motion repair buys counterfactual
 contract compliance at the cost of a large, significant loss of human agreement —
-a bigger loss than the dynamics v2 repair shows.
+a bigger loss than the dynamics v2 repair shows. **Both halves of that statement
+are measured on the pre-`4d53fa2` defaults**; they establish that the
+direction-aware repair of that revision was anti-correlated with human preference,
+and they are the baseline the new defaults have to beat.
 
 Two scope caveats:
 
@@ -123,10 +126,12 @@ Two scope caveats:
   an **older estimator**; the rerun above is the comparable measurement, and the
   old Repair .395 was already below chance, so the direction of this finding
   predates the direction-aware change.
-- These numbers describe the **committed** repair at `ccbd89b`. The worktree
-  currently holds uncommitted motion-smoothness changes (raw-direction default,
-  top-k temporal aggregation, 0.5/0.5 magnitude/direction weights) that would
-  change this number and are deliberately **not** reflected here.
+- These numbers describe the repair as it stood at `ccbd89b`. The defaults have
+  since changed (`4d53fa2`: unaligned pixel-wise direction, top-k temporal
+  aggregation with k=3, and 0.5/0.5 magnitude/direction weights), so this row
+  **describes the pre-`4d53fa2` revision** and must be re-measured before it is
+  quoted as a property of the shipped estimator. The same caveat applies to the
+  `motion_smoothness` row of `CONSOLIDATED.md`.
 
 ## P1.4 Multiple Objects — corrected ordered/control statistics
 

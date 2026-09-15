@@ -64,7 +64,11 @@ number is the Official one. See `CONSOLIDATED.md` for the per-dimension verdicts
 The review found a structural defect (the estimator never scored direction
 change), which the direction-aware fix (`feeb770`) removed; the re-score moves the
 row from **−0.1050** to **+0.0500** with a paired CI of [−0.015, +0.110]. That
-crosses zero, so it is **parity**, not a demonstrated win. `spatial_relationship`
+crosses zero, so it is **parity**, not a demonstrated win. **This row — and the
+natural-set measurement in `P1_NATURAL_AND_CONTROL_RUNS.md` — describes the
+`feeb770` revision: `4d53fa2` has since changed the estimator's defaults
+(unaligned pixel-wise direction, top-k aggregation k=3, 0.5/0.5 weights), so
+re-score before quoting either.** `spatial_relationship`
 (−0.300) must be read as **neither a loss nor a win**: 25 of its 30 test pairs tie
 at 0:0, so the number measures the Repair's silence rather than its sign, and the
 family's premise was never true on this source. See the caveat below.

@@ -61,6 +61,11 @@
   repair `p=−0.51`），v2 的 `d/dt**0.5` 才把聚合层拉回 `p=−0.011`（但指数是同一
   批数据上的 default，非独立校准）；`motion_smoothness` 的方向感知修复只到
   parity。
+- **`motion_smoothness` 的默认值在 `4d53fa2` 变了**（未对齐的像素级方向、top-k
+  时间聚合 k=3、0.5/0.5 权重），因此 `CONSOLIDATED.md` 的 motion 行与
+  `P1_NATURAL_AND_CONTROL_RUNS.md` 的自然集测量（0.3248 对 0.6364）都是
+  **`feeb770` 修订版**的数字，引用前必须重跑；新默认值目前只有合成 ladder 与
+  单元测试覆盖。
 - 真实模型、CUDA 与权重 parity 对冻结 E0 基线**尚未验证**，上述数值是首轮
   测量值，不是复现的官方基线。
 
