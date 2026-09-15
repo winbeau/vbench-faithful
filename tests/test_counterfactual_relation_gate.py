@@ -156,3 +156,37 @@ def test_spatial_annotation_without_bare_nouns_is_rejected(monkeypatch):
     )
     with pytest.raises(ValueError, match="bare object nouns"):
         pick_detectable.spatial_query({"prompt_en": "p", "parsed": {"relation": "left"}}, Path("/data"))
+
+
+def test_summary_records_the_scan_and_rejection_counts(tmp_path, monkeypatch):
+    """The eligibility counts must survive the process, not just the terminal."""
+    monkeypatch.setattr(pick_detectable, "read_jsonl", lambda path: [])
+    monkeypatch.setattr(pick_detectable, "load_prompts", lambda: {})
+    monkeypatch.setattr(pick_detectable, "load_manifest", lambda: [])
+    monkeypatch.setattr(pick_detectable, "GritDetector", lambda *args, **kwargs: object())
+    monkeypatch.setattr(pick_detectable, "ranked_pool",
+                        lambda dimension, prompts, manifest, seed: [None] * 49)
+    kept = [
+        {"dimension": "multiplt_object", "split": "dev", "video_uid": "a"},
+        {"dimension": "multiplt_object", "split": "test", "video_uid": "b"},
+    ]
+    monkeypatch.setattr(pick_detectable, "select_dimension",
+                        lambda dimension, pool, args, detector, validity: (kept, 49))
+    monkeypatch.setattr(pick_detectable, "write_jsonl", lambda path, rows: None)
+
+    summary = tmp_path / "detector_eligibility.json"
+    monkeypatch.setattr("sys.argv", [
+        "pick_detectable",
+        "--dataset-root", str(tmp_path),
+        "--output", str(tmp_path / "bases.jsonl"),
+        "--dimension", "multiplt_object",
+        "--summary", str(summary),
+    ])
+
+    assert pick_detectable.main() == 0
+
+    entry = json.loads(summary.read_text(encoding="utf-8"))["per_dimension"]["multiplt_object"]
+    assert entry["pool"] == 49
+    assert entry["scanned"] == 49
+    assert entry["rejected"] == 47
+    assert entry["kept"] == {"dev": 1, "test": 1}

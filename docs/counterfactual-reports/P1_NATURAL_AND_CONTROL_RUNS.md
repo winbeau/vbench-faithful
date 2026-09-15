@@ -159,11 +159,12 @@ Done. What changed relative to the earlier report:
 3. Detection confidence/profile, paired CI, Spearman and strict-order rate were
    already present from the review round and are unchanged.
 4. Construction rejection count: the detector-eligibility pass
-   (`scripts/counterfactual/pick_detectable.py`) scanned 49 candidate prompts and
-   kept 25 for this dimension (24 rejected for undetectable targets). That number
-   was printed during construction but is **not durably recorded** — re-running
-   `pick_detectable.py` is currently the only way to reproduce it, and it should
-   write a summary file next time.
+   (`scripts/counterfactual/pick_detectable.py`) scanned 49 ranked candidates and
+   kept 25 for this dimension (24 rejected for undetectable targets;
+   `subject_consistency` scanned 25 for 25 kept, so the rejection is specific to
+   the two-object dimensions). That number was previously only printed; it is now
+   written to a summary file via `pick_detectable.py --summary` and recorded in
+   `configs/counterfactual/README.md`.
 
 ## P1.3 Dynamic Degree — independent FPS validation of alpha = 0.5
 
@@ -327,3 +328,15 @@ Consequence: the published dataset and the `CONSOLIDATED.md` table remain
 internally consistent — every reported score was computed on a published clip —
 but `build.py` against the current `bases.jsonl` reproduces only 5 of 7
 dimensions.
+
+**Resolved.** Running the two-step pipeline — `select_bases.py`, then
+`pick_detectable.py` with no `--dimension` so all three detector-dependent
+dimensions are re-selected — reproduces the published clip inventory on **all 7
+dimensions, 205/205 bases**, while leaving the other five byte-identical. Because
+`output/` is gitignored, the selection of record is now versioned at
+`configs/counterfactual/bases_published.jsonl`, and the eligibility counts are
+written next to it (`configs/counterfactual/README.md`): `subject_consistency`
+scanned 25 ranked candidates for 25 kept (**0 rejected**), `multiplt_object`
+scanned 49 for 25 kept (**24 rejected**). That last number is the P1.4 Multiple
+Objects fixture finding, which until now existed only in a terminal scrollback;
+`pick_detectable.py` gained a `--summary` output so it is durable.
