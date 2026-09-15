@@ -131,15 +131,15 @@ class MixedRankReportTests(unittest.TestCase):
         split = contract_split_cpa(test_rows, scores(4, position_gap=position_gap), 0.0, 50, 7)
         cpa = {
             "coverage": [{"backend": "official", "split": "test", "scored": 16, "total": 16}],
-            "profiles": {"official": {"clean": {"n": 4, "mean": 0.9, "std": 0.0, "min": 0.9,
-                                                "max": 0.9, "distinct": 1}}},
+            "profiles": {"official": {"test": {"clean": {"n": 4, "mean": 0.9, "std": 0.0,
+                                                         "min": 0.9, "max": 0.9, "distinct": 1}}}},
             "contracts": {
                 "official": {
                     "test_zero_margin": group_stats(rank_gap_groups(pairs), 0.0),
                     "test_tie_aware": group_stats(rank_gap_groups(pairs), 0.0),
                 }
             },
-            "contract_split": {"official": split},
+            "contract_split": {"official": {"test": split}},
             "official": {"dev_margin": 0.0},
         }
         return render_report(
@@ -158,8 +158,8 @@ class MixedRankReportTests(unittest.TestCase):
         report = self._report()
         self.assertIn("## CPA by contract half", report)
         self.assertIn("| 95% CI |", report)
-        self.assertIn("| official | sensitivity |", report)
-        self.assertIn("| official | invariance |", report)
+        self.assertIn("| official | test | sensitivity |", report)
+        self.assertIn("| official | test | invariance |", report)
 
     def test_conjunction_control_predicate_is_reported_when_present(self):
         rows_ = rows(2)
@@ -260,16 +260,16 @@ class OrderedFamilyReportTests(unittest.TestCase):
                      "incomplete_shards": []}]
         cpa = {
             "coverage": [{"backend": "official", "split": "test", "scored": 20, "total": 20}],
-            "profiles": {"official": {"jerk_0_original": {
-                "n": 4, "mean": 0.9, "std": 0.0, "min": 0.9, "max": 0.9, "distinct": 1}}},
+            "profiles": {"official": {"test": {"jerk_0_original": {
+                "n": 4, "mean": 0.9, "std": 0.0, "min": 0.9, "max": 0.9, "distinct": 1}}}},
             "contracts": {"official": {
                 "test_zero_margin": group_stats(rank_gap_groups(_base_pairs(test_rows, flat)), 0.0),
                 "test_tie_aware": group_stats(rank_gap_groups(_base_pairs(test_rows, flat)), 0.0),
             }},
-            "contract_split": {"official": {
+            "contract_split": {"official": {"test": {
                 "sensitivity": {"n_pairs": 40, "cpa": 1.0, "cpa_zero_margin": 1.0},
                 "invariance": {"n_pairs": 0, "cpa": None},
-            }},
+            }}},
             "order": {
                 "official": {"dev": order_statistics(test_rows[:10], flat),
                              "test": order_statistics(test_rows, flat)},

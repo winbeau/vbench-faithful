@@ -536,22 +536,23 @@ def render_report(
             "separately, and each half carries its own cluster-bootstrap interval:",
             "the composite's interval says nothing about either half.",
             "",
-            "| backend | half | pairs | CPA (dev margin) | CPA (zero margin) | 95% CI |",
-            "|---|---|---:|---:|---:|---|",
+            "| backend | split | half | pairs | CPA (dev margin) | CPA (zero margin) | 95% CI |",
+            "|---|---|---|---:|---:|---:|---|",
         ]
         for backend in ("official", "repair"):
-            for half, stats in (cpa.get("contract_split", {}).get(backend, {}) or {}).items():
-                if stats.get("cpa") is None:
-                    continue
-                interval = (
-                    f"[{stats['ci_low']:.4f}, {stats['ci_high']:.4f}]"
-                    if stats.get("ci_low") is not None
-                    else "—"
-                )
-                lines.append(
-                    f"| {backend} | {half} | {stats['n_pairs']} | {stats['cpa']:.4f} | "
-                    f"{stats['cpa_zero_margin']:.4f} | {interval} |"
-                )
+            for split in ("dev", "test"):
+                for half, stats in ((cpa.get("contract_split", {}).get(backend, {}) or {}).get(split, {}) or {}).items():
+                    if stats.get("cpa") is None:
+                        continue
+                    interval = (
+                        f"[{stats['ci_low']:.4f}, {stats['ci_high']:.4f}]"
+                        if stats.get("ci_low") is not None
+                        else "—"
+                    )
+                    lines.append(
+                        f"| {backend} | {split} | {half} | {stats['n_pairs']} | {stats['cpa']:.4f} | "
+                        f"{stats['cpa_zero_margin']:.4f} | {interval} |"
+                    )
         paired_halves = (cpa.get("paired_halves", {}) or {})
         if any(entry.get("delta") is not None for entry in paired_halves.values()):
             lines += [
@@ -683,7 +684,11 @@ def render_report(
         for backend in ("official", "repair"):
             for split, split_rows in (("dev", [r for r in rows if r["split"] == "dev"]),
                                       ("test", [r for r in rows if r["split"] == "test"])):
-                backend_scores = {r["derived_id"]: (scores or {}).get((r["derived_id"], backend)) for r in split_rows}
+                # `scores` is the nested {derived_id: {backend: score}} shape here.
+                backend_scores = {
+                    r["derived_id"]: (scores or {}).get(r["derived_id"], {}).get(backend)
+                    for r in split_rows
+                }
                 stats = invariance_stats(split_rows, backend_scores)
                 if stats["mean_cv"] is None:
                     continue
@@ -778,23 +783,25 @@ def render_report(
         "",
         *sensitivity_note,
         "",
-        "| backend | level | n | mean | std | min | max | distinct |",
-        "|---|---|---:|---:|---:|---:|---:|---:|",
+        "| backend | split | level | n | mean | std | min | max | distinct |",
+        "|---|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     for backend in ("official", "repair"):
-        for level, stats in cpa.get("profiles", {}).get(backend, {}).items():
-            lines.append(
-                f"| {backend} | `{level}` | {stats['n']} | {stats['mean']:.4f} | {stats['std']:.4f} | "
-                f"{stats['min']:.4f} | {stats['max']:.4f} | {stats['distinct']} |"
-            )
+        for split in ("dev", "test"):
+            for level, stats in (cpa.get("profiles", {}).get(backend, {}) or {}).get(split, {}).items():
+                lines.append(
+                    f"| {backend} | {split} | `{level}` | {stats['n']} | {stats['mean']:.4f} | "
+                    f"{stats['std']:.4f} | {stats['min']:.4f} | {stats['max']:.4f} | {stats['distinct']} |"
+                )
     for backend in ("official", "repair"):
-        profile = cpa.get("profiles", {}).get(backend, {})
-        distinct = {stats["distinct"] for stats in profile.values()}
-        if distinct == {1} and profile:
-            lines.append(
-                f"\n**Warning:** the `{backend}` backend returned a single constant score at every "
-                "level, so its CPA here measures insensitivity, not invariance."
-            )
+        for split in ("dev", "test"):
+            profile = (cpa.get("profiles", {}).get(backend, {}) or {}).get(split, {})
+            present = {stats["distinct"] for stats in profile.values()}
+            if present == {1} and profile:
+                lines.append(
+                    f"\n**Warning:** the `{backend}` backend returned a single constant score at every "
+                    f"level on the {split} split, so its CPA there measures insensitivity, not invariance."
+                )
 
     continuity = cpa.get("discontinuity", {}).get("repair", {})
     if continuity:
@@ -1136,13 +1143,19 @@ def main() -> int:
             "test_zero_margin": group_stats(rank_gap_groups(test_base_pairs), 0.0),
             "test_tie_aware": group_stats(rank_gap_groups(test_base_pairs), margin),
         }
-        cpa["profiles"][backend] = score_profile(rows, backend_scores)
+        cpa["profiles"][backend] = {
+            "dev": score_profile(dev_rows, backend_scores),
+            "test": score_profile(test_rows, backend_scores),
+        }
         cpa.setdefault("discontinuity", {})[backend] = discontinuity_profile(
             rows, nested_evidence, backend
         )
-        cpa.setdefault("contract_split", {})[backend] = contract_split_cpa(
-            rows, backend_scores, margin, args.iterations, args.seed
-        )
+        cpa.setdefault("contract_split", {})[backend] = {
+            split: contract_split_cpa(
+                split_rows, backend_scores, margin, args.iterations, args.seed
+            )
+            for split, split_rows in (("dev", dev_rows), ("test", test_rows))
+        }
         cpa.setdefault("conjunction_control", {})[backend] = contract_predicate_stats(
             rows, backend_scores, "conjunction_control", "occlusion_100"
         )
