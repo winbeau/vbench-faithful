@@ -13,10 +13,10 @@ Each report contains: score coverage per backend and split, per-family CPA
 
 | dimension | family | Official CPA | Repair CPA | delta | Official CV | Repair CV |
 |---|---|---:|---:|---:|---:|---:|
-| `dynamics_degree` | `fps_resampling` | 0.8333 | 0.8444 | +0.0111 | — | — |
-| `human_action` | `filename_invariance` | 1.0000 | 1.0000 | +0.0000 | — | — |
+| `dynamics_degree` | `fps_resampling` | 0.8333 | 0.8444 | +0.0111 | 0.3177 | 0.2360 |
+| `human_action` | `filename_invariance` | 1.0000 | 1.0000 | +0.0000 | 1.4142 | 0.0000 |
 | `spatial_relationship` | `directional_flip` | 0.3667 | 0.0667 | -0.3000 | — | — |
 | `subject_consistency` | `temporal_relocation` | 0.5917 | 0.8500 | +0.2583 | — | — |
 
-`CV` is the mean within-base coefficient of variation, reported only for
-same-rank (invariance) families where a tie-margin CPA is degenerate.
+`CV` is the mean within-base coefficient of variation (test split), reported
+only for same-rank (invariance) families where a tie-margin CPA is degenerate.
