@@ -81,6 +81,43 @@ def cpa_at_margin(pairs: list[tuple[int, int, float]], margin: float) -> float:
     return correct / len(pairs)
 
 
+def rank_gap_groups(
+    base_pairs: dict[str, list[tuple[int, int, float]]],
+) -> dict[int, list[tuple[int, int, float]]]:
+    """Split the pair census by expected rank gap.
+
+    A mixed-rank family (`expected_rank` takes more than one value) is a
+    conjunction of contracts: rank gap > 0 pairs test sensitivity, while rank gap
+    0 pairs test the invariance of the levels that were declared equal.  A
+    single composite CPA over both is dominated by whichever contract is easier
+    and hides the other, so the report has to show them separately.
+    """
+    groups: dict[int, list[tuple[int, int, float]]] = defaultdict(list)
+    for pairs in base_pairs.values():
+        for pair in pairs:
+            groups[pair[1]].append(pair)
+    return dict(groups)
+
+
+def group_stats(
+    groups: dict[int, list[tuple[int, int, float]]], margin: float
+) -> dict[int, dict[str, Any]]:
+    """Per-rank-gap pair count, tie rate and match rate at one margin."""
+    stats: dict[int, dict[str, Any]] = {}
+    for rank_gap, pairs in sorted(groups.items()):
+        matched = sum(
+            1 for expected, _gap, delta in pairs if prediction(delta, margin) == expected
+        )
+        tied = sum(1 for _e, _gap, delta in pairs if prediction(delta, margin) == 0)
+        stats[rank_gap] = {
+            "n_pairs": len(pairs),
+            "matched": matched,
+            "match_rate": matched / len(pairs) if pairs else float("nan"),
+            "tie_rate": tied / len(pairs) if pairs else float("nan"),
+        }
+    return stats
+
+
 def calibrate_margin(dev_pairs: list[tuple[int, int, float]]) -> float:
     """Pick the zero-margin neighbourhood that maximises dev tie-aware CPA."""
     deltas = np.array([abs(delta) for _, _, delta in dev_pairs if delta != 0])
