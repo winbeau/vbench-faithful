@@ -13,5 +13,5 @@ Each report contains: score coverage per backend and split, per-family CPA
 
 | dimension | family | Official (test, tie-aware) | Repair (test, tie-aware) | delta |
 |---|---|---:|---:|---:|
-| `dynamics_degree` | `fps_resampling` |  |  |  |
-| `subject_consistency` | `temporal_relocation` |  |  |  |
+| `dynamics_degree` | `fps_resampling` | 0.8333 | 0.8444 | +0.0111 |
+| `subject_consistency` | `temporal_relocation` | 0.5917 | 0.8500 | +0.2583 |
