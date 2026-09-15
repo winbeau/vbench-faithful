@@ -179,10 +179,9 @@ def make_scorer(dimension: str, backend: str, device: Any, upstream: Path) -> Ca
             OfficialGritDetector,
             evaluate_official,
             normalize_official_results,
-            weight_path,
         )
         from spatial_relationship.diagnostics import DiagnosticsLevel
-        from spatial_relationship.metric import evaluate_audit_batch, parse_query
+        from spatial_relationship.metric import evaluate_audit_batch, parse_query, weight_path
 
         weight = Path(os.environ.get("VBENCH_AUDIT_GRIT_WEIGHT", weight_path())).expanduser()
         if backend == "official":
@@ -215,11 +214,12 @@ def make_scorer(dimension: str, backend: str, device: Any, upstream: Path) -> Ca
         return ev
 
     if dimension == "multiple_objects":
-        from multiple_objects.backends.vbench import evaluate_official_batch, weight_path
+        from multiple_objects.backends.vbench import DEFAULT_WEIGHT as GRIT_WEIGHT
+        from multiple_objects.backends.vbench import evaluate_official_batch
         from multiple_objects.metric import evaluate_audit_batch as mo_audit_batch
         from multiple_objects.schemas import MultipleObjectsConfig
 
-        weight = Path(os.environ.get("VBENCH_AUDIT_GRIT_WEIGHT", weight_path())).expanduser()
+        weight = Path(os.environ.get("VBENCH_AUDIT_GRIT_WEIGHT", str(GRIT_WEIGHT))).expanduser()
         if backend == "official":
             def ev(video: Path, item: dict[str, Any]) -> dict[str, Any]:
                 return _first(evaluate_official_batch([video], {video.name: item}, device, weight))
