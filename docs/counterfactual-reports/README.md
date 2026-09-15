@@ -32,9 +32,11 @@ dimension except `human_action` (48/60 test clips scored on both backends).
 intervals**: `scene` (+0.545), `subject_consistency` (+0.258), `multiplt_object`
 (+0.167).
 
-**Two families are genuine Repair losses**, reported as-is:
-`spatial_relationship` (−0.300, where both backends sit at or below chance
-because neither responds to the flip) and `motion_smoothness` (−0.105).
+**One family is a genuine Repair loss**, reported as-is: `motion_smoothness`
+(−0.105). `spatial_relationship` (−0.300) must be read as **neither a loss nor a
+win**: 25 of its 30 test pairs tie at 0:0, so the number measures the Repair's
+silence rather than its sign, and the family's premise was never true on this
+source. See the caveat below.
 
 **The two invariance families must not be read from CPA at all.** When every
 level is expected to tie, the dev-calibrated margin can always be widened until
@@ -43,8 +45,20 @@ and is also sign-blind. Use the dispersion:
 
 | dimension | Official CV | Repair CV | reading |
 |---|---:|---:|---|
-| `human_action` | 1.4142 | **0.0000** | Official swings with the filename; Repair is *exactly* filename-invariant |
+| `human_action` | 1.4142 | **0.0000** | Official swings with the filename; Repair is *exactly* filename-invariant — **see the caveat below** |
 | `dynamics_degree` | 0.3177 | 0.2360 | see the exponent warning below |
+
+### `human_action`'s CV 0 is an identity, not a result
+
+The filename *is* the Official target label: `official_target_from_filename` plus
+`official_decision` score a clip by whether the action parsed out of its filename
+is in the accepted top-5, so a family that changes only the filename is the exact
+counterfactual the Official metric is defined to respond to and its column is a
+fixture property rather than a stability measurement. The Repair target comes
+from `metadata[...]["target_action"]` instead, which this family never moves, so
+its three levels share one query *and* one byte-identical video and CV 0 follows
+by construction. That shows the Repair reads its query from metadata; it does
+**not** show the Repair responds to the query. See `human_action.review.md`.
 
 ### `dynamics_degree` is not a Repair win
 
@@ -63,7 +77,40 @@ once, giving `dt**(p−1)` = `dt**−0.48` — **the same violation with the opp
 sign, not a fix**. Coefficient of variation is unsigned and cannot tell those two
 apart, which is why its apparent improvement is not evidence.
 
-See `dynamics_degree.review.md` and `subject_consistency.review.md` for the full
+A fixed exponent of 0.5 (the diffusive law `displacement ~ sqrt(dt)` that the
+40-base bootstrap supports, CI `[+0.417, +0.651]`) removes the dependence from the
+reported aggregate: the test-split level profile becomes `1 / 1.042 / 1.040 /
+0.996`, slope `−0.011`, against `+0.458` (Official) and `−0.511` (the archived
+repair). Individual clips stay dispersed — per-base `fps2/fps8` median `1.284` —
+so this is an aggregate-level fix only, and `dynamics_degree.md` now leads with
+the level profile, the calibrated exponent and the per-clip dispersion instead of
+the composite CPA.
+
+### `spatial_relationship` is neither a Repair win nor a Repair loss
+
+Its `−0.300` decomposes into 25 tied, 2 correct and 3 inverted pairs out of 30. The
+Repair scores exactly `0.0` on 70 of the 80 clips because it never reaches the
+geometry check: over the 40 `original` clips, 508 of 640 frames (79.4%) are
+`missing_subject` or `missing_object`. The two named objects are simply not both
+present in most of these VBench generations — 23 of the 40 bases have no frame in
+which both are detected, and among the frames that *are* resolved only 28.8%
+satisfy the prompt's relation. The family's premise (`original > flip`) was
+therefore never true here, and plan section 9.2's validity check was never carried
+out.
+
+Official's `0.3667` is not a noisy measurement either: upstream
+`get_position_score` computes `abs(x_distance)` and never reads its sign, so
+mirroring cannot lower the score in any frame. That is a property of the code, and
+the near-identical level means (`0.3104` original / `0.3108` horizontal flip /
+`0.3319` vertical flip) are its empirical shadow.
+
+`pick_detectable.py` now refuses to build the family without a confirmed relation,
+and the scoring driver records the per-frame evidence this review had to
+reconstruct. See `spatial_relationship.review.md`.
+
+See `dynamics_degree.review.md`, `subject_consistency.review.md`,
+`human_action.review.md`, `motion_smoothness.review.md`,
+`multiplt_object.review.md` and `spatial_relationship.review.md` for the full
 independent reviews behind these caveats.
 
 ## Limitations

@@ -13,6 +13,34 @@
 - `docs/` 记录当前行为；旧的根级论文计划保留并链接到当前计划。
 - VBench 1.0 的 `dynamics_degree` 与 `motion_smoothness` 官方 sampled videos 复用每个生成器的 `subject_consistency/`。远端输入可建立 `dynamics_degree -> subject_consistency`、仓库别名 `dynamic_degree -> subject_consistency` 和 `motion_smoothness -> subject_consistency` 软链接；不得复制成内容分叉的目录，也不得将该视频共享关系误用为评分公式或人类标注共享。
 
+## 当前状态（2026-09-15）
+
+反事实（metamorphic）审计已完成一轮全量测量，结论与产物见
+`docs/counterfactual-reports/CONSOLIDATED.md`。要点：
+
+- **数据集** `counterfactual-vbench`：7 维、205 base、815 条派生片段，已发布到
+  `xjuIcthub/counterfactual-vbench`；`Overall Consistency` 因需要人工撰写
+  prompt 条件（计划 §12.2）本轮未做。构造代码在 `scripts/counterfactual/`。
+- **评分** 在 `h100-server` 上进行：Official VBench 1.0 与 Repair 两个后端，
+  6 卡并行、一维一维串行；7 维 × 2 后端覆盖率为 100%。
+- **评分环境**（H100 上，均在 `/root/wenbiao_zhao/` 下，不依赖他人目录）：
+  解释器 `venvs/vbench/bin/python`；锁定上游 checkout `VBench`（`fd18b3d`，
+  由 on-box bundle 克隆）；权重 `models/raft/` 与 `~/.cache/vbench/`，scene
+  Repair 用本地 `/root/.cache/clip/ViT-B-32.pt`。**物理卡 6 对 nvidia-smi 可见
+  但对 CUDA 不可用，可用范围是 1–5。**
+- **不要单独引用 pooled CPA。** 七份独立 review（`<dimension>.review.md`）
+  指出：同 rank 族（`fps_resampling`、`filename_invariance`）的 tie-margin CPA
+  会因 margin 饱和而恒为 1.0 且对符号不敏感；混合族（`temporal_relocation`、
+  `weakest_object_visibility`）必须按敏感性半/不变性半分开报；`scene`、
+  `human_action`、`spatial_relationship` 三个族的**族设计本身**不成立，结论
+  必须连同 review 一起读。
+- **当前没有任何维度支持无保留的"Repair 更好"**：`subject_consistency` 按半边
+  拆分后最站得住；`dynamics_degree` 的 shipped repair 只是把违约镜像
+  （Official `p=+0.49`，repair `p=−0.51`），v2 的 `d/dt**0.5` 才把聚合层
+  拉回 `p=−0.011`（但指数是同一批数据上的 default，非独立校准）。
+- 真实模型、CUDA 与权重 parity 对冻结 E0 基线**尚未验证**，上述数值是首轮
+  测量值，不是复现的官方基线。
+
 ## 改动与验证
 
 源码变更后运行受影响包的纯算法测试和合约测试；接口或工作区变更还要运行 `uv lock --check`、`uv sync --locked`、CPU torch overlay 与 `uv run --no-sync --group test pytest tests metrics` 及八个入口的 `--help`。真实模型、CUDA 和权重 parity 未验证时必须在报告中明确写出，不下载权重，也不修改上游 checkout。

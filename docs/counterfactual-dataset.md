@@ -59,21 +59,47 @@ prompt split, one per eligible prompt, chosen by stable hash
 rather than mistransformed — notably the 24 `inside of` Spatial prompts, which
 the locked Official evaluator does not support.
 
+**The directional family proves its own premise.**  `original > flip` is only the
+right expectation when the source clip actually places A on the required side of B,
+and plan section 9.2 requires that to be confirmed before the family is used.  The
+first build never checked it, so a direction-sensitive repair was scored against a
+coin flip.  `pick_detectable.py --dimension spatial_relationship` now gates Spatial
+Relationship candidates on two things: at least `--min-co-detected-frames` (default
+0.25) of frames must natively detect both targets, and at least
+`--relation-min-frames` (default 0.75) of *those* frames must satisfy the ordered
+relation.  A failed gate prints the observed rate distribution so the thresholds can
+be tuned against real data instead of guessed.  The gate reuses the audited geometry
+on the shared GRiT boxes, and every kept base records `relation_oracle`,
+`relation_frame_rate`, `relation_frames_scored` and `relation_frames_total`, which
+`build.py` copies into each manifest row.  It is therefore *not* an independent
+oracle: a repair that consumes those same boxes is being asked to rank a verified
+arrangement above its mirror, not to discover the arrangement.  Pass
+`--relation-oracle human --relation-validity <file>` to use human verdicts instead,
+or `--relation-oracle none` to reproduce the unverified family.
+
 ## Running it
 
 ```bash
 # 1. choose bases (metadata only, no videos or models needed)
 uv run --no-sync python -m scripts.counterfactual.select_bases
 
-# 2. generate (on a machine with the videos; add --detector for the two
-#    GRiT-dependent dimensions)
+# 2. re-select the GRiT-dependent dimensions with oversampling.  This is also
+#    where the Spatial Relationship directional gate runs, so Spatial bases are
+#    replaced by ones whose original clip actually satisfies the relation.
+uv run --no-sync python -m scripts.counterfactual.pick_detectable \
+  --bases output/counterfactual/bases.jsonl \
+  --dataset-root <vbench-1.0-human-preference> \
+  --dimension spatial_relationship
+
+# 3. generate (on a machine with the videos; --detector is required because the
+#    two box-presence dimensions and the Spatial gate all ground targets)
 uv run --no-sync python -m scripts.counterfactual.build \
   --bases output/counterfactual/bases.jsonl \
   --dataset-root <vbench-1.0-human-preference> \
   --output-root <counterfactual-vbench> \
-  --detector default
+  --detector default --dimension spatial_relationship
 
-# 3. verify: structure, split isolation, hashes, duration/frame checks and a
+# 4. verify: structure, split isolation, hashes, duration/frame checks and a
 #    byte-exact replay of every derived clip from its recorded parameters
 uv run --no-sync python -m scripts.counterfactual.validate \
   --root <counterfactual-vbench> --dataset-root <vbench-1.0-human-preference>
@@ -82,6 +108,36 @@ uv run --no-sync python -m scripts.counterfactual.validate \
 The manifest records the plan's section 3.2 provenance fields plus the
 transformation parameters needed to replay each clip.  Because the detector box
 is stored as a parameter, validation never needs a GPU.
+
+## Scoring variants
+
+`directional_flip` cannot separate a direction-blind metric from a direction-sensitive
+one unless the repair contract is stated.  The Spatial Relationship repair therefore
+exposes plan section 9.6's two settings through the scoring driver:
+
+```bash
+# end-to-end (default): undetected frames count as relation violations
+uv run --no-sync python -m scripts.counterfactual.run_dimension \
+  --dimension spatial_relationship ... --repair-mode ordered_role_identity_assignment
+
+# detection-conditioned ordered-role repair: the configuration that matches the
+# gated, relation-verified base set above
+VBENCH_AUDIT_SPATIAL_MODE=ordered_role \
+VBENCH_AUDIT_SPATIAL_DETECTION_CONDITIONED=1 \
+uv run --no-sync python -m scripts.counterfactual.run_dimension \
+  --dimension spatial_relationship ...
+```
+
+- `ordered_role_identity_assignment` (default) commits to the highest-confidence instance
+  per role; `ordered_role` maximises signed geometry over every `(subject, object)` pair.
+- detection conditioning averages only over frames where both roles were detected, so a
+  detector drop-out leaves the denominator instead of scoring as a wrong direction.
+
+Each scored row records `repair_mode` and `detection_conditioned`, the generated report
+header repeats them, and a shard file refuses to accept a second configuration: score a
+different variant into a fresh `--scores` tree.  A variant change also needs a fresh
+dataset root, because the manifest rows carry the eligibility provenance of the bases
+they were built from.
 
 ## Budget
 

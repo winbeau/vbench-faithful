@@ -1,19 +1,24 @@
 # Review: `dynamics_degree` counterfactual report
 
-Scope: `docs/counterfactual-reports/dynamics_degree.md` (code SHA
+Scope: the archived `docs/counterfactual-reports/dynamics_degree.md` (code SHA
 `66c4a99dba05aceaebe80276ffbffc607c3d2e40`), the CPA instrument that produced it
 (`scripts/counterfactual/cpa.py`, `run_dimension.py`), and the Audit time
 normalisation that produced the `repair` row
-(`metrics/dynamic-degree/src/dynamic_degree/backends/audit.py:normalized_speed`).
+(`metrics/dynamic-degree/src/dynamic_degree/backends/audit.py`). The review was
+subsequently carried through to a fix and a re-measurement on the scoring host;
+sections 3.1 and 6 carry the corrected numbers and the current state.
 
 Verdict: the headline row `dynamics_degree | fps_resampling | 0.8333 | 0.8444 |
 +0.0111` in `docs/counterfactual-reports/README.md` is **not** a measurement of
 the contract and the `+0.0111` must not be quoted as a Repair win. Unlike
 `subject_consistency`, the report's own `Score sensitivity` table already
 contains the proof: the Official metric's dependence on the sampling interval is
-real and measured (`p = +0.49`), and the shipped repair does **not** remove it —
-it mirrors it (`p = -0.48`). The composite CPA could not have reported this even
-in principle.
+real and measured, and the archived repair did **not** remove it — it mirrored it
+(`p = -0.481` against `+0.491`). The composite CPA could not have reported this
+even in principle. The fix and its verification are in section 6: with a fixed
+exponent of 0.5 the test-split level profile goes from `+0.491 / -0.481` to
+`-0.011`, i.e. the reported aggregate becomes frame-rate invariant, while
+individual clips remain dispersed.
 
 ## 1. This family is a pure invariance family
 
@@ -144,15 +149,38 @@ Official metric's own flow magnitude divided by the sampling interval, times a
 fixed constant (the image diagonal plus the residual-vs-apparent routing, which
 changes little on these clips). Consequently:
 
-- The criticism of the Official metric **stands and is now quantified**: its raw
-  top-5% flow grows like `dt**0.49`, so the same trajectory scores ~2x higher at
-  2 fps than at 8 fps, and because `check_move` compares against a threshold fixed
-  in pixels (`6*min(H,W)/256`), downsampling also pushes clips across the
+- The criticism of the Official metric **stands and is quantified**: its raw
+  top-5% flow grows sublinearly in `dt`, so the same trajectory scores ~2x higher
+  at 2 fps than at 8 fps, and because `check_move` compares against a threshold
+  fixed in pixels (`6*min(H,W)/256`), downsampling also pushes clips across the
   static/moving boundary. The metric is not comparable across frame rates.
-- The claim that the repair fixes it is **false**. `p = -0.48` is the same
-  violation with the opposite sign. Against a target of `p = 0`, the shipped
-  repair is as wrong as the metric it audits, and no number in this report shows
-  otherwise.
+- The claim that the archived repair fixes it is **false**. `p = -0.481` is the
+  same violation with the opposite sign, and it is not an independent
+  measurement that could have come out any other way.
+- Target `p = 0`. Section 6 reports the fixed and re-measured value: `-0.011` on
+  the test split.
+
+### 3.1 `+0.491` is a heavy-tailed aggregate, not the per-clip law
+
+The figure above is the slope of the *mean of 40 clips* at each rung, and this
+benchmark's per-clip scores span three orders of magnitude (`0.30` to `153` px at
+8 fps), so the mean at the coarse rungs is dominated by a few high-motion clips.
+Measured directly on the 10 dev bases instead:
+
+- the per-clip exponent fitted across that clip's own four rung scores averages
+  **+0.706** (not +0.491), and it correlates **+0.925** with the within-clip RAFT
+  exponent measured from the clip's own lag-1/2/4 displacements, and **+0.935**
+  with `log(s_fps2 / s_fps8)`;
+- within a single 8 fps clip, the top-5% displacement at lags 1/2/4 sampled frames
+  (0.125/0.25/0.5 s) grows `1 : 1.73 : 2.86`, i.e. `p = +0.758` on the means and
+  `+0.819` on the mean of per-clip fits.
+
+So the level-mean slope understates the typical clip, and the exponent is
+measurable from a clip's own frames. Both facts matter: the first means the
+headline number must not be presented as "the" exponent, the second is the
+premise any lag-calibrated normalisation relies on (section 6). The mirror
+identity `repair == official / dt` is unaffected, because it is exact arithmetic
+that holds clip by clip.
 
 ## 4. Why the repair code does that
 
@@ -199,8 +227,8 @@ inter-frame times of the retained frames match their source times; and for the
    duration when the source rate is not a multiple of the ladder rate. Inter-frame
    timing stays correct (misalignment <= 0.05 s); the drift is a stale final frame.
 
-Neither explains `p = +0.49`, because the same pipeline reproduces the true law
-for synthetic content:
+Neither explains the sublinear law, because the same pipeline reproduces the true
+law for synthetic content:
 
 | synthetic motion law | profile 8/6/4/2 fps | fitted `p` |
 |---|---|---:|
@@ -209,85 +237,142 @@ for synthetic content:
 | static | 1 / 1 / 1 / 0.999 | 0.000 |
 
 The ladder faithfully transmits a ballistic law at `p = +1.0`; it cannot
-manufacture sublinearity. The measured exponent is a property of the content or
-of RAFT, not of the dataset construction. (Both defects are still worth fixing
-before the family is used again, because they make the rungs non-comparable; they
-are reported here rather than patched because regenerating the dataset would
-invalidate the existing 160 scores.)
+manufacture sublinearity. Three further checks on the real clips, run on the
+scoring host, close the remaining alternative explanations:
 
-## 6. The repair as it now stands
+1. **Per-rung re-encoding is not the cause.** The derived clips are re-encoded at
+   each rung, so the level effect could have been a codec effect. On the identical
+   0.5 s trajectory span the 2 fps rung's lag-1 displacement and the 8 fps rung's
+   lag-4 displacement agree to within 3.5% (ratios 0.965-1.004 over 6 bases), and
+   the stored source agrees with the 8 fps rung as well.
+2. **It is not RAFT-specific.** Two independent estimators on the same frame pairs
+   are both sublinear: RAFT `+0.819` and Farneback `+0.608` (mean of per-clip fits
+   on the 10 dev bases). An estimator that saturated would be *more* linear than
+   its cross-check, not less.
+3. **The motion genuinely turns at these lags.** `straightness` (direct
+   displacement at a lag divided by the sum of the lag-1 displacements over the
+   same span) has median `0.793` at lag 2 and `0.574` at lag 4 across all 160
+   clips, against `1.0` for constant-velocity motion and `k**-0.5 = 0.707 / 0.500`
+   for a diffusive law. The chord is systematically much shorter than the path, so
+   displacement grows sublinearly in the lag.
 
-The normalisation has been replaced with a measured-exponent one in
-`metrics/dynamic-degree` (see the new section in
-`metrics/dynamic-degree/IMPLEMENTATION_REPORT.md` for the full account):
+The two construction defects are still worth fixing before the family is used
+again, because they make the rungs non-comparable; they are reported here rather
+than patched because regenerating the dataset would invalidate the existing 160
+scores.
 
-- `AuditConfig.lag_scaling_enabled` (default on) fits the clip's own
-  displacement-vs-lag exponent from within-clip multi-lag flows (default lags
-  1/2/4 sampled frames) and applies `d / dt**p` instead of `d / dt`; `p = 1`
-  reproduces the previous behaviour bit for bit, so ballistic content is
-  unchanged.
-- `AuditAblation.WITHOUT_LAG_SCALING` restores the ballistic normalisation as a
-  named ablation, `AuditConfig.lag_exponent` + `lag_exponent_source` apply a
-  fixed (e.g. dev-calibrated) exponent with declared provenance, and every result
-  carries `LagScalingEvidence`: the exponent, the per-lag chord and path
-  displacements, `straightness = chord/path`, pair counts and fit residual.
-- `tests/test_lag_scaling.py` (23 tests) verifies the invariance directly. With
-  the law measured from the real run (`p = 0.49`):
+## 6. The fix, and what it does and does not deliver
 
-| trajectory | previous `d/dt`, 2 fps / 8 fps | `d/dt**p`, 2 fps / 8 fps |
-|---|---:|---:|
-| ballistic (`p = 1`) | 1.0000 | 1.0000 |
-| measured real law (`p = 0.49`) | **0.4931** | **1.0000** |
+The normalisation is now `d / dt**alpha` with a fixed, pre-registered
+`alpha = 0.5` (`AuditConfig.default_lag_exponent`, mode `LagExponentMode.FIXED`),
+and the same exponent is used for the static/moving threshold and coverage so the
+decision does not mix a pixel threshold with a per-frame displacement. What
+remains configurable:
 
-This is the fix for the *normalisation* defect identified here. It is not yet
-evidence that the real clips become invariant, for the reason in section 8.
+- `LagExponentMode.MEASURED` applies each clip's own fitted exponent. It is the
+  diagnostic path, not the default: the fitted value is itself lag-window
+  dependent (mean `0.618` at 8 fps falling to `0.480` at 2 fps), which is exactly
+  why per-clip calibration under-corrects (`-0.138` against `-0.011`).
+- `LagExponentMode.BALLISTIC` and `AuditAblation.WITHOUT_LAG_SCALING` restore the
+  archived `d/dt` behaviour; `AuditConfig.lag_exponent` + `lag_exponent_source`
+  apply any other fixed exponent with declared provenance.
+- Every result carries `LagScalingEvidence`: the fitted exponent, the per-lag
+  chord and path displacements, `straightness = chord/path`, pair counts and the
+  fit residual.
+
+Re-measured end to end on all 160 real clips (5 GPUs, `metrics/dynamic-degree` on
+commit `a044ac9` + this patch), level profile and slope:
+
+| backend | dev profile | dev `p` | test profile | test `p` |
+|---|---|---:|---|---:|
+| `official` (`alpha=0`) | 1 / 1.184 / 1.635 / 2.404 | +0.641 | 1 / 1.196 / 1.437 / 1.911 | +0.458 |
+| `repair_v1` (`alpha=1`, archived) | 1 / 0.881 / 0.808 / 0.586 | -0.376 | 1 / 0.902 / 0.736 / 0.498 | -0.511 |
+| `repair_v2` (`alpha=0.5`, shipped) | 1 / 1.017 / 1.143 / 1.172 | +0.124 | 1 / 1.042 / 1.040 / 0.996 | **-0.011** |
+
+- The exponent that flattens the ladder is `+0.518` with a base-cluster bootstrap
+  95% CI `[+0.417, +0.651]`; both `0` and `1` fall outside it. Slope magnitude on
+  the test split drops from `0.511` to `0.011` (**~46x**).
+- The recorded scores reproduce `mean_displacement / dt**0.5` to `1.7e-16`
+  (160/160 clips), so the end-to-end path and the offline calibration agree.
+- **Per-clip invariance is not achieved.** The per-base `fps2/fps8` ratio still
+  has median `1.284`, IQR `[0.807, 1.537]`, and only 20% of bases are within
+  ±20% of 1. The fix makes the *reported aggregate* frame-rate invariant, which is
+  the quantity VBench's dynamic degree is defined as (a dataset-level mean); it
+  does not make individual clips comparable across frame rates.
+- **Calibrating the exponent on dev alone fails.** The dev split yields `+0.624`,
+  which leaves a residual test slope of `-0.135`. The exponent must therefore be
+  defended as an a-priori diffusive constant (`displacement ~ sqrt(dt)`) that the
+  40-base CI supports, not as a tuned parameter. The dev split is too small for
+  this constant.
+- Coverage moves the same way: on the test split the static/moving fraction goes
+  `0.501 -> 0.333` under `alpha=1` but `0.501 -> 0.533` under `alpha=0.5`, and at
+  the reference lag the two thresholds coincide by construction.
 
 ## 7. What the report should say instead
 
 For a same-rank family the primary table is the level profile and its signed
-exponent; CPA belongs in an appendix, labelled non-diagnostic:
+exponent; CPA belongs in an appendix, labelled non-diagnostic. The regenerated
+`docs/counterfactual-reports/dynamics_degree.md` now does this, dev and test
+separately:
 
-1. **Sampling-interval response (primary).** Per backend: the per-level mean and
-   median, the ratio profile relative to the reference rung, and the fitted
-   `p = d log(score) / d log(dt)` with a cluster bootstrap over `base_id` and its
-   per-step values. Target `p = 0`. Current: Official `+0.49`, previous repair
-   `-0.48`.
-2. **Per-clip exponent (the mechanism).** Distribution of the measured within-clip
-   exponent per backend and per rung, plus `straightness` at lags 2 and 4. This is
-   what distinguishes genuine trajectory curvature from estimator saturation, and
-   it needs no ladder.
-3. **Dispersion (secondary).** The existing within-base CV and relative range,
-   clearly marked as unsigned and therefore unable to detect a sign flip.
-4. **Composite CPA (appendix, non-diagnostic).** If kept, report alongside it the
-   dev margin, the dev tie-aware CPA (which is 0.90 by construction, section 2.2),
-   and a note that zero-margin CPA requires exact float equality.
+1. **Sampling-interval response (primary).** Per backend: the per-level mean, the
+   ratio profile relative to the reference rung, and the fitted
+   `p = d log(score) / d log(dt)`. Target `p = 0`. Archived: Official `+0.491`,
+   `repair_v1` `-0.481`. Shipped: `repair_v2` `-0.011` (test).
+2. **Calibrated exponent.** The exponent that flattens the ladder, `+0.518` with
+   a base-cluster bootstrap 95% CI `[+0.417, +0.651]`, plus the explicit warning
+   that a dev-only calibration (`+0.624`) does not transfer.
+3. **Per-clip dispersion and exponent.** Per-base `fps2/fps8` median/IQR/fraction
+   within ±20%, within-base CV and relative range (marked unsigned), and the
+   distribution of the within-clip measured exponent per rung. This is what keeps
+   the aggregate result from being read as per-clip invariance.
+4. **Threshold and coverage domain.** The static/moving fraction per rung under
+   each exponent, so the threshold component is auditable too.
+5. **Composite CPA (appendix, non-diagnostic).** Kept with the dev margin, the
+   note that the dev tie-aware CPA is 0.90 by construction (section 2.2), and the
+   note that zero-margin CPA requires exact float equality.
 
 The honest headline sentence is: *the Official dynamic-degree score is
-sampling-interval dependent (`p = +0.49`, ~2x inflation from 8 to 2 fps, plus a
-fixed-pixel threshold that is easier to cross at low frame rates), and the
-previous repair mirrored that dependence (`p = -0.48`) instead of removing it.*
+sampling-interval dependent (measured exponents `+0.491` on the 40-clip level
+means and `+0.706` per clip, a ~2x inflation from 8 to 2 fps, plus a fixed-pixel
+threshold that is easier to cross at low frame rates); the archived repair
+mirrored that dependence (`-0.481`) instead of removing it; and normalising by
+`dt**0.5` removes it from the reported aggregate (`-0.011` on the test split)
+while leaving individual clips dispersed.*
 
 ## 8. Status of the numbers in this review
 
-- Sections 2-4 are derived from the published report and the committed CPA code.
+- Sections 2-4 are derived from the archived report and the committed CPA code.
   Nothing there needs a model run; the synthetic demonstrations use the
   repository's own `cpa.py` and its `calibrate_margin` / `evaluate_method`.
-- Section 5 is derived from `resample_indices` arithmetic and the real
-  transform/encode/decode path on synthetic clips. The derived-clip defects were
-  **not** re-verified against the 160 real files, because neither the clips nor
-  the sources are reachable from this workspace and there is no CUDA device here.
-  A scoring host can confirm them with `ffprobe` (per-clip fps, frame count,
-  duration) plus the recorded `kept_frame_indices`.
-- Section 6's fix is unit-verified only. Whether the measured exponent is stable
-  across rungs on real clips — i.e. whether `d / dt**p` actually closes the gap
-  rather than moving it — requires re-running the Audit backend on the 40
-  `dynamics_degree` bases with the real weights. Every result now emits the
-  evidence needed to check that (`lag_scaling.lags_frames`, `lag_seconds`,
-  `chord_displacement_diagonals`, `straightness`, `fit_rmse_log_log`), and the
-  same re-run settles the content-vs-saturation question.
-- The counterfactual harness does not yet persist that evidence:
-  `scripts/counterfactual/score.py:_first` returns only `score/status/error`, so
-  the `lag_scaling` block is currently dropped from the `repair` rows.
+- Section 5 is derived from `resample_indices` arithmetic, the real
+  transform/encode/decode path on synthetic clips, and — for the re-encoding,
+  two-estimator and straightness checks — from the 160 real clips on the scoring
+  host (`/root/wenbiao_zhao/datasets/counterfactual-vbench`, RAFT
+  `/root/wenbiao_zhao/models/raft/raft-things.pth`, upstream
+  `/root/wenbiao_zhao/VBench`). The two construction defects were verified by
+  arithmetic against `resample_indices`; confirming them against the 160 stored
+  files needs only `ffprobe` plus the recorded `kept_frame_indices`, which has not
+  been run.
+- **Section 6 is measured, not projected.** All 160 clips were scored end to end
+  with the patched backend on the scoring host (5 physical GPUs, one logical
+  `cuda:0` each), 160/160 succeeded, and the recorded scores reproduce the
+  offline `mean_displacement / dt**0.5` calibration to `1.7e-16`. The
+  `alpha = 0.5` default, the `alpha*` bootstrap and the per-clip residual are
+  from that run; the coverage column comes from the same run plus the
+  `WITHOUT_LAG_SCALING` ablation pass.
+- The report at `docs/counterfactual-reports/dynamics_degree.md` has been
+  regenerated from those raw score files by
+  `scripts/counterfactual/regen_dynamics_degree_report.py` (no model needed) and
+  now leads with the level profile, the calibrated exponent, the per-clip
+  dispersion, the measured-exponent distribution and the threshold/coverage
+  domain, with the composite CPA moved to a section labelled non-diagnostic.
+- Reproduction: `scripts/counterfactual/score_lagcal.py` (one shard per physical
+  GPU, `--mode fixed|measured|ballistic|raw`) writes the score files that
+  `scripts/counterfactual/regen_dynamics_degree_report.py` turns into the report.
+  The counterfactual harness itself still does not persist the new evidence —
+  `scripts/counterfactual/score.py:_first` returns only `score/status/error` — so
+  the default path should be extended or replaced by that driver.
 - As with the sibling review, the archived reports name a `code SHA` that
   predates the runner that produced them: `66c4a99` is an ancestor of
   `7ffa6fa`, the commit that first adds `scripts/counterfactual/cpa.py`. The
