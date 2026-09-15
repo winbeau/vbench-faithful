@@ -17,6 +17,7 @@ DIMS = {
     'subject_consistency': 'subject_consistency',
     'human_action': 'human_action',
     'spatial_relationship': 'spatial_relationship',
+    'motion_smoothness': 'motion_smoothness',
 }
 
 
@@ -43,11 +44,12 @@ def _finite_score(row, repair):
     return score if math.isfinite(score) else None
 
 
-def build(alias, predictions_root=None):
+def build(alias, predictions_root=None, scores_root=None):
     official_dimension = DIMS[alias]
     repair = predictions_root is not None
+    official_root = Path(scores_root) if scores_root is not None else SCORES
     result_path = (Path(predictions_root) / alias / 'predictions.csv' if repair
-                   else SCORES / official_dimension / 'results.csv')
+                   else official_root / official_dimension / 'results.csv')
     results = {row['video_uid']: row for row in rows(result_path)}
     all_pairs = [row for row in rows(ROOT / 'data/processed/pairwise_master_split.csv')
                  if row['dimension'] == official_dimension]
@@ -97,11 +99,11 @@ def ci(items, delta, seed, iterations):
     return [values[int(.025 * (iterations - 1))], values[int(.975 * (iterations - 1))]]
 
 
-def calculate(iterations=2000, seed=2026, predictions_root=None, dimensions=None):
+def calculate(iterations=2000, seed=2026, predictions_root=None, dimensions=None, scores_root=None):
     requested = dimensions or list(DIMS)
     output = []
     for alias in requested:
-        total, valid = build(alias, predictions_root)
+        total, valid = build(alias, predictions_root, scores_root)
         dev = [item for item in valid if item[0]['split'] == 'dev']
         test = [item for item in valid if item[0]['split'] == 'test']
         if not dev or not test:
@@ -178,6 +180,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--predictions-root', type=Path,
                         help='Root containing <dimension>/predictions.csv; omit for frozen official results.')
+    parser.add_argument('--official-scores-root', type=Path,
+                        help='Alternative read-only root containing <dimension>/results.csv.')
     parser.add_argument('--dimension', choices=DIMS, action='append',
                         help='Compute only this dimension; repeatable.')
     parser.add_argument('--output', type=Path)
@@ -188,7 +192,7 @@ def main():
     parser.add_argument('--comparison-csv', type=Path)
     parser.add_argument('--comparison-md', type=Path)
     args = parser.parse_args()
-    data = calculate(args.bootstrap_iterations, args.seed, args.predictions_root, args.dimension)
+    data = calculate(args.bootstrap_iterations, args.seed, args.predictions_root, args.dimension, args.official_scores_root)
     output = args.output or args.output_dir / ('repair_metrics.csv' if args.predictions_root else 'reconstructed_baseline_metrics.csv')
     write_metrics(data, output)
     if args.official_metrics or args.comparison_csv or args.comparison_md:
