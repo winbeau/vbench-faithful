@@ -207,7 +207,7 @@ def make_scorer(dimension: str, backend: str, device: Any, upstream: Path) -> Ca
                 os.environ.get("VBENCH_AUDIT_SCENE_SCORER", "openclip"),
                 device=device,
                 model_name=os.environ.get("VBENCH_AUDIT_SCENE_MODEL", "ViT-B-32"),
-                pretrained=os.environ.get("VBENCH_AUDIT_SCENE_PRETRAINED", "openai"),
+                pretrained=os.environ.get("VBENCH_AUDIT_SCENE_PRETRAINED", "/root/.cache/clip/ViT-B-32.pt"),
             )
             def ev(video: Path, item: dict[str, Any]) -> dict[str, Any]:
                 return _first(evaluate_global_or_environment_batch([video], {video.name: item}, scorer, "environment"))
@@ -216,7 +216,7 @@ def make_scorer(dimension: str, backend: str, device: Any, upstream: Path) -> Ca
     if dimension == "multiple_objects":
         from multiple_objects.backends.vbench import DEFAULT_WEIGHT as GRIT_WEIGHT
         from multiple_objects.backends.vbench import evaluate_official_batch
-        from multiple_objects.metric import evaluate_audit_batch as mo_audit_batch
+        from multiple_objects.backends.audit import evaluate_audit_batch as mo_audit_batch
         from multiple_objects.schemas import MultipleObjectsConfig
 
         weight = Path(os.environ.get("VBENCH_AUDIT_GRIT_WEIGHT", str(GRIT_WEIGHT))).expanduser()

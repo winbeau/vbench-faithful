@@ -26,6 +26,7 @@ export VBENCH_AUDIT_AMT_WEIGHT=/root/.cache/vbench/amt_model/amt-s.pth
 export VBENCH_AUDIT_GRIT_WEIGHT=/root/.cache/vbench/grit_model/grit_b_densecap_objectdet.pth
 export VBENCH_AUDIT_UMT_WEIGHT=/root/.cache/vbench/umt_model/l16_ptk710_ftk710_ftk400_f16_res224.pth
 export VBENCH_AUDIT_TAG2TEXT_WEIGHT=/root/.cache/vbench/caption_model/tag2text_swin_14m.pth
+export VBENCH_AUDIT_SCENE_PRETRAINED=/root/.cache/clip/ViT-B-32.pt
 export VBENCH_AUDIT_UPSTREAM="$UPSTREAM"
 
 # GPU 6 is visible to nvidia-smi but not CUDA-available inside this container,
