@@ -520,13 +520,36 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         print(f"[{index}/{len(bases)}] {base['base_id']}: {len(produced)} variants")
 
     manifest = ctx.output_root / "manifest.jsonl"
+    previous = read_jsonl(manifest) if args.merge else []
+    if previous:
+        # Merge by derived_id so a second invocation (for example the
+        # GRiT-dependent dimensions) extends the dataset instead of replacing
+        # the rows an earlier run already produced.
+        merged: dict[str, dict[str, Any]] = {row["derived_id"]: row for row in previous}
+        for row in rows:
+            merged[row["derived_id"]] = row
+        rows = [merged[key] for key in sorted(merged)]
     write_jsonl(manifest, rows)
-    write_json(ctx.output_root / "metadata" / "build_failures.json", {"failures": failures})
+
+    failure_path = ctx.output_root / "metadata" / "build_failures.json"
+    known_failures = {
+        entry["base_id"]: entry
+        for entry in (json.loads(failure_path.read_text(encoding="utf-8")).get("failures", [])
+                      if args.merge and failure_path.is_file() else [])
+    }
+    for failure in failures:
+        known_failures[failure["base_id"]] = failure
+    # A base that succeeds on a later run is no longer a failure.
+    for row in rows:
+        known_failures.pop(row["base_id"], None)
+    failures = [known_failures[key] for key in sorted(known_failures)]
+    write_json(failure_path, {"failures": failures})
+
     summary = {
         "schema_version": SCHEMA_VERSION,
         "bases_attempted": len(bases),
-        "bases_ok": len(bases) - len(failures),
-        "bases_failed": len(failures),
+        "bases_ok": len(bases) - len([f for f in failures if f["base_id"] in {b["base_id"] for b in bases}]),
+        "bases_failed": len([f for f in failures if f["base_id"] in {b["base_id"] for b in bases}]),
         "derived_rows": len(rows),
         "code_sha": ctx.code_sha,
         "manifest": str(manifest),
@@ -552,8 +575,13 @@ def main() -> int:
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--dimension", action="append")
     parser.add_argument("--limit", type=int, default=0)
-    parser.add_argument("--detector", help="path to GRiT weights directory")
+    parser.add_argument("--detector", help="path to GRiT weights directory, or 'default'")
     parser.add_argument("--detector-device", default="cuda:0")
+    parser.add_argument(
+        "--merge",
+        action="store_true",
+        help="merge into an existing manifest instead of replacing it",
+    )
     args = parser.parse_args()
     summary = run(args)
     print(json.dumps(summary, indent=2, ensure_ascii=False)[:4000])
