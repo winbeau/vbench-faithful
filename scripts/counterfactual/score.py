@@ -341,12 +341,13 @@ def make_scorer(
             def ev(video: Path, _: dict[str, Any]) -> dict[str, Any]:
                 frames, _ = decode_timed_frames(video)
                 item = evaluate_timed_frames(video, frames, estimator, config)
+                diagnostics = item.diagnostics
                 return {
                     "score": float(item.score),
                     "status": "succeeded",
-                    "diagnostics": {
-                        "mean_discontinuity": item.diagnostics.get("mean_discontinuity"),
-                        "tail_discontinuity": item.diagnostics.get("tail_discontinuity"),
+                    "evidence": {
+                        "mean_discontinuity": diagnostics.get("mean_discontinuity"),
+                        "tail_discontinuity": diagnostics.get("tail_discontinuity"),
                         "D_video": float(item.discontinuity),
                     },
                 }

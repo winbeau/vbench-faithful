@@ -272,7 +272,7 @@ class OrderedFamilyReportTests(unittest.TestCase):
         self.assertIn("## Official vs Repair (test, tie-aware)", report)
         self.assertIn("paired 95% CI", report)
         self.assertIn("[-0.2000, -0.0100]", report)
-        self.assertIn("## Repair continuity components (test)", report)
+        self.assertIn("## Repair continuity components (dev + test)", report)
         self.assertNotIn("## Frame evidence", report)
 
     def test_ordered_family_still_reports_the_composite(self):

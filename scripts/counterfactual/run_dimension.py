@@ -664,7 +664,7 @@ def render_report(
     if continuity:
         lines += [
             "",
-            "## Repair continuity components (test)",
+            "## Repair continuity components (dev + test)",
             "",
             "The repair's own mean and upper-tail discontinuity per level (plan 13.3).",
             "`D_video = (1 - tail_weight) * D_mean + tail_weight * D_tail`, so a level",
