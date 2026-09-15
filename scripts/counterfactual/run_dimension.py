@@ -461,6 +461,10 @@ def weak_target_area_profile(rows: list[dict[str, Any]], split: str = "test") ->
     seen: set[str] = set()
     ratios: list[float] = []
     for row in rows:
+        # The conjunction control carries boxes_a/boxes_b, not the suppressed
+        # target's `boxes`, and it is not a rung of the occlusion ladder.
+        if row["level"] in CONTROL_LEVELS:
+            continue
         if row["split"] != split or row["base_id"] in seen:
             continue
         seen.add(row["base_id"])
