@@ -5,8 +5,8 @@
 - expected relation: Invariance: every rung should score the same.
 - bases: 40 (dev 10, test 30)
 - derived clips: 160 (dev 40, test 120)
-- levels: `fps2`, `fps8`, `fps6`, `fps4`
-- code SHA: `66c4a99dba05aceaebe80276ffbffc607c3d2e40`
+- levels: `fps6`, `fps8`, `fps4`, `fps2`
+- code SHA: `bdfda5cc6e31725cddb6f45ce194ff1333f7c05d`
 
 ## Score coverage
 
@@ -18,6 +18,29 @@
 | official (test) | 120 | 120 | — |
 | repair (dev) | 40 | 40 | — |
 | repair (test) | 120 | 120 | — |
+
+## Sampling-interval response (primary)
+
+The contract for this family is `score must not depend on the sampling
+interval`, i.e. a signed log-log slope of `p = 0`. This is the primary
+diagnostic: unlike the unsigned dispersion below it can tell a score that
+inflates at low frame rates from one that shrinks.
+
+| backend | fitted p (target 0) | mean per-clip p | sd | levels (score vs rung) |
+|---|---:|---:|---:|---|
+| official | +0.4908 | 0.5562 | 0.3492 | fps2=32.8744, fps4=24.2540, fps6=19.7201, fps8=16.5108 |
+| repair | -0.4813 | -0.4435 | 0.3769 | fps2=0.1282, fps4=0.1864, fps6=0.2230, fps8=0.2484 |
+
+## CPA by contract half
+
+This family mixes an inequality half (the counterfactual must move the
+score) with an invariance half (relocated variants must tie). A pooled CPA
+is dominated by whichever half is easier, so each is scored separately.
+
+| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |
+|---|---|---:|---:|---:|
+| official | invariance | 240 | 0.8500 | 0.0000 |
+| repair | invariance | 240 | 0.8583 | 0.0000 |
 
 ## CPA
 
@@ -43,10 +66,6 @@ metric is. The dispersion below is the meaningful invariance measure
 
 | backend | split | bases | mean within-base CV | mean relative range |
 |---|---|---:|---:|---:|
-| official | dev | 10 | 0.3838 | 0.9862 |
-| official | test | 30 | 0.3177 | 0.8196 |
-| repair | dev | 10 | 0.1800 | 0.4662 |
-| repair | test | 30 | 0.2360 | 0.6107 |
 
 ## Score sensitivity
 

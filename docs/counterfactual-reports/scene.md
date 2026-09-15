@@ -6,7 +6,7 @@
 - bases: 25 (dev 5, test 20)
 - derived clips: 125 (dev 25, test 100)
 - levels: `coverage_000`, `coverage_025`, `coverage_050`, `coverage_075`, `coverage_100`
-- code SHA: `66c4a99dba05aceaebe80276ffbffc607c3d2e40`
+- code SHA: `bdfda5cc6e31725cddb6f45ce194ff1333f7c05d`
 
 ## Score coverage
 
@@ -18,6 +18,17 @@
 | official (test) | 100 | 100 | — |
 | repair (dev) | 25 | 25 | — |
 | repair (test) | 100 | 100 | — |
+
+## CPA by contract half
+
+This family mixes an inequality half (the counterfactual must move the
+score) with an invariance half (relocated variants must tie). A pooled CPA
+is dominated by whichever half is easier, so each is scored separately.
+
+| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |
+|---|---|---:|---:|---:|
+| official | sensitivity | 250 | 0.3760 | 0.3760 |
+| repair | sensitivity | 250 | 0.9240 | 0.9240 |
 
 ## CPA
 
@@ -32,6 +43,38 @@ margin. Intervals are 95% cluster-bootstrap CIs over `base_id`.
 | repair | dev (zero-margin) | 0 | 50 | 0.9000 | [0.7800, 1.0000] |
 | repair | test (zero-margin) | 0 | 200 | 0.9300 | [0.8400, 0.9850] |
 | repair | test (tie-aware) | 0 | 200 | 0.9300 | [0.8400, 0.9850] |
+
+## Contract decomposition
+
+This family declares more than one expected rank, so its CPA is a
+mixture of two contracts and is dominated by whichever is easier. Rank
+gap > 0 pairs test sensitivity; rank gap 0 pairs test the invariance of
+the levels declared equal, and there the only correct prediction is a
+tie, so a widening dev margin raises this half without measuring
+anything. Read the two halves separately, never the composite alone.
+
+| backend | split | rank gap | pairs | match rate | tie rate |
+|---|---|---:|---:|---:|---:|
+| official | test (zero-margin) | 1 | 80 | 0.2750 | 0.6875 |
+| official | test (zero-margin) | 2 | 60 | 0.3500 | 0.6167 |
+| official | test (zero-margin) | 3 | 40 | 0.5000 | 0.5000 |
+| official | test (zero-margin) | 4 | 20 | 0.7000 | 0.3000 |
+| official | test (tie-aware) | 1 | 80 | 0.2750 | 0.6875 |
+| official | test (tie-aware) | 2 | 60 | 0.3500 | 0.6167 |
+| official | test (tie-aware) | 3 | 40 | 0.5000 | 0.5000 |
+| official | test (tie-aware) | 4 | 20 | 0.7000 | 0.3000 |
+| repair | test (zero-margin) | 1 | 80 | 0.9000 | 0.0000 |
+| repair | test (zero-margin) | 2 | 60 | 0.9500 | 0.0000 |
+| repair | test (zero-margin) | 3 | 40 | 0.9500 | 0.0000 |
+| repair | test (zero-margin) | 4 | 20 | 0.9500 | 0.0000 |
+| repair | test (tie-aware) | 1 | 80 | 0.9000 | 0.0000 |
+| repair | test (tie-aware) | 2 | 60 | 0.9500 | 0.0000 |
+| repair | test (tie-aware) | 3 | 40 | 0.9500 | 0.0000 |
+| repair | test (tie-aware) | 4 | 20 | 0.9500 | 0.0000 |
+
+Rank-gap-0 pairs are the family's actual target. Splitting them out
+shows whether a Repair gain in the composite comes from sensitivity
+(which both backends usually already have) or from the invariant half.
 
 ## Score sensitivity
 

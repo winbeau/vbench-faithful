@@ -5,8 +5,8 @@
 - expected relation: original > flip.
 - bases: 40 (dev 10, test 30)
 - derived clips: 80 (dev 20, test 60)
-- levels: `horizontal_flip`, `vertical_flip`, `original`
-- code SHA: `66c4a99dba05aceaebe80276ffbffc607c3d2e40`
+- levels: `vertical_flip`, `horizontal_flip`, `original`
+- code SHA: `bdfda5cc6e31725cddb6f45ce194ff1333f7c05d`
 
 ## Score coverage
 
@@ -18,6 +18,17 @@
 | official (test) | 60 | 60 | — |
 | repair (dev) | 20 | 20 | — |
 | repair (test) | 60 | 60 | — |
+
+## CPA by contract half
+
+This family mixes an inequality half (the counterfactual must move the
+score) with an invariance half (relocated variants must tie). A pooled CPA
+is dominated by whichever half is easier, so each is scored separately.
+
+| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |
+|---|---|---:|---:|---:|
+| official | sensitivity | 40 | 0.3750 | 0.3750 |
+| repair | sensitivity | 40 | 0.1000 | 0.1000 |
 
 ## CPA
 
@@ -32,6 +43,35 @@ margin. Intervals are 95% cluster-bootstrap CIs over `base_id`.
 | repair | dev (zero-margin) | 0 | 10 | 0.2000 | [0.0000, 0.5000] |
 | repair | test (zero-margin) | 0 | 30 | 0.0667 | [0.0000, 0.1667] |
 | repair | test (tie-aware) | 0 | 30 | 0.0667 | [0.0000, 0.1667] |
+
+## Contract decomposition
+
+This family declares more than one expected rank, so its CPA is a
+mixture of two contracts and is dominated by whichever is easier. Rank
+gap > 0 pairs test sensitivity; rank gap 0 pairs test the invariance of
+the levels declared equal, and there the only correct prediction is a
+tie, so a widening dev margin raises this half without measuring
+anything. Read the two halves separately, never the composite alone.
+
+| backend | split | rank gap | pairs | match rate | tie rate |
+|---|---|---:|---:|---:|---:|
+| official | test (zero-margin) | 1 | 30 | 0.3667 | 0.3667 |
+| official | test (tie-aware) | 1 | 30 | 0.3667 | 0.3667 |
+| repair | test (zero-margin) | 1 | 30 | 0.0667 | 0.8333 |
+| repair | test (tie-aware) | 1 | 30 | 0.0667 | 0.8333 |
+
+Rank-gap-0 pairs are the family's actual target. Splitting them out
+shows whether a Repair gain in the composite comes from sensitivity
+(which both backends usually already have) or from the invariant half.
+
+### Declared-equal subgroups — dispersion, not CPA
+
+Same degeneracy as a same-rank family, applied to each declared-equal
+group: the tie-margin CPA of these pairs can be pushed to 1.0 by
+widening the margin, so the within-base CV is the meaningful number.
+
+| backend | split | levels | bases | mean within-base CV | mean relative range |
+|---|---|---|---:|---:|---:|
 
 ## Score sensitivity
 

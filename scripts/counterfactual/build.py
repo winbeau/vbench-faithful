@@ -182,7 +182,11 @@ def _build_filename_family(
     for variant in variants:
         derived_id = f"{base['base_id']}__{variant.name}"
         stem = _filename_stem(variant.name, correct, wrong, base["video_uid"])
-        out = ctx.output_root / base["dimension"] / "interventions" / family / f"{stem}.mp4"
+        # Keep the source container: the CogVideo sources are GIF, and naming a
+        # GIF's bytes ".mp4" makes decoders (decord) reject the file outright --
+        # that is what failed 15 human_action clips. The Official filename parser
+        # splits on the first hyphen, so the extension does not affect the target.
+        out = ctx.output_root / base["dimension"] / "interventions" / family / f"{stem}{path.suffix}"
         out.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(path, out)
         if sha256_file(out) != input_sha:

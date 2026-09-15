@@ -6,7 +6,7 @@
 - bases: 25 (dev 5, test 20)
 - derived clips: 75 (dev 15, test 60)
 - levels: `filename_neutral`, `filename_correct`, `filename_wrong`
-- code SHA: `77ca915ac5e41f7d6d1a122181c0051791404748`
+- code SHA: `bdfda5cc6e31725cddb6f45ce194ff1333f7c05d`
 
 ## Score coverage
 
@@ -18,6 +18,17 @@
 | official (test) | 48 | 60 | — |
 | repair (dev) | 12 | 15 | — |
 | repair (test) | 48 | 60 | — |
+
+## CPA by contract half
+
+This family mixes an inequality half (the counterfactual must move the
+score) with an invariance half (relocated variants must tie). A pooled CPA
+is dominated by whichever half is easier, so each is scored separately.
+
+| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |
+|---|---|---:|---:|---:|
+| official | invariance | 60 | 1.0000 | 0.4333 |
+| repair | invariance | 60 | 1.0000 | 1.0000 |
 
 ## CPA
 
@@ -43,10 +54,6 @@ metric is. The dispersion below is the meaningful invariance measure
 
 | backend | split | bases | mean within-base CV | mean relative range |
 |---|---|---:|---:|---:|
-| official | dev | 3 | 1.4142 | 3.0000 |
-| official | test | 14 | 1.4142 | 3.0000 |
-| repair | dev | 4 | 0.0000 | 0.0000 |
-| repair | test | 16 | 0.0000 | 0.0000 |
 
 ## Score sensitivity
 
