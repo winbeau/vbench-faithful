@@ -118,3 +118,50 @@ Done. What changed relative to the earlier report:
    was printed during construction but is **not durably recorded** — re-running
    `pick_detectable.py` is currently the only way to reproduce it, and it should
    write a summary file next time.
+
+## P1.3 Dynamic Degree — independent FPS validation of alpha = 0.5
+
+**Question**: 0.5 was taken from a bootstrap CI over the same 40 bases the
+counterfactual family uses, so it has never been validated on data that played no
+part in choosing it.
+
+Holdout: `build_dynamic_validation.py` ranks every eligible `dynamics_degree`
+candidate with the selector's own stable hash, removes the 40 in-use bases, and
+takes the next 30. Both the base UIDs and the prompts are disjoint from the
+counterfactual set (asserted, not assumed), and both come from the frozen E0
+prompt split. The dynamics pool is prompt-limited, so 30 of 32 unused candidates
+is the largest honest holdout.
+
+Scoring: Official plus the repair at three fixed exponents — 0 (raw
+displacement), 0.5 (shipped), 1 (archived ballistic) — over the 120 holdout
+clips. Ratio is the per-base `fps2 / fps8` score ratio; the contract is
+invariance, so the target is 1.0.
+
+| method | bases | median ratio | IQR | within ±20% |
+|---|---:|---:|---|---:|
+| Official | 30 | 1.8474 | [1.253, 3.052] | 0.133 |
+| repair alpha = 0 | 30 | 1.9352 | [1.273, 3.037] | 0.133 |
+| **repair alpha = 0.5 (shipped)** | 30 | **0.9676** | [0.637, 1.518] | **0.200** |
+| repair alpha = 1 (ballistic) | 30 | 0.4838 | [0.318, 0.759] | 0.167 |
+
+**The holdout validates 0.5 at the aggregate level.** It is the only setting
+whose median ratio sits near 1.0 (0.968); `alpha = 0` reproduces Official almost
+exactly (1.935 vs 1.847 — no time normalisation at all, so the same low-frame-rate
+inflation), and `alpha = 1` is the mirror violation (0.484). The ordering of the
+three exponents on unseen prompts is exactly the ordering the contract predicts,
+which is what the earlier in-sample CI could not establish.
+
+**The per-base dispersion is not fixed, and the holdout says so.** Even at
+`alpha = 0.5` only 20% of bases land within ±20% of 1.0 and the IQR still spans
+0.64–1.52. So the honest claim is: *0.5 corrects the aggregate sampling-interval
+dependence on independent data; individual clips remain dispersed*, matching the
+in-sample caveat rather than contradicting it.
+
+## P1.2 Motion Smoothness — natural preference set (continued)
+
+The Official pass finished: **tie-aware pair accuracy 0.6364** [0.6101, 0.6636],
+coverage 1.0, 2 160 pairs — reproducing the status document's `.636`. The repair
+pass was relaunched at 21:57 after two operational fixes: `results/` is frozen so
+the repair joins against the official scores this run produced itself, and the
+generated official `results.csv` needed the E0 `status == "success"` convention
+rather than the comparator's `succeeded_scalar`.
