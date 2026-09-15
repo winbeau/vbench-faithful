@@ -242,7 +242,7 @@ def _variants_for(
         # identical in area, ensuring the only variable is *when* it applies.
         mode = os.environ.get("VBENCH_AUDIT_SUBJECT_BOX", "median")
         if mode == "median":
-            boxes = [_median_box(boxes)]
+            boxes = _median_box(boxes)  # a single box is broadcast to every frame
         elif mode != "tracked":
             raise CounterfactualError(f"unknown VBENCH_AUDIT_SUBJECT_BOX mode: {mode}")
         return transforms.temporal_relocation(frames, meta, boxes)
