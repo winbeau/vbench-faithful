@@ -84,6 +84,7 @@ def run_shard(
     shards: int,
     manifest: Path,
     dataset_root: Path,
+    annotations_root: Path,
     upstream: Path,
     out: Path,
     log: Path,
@@ -93,6 +94,7 @@ def run_shard(
         python, "-u", "-B", "-m", "scripts.counterfactual.score",
         "--dimension", dimension, "--backend", backend,
         "--manifest", str(manifest), "--dataset-root", str(dataset_root),
+        "--annotations-root", str(annotations_root),
         "--output", str(out), "--upstream", str(upstream),
         "--shard-index", str(index), "--num-shards", str(shards),
     ]
@@ -108,6 +110,7 @@ def score_backend(
     gpus: list[str],
     manifest: Path,
     dataset_root: Path,
+    annotations_root: Path,
     upstream: Path,
     scores: Path,
     python: str,
@@ -127,7 +130,7 @@ def score_backend(
             log = scores / f"{dimension}__{backend}__shard{index}.log"
             running[index] = run_shard(
                 python, repo, dimension, backend, gpus[index], index, len(gpus),
-                manifest, dataset_root, upstream, out, log, env,
+                manifest, dataset_root, annotations_root, upstream, out, log, env,
             )
         for index, process in running.items():
             process.wait()
@@ -256,7 +259,10 @@ def render_report(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dimension", required=True)
-    parser.add_argument("--dataset-root", type=Path, required=True)
+    parser.add_argument("--dataset-root", type=Path, required=True,
+                        help="derived counterfactual dataset holding the clips")
+    parser.add_argument("--annotations-root", type=Path, default=None,
+                        help="source VBench dataset holding annotations/")
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--upstream", type=Path, required=True)
     parser.add_argument("--scores", type=Path, required=True)
@@ -267,6 +273,8 @@ def main() -> int:
     parser.add_argument("--seed", type=int, default=2026)
     args = parser.parse_args()
 
+    if args.annotations_root is None:
+        args.annotations_root = args.dataset_root
     gpus = [gpu.strip() for gpu in args.gpus.split(",") if gpu.strip()]
     args.scores.mkdir(parents=True, exist_ok=True)
     args.reports.mkdir(parents=True, exist_ok=True)
@@ -283,8 +291,16 @@ def main() -> int:
         coverage.append(
             score_backend(
                 args.dimension, backend, gpus, args.manifest, args.dataset_root,
-                args.upstream, args.scores, args.python, ROOT, env,
+                args.annotations_root, args.upstream, args.scores, args.python, ROOT, env,
             )
+        )
+
+    hollow = [entry for entry in coverage if entry["scored_clips"] == 0]
+    if hollow:
+        raise SystemExit(
+            "refusing to report: no clip scored for "
+            + ", ".join(entry["backend"] for entry in hollow)
+            + " (check --annotations-root and the shard logs)"
         )
 
     scores: dict[tuple[str, str], float | None] = {}

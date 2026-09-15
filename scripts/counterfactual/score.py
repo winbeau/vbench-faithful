@@ -61,12 +61,16 @@ def _syspath() -> None:
         sys.path.insert(0, upstream)
 
 
-def load_annotations(dataset_root: Path, dimension: str) -> dict[str, dict[str, Any]]:
-    """Map prompt_en -> official annotation entry for one dimension."""
+def load_annotations(annotations_root: Path, dimension: str) -> dict[str, dict[str, Any]]:
+    """Map prompt_en -> official annotation entry for one dimension.
+
+    These live in the *source* VBench dataset, not in the derived counterfactual
+    dataset, so the caller passes the source root explicitly.
+    """
     name = ANNOTATION_FILES.get(dimension)
     if name is None:
         return {}
-    path = dataset_root / "annotations" / name
+    path = annotations_root / "annotations" / name
     payload = json.loads(path.read_text(encoding="utf-8"))
     return {str(entry.get("prompt_en", "")): entry for entry in payload}
 
@@ -253,7 +257,10 @@ def main() -> int:
     parser.add_argument("--dimension", required=True, choices=DIMENSIONS)
     parser.add_argument("--backend", required=True, choices=("official", "repair"))
     parser.add_argument("--manifest", required=True, type=Path)
-    parser.add_argument("--dataset-root", required=True, type=Path)
+    parser.add_argument("--dataset-root", required=True, type=Path,
+                        help="derived counterfactual dataset holding the clips")
+    parser.add_argument("--annotations-root", type=Path, default=None,
+                        help="source VBench dataset holding annotations/ (defaults to --dataset-root)")
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--upstream", required=True, type=Path)
     parser.add_argument("--shard-index", type=int, default=0)
@@ -273,7 +280,8 @@ def main() -> int:
     if args.limit:
         rows = rows[: args.limit]
 
-    annotation = load_annotations(args.dataset_root, args.dimension)
+    annotations_root = args.annotations_root or args.dataset_root
+    annotation = load_annotations(annotations_root, args.dimension)
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
     # Resume: skip clips already scored by this backend.
