@@ -191,6 +191,38 @@ def score_profile(rows: list[dict[str, Any]], backend_scores: dict[str, float | 
     return profile
 
 
+def invariance_stats(rows: list[dict[str, Any]], backend_scores: dict[str, float | None]) -> dict[str, Any]:
+    """Within-base coefficient of variation and relative range.
+
+    For an invariance family (every level sharing one expected rank) a
+    tie-margin CPA is degenerate: the margin can always be widened until every
+    difference counts as a tie, which scores 1.0 while hiding the very
+    instability the family exists to detect. Plan sections 6.4 and 8.3 ask for
+    the dispersion statistics instead, so they are reported alongside.
+    """
+    by_base: dict[str, list[float]] = defaultdict(list)
+    for row in rows:
+        value = backend_scores.get(row["derived_id"])
+        if value is not None:
+            by_base[row["base_id"]].append(float(value))
+    cvs: list[float] = []
+    ranges: list[float] = []
+    for values in by_base.values():
+        array = np.asarray(values, dtype=float)
+        if len(array) < 2:
+            continue
+        scale = float(np.abs(array).mean())
+        if scale <= 0:
+            continue
+        cvs.append(float(array.std() / scale))
+        ranges.append(float((array.max() - array.min()) / scale))
+    return {
+        "n_bases": len(cvs),
+        "mean_cv": float(np.mean(cvs)) if cvs else None,
+        "mean_relative_range": float(np.mean(ranges)) if ranges else None,
+    }
+
+
 def render_report(
     dimension: str,
     family: str,
@@ -198,6 +230,7 @@ def render_report(
     coverage: list[dict[str, Any]],
     cpa: dict[str, Any],
     code_sha: str,
+    scores: dict[tuple[str, str], float | None] | None = None,
 ) -> str:
     transformation, expectation = FAMILY_DESCRIPTION.get(family, ("", ""))
     levels = sorted({row["level"] for row in rows}, key=lambda name: next(r["expected_rank"] for r in rows if r["level"] == name))
@@ -255,6 +288,33 @@ def render_report(
                     f"| {backend} | {split} ({label}) | {margin:.4g} | {stats['n_pairs']} | "
                     f"{stats['cpa']:.4f} | [{stats['ci_low']:.4f}, {stats['ci_high']:.4f}] |"
                 )
+    ranks = {row["expected_rank"] for row in rows}
+    if len(ranks) == 1:
+        lines += [
+            "",
+            "## Invariance statistics",
+            "",
+            "Every level of this family carries the same expected rank, so the",
+            "tie-aware CPA above is degenerate — widening the dev margin until all",
+            "differences count as ties yields CPA 1.0 regardless of how unstable the",
+            "metric is. The dispersion below is the meaningful invariance measure",
+            "(plan sections 6.4 and 8.3).",
+            "",
+            "| backend | split | bases | mean within-base CV | mean relative range |",
+            "|---|---|---:|---:|---:|",
+        ]
+        for backend in ("official", "repair"):
+            for split, split_rows in (("dev", [r for r in rows if r["split"] == "dev"]),
+                                      ("test", [r for r in rows if r["split"] == "test"])):
+                backend_scores = {r["derived_id"]: (scores or {}).get((r["derived_id"], backend)) for r in split_rows}
+                stats = invariance_stats(split_rows, backend_scores)
+                if stats["mean_cv"] is None:
+                    continue
+                lines.append(
+                    f"| {backend} | {split} | {stats['n_bases']} | {stats['mean_cv']:.4f} | "
+                    f"{stats['mean_relative_range']:.4f} |"
+                )
+
     lines += [
         "",
         "## Score sensitivity",
@@ -399,7 +459,7 @@ def main() -> int:
     code_sha = next((row.get("code_sha") for row in rows if row.get("code_sha")), "unknown")
     args.scores.mkdir(parents=True, exist_ok=True)
     write_json(args.scores / f"{args.dimension}__cpa.json", cpa)
-    report = render_report(args.dimension, family, rows, coverage, cpa, code_sha)
+    report = render_report(args.dimension, family, rows, coverage, cpa, code_sha, scores)
     (args.reports / f"{args.dimension}.md").write_text(report, encoding="utf-8")
     print(json.dumps({"dimension": args.dimension, "coverage": coverage, "report": str(args.reports / f"{args.dimension}.md")}, indent=2))
     return 0
