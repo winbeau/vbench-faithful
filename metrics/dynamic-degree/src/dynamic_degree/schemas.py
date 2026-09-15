@@ -58,6 +58,56 @@ class MotionThreshold:
     units: str
     source: str
     independently_calibrated: bool
+    # The time-normalisation exponent this threshold is expressed in, so the
+    # comparison against ``*_intensity`` is dimensionally explicit.
+    exponent: float = 1.0
+
+
+@dataclass(frozen=True)
+class LagScalingEvidence:
+    """How the clip's own inter-frame displacement scales with the sampling lag.
+
+    The counterfactual FPS ladder holds the duration fixed and changes only the
+    sampling interval, so a task-relevant motion magnitude is comparable across
+    rungs only if the normalisation removes the clip's lag dependence.  A
+    ballistic assumption (``d = v * dt``) removes exactly ``dt**1``; the measured
+    exponent here says what actually has to be removed.
+
+    ``straightness`` is ``chord / path``: the mean direct displacement at a lag
+    divided by the sum of the lag-1 displacements covering the same span.  It is
+    ~1.0 for straight, constant-velocity motion, well below 1.0 for oscillating
+    or diffusive trajectories, and it also identifies an estimator that saturates
+    at large displacements.  It is what tells the two causes apart without
+    needing the ladder.
+    """
+
+    exponent: float | None
+    exponent_source: str
+    measured_on_channel: str
+    lags: tuple[int, ...]
+    lag_seconds: tuple[float, ...]
+    chord_displacement: tuple[float, ...]
+    path_displacement: tuple[float, ...]
+    straightness: tuple[float, ...]
+    pair_counts: tuple[int, ...]
+    fit_rmse: float | None
+    independently_calibrated: bool
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "exponent": self.exponent,
+            "exponent_source": self.exponent_source,
+            "measured_on_channel": self.measured_on_channel,
+            "lags_frames": list(self.lags),
+            "lag_seconds": list(self.lag_seconds),
+            "chord_displacement_diagonals": list(self.chord_displacement),
+            "path_displacement_diagonals": list(self.path_displacement),
+            "straightness": list(self.straightness),
+            "pair_counts": list(self.pair_counts),
+            "fit_rmse_log_log": self.fit_rmse,
+            "independently_calibrated": self.independently_calibrated,
+            "model": "displacement ~ lag**exponent",
+        }
 
 
 @dataclass(frozen=True)
@@ -76,6 +126,11 @@ class TransitionEvidence:
     apparent_speed: float | None = None
     global_speed: float | None = None
     residual_speed: float | None = None
+    # displacement / diagonal / dt**exponent, with the exponent resolved per clip
+    # (1.0 reproduces `*_speed` exactly, so ballistic content is unchanged).
+    apparent_intensity: float | None = None
+    global_intensity: float | None = None
+    residual_intensity: float | None = None
     significant_motion_threshold: float | None = None
     apparent_significant: bool | None = None
     global_significant: bool | None = None
@@ -101,6 +156,9 @@ class TransitionEvidence:
             "apparent_speed": self.apparent_speed,
             "global_speed": self.global_speed,
             "residual_speed": self.residual_speed,
+            "apparent_intensity": self.apparent_intensity,
+            "global_intensity": self.global_intensity,
+            "residual_intensity": self.residual_intensity,
             "significant_motion_threshold": self.significant_motion_threshold,
             "moving_static_decision": {
                 "apparent": self.apparent_significant,
@@ -192,6 +250,10 @@ class AuditVideoResult:
     audit_effective_count_num: int | None
     boundary_fix_applied: bool
     component_provenance: dict[str, bool]
+    lag_scaling: LagScalingEvidence | None = None
+    time_normalization_exponent: float = 1.0
+    time_normalization_exponent_source: str = "ballistic_default"
+    time_normalization_exponent_independently_calibrated: bool = False
 
 
 @dataclass(frozen=True)

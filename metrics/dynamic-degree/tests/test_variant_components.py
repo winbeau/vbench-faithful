@@ -1,7 +1,12 @@
 import unittest
 import numpy as np
 
-from dynamic_degree.backends.audit import AuditConfig, AuditVariant, analyze_timed_flow_sequence
+from dynamic_degree.backends.audit import (
+    AuditConfig,
+    AuditVariant,
+    LagExponentMode,
+    analyze_timed_flow_sequence,
+)
 from dynamic_degree.backends.audit import audit_result_payload
 from dynamic_degree.diagnostics import DiagnosticsLevel
 from dynamic_degree.schemas import TimedFrame, TimedFrameSequence
@@ -18,8 +23,8 @@ def flow(dx):
 
 
 class VariantComponentTests(unittest.TestCase):
-    def evaluate(self, variant, dt=0.125, dx=1.0):
-        return analyze_timed_flow_sequence('x', 'camera pans while a subject runs', sequence(dt), flow(dx), config=AuditConfig(variant=variant))
+    def evaluate(self, variant, dt=0.125, dx=1.0, **config_kwargs):
+        return analyze_timed_flow_sequence('x', 'camera pans while a subject runs', sequence(dt), flow(dx), config=AuditConfig(variant=variant, **config_kwargs))
 
     def test_component_provenance_and_no_source_affine_leakage(self):
         expected = {
@@ -43,10 +48,23 @@ class VariantComponentTests(unittest.TestCase):
             )
 
     def test_time_only_is_dt_invariant_and_source_only_is_not_time_normalized(self):
+        # The time-normalisation exponent is configurable, so the variant test
+        # states the law each normalisation is invariant for: displacement
+        # proportional to dt**exponent.
         left = self.evaluate(AuditVariant.TIME_ONLY, .125, 1.0).apparent.motion_intensity
-        right = self.evaluate(AuditVariant.TIME_ONLY, .25, 2.0).apparent.motion_intensity
+        right = self.evaluate(AuditVariant.TIME_ONLY, .25, 2 ** 0.5).apparent.motion_intensity
         self.assertAlmostEqual(left, right)
-        self.assertNotEqual(self.evaluate(AuditVariant.SOURCE_ONLY, .125, 1.0).apparent.motion_intensity, self.evaluate(AuditVariant.SOURCE_ONLY, .25, 2.0).apparent.motion_intensity)
+        ballistic = self.evaluate(
+            AuditVariant.TIME_ONLY, .125, 1.0, lag_exponent_mode=LagExponentMode.BALLISTIC
+        ).apparent.motion_intensity
+        ballistic_coarse = self.evaluate(
+            AuditVariant.TIME_ONLY, .25, 2.0, lag_exponent_mode=LagExponentMode.BALLISTIC
+        ).apparent.motion_intensity
+        self.assertAlmostEqual(ballistic, ballistic_coarse)
+        self.assertNotEqual(
+            self.evaluate(AuditVariant.SOURCE_ONLY, .125, 1.0).apparent.motion_intensity,
+            self.evaluate(AuditVariant.SOURCE_ONLY, .25, 2.0).apparent.motion_intensity,
+        )
 
     def test_duration_only_has_coverage_without_source_or_time(self):
         result = self.evaluate(AuditVariant.DURATION_ONLY)

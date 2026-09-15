@@ -29,26 +29,41 @@ def aggregate_channel(
     significant_threshold: float | None,
     *,
     duration_weighted: bool = True,
+    intensity_field: str | None = None,
 ) -> ChannelEvidence:
+    """Duration-weighted mean channel evidence.
+
+    ``intensity_field`` selects which per-transition magnitude is reported as
+    ``motion_intensity``.  The audit path passes the lag-normalised intensity so
+    the reported magnitude does not carry the sampling interval; the default
+    keeps the ballistic ``*_speed`` fields, which is also what the threshold
+    comparison and the temporal-coverage fraction use.
+    """
     speed_field = {"apparent": "apparent_speed", "camera": "global_speed", "residual": "residual_speed"}[channel]
+    magnitude_field = intensity_field or speed_field
     valid = [
         transition
         for transition in transitions
-        if transition.valid and getattr(transition, speed_field) is not None and transition.dt_seconds > 0
+        if transition.valid
+        and getattr(transition, magnitude_field) is not None
+        and transition.dt_seconds > 0
     ]
     duration = sum(transition.dt_seconds for transition in valid)
     if not valid or duration <= 0:
         return ChannelEvidence(channel, None, None, 0, 0.0)
     if duration_weighted:
-        intensity = sum(float(getattr(transition, speed_field)) * transition.dt_seconds for transition in valid) / duration
+        intensity = sum(float(getattr(transition, magnitude_field)) * transition.dt_seconds for transition in valid) / duration
     else:
-        intensity = sum(float(getattr(transition, speed_field)) for transition in valid) / len(valid)
+        intensity = sum(float(getattr(transition, magnitude_field)) for transition in valid) / len(valid)
     coverage = None
     if significant_threshold is not None:
+        # Compared in the same domain as the reported intensity, so the
+        # static/moving fraction does not inherit the sampling interval.
         coverage = sum(
             transition.dt_seconds
             for transition in valid
-            if float(getattr(transition, speed_field)) > significant_threshold
+            if getattr(transition, magnitude_field) is not None
+            and float(getattr(transition, magnitude_field)) > significant_threshold
         ) / duration
     return ChannelEvidence(channel, float(intensity), None if coverage is None else float(coverage), len(valid), float(duration))
 
@@ -86,12 +101,29 @@ def serialize_audit_result(result: AuditVideoResult, level: DiagnosticsLevel) ->
                 else "unweighted_mean_transition_motion_intensity_no_temporal_coverage"
             ),
             "component_provenance": result.component_provenance,
+            "time_normalization": {
+                "exponent": result.time_normalization_exponent,
+                "exponent_source": result.time_normalization_exponent_source,
+                "exponent_independently_calibrated": result.time_normalization_exponent_independently_calibrated,
+                "intensity_units": (
+                    "image_diagonals_per_second" if result.time_normalization_exponent == 1.0
+                    else f"image_diagonals_per_second_pow_{result.time_normalization_exponent:g}"
+                ),
+                "ballistic_default_exponent": 1.0,
+                "role": (
+                    "applied_to_motion_intensity_and_scalar; coverage_fraction_still_uses_"
+                    "the_ballistic_speed_against_the_official_derived_threshold"
+                ),
+            },
+            "lag_scaling": None if result.lag_scaling is None else result.lag_scaling.to_dict(),
         },
         "threshold": {
             "value": result.threshold.value,
             "units": result.threshold.units,
+            "exponent": result.threshold.exponent,
             "source": result.threshold.source,
             "independently_calibrated": result.threshold.independently_calibrated,
+            "role": "compared against the lag-normalised intensity in the same exponent domain",
         },
         "boundary": {
             "official_count_num": result.official_count_num,

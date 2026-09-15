@@ -102,3 +102,116 @@ The opt-in real parity test requires `VBENCH_AUDIT_REAL_DYNAMIC_PARITY=1`, `VBEN
 - Static plus camera shake, Subject x Camera 2x2, FPS resampling, subject speed, motion coverage, real T2V, and human preference experiments from the old repository were not rerun. Their historical numbers are not embedded in code and are not new evidence.
 - Human pairwise agreement, ranking accuracy, Kendall tau, and Spearman remain future evaluation work.
 - Root `uv.lock` was absent before implementation and remains intentionally ungenerated until the workspace-wide model dependency combination is validated.
+
+## Fourth repair: lag-calibrated time normalisation
+
+Added after the counterfactual FPS-invariance run (`dynamics_degree`, family
+`fps_resampling`, 40 bases / 160 clips) showed the repair was not actually
+frame-rate invariant. The full critique, including why the composite CPA could
+not have reported it and what the released clips do and do not explain, is in
+`docs/counterfactual-reports/dynamics_degree.review.md`; the re-measured report
+is `docs/counterfactual-reports/dynamics_degree.md`.
+
+### What the archived data said
+
+| backend | 8 fps | 6 fps | 4 fps | 2 fps | ratio profile | fitted `s ~ dt**p` |
+|---|---:|---:|---:|---:|---|---:|
+| Official raw top-5% flow (px) | 16.5108 | 19.7201 | 24.2540 | 32.8744 | 1 / 1.19 / 1.47 / 1.99 | **p = +0.491** |
+| Archived Repair (`d/dt`, diag/s) | 0.2484 | 0.2230 | 0.1864 | 0.1282 | 1 / 0.90 / 0.75 / 0.52 | **p = -0.481** |
+
+The two rows are mirror images, and `official / (dt * repair)` is constant at
+0.015-0.016 across all four rungs: the archived "repair" was the Official flow
+magnitude divided by `dt`, nothing more. Dividing by `dt**1` is exact only when
+displacement grows linearly with the lag (constant-velocity motion). An
+invariance family has every pair expected to tie, so the counterfactual's
+tie-margin CPA is blind to the sign of the level effect: the reported `+0.0111`
+was noise.
+
+The aggregate `+0.491` is also a heavy-tailed mean-of-means statistic. On the 10
+dev bases the per-clip across-rung exponent averages **+0.706** and correlates
+**+0.925** with the within-clip RAFT exponent fitted from the clip's own lag-1/2/4
+displacements (and `+0.935` with `log(s_fps2 / s_fps8)`).
+
+### What was measured on the real clips
+
+All 160 clips were scored with the patched backend on the scoring host (5
+physical GPUs, one logical `cuda:0` each). The displacement law is sublinear in
+`dt` and the fitted exponent is itself lag-window dependent, which is why a
+per-clip calibration under-corrects:
+
+| rung | frames | mean measured within-clip exponent |
+|---|---:|---:|
+| 8 fps | 16, 27 | +0.618 |
+| 6 fps | 12, 20 | +0.557 |
+| 4 fps | 8, 14 | +0.512 |
+| 2 fps | 4, 7 | +0.480 |
+
+Applying an exponent `alpha` to the recorded per-clip displacements gives:
+
+| alpha | test level profile (8/6/4/2 fps) | test slope | test `fps2/fps8` |
+|---:|---|---:|---:|
+| 0 (Official) | 1 / 1.196 / 1.437 / 1.911 | +0.458 | 1.911 |
+| **0.5 (shipped default)** | **1 / 1.042 / 1.040 / 0.996** | **-0.011** | **0.996** |
+| 1 (archived repair) | 1 / 0.902 / 0.736 / 0.498 | -0.511 | 0.498 |
+
+The exponent that flattens the ladder is `+0.518`, base-cluster bootstrap 95% CI
+`[+0.417, +0.651]`; both `0` and `1` fall outside it. Calibrated on the 10 dev
+bases alone it is `+0.624`, which leaves a residual test slope of `-0.135`: the
+dev split is too small to calibrate this constant, so `alpha = 0.5` ships as an
+a-priori diffusive constant (`displacement ~ sqrt(dt)`) that the CI supports.
+
+### What changed
+
+- `AuditConfig.lag_exponent_mode` defaults to `LagExponentMode.FIXED` with
+  `default_lag_exponent = 0.5`, and the resolution order is: ablation, explicit
+  `lag_exponent` (requires `lag_exponent_source`), `BALLISTIC` mode (`dt**1`,
+  the archived behaviour), `MEASURED` mode (each clip's own fit), else the fixed
+  default. `time_normalization_exponent_source` records which applied.
+- `LagScalingEvidence` is still measured and emitted for every clip (`lag_set`
+  default 1/2/4 sampled frames, capped by `max_lag_frames`): the fitted exponent,
+  the per-lag chord and path displacements, `straightness = chord/path`, pair
+  counts and the fit residual. It is a diagnostic, not the normaliser, because
+  the fitted value moves with the lag window the rung exposes.
+- `derive_motion_threshold` now takes the applied exponent and re-expresses the
+  Official pixel threshold as `official_px / diagonal / reference_lag**exponent`
+  (`AuditConfig.reference_lag_seconds`, default 0.125). `aggregate_channel`'s
+  coverage fraction and the per-transition significance flags use the same
+  `d / dt**alpha` domain, so the static/moving decision no longer mixes a pixel
+  threshold with a per-frame displacement. At the reference lag the two domains
+  coincide by construction, and `MotionThreshold.exponent` records which was used.
+- `time_normalization.intensity_units` states the resulting unit, which is
+  `image_diagonals_per_second_pow_alpha` when `alpha != 1`.
+
+### Verification
+
+Unit level: `tests/test_lag_scaling.py` builds trajectories whose lag law is
+known and samples each at two rates, and `tests/test_temporal_aggregation.py`
+pins the threshold/coverage domain. With the law measured from the real clips:
+
+| trajectory | archived `d/dt`, 2 fps / 8 fps | `d/dt**0.5`, 2 fps / 8 fps |
+|---|---:|---:|
+| ballistic (`p = 1`) | 1.0000 | 1.0000 (under `BALLISTIC`) |
+| measured real law (`p = 0.5`) | **0.4931** | **1.0000** |
+
+End to end: 160/160 counterfactual clips scored on the H100 host, and the
+recorded scores reproduce the offline `mean_displacement / dt**0.5` calibration
+to `1.7e-16`. Coverage on the test split moves `0.501 -> 0.333` under
+`alpha = 1` but `0.501 -> 0.533` under `alpha = 0.5`.
+
+### What this does not deliver
+
+- **Per-clip invariance is not achieved.** After the fix the per-base
+  `fps2/fps8` ratio still has median `1.284`, IQR `[0.807, 1.537]`, and only 20%
+  of bases sit within ±20% of 1. The fix makes the reported *dataset aggregate*
+  frame-rate invariant — which is how VBench defines dynamic degree — but
+  individual clips remain incomparable across frame rates.
+- The two construction defects in the counterfactual ladder remain in the
+  released dataset: the coarse rungs sample a shorter span of the source
+  trajectory (fps2 covers 80% of a 16-frame 8 fps source), and the 10 fps GIF
+  rungs drift in container duration by up to 6.1%.
+- The `~sqrt(dt)` law is measured, not explained. Two independent estimators are
+  both sublinear (RAFT `+0.819`, Farneback `+0.608` on the same frame pairs), and
+  the median `straightness` is `0.793` at lag 2 and `0.574` at lag 4 across all
+  160 clips, so the trajectories genuinely turn at these lags and the estimator
+  is not the whole story; separating the two completely would need a
+  per-pixel chord-vs-path field comparison against a non-saturating estimator.

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from math import ceil, sqrt
+from typing import Sequence
 
 import cv2
 import numpy as np
@@ -36,6 +37,95 @@ def top_fraction_mean(values: np.ndarray, fraction: float = 0.05) -> float:
     count = max(1, int(flat.size * fraction))
     selected = np.partition(flat, flat.size - count)[-count:]
     return float(selected.mean())
+
+
+def normalized_intensity(
+    displacement_pixels: float,
+    frame_shape: tuple[int, int],
+    dt_seconds: float,
+    exponent: float,
+) -> tuple[float, float]:
+    """Displacement in diagonals, and it divided by ``dt ** exponent``.
+
+    ``exponent=1`` is the ballistic normalisation (the ``*_speed`` fields) and is
+    exact only for constant-velocity motion.  ``exponent=0`` keeps the raw
+    displacement.  Any other value removes exactly the lag dependence measured
+    for this clip, so the reported intensity separates motion amplitude from the
+    sampling interval that the FPS ladder varies.
+    """
+    if not np.isfinite(dt_seconds) or dt_seconds <= 0:
+        raise ValueError("dt_seconds must be finite and positive")
+    if not np.isfinite(exponent):
+        raise ValueError("time-normalization exponent must be finite")
+    height, width = frame_shape
+    diagonal = float(np.hypot(height, width))
+    if diagonal <= 0:
+        raise ValueError("frame diagonal must be positive")
+    displacement = float(displacement_pixels) / diagonal
+    return displacement, displacement / (float(dt_seconds) ** float(exponent))
+
+
+def scale_intensity(displacement_diagonals: float, dt_seconds: float, exponent: float) -> float:
+    """Divide an already diagonal-normalised displacement by ``dt ** exponent``."""
+    if not np.isfinite(dt_seconds) or dt_seconds <= 0:
+        raise ValueError("dt_seconds must be finite and positive")
+    if not np.isfinite(exponent):
+        raise ValueError("time-normalization exponent must be finite")
+    return float(displacement_diagonals) / (float(dt_seconds) ** float(exponent))
+
+
+def resolve_lags(requested: Sequence[int], frame_count: int) -> tuple[int, ...]:
+    """The frame lags to measure: the requested ones the clip supports, plus the
+    longest lag it can support (so a short clip still spans more than one lag)."""
+    maximum = frame_count - 1
+    available: set[int] = set()
+    for lag in requested:
+        if int(lag) < 1:
+            raise ValueError("sampling lags are counted in frames and must be >= 1")
+        if int(lag) <= maximum:
+            available.add(int(lag))
+    cap = min(max(int(lag) for lag in requested), maximum)
+    if cap >= 2:
+        available.add(cap)
+    return tuple(sorted(available))
+
+
+def fit_power_law_exponent(
+    lag_seconds: Sequence[float],
+    displacements: Sequence[float],
+    *,
+    minimum_points: int = 2,
+    weights: Sequence[float] | None = None,
+) -> tuple[float, float] | None:
+    """Least-squares slope of ``log(displacement)`` on ``log(lag)``.
+
+    Returns ``(exponent, rmse_of_the_log_fit)``, or ``None`` when the clip does
+    not supply at least ``minimum_points`` distinct positive lag/displacement
+    pairs.  ``exponent=1`` means ballistic motion, ``0`` lag-independent motion.
+    ``weights`` lets a caller down-weight a lag that rests on very few pairs.
+    """
+    points: list[tuple[float, float, float]] = []
+    for position, (lag, displacement) in enumerate(zip(lag_seconds, displacements)):
+        lag_value, displacement_value = float(lag), float(displacement)
+        if not np.isfinite(lag_value) or not np.isfinite(displacement_value):
+            continue
+        if lag_value <= 0 or displacement_value <= 0:
+            continue
+        weight = 1.0 if weights is None else float(weights[position])
+        if not np.isfinite(weight) or weight <= 0:
+            continue
+        points.append((lag_value, displacement_value, weight))
+    if len(points) < minimum_points or len({round(lag, 9) for lag, _, _ in points}) < minimum_points:
+        return None
+    log_lag = np.log(np.array([lag for lag, _, _ in points], dtype=np.float64))
+    log_displacement = np.log(np.array([value for _, value, _ in points], dtype=np.float64))
+    weight_array = np.array([weight for _, _, weight in points], dtype=np.float64)
+    slope, intercept = np.polyfit(log_lag, log_displacement, 1, w=weight_array)
+    residual = log_displacement - (slope * log_lag + intercept)
+    rmse = float(np.sqrt(np.average(np.square(residual), weights=np.square(weight_array))))
+    if not np.isfinite(float(slope)) or not np.isfinite(rmse):
+        return None
+    return float(slope), rmse
 
 
 def motion_statistics(flow: np.ndarray) -> MotionStatistics:
