@@ -122,6 +122,9 @@ def frame_evidence(diagnostics: Any) -> dict[str, Any] | None:
     if not isinstance(diagnostics, dict):
         return None
     frames = diagnostics.get("frame_results")
+    if frames is None:
+        # Multiple Objects reports its per-frame evidence under `frames`.
+        frames = diagnostics.get("frames")
     evidence: dict[str, Any] = {
         "detected_frame_count": diagnostics.get("detected_frame_count"),
         "scored_frame_count": diagnostics.get("scored_frame_count"),
@@ -131,6 +134,16 @@ def frame_evidence(diagnostics: Any) -> dict[str, Any] | None:
         "ambiguous_role_count": diagnostics.get("ambiguous_role_count"),
         "aggregation_method": diagnostics.get("aggregation_method"),
     }
+    # The official Multiple Objects backend reports only a frame count and how
+    # many of those frames its conjunction accepted; keep both so the report can
+    # show the same "how incomplete" number for both backends.
+    if diagnostics.get("frame_count") is not None:
+        evidence["frame_count"] = int(diagnostics["frame_count"])
+    if diagnostics.get("success_frame_count") is not None:
+        success = int(diagnostics["success_frame_count"])
+        evidence["success_frame_count"] = success
+        if evidence.get("frame_count"):
+            evidence["joint_detection_rate"] = success / evidence["frame_count"]
     # Continuity backends (Motion Smoothness) record the mean/tail decomposition
     # of their own score rather than per-frame reasons; plan 13.3 asks for both
     # numbers next to the score, so keep them in the evidence block.
@@ -139,11 +152,31 @@ def frame_evidence(diagnostics: Any) -> dict[str, Any] | None:
             evidence[key] = float(diagnostics[key])
     if isinstance(frames, list) and frames:
         if isinstance(frames[0], dict):
-            counts: dict[str, int] = {}
-            for frame in frames:
-                reason = str(frame.get("frame_reason"))
-                counts[reason] = counts.get(reason, 0) + 1
-            evidence["frame_reason_counts"] = dict(sorted(counts.items()))
+            if any("frame_reason" in frame for frame in frames):
+                counts: dict[str, int] = {}
+                for frame in frames:
+                    reason = str(frame.get("frame_reason"))
+                    counts[reason] = counts.get(reason, 0) + 1
+                evidence["frame_reason_counts"] = dict(sorted(counts.items()))
+            else:
+                # Multiple Objects: the audit backend reports per-target
+                # confidences and a co-presence decision per frame, and those
+                # are what separate "the target is absent" from "the detector
+                # still answers with moderate confidence for a suppressed
+                # region" (the failure this family exists to expose).
+                evidence["frame_count"] = len(frames)
+                decisions = [bool(frame.get("official_binary_frame_decision")) for frame in frames]
+                scores = [float(frame.get("repaired_frame_score") or 0.0) for frame in frames]
+                weakest = [
+                    float(frame.get("weakest_official_threshold_score") or 0.0) for frame in frames
+                ]
+                # `joint_detection_rate` is the official-threshold pass on the
+                # same frame; it is directly comparable to the official
+                # backend's `joint_detection_rate`.
+                evidence["joint_detection_rate"] = sum(decisions) / len(frames)
+                evidence["mean_frame_score"] = sum(scores) / len(frames)
+                evidence["mean_weakest_confidence"] = sum(weakest) / len(weakest)
+                evidence["zero_frame_fraction"] = sum(1 for score in scores if score == 0.0) / len(scores)
         elif isinstance(frames[0], (int, float)):
             evidence["frame_count"] = len(frames)
             evidence["zero_frame_fraction"] = sum(1 for value in frames if float(value) == 0.0) / len(frames)

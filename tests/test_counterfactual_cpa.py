@@ -20,6 +20,7 @@ from scripts.counterfactual.cpa import (
     rank_gap_groups,
 )
 from scripts.counterfactual.run_dimension import (
+    contract_split_cpa,
     invariance_stats,
     render_report,
     tied_level_groups,
@@ -127,6 +128,7 @@ class MixedRankReportTests(unittest.TestCase):
         coverage = [{"backend": "official", "scored_clips": 16, "expected_clips": 16,
                      "incomplete_shards": []}]
         pairs = _base_pairs(test_rows, scores(4, position_gap=position_gap))
+        split = contract_split_cpa(test_rows, scores(4, position_gap=position_gap), 0.0, 50, 7)
         cpa = {
             "coverage": [{"backend": "official", "split": "test", "scored": 16, "total": 16}],
             "profiles": {"official": {"clean": {"n": 4, "mean": 0.9, "std": 0.0, "min": 0.9,
@@ -137,6 +139,7 @@ class MixedRankReportTests(unittest.TestCase):
                     "test_tie_aware": group_stats(rank_gap_groups(pairs), 0.0),
                 }
             },
+            "contract_split": {"official": split},
             "official": {"dev_margin": 0.0},
         }
         return render_report(
@@ -148,7 +151,43 @@ class MixedRankReportTests(unittest.TestCase):
         report = self._report()
         self.assertIn("## Contract decomposition", report)
         self.assertIn("Declared-equal subgroups", report)
-        self.assertIn("Rank-gap-0 pairs are the family's actual target", report)
+        self.assertIn("Rank-gap-0 pairs are the declared-equal contract", report)
+
+    def test_contract_halves_carry_their_own_interval(self):
+        """A pooled interval says nothing about either half, so each half needs one."""
+        report = self._report()
+        self.assertIn("## CPA by contract half", report)
+        self.assertIn("| 95% CI |", report)
+        self.assertIn("| official | sensitivity |", report)
+        self.assertIn("| official | invariance |", report)
+
+    def test_conjunction_control_predicate_is_reported_when_present(self):
+        rows_ = rows(2)
+        cpa = {
+            "coverage": [],
+            "profiles": {},
+            "contracts": {},
+            "contract_split": {},
+            "order": {},
+            "paired": {},
+            "conjunction_control": {
+                "official": {
+                    "n_bases": 2,
+                    "control_mean": 0.13,
+                    "reference_mean": 0.18,
+                    "control_not_higher_rate": 1.0,
+                    "reference_level": "occlusion_100",
+                    "control_level": "conjunction_control",
+                }
+            },
+        }
+        report = render_report(
+            "multiplt_object", "weakest_object_visibility", rows_, [], cpa, "deadbeef"
+        )
+        self.assertIn("### Conjunction control", report)
+        self.assertIn("does not ask the temporal-conjunction control", report)
+        self.assertIn("0.1300", report)
+        self.assertIn("control ≤ `occlusion_100`", report)
 
     def test_position_spread_shows_up_in_the_decomposition(self):
         flat = self._report(position_gap=0.0)

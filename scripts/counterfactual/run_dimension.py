@@ -30,6 +30,7 @@ from .common import ROOT, read_jsonl, write_json
 from .cpa import (
     BUDGET,
     _base_pairs,
+    bootstrap_ci,
     calibrate_margin,
     cpa_at_margin,
     evaluate_method,
@@ -290,14 +291,20 @@ def tied_level_groups(rows: list[dict[str, Any]]) -> dict[int, list[str]]:
 
 
 def contract_split_cpa(
-    rows: list[dict[str, Any]], backend_scores: dict[str, float | None], margin: float
+    rows: list[dict[str, Any]],
+    backend_scores: dict[str, float | None],
+    margin: float,
+    iterations: int = 2000,
+    seed: int = 2026,
 ) -> dict[str, Any]:
-    """CPA split by contract half.
+    """CPA split by contract half, with a cluster bootstrap CI for each half.
 
     A family may mix two contracts: an inequality half (the counterfactual must
     move the score) and an invariance half (relocated variants must tie). A
     single pooled CPA is dominated by whichever half is easier, so each is
-    scored on its own pairs. `expected` comes from `family_pairs`.
+    scored on its own pairs *and* carries its own interval: the composite's
+    interval says nothing about either half.  `expected` comes from
+    `family_pairs`.
     """
     by_base: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
     for row in rows:
@@ -305,21 +312,78 @@ def contract_split_cpa(
             "score": backend_scores.get(row["derived_id"]),
             "expected_rank": row["expected_rank"],
         }
-    halves: dict[str, list[tuple[int, int, float]]] = {"sensitivity": [], "invariance": []}
-    for levels in by_base.values():
+    halves: dict[str, dict[str, list[tuple[int, int, float]]]] = {"sensitivity": {}, "invariance": {}}
+    for base_id, levels in by_base.items():
         for expected, rank_gap, delta in family_pairs(levels):
-            halves["invariance" if expected == 0 else "sensitivity"].append((expected, rank_gap, delta))
+            halves["invariance" if expected == 0 else "sensitivity"].setdefault(base_id, []).append(
+                (expected, rank_gap, delta)
+            )
     out: dict[str, Any] = {}
-    for name, pairs in halves.items():
+    for name, base_pairs in halves.items():
+        pairs = [pair for group in base_pairs.values() for pair in group]
         if not pairs:
             out[name] = {"n_pairs": 0, "cpa": None}
             continue
+        low, high = bootstrap_ci(base_pairs, margin, iterations, seed)
         out[name] = {
             "n_pairs": len(pairs),
+            "n_bases": len(base_pairs),
             "cpa": round(cpa_at_margin(pairs, margin), 4),
             "cpa_zero_margin": round(cpa_at_margin(pairs, 0.0), 4),
+            "ci_low": round(low, 4),
+            "ci_high": round(high, 4),
         }
     return out
+
+
+def contract_predicate_stats(
+    rows: list[dict[str, Any]],
+    backend_scores: dict[str, float | None],
+    control_level: str,
+    reference_level: str,
+    *,
+    incomplete_threshold: float | None = None,
+) -> dict[str, Any]:
+    """Plan section 11.4 statistic: is the conjunction control scored incomplete?
+
+    The plan does not ask for the control to *tie* a full-occlusion clip — it
+    asks that a clip in which no frame holds both targets is scored as
+    incomplete, and section 11.4 states the reason explicitly: it guards against
+    a repair that turns same-frame conjunction into temporal union.  That is a
+    level predicate plus an ordering against the ladder's worst rung, not an
+    exact-tie CPA, so it is measured directly here.
+    """
+    by_base: dict[str, dict[str, float]] = defaultdict(dict)
+    for row in rows:
+        value = backend_scores.get(row["derived_id"])
+        if value is not None:
+            by_base[row["base_id"]][row["level"]] = float(value)
+    control: list[float] = []
+    reference: list[float] = []
+    not_higher = 0
+    below_threshold = 0
+    for levels in by_base.values():
+        if control_level not in levels or reference_level not in levels:
+            continue
+        control.append(levels[control_level])
+        reference.append(levels[reference_level])
+        not_higher += int(levels[control_level] <= levels[reference_level])
+        if incomplete_threshold is not None:
+            below_threshold += int(levels[control_level] <= incomplete_threshold)
+    if not control:
+        return {"n_bases": 0}
+    return {
+        "n_bases": len(control),
+        "control_mean": round(float(np.mean(control)), 4),
+        "reference_mean": round(float(np.mean(reference)), 4),
+        "control_not_higher_rate": round(not_higher / len(control), 4),
+        "control_below_threshold_rate": (
+            round(below_threshold / len(control), 4) if incomplete_threshold is not None else None
+        ),
+        "incomplete_threshold": incomplete_threshold,
+        "control_level": control_level,
+        "reference_level": reference_level,
+    }
 
 
 def lag_exponent(rows: list[dict[str, Any]], backend_scores: dict[str, float | None]) -> dict[str, Any]:
@@ -469,19 +533,86 @@ def render_report(
             "CPA mixes an inequality half (the counterfactual must move the score)",
             "with an invariance half (the declared-equal levels must tie). A pooled",
             "CPA is dominated by whichever half is easier, so each is scored",
-            "separately.",
+            "separately, and each half carries its own cluster-bootstrap interval:",
+            "the composite's interval says nothing about either half.",
             "",
-            "| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |",
-            "|---|---|---:|---:|---:|",
+            "| backend | half | pairs | CPA (dev margin) | CPA (zero margin) | 95% CI |",
+            "|---|---|---:|---:|---:|---|",
         ]
         for backend in ("official", "repair"):
             for half, stats in (cpa.get("contract_split", {}).get(backend, {}) or {}).items():
                 if stats.get("cpa") is None:
                     continue
+                interval = (
+                    f"[{stats['ci_low']:.4f}, {stats['ci_high']:.4f}]"
+                    if stats.get("ci_low") is not None
+                    else "—"
+                )
                 lines.append(
                     f"| {backend} | {half} | {stats['n_pairs']} | {stats['cpa']:.4f} | "
-                    f"{stats['cpa_zero_margin']:.4f} |"
+                    f"{stats['cpa_zero_margin']:.4f} | {interval} |"
                 )
+        paired_halves = (cpa.get("paired_halves", {}) or {})
+        if any(entry.get("delta") is not None for entry in paired_halves.values()):
+            lines += [
+                "",
+                "Per-half paired difference (the same `base_id` clusters resampled once",
+                "and both backends re-scored on each resample, plan 5.4). This is the",
+                "interval that decides a half; the two marginal intervals above overlap.",
+                "",
+                "| half | repair − official | paired 95% CI | bases |",
+                "|---|---:|---|---:|",
+            ]
+            for half in ("sensitivity", "invariance"):
+                entry = paired_halves.get(half) or {}
+                if entry.get("delta") is None:
+                    continue
+                lines.append(
+                    f"| {half} | {entry['delta']:+.4f} | "
+                    f"[{entry['ci_low']:+.4f}, {entry['ci_high']:+.4f}] | {entry['n_bases']} |"
+                )
+        predicate = {
+            backend: (cpa.get("conjunction_control", {}) or {}).get(backend, {})
+            for backend in ("official", "repair")
+        }
+        if any(entry.get("n_bases") for entry in predicate.values()):
+            reference = next(
+                (entry["reference_level"] for entry in predicate.values() if entry.get("n_bases")),
+                "occlusion_100",
+            )
+            lines += [
+                "",
+                "### Conjunction control — the plan's actual predicate",
+                "",
+                "Plan section 11.4 does not ask the temporal-conjunction control to",
+                "*tie* the fully occluded clip. It asks that a clip in which no frame",
+                "holds both targets is scored as incomplete, because that is what",
+                "catches a repair which silently converts same-frame conjunction into",
+                "temporal union. Equality between two different corruption geometries",
+                "on a continuous score is not achievable by any continuous estimator —",
+                "and a hard 0/1 metric reaches it only by saturating, which is what the",
+                "Official column below does. The predicate is therefore reported",
+                "directly, next to the tie-based CPA that misrepresents it.",
+                "",
+                f"| backend | bases | control mean | `{reference}` mean | control ≤ `{reference}` |",
+                "|---|---:|---:|---:|---:|",
+            ]
+            for backend in ("official", "repair"):
+                entry = predicate[backend]
+                if not entry.get("n_bases"):
+                    continue
+                lines.append(
+                    f"| {backend} | {entry['n_bases']} | {entry['control_mean']:.4f} | "
+                    f"{entry['reference_mean']:.4f} | {entry['control_not_higher_rate']:.4f} |"
+                )
+            lines += [
+                "",
+                "Read the tie-based invariance CPA as *not applicable* whenever the two",
+                "levels in the declared-equal group are different corruption geometries:",
+                "an exact tie requires the metric to be blind to the difference between",
+                "them, which is a property of saturation rather than of contract",
+                "fidelity.",
+            ]
 
     lines += [
         "",
@@ -587,9 +718,14 @@ def render_report(
                     )
         lines += [
             "",
-            "Rank-gap-0 pairs are the family's actual target. Splitting them out",
+            "Rank-gap-0 pairs are the declared-equal contract. Splitting them out",
             "shows whether a Repair gain in the composite comes from sensitivity",
-            "(which both backends usually already have) or from the invariant half.",
+            "(which both backends usually already have) or from the invariant half —",
+            "but an exact tie is only a contract test when the levels in the group",
+            "really are interchangeable. When they differ in more than severity (for",
+            "example a same-frame occlusion against a clip in which no frame holds",
+            "both targets), the tie rate measures the metric's saturation, not its",
+            "fidelity, and the predicate section below is the test that applies.",
         ]
         if dispersion_rows:
             lines += [
@@ -755,6 +891,9 @@ def evidence_summary(
     reasons: dict[str, int] = {}
     clips_with_evidence = frames = 0
     zero_fractions: list[float] = []
+    joint_rates: list[float] = []
+    mean_scores: list[float] = []
+    mean_weakest: list[float] = []
     for row in rows:
         entry = (evidence or {}).get(row["derived_id"], {}).get(backend)
         if not entry:
@@ -765,6 +904,12 @@ def evidence_summary(
         frames += int(entry.get("frame_count") or sum((entry.get("frame_reason_counts") or {}).values()))
         if entry.get("zero_frame_fraction") is not None:
             zero_fractions.append(float(entry["zero_frame_fraction"]))
+        if entry.get("joint_detection_rate") is not None:
+            joint_rates.append(float(entry["joint_detection_rate"]))
+        if entry.get("mean_frame_score") is not None:
+            mean_scores.append(float(entry["mean_frame_score"]))
+        if entry.get("mean_weakest_confidence") is not None:
+            mean_weakest.append(float(entry["mean_weakest_confidence"]))
     satisfied = sum(count for reason, count in reasons.items() if reason.startswith("relation_satisfied"))
     return {
         "backend": backend,
@@ -775,6 +920,9 @@ def evidence_summary(
         "direction_mismatch": reasons.get("direction_mismatch", 0),
         "axis_mismatch": reasons.get("axis_mismatch", 0),
         "satisfied": satisfied,
+        "mean_joint_detection_rate": float(np.mean(joint_rates)) if joint_rates else None,
+        "mean_frame_score": float(np.mean(mean_scores)) if mean_scores else None,
+        "mean_weakest_confidence": float(np.mean(mean_weakest)) if mean_weakest else None,
         "other": sum(reasons.values()) - sum(
             reasons.get(reason, 0)
             for reason in ("missing_subject", "missing_object", "direction_mismatch", "axis_mismatch")
@@ -806,6 +954,49 @@ def render_evidence_section(
             "attributed to detector drop-outs rather than to a wrong direction. Re-score with the",
             "current `score.py` to populate it.",
         ]
+    if dimension == "multiplt_object":
+        # The generic frame-reason table is empty for this backend: its evidence
+        # is per-target confidence and a co-presence decision, which is exactly
+        # what shows whether a suppressed target is *absent* or merely
+        # low-confidence.
+        lines = [
+            "",
+            "## Frame evidence (test split)",
+            "",
+            "Per-clip detection evidence behind the scores. `joint co-presence` is the",
+            "fraction of sampled frames in which both targets pass the official 0.5",
+            "gate, read from the separate official-threshold pass for the Repair;",
+            "`mean frame score` is the repair's SoftMin value averaged over frames",
+            "(the official score is that same co-presence rate, so it has no separate",
+            "SoftMin column), and `weakest confidence` is the mean per-frame confidence",
+            "of the weaker target. A repair whose `weakest confidence` stays well above",
+            "zero at full suppression is reading context, not the object.",
+            "",
+            "| backend | clips | frames | mean joint co-presence | mean frame score | mean weakest confidence | zero-frame rate |",
+            "|---|---:|---:|---:|---:|---:|---:|",
+        ]
+        for backend, summary in summaries.items():
+            joint = (
+                "—" if summary.get("mean_joint_detection_rate") is None
+                else f"{summary['mean_joint_detection_rate']:.4f}"
+            )
+            frame_score = (
+                "—" if summary.get("mean_frame_score") is None
+                else f"{summary['mean_frame_score']:.4f}"
+            )
+            weakest = (
+                "—" if summary.get("mean_weakest_confidence") is None
+                else f"{summary['mean_weakest_confidence']:.4f}"
+            )
+            zero = (
+                "—" if summary["mean_zero_frame_fraction"] is None
+                else f"{summary['mean_zero_frame_fraction']:.4f}"
+            )
+            lines.append(
+                f"| {backend} | {summary['clips']} | {summary['frames']} | {joint} | "
+                f"{frame_score} | {weakest} | {zero} |"
+            )
+        return lines
     lines = [
         "",
         "## Frame evidence (test split)",
@@ -949,7 +1140,12 @@ def main() -> int:
         cpa.setdefault("discontinuity", {})[backend] = discontinuity_profile(
             rows, nested_evidence, backend
         )
-        cpa.setdefault("contract_split", {})[backend] = contract_split_cpa(rows, backend_scores, margin)
+        cpa.setdefault("contract_split", {})[backend] = contract_split_cpa(
+            rows, backend_scores, margin, args.iterations, args.seed
+        )
+        cpa.setdefault("conjunction_control", {})[backend] = contract_predicate_stats(
+            rows, backend_scores, "conjunction_control", "occlusion_100"
+        )
         cpa.setdefault("lag_exponent", {})[backend] = lag_exponent(rows, backend_scores)
         # Sequence-level order statistics answer the same question as CPA
         # without the pair-count weighting (plan 5.2 and 13.3).
@@ -973,6 +1169,31 @@ def main() -> int:
             margins["official"], margins["repair"], args.iterations, args.seed,
         ),
     }
+    # The composite interval hides which contract moved, so repeat the paired
+    # bootstrap for each half over **all** bases the halves are pooled on: the
+    # halves table pools dev+test, and a test-only interval would not describe it.
+    all_rows = rows
+    all_scores = {row["derived_id"]: scores.get((row["derived_id"], "official")) for row in all_rows}
+    repair_scores = {row["derived_id"]: scores.get((row["derived_id"], "repair")) for row in all_rows}
+    official_all = _base_pairs(all_rows, all_scores)
+    repair_all = _base_pairs(all_rows, repair_scores)
+    cpa["paired_halves"] = {}
+    for half in ("sensitivity", "invariance"):
+        expected = 0 if half == "invariance" else 1
+        official_half = {
+            base_id: [pair for pair in pairs if (pair[0] == 0) == (expected == 0)]
+            for base_id, pairs in official_all.items()
+        }
+        repair_half = {
+            base_id: [pair for pair in pairs if (pair[0] == 0) == (expected == 0)]
+            for base_id, pairs in repair_all.items()
+        }
+        official_half = {key: value for key, value in official_half.items() if value}
+        repair_half = {key: value for key, value in repair_half.items() if value}
+        cpa["paired_halves"][half] = paired_bootstrap_ci(
+            official_half, repair_half,
+            margins["official"], margins["repair"], args.iterations, args.seed,
+        )
 
     from .build import git_sha
     code_sha = git_sha()  # scoring revision, not the dataset-build revision in the manifest

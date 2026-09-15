@@ -14,8 +14,16 @@ Scoring code SHA: `66c4a99dba05aceaebe80276ffbffc607c3d2e40`.
 | human_action | `filename_invariance` | 25 | 60 | 1.0000 | 1.0000 | +0.0000 | — |
 | spatial_relationship | `directional_flip` | 40 | 60 | 0.3667 | 0.0667 | -0.3000 | — |
 | scene | `environment_coverage` | 25 | 100 | 0.3850 | 0.9300 | +0.5450 | — |
-| multiplt_object | `weakest_object_visibility` | 25 | 120 | 0.5967 | 0.7633 | +0.1666 | — |
+| multiplt_object | `weakest_object_visibility` | 25 | 120 | 0.5967 | 0.7633 | +0.1666 | [+0.0900, +0.2500] |
 | motion_smoothness | `temporal_jerk` | 25 | 100 | 0.8300 | 0.8800 | +0.0500 | [-0.0150, +0.1100] |
+
+`multiplt_object` is a mixture: reported split by contract half
+(`multiplt_object.md`), sensitivity is 0.5371 → 0.8171 (paired Δ **+0.2800**,
+95% CI [+0.1886, +0.3771]) while the tie-based invariance pair is 0.6000 →
+0.0000. The invariance criterion asks a continuous score for an exact tie
+between two different corruption geometries and is not satisfiable; the plan's
+§11.4 predicate (score the never-co-present control as incomplete) passes on
+both backends, with control means 0.2009/0.2436 against a clean level of 0.5181.
 
 ## Invariance families — dispersion, not CPA
 

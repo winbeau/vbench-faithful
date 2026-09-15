@@ -20,9 +20,10 @@ worth after independent review.
 **This section is maintained at the latest revision and is the canonical table.**
 Update it in place whenever a dimension is re-scored; do not add parallel copies.
 Current snapshot: `dynamics_degree` scored with the shipped v2 repair (`d/dt**p`);
-`motion_smoothness` re-scored with the direction-aware estimator (`feeb770`); all
-other dimensions at scoring code `a044ac9`; coverage 100% on both backends for
-all seven dimensions.
+`motion_smoothness` re-scored with the direction-aware estimator (`feeb770`);
+`multiplt_object` re-scored with per-half CIs and the §11.4 conjunction-control
+predicate (`687d19a` + the scoring-code commit it names); all other dimensions at
+scoring code `a044ac9`; coverage 100% on both backends for all seven dimensions.
 
 CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`.
 
@@ -30,7 +31,7 @@ CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`.
 |---|---|---|---:|---:|---:|---:|---:|---|
 | scene | environment_coverage | ordered | 25 | 125 | 0.3850 | 0.9300 | +0.5450 | [0.840, 0.985] |
 | subject_consistency | temporal_relocation | mixed | 25 | 100 | 0.5917 | 0.8500 | +0.2583 | [0.758, 0.933] |
-| multiplt_object | weakest_object_visibility | mixed | 25 | 150 | 0.5967 | 0.7633 | +0.1666 | [0.677, 0.830] |
+| multiplt_object ‡ | weakest_object_visibility | mixed | 25 | 150 | 0.5967 | 0.7633 | +0.1666 | [0.677, 0.830] |
 | dynamics_degree † | fps_resampling | invariance | 40 | 160 | 0.8333 | 0.7722 | −0.0611 | [0.667, 0.867] |
 | human_action | filename_invariance | invariance | 25 | 75 | 1.0000 | 1.0000 | +0.0000 | — |
 | motion_smoothness | temporal_jerk | ordered | 25 | 125 | 0.8300 | 0.8800 | +0.0500 | [0.805, 0.945] |
@@ -42,6 +43,26 @@ CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`.
 `scores/archive/dynamics_degree__repair_v1_archived.jsonl`. **v2 is the variant
 that satisfies the contract yet reports the *lower* CPA** — for this invariance
 family CPA is non-diagnostic, so read the exponent, not the CPA.
+
+‡ The `multiplt_object` composite is a mixture, not a Repair win or loss. Split
+by contract half (`multiplt_object.md`): sensitivity 0.5371 → 0.8171 (paired
+Δ **+0.2800**, 95% CI [+0.1886, +0.3771] — a genuine win) and the tie-based
+invariance pair 0.6000 → 0.0000 (paired Δ −0.6000, [−0.8000, −0.4000]). That
+invariance number is **not a criterion any continuous estimator can satisfy**:
+it asks a continuous score for an *exact tie* between two different corruption
+geometries (a same-frame occlusion versus a clip in which no frame holds both
+targets), and the Official 0.60 is saturation to sixteenths rather than
+fidelity — the same criterion reads 0.90 vs 0.70 when taken as "control not
+higher". The plan's §11.4 predicate is the test that applies, and both backends
+pass it: control ≤ full occlusion in 18/25 (Repair) and 22/25 (Official) bases,
+control means 0.2009/0.2436 (Repair) against a clean level of 0.5181. Diagnosis:
+neither the SoftMin/`beta` configuration (swept β ∈ {1,3,10,30,100} and
+`hard_min`, plus candidate thresholds 0.0–0.5: no setting produces an exact tie)
+nor the aggregation reading temporal union as co-presence, but the detector's
+confidence floor — at full suppression the weaker target is still answered at
+mean confidence 0.3510 and the official 0.5 gate still accepts it in 6–15 of 16
+frames, so no confidence-level rule can separate "present" from "suppressed".
+See `multiplt_object.review.md` §3.
 
 †† The `motion_smoothness` row is the **direction-aware estimator**
 (`feeb770`); the archived v1 row (`a044ac9`) scored 0.8300 / 0.7250
@@ -61,7 +82,7 @@ non-diagnostic or measures something other than the contract.
 |---|---|---|
 | `scene` | **Not a Repair win.** The two headline numbers are mutually inconsistent, and the only informative number is the Official one: the official Scene metric cannot recover the base video it was given. | Official is globally blind to which video it scored |
 | `spatial_relationship` | **Not "Repair is worse".** Both numbers are artefacts of an unverified premise: the repair has no evidence on 79.4% of frames, and for most bases `original > flip` is false on this source. The Official number is exactly what upstream must produce, because that code never reads the sign of the geometry. | the family's premise fails; the fixture needs redesign |
-| `multiplt_object` | Sensitivity half is a real Repair win; the **invariance half is a Repair loss** (0.00 vs Official 0.60). The composite nets a win against a loss. | win on ordering, loss on temporal conjunction |
+| `multiplt_object` | Sensitivity half is a real Repair win (+0.2800 paired, CI [+0.1886, +0.3771]); the **tie-based invariance half is 0.00 vs Official 0.60 and is not satisfiable by a continuous estimator**. The plan's §11.4 "score the never-co-present control as incomplete" predicate passes on both backends, but not on the exact-tie criterion the composite uses. | win on ordering; the temporal-conjunction contract must be read as a level predicate, not a tie |
 | `dynamics_degree` | Composite CPA is non-diagnostic and its sign is not trustworthy. Signed exponent (target 0): Official `+0.491`, archived v1 repair `−0.511` — the same violation mirrored — and the shipped v2 repair `+0.019`. v2 satisfies the contract yet scores the **lower** CPA. | v2 fixes the exponent; CPA cannot see it |
 | `human_action` | **Unfalsifiable by construction.** The filename *is* the Official target label, so the invariance expectation is unsatisfiable for Official; the Repair target comes from metadata, so all three levels share one query and one byte-identical video and CV 0 is an identity. | the family tests nothing; needs redesign |
 | `motion_smoothness` | The review found a **structural estimator defect**: it never scored direction change, so a hold-and-jump (`jerk_2`) tied or inverted a local reversal (`jerk_3`), which the contract requires to be strict. That is fixed (`feeb770`) and the dimension re-scored: the repair now beats Official on CPA (0.8800 vs 0.8300), on strict order (10/20 vs 7/20) and on Spearman (0.815 vs 0.765). The paired delta CI crosses zero ([−0.015, +0.110]), so this is parity, not a win. | the v1 deficit is fixed; the shipped repair matches Official on the declared ladder |
@@ -104,7 +125,9 @@ here.
 
 - **No dimension currently supports an unqualified "the repair is better" claim.**
   `scene`, `human_action` and `spatial_relationship` fail on family design;
-  `multiplt_object` is a win on one contract half and a loss on the other;
+  `multiplt_object` consists of a genuine sensitivity win plus an invariance
+  half that no continuous estimator can satisfy (§‡ above), so it can be claimed
+  only half by half and only with the §11.4 predicate as the invariance test;
   `dynamics_degree` is an invariance family where CPA cannot adjudicate — its
   shipped v2 repair does satisfy the contract (`p=+0.019`), but it can only be
   claimed on the exponent, never on CPA;
