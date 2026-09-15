@@ -1,309 +1,384 @@
-# Review: `motion_smoothness` counterfactual report
+# Review: `motion_smoothness` counterfactual + natural-preference evidence
 
-Scope: `docs/counterfactual-reports/motion_smoothness.md` (code SHA
-`bdfda5cc6e31725cddb6f45ce194ff1333f7c05d`), the CPA instrument that produced it
-(`scripts/counterfactual/cpa.py`, `run_dimension.py`), the `temporal_jerk`
-transform (`scripts/counterfactual/transforms.py:472-556`) and the Audit
-estimator it scores against
-(`metrics/motion-smoothness/src/motion_smoothness/metric.py:analyze_motion_fields`).
+Scope, 2026-09-16 (adversarial re-review; supersedes the 2026-09-15 revision):
 
-Verdict: the headline row `motion_smoothness | temporal_jerk | 0.8300 | 0.7250 |
--0.1050` in `docs/counterfactual-reports/README.md` is a **real deficit on the
-declared ladder, but the report does not establish it and does not describe what
-it is measuring.** Three defects, in descending order of severity:
+- `docs/counterfactual-reports/CONSOLIDATED.md` (Raw result row + notes),
+  `motion_smoothness.md`, `P1_NATURAL_AND_CONTROL_RUNS.md` §P1.2, `README.md`,
+  `table2.csv`/`table2.json`/`SUMMARY.md`.
+- Estimator: `metrics/motion-smoothness/src/motion_smoothness/{metric,schemas}.py`
+  and `backends/audit.py`; the defaults changed at `4d53fa2`, the frozen scores
+  were produced at `feeb770`, the report file was regenerated at `5c4a130`.
+- Statistics: `scripts/counterfactual/cpa.py`, `scripts/counterfactual/run_dimension.py`,
+  `scripts/evaluate_pairwise_statistics.py`, `scripts/evaluate_paired_backend_delta.py`.
+- Frozen trees on `h100-server`: `/root/wenbiao_zhao/datasets/counterfactual-vbench/scores/`
+  and `/root/wenbiao_zhao/datasets/natural-preference-runs/`.
 
-1. The report's framing is wrong: `temporal_jerk` is a *pure ordered* family, not
-   a "mixture of two contracts", and it has **no rank-gap-0 pairs**. The
-   "Contract decomposition" narrative and the rank-gap-0 sentence are
-   boilerplate emitted for any family with more than one rank; they contradict
-   the report's own table.
-2. The deficit is at least partly **structural in the Audit estimator**: on
-   canonical smooth trajectories the estimator ties or inverts the declared
-   ordering of `jerk_2_duplicate_skip` vs `jerk_3_local_reverse`, which the
-   contract requires to be strict. The report's own level table already shows
-   the repair placing level 2 *below* levels 3 and 4.
-3. The plan-required statistics are missing — a sequence-level order statistic,
-   mean/tail discontinuity, and the **paired** `Repair - Official` confidence
-   interval — so the `-0.1050` is quoted at a precision the evidence does not
-   carry (the two marginal 95% CIs overlap on `[0.77, 0.79]`).
+Verdict: **the `motion_smoothness` row must not be written as a repair win, and the
+`4d53fa2` default change is not yet evidence-based.** Three conclusions hold
+simultaneously and are all measured below:
 
-Nothing below requires a model re-run. Section 2 uses the repository's own
-transform and estimator with synthetic constant-flow trajectories; sections 1,
-3 and 4 are derived from the published report and the committed CPA code.
+1. On the counterfactual ladder the direction-aware estimator is direction-correct
+   *within a base* (all four adjacent contrasts positive on average; CPA 0.8300 →
+   0.8800 for `feeb770`, and a replay of `4d53fa2` predicts 0.9150).
+2. On the natural preference set the same `feeb770` estimator is **significantly
+   below chance** (tie-aware 0.3248 against Official 0.6364, paired Δ −0.3116
+   [−0.3605, −0.2643] with the correct prompt-clustered unit). This is not a bug:
+   the natural label is largely "which clip changes less between frames", and the
+   repair score increases with frame-to-frame change.
+3. `4d53fa2` has **no end-to-end measurement at all**. Its support is the synthetic
+   ladder, the unit tests, and a component replay that predicts test CPA 0.9150
+   (Δ +0.0850 [+0.015, +0.155]) — but that same replay shows the strict-order rate
+   *falling* from 10/20 to 8/20, so the ladder problem is reduced, not fixed.
 
-## 1. This family is ordered, not mixed — the report contradicts itself
+Two harness defects are reported in §5 and must be fixed before any of these
+numbers is quoted.
 
-`temporal_jerk` emits five levels with five **distinct** expected ranks
-(`transforms.py:489,501,516,534,551`):
+## 0. Revision map (why every motion number is stale)
 
-| level | `expected_rank` | contract |
-|---|---:|---|
-| `jerk_0_original` | 4 | highest smoothness |
-| `jerk_1_duplicate` | 3 | " |
-| `jerk_2_duplicate_skip` | 2 | " |
-| `jerk_3_local_reverse` | 1 | " |
-| `jerk_4_multiple` | 0 | lowest smoothness |
+| artifact | revision | when | status |
+|---|---|---|---|
+| v1 estimator scores (`Δ −0.1050`) | `a044ac9` | — | archived |
+| direction-aware scores, counterfactual | `feeb770` | 2026-09-15 18:35 CST | **frozen, reproduced exactly** |
+| `motion_smoothness.md` regenerated (`--report-only`) | `5c4a130` | 21:01 CST | report file only |
+| natural-preference repair scores (`0.3248`) | `ccbd89b` | 21:57–22:08 CST | **frozen, reproduced exactly** |
+| estimator defaults changed | `4d53fa2` | 23:43 CST | **never scored** |
+| docs marked pre-`4d53fa2` | `52e4b76` | 23:44 CST | last motion commit; sibling reviews continued on top |
 
-`C(5,2) = 10` pairs per base; 20 test bases -> 200 test pairs, 5 dev bases ->
-50 dev pairs. The rank-gap census of the report is exactly what that implies:
-gaps 1/2/3/4 have 4/3/2/1 pairs per base -> 80/60/40/20 test pairs. **Every pair
-has `expected ±1`; there are no ties and no rank-gap-0 pairs.**
+`git log -- metrics/motion-smoothness/src/motion_smoothness/metric.py` is exactly
+`1878d39`, `907bc31`, `4d53fa2`, so the counterfactual row (`feeb770`) and the
+natural row (`ccbd89b`) were produced by the **same** estimator. The tension in
+question 2 is therefore internal to one revision, not a revision mismatch.
 
-The generator gates the mixed-contract text on `len(ranks) > 1`
-(`run_dimension.py:470` at `bdfda5c`), which is true for *any* family with at
-least two levels, including pure ordered ones:
+Provenance defect found while building this table: the report's `- code SHA:` line
+is written by `run_dimension.py:1287` as `git_sha()` at **render** time, and the
+score rows carry no revision at all (verified: no `code_sha` key in either frozen
+`motion_smoothness__{official,repair}.jsonl`). The published report therefore names
+`5c4a130` — a report-generator commit — while the scores it describes were produced
+at `feeb770`. A `--report-only` rerun silently relabels the scoring revision. This
+must be fixed (write the scoring revision into the score rows, or split the two
+fields) before any revision caveat can be trusted.
 
-```text
-run_dimension.py:475  "This family declares more than one expected rank, so its CPA is a"
-run_dimension.py:476  "mixture of two contracts and is dominated by whichever is easier..."
-run_dimension.py:477  "gap > 0 pairs test sensitivity; rank gap 0 pairs test the invariance of"
-run_dimension.py:496  "Rank-gap-0 pairs are the family's actual target. ..."
-```
+## 1. Q1 — does `4d53fa2` fix the ladder-realizability problem?
 
-For this family lines 475-480 and 496-498 are false. The correct predicate is
-already computed four lines later as `dispersion_rows` (`run_dimension.py:501-503`:
-ranks shared by more than one level). A family is a contract mixture iff
-`dispersion_rows` is non-empty; `subject_consistency` qualifies,
-`motion_smoothness` does not.
+**What is verified.**
 
-Two further boilerplate artefacts in the same report:
+- Synthetic ladder: on the canonical constant/ramp/sinusoid trajectories (18
+  settings), the new defaults order `L0 > L1 > L2 > L3 > L4` strictly in **18/18**,
+  with an `L2 − L3` margin of +0.26 to +0.29 in score.
+- Unit tests: `metrics/motion-smoothness/tests/test_temporal_jerk_ladder.py` pins
+  the order, the load-bearing direction term, the shipped defaults, and the legacy
+  `mean_tail` ablation.
 
-- "CPA by contract half" (report lines 22-31) says both halves "are scored
-  separately", then prints only the `sensitivity` rows for both backends. The
-  invariance half has `n_pairs = 0` and is silently skipped
-  (`run_dimension.py:412` at `bdfda5c`). The prose describes a table that is not there.
-- The `Score sensitivity` note about "a single distinct value ... its CPA on an
-  invariance family is vacuous (plan section 7.4)" (report lines 81-83) does not
-  apply: every level has `distinct = 25`.
+**What the synthetic evidence cannot show.** The synthetic trajectories use
+uniform, noise-free flow with a single motion scale; they are exactly the regime in
+which a scale-free ratio behaves. Real clips have content motion, flow noise and a
+motion scale spanning three orders of magnitude (measured below: `speed_scale`
+0.47–1256 px/frame across the 125 derivative clips).
 
-None of this is a scoring bug; it is report-generator copy that a reader will
-mistake for the family's design. It must be fixed before the report is cited.
+**Real-clip evidence that does exist (a replay, not a score).** The per-transition
+components for all 125 `temporal_jerk` clips were cached from a real RAFT pass
+(`/root/wenbiao_zhao/tmp/ms_components4/`). Replaying the `feeb770` spec from that
+cache reproduces **every frozen repair score to 1.7e-16** (`max|diff| = 1.665e-16`,
+`mean|diff| = 2.0e-17`, n=125), which both proves the cache is faithful and proves
+the frozen scores are the `feeb770` estimator. Replaying `4d53fa2` from the same
+cache gives:
 
-## 2. The estimator cannot realise the declared level-2 > level-3 ordering
+| statistic (test, 20 bases) | Official | Repair `feeb770` (frozen) | Repair `4d53fa2` (replay) |
+|---|---:|---:|---:|
+| CPA (all 10 pairs) | 0.8300 | 0.8800 | **0.9150** |
+| paired Δ vs Official | — | +0.0500 [−0.015, +0.110] | **+0.0850 [+0.015, +0.155]** |
+| `L2 > L3` bases | **19/20** | 15/20 | **17/20** |
+| strict order `L0>…>L4` | 7/20 | **10/20** | **8/20** |
+| `L0>L1` / `L1>L2` / `L3>L4` | 8 / 11 / 20 | 18 / 15 / 18 | 18 / 15 / 18 |
+| level means (L0…L4) | — | — | 0.4346 / 0.3732 / 0.3497 / 0.3276 / 0.2750 |
 
-The contract is a strict monotone order
-`L0 > L1 > L2 > L3 > L4`. The Audit estimator's response is a second difference
-of a *normalised* first difference: `relative = |v_t - v_{t-1}| /
-(|v_t| + |v_{t-1}| + eps)` saturates near 1 for any large change, and `D_t` is
-then `|relative_t - relative_{t-1}|`, aggregated as
-`0.75 * mean(D_t) + 0.25 * mean(top 10% of D_t)` (`metric.py:303-354`).
+**Answer.** Synthetic + unit evidence is **not sufficient**, and the replay shows
+why: `L2 > L3` improves from 15/20 to 17/20 and CPA from 0.880 to 0.915, but the
+strict-order rate — the statistic plan 5.2 asks for — **drops from 10/20 to
+8/20**. The joint pattern changed on 8 of 20 bases: 3 bases gained exactly the
+`L2 > L3` pair (`1101→1111`, `1001→1011`, `0101→1101`) and 5 lost a *different*
+adjacent pair, three of them abandoning a previously strict `1111`
+(`1111→1011` twice, `1111→0111` once). Top-k aggregation sharpens the average pair
+decision while making a single noisy transition more likely to break the full
+chain, so the two published order statistics move in opposite directions.
+The required real-clip evidence is therefore:
 
-`output/counterfactual/_scratch/ms_level_response.py` feeds the repository's own
-`transforms.temporal_jerk` index surgery and `analyze_motion_fields` the exact
-per-step flows of a canonical smooth trajectory (a translating pattern; the flow
-between two reordered source frames is the known displacement). No RAFT, no
-CUDA, no content noise. Sweep over clip length, speed profile and step size:
+1. an **end-to-end re-score** of the 125 clips at `4d53fa2` (not a replay), with
+   the per-base `L2 − L3` sign count, the strict-order rate and the paired CI;
+2. the **natural-set re-run** at `4d53fa2` (the replay cannot produce it — those
+   1 440 videos have no cached components);
+3. a statement of which statistic is the headline. CPA and strict order move in
+   opposite directions here, so quoting only CPA hides the regression.
 
-| n | profile | step px | L0 | L1 | L2 | L3 | L4 | strict order | L2-L3 |
-|---:|---|---:|---:|---:|---:|---:|---:|---|---:|
-| 16 | constant | 0.5 | 1.0000 | 0.7235 | 0.6184 | 0.6183 | 0.4797 | yes | +0.0000 |
-| 16 | constant | 1.0 | 1.0000 | 0.7235 | 0.6183 | 0.6183 | 0.4797 | yes | +0.0000 |
-| 16 | constant | 2.0 | 1.0000 | 0.7235 | 0.6183 | 0.6183 | 0.4797 | yes | +0.0000 |
-| 16 | ramp | 1.0 | 0.9809 | 0.7223 | 0.6174 | 0.6313 | 0.5112 | **no** | **-0.0139** |
-| 16 | sinusoid | 1.0 | 0.8435 | 0.6873 | 0.6089 | 0.6238 | 0.5131 | **no** | **-0.0149** |
-| 33 | constant | 1.0 | 1.0000 | 0.8052 | 0.7047 | 0.7179 | 0.5770 | **no** | **-0.0132** |
-| 33 | ramp | 1.0 | 0.9949 | 0.8080 | 0.7054 | 0.7208 | 0.5851 | **no** | **-0.0154** |
-| 33 | sinusoid | 1.0 | 0.9674 | 0.8219 | 0.7109 | 0.7507 | 0.5870 | **no** | **-0.0399** |
+## 2. Q2 — can ladder parity and natural below-chance both be true?
 
-(All 18 sweeps in the script; the pattern is identical at 0.5/2.0 px and for
-both frame lengths, and L2 vs L3 is the *only* violated adjacent pair in every
-row.)
+**Yes. They are different statistics against different targets, and the mechanism
+is measurable.** Three independent measurements on the frozen data explain it.
 
-- At constant velocity, n=16, the two levels score `0.6183308` and `0.6183150`:
-  a tie of `1.6e-5`, not the strict `L2 > L3` the family declares.
-- At every other setting the ordering **inverts** by `0.013`-`0.040` in favour
-  of level 3.
+### 2.1 CPA is a within-base statistic; the nuisance is between-base
 
-The mechanism is visible in `D_t` for n=16, constant, 1 px:
-`jerk_2` gives `[.., 1.00, 1.00, 1.00, .., 1.00, ..]` and `jerk_3` gives
-`[.., 0.60, 0.40, 1.00, .., 1.00, 0.40, 0.60, ..]` — the same total
-discontinuity mass and the same top-tail, hence the same `D_video = 0.4808`.
-A five-frame excise-and-hold and a four-frame in-place reversal are operationally
-different edits of similar temporal extent; the mean+tail aggregation of a
-saturated second difference cannot tell them apart.
+Variance decomposition of the counterfactual test scores (test split, 20 bases ×
+5 levels):
 
-This is not a synthetic-only artefact. The report's own per-level means
-(lines 92-96) are:
+| backend | variance share between bases | within base | declared-rank vs within-base level means |
+|---|---:|---:|---:|
+| Official | 0.9224 | 0.0776 | Spearman **+1.000** |
+| Repair `feeb770` | 0.5776 | 0.4224 | Spearman **+1.000** |
 
-| backend | L0 | L1 | L2 | L3 | L4 | order |
-|---|---:|---:|---:|---:|---:|---|
-| official | 0.9565 | 0.9559 | 0.9545 | 0.9482 | 0.9378 | 0>1>2>3>4 |
-| repair | 0.7562 | 0.7292 | **0.6586** | 0.7094 | 0.6732 | 0>1>3>4>**2** |
+Both backends order the levels perfectly *on average within a base*. Official does
+so with a within-base effect of only ±0.006…−0.014 riding on 92 % between-base
+variance; the repair's effect is roughly 4–9× larger (±0.054…−0.059) but carries
+42 % within-base noise, which is what costs it per-base pairs. Every pair CPA
+scores compares two levels of the *same* source clip, so any clip-level nuisance
+cancels inside the comparison. The natural set compares *different* clips, so it
+does not.
 
-The repair's mean ordering puts level 2 *last*, below both level 3 and level 4.
-If the per-base ordering followed the means, the repair would lose 2 of the 10
-pairs per base — `(L2,L3)` and `(L2,L4)` — before any noise, capping the CPA at
-`0.80`. The observed `0.7250` is consistent with that plus ordinary noise; the
-official means violate nothing.
+### 2.2 The repair score tracks the clip's motion amount, in the wrong direction
 
-The honest reading is therefore not "the repair is worse at smoothness". It is
-"the repair ranks the two middle levels in the opposite order to the one the
-family declares, and the family's declared order is an unvalidated design
-assumption" — see section 4.
-
-## 3. The headline delta is not established, and the required statistics are missing
-
-### 3.1 No paired confidence interval
-
-Plan section 5.4 requires a 95% cluster bootstrap for `Ours - Official`. The
-report's final table (lines 98-102) prints only the point estimate
-`-0.1050`. The two marginal intervals the report *does* give overlap:
+Measured on the cached real-clip components (old defaults):
 
 ```text
-official test [0.7700, 0.8900]   repair test [0.6500, 0.7900]   overlap [0.77, 0.79]
+spearman(speed_scale, D_video) = -0.3318     # slower clip -> higher discontinuity
+spearman(speed_scale, score)   = +0.3318     # slower clip -> lower "smoothness"
+mean score by speed_scale quartile: Q1 0.4628 | Q2 0.4623 | Q3 0.4829 | Q4 0.5345
 ```
 
-`bootstrap_ci` (`cpa.py:135-149`) resamples each backend independently, so no
-paired interval exists anywhere in the harness, and `run_dimension.py:562-575`
-computes the delta by subtracting two rounded point estimates. A `-0.105` on
-20 clusters with an overlap in the marginals cannot be called a "genuine Repair
-loss" (README) until the paired interval is reported.
+The promoted scale-free normalisation `|Δv| / (|v_t| + |v_{t-1}| + eps)` is
+scale-free only where the denominator is signal; near zero it divides flow noise by
+flow noise and returns values near 1. Static and slow clips therefore look
+*maximally* discontinuous. On the natural videos the same dependence is present and
+in the same direction: Spearman(repair score, mean-absolute-frame-difference) =
+**+0.2479** overall, **+0.1914** within `.mp4`, **+0.1533** within `.gif`. By MAD
+decile the repair score *rises* from 0.4838 (decile 1) to 0.5947 (decile 8).
 
-### 3.2 Missing sequence-level and discontinuity statistics
+### 2.3 Human "motion smoothness" is largely "changes less", and Official tracks it
 
-Plan 5.2 ("for ordered levels ... also report a sequence-level statistic such as
-Spearman correlation or strict-order rate") and plan 13.3 ("Report monotonic CPA,
-Spearman correlation, mean discontinuity, and tail discontinuity") are both
-explicit. The report contains:
+Cheap CPU baseline: mean absolute grayscale frame difference (MAD) over ≤12 frames,
+used as a pairwise score with "lower MAD = smoother" and a dev-calibrated tie
+margin, on the same 2 160 pairs and split:
 
-- no Spearman correlation and no strict-order rate anywhere (`grep` over
-  `scripts/counterfactual/` finds neither term);
-- only the per-level *score* distribution, not the repair's own
-  `mean_discontinuity` / `tail_discontinuity` diagnostics, which
-  `analyze_motion_fields` already computes (`metric.py:363-364`) and which are
-  exactly the two numbers plan 13.3 asks for.
+| backend | dev margin | test acc0 | tie-aware | tie-aware 95 % CI (pair) | 95 % CI (prompt-clustered) |
+|---|---:|---:|---:|---|---|
+| Official | 0.0215 | 0.5682 | **0.6364** | [0.6101, 0.6636] | [0.5961, 0.6744] |
+| lower-MAD CPU baseline | 3.6924 | 0.5550 | **0.6000** | [0.5736, 0.6264] | [0.5674, 0.6295] |
+| Repair `feeb770` | 0.1459 | 0.3388 | **0.3248** | [0.2992, 0.3512] | [0.2907, 0.3628] |
 
-For an ordered family the strict-order rate is the statistic that answers the
-question the CPA is being used to answer, and it is the one the report omits.
+On the 1 501 pairs with a non-tie human label, "the lower-MAD clip is smoother"
+agrees with the human label **0.7935** of the time; Official agrees **0.8075**; the
+repair agrees **0.4857**. Official's score is a near-monotone function of the same
+cue (Spearman(Official, MAD) = **−0.9451**), which is why its accuracy is high.
 
-### 3.3 Split hygiene and a redundant column
+**Mechanism, stated plainly.** The natural label for this dimension is dominated by
+"which clip has less frame-to-frame change" (a static CPU statistic reproduces
+56–60 % tie-aware and 79 % of decisive pairs). Official's AMT interpolation error
+is an almost perfect proxy for that cue. The repair measures a different thing —
+normalised flow-field continuity — whose between-clip variation is driven by motion
+scale *opposite* to the human cue, so it lands below chance. No sign bug or plumbing
+error is needed to explain the result: predictions.csv matches the audit rows
+value-for-value on all 1 440 videos, the Official path reproduces .6364 exactly, and
+the below-chance number survives the correct (prompt-clustered) interval.
 
-- "CPA by contract half" reports `250` pairs and labels the column "dev margin",
-  but never says those 250 pairs are **50 dev + 200 test pooled**
-  (`run_dimension.py:683` calls `contract_split_cpa(rows, ...)` with all rows).
-  The pool mixes the split used to calibrate the margin into the reported
-  number. The rank-gap table, by contrast, is test-only. Pick one split and say
-  which.
-- Both `tie-aware` rows equal the `zero-margin` rows exactly, because the dev
-  margin is `0`. That is expected for a family where every pair expects `±1`:
-  `calibrate_margin` (`cpa.py:121-132`) searches margins and widening one turns
-  correct sign predictions into ties, so the first candidate (`0`) wins. The
-  report should state that the tie-aware column is degenerate here rather than
-  print two identical columns as if they were checks on each other.
+The two results are therefore compatible, and the counterfactual row is the weaker
+evidence: a family whose levels are derived from one source clip cannot detect a
+metric that is wrong about every *other* clip.
 
-## 4. Why the declared ladder itself needs justification
+## 3. Q3 — is this still a "motion smoothness repair"? What should the row say?
 
-Even with a perfect estimator, the CPA would reward whichever backend agrees
-with the declared order. Here the order is an assumption, not ground truth:
+**No replacement claim is defensible for this dimension, and the word "repair"
+should be dropped from the row.** The estimator is an *audit instrument* with a
+demonstrated property and a demonstrated failure:
 
-- Plan 13.3 declares level 2 ("duplicate and skip two frames") milder than
-  level 3 ("reverse a short local segment"). The code does not implement "two
-  duplicated and two skipped frames" literally: for a 16-frame clip it rewrites
-  `[f7,f8,f9,f10,f11]` to `[f7,f7,f7,f11,f11]` (`transforms.py:506-510`), i.e.
-  three frames are excised and replaced by two holds — a stop-and-go that is
-  arguably *harsher* than reversing four frames in place, which is what level 3
-  does. Whether `L2 < L3` in smoothness is an empirical question the family
-  never answers.
-- The L2-vs-L3 inversion of section 2 is therefore ambiguous by construction:
-  it is consistent with a metric defect *and* with the repair correctly
-  disagreeing with a mis-declared level.
-- Plan section 14 requires human validation of the constructed relation, and
-  `output/counterfactual/bases.jsonl` carries no `manual_validity_status` for
-  any of the 25 bases; the ladder has never been checked against annotators.
+- it can be made to satisfy the injected within-clip ordering (a real, if partial,
+  result: `L2 > L3` 15/20 → 17/20, CPA 0.880 → 0.915 under `4d53fa2`);
+- it is *anti*-correlated with the human construct it is named after, and the
+  anti-correlation is structural (motion-scale normalisation), not noise;
+- the natural-set failure is shared with the *old* estimator (P1.2's own scope
+  caveat records the pre-direction repair at .395, already below chance), so it is
+  not a regression introduced by the direction fix — the construct mismatch
+  predates it.
 
-The report does not mention this, and the README's "genuine Repair loss" reads
-the composite as if the ladder were ground truth.
+Sentence for the paper: *"VBench Motion Smoothness on the natural preference set is
+largely a frame-difference detector: an unlearned CPU baseline using only the mean
+absolute frame difference reaches tie-aware accuracy 0.600 against the Official
+metric's 0.636, and the Official score is a near-monotone function of that baseline
+(Spearman −0.95). A flow-continuity repair satisfies the injected temporal-jerk
+ladder within a clip (0.880 → 0.915 after the `4d53fa2` defaults) but is
+significantly below chance on the same human pairs (0.325; paired Δ −0.312
+[−0.361, −0.264]), because its scale-free acceleration ratio rewards
+frame-to-frame change that the human label penalises. Motion Smoothness is therefore
+an audit-only row: the counterfactual contract is satisfiable, the human contract is
+not, and no replacement is claimed."*
 
-## 5. What the report should say instead
+In the decision table this belongs in the same "better counterfactual, worse
+natural" cell as `dynamics_degree` v2 — with the additional, stronger diagnostic
+that here the natural metric can be reproduced by a baseline that uses no model.
 
-1. **Fix the generator gate first.** Emit the "contract mixture / rank gap 0"
-   block iff `dispersion_rows` is non-empty (`run_dimension.py:501-503`), and
-   label the ordered family's table "rank-gap decomposition" only. The current
-   text is indistinguishable from a design description and is wrong here.
-2. **Lead with the sequence-level statistic.** Per base: the strict-order rate
-   over `L0 > L1 > L2 > L3 > L4`, the Spearman correlation, and the signed
-   `L2 - L3` contrast. Report the composite CPA as a secondary number.
-3. **Report the repair's `D_mean` and `D_tail` per level** (plan 13.3), which
-   also makes the level-2/level-3 behaviour legible.
-4. **Add the paired cluster-bootstrap `Repair - Official` CI** (plan 5.4) beside
-   `-0.1050`, and stop quoting the delta alone.
-5. **Either justify or fix level 2.** If the intent is "duplicate and skip two
-   frames", implement a two-frame edit (not a three-frame excision); if the
-   intent is "a hold-and-jump", declare it as such and pre-register the expected
-   order against a validated reference. Until then, report the `L2`/`L3`
-   declaration as unverified.
-6. **State the split** for the contract-half table, and drop or footnote the
-   redundant tie-aware column.
+## 4. Q4 — minimal re-run list
 
-The honest headline sentence is: *on the declared jerk ladder the Official
-interpolation score separates the five levels in the declared order (test CPA
-0.8300, 95% CI [0.77, 0.89]), while the Audit repair inverts the order of the
-two middle levels and scores 0.7250 [0.65, 0.79]; the paired difference is not
-yet reported, the estimator has a demonstrated level-2/level-3 degeneracy on
-clean motion, and the ladder's own severity ordering has not been validated.*
+The estimator changed at `4d53fa2`; the counterfactual row and P1.2 both describe
+`feeb770`/`ccbd89b`. Nothing below needs weights downloaded; all helpers exist on
+`h100-server`.
 
-## 6. Status of the numbers in this review
+**Must be re-scored (GPU, ~13 min total)**
 
-- Sections 1, 3 and 4 are derived from the published report and the committed
-  code at `bdfda5c`. Unlike the two sibling reports (`dynamics_degree`,
-  `subject_consistency`, both naming `66c4a99`), this report's `code SHA`
-  *does* contain the generator that produced it (`cpa.py`, `contract_split_cpa`,
-  `rank_gap_groups` are all present at `bdfda5c`); only the report file itself
-  was committed later (`a044ac9`). The reproducibility complaint from the
-  sibling reviews does not apply here.
-- Section 2 uses the repository's own `transforms.temporal_jerk` and
-  `analyze_motion_fields` on synthetic constant-flow trajectories
-  (`output/counterfactual/_scratch/ms_level_response.py`), so it isolates the
-  estimator's response to the transform. It does **not** re-score the 125 real
-  clips: those scores and the derived clips live on the scoring host
-  (`/root/wenbiao_zhao/datasets/counterfactual-vbench`), which is not reachable
-  from this workspace, and this workspace has no RAFT weight or CUDA device.
-- The claim that the repair's *per-base* ordering inverts `L2`/`L3` is inferred
-  from the published per-level means plus the probe. A scoring host can confirm
-  it directly from the cached `<dimension>__official.jsonl` /
-  `__repair.jsonl` by computing the strict-order rate, the per-base `L2 - L3`
-  sign counts, and the paired bootstrap; `run_dimension.py --report-only` will
-  rebuild the report from those caches once the two missing blocks are added.
-- The probe scripts are gitignored under `output/counterfactual/_scratch/`
-  (consistent with the sibling reviews); `ms_level_response.py` reruns in
-  seconds with `.venv/bin/python` and no model assets.
+| # | scores | command | measured cost |
+|---|---|---|---|
+| 1 | counterfactual repair, 125 clips | archive `scores/motion_smoothness__repair*.jsonl` → `run_dim.sh motion_smoothness 1,2,3,4,5` | 73 s (18:34:06→18:35:19, 4 shards, GPUs 1,2,3,5) |
+| 2 | natural repair, 1 440 videos | archive `natural-preference-runs/motion_smoothness/{repair_results.jsonl,predictions.csv}` → `run_natural.sh motion_smoothness repair 1,2,3,4,5` | 11 min 5 s (21:57:35→22:08:40, 5 shards) |
 
-## 7. Addendum (2026-09-15): all three defects fixed and the dimension re-scored
+**Can be reused unchanged**
 
-The findings above describe the shipped estimator and report at `a044ac9`. Both
-have since been repaired, and the dimension was re-scored at `feeb770`:
+- Official counterfactual scores and their CPA (Official did not change; verified
+  0.8300 from the frozen tree).
+- Official natural scores (`official_scores/motion_smoothness/results.csv`) and all
+  Official natural statistics (0.6364; the file is unchanged by a repair rerun).
+- Human labels, split, pair census (`data/processed/pairwise_master_split.csv`).
+- The frozen v1 archives under `scores/archive/`.
 
-- **Estimator (issue 2, commit `907bc31`).** `D_t` now follows the plan 13.5 Full
-  variant, `magnitude_weight * flow acceleration + direction_weight * direction
-  change`, aggregated with mean + upper tail; the previously computed but unused
-  `direction_change_t` is now load-bearing. `magnitude_weight`/`direction_weight`
-  are configurable (`0.7`/`0.3`) and threaded through the CLI and the sharded
-  worker. `metrics/motion-smoothness/tests/test_temporal_jerk_ladder.py` pins the
-  strict `L0 > L1 > L2 > L3 > L4` order on canonical constant/ramp/sinusoid
-  trajectories; the `L2 - L3` margin moves from `[−0.040, 0.000]` to
-  `[+0.040, +0.122]` across the 18-setting sweep. The claim in section 2 that the
-  estimator "cannot realise the declared ordering" therefore describes v1 only.
-- **Report generator (issue 1, commit `b2117a5`).** The mixed-contract template
-  is now emitted only when a family has more than one rank *and* a rank shared by
-  several levels. `temporal_jerk` gets no `Contract decomposition` and no
-  `CPA by contract half` section; the ordered-family regression is pinned in
-  `tests/test_counterfactual_cpa.py`.
-- **Missing statistics (issue 3, commits `dc3739c`, `feeb770`).** The report now
-  carries per-base Spearman and strict-order rate (plan 5.2/13.3), the repair's
-  per-level `D_mean`/`D_tail` (plan 13.3), and a **paired** cluster-bootstrap
-  `Repair − Official` interval (plan 5.4). The v1 paired interval was
-  `[−0.200, −0.020]`: the −0.1050 deficit the review could only call
-  "under-evidenced" was in fact significant.
-- **Re-scored numbers (`feeb770`, 125/125 clips both backends).** Official
-  0.8300 `[0.770, 0.890]`; Repair 0.8800 `[0.805, 0.945]`; delta +0.0500 with
-  paired 95% CI `[−0.015, +0.110]` (crosses zero). Sequence-level: strict order
-  10/20 (Repair) vs 7/20 (Official), mean Spearman 0.815 vs 0.765. The repair's
-  per-level means are now monotone (`0.5407 > 0.5011 > 0.4855 > 0.4760 > 0.4268`),
-  and its `D_mean`/`D_tail` rise with severity (`0.5646 → 0.7515` and
-  `0.8433 → 1.1627`). The v1 repair scores are archived at
-  `scores/archive/motion_smoothness__repair_v1_archived.jsonl`.
-- **What the result now supports.** The v1 deficit is gone; the honest reading is
-  *parity*, not a win — the paired interval crosses zero and the family's severity
-  ladder (in particular the `L2 > L3` declaration, section 4) still has no human
-  validation. `CONSOLIDATED.md` and `table2.csv` carry these numbers and the
-  paired interval.
+**Must be recomputed from the new repair scores (CPU, ~2 min)**
+
+- Counterfactual: per-backend CPA, dev margin, rank-gap table, strict-order rate,
+  Spearman, `D_mean`/`D_tail`, and the paired `base_id`-clustered interval
+  (`scripts/counterfactual/run_dimension.py` then `summarize.py`).
+- Natural: dev margin, tie-aware accuracy, Kendall tau-b, model-level Pearson, the
+  marginal and paired intervals — **with `prompt_id` clustering** (§5).
+- Then regenerate `motion_smoothness.md`, `CONSOLIDATED.md` Raw result row,
+  `table2.csv`/`table2.json`/`SUMMARY.md`, `README.md` and the `P1.2` tables.
+
+**Fix at the same time**
+
+- Write the scoring revision into the score rows (`run_dimension.py:1287` currently
+  records the render revision; the report's `code SHA` is `5c4a130` for `feeb770`
+  scores).
+- Add the prompt-clustered interval to `evaluate_pairwise_statistics.ci` and
+  `evaluate_paired_backend_delta.compare`.
+- Keep the lower-MAD baseline as a permanent control row (it is CPU-only and it is
+  the finding that makes the natural result interpretable).
+
+## 5. Q5 — audit of the paired intervals
+
+### 5.1 Counterfactual interval — correct
+
+`scripts/counterfactual/cpa.py:paired_bootstrap_ci` resamples **`base_id` clusters**
+(`keys = sorted(set(official) & set(repair))`), draws `len(keys)` clusters with
+replacement, and recomputes *both* backends on the same draw, so the pairing is
+preserved; 2 000 iterations, seed 2026, percentile interval, each backend using its
+own dev-calibrated margin. That matches plan 5.4 ("clustered by `base_id` for
+VBench-CF"). Independently recomputed on the frozen tree: Δ **+0.0500**,
+95 % CI **[−0.0150, +0.1100]**, 20 clusters — identical to the published value.
+The only residual issue is the provenance defect of §0, not the algorithm.
+
+### 5.2 Natural intervals — wrong cluster unit
+
+`scripts/evaluate_paired_backend_delta.py:69-75` and
+`scripts/evaluate_pairwise_statistics.py:94-99` both resample **pairs**
+(`test_keys[rng.randrange(count)]`). The natural set has **43 test prompts × 30
+pairs** (72 prompts × 30 = 2 160 pairs overall), and plan 5.4 requires the Natural
+Set to be clustered by `prompt_id` and states that pairs within a model group must
+never be resampled as independent observations. Consequence, recomputed on the same
+frozen scores:
+
+| interval | published (pair unit) | prompt-clustered | width inflation |
+|---|---|---:|---:|
+| Official tie-aware | [0.6101, 0.6636] | [0.5961, 0.6744] | 0.0535 → 0.0783 (+46 %) |
+| Repair tie-aware | [0.2992, 0.3512] | [0.2907, 0.3628] | 0.0519 → 0.0721 (+39 %) |
+| Paired Δ | [−0.3473, −0.2760] | [−0.3605, −0.2643] | 0.0713 → 0.0961 (+35 %) |
+
+Every published interval is therefore too narrow by 35–46 %. All three still
+exclude their null, so the *conclusions* survive; the *widths* do not, and the
+`P1.2` numbers as printed overstate precision. Two smaller defects in the same
+file: `model_level_pearson_n4` is computed over all valid pairs (dev + test) while
+the accuracy columns are test-only, and the Kendall tau-b is reported without a
+clustered interval or p-value. Seed handling is deterministic and reproducible
+(seed 2026 for the marginal zero-margin and paired intervals, seed+1 = 2027 for the
+tie-aware intervals), and the paired point estimate correctly lets each backend keep
+its own dev-calibrated margin.
+
+## 6. Findings from the previous review that still stand
+
+- **The family is ordered, not mixed.** `temporal_jerk` has five distinct expected
+  ranks and no rank-gap-0 pairs; the mixed-contract template was generated by a
+  `len(ranks) > 1` gate. Fixed in `b2117a5`; the current report has no
+  `Contract decomposition` and no `CPA by contract half` section.
+- **The plan-required statistics now exist.** Sequence-level Spearman and
+  strict-order rate, per-level `D_mean`/`D_tail`, and a paired interval are in the
+  report (commits `dc3739c`, `feeb770`, `4d53fa2`). Section 3.1 of the previous
+  review (no paired CI) is resolved for the counterfactual row.
+- **The severity ladder is still an unvalidated design assumption.** Level 2
+  rewrites `[f7…f11]` to `[f7,f7,f7,f11,f11]` (`transforms.py`), i.e. three frames
+  excised plus holds — not the "skip two frames" the plan describes — and no
+  `manual_validity_status` exists for the 25 bases. The L2/L3 comparison remains
+  ambiguous between "metric defect" and "mis-declared level"; `4d53fa2` reduces the
+  observable inversion without settling which it was.
+- **The tie-aware column is degenerate for this family** (dev margin 0 for both
+  backends), so the report's `zero-margin` and `tie-aware` rows are identical by
+  construction. The split hygiene issue is fixed (the profile table is now
+  split-aware).
+- **Model/CUDA/weight parity against the frozen E0 baselines is still unverified**,
+  and no weights were downloaded for this review.
+
+## 7. Previously published conclusions that are overturned or downgraded
+
+| previous statement | status now |
+|---|---|
+| "the v1 deficit is fixed; the repair matches Official on the declared ladder (parity)" | **Downgraded twice.** It is not parity — it is parity *on one statistic computed within a base* while being significantly below chance on natural preference. And the number describes `feeb770`, not the shipped defaults. |
+| "estimator fixed (`907bc31`/`feeb770`), strict order 10/20 vs 7/20, Spearman 0.815 vs 0.765" | **Superseded by `4d53fa2`.** The replay predicts strict order **8/20** (worse than 10/20) with CPA 0.915; the pair of statistics disagree. |
+| "§3.1 no paired CI — the −0.1050 is under-evidenced" | **Resolved** for the counterfactual row (paired CI exists and is correct). The natural-row intervals are still mis-clustered (§5.2). |
+| "the deficit is partly structural; the estimator cannot realise `L2 > L3`" | **Partially resolved.** 15/20 → 17/20 on real clips (replay); still not 20/20. |
+| "the report's code SHA does contain the generator (unlike the sibling reports)" | **Overturned.** The report's `code SHA` is the *render* revision (`5c4a130`), not the scoring revision (`feeb770`), and the score rows carry no revision at all. |
+| `CONSOLIDATED.md` motion row and `P1.2` "describe the shipped estimator" with a revision caveat | **Insufficient.** Both are `feeb770`/`ccbd89b`; `4d53fa2` has never been scored, so neither describes the shipped estimator even with the caveat. |
+
+## 8. Status of the numbers in this review
+
+Everything below was recomputed on `h100-server` from the frozen trees; nothing was
+re-scored and no frozen file was modified. The committed verifier
+`scripts/counterfactual/verify_motion_review.py` reproduces every row of this table
+in one run (the MAD row needs `--mad-cache` or `--compute-mad`):
+
+```bash
+cd /root/wenbiao_zhao/vbench-audit
+/root/wenbiao_zhao/venvs/vbench/bin/python -B scripts/counterfactual/verify_motion_review.py \
+    --output /root/wenbiao_zhao/tmp/mv/verify.json
+```
+
+| claim | verifier section |
+|---|---|
+| frozen scores are `feeb770` (replay reproduces all 125 to 1.665e-16) | `revision.replay_feeb770_vs_frozen` |
+| no score row carries a revision; report `code SHA` is `5c4a130` | `revision.*_rows_carry_code_sha`, `revision.report_code_sha` |
+| counterfactual CPA 0.8300 / 0.8800, paired +0.0500 [−0.015, +0.110] | `counterfactual.{official,repair}` |
+| `4d53fa2` replay 0.9150, Δ +0.0850 [+0.015, +0.155], `L2>L3` 17/20, strict 8/20 | `revision.replay_4d53fa2_replay` |
+| natural 0.6364 / 0.3248, margins 0.0215 / 0.1459, tau, pair-unit CIs | `natural.backends`, `natural.published_paired_pair_unit` |
+| prompt-clustered intervals and the paired delta | `natural.backends.*_ci_prompt`, `natural.paired.delta_ci_prompt` |
+| predictions.csv ↔ repair_results.jsonl, 0 mismatches on 1 440 videos | `natural.predictions_consistency` |
+| Spearman(Official, Repair) = −0.1032, Pearson = +0.0198; ranges | `natural.per_video` |
+| lower-MAD baseline 0.6000 [0.5674, 0.6295]; non-tie direction accuracies 0.7935 / 0.8075 / 0.4857; Spearman +0.2479 / −0.9451 | `mad_baseline` |
+| variance decomposition 0.9224 / 0.5776; Spearman(speed_scale, D) = −0.3318 | `counterfactual.variance_*`, `normalisation` |
+| timings 73 s / 11 min 5 s | `/root/wenbiao_zhao/datasets/counterfactual-vbench/scores/run_motion_smoothness_v2.log`; `natural-preference-runs/run_mot_repair.log` |
+
+The MAD proxy (≤12 grayscale frames per video, 1 440 videos, CPU) is cached at
+`/root/wenbiao_zhao/tmp/motion_natural_proxy.json`; `--compute-mad` rebuilds it and
+needs no weights. One cosmetic defect in `finalize_natural.py:52` (`NameError` in
+the closing `print`, after `results.csv` is written) makes a successful official
+natural run end in a traceback; it does not affect the written file.
+
+## 9. Executable checklist
+
+1. **Do not quote the `motion_smoothness` row as a repair win** in
+   `CONSOLIDATED.md`, `README.md` or the paper; mark it audit-only and cite the
+   natural-set result next to the counterfactual one.
+2. Fix score-row provenance: record the scoring revision in the score rows and
+   split `code SHA` from the render revision in `run_dimension.py`.
+3. Re-score counterfactual repair (`run_dim.sh motion_smoothness 1,2,3,4,5`, ~1 min)
+   after archiving the `feeb770` shards; recompute CPA, strict order, Spearman,
+   `D_mean`/`D_tail` and the paired CI.
+4. Re-run natural repair (`run_natural.sh motion_smoothness repair 1,2,3,4,5`,
+   ~11 min) after archiving `natural-preference-runs/motion_smoothness/`; recompute
+   the dev margin, tie-aware accuracy, tau-b and model-level Pearson.
+5. Switch both natural `ci()` and `compare()` to `prompt_id`-clustered resampling;
+   regenerate the `P1.2` intervals and note the 35–46 % width correction.
+6. Add the lower-MAD CPU baseline as a permanent control row in the natural tables.
+7. Report CPA, strict-order rate and the `L2 − L3` sign count together — never CPA
+   alone — and state the `L2`/`L3` level declaration as unvalidated.
+8. Keep the direction-aware estimator only if the natural re-run is the acceptance
+   test; if it stays below chance, the honest conclusion is that VBench Motion
+   Smoothness needs a different target definition, not a better flow statistic.
