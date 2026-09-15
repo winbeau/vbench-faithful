@@ -96,7 +96,7 @@ def collect(scores_dir: Path, manifest: Path) -> list[dict[str, Any]]:
     return entries
 
 
-def render_summary(entries: list[dict[str, Any]], code_sha: str) -> str:
+def render_summary(entries: list[dict[str, Any]], dataset_code_sha: str, scoring_code_sha: str | None) -> str:
     lines = [
         "# Table 2 — Counterfactual Pair Accuracy (VBench-CF)",
         "",
@@ -105,7 +105,15 @@ def render_summary(entries: list[dict[str, Any]], code_sha: str) -> str:
         "interval is a 95% cluster bootstrap over `base_id`; `delta` is Repair minus",
         "Official on the test split.",
         "",
-        f"Scoring code SHA: `{code_sha}`.",
+        # The dataset manifest records the revision the *clips* were built from,
+        # which is not the revision the *scores* were produced by.  Labelling the
+        # manifest SHA as the scoring SHA was wrong whenever a dimension was
+        # re-scored, so the two are now reported separately.
+        f"Dataset build code SHA: `{dataset_code_sha}`.",
+    ]
+    if scoring_code_sha:
+        lines.append(f"Scoring code SHA: {scoring_code_sha}.")
+    lines += [
         "",
         "| dimension | family | bases | clips (test) | Official CPA | Repair CPA | delta | delta 95% CI (paired) |",
         "|---|---|---:|---:|---:|---:|---:|---|",
@@ -187,11 +195,17 @@ def main() -> int:
     parser.add_argument("--scores", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--code-sha",
+        default=None,
+        help="revision the scores were produced by; the manifest only records the "
+             "dataset build revision, so any re-scored dimension must be named here",
+    )
     args = parser.parse_args()
 
     entries = collect(args.scores, args.manifest)
     args.output.mkdir(parents=True, exist_ok=True)
-    code_sha = next(
+    dataset_code_sha = next(
         (row.get("code_sha") for row in read_jsonl(args.manifest) if row.get("code_sha")), "unknown"
     )
 
@@ -209,9 +223,15 @@ def main() -> int:
         for entry in entries:
             writer.writerow({key: entry.get(key) for key in fields})
 
-    write_json(args.output / "table2.json", {"code_sha": code_sha, "dimensions": entries})
-    (args.output / "SUMMARY.md").write_text(render_summary(entries, code_sha), encoding="utf-8")
-    print(render_summary(entries, code_sha))
+    write_json(args.output / "table2.json", {
+        "code_sha": dataset_code_sha,
+        "dataset_code_sha": dataset_code_sha,
+        "scoring_code_sha": args.code_sha,
+        "dimensions": entries,
+    })
+    summary = render_summary(entries, dataset_code_sha, args.code_sha)
+    (args.output / "SUMMARY.md").write_text(summary, encoding="utf-8")
+    print(summary)
     return 0
 
 
