@@ -1,355 +1,416 @@
 # Review: `multiplt_object` counterfactual report
 
-Scope: `docs/counterfactual-reports/multiplt_object.md` — first reviewed at code
-SHA `bdfda5cc6e31725cddb6f45ce194ff1333f7c05d`, refreshed after the diagnosis
-below was acted on — the CPA instrument that produced it
-(`scripts/counterfactual/cpa.py`, `run_dimension.py`, `score.py`,
-`summarize.py`, `transforms.py`, `build.py`), and the `multiplt_object` row of
-`docs/counterfactual-reports/README.md`.
+Scope: `docs/counterfactual-reports/multiplt_object.md` (code SHA
+`c73495e6ffdc44b96d55e1e29d7eab21766c080b`), the `multiplt_object` row of
+`docs/counterfactual-reports/{CONSOLIDATED.md,README.md,SUMMARY.md,table2.csv}`,
+the instrument that produces them (`scripts/counterfactual/{cpa,run_dimension,
+summarize,transforms,score,pick_detectable}.py`), `configs/counterfactual/`
+(`README.md`, `bases_published.jsonl`), and the plan's sections 5.2, 11.3, 11.4
+and 15.2.
 
-Verdict: **the sensitivity half of this row is a real, significant Repair win
-(+0.2800, 95% paired-bootstrap CI [+0.1886, +0.3771]); the tie-based invariance
-half is 0.00 against Official 0.60 (paired delta −0.6000, CI [−0.8000, −0.4000])
-and is not a criterion any continuous estimator can satisfy.** The composite
-`+0.1666` (paired 95% CI [+0.0900, +0.2500], so it clears the plan's §15.2
-success criterion) is a sensitivity gain net of an invariance loss. Section 3
-settles the cause: not the SoftMin/`beta` configuration and not the aggregation
-reading temporal union as co-presence, but the detector's confidence floor — no
-confidence-level rule can separate "target present" from "suppressed target
-still answered at 0.2-0.5". The plan's actual §11.4 predicate is now reported
-directly, and the README's "genuine Repair win with non-overlapping intervals"
-claim does not hold for this row on the intervals (they overlap on
-[0.6767, 0.6967]).
+Reviewed 2026-09-15 as an adversarial re-review at revision `52e4b76`, against
+the frozen score tree
+`/root/wenbiao_zhao/datasets/counterfactual-vbench/scores/` on `h100-server`.
+Previous revision of this file reviewed the 6-level ladder at `bdfda5c`; every
+verdict it reached is re-tested below and the changes are called out explicitly.
 
-## 1. Arithmetic that does check out
+**Verdict.** The published numbers are arithmetically exact and the headline is
+the strongest ordered result in the audit: on the occlusion-only ladder,
+Official 0.5450 → Repair 0.7850 (109/200 → 157/200 pairs), paired Δ **+0.2400**
+[+0.155, +0.330], 17/20 test bases move Repair's way, 0 move Official's way, and
+a leave-one-out sweep keeps the delta in [+0.216, +0.253]. Three things must
+travel with it, and one of them is a defect:
 
-So the record is clear about what is not in dispute. Derived from the published
-integers and the pair census (`family_pairs`, `cpa.py:58-72`; 6 levels → 15
-unordered level pairs per base = 1 rank-0 + 14 rank-positive in the 25 bases):
+1. **More than half the delta is tie-handling, and only an eighth is new
+   discrimination.** Exact outcome decomposition of the 200 test pairs (every
+   pair's label is `+1`):
 
-| quantity | value | check |
-|---|---|---|
-| clips | 150 = 25 × 6 | report header |
-| test pairs | 300 = 20 × 15 | 100 + 80 + 60 + 40 + 20 from the rank gaps |
-| sensitivity / invariance | 350 / 25 | 14 + 1 per base |
-| rank-gap census | `rank1..4` = 100/80/60/40 | spacing counts 5+4+3+2, exact |
-| Official test composite | 179/300 = 0.5967 | 167 sensitivity + 12 invariance |
-| Repair test composite | 229/300 = 0.7633 | 229 sensitivity + 0 invariance |
-| Official whole-family halves | 188/350, 15/25 | published as 0.5371 / 0.6000 |
-| dev margin | 0 for both backends | "dev margin" = "zero margin" columns are equal |
-| profiles | n=25 per level, min/max/distinct consistent | — |
+   | Official | Repair | pairs | contribution to Δ |
+   |---|---|---:|---:|
+   | correct | correct | 104 | 0 |
+   | tie | correct | 42 | **+0.2100** |
+   | tie | inverted | 25 | **−0.1250** |
+   | wrong | correct | 11 | **+0.0550** |
+   | correct | wrong | 5 | −0.0250 |
+   | wrong | wrong | 13 | 0 |
 
-Three items do **not** quite close and should be re-derived on the scoring
-host before publication:
+   Net tie-handling is +0.0850, net strict-versus-strict discrimination is
+   +0.0300. So the Repair does not order 48 more pairs than Official because it
+   *sees* more ordering — it wins 42 ties, loses 25 of them the other way, and
+   only 12 pairs in 200 are decided by a strict comparison the Repair wins that
+   was not already a tie or a loss.
+2. **The report is internally mixed-generation.** It is labelled `ordered` in the
+   tables while its own `## CPA by contract half` and `## Contract decomposition`
+   sections still describe a mixture, and the `invariance` row of the per-half
+   paired table reports a level pairing (`conjunction_control` vs
+   `occlusion_100`) that the same report's `contract_split` declares to have
+   **0 pairs**. That row describes a comparison that is no longer in the ladder
+   and must be removed or relabelled.
+3. **The fixture is detector-conditioned.** `multiplt_object` kept 25 of 49
+   scanned candidates (24 rejected because GRiT could not ground the named
+   targets) and four test bases suppress under 2 % of the frame (62× area span).
+   The dimension therefore measures ranking *among clips GRiT can see*, which is
+   a weaker claim than the tables' unqualified phrasing suggests.
 
-1. The same official sensitivity half appears as **0.5371** in the
-   contract-half table (188/350, dev+test pooled) and as **0.5964** in the test
-   block (167/280, reconstructed from the 0.5967 composite minus the 12/20
-   invariance pairs). Pooling instead from the published dev row (0.3200 over
-   75 ⇒ 24 correct) gives dev sensitivity 21/70 = 0.3000, i.e. pooled
-   188/350 = 0.5371 — so the two halves are internally consistent with each
-   other *only* if dev and test really differ that much (0.30 vs 0.60), which
-   is itself a finding left unstated in the report. The residual is ≈ 1.5
-   pairs, at the edge of the published 4-decimal rounding; it should still be
-   pinned down on the scoring host, because "the same quantity is printed twice
-   with two different values" is exactly what a review must not wave through.
-2. The report prints no `dev_margin` value at all. Because both margins are 0,
-   the zero-margin and tie-aware columns are *identical by construction*
-   (`cpa.py:126-132` picks 0.0 whenever it wins), which means the tie-aware
-   machinery is inert here and the reader cannot tell that from the tables.
+Net: **+0.2400 is real and reproducible, and it is not a pure ordering gain.**
+It is "Repair is a strictly finer estimator than Official on this ladder, on the
+subset of bases where GRiT grounds both targets". That is worth claiming — it is
+the only clean zero-excluded interval in the audit — but not as "the cleanest
+ordered Repair win" without the saturation, fixture and mislabelling caveats.
+The area objection raised in the previous round is now tested and **does not**
+survive: dropping the small-area tail or the non-responsive bases leaves the
+interval above zero (+0.2000 to +0.2375; §4).
 
-3. Related, and more consequential: the Official backend's own dev and test
-   results differ enormously (pooled dev 0.3200 vs test 0.5967), while the
-   Repair is stable (0.7600 vs 0.7633). The 5 dev bases the margin is
-   calibrated on are not representative of the 20 test bases for Official, so
-   "the dev-calibrated margin" (and the whole tie-aware column for this
-   dimension) rests on a 5-base calibration set whose pool behaves unlike the
-   test pool. This deserves an explicit caveat next to the tie-aware row.
+## 1. Scope of the change under review
 
-## 2. The headline is 80 % sensitivity and 20 % an invariance contract the Repair fails
+The ladder is now occlusion-only. `conjunction_control` is listed in the report
+header as `control levels (excluded from the ordered ladder)` and
+`run_dimension.py` implements that by building every rank-based statistic from
+`ladder = [row for row in rows if row["level"] not in CONTROL_LEVELS]`
+(`run_dimension.py:1196`), with `CONTROL_LEVELS = ("conjunction_control",)` at
+line 49 and the rationale in the comment at lines 43-48. `--report-only`
+regenerates the artefact; nothing was re-scored this round, and the per-clip
+score files are timestamped 19:49 while the report is 21:37, consistent with a
+report-only refresh over unchanged scores.
 
-Published test/whole-family halves:
+## 2. Q1 — Is removing `conjunction_control` from the ladder justified?
 
-- sensitivity: Official 0.5371 → Repair 0.8171 (**+0.28**);
-- invariance: Official 0.6000 → Repair 0.0000 (**−0.60**).
+**Yes, and it is what this reviewer asked for — but the arithmetic effect on the
+headline is larger than "presentational", and neither the report nor
+`CONSOLIDATED.md` quantifies it.** Two separate questions:
 
-Composition into the +0.1666 composite, using the pair weights
-P(sensitivity) = 280/300 and P(invariance) = 20/300:
+**(a) Is it legitimate?** Yes.
 
-```text
-sensitivity: (0.8171 - 0.5371) x 280/300 = +0.2613
-invariance:  (0.0000 - 0.6000) x  20/300 = -0.0400
-                                            +0.2213
-```
+- The plan does not declare the control equal to `occlusion_100` anywhere.
+  §11.3 is an ordered family; §11.4 is a *control* whose stated requirement is
+  "Both Official and Audit should score this as incomplete". Equality between a
+  same-frame full occlusion and a clip in which no frame holds both targets was
+  a construction choice made in the manifest (`expected_rank=0` on both rows),
+  not a read-off from the plan.
+- The two levels differ in far more than severity: `occlusion_100` suppresses
+  the weak target in all 16 frames, the control suppresses A in the first half
+  and B in the second. A tie between them is not a severity tie.
+- The previous review reached the same conclusion (§3 there, and its §6 asked
+  for the tie to be demoted to a separate statistic). The implementers' comment
+  at `run_dimension.py:43-48` matches that reasoning.
 
-(the published accuracies are rounded to 4 decimals and the 0.5371 half is
-pooled over dev+test, so the reconstructed total, +0.2213, exceeds the published
-composite delta +0.1666 by 0.055 = 16.5 pairs; the *decomposition direction* —
-positive sensitivity, negative invariance — is what the tables establish, and
-the reconciliation is one more reason to re-derive the halves on the scoring
-host, section 1.)
+**(b) What did it cost?** Removing the control is not neutral for the headline,
+because the composite changed *pool*, not only composition:
 
-Either way the reading is the same: the composite moves up only on the
-sensitivity contract and the invariance half moves *against* the repair. The
-invariance half is 20 of the 300 test pairs, i.e. 6.7 % of the composite, and it
-is the only half the report calls the family's target. Playing the report's own
-instruction ("whether a Repair gain in the composite comes from sensitivity …
-or from the invariant half", lines 81-83) straight: **it comes from
-sensitivity, and the invariant half supplies none of the gain.** That sentence
-has to be in the report and in the README, not left as an exercise.
-
-## 3. The rank-0 pair is a contract the plan never declared, and it is confounded
-
-**Diagnosis (settled on the scoring host).** The Repair's 0/20 rank-0 result is
-*neither* a SoftMin/`beta` configuration problem *nor* the aggregation reading
-temporal union as co-presence. It is structural: the continuous confidence
-channel never reports absence, and the family's rank-0 pair asks a continuous
-estimator for an exact tie between two different corruption geometries.
-
-Evidence, all from the archived per-clip detections and re-runs on the H100:
-
-1. **The reconstruction is exact.** Re-running the detector on all 150 clips and
-   recomputing `softmin(max per-target official-threshold ROI confidence,
-   beta=10)` reproduces the archived Repair scores with `mean|delta| = 0.00000`
-   (150/150), and the official-label rule reproduces the archived Official
-   scores likewise. The 0.00 is not an artefact of the instrument.
-2. **The target is never absent to the detector.** Per-level mean confidence for
-   the weak target at full severity is still 0.44/0.64/0.55 on the first three
-   bases (natural level 0.66/0.70/0.71), and the official 0.5 gate still accepts
-   it in 6-15 of 16 frames. Visual inspection of `occlusion_000` versus
-   `occlusion_100` confirms the region really is replaced by a flat patch, so the
-   residual confidence is carried by the surrounding scene and by the pose, not
-   by the object pixels.
-3. **No aggregation setting fixes it.** Sweeping the shipped SoftMin over
-   `beta ∈ {1, 3, 10, 30, 100}`, `hard_min`, and confidence gates at 0.2-0.5
-   changes rank-0 only from 0.70 to 0.80 (test, `control ≤ occlusion_100`) and
-   **never produces an exact tie: `rank0(==) = 0.0000` at every setting**.
-4. **No configured threshold fixes it either.** `repair_candidate_threshold` is
-   part of `MultipleObjectsConfig` and lowering/raising it is a configuration
-   change, not a new rule. At 0.0-0.5 the exact-tie rate stays 0.0000; the best
-   ordering rate is 0.80 at 0.2, and sensitivity is flat-to-worse (0.7850 →
-   0.8050 → 0.7150).
-5. **The Official 0.60 is saturation, not fidelity.** Official's 0/1 score lands
-   on exactly equal values in 12 of 20 test bases because it quantises to
-   sixteenths; the Repair, being continuous, ties in 0. An exact-tie criterion
-   therefore rewards the coarser metric by construction.
-
-The plan's requirement for this control is in section 11.4: "No frame contains
-both. Both Official and Audit should score this as incomplete." That is a level
-predicate plus an ordering against the ladder's worst rung, not an equality
-between the two clips. Both backends pass it (`control ≤ occlusion_100` in
-18/25 Repair and 22/25 Official bases; Repair control mean 0.2009 against its
-clean level 0.5181), so the report's rank-0 CPA is the wrong statistic for the
-contract it claims to test — which is why the instrument now reports the
-predicate directly (see section 6) instead of burying it under a tie rate.
-
-The refreshed report also carries the frame evidence that makes the diagnosis
-checkable from the artefact: on the test split the official-threshold pass finds
-both targets in 38.0 % of sampled frames for *both* backends, the Repair's mean
-per-frame SoftMin is 0.4074, and the weaker target's mean per-frame confidence is
-**0.3510** — the suppressed target is still answered with substantial confidence,
-which is the floor the rank-0 tie is measuring.
-
-`transforms.weakest_object_visibility` (`transforms.py:382-419`) alpha-blends
-the tracked weaker target towards its per-frame box mean at severity 0/25/50/
-75/100, with `expected_rank = round((1-severity)*4)`. The control
-(`transforms.temporal_conjunction_control`, `transforms.py:422-455`) suppresses
-A in the first half and B in the second, and is stamped `expected_rank=0`
-alongside `occlusion_100`.
-
-Plan 11.3 and 11.4 do **not** declare those two equal:
-
-- 11.3: "completeness decreases monotonically as B becomes less visible";
-- 11.4: "No frame contains both. Both Official and Audit should score this as
-  incomplete."
-
-"Score this as incomplete" is an absolute-level predicate (score low), not a
-tie between two different corruption geometries. The rank-0 relation is a
-construction decision made in the manifest, and it is a *confounded* one: the
-control suppresses A in the first half and B in the second, while
-`occlusion_100` suppresses B in every frame, so the two levels differ in **which
-frames hold which target** as well as in severity. (The suppression operator
-itself is the same: `weakest_object_visibility` at severity 1.0 blends the
-region to its mean, which is what `_suppress` writes.) A rank-0 violation
-therefore cannot be attributed to the metric alone.
-
-The published means even run *opposite* to the report's "tie" framing, and in
-the direction that matters for the plan's control:
-
-| backend | conjunction_control | occlusion_100 | control − occl100 |
+| statistic (test split) | Official | Repair | Δ |
 |---|---:|---:|---:|
-| official | 0.1275 | 0.1825 | −0.055 |
-| repair | 0.2009 | 0.2436 | −0.043 |
+| 6-level pool, as previously published (300 pairs) | 179/300 = 0.5967 | 229/300 = 0.7633 | +0.1667 |
+| occlusion-only ladder (200 pairs) | 109/200 = 0.5450 | 157/200 = 0.7850 | **+0.2400** |
 
-Both backends score the never-co-present control **more incomplete** than the
-fully-suppressed single-object clip. The absolute levels say the control works
-(0.13 / 0.20 are low), so the "should score this as incomplete" requirement is
-arguably met at both backends, and the tie contract is the wrong statistic to
-judge it with. The defensible statement is the level one: *the repair also
-scores the never-co-present clip as incomplete (mean 0.20), but ranks it below
-full occlusion, so its soft-min response is not zero for a target that the
-frame evidence says is gone.* The report should lead with that predicate and
-demote the rank-0 CPA to a secondary statistic, as `dynamics_degree` and
-`human_action` already do for their invariance families.
+The 20 control pairs contributed `12/20` to Official and `0/20` to the Repair, so
+removing them *lowers* the measured gap by 0.04; the remaining **+0.0733** is a
+composition effect — moving from a 5-rung ladder to a 4-rung ladder re-weights
+which rank gaps the composite averages, and Official collapses to 0 on the
+twice-counted rung it used to be scored against. Both effects are legitimate,
+but a reader comparing the two vintages will see the delta rise from +0.1666 to
++0.2400 and should be told that 45 % of that rise is the re-weighted pair
+composition, not new evidence. `CONSOLIDATED.md`'s footnote describes *why* the
+control left but not *what it did to the number*.
 
-Corroborating dispersion (report lines 85-96): the declared-equal subgroup has
-Official test within-base CV 0.4922 (relative range 0.9844) and Repair 0.1699
-(0.3398) on 20 bases. Neither backend is remotely invariant on that pair, which
-is why the 0.00 Repair tie rate is a real failure of a criterion that should not
-have been applied in the first place.
+**Alternatives, in order of preference.** (i) Keep the ordered ladder as the
+headline and report the 6-level composite beside it as a deprecated comparator
+with the one-line accounting above. (ii) Report the literal plan §5.2 pairing
+(base vs each counterfactual) as well: on test that reads Official 47/80 = 0.5875
+vs Repair 64/80 = 0.8000 (Δ +0.2125), i.e. the win survives the alternative
+pairing and is 0.028 smaller. (iii) Do **not** simply keep the old mixture and
+hope the reader splits it; the previous round showed that does not happen.
 
-## 4. The instrument measures a graded 6-rung ladder as 14 binary pairs
+## 3. Q2 — Can +0.2400 and the old §2 reading coexist?
 
-Plan 5.2 defines the unit as the pair `(base, counterfactual)`:
+**They coexist only if the tie contract is formally dropped, and the frozen
+artefact does not currently drop it consistently.**
 
-```text
-delta_score = score_counterfactual - score_base
-```
+- The old review §2 said the headline was "80 % sensitivity and 20 % an
+  invariance contract the Repair fails". The 20 % is now provably not a contract:
+  §11.4 never asks for a tie, and the previous review's own §3 established that
+  the pairing is confounded. So §2's *conclusion* ("the composite nets a win
+  against a loss") is **superseded** — the composite no longer contains that
+  pairing.
+- But the tie criterion has not been removed, only relocated.
+  `multiplt_object.md` still prints `| invariance | -0.6000 | [-0.8000, -0.4000] |`
+  in the per-half paired table while its own `## CPA by contract half` table
+  shows `invariance n_pairs = 0` for both splits and both backends. Both numbers
+  are literally reproducible from the frozen tree — `paired_halves` is computed
+  over the 6-level pool (`run_dimension.py:1266-1284` builds it from
+  `_base_pairs(rows, …)` on all rows, control included) while `contract_split`
+  runs on `ladder` (line 1196) — but a report that says "0 pairs" three lines
+  above "-0.6000" is not a single measurement.
+- Whether the excluded tie is *still a contract requirement*: **no**. The
+  contract that remains is §11.4's level predicate, and by that standard the
+  Repair is not merely passing, it is strong on the level scale: control mean
+  0.2009 against its own clean level 0.5368 (−63 %), with the control scored no
+  higher than `occlusion_100` in 18/25 bases against Official's 22/25 and a
+  lower control mean (0.2009 vs 0.2436).
+- What the exclusion *legitimately* hides is a separate, real property: the
+  Repair never reaches zero on this dimension. On test, `occlusion_100` scores
+  exactly 0.0 in 13/20 Official clips but **0/20 Repair clips** (Repair median
+  0.1106); the control scores exactly 0.0 in 12/20 Official but 0/20 Repair
+  (median 0.1534), and the two are separated by only 0.043 in the mean. The
+  earlier review framed this as "no exact tie"; the sharper statement is that
+  **absence is not a fixed point of the repair's score**, so a strength-2 union
+  and a strength-4 absence land within 0.05 of each other. That is worth an
+  explicit line in the report and is a candidate improvement for the metric
+  (a floor or a detection-conditioned gate), not a reason to restore the tie.
 
-which for this family is 5 pairs per base (severity 0/25/50/75/100 against
-severity 0), exactly the report's rank-1 count. The runner instead expands all
-15 level combinations, so 4 of the 5 "sensitivity" pairs per base are
-ladder-versus-ladder comparisons (e.g. `occl_000` vs `occl_075`) whose
-"strictly higher" status the plan never declared distinguishable. Consequences
-visible in the published table:
+**Answer in one line:** the tie criterion was never a contract, so excluding it
+from the composite is right; it is still being reported inconsistent with the
+ladder it now sits outside, and the non-saturation finding it was gesturing at
+has not been carried over.
 
-- rank-1 precision is 0.49 (official) / 0.73 (repair) — the lowest of all gaps,
-  i.e. the pair that comes closest to the plan's declared contract is the one
-  both backends pass least often;
-- all 15 pairs are weighted equally, so rank-gap-4 comparisons carry the same
-  weight as adjacent-rung ones, contradicting plan 5.2's "report a
-  sequence-level statistic such as Spearman correlation or strict-order rate"
-  and 5.3's macro-averaging rule (5 rungs, equal weight per level, not 15 pairs).
+## 4. Q3 — Does the 62× weak-target area span break the ladder, and is +0.2400 just "bigger box, easier"?
 
-Sequence-level statistics are absent. From the published rank-gap precision,
-the strict-order (Spearman = 1) rate is **at most** `min(p1..p4)` = 0.49
-(official) and 0.73 (repair), and the report should carry the exact figure.
-Given that the pooled means are monotone in severity for both backends
-(0.5575 > 0.4800 > 0.4625 > 0.4150 > 0.1825 official; 0.5181 > 0.4928 > 0.4777
-> 0.4286 > 0.2436 repair), the ordered statistic is likely more favourable than
-CPA and its absence understates the Repair result — which is itself a reason to
-report it rather than let a reviewer discover the omission.
+**The span is real; the simple area explanation is not supported; a subtler area
+confound is not excluded.**
 
-## 5. Construction and reporting gaps
+Verified from the manifest's per-frame tracked boxes (`transformation_parameters
+.boxes` of the `occlusion_000` row, median area over 16 frames divided by
+`width × height`) — the frozen `weak_target_area` block agrees: n = 20 test
+bases, median **0.1575**, IQR **0.0350–0.3446**, range **0.0066–0.4101**, span
+**62.2×** (the same span holds over all 25 bases). Four test bases are under 2 %
+and six are under 5 %.
 
-1. **No intervention verification.** The plan's 11.3 expects occlusion to make
-   B "less visible". The audit backend records per-frame target evidence, and
-   the report has no such table. That matters here: `conjunction_control`
-   suppresses both objects with the same `_suppress` operator used at full
-   severity, yet its score has a floor of 0.20 rather than the softmin floor,
-   which suggests the detector keeps returning near-threshold detections for a
-   flattened patch. Whether severity actually removed target B — and whether it
-   destroyed unrelated content, the plan's "manually reject edits that destroy
-   unrelated content" clause — is currently unmeasured in the report.
-2. **Level profiles pool dev and test** (`score_profile(rows, …)`,
-   `run_dimension.py:795-800`) while CPA separates them; the monotonicity claim
-   should be split.
-3. **The weaker-target choice can be a coin flip.** `_weaker_target`
-   (`build.py:356-366`) takes `argmin` of median tracked box areas with no
-   margin; near-tie bases are chosen by pixels. The report has no table of
-   selected target, area, or area ratio, nor of clips rejected at build time
-   (e.g. `_track_boxes` raising on incomplete tracking). The coverage table's
-   "expected 150" only proves that bases which *survived* were all scored.
-4. **Naming.** `multiplt_object` and `Multiplt_Object.json` are upstream typos
-   (commit `8beec1b` "repaired" it to this), while `docs/upstream-mapping.md`
-   and the package use `multiple_objects`/`multiple-objects`. One canonical
-   name should be chosen and noted, or the row will not map to the dimension in
-   the paper.
-5. **Difficulty heterogeneity is untested.** The four sensitivity rank gaps
-   could be driven by a few easy bases; per-gap paired CIs would show it.
+Stratifying the 200 test pairs by area does **not** show the win living in the
+large boxes:
 
-## 6. What the public tables should say
+| stratum | Official | Repair | Δ | paired Δ (95 % CI) |
+|---|---:|---:|---:|---|
+| smaller half (n=10) | 0.590 | 0.810 | +0.220 | +0.220 [+0.000, +0.450] |
+| larger half (n=10) | 0.500 | 0.760 | +0.260 | +0.260 [+0.090, +0.440] |
+| Q1 (0.007–0.033) | 0.440 | 0.700 | +0.260 | — |
+| Q2 (0.036–0.155) | 0.740 | 0.920 | +0.180 | — |
+| Q3 (0.160–0.342) | 0.400 | 0.680 | +0.280 | — |
+| Q4 (0.351–0.410) | 0.600 | 0.840 | +0.240 | — |
 
-`docs/counterfactual-reports/README.md`, Table 2 row:
+`Pearson(area, per-base Δ) = +0.101`, `Spearman = +0.110` — no monotone "larger
+box wins bigger" trend, and the smallest-area quartile carries a gain as large
+as the largest. Per-base deltas are +0.240 mean, +0.200 median, 17 positive, 0
+negative, 3 zero.
 
-| dimension | family | bases | clips | Official CPA | Repair CPA | delta | 95% CI (Repair) |
-|---|---|---:|---:|---:|---:|---:|---|
-| `multiplt_object` | `weakest_object_visibility` | 25 | 150 | 0.5967 | 0.7633 | +0.1666 | [0.677, 0.830] |
+**The cheap area control is now done, and the headline survives it** (paired
+bootstrap, 2 000 iterations, frozen tree only — this is checklist item 6,
+executed as part of this review rather than deferred):
 
-- The Repair CI **overlaps** the Official one ([0.483, 0.697] vs [0.677, 0.830],
-  disjoint only above 0.697 — overlapping on [0.677, 0.697]), so the README's
-  "**non-overlapping intervals**" sentence does not hold for this row. The
-  sensitivity-half difference is strongly significant (167/280 vs 229/280,
-  unpaired `+0.267 ± 0.074`, CI [+0.192, +0.341]), so the fix is to quote the
-  half-level difference, not to weaken the win.
-- The row must carry the split verdict, e.g. *sensitivity +0.27 (Repair win),
-  conjunction control not higher than full occlusion in 18/25 bases (Repair) vs
-  22/25 (Official); the rank-0 tie-based CPA is not applicable*, or be split into
-  two rows. Under the rule the README already applies to invariance families, the
-  rank-0 number cannot stand as a "win" without its dispersion (CV 0.49 / 0.17).
+| subset | bases | Official | Repair | Δ (95 % CI) |
+|---|---:|---:|---:|---|
+| all | 20 | 0.5450 | 0.7850 | +0.2400 [+0.1550, +0.3300] |
+| drop area < 0.02 | 16 | 0.5875 | 0.8250 | +0.2375 [+0.1500, +0.3312] |
+| drop area < 0.05 | 14 | 0.5714 | 0.8071 | +0.2357 [+0.1357, +0.3500] |
+| drop bases where Official is constant across rungs | 18 | 0.6056 | 0.8056 | +0.2000 [+0.1222, +0.2833] |
+| drop bases with Repair rung spread < 0.10 | 17 | 0.5647 | 0.7882 | +0.2235 [+0.1353, +0.3176] |
+| drop both (area ≥ 0.02 and spread ≥ 0.10) | 16 | 0.5875 | 0.8250 | +0.2375 [+0.1500, +0.3312] |
 
-The per-dimension report should add, in order:
+Every subset keeps the lower bound above zero, so the plan §15.2 criterion still
+holds after the small-area tail and after the two bases where Official is
+degenerate. **The +0.2400 is not an artefact of the 62× span.**
 
-1. **Level means with detection evidence** (matched/weakest-target confidences
-   per level) and an explicit statement that the conjunction control is an
-   absolute-level check, not a tie to `occlusion_100`.
-2. **Base-vs-base-vs-rung pairs** per plan 5.2, plus a sequence-level strict-order
-   rate and Spearman, macro-averaged per plan 5.3.
-3. **Dev margins printed**; dev and test statistics separated; the "margin"
-   column labelled with the value actually used (0 for both backends).
-4. **Build-time rejections and the chosen weak target's area**, so the
-   25 × 6 census is auditable.
-5. The rank-0 subgroup and the rank-gap table kept as secondary evidence, clearly
-   marked as the confounded pair they are.
+**What the controls do show, and what is still not excluded.** The smallest-area
+bases are where the *fixture* is stressed, and the effect is visible even though
+it does not drive the headline:
 
-Implemented in `scripts/counterfactual/run_dimension.py` for this re-score:
+- on base `…858774` (area 0.0071) Official returns 0.0 on all five rungs, so all
+  ten pairs are ties and it scores 0/10 by construction; the Repair scores 7/10
+  on a spread of 0.028. Two bases (`…858774`, `…48250c`) are officially flat.
+- on base `…a09a72` (area 0.0066, the smallest) **both** backends order worse
+  than chance and the Repair's control score (0.430) sits above every rung, i.e.
+  the union clip outranks the clean clip.
+- dropping flat/spread-less bases moves the delta from +0.2400 to +0.2000, so
+  roughly one sixth of the headline comes from bases where one backend has
+  little or nothing to order.
 
-- **`## CPA by contract half` now carries a 95% cluster-bootstrap interval per
-  half** (`contract_split_cpa(..., iterations, seed)`), because the composite's
-  interval says nothing about either half.
-- **`### Conjunction control — the plan's actual predicate`** reports, per
-  backend, the control mean, the `occlusion_100` mean and the fraction of bases
-  where the control is no higher (`contract_predicate_stats`). This is the
-  statistic the family's section 11.4 contract asks for; the tie-based CPA is
-  kept beside it as a diagnostic and explicitly marked not applicable when the
-  declared-equal group is not interchangeable.
-- **The rank-gap template no longer calls the rank-0 pairs "the family's actual
-  target"** — a sentence that was false for this family and is now conditional on
-  the group really being interchangeable.
-- `score.py` records Multiple Objects frame evidence (`joint_detection_rate`,
-  `mean_frame_score`, `mean_weakest_confidence`, `zero_frame_fraction`) so the
-  report can show whether a suppressed target is absent or merely low-confidence
-  instead of only reporting the scalar.
+So the remaining caveat is not "bigger box, easier win" but "a few bases carry no
+usable ladder, and their disagreement is counted as Repair superiority". A
+severity-level validity gate (per-base monotonicity of the *intervention*, not of
+the score) is what would remove it; an area filter alone does not.
 
-## 7. Status of the numbers in this review
+**Still not excluded / not run:** (a) an area-normalised occlusion that fixes the
+*absolute* suppressed area across bases and re-derives the clips; (b) per-base
+normalisation of scores by that base's `occlusion_000` level before pairing. Both
+would strengthen the claim but require either re-derivation or a new statistic;
+neither is needed to make the current interval defensible.
 
-- Sections 1-4 are derived from the published report, the committed instrument
-  (`scripts/counterfactual/cpa.py`, `run_dimension.py`, `transforms.py`,
-  `build.py`) and the plan.
-- Section 3's diagnosis required the scoring host: the per-frame detections were
-  re-generated for all 150 clips and reconciled against the archived scores
-  (`mean|delta| = 0.00000`, both backends), the aggregation/threshold sweeps ran
-  on that cache without a GPU, and the two annotated frame strips were rendered
-  from the derived clips.
-- The 0.5371/0.5964 reconciliation in section 1 is now closed as far as the
-  published artefacts go: the refreshed report recomputes both halves from one
-  pass and prints them with their own intervals, and the archived
-  `multiplt_object__cpa.json` should be replaced by the refreshed one.
-- `docs/counterfactual-reports/SUMMARY.md` still names code SHA `66c4a99`, and
-  the README's coverage sentence ("complete for every dimension except
-  `human_action` 48/60") contradicts SUMMARY's own 60/60 coverage table. Both
-  are stale relative to this report's `a660756` and should be refreshed with
-  the same edit that fixes this row.
+## 5. Q4 — Does the frame evidence support "ordered win"?
 
-## 8. Scope note: the dataset was not rebuilt
+**It supports "strictly finer ordering", not "clean ordering", and the report
+prints it without that distinction.**
 
-The 0.00 rank-0 result has a second, independent cause on the intervention side:
-`transforms.weakest_object_visibility` suppresses the *raw* tracked box, and the
-tracked box is both slightly larger than the object and drifting, so at full
-severity parts of the target remain and the surrounding scene is untouched. A v2
-transform (dilated support, severity-scaled blur-to-mean fill) was prototyped and
-measured on the host: at `occlusion_100` the weaker target's mean confidence
-falls on some bases (0.66 → 0.44, 0.71 → 0.00) but rises on another
-(0.70 → 0.59), so it does **not** reliably create an absent-target condition and
-would move the published dataset's clips and all six score files that reference
-them. It was therefore **reverted**; the frozen `data/`, `results/`, `splits/`
-and `runs/` trees and the published `counterfactual-vbench` clips are unchanged,
-and the delivered fix is instrument-side only (the report code at `a660756`).
+Frozen `order` block, occlusion-only ladder (5 rungs, 10 pairs/base):
 
-Recorded honestly because it shapes what a future round should do: if a v3
-intervention is attempted, it must (a) rebuild through
-`scripts.counterfactual.build` with reusable boxes rather than editing derived
-clips, (b) demonstrate in a pre-registered pilot that the absent-target
-condition is actually reached (per-target confidence at the top rung, not a
-score-level proxy), and (c) re-score every backend, since the comparison in this
-family is between clips and not merely between report columns.
+| backend | split | bases | mean Spearman | median Spearman | strict order |
+|---|---|---:|---:|---:|---:|
+| official | dev | 5 | 0.8008 | 0.8008 | 0/5 |
+| official | test | 20 | 0.6204 | 0.7225 | 0/20 |
+| repair | dev | 5 | 0.7000 | 0.9000 | 2/5 |
+| repair | test | 20 | 0.6550 | 0.9000 | 3/20 |
+
+Frozen rank-gap decomposition (test):
+
+| rank gap | pairs | Official match (tie rate) | Repair match (tie rate) |
+|---|---:|---:|---:|
+| 1 | 80 | 0.4500 (0.4250) | 0.7000 (0.0000) |
+| 2 | 60 | 0.5167 (0.3500) | 0.7833 (0.0000) |
+| 3 | 40 | 0.6250 (0.2500) | 0.8750 (0.0000) |
+| 4 | 20 | 0.8500 (0.1000) | 0.9500 (0.0000) |
+
+Reading:
+
+- **Supports the claim:** at every rank gap the Repair matches more pairs, the
+  advantage is largest exactly where Official saturates (gap 1-2), the Repair has
+  zero ties, its median Spearman rises 0.7225 → 0.9000, and its strict-order
+  count rises 0 → 3/20. Three of twenty bases are perfectly ordered by the
+  Repair and none by Official.
+- **Undercuts "clean":** the per-base strict-order rate is 15 %, so 17 of 20
+  test bases are *not* in the declared order; on dev the Repair's mean Spearman
+  (0.7000) is **below** Official's (0.8008); and Official's gap-4 match rate of
+  0.8500 shows it does order large severity separations well (the Repair's gap-4
+  edge is only +0.10). Combined with the outcome decomposition in the verdict —
+  42 ties repaired, 25 ties inverted, 11 strict errors fixed, 5 strict wins lost
+  — the rank-gap table is better read as "the Repair separates near-identical
+  clips that Official collapses" than as "the Repair orders the ladder". The
+  declared relation is monotone in the aggregate means (Repair 0.5368 → 0.5097 →
+  0.4959 → 0.4396 → 0.2487) but not per base.
+- The frame-evidence table is consistent with the rest of the report (Official
+  and Repair agree exactly on mean joint co-presence, 0.3802, because the Repair
+  reads the same official-threshold pass), and the Repair's mean weakest-target
+  confidence of 0.3510 is the floor the ladder is fighting. What the table does
+  not show is the per-level decomposition (verified separately: weakest
+  confidence 0.481 → 0.454 → 0.440 → 0.382 → 0.189 → 0.160 control), which is
+  the actually informative shape — the detector's confidence falls by only ~0.29
+  absolute across the whole ladder.
+
+**Bottom line:** the number is a real improvement over Official on this ladder,
+but "ordered Repair win" should be qualified as *relative to a saturated
+baseline, with no strict ordering on 85 % of bases*.
+
+## 6. Q5 — Does 24/49 detector rejection mean this dimension tests GRiT, not the metric?
+
+**It means the claim is conditional on GRiT grounding, which the report does not
+state anywhere in its own text.**
+
+Durable counts (`configs/counterfactual/README.md`, from `pick_detectable.py
+--summary`): `multiplt_object` scanned 49 ranked candidates, kept 25 (5 dev /
+20 test), rejected **24** for undetectable targets; `subject_consistency` scanned
+25 and rejected 0. My independent check of the published selection against the
+current base list finds 25/25 overlap, so the published dataset and the current
+selector agree; the earlier 6/25 discrepancy is closed by
+`configs/counterfactual/bases_published.jsonl`.
+
+What this does and does not imply:
+
+- It is **not** a scoring artefact: every reported score was computed on a
+  published clip, coverage is 120/120 + 30/30 on both backends, and no clip was
+  scored as zero or dropped after scoring.
+- It **is** a selection effect in two directions. First, the kept bases are
+  exactly those where GRiT grounds both bare nouns in the official
+  `object_en` annotation, using its own category names — so the sample is
+  conditioned on the same detector that the Repair's confidence channel uses.
+  Second, the rejected half is not random: two-object prompts whose second
+  target GRiT will not name are precisely the compositional cases the dimension
+  exists to probe. `CONSOLIDATED.md` and `P1_NATURAL_AND_CONTROL_RUNS.md` record
+  the count as a *fixture* finding (P1.4 item 4) but the report itself never
+  mentions it, and the tables' "25 bases" gives no hint that half the candidate
+  pool was dropped for detector reasons.
+- The direction of the bias on the metric claim is not obvious: within the kept
+  set the Repair wins, but the rejected set is unmeasured for both backends, so
+  nothing here says how either metric behaves on the prompts GRiT cannot ground.
+  That is a scope limit on the claim, not a refutation of it.
+
+**Required addition:** one sentence in `multiplt_object.md`'s limitations —
+"25 of 49 ranked candidates were rejected because GRiT could not ground both
+targets; this dimension measures ranking only on prompts where it can" — plus
+the same qualifier wherever the row is called "the cleanest ordered Repair win"
+(`CONSOLIDATED.md` "What can still be claimed", `README.md` line 57).
+
+## 7. Conclusions from the previous revision: kept, superseded, added
+
+| previous claim | status now | note |
+|---|---|---|
+| §1 pair census, profiles, margins consistent | **kept, updated** | 15/base → 10/base on the ordered ladder; profiles are now split dev/test; margins remain 0.0 for both backends |
+| §2 "headline is 80 % sensitivity + 20 % a failed invariance contract" | **superseded** | the invariance pairing is no longer in the composite; the ordered half now *is* the composite. The 6-level sensitivity Δ +0.2800 and invariance Δ −0.6000 still reproduce, but as a different (dev+test, 6-level) pool |
+| §3 "rank-0 is structural, no confidence rule separates present from suppressed" | **kept and strengthened** | verified again: the Repair scores no test clip at exactly 0.0 on either `occlusion_100` (min 0.0473) or the control (min 0.0473); mean weakest confidence is still 0.3510 and the repair's control mean sits 0.043 above full occlusion |
+| §3 "Official's 0.60 is saturation, not fidelity" | **kept, now quantified** | 67/200 test rung pairs tie exactly under Official vs 0/200 under Repair, and 42 pairs are won purely by breaking those ties |
+| §4 "the instrument measures a graded ladder as many binary pairs, and the plan's literal pairing is base-vs-rung" | **partly superseded** | the ladder is now occlusion-only, so the pair set is the declared one; the base-vs-rung reading still differs (Official 0.5875 vs Repair 0.8000, Δ +0.2125) and is worth printing |
+| §4 "the ordered statistic is likely more favourable than CPA and its absence understates the Repair result" | **falsified** | Spearman mean 0.6204 → 0.6550 and strict order 0/20 → 3/20 are favourable but modest, and the Repair's dev mean Spearman (0.7000) is below Official's (0.8008) |
+| §5.1 "no intervention verification" | **closed** | the report now carries construction check + frame evidence, and this review verified per-level weakest confidence and co-presence |
+| §5.2 "level profiles pool dev and test" | **closed** | profiles are split by split in the frozen artefact |
+| §5.3 "weaker-target choice can be a coin flip, no area table" | **partly closed** | the area table exists; the near-tie choice rule and the 24 rejections are still not in the report body |
+| §5.4 "naming: multiplt_object vs multiple_objects" | **open** | unchanged |
+| §5.5 "difficulty heterogeneity untested" | **closed here** | per-base deltas: 17 positive, 0 negative, 3 zero; leave-one-out Δ ∈ [+0.2158, +0.2526] |
+| §3 / §6 "the 62× weak-target area span makes severity incomparable across bases" (raised as a fixture finding in P1.4) | **tested and downgraded** | the headline survives every area/validity filter (Δ ∈ [+0.2000, +0.2375], all CIs clear zero); the residual issue is 2 officially-flat bases and 3 with repair spread < 0.10, worth ~0.04 of the delta |
+| §6 "row must carry the split verdict; CI overlap" | **superseded** | the row now carries a paired interval that clears zero; the older "Repair CI overlaps Official" objection is obsolete because the marginal intervals are no longer the decision statistic |
+| §8 "v2 transform prototyped and reverted" | **kept** | still the reason the fixture, not the metric, carries the remaining confound |
+
+## 8. Acceptance checklist (executable)
+
+1. **Fix the mixed-generation report** (`scripts/counterfactual/run_dimension.py`,
+   then regenerate the artefact with `--report-only`): (a) when
+   `contract_split[*]["invariance"]["n_pairs"] == 0`, drop the `invariance` row
+   from the per-half paired table, or relabel it `invariance (6-level control
+   pool, not in the composite)`; (b) gate `## Contract decomposition` and the
+   "declares levels that must tie" preamble on `mixed_family` computed from the
+   *ladder*, so an ordered family does not ship mixture prose; (c) fix the header
+   `- levels:` line, which still lists `conjunction_control` first among levels
+   while a later line calls it excluded.
+2. **Quantify the ladder change where the number is quoted** —
+   `CONSOLIDATED.md` footnote and `README.md` ‡: state that the published delta
+   moved 6-level → occlusion-only, that the control pairs were worth 12/20 → 0/20,
+   and that the remaining +0.0733 is re-weighted pair composition.
+3. **Carry the outcome split into the tables**, not just the rank-gap split:
+   "of the +0.2400, +0.2100 comes from ordering 42 pairs Official leaves tied and
+   −0.1250 from inverting 25 other ties; only +0.0300 is strict-versus-strict
+   discrimination". Without it the win reads as a detection advantage it is not.
+4. **Add the non-saturation finding** to the report: Repair scores 0.0 on 0/20
+   `occlusion_100` and 0/20 control test clips (Official: 13/20 and 12/20), so
+   absence is not a fixed point and temporal union sits only 0.043 above full
+   occlusion on the mean. This is the honest descendant of the retired tie
+   criterion.
+5. **State the fixture scope in the report itself**: 49 scanned, 24 rejected,
+   62× area span, 4/20 bases under 2 % of frame; and soften the
+   "cleanest ordered Repair win" phrasing in `CONSOLIDATED.md` and `README.md`
+   to "cleanest zero-excluded ordered result, conditional on GRiT grounding".
+6. **Report the area control that this review ran** (drop area < 0.02 → Δ
+   +0.2375 [+0.1500, +0.3312]; drop Official-flat bases → +0.2000
+   [+0.1222, +0.2833]) so the 62× objection is answered in the artefact. Optionally
+   add a per-base severity-validity gate for the 2 flat and 3 near-flat bases,
+   which is worth ~0.04 of the delta and is a fixture fix, not a scoring fix.
+7. **Print the plan §5.2 base-vs-rung pairing** (Official 0.5875 vs Repair
+   0.8000 on test) as a second column, since it is the literal contract reading
+   and it is 0.028 smaller.
+8. **Reconcile the two "pair sets" in the instrument** so this class of
+   inconsistency cannot recur: have `paired_halves` take the same `ladder` as
+   `contract_split`, or record the pool it used in its own output.
+
+## 9. How the numbers in this review were obtained
+
+All statistics were recomputed on `h100-server` from the frozen score tree with
+the CPU interpreter, no GPU and no model run:
+
+- per-clip scores: `scores/multiplt_object__{official,repair}.jsonl`;
+- headline, halves, rank gaps, pair census, control predicate, order statistics:
+  recomputed with the same `family_pairs`/`cpa_at_margin` semantics as
+  `scripts/counterfactual/cpa.py` and reproduced the frozen
+  `scores/multiplt_object__cpa.json` — the 5-rung composite (109/200 vs 157/200,
+  paired +0.2400, 6-level composite 179/300 vs 229/300, 6-level sensitivity
+  188/350 vs 286/350, 6-level invariance 15/25 vs 0/25) and the frozen profiles
+  all match. The paired interval is [+0.155, +0.330] under
+  one-sample-per-iteration resampling, which is what `paired_bootstrap_ci`
+  implements; an independent resample per backend widens the same interval to
+  [+0.100, +0.385], which is the wrong pairing and was discarded;
+- areas: from `manifest.jsonl` per-frame `transformation_parameters.boxes`,
+  median area / (width × height), matching the frozen `weak_target_area` block;
+- selection counts: `configs/counterfactual/README.md` and
+  `bases_published.jsonl` vs the manifest's base ids (25/25 overlap);
+- scripts used (scratch, not committed):
+  `output/counterfactual/_scratch/multiplt_verify.py`,
+  `multiplt_verify2.py`, and `/tmp/verify{3,4,5,6,7}.py` (halves and their pools,
+  headline accounting, leave-one-out, small-area ladder validity, area/validity
+  controls, outcome decomposition).
+
+Standing limitations, unchanged from the consolidated report: these are
+first-run measurements from the current metric packages; model/CUDA/weight parity
+against the frozen E0 baselines is **not** verified; and the absolute score
+levels are not reproduced official baselines.
