@@ -149,6 +149,120 @@ def bootstrap_ci(
     return float(np.quantile(estimates, 0.025)), float(np.quantile(estimates, 0.975))
 
 
+def _average_ranks(values: np.ndarray) -> np.ndarray:
+    """Ranks with average ties, so Spearman stays defined when scores repeat."""
+    order = np.argsort(values, kind="mergesort")
+    ranks = np.empty(values.size, dtype=np.float64)
+    sorted_values = values[order]
+    start = 0
+    while start < values.size:
+        stop = start
+        while stop + 1 < values.size and sorted_values[stop + 1] == sorted_values[start]:
+            stop += 1
+        ranks[order[start : stop + 1]] = (start + stop) / 2.0 + 1.0
+        start = stop + 1
+    return ranks
+
+
+def _spearman(expected: np.ndarray, scores: np.ndarray) -> float | None:
+    if expected.size < 2 or np.all(expected == expected[0]) or np.all(scores == scores[0]):
+        return None
+    left = _average_ranks(expected)
+    right = _average_ranks(scores)
+    left = left - left.mean()
+    right = right - right.mean()
+    denominator = float(np.linalg.norm(left) * np.linalg.norm(right))
+    if denominator == 0.0:
+        return None
+    return float(np.dot(left, right) / denominator)
+
+
+def order_statistics(
+    rows: list[dict[str, Any]], scores: dict[str, float | None]
+) -> dict[str, Any]:
+    """Sequence-level order statistics for an ordered family (plan 5.2, 13.3).
+
+    CPA counts pairs and therefore weights small rank gaps more heavily than
+    large ones.  The per-base rank correlation and the strict-order rate answer
+    the same question without that weighting: does one clip's levels come out in
+    the declared order at all?  A base whose levels are missing a score is left
+    out of both, never counted as a violation.
+    """
+    by_base: dict[str, list[tuple[int, float]]] = defaultdict(list)
+    for row in rows:
+        value = scores.get(row["derived_id"])
+        if value is not None:
+            by_base[row["base_id"]].append((int(row["expected_rank"]), float(value)))
+    correlations: list[float] = []
+    strict = 0
+    n_bases = 0
+    for entries in by_base.values():
+        if len(entries) < 2:
+            continue
+        n_bases += 1
+        expected = np.array([entry[0] for entry in entries], dtype=np.float64)
+        values = np.array([entry[1] for entry in entries], dtype=np.float64)
+        rho = _spearman(expected, values)
+        if rho is not None:
+            correlations.append(rho)
+        ordered = sorted(entries, key=lambda entry: -entry[0])
+        # Only pairs whose declared ranks differ are required to be strictly
+        # ordered; levels that the family declares equal must not be.
+        if all(
+            high[1] > low[1]
+            for index, high in enumerate(ordered)
+            for low in ordered[index + 1 :]
+            if high[0] > low[0]
+        ):
+            strict += 1
+    return {
+        "n_bases": n_bases,
+        "mean_spearman": float(np.mean(correlations)) if correlations else None,
+        "median_spearman": float(np.median(correlations)) if correlations else None,
+        "strict_order_bases": strict,
+        "strict_order_rate": (strict / n_bases) if n_bases else None,
+    }
+
+
+def paired_bootstrap_ci(
+    official_base_pairs: dict[str, list[tuple[int, int, float]]],
+    repair_base_pairs: dict[str, list[tuple[int, int, float]]],
+    official_margin: float,
+    repair_margin: float,
+    iterations: int,
+    seed: int,
+) -> dict[str, float | None]:
+    """Cluster bootstrap over `base_id` of `CPA_repair - CPA_official`.
+
+    The two marginal intervals in the report overlap, so a delta quoted from two
+    rounded point estimates carries no uncertainty.  Resampling the *same*
+    bases for both backends keeps the pairing (both backends scored the same
+    clips) and gives the interval the delta claim needs (plan 5.4).
+    """
+    keys = sorted(set(official_base_pairs) & set(repair_base_pairs))
+    if not keys:
+        return {"delta": None, "ci_low": None, "ci_high": None, "n_bases": 0}
+    official_flat = [pair for key in keys for pair in official_base_pairs[key]]
+    repair_flat = [pair for key in keys for pair in repair_base_pairs[key]]
+    point = cpa_at_margin(repair_flat, repair_margin) - cpa_at_margin(official_flat, official_margin)
+    rng = np.random.default_rng(seed)
+    estimates = []
+    for _ in range(iterations):
+        sample = [keys[index] for index in rng.choice(len(keys), size=len(keys), replace=True)]
+        official_sample = [pair for key in sample for pair in official_base_pairs[key]]
+        repair_sample = [pair for key in sample for pair in repair_base_pairs[key]]
+        estimates.append(
+            cpa_at_margin(repair_sample, repair_margin) - cpa_at_margin(official_sample, official_margin)
+        )
+    estimates = np.array(estimates)
+    return {
+        "delta": float(point),
+        "ci_low": float(np.quantile(estimates, 0.025)),
+        "ci_high": float(np.quantile(estimates, 0.975)),
+        "n_bases": len(keys),
+    }
+
+
 def evaluate_method(
     rows: list[dict[str, Any]],
     scores: dict[str, float | None],

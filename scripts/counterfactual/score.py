@@ -131,6 +131,12 @@ def frame_evidence(diagnostics: Any) -> dict[str, Any] | None:
         "ambiguous_role_count": diagnostics.get("ambiguous_role_count"),
         "aggregation_method": diagnostics.get("aggregation_method"),
     }
+    # Continuity backends (Motion Smoothness) record the mean/tail decomposition
+    # of their own score rather than per-frame reasons; plan 13.3 asks for both
+    # numbers next to the score, so keep them in the evidence block.
+    for key in ("mean_discontinuity", "tail_discontinuity", "D_video"):
+        if diagnostics.get(key) is not None:
+            evidence[key] = float(diagnostics[key])
     if isinstance(frames, list) and frames:
         if isinstance(frames[0], dict):
             counts: dict[str, int] = {}
@@ -335,7 +341,15 @@ def make_scorer(
             def ev(video: Path, _: dict[str, Any]) -> dict[str, Any]:
                 frames, _ = decode_timed_frames(video)
                 item = evaluate_timed_frames(video, frames, estimator, config)
-                return {"score": float(item.score), "status": "succeeded"}
+                return {
+                    "score": float(item.score),
+                    "status": "succeeded",
+                    "diagnostics": {
+                        "mean_discontinuity": item.diagnostics.get("mean_discontinuity"),
+                        "tail_discontinuity": item.diagnostics.get("tail_discontinuity"),
+                        "D_video": float(item.discontinuity),
+                    },
+                }
         return ev
 
     raise ValueError(f"no scorer for {dimension}/{backend}")

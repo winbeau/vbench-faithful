@@ -88,6 +88,10 @@ def collect(scores_dir: Path, manifest: Path) -> list[dict[str, Any]]:
                 entry[f"{backend}_cv"] = invariance_stats(test_rows, backend_scores)["mean_cv"]
         if entry.get("official_cpa") is not None and entry.get("repair_cpa") is not None:
             entry["delta"] = round(entry["repair_cpa"] - entry["official_cpa"], 4)
+        paired = cpa.get("paired", {}).get("tie_aware", {}) or {}
+        entry["delta_paired"] = paired.get("delta")
+        entry["delta_ci_low"] = paired.get("ci_low")
+        entry["delta_ci_high"] = paired.get("ci_high")
         entries.append(entry)
     return entries
 
@@ -103,21 +107,24 @@ def render_summary(entries: list[dict[str, Any]], code_sha: str) -> str:
         "",
         f"Scoring code SHA: `{code_sha}`.",
         "",
-        "| dimension | family | bases | clips (test) | Official CPA | Repair CPA | delta |",
-        "|---|---|---:|---:|---:|---:|---:|",
+        "| dimension | family | bases | clips (test) | Official CPA | Repair CPA | delta | delta 95% CI (paired) |",
+        "|---|---|---:|---:|---:|---:|---:|---|",
     ]
     for entry in entries:
         if entry.get("status") == "missing":
-            lines.append(f"| {entry['dimension']} | — | — | — | — | — | — |")
+            lines.append(f"| {entry['dimension']} | — | — | — | — | — | — | — |")
             continue
         off = entry.get("official_cpa")
         rep = entry.get("repair_cpa")
+        ci_low = entry.get("delta_ci_low")
+        ci_high = entry.get("delta_ci_high")
+        ci = "—" if ci_low is None else f"[{ci_low:+.4f}, {ci_high:+.4f}]"
         lines.append(
             f"| {entry['dimension']} | `{entry['family']}` | {entry['bases']} | "
             f"{entry.get('official_test_clips', 0)} | "
-            f"{off:.4f} | {rep:.4f} | {entry.get('delta', float('nan')):+.4f} |"
+            f"{off:.4f} | {rep:.4f} | {entry.get('delta', float('nan')):+.4f} | {ci} |"
             if off is not None and rep is not None
-            else f"| {entry['dimension']} | `{entry['family']}` | {entry['bases']} | — | — | — | — |"
+            else f"| {entry['dimension']} | `{entry['family']}` | {entry['bases']} | — | — | — | — | — |"
         )
 
     invariance_rows = [entry for entry in entries if entry.get("invariance") and entry.get("status") == "ok"]
@@ -192,6 +199,7 @@ def main() -> int:
         "dimension", "family", "bases", "clips", "invariance",
         "official_cpa", "official_ci_low", "official_ci_high",
         "repair_cpa", "repair_ci_low", "repair_ci_high", "delta",
+        "delta_paired", "delta_ci_low", "delta_ci_high",
         "official_cv", "repair_cv", "official_coverage", "repair_coverage",
         "official_test_clips", "repair_test_clips", "margin",
     ]

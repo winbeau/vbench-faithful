@@ -27,7 +27,18 @@ from typing import Any
 import numpy as np
 
 from .common import ROOT, read_jsonl, write_json
-from .cpa import BUDGET, _base_pairs, calibrate_margin, cpa_at_margin, evaluate_method, family_pairs, group_stats, rank_gap_groups
+from .cpa import (
+    BUDGET,
+    _base_pairs,
+    calibrate_margin,
+    cpa_at_margin,
+    evaluate_method,
+    family_pairs,
+    group_stats,
+    order_statistics,
+    paired_bootstrap_ci,
+    rank_gap_groups,
+)
 
 DEFAULT_GPUS = "1,2,3,4,5,6"
 BACKENDS = ("official", "repair")
@@ -187,6 +198,41 @@ def score_profile(rows: list[dict[str, Any]], backend_scores: dict[str, float | 
             "min": float(array.min()),
             "max": float(array.max()),
             "distinct": int(len(set(values))),
+        }
+    return profile
+
+
+def discontinuity_profile(
+    rows: list[dict[str, Any]],
+    evidence: dict[str, dict[str, Any]] | None,
+    backend: str,
+) -> dict[str, dict[str, Any]]:
+    """Per-level mean and tail discontinuity from a backend's own diagnostics.
+
+    Plan 13.3 requires mean discontinuity and tail discontinuity next to the
+    score profile.  They exist only when the backend records them, so a backend
+    whose scorer does not persist them produces an empty profile instead of a
+    fabricated zero.
+    """
+    by_level: dict[str, list[tuple[float, float]]] = defaultdict(list)
+    for row in rows:
+        entry = (evidence or {}).get(row["derived_id"], {}).get(backend)
+        if not entry:
+            continue
+        mean = entry.get("mean_discontinuity")
+        tail = entry.get("tail_discontinuity")
+        if mean is None or tail is None:
+            continue
+        by_level[row["level"]].append((float(mean), float(tail)))
+    profile: dict[str, dict[str, Any]] = {}
+    for level, values in sorted(by_level.items()):
+        means = np.asarray([value[0] for value in values], dtype=float)
+        tails = np.asarray([value[1] for value in values], dtype=float)
+        profile[level] = {
+            "n": len(values),
+            "mean_discontinuity": float(means.mean()),
+            "tail_discontinuity": float(tails.mean()),
+            "std_mean": float(means.std()),
         }
     return profile
 
@@ -462,6 +508,33 @@ def render_report(
                     f"{stats['cpa']:.4f} | [{stats['ci_low']:.4f}, {stats['ci_high']:.4f}] |"
                 )
     ranks = {row["expected_rank"] for row in rows}
+    if len(ranks) > 1:
+        lines += [
+            "",
+            "## Sequence-level order statistics",
+            "",
+            "Per-base Spearman correlation between the declared rank and the score,",
+            "and the fraction of bases whose levels come out in the declared strict",
+            "order (plan 5.2 and 13.3). Unlike CPA this does not weight small rank",
+            "gaps more heavily; levels the family declares equal are not required",
+            "to be strictly ordered, and a base with a missing score is excluded",
+            "rather than counted as a violation.",
+            "",
+            "| backend | split | bases | mean Spearman | median Spearman | strict order |",
+            "|---|---|---:|---:|---:|---:|",
+        ]
+        for backend in ("official", "repair"):
+            for split in ("dev", "test"):
+                stats = (cpa.get("order", {}).get(backend, {}) or {}).get(split)
+                if not stats or not stats.get("n_bases"):
+                    continue
+                mean = "—" if stats["mean_spearman"] is None else f"{stats['mean_spearman']:.4f}"
+                median = "—" if stats["median_spearman"] is None else f"{stats['median_spearman']:.4f}"
+                lines.append(
+                    f"| {backend} | {split} | {stats['n_bases']} | {mean} | {median} | "
+                    f"{stats['strict_order_bases']}/{stats['n_bases']} "
+                    f"({stats['strict_order_rate']:.4f}) |"
+                )
     if len(ranks) == 1:
         lines += [
             "",
@@ -587,7 +660,44 @@ def render_report(
                 "level, so its CPA here measures insensitivity, not invariance."
             )
 
-    lines += ["", "## Official vs Repair (test, tie-aware)", "", "| metric | official | repair | repair - official |", "|---|---:|---:|---:|"]
+    continuity = cpa.get("discontinuity", {}).get("repair", {})
+    if continuity:
+        lines += [
+            "",
+            "## Repair continuity components (test)",
+            "",
+            "The repair's own mean and upper-tail discontinuity per level (plan 13.3).",
+            "`D_video = (1 - tail_weight) * D_mean + tail_weight * D_tail`, so a level",
+            "whose mean is flat while its tail rises is a localised failure the score",
+            "alone would hide.",
+            "",
+            "| level | n | mean D_mean | mean D_tail | sd(D_mean) |",
+            "|---|---:|---:|---:|---:|",
+        ]
+        for level, stats in continuity.items():
+            lines.append(
+                f"| `{level}` | {stats['n']} | {stats['mean_discontinuity']:.4f} | "
+                f"{stats['tail_discontinuity']:.4f} | {stats['std_mean']:.4f} |"
+            )
+
+    paired_zero = cpa.get("paired", {}).get("zero_margin", {})
+    paired_tie = cpa.get("paired", {}).get("tie_aware", {})
+    ci_low = paired_zero.get("ci_low")
+    ci_high = paired_zero.get("ci_high")
+    paired_ci = "—" if ci_low is None else f"[{ci_low:+.4f}, {ci_high:+.4f}]"
+    lines += [
+        "",
+        "## Official vs Repair (test, tie-aware)",
+        "",
+        "`repair - official` is the paired difference over the same `base_id`",
+        "clusters; its 95% CI resamples those clusters once and re-scores both",
+        "backends on each resample (plan 5.4). The interval is what decides whether",
+        "the delta is distinguishable from zero — the two marginal intervals in the",
+        "`CPA` table do not.",
+        "",
+        "| metric | official | repair | repair - official | paired 95% CI |",
+        "|---|---:|---:|---:|---|",
+    ]
     for family_name in sorted({row["family"] for row in rows}):
         off = cpa.get("official", {}).get("test_tie_aware", {}).get(family_name, {})
         rep = cpa.get("repair", {}).get("test_tie_aware", {}).get(family_name, {})
@@ -600,9 +710,22 @@ def render_report(
         )
         lines.append(
             f"| {family_name} | {off.get('cpa', float('nan')):.4f} | "
-            f"{rep.get('cpa', float('nan')):.4f} | {delta} |"
+            f"{rep.get('cpa', float('nan')):.4f} | {delta} | {paired_ci} |"
         )
-    lines += render_evidence_section(rows, evidence)
+    if paired_zero.get("n_bases"):
+        lines += [""]
+        if paired_tie.get("delta") is not None:
+            lines.append(
+                f"Paired zero-margin delta: `{paired_zero['delta']:+.4f}` over "
+                f"{paired_zero['n_bases']} test bases; paired tie-aware delta: "
+                f"`{paired_tie['delta']:+.4f}`."
+            )
+        else:
+            lines.append(
+                f"Paired zero-margin delta: `{paired_zero['delta']:+.4f}` over "
+                f"{paired_zero['n_bases']} test bases."
+            )
+    lines += render_evidence_section(rows, evidence, dimension)
 
     lines += [
         "",
@@ -663,8 +786,13 @@ def evidence_summary(
 
 
 def render_evidence_section(
-    rows: list[dict[str, Any]], evidence: dict[str, dict[str, Any]] | None
+    rows: list[dict[str, Any]], evidence: dict[str, dict[str, Any]] | None, dimension: str | None = None
 ) -> list[str]:
+    # The frame-reason table is a detector diagnostic; a continuity dimension
+    # (Motion Smoothness) records mean/tail discontinuity instead and reports it
+    # in its own section, so the detector wording would be misleading here.
+    if dimension in {"motion_smoothness"}:
+        return []
     test_rows = [row for row in rows if row["split"] == "test"]
     summaries = {
         backend: evidence_summary(test_rows, evidence, backend) for backend in ("official", "repair")
@@ -791,7 +919,9 @@ def main() -> int:
             if row.get("evidence"):
                 nested_evidence.setdefault(row["derived_id"], {})[backend] = row["evidence"]
 
-    cpa: dict[str, Any] = {"coverage": [], "profiles": {}, "contracts": {}}
+    cpa: dict[str, Any] = {"coverage": [], "profiles": {}, "contracts": {}, "order": {}, "paired": {}}
+    test_pairs_by_backend: dict[str, dict[str, list[tuple[int, int, float]]]] = {}
+    margins: dict[str, float] = {}
     for backend in BACKENDS:
         backend_scores = {row["derived_id"]: scores.get((row["derived_id"], backend)) for row in rows}
         dev_rows = [row for row in rows if row["split"] == "dev"]
@@ -799,6 +929,7 @@ def main() -> int:
         margin = calibrate_margin(
             [pair for group in _base_pairs(dev_rows, backend_scores).values() for pair in group]
         )
+        margins[backend] = margin
         cpa[backend] = {
             "dev_margin": margin,
             "dev_zero_margin": evaluate_method(dev_rows, backend_scores, 0.0, args.iterations, args.seed),
@@ -809,16 +940,39 @@ def main() -> int:
         # sensitivity contract and a tie contract, and only the latter is the
         # invariance target, so it must be readable on its own.
         test_base_pairs = _base_pairs(test_rows, backend_scores)
+        test_pairs_by_backend[backend] = test_base_pairs
         cpa["contracts"][backend] = {
             "test_zero_margin": group_stats(rank_gap_groups(test_base_pairs), 0.0),
             "test_tie_aware": group_stats(rank_gap_groups(test_base_pairs), margin),
         }
         cpa["profiles"][backend] = score_profile(rows, backend_scores)
+        cpa.setdefault("discontinuity", {})[backend] = discontinuity_profile(
+            rows, nested_evidence, backend
+        )
         cpa.setdefault("contract_split", {})[backend] = contract_split_cpa(rows, backend_scores, margin)
         cpa.setdefault("lag_exponent", {})[backend] = lag_exponent(rows, backend_scores)
+        # Sequence-level order statistics answer the same question as CPA
+        # without the pair-count weighting (plan 5.2 and 13.3).
+        cpa["order"][backend] = {
+            "dev": order_statistics(dev_rows, backend_scores),
+            "test": order_statistics(test_rows, backend_scores),
+        }
         for split, split_rows in (("dev", dev_rows), ("test", test_rows)):
             scored = sum(1 for row in split_rows if backend_scores.get(row["derived_id"]) is not None)
             cpa["coverage"].append({"backend": backend, "split": split, "scored": scored, "total": len(split_rows)})
+
+    # Paired difference over the *same* bases: the two marginal intervals alone
+    # cannot say whether the delta is distinguishable from zero (plan 5.4).
+    cpa["paired"] = {
+        "zero_margin": paired_bootstrap_ci(
+            test_pairs_by_backend["official"], test_pairs_by_backend["repair"],
+            0.0, 0.0, args.iterations, args.seed,
+        ),
+        "tie_aware": paired_bootstrap_ci(
+            test_pairs_by_backend["official"], test_pairs_by_backend["repair"],
+            margins["official"], margins["repair"], args.iterations, args.seed,
+        ),
+    }
 
     from .build import git_sha
     code_sha = git_sha()  # scoring revision, not the dataset-build revision in the manifest
