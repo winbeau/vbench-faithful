@@ -299,6 +299,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=0.25,
         help="detector oracle: minimum fraction of frames that must natively detect both targets",
     )
+    parser.add_argument(
+        "--summary",
+        type=Path,
+        default=None,
+        help="write the per-dimension scan/rejection counts here as JSON",
+    )
     return parser
 
 
@@ -345,7 +351,9 @@ def main() -> int:
             )
             final.append(base)
         entry: dict[str, Any] = {
+            "pool": len(pool),
             "scanned": scanned,
+            "rejected": scanned - sum(1 for b in kept),
             "kept": {split: sum(1 for b in kept if b["split"] == split) for split in ("dev", "test")},
         }
         if dimension in DIRECTIONAL_DIMENSIONS:
@@ -356,7 +364,21 @@ def main() -> int:
         report[dimension] = entry
 
     write_jsonl(args.output, final)
-    print(json.dumps({"status": "COMPLETE", "bases": len(final), "per_dimension": report}, indent=2))
+    payload = {
+        "status": "COMPLETE",
+        "bases": len(final),
+        "dimensions": list(dimensions),
+        "seed": args.seed,
+        "detector": args.detector,
+        "per_dimension": report,
+    }
+    if args.summary is not None:
+        # The scan/rejection counts are the fixture-eligibility record plan
+        # section 11.2 asks for; printing them left them unreproducible once the
+        # terminal scrolled away, so they are written next to the selection.
+        args.summary.parent.mkdir(parents=True, exist_ok=True)
+        args.summary.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(json.dumps(payload, indent=2, sort_keys=True))
     return 0
 
 
