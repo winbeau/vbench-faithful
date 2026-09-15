@@ -6,7 +6,7 @@
 - bases: 25 (dev 5, test 20)
 - derived clips: 150 (dev 30, test 120)
 - levels: `conjunction_control`, `occlusion_100`, `occlusion_075`, `occlusion_050`, `occlusion_025`, `occlusion_000`
-- code SHA: `687d19afb6e943fa6e4300629a84602c6d4dffa5`
+- code SHA: `a660756` (the tree it names is content-identical to the scoring tree)
 - repair variant: `ordered_role_identity_assignment` (detection-conditioned: false)
 
 ## Score coverage
