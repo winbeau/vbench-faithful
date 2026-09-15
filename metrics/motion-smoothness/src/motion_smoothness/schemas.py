@@ -26,8 +26,11 @@ class MotionSmoothnessConfig:
     min_motion_magnitude: float = 0.05
     tail_quantile: float = 0.90
     tail_weight: float = 0.25
-    magnitude_weight: float = 0.7
-    direction_weight: float = 0.3
+    magnitude_weight: float = 0.5
+    direction_weight: float = 0.5
+    direction_alignment: bool = False
+    temporal_aggregation: str = "topk"
+    top_k: int = 3
 
     def __post_init__(self) -> None:
         if not math.isfinite(self.eps) or self.eps <= 0:
@@ -44,6 +47,10 @@ class MotionSmoothnessConfig:
             raise ValueError("direction_weight must be finite and non-negative")
         if self.magnitude_weight == 0.0 and self.direction_weight == 0.0:
             raise ValueError("at least one of magnitude_weight and direction_weight must be positive")
+        if self.temporal_aggregation not in ("topk", "mean_tail"):
+            raise ValueError("temporal_aggregation must be 'topk' or 'mean_tail'")
+        if not isinstance(self.top_k, int) or isinstance(self.top_k, bool) or self.top_k < 1:
+            raise ValueError("top_k must be a positive integer")
 
 
 @dataclass(frozen=True)

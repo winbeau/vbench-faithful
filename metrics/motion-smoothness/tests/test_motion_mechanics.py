@@ -86,7 +86,9 @@ class MotionMechanicsTests(unittest.TestCase):
         self.assertFalse(valid[:, -1].any())
 
     def test_upper_tail_mean_detects_rare_failures(self):
-        config = MotionSmoothnessConfig(tail_weight=0.25, tail_quantile=0.90)
+        config = MotionSmoothnessConfig(
+            tail_weight=0.25, tail_quantile=0.90, temporal_aggregation="mean_tail"
+        )
         for bad_percent in (1, 5, 10, 25):
             with self.subTest(bad_percent=bad_percent):
                 values = [0.0] * (100 - bad_percent) + [1.0] * bad_percent
@@ -94,6 +96,29 @@ class MotionMechanicsTests(unittest.TestCase):
                 self.assertGreater(tail, mean)
                 self.assertGreater(combined, mean)
                 self.assertLess(combined, 1.0)
+
+    def test_top_k_aggregation_scores_the_localised_peak(self):
+        values = [0.0] * 12 + [1.0, 0.6, 0.4]
+        mean, tail, combined = aggregate_temporal_discontinuity(
+            values, MotionSmoothnessConfig(top_k=3)
+        )
+        self.assertAlmostEqual(combined, (1.0 + 0.6 + 0.4) / 3, places=12)
+        self.assertGreater(combined, mean)
+        self.assertEqual(combined, tail)
+        # A single extreme transition is diluted by k=3 but not by k=1.
+        single = aggregate_temporal_discontinuity(
+            [0.0] * 14 + [1.0], MotionSmoothnessConfig(top_k=3)
+        )[2]
+        self.assertAlmostEqual(single, 1.0 / 3, places=12)
+
+    def test_temporal_aggregation_and_top_k_validation(self):
+        for kwargs in (
+            {"temporal_aggregation": "median"},
+            {"top_k": 0},
+            {"top_k": -1},
+        ):
+            with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
+                MotionSmoothnessConfig(**kwargs)
 
     def test_score_mapping_zero_monotonic_finite_and_invalid(self):
         self.assertEqual(discontinuity_to_score(0.0), 1.0)

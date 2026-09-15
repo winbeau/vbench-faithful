@@ -24,8 +24,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--model-weight")
     parser.add_argument("--tail-quantile", type=float, default=0.90)
     parser.add_argument("--tail-weight", type=float, default=0.25)
-    parser.add_argument("--magnitude-weight", type=float, default=0.7)
-    parser.add_argument("--direction-weight", type=float, default=0.3)
+    parser.add_argument("--magnitude-weight", type=float, default=0.5)
+    parser.add_argument("--direction-weight", type=float, default=0.5)
+    parser.add_argument("--direction-alignment", action="store_true",
+                        help="align the current flow before measuring direction change (ablation; default is the raw pixel-wise angle)")
+    parser.add_argument("--temporal-aggregation", choices=("topk", "mean_tail"), default="topk")
+    parser.add_argument("--top-k", type=int, default=3)
     return parser
 
 
@@ -40,6 +44,9 @@ def main(argv: list[str] | None = None) -> int:
             tail_weight=args.tail_weight,
             magnitude_weight=args.magnitude_weight,
             direction_weight=args.direction_weight,
+            direction_alignment=args.direction_alignment,
+            temporal_aggregation=args.temporal_aggregation,
+            top_k=args.top_k,
         )
         gpu_ids = parse_gpu(args.gpu)
         device_info = check_cuda(gpu_ids)

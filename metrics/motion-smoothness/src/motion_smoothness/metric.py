@@ -36,8 +36,11 @@ def _motion_worker(result_path: str, gpu_id: int, videos: list[str], backend: st
             audit_config = MotionSmoothnessConfig(
                 tail_quantile=float(config.get("tail_quantile", 0.9)),
                 tail_weight=float(config.get("tail_weight", 0.25)),
-                magnitude_weight=float(config.get("magnitude_weight", 0.7)),
-                direction_weight=float(config.get("direction_weight", 0.3)),
+                magnitude_weight=float(config.get("magnitude_weight", 0.5)),
+                direction_weight=float(config.get("direction_weight", 0.5)),
+                direction_alignment=bool(config.get("direction_alignment", False)),
+                temporal_aggregation=str(config.get("temporal_aggregation", "topk")),
+                top_k=int(config.get("top_k", 3)),
             )
             results = []
             for video in paths:
@@ -62,6 +65,9 @@ def evaluate_backend_sharded(backend: str, videos: list[Path], gpu_ids: list[int
             "tail_weight": cfg.tail_weight,
             "magnitude_weight": cfg.magnitude_weight,
             "direction_weight": cfg.direction_weight,
+            "direction_alignment": cfg.direction_alignment,
+            "temporal_aggregation": cfg.temporal_aggregation,
+            "top_k": cfg.top_k,
         }, seed),
         backend=backend, label="motion-smoothness",
     ).results
@@ -263,6 +269,14 @@ def aggregate_temporal_discontinuity(
     if not np.isfinite(data).all() or np.any(data < 0.0):
         raise ValueError("temporal discontinuities must be finite and non-negative")
     mean = float(np.mean(data))
+    if config.temporal_aggregation == "topk":
+        # A temporal edit touches only a few transitions, so the global mean
+        # dilutes it.  The mean of the k largest per-time discontinuities is the
+        # localized-failure statistic plan 13.4 asks for; the number of injected
+        # events is bounded, so k does not scale with clip length.
+        count = min(config.top_k, data.size)
+        peak = float(np.mean(np.sort(data)[-count:]))
+        return mean, peak, peak
     tail_count = max(1, math.ceil((1.0 - config.tail_quantile) * data.size))
     tail = float(np.mean(np.sort(data)[-tail_count:]))
     combined = (1.0 - config.tail_weight) * mean + config.tail_weight * tail
@@ -312,6 +326,7 @@ def analyze_motion_fields(
 
     magnitude_t: list[float] = []
     direction_change_t: list[float] = []
+    aligned_direction_t: list[float] = []
     valid_ratios: list[float] = []
     spatial_medians: list[float] = []
     spatial_p90s: list[float] = []
@@ -337,24 +352,46 @@ def analyze_motion_fields(
             current_magnitude >= cfg.min_motion_magnitude
         )
         denominator = previous_magnitude * current_magnitude
-        cosine = np.divide(
+        aligned_cosine = np.divide(
             np.sum(previous * current_aligned, axis=-1),
             denominator,
             out=np.ones_like(denominator),
             where=denominator > 0,
         )
-        direction_change_t.append(
-            _spatial_stats(np.clip(1.0 - cosine, 0.0, 2.0), direction_mask)[0]
+        aligned_direction = _spatial_stats(
+            np.clip(1.0 - aligned_cosine, 0.0, 2.0), direction_mask
+        )[0]
+
+        # Raw (pixel-wise) direction: the alignment warp follows a moving
+        # subject, but at a frame reversal it samples the reversed field at the
+        # pre-reversal location and can cancel the flip.  The unaligned angle is
+        # the direct measure of a temporal-order violation and is the default;
+        # the aligned value stays available as a diagnostic and an ablation.
+        raw = velocities[index]
+        raw_magnitude = np.linalg.norm(raw, axis=-1)
+        raw_mask = mask & (previous_magnitude >= cfg.min_motion_magnitude) & (
+            raw_magnitude >= cfg.min_motion_magnitude
         )
+        raw_denominator = previous_magnitude * raw_magnitude
+        raw_cosine = np.divide(
+            np.sum(previous * raw, axis=-1),
+            raw_denominator,
+            out=np.ones_like(raw_denominator),
+            where=raw_denominator > 0,
+        )
+        raw_direction = _spatial_stats(np.clip(1.0 - raw_cosine, 0.0, 2.0), raw_mask)[0]
+        aligned_direction_t.append(aligned_direction)
+        direction_change_t.append(aligned_direction if cfg.direction_alignment else raw_direction)
 
     # Full variant (plan 13.5): per-time discontinuity is the weighted sum of the
     # normalised magnitude change (`relative`, i.e. flow acceleration) and the
-    # direction change, aggregated with mean + upper tail.  The previous
-    # estimator aggregated a temporal *difference* of the already-saturated
-    # magnitude change and never read `direction_change_t`, so a local reversal
-    # and a hold-and-jump of similar length produced the same D_video and the
-    # declared level-2 > level-3 ordering was not realisable.  The direction
-    # term is what separates an actual reversal from a stall.
+    # direction change.  The estimator before this one aggregated a temporal
+    # *difference* of the already-saturated magnitude change and never read
+    # `direction_change_t`, so a local reversal and a hold-and-jump of similar
+    # length produced the same D_video and the declared level-2 > level-3
+    # ordering was not realisable.  The direction term separates an actual
+    # reversal from a stall, and the top-k aggregation keeps a localized edit
+    # from being diluted by the ~15-30 transitions it sits among.
     discontinuities = [
         cfg.magnitude_weight * magnitude + cfg.direction_weight * direction
         for magnitude, direction in zip(magnitude_t, direction_change_t)
@@ -373,11 +410,15 @@ def analyze_motion_fields(
         "tail_discontinuity": d_tail,
         "magnitude_discontinuity": float(np.mean(magnitude_t)) if magnitude_t else 0.0,
         "direction_discontinuity": float(np.mean(direction_change_t)) if direction_change_t else 0.0,
+        "aligned_direction_discontinuity": (
+            float(np.mean(aligned_direction_t)) if aligned_direction_t else 0.0
+        ),
         "D_video": d_video,
         "score": score,
         "D_t": discontinuities,
         "state_change_t": magnitude_t,
         "direction_change_t": direction_change_t,
+        "aligned_direction_t": aligned_direction_t,
         "spatial_median_t": spatial_medians,
         "spatial_p90_t": spatial_p90s,
         "config": asdict(cfg),

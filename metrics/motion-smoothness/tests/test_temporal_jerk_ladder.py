@@ -159,9 +159,28 @@ class TemporalJerkLadderTests(unittest.TestCase):
             {"direction_weight": -0.1},
             {"magnitude_weight": float("nan")},
             {"magnitude_weight": 0.0, "direction_weight": 0.0},
+            {"temporal_aggregation": "median"},
+            {"top_k": 0},
         ):
             with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
                 MotionSmoothnessConfig(**kwargs)
+
+    def test_shipped_defaults_are_the_localized_direction_variant(self):
+        config = MotionSmoothnessConfig()
+        self.assertEqual(config.temporal_aggregation, "topk")
+        self.assertEqual(config.top_k, 3)
+        self.assertEqual((config.magnitude_weight, config.direction_weight), (0.5, 0.5))
+        self.assertFalse(config.direction_alignment)
+        # The legacy mean+tail variant remains selectable for the plan 13.5
+        # ablation and must still order the canonical ladder.
+        legacy = MotionSmoothnessConfig(
+            temporal_aggregation="mean_tail", magnitude_weight=0.5, direction_weight=0.5
+        )
+        scores = {
+            name: analyze_motion_fields(_fields(indices, _position(FRAMES)), legacy)["score"]
+            for name, indices in ladder_indices().items()
+        }
+        self.assertGreater(scores["jerk_2_duplicate_skip"], scores["jerk_3_local_reverse"])
 
 
 if __name__ == "__main__":
