@@ -14,9 +14,10 @@ checkout `/root/wenbiao_zhao/VBench` at
 nothing of theirs was signalled or killed.
 
 Verdict: the direction of the previous review stands, but three of its load-bearing claims
-were estimates and are now measurements, one of them was wrong, and one code defect is new.
-The row `spatial_relationship | directional_flip | 0.3667 | 0.0667 | −0.3000` is **not a
-Repair deficit and not a repairable fixture**:
+were estimates and are now measurements, one estimate was wrong (the gate admits **3** of the
+published 40, not 2), one claim is withdrawn (§6), and one code defect is new. The row
+`spatial_relationship | directional_flip | 0.3667 | 0.0667 | −0.3000` is **not a Repair
+deficit and not a repairable fixture**:
 
 - The Repair number rests on **5 of 30 test bases**. The other 25 are exact ties; of the 5
   that carry any signal, **2 are correct and 3 are inverted**.
