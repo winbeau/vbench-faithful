@@ -22,7 +22,7 @@ for path in (OVERLAY, REPO_ROOT / 'metrics/spatial-relationship/src', REPO_ROOT 
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
-VARIANTS = ('official', 'signed_direction', 'role_preserving', 'full_temporal')
+VARIANTS = ('official', 'signed_direction', 'role_preserving', 'role_max_signed', 'full_temporal')
 FAMILIES = ('directional_inversion', 'role_swap', 'temporal_persistence', 'multi_instance', 'detection_control')
 REQUIRED = ('base_id', 'derived_id', 'intervention_family', 'intervention_level', 'subject_a', 'relation', 'subject_b', 'expected_relation')
 RELATIONS = {
@@ -38,7 +38,14 @@ class VariantNotReady(RuntimeError):
 
 
 def variant_mode(variant: str) -> str | None:
-    mapping = {'official': None, 'signed_direction': 'signed_only', 'role_preserving': 'ordered_role_identity_assignment'}
+    mapping = {
+        'official': None,
+        'signed_direction': 'signed_only',
+        'role_preserving': 'ordered_role_identity_assignment',
+        # Signed geometry maximised over every (subject, object) role pair
+        # instead of committing to the highest-confidence instance per role.
+        'role_max_signed': 'ordered_role',
+    }
     if variant == 'full_temporal':
         raise VariantNotReady('full_temporal is not implemented: the current evaluator has no temporal persistence component')
     if variant not in mapping:
@@ -71,16 +78,16 @@ def json_default(value: Any):
     raise TypeError(f'Object of type {value.__class__.__name__} is not JSON serializable')
 
 
-def manifest_key(row: Mapping[str, Any], variant: str) -> tuple[str, ...]:
-    return tuple(str(row[name]) for name in ('base_id', 'derived_id', 'intervention_family', 'intervention_level', 'subject_a', 'relation', 'subject_b')) + (variant,)
+def manifest_key(row: Mapping[str, Any], variant: str, detection_conditioned: bool = False) -> tuple[str, ...]:
+    return tuple(str(row[name]) for name in ('base_id', 'derived_id', 'intervention_family', 'intervention_level', 'subject_a', 'relation', 'subject_b')) + (variant, str(bool(detection_conditioned)))
 
 
 def result_key(row: Mapping[str, Any]) -> tuple[str, ...]:
-    return tuple(str(row[name]) for name in ('base_id', 'derived_id', 'intervention_family', 'intervention_level', 'subject_a', 'relation', 'subject_b', 'metric_variant'))
+    return tuple(str(row[name]) for name in ('base_id', 'derived_id', 'intervention_family', 'intervention_level', 'subject_a', 'relation', 'subject_b', 'metric_variant')) + (str(bool(row.get('detection_conditioned', False))),)
 
 
-def pending_rows(rows: list[dict[str, Any]], existing: set[tuple[str, ...]], variant: str) -> list[dict[str, Any]]:
-    return [row for row in rows if manifest_key(row, variant) not in existing]
+def pending_rows(rows: list[dict[str, Any]], existing: set[tuple[str, ...]], variant: str, detection_conditioned: bool = False) -> list[dict[str, Any]]:
+    return [row for row in rows if manifest_key(row, variant, detection_conditioned) not in existing]
 
 
 def validate_manifest(rows: list[dict[str, Any]], manifest: Path, family: str, data_root: Path | None) -> list[dict[str, Any]]:
@@ -148,23 +155,24 @@ def detection_diagnostics(diagnostics: Any, subject: str, object_: str) -> dict[
     return {'detected_a': None, 'detected_b': None, 'detection_confidence': None, 'selected_instance_pair': None}
 
 
-def _base_record(row: Mapping[str, Any], variant: str) -> dict[str, Any]:
+def _base_record(row: Mapping[str, Any], variant: str, detection_conditioned: bool = False) -> dict[str, Any]:
     return {
         'base_id': str(row['base_id']), 'derived_id': str(row['derived_id']),
         'intervention_family': str(row['intervention_family']), 'intervention_level': row['intervention_level'],
         'subject_a': str(row['subject_a']), 'relation': str(row['relation']), 'subject_b': str(row['subject_b']),
         'expected_relation': row['expected_relation'], 'metric_variant': variant, 'video_path': str(row['video_path']),
+        'detection_conditioned': bool(detection_conditioned),
     }
 
 
-def evaluate_row(row: Mapping[str, Any], variant: str, evaluator: Any, diagnostics_level: Any) -> dict[str, Any]:
+def evaluate_row(row: Mapping[str, Any], variant: str, evaluator: Any, diagnostics_level: Any, *, detection_conditioned: bool = False) -> dict[str, Any]:
     from spatial_relationship.backends.audit import score_predictions
     from spatial_relationship.models import AblationMode
     from spatial_relationship.relation import normalize_relation
     from spatial_relationship.schemas import OrderedRelationQuery
 
     started = time.monotonic()
-    record = _base_record(row, variant)
+    record = _base_record(row, variant, detection_conditioned)
     query = OrderedRelationQuery(record['subject_a'], normalize_relation(record['relation']), record['subject_b'])
     record['relation'] = query.relation
     try:
@@ -181,11 +189,11 @@ def evaluate_row(row: Mapping[str, Any], variant: str, evaluator: Any, diagnosti
         else:
             frame_indices, predictions = evaluator.detect_video(Path(record['video_path']))
             mode = AblationMode(variant_mode(variant))
-            scored = score_predictions(record['video_path'], str(row.get('prompt', '')), query, predictions, sampled_frame_indices=frame_indices, mode=mode)
+            scored = score_predictions(record['video_path'], str(row.get('prompt', '')), query, predictions, sampled_frame_indices=frame_indices, mode=mode, condition_on_detection=detection_conditioned)
             diagnostics = scored.to_dict(include_frames=diagnostics_level.value == 'full')
             score = float(scored.video_score)
             detection = detection_diagnostics(diagnostics, query.subject, query.object)
-            provenance = {'mode': mode.value, 'temporal_aggregation': scored.aggregation_method, 'detector': 'locked_official_grit_objectdet'}
+            provenance = {'mode': mode.value, 'temporal_aggregation': scored.aggregation_method, 'detection_conditioned': detection_conditioned, 'scored_frame_count': scored.scored_frame_count, 'detector': 'locked_official_grit_objectdet'}
         return {**record, 'score': score, **detection, 'relation_score': score, 'failure_or_abstention': None, 'component_provenance': provenance, 'diagnostics': diagnostics, 'runtime_s': time.monotonic() - started}
     except Exception as exc:
         return {**record, 'score': None, 'detected_a': None, 'detected_b': None, 'detection_confidence': None, 'selected_instance_pair': None, 'relation_score': None, 'failure_or_abstention': f'{type(exc).__name__}: {exc}', 'component_provenance': None, 'diagnostics': None, 'runtime_s': time.monotonic() - started}
@@ -202,10 +210,13 @@ def main() -> int:
     parser.add_argument('--upstream', type=Path, default=Path(os.environ.get('VBENCH_AUDIT_UPSTREAM', str(REPO_ROOT.parent / 'VBench'))))
     parser.add_argument('--device', default='cuda:0')
     parser.add_argument('--diagnostics', choices=('full', 'compact'), default='compact')
+    parser.add_argument('--detection-conditioned', action='store_true', help='average only over frames where both roles were detected (plan 9.6 setting 1)')
     parser.add_argument('--validate-only', action='store_true')
     args = parser.parse_args()
 
     variant_mode(args.variant)
+    if args.variant == 'official' and args.detection_conditioned:
+        raise SystemExit('--detection-conditioned applies to the audit variants; official scores come from the locked upstream')
     rows = validate_manifest(read_jsonl(args.manifest), args.manifest, args.family, args.data_root)
     if args.validate_only:
         print(json.dumps({'status': 'VALID', 'rows': len(rows), 'family': args.family, 'variant': args.variant}))
@@ -218,7 +229,7 @@ def main() -> int:
     if args.output.exists():
         for row in read_jsonl(args.output):
             existing.add(result_key(row))
-    pending = pending_rows(rows, existing, args.variant)
+    pending = pending_rows(rows, existing, args.variant, args.detection_conditioned)
     skipped = len(rows) - len(pending)
     if not pending:
         print(json.dumps({'status': 'COMPLETE', 'variant': args.variant, 'family': args.family, 'selected': len(rows), 'evaluated': 0, 'skipped': skipped, 'succeeded': 0, 'failed': 0, 'output': str(args.output)}, ensure_ascii=False))
@@ -237,11 +248,11 @@ def main() -> int:
     succeeded = failed = 0
     with args.output.open('a', encoding='utf-8') as handle:
         for row in pending:
-            result = evaluate_row(row, args.variant, evaluator, level)
+            result = evaluate_row(row, args.variant, evaluator, level, detection_conditioned=args.detection_conditioned)
             try:
                 serialized = json.dumps(result, ensure_ascii=False, sort_keys=True, default=json_default)
             except Exception as exc:
-                result = {**_base_record(row, args.variant), 'score': None, 'detected_a': None, 'detected_b': None, 'detection_confidence': None, 'selected_instance_pair': None, 'relation_score': None, 'failure_or_abstention': f'structured evidence serialization failed: {type(exc).__name__}: {exc}', 'component_provenance': None, 'diagnostics': None, 'runtime_s': result.get('runtime_s')}
+                result = {**_base_record(row, args.variant, args.detection_conditioned), 'score': None, 'detected_a': None, 'detected_b': None, 'detection_confidence': None, 'selected_instance_pair': None, 'relation_score': None, 'failure_or_abstention': f'structured evidence serialization failed: {type(exc).__name__}: {exc}', 'component_provenance': None, 'diagnostics': None, 'runtime_s': result.get('runtime_s')}
                 serialized = json.dumps(result, ensure_ascii=False, sort_keys=True)
             handle.write(serialized + '\n')
             handle.flush()

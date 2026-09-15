@@ -5,6 +5,7 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 
 from spatial_relationship.cli import main
+from spatial_relationship.models import AblationMode
 
 
 def metadata_for(names):
@@ -24,7 +25,7 @@ def metadata_for(names):
     }
 
 
-def fake_backend(backend, videos, metadata, gpu_ids, model_weight, level, seed):
+def fake_backend(backend, videos, metadata, gpu_ids, model_weight, level, seed, **kwargs):
     return [
         {
             "video": str(video), "prompt": metadata[video.name]["prompt"],
@@ -67,6 +68,21 @@ class CliSmokeTests(unittest.TestCase):
             result = json.loads(result_path.read_text(encoding="utf-8"))[0]
             self.assertEqual((result["subject"], result["relation"], result["object"]), ("cat", "on the left of", "dog"))
             self.assertTrue(result_path.with_name("run.log").is_file())
+
+    def test_audit_variant_flags_reach_the_scoring_backend(self):
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            video = root / "arbitrary-name.mp4"
+            video.touch()
+            metadata = root / "metadata.json"
+            metadata.write_text(json.dumps(metadata_for([video.name])), encoding="utf-8")
+            code, backend = self.run_cli([
+                "--audit", "--video", str(video), "--metadata", str(metadata),
+                "--output", str(root / "out"), "--audit-mode", "ordered_role", "--detection-conditioned",
+            ])
+            self.assertEqual(code, 0)
+            self.assertEqual(backend.call_args.kwargs["mode"], AblationMode.ORDERED_ROLE)
+            self.assertTrue(backend.call_args.kwargs["condition_on_detection"])
 
     def test_batch_both_uses_same_run_id_and_gpu_list(self):
         with tempfile.TemporaryDirectory() as root:

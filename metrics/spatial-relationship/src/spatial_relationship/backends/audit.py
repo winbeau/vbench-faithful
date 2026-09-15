@@ -15,6 +15,7 @@ def score_predictions(
     *,
     sampled_frame_indices: Iterable[int] | None = None,
     mode: AblationMode = AblationMode.ORDERED_ROLE_IDENTITY_ASSIGNMENT,
+    condition_on_detection: bool = False,
 ) -> VideoAuditResult:
     prediction_list = list(predictions)
     indices = list(sampled_frame_indices) if sampled_frame_indices is not None else list(range(len(prediction_list)))
@@ -24,7 +25,9 @@ def score_predictions(
     for frame_index, raw_detections in zip(indices, prediction_list):
         detections = tuple(detection_from_raw(raw, detection_id) for detection_id, raw in enumerate(raw_detections))
         frame_results.append(evaluate_frame(query, detections, frame_index, mode=mode))
-    return aggregate_video(video, prompt, query, frame_results, indices)
+    return aggregate_video(
+        video, prompt, query, frame_results, indices, condition_on_detection=condition_on_detection
+    )
 
 
 def result_payload(result: VideoAuditResult, level: DiagnosticsLevel) -> dict[str, object]:

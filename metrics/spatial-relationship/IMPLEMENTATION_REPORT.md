@@ -108,11 +108,48 @@ The primary assignment strategy is exact label filtering, detector-confidence de
 - `backends/audit.py`: ordered-role audit scoring
 - `backends/__init__.py`
 
+## Scoring variants (plan section 9.6)
+
+`--audit-mode` and `--detection-conditioned` select the audit scoring contract. The
+default (`ordered_role_identity_assignment` over every sampled frame) is the contract
+behind the numbers already published, so the flags are additive.
+
+- `ordered_role_identity_assignment` (default): exactly one instance per role, chosen by
+  detector confidence and then stable detector order; signed geometry is evaluated on that
+  pair only.
+- `ordered_role`: signed geometry is maximised over every `(subject, object)` candidate
+  pair, i.e. the role-preserving variant without the single-instance commitment.
+- `signed_only`: signed geometry over every pair of target-labelled boxes, without role
+  preservation.
+- `official`: the unsigned re-implementation kept for source-parity checks.
+- `--detection-conditioned`: the video score averages only over frames where the detector
+  returned a candidate for both roles. Frames that were never scoreable leave the
+  denominator instead of being counted as relation violations, and
+  `detected_frame_count` / `scored_frame_count` record the change. This is plan section 9.6
+  setting 1; without it a detector drop-out is numerically indistinguishable from a wrong
+  direction, which is exactly the ambiguity the `directional_flip` CPA runs into.
+
+The counterfactual driver reaches the same knobs through `--repair-mode` /
+`--repair-detection-conditioned` (or `VBENCH_AUDIT_SPATIAL_MODE` /
+`VBENCH_AUDIT_SPATIAL_DETECTION_CONDITIONED`), records both on every scored row and in the
+generated report header, and refuses to append a second configuration into one shard file.
+
 ## Unit and counterfactual tests
 
-The local suite contains 23 tests. Twenty-two model-free tests pass and one real model parity test is skipped because the required CUDA, Detectron2/GRiT runtime, weight, and real video fixture are unavailable.
+The local suite contains 42 tests. Forty-one model-free tests pass and one real-model
+parity test is skipped because the required CUDA, Detectron2/GRiT runtime, weight, and
+real video fixture are unavailable.
 
-Covered contracts include official source geometry parity, upstream SHA/dirty gate, official metadata conversion, per-video official failure isolation, correct role, role swap, reciprocal equivalence, horizontal flip sensitivity, missing entity, identity corruption, confidence/order assignment, multi-instance distractor resistance, same-class ambiguity, temporary detection loss, random reciprocal algebra, single-video CLI smoke, batch `--both`, shared run-id, GPU-list forwarding, interrupted-run recording, diagnostics and output files.
+Covered contracts include official source geometry parity, upstream SHA/dirty gate,
+official metadata conversion, per-video official failure isolation, correct role, role
+swap, reciprocal equivalence, horizontal flip sensitivity, missing entity, identity
+corruption, confidence/order assignment, multi-instance distractor resistance, same-class
+ambiguity, temporary detection loss, random reciprocal algebra, single-video CLI smoke,
+batch `--both`, shared run-id, GPU-list forwarding, interrupted-run recording, diagnostics
+and output files. The scoring variants add: `ordered_role` recovering a relation that the
+single-instance commitment rejects, `ordered_role` still rejecting mirrored geometry,
+detection-conditioned aggregation removing drop-outs from the denominator, and
+detection-conditioned aggregation keeping direction sensitivity.
 
 Two isolated wheels were built and installed into a temporary Python 3.10 environment. The installed `spatial-relationship` entrypoint and `uv run --active --no-sync spatial-relationship --help` both succeeded.
 

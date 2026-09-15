@@ -65,6 +65,22 @@ class SpatialExperimentToolTests(unittest.TestCase):
         with self.assertRaises(runner.VariantNotReady):
             runner.variant_mode('full_temporal')
 
+    def test_role_max_signed_maps_to_the_ordered_role_mode(self):
+        runner = load_script('run_spatial_experiments.py')
+        self.assertEqual(runner.variant_mode('role_max_signed'), 'ordered_role')
+        self.assertEqual(runner.variant_mode('role_preserving'), 'ordered_role_identity_assignment')
+
+    def test_detection_conditioning_is_part_of_the_resume_key(self):
+        runner = load_script('run_spatial_experiments.py')
+        row = {'base_id': 'b1', 'derived_id': 'd1', 'intervention_family': 'directional_inversion',
+               'intervention_level': 'original', 'subject_a': 'cat', 'relation': 'left', 'subject_b': 'dog',
+               'expected_relation': True}
+        end_to_end = runner.manifest_key(row, 'role_max_signed', False)
+        conditioned = runner.manifest_key(row, 'role_max_signed', True)
+        self.assertNotEqual(end_to_end, conditioned)
+        self.assertEqual(runner.pending_rows([row], {conditioned}, 'role_max_signed', False), [row])
+        self.assertEqual(runner.pending_rows([row], {conditioned}, 'role_max_signed', True), [])
+
     def test_detection_diagnostics_preserve_selected_pair_and_confidence(self):
         runner = load_script('run_spatial_experiments.py')
         diagnostics = {'frame_results': [{'frame_index': 0, 'subject_candidate_ids': [1], 'object_candidate_ids': [2], 'assigned_subject_id': 1, 'assigned_object_id': 2, 'selected_subject_box': [0, 0, 2, 2], 'selected_object_box': [8, 0, 10, 2], 'detections': [{'detection_id': 1, 'confidence': .9}, {'detection_id': 2, 'confidence': .8}]}]}

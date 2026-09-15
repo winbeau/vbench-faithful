@@ -18,6 +18,7 @@ from vbench_audit_core.schemas import RunSummary, VideoResult
 from .backends.vbench import verify_upstream
 from .diagnostics import diagnostics_level
 from .metric import environment_record, evaluate_backend_sharded, parse_query, set_seed, upstream_path, weight_path
+from .models import AblationMode
 
 
 def _to_video_result(item: dict[str, object]) -> VideoResult:
@@ -29,6 +30,16 @@ def _to_video_result(item: dict[str, object]) -> VideoResult:
         error=item.get("error"),
         metric={key: value for key, value in item.items() if key not in reserved},
     )
+
+
+def formula_version(backend: str, args: argparse.Namespace) -> str:
+    """Name the frozen scoring contract that produced this run's numbers."""
+
+    if backend == "vbench":
+        return "vbench-1.0-frame-mean"
+    conditioned = "-detection-conditioned" if getattr(args, "detection_conditioned", False) else ""
+    mode = getattr(args, "audit_mode", AblationMode.ORDERED_ROLE_IDENTITY_ASSIGNMENT.value)
+    return f"spatial-audit-{mode}{conditioned}-v1"
 
 
 def _aggregate(results: list[dict[str, object]]) -> tuple[float | None, int]:
@@ -46,7 +57,19 @@ def _aggregate(results: list[dict[str, object]]) -> tuple[float | None, int]:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    return build_core_parser("spatial-relationship", "VBench Spatial Relationship evaluator")
+    parser = build_core_parser("spatial-relationship", "VBench Spatial Relationship evaluator")
+    parser.add_argument(
+        "--audit-mode",
+        choices=[mode.value for mode in AblationMode],
+        default=AblationMode.ORDERED_ROLE_IDENTITY_ASSIGNMENT.value,
+        help="audit scoring variant; official is the locked upstream re-implementation",
+    )
+    parser.add_argument(
+        "--detection-conditioned",
+        action="store_true",
+        help="average only over frames where both roles were detected (plan 9.6 setting 1)",
+    )
+    return parser
 
 
 def execute(args: argparse.Namespace) -> int:
@@ -87,7 +110,10 @@ def execute(args: argparse.Namespace) -> int:
     for backend in backends:
         backend_started = time.monotonic()
         try:
-            results = evaluate_backend_sharded(backend, videos, metadata, gpu_ids, model_weight, level, args.seed)
+            results = evaluate_backend_sharded(
+                backend, videos, metadata, gpu_ids, model_weight, level, args.seed,
+                mode=AblationMode(args.audit_mode), condition_on_detection=args.detection_conditioned,
+            )
         except KeyboardInterrupt:
             results = []
             for video in videos:
@@ -105,7 +131,7 @@ def execute(args: argparse.Namespace) -> int:
             summary = RunSummary(
                 metric="spatial-relationship", backend=backend, status="interrupted",
                 total=len(results), succeeded=0, failed=len(results), valid_samples=0,
-                aggregate=None, formula_version="vbench-1.0-frame-mean" if backend == "vbench" else "ordered-role-identity-first-v1",
+                aggregate=None, formula_version=formula_version(backend, args),
             )
             run_info = {
                 "experiment": "spatial-relationship evaluation",
@@ -133,7 +159,7 @@ def execute(args: argparse.Namespace) -> int:
             metric="spatial-relationship", backend=backend, status=status,
             total=len(results), succeeded=succeeded, failed=failed,
             valid_samples=valid_samples, aggregate=aggregate,
-            formula_version="vbench-1.0-frame-mean" if backend == "vbench" else "ordered-role-identity-first-v1",
+            formula_version=formula_version(backend, args),
         )
         destination = output_root / "spatial-relationship" / backend / current_run
         run_info = {

@@ -14,6 +14,7 @@ from vbench_audit_core.coordinator import run_spawn_coordinator
 from .backends.audit import result_payload, score_predictions
 from .backends.vbench import DEFAULT_WEIGHT, OfficialGritDetector, OfficialVBenchEvaluator, inspect_upstream, normalize_official_results
 from .diagnostics import DiagnosticsLevel
+from .models import AblationMode
 from .relation import normalize_relation
 from .schemas import OrderedRelationQuery
 
@@ -71,6 +72,8 @@ def evaluate_audit_batch(
     diagnostics_level: DiagnosticsLevel,
     *,
     detector: Any | None = None,
+    mode: AblationMode = AblationMode.ORDERED_ROLE_IDENTITY_ASSIGNMENT,
+    condition_on_detection: bool = False,
 ) -> list[dict[str, Any]]:
     detector = detector or OfficialGritDetector(device, model_weight, upstream_path())
     results = []
@@ -79,8 +82,14 @@ def evaluate_audit_batch(
         query = parse_query(meta)
         try:
             frame_indices, predictions = detector.detect_video(video)
-            scored = score_predictions(str(video), str(meta.get("prompt", "")), query, predictions, sampled_frame_indices=frame_indices)
+            scored = score_predictions(
+                str(video), str(meta.get("prompt", "")), query, predictions,
+                sampled_frame_indices=frame_indices, mode=mode,
+                condition_on_detection=condition_on_detection,
+            )
             payload = result_payload(scored, diagnostics_level)
+            payload["audit_mode"] = mode.value
+            payload["detection_conditioned"] = condition_on_detection
             results.append({"video": str(video), "score": scored.video_score, "status": "succeeded", "error": None, **payload})
         except Exception as exc:
             results.append(
@@ -142,6 +151,8 @@ def _worker(
     model_weight: str,
     diagnostics_level: str,
     seed: int = 42,
+    audit_mode: str = AblationMode.ORDERED_ROLE_IDENTITY_ASSIGNMENT.value,
+    condition_on_detection: bool = False,
 ) -> None:
     paths = [Path(video) for video in videos]
     try:
@@ -152,7 +163,10 @@ def _worker(
         if backend == "vbench":
             results = evaluate_vbench_batch(paths, metadata, device, Path(model_weight))
         else:
-            results = evaluate_audit_batch(paths, metadata, device, Path(model_weight), DiagnosticsLevel(diagnostics_level))
+            results = evaluate_audit_batch(
+                paths, metadata, device, Path(model_weight), DiagnosticsLevel(diagnostics_level),
+                mode=AblationMode(audit_mode), condition_on_detection=condition_on_detection,
+            )
     except Exception as exc:
         results = _failed_results(backend, paths, metadata, exc)
     Path(result_path).write_text(json.dumps({"gpu_id": gpu_id, "results": results}, ensure_ascii=False), encoding="utf-8")
@@ -166,13 +180,19 @@ def evaluate_backend_sharded(
     model_weight: Path,
     diagnostics_level: DiagnosticsLevel,
     seed: int = 42,
+    *,
+    mode: AblationMode = AblationMode.ORDERED_ROLE_IDENTITY_ASSIGNMENT,
+    condition_on_detection: bool = False,
 ) -> list[dict[str, Any]]:
     metadata_dict = {key: dict(value) for key, value in metadata.items()}
     coordinated = run_spawn_coordinator(
         _worker,
         [str(video) for video in videos],
         gpu_ids,
-        worker_args=(backend, metadata_dict, str(model_weight), diagnostics_level.value, seed),
+        worker_args=(
+            backend, metadata_dict, str(model_weight), diagnostics_level.value, seed,
+            mode.value, condition_on_detection,
+        ),
         backend=backend,
         label="spatial-relationship",
     )

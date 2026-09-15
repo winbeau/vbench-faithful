@@ -75,10 +75,25 @@ class VideoAuditResult:
     frame_results: tuple[FrameAuditResult, ...]
     video_score: float
     aggregation_method: str = "mean_over_16_officially_sampled_frames"
+    scored_frame_count: int | None = None
 
     @property
     def valid_frame_count(self) -> int:
         return sum(result.geometry is not None for result in self.frame_results)
+
+    @property
+    def detected_frame_count(self) -> int:
+        """Frames where the detector returned a candidate for both roles.
+
+        This is the denominator of the detection-conditioned aggregation: it
+        removes detector drop-outs instead of scoring them as relation
+        violations, so an abstention is no longer indistinguishable from a
+        wrong direction.
+        """
+        return sum(
+            bool(result.subject_candidate_ids) and bool(result.object_candidate_ids)
+            for result in self.frame_results
+        )
 
     @property
     def missing_subject_count(self) -> int:
@@ -102,6 +117,8 @@ class VideoAuditResult:
             "sampled_frame_indices": list(self.sampled_frame_indices),
             "frame_scores": [frame.frame_score for frame in self.frame_results],
             "valid_frame_count": self.valid_frame_count,
+            "detected_frame_count": self.detected_frame_count,
+            "scored_frame_count": self.scored_frame_count,
             "missing_subject_count": self.missing_subject_count,
             "missing_object_count": self.missing_object_count,
             "ambiguous_role_count": self.ambiguous_role_count,
