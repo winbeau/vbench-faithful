@@ -10,7 +10,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT"
 
-PY=/root/shuyuan_meng/projects/VBench/.venv/bin/python
+# Everything this run needs lives under /root/wenbiao_zhao (the winbeau branch);
+# nothing is read from or written into another user's tree.
+PY=/root/wenbiao_zhao/venvs/vbench/bin/python
 DATA=/root/wenbiao_zhao/datasets/vbench-1.0-human-preference
 CF=/root/wenbiao_zhao/datasets/counterfactual-vbench
 MANIFEST="$CF/manifest.jsonl"
@@ -19,14 +21,16 @@ SCORES="$CF/scores"
 mkdir -p "$SCORES"
 
 # Weight locations on the H100 box (none are downloaded here).
-export VBENCH_AUDIT_RAFT_WEIGHT=/root/shuyuan_meng/models/raft/raft-things.pth
+export VBENCH_AUDIT_RAFT_WEIGHT=/root/wenbiao_zhao/models/raft/raft-things.pth
 export VBENCH_AUDIT_AMT_WEIGHT=/root/.cache/vbench/amt_model/amt-s.pth
 export VBENCH_AUDIT_GRIT_WEIGHT=/root/.cache/vbench/grit_model/grit_b_densecap_objectdet.pth
 export VBENCH_AUDIT_UMT_WEIGHT=/root/.cache/vbench/umt_model/l16_ptk710_ftk710_ftk400_f16_res224.pth
 export VBENCH_AUDIT_TAG2TEXT_WEIGHT=/root/.cache/vbench/caption_model/tag2text_swin_14m.pth
 export VBENCH_AUDIT_UPSTREAM="$UPSTREAM"
 
-GPUS=(1 2 3 4 5 6)
+# GPU 6 is visible to nvidia-smi but not CUDA-available inside this container,
+# so the usable physical range is 1-5.
+GPUS=(1 2 3 4 5)
 DIMS=(dynamics_degree subject_consistency human_action spatial_relationship scene multiple_objects motion_smoothness)
 BACKENDS=(official repair)
 
