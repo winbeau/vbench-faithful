@@ -92,12 +92,19 @@ def metadata_item(dimension: str, row: dict[str, Any], annotation: dict[str, Any
         item["dimension_metadata"] = {
             "spatial_relationship": {"object_a": subject, "object_b": obj, "relationship": relation}
         }
-    elif dimension == "multiple_objects":
+    elif dimension == "multiplt_object":
         ann = annotation or {}
         raw = str(ann.get("object_en") or "").strip()
         if not raw and "parsed" in row:
             raw = " and ".join(row["parsed"].get("targets", []))
-        item["auxiliary_info"] = {"multiple_objects": {"object": raw}}
+        if not raw:
+            raise ValueError(f"no object targets for {row.get('derived_id')}")
+        # `_unwrap_object_metadata` accepts either shape; this matches the
+        # official entry-builder in multiple_objects/backends/vbench.py.
+        item["auxiliary_info"] = {
+            "object": raw,
+            "multiple_objects": {"object": raw},
+        }
     elif dimension == "scene":
         # scene_label() reads the prompt; the base prompt is the target scene.
         item["auxiliary_info"] = {"scene": {"scene": prompt}}
