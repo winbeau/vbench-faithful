@@ -29,13 +29,21 @@ claim about benchmark failure.
 ## Repair implemented
 
 The audit path decodes timed frames, estimates consecutive flow fields, forms
-velocity `v_t = flow_t / dt_t`, aligns fields with deterministic forward
-nearest-neighbour splatting, and computes acceleration and jerk-like changes.
-Magnitude change is normalized by a local median velocity scale plus `eps`;
-direction change is `1 - cosine(v_prev, v_curr)` only above the configured
-minimum motion magnitude. Per-time discontinuity is a weighted sum of these
-components, spatially summarized by robust mean/median/percentile statistics.
-Temporal aggregation is:
+velocity `v_t = flow_t / dt_t`, aligns each field along the previous flow with
+deterministic bilinear sampling, and scores two per-transition components:
+
+```text
+magnitude_t  = mean_pixels |v_t(aligned) - v_{t-1}| / (|v_t| + |v_{t-1}| + eps)
+direction_t  = mean_pixels [1 - cos(v_{t-1}, v_t)]   (only where both speeds
+                                                      exceed min_motion_magnitude)
+D_t          = magnitude_weight * magnitude_t + direction_weight * direction_t
+```
+
+`magnitude_t` is the normalised flow acceleration, so a stall, a skip and a jump
+are all measured on the same scale regardless of how fast the subject moves;
+`direction_t` is what distinguishes a genuine reversal from a stall or a jump.
+`D_t` is a weighted sum of the two components (plan section 13.5, "acceleration
++ direction change"). Temporal aggregation is:
 
 ```text
 D_mean = mean(D_t)
@@ -44,11 +52,21 @@ D_video = (1 - tail_weight) * D_mean + tail_weight * D_tail
 score = exp(-D_video)
 ```
 
-Defaults are `eps=1e-3`, `min_motion_magnitude=0.05`,
-`magnitude_weight=0.7`, `direction_weight=0.3`, `tail_quantile=0.90`, and
-`tail_weight=0.25`. They are configurable engineering defaults, not tuned
-values. A sequence with fewer than three motion fields returns a finite score
-of `1.0` with an explicit diagnostic status.
+Defaults are `eps=1e-3`, `min_motion_magnitude=0.05`, `magnitude_weight=0.7`,
+`direction_weight=0.3`, `tail_quantile=0.90`, and `tail_weight=0.25`. They are
+configurable engineering defaults, not tuned values. A sequence with fewer than
+three motion fields returns a finite score of `1.0` with an explicit diagnostic
+status.
+
+**Correction (2026-09-15).** The first version of this estimator scored the
+temporal *difference* of `magnitude_t` and never read `direction_t`. Because
+`magnitude_t` saturates near 1 for any large change, a hold-and-jump
+(`jerk_2_duplicate_skip`) and a local reversal (`jerk_3_local_reverse`) of
+similar length produced the same `D_video`, and the declared level-2 >
+level-3 ordering of plan section 13.3 was not realisable: on canonical constant
+and curved trajectories the two levels tied or inverted. `D_t` now follows the
+plan's "acceleration + direction change" Full variant, and
+`tests/test_temporal_jerk_ladder.py` pins the strict ordering.
 
 ## Difference from Dynamic Degree
 

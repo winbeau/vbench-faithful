@@ -26,6 +26,8 @@ class MotionSmoothnessConfig:
     min_motion_magnitude: float = 0.05
     tail_quantile: float = 0.90
     tail_weight: float = 0.25
+    magnitude_weight: float = 0.7
+    direction_weight: float = 0.3
 
     def __post_init__(self) -> None:
         if not math.isfinite(self.eps) or self.eps <= 0:
@@ -36,6 +38,12 @@ class MotionSmoothnessConfig:
             raise ValueError("tail_quantile must be in [0, 1]")
         if not math.isfinite(self.tail_weight) or not 0.0 <= self.tail_weight <= 1.0:
             raise ValueError("tail_weight must be in [0, 1]")
+        if not math.isfinite(self.magnitude_weight) or self.magnitude_weight < 0:
+            raise ValueError("magnitude_weight must be finite and non-negative")
+        if not math.isfinite(self.direction_weight) or self.direction_weight < 0:
+            raise ValueError("direction_weight must be finite and non-negative")
+        if self.magnitude_weight == 0.0 and self.direction_weight == 0.0:
+            raise ValueError("at least one of magnitude_weight and direction_weight must be positive")
 
 
 @dataclass(frozen=True)

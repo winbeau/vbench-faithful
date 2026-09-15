@@ -33,7 +33,12 @@ def _motion_worker(result_path: str, gpu_id: int, videos: list[str], backend: st
             from .models import RaftFlowEstimator, decode_timed_frames
             from vbench_audit_core.upstream import resolve_upstream_path
             estimator = RaftFlowEstimator(device, Path(weight), Path(str(config.get("upstream") or resolve_upstream_path())))
-            audit_config = MotionSmoothnessConfig(tail_quantile=float(config.get("tail_quantile", 0.9)), tail_weight=float(config.get("tail_weight", 0.25)))
+            audit_config = MotionSmoothnessConfig(
+                tail_quantile=float(config.get("tail_quantile", 0.9)),
+                tail_weight=float(config.get("tail_weight", 0.25)),
+                magnitude_weight=float(config.get("magnitude_weight", 0.7)),
+                direction_weight=float(config.get("direction_weight", 0.3)),
+            )
             results = []
             for video in paths:
                 try:
@@ -52,7 +57,12 @@ def evaluate_backend_sharded(backend: str, videos: list[Path], gpu_ids: list[int
     cfg = config or MotionSmoothnessConfig()
     return run_spawn_coordinator(
         _motion_worker, [str(video) for video in videos], gpu_ids,
-        worker_args=(backend, str(weight), {"tail_quantile": cfg.tail_quantile, "tail_weight": cfg.tail_weight}, seed),
+        worker_args=(backend, str(weight), {
+            "tail_quantile": cfg.tail_quantile,
+            "tail_weight": cfg.tail_weight,
+            "magnitude_weight": cfg.magnitude_weight,
+            "direction_weight": cfg.direction_weight,
+        }, seed),
         backend=backend, label="motion-smoothness",
     ).results
 
@@ -300,10 +310,11 @@ def analyze_motion_fields(
             },
         }
 
-    relative_maps: list[np.ndarray] = []
-    relative_masks: list[np.ndarray] = []
-    state_change_t: list[float] = []
+    magnitude_t: list[float] = []
     direction_change_t: list[float] = []
+    valid_ratios: list[float] = []
+    spatial_medians: list[float] = []
+    spatial_p90s: list[float] = []
     for index in range(1, len(velocities)):
         current_aligned, aligned_mask = align_motion_field(
             velocities[index], flows[index - 1], field_masks[index]
@@ -316,9 +327,11 @@ def analyze_motion_fields(
             current_magnitude + previous_magnitude + cfg.eps
         )
         relative[~mask] = 0.0
-        relative_maps.append(relative)
-        relative_masks.append(mask)
-        state_change_t.append(_spatial_stats(relative, mask)[0])
+        mean, median, p90, valid_ratio = _spatial_stats(relative, mask)
+        magnitude_t.append(mean)
+        spatial_medians.append(median)
+        spatial_p90s.append(p90)
+        valid_ratios.append(valid_ratio)
 
         direction_mask = mask & (previous_magnitude >= cfg.min_motion_magnitude) & (
             current_magnitude >= cfg.min_motion_magnitude
@@ -334,22 +347,18 @@ def analyze_motion_fields(
             _spatial_stats(np.clip(1.0 - cosine, 0.0, 2.0), direction_mask)[0]
         )
 
-    discontinuities: list[float] = []
-    valid_ratios: list[float] = []
-    spatial_medians: list[float] = []
-    spatial_p90s: list[float] = []
-    for index in range(1, len(relative_maps)):
-        current_aligned, current_valid = _bilinear_sample(
-            relative_maps[index], flows[index - 1], relative_masks[index]
-        )
-        mask = relative_masks[index - 1] & current_valid
-        variation = np.abs(current_aligned - relative_maps[index - 1])
-        mean, median, p90, valid_ratio = _spatial_stats(variation, mask)
-        discontinuities.append(mean)
-        valid_ratios.append(valid_ratio)
-        spatial_medians.append(median)
-        spatial_p90s.append(p90)
-
+    # Full variant (plan 13.5): per-time discontinuity is the weighted sum of the
+    # normalised magnitude change (`relative`, i.e. flow acceleration) and the
+    # direction change, aggregated with mean + upper tail.  The previous
+    # estimator aggregated a temporal *difference* of the already-saturated
+    # magnitude change and never read `direction_change_t`, so a local reversal
+    # and a hold-and-jump of similar length produced the same D_video and the
+    # declared level-2 > level-3 ordering was not realisable.  The direction
+    # term is what separates an actual reversal from a stall.
+    discontinuities = [
+        cfg.magnitude_weight * magnitude + cfg.direction_weight * direction
+        for magnitude, direction in zip(magnitude_t, direction_change_t)
+    ]
     d_mean, d_tail, d_video = aggregate_temporal_discontinuity(discontinuities, cfg)
     score = discontinuity_to_score(d_video)
     diagnostics = {
@@ -362,11 +371,12 @@ def analyze_motion_fields(
         "valid_pixel_ratio": float(np.mean(valid_ratios)) if valid_ratios else 0.0,
         "mean_discontinuity": d_mean,
         "tail_discontinuity": d_tail,
+        "magnitude_discontinuity": float(np.mean(magnitude_t)) if magnitude_t else 0.0,
         "direction_discontinuity": float(np.mean(direction_change_t)) if direction_change_t else 0.0,
         "D_video": d_video,
         "score": score,
         "D_t": discontinuities,
-        "state_change_t": state_change_t,
+        "state_change_t": magnitude_t,
         "direction_change_t": direction_change_t,
         "spatial_median_t": spatial_medians,
         "spatial_p90_t": spatial_p90s,

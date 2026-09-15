@@ -24,6 +24,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--model-weight")
     parser.add_argument("--tail-quantile", type=float, default=0.90)
     parser.add_argument("--tail-weight", type=float, default=0.25)
+    parser.add_argument("--magnitude-weight", type=float, default=0.7)
+    parser.add_argument("--direction-weight", type=float, default=0.3)
     return parser
 
 
@@ -33,7 +35,12 @@ def main(argv: list[str] | None = None) -> int:
         videos = enumerate_videos(args.video, args.video_dir)
         metadata_path = find_metadata(args.video, args.video_dir, args.metadata)
         metadata = load_metadata(metadata_path, videos)
-        config = MotionSmoothnessConfig(tail_quantile=args.tail_quantile, tail_weight=args.tail_weight)
+        config = MotionSmoothnessConfig(
+            tail_quantile=args.tail_quantile,
+            tail_weight=args.tail_weight,
+            magnitude_weight=args.magnitude_weight,
+            direction_weight=args.direction_weight,
+        )
         gpu_ids = parse_gpu(args.gpu)
         device_info = check_cuda(gpu_ids)
     except (AuditError, OSError, RuntimeError, ValueError) as exc:
