@@ -9,7 +9,7 @@ Scoring code SHA: `66c4a99dba05aceaebe80276ffbffc607c3d2e40`.
 
 | dimension | family | bases | clips (test) | Official CPA | Repair CPA | delta |
 |---|---|---:|---:|---:|---:|---:|
-| dynamics_degree | `fps_resampling` | 40 | 120 | 0.8333 | 0.8444 | +0.0111 |
+| dynamics_degree | `fps_resampling` | 40 | 120 | 0.8333 | 0.7722 | -0.0611 |
 | subject_consistency | `temporal_relocation` | 25 | 80 | 0.5917 | 0.8500 | +0.2583 |
 | human_action | `filename_invariance` | 25 | 60 | 1.0000 | 1.0000 | +0.0000 |
 | spatial_relationship | `directional_flip` | 40 | 60 | 0.3667 | 0.0667 | -0.3000 |
@@ -27,7 +27,7 @@ Repair CV of 0 with a large Official CV is the actual result.
 
 | dimension | Official CV | Repair CV | Official CPA | Repair CPA |
 |---|---:|---:|---:|---:|
-| dynamics_degree | 0.3177 | 0.2360 | 0.8333 | 0.8444 |
+| dynamics_degree | 0.3177 | 0.1822 | 0.8333 | 0.7722 |
 | human_action | 1.4142 | 0.0000 | 1.0000 | 1.0000 |
 
 ## Coverage

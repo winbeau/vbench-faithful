@@ -28,15 +28,17 @@ CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`.
 | scene | environment_coverage | ordered | 25 | 125 | 0.3850 | 0.9300 | +0.5450 | [0.840, 0.985] |
 | subject_consistency | temporal_relocation | mixed | 25 | 100 | 0.5917 | 0.8500 | +0.2583 | [0.758, 0.933] |
 | multiplt_object | weakest_object_visibility | mixed | 25 | 150 | 0.5967 | 0.7633 | +0.1666 | [0.677, 0.830] |
-| dynamics_degree | fps_resampling | invariance | 40 | 160 | 0.8333 | 0.8444 † | +0.0111 | [0.739, 0.933] |
+| dynamics_degree | fps_resampling | invariance | 40 | 160 | 0.8333 | 0.7722 | −0.0611 | [0.667, 0.867] |
 | human_action | filename_invariance | invariance | 25 | 75 | 1.0000 | 1.0000 | +0.0000 | — |
 | motion_smoothness | temporal_jerk | ordered | 25 | 125 | 0.8300 | 0.7250 | −0.1050 | [0.650, 0.790] |
 | spatial_relationship | directional_flip | ordered | 40 | 80 | 0.3667 | 0.0667 | −0.3000 | [0.000, 0.167] |
 
-† The `dynamics_degree` Repair column is the **archived v1** (`d/dt`) measurement.
-The v2 repair (`d/dt**0.5`) is the one that satisfies the contract; its numbers,
-and why its CPA is *lower* despite being correct, are in the v1/v2 section below.
-For this invariance family CPA is non-diagnostic — read the exponent, not the CPA.
+† The `dynamics_degree` Repair column is the **v2 shipped repair**
+(`d/dt**p`, lag-calibrated). The archived v1 (`d/dt`) scored CPA 0.8444 /
+Δ +0.0111 and is kept at
+`scores/archive/dynamics_degree__repair_v1_archived.jsonl`. **v2 is the variant
+that satisfies the contract yet reports the *lower* CPA** — for this invariance
+family CPA is non-diagnostic, so read the exponent, not the CPA.
 
 **This table must not be read on its own.** Seven independent reviews
 (`<dimension>.review.md`) found that for most rows the composite CPA is either
@@ -49,26 +51,28 @@ non-diagnostic or measures something other than the contract.
 | `scene` | **Not a Repair win.** The two headline numbers are mutually inconsistent, and the only informative number is the Official one: the official Scene metric cannot recover the base video it was given. | Official is globally blind to which video it scored |
 | `spatial_relationship` | **Not "Repair is worse".** Both numbers are artefacts of an unverified premise: the repair has no evidence on 79.4% of frames, and for most bases `original > flip` is false on this source. The Official number is exactly what upstream must produce, because that code never reads the sign of the geometry. | the family's premise fails; the fixture needs redesign |
 | `multiplt_object` | Sensitivity half is a real Repair win; the **invariance half is a Repair loss** (0.00 vs Official 0.60). The composite nets a win against a loss. | win on ordering, loss on temporal conjunction |
-| `dynamics_degree` | Composite CPA is non-diagnostic and its sign is not trustworthy. The family's signed exponent: Official `+0.491`, archived repair `−0.481` — the same violation mirrored. The v2 repair (`d/dt**0.5`) gives `−0.011`. | see the v1/v2 section |
+| `dynamics_degree` | Composite CPA is non-diagnostic and its sign is not trustworthy. Signed exponent (target 0): Official `+0.491`, archived v1 repair `−0.511` — the same violation mirrored — and the shipped v2 repair `+0.019`. v2 satisfies the contract yet scores the **lower** CPA. | v2 fixes the exponent; CPA cannot see it |
 | `human_action` | **Unfalsifiable by construction.** The filename *is* the Official target label, so the invariance expectation is unsatisfiable for Official; the Repair target comes from metadata, so all three levels share one query and one byte-identical video and CV 0 is an identity. | the family tests nothing; needs redesign |
 | `motion_smoothness` | The deficit is real on the declared ladder, but the report misdescribes it (pure ordered family reported as mixed), the deficit is partly structural in the Audit estimator (it ties or inverts `jerk_2` vs `jerk_3`, which the contract requires to be strict), and the missing paired interval means −0.1050 is quoted at unsupported precision. | real deficit, under-evidenced |
 | `subject_consistency` | Pooled CPA is dominated by the easy sensitivity half; the invariance half is ≤11/60 (Official) vs ≤42/60 (Repair). | must be reported split by contract half |
 
-## `dynamics_degree`: v1 shipped repair vs v2 measured-exponent repair
+## `dynamics_degree`: archived v1 vs shipped v2 (measured exponent)
 
 The contract is `score independent of sampling interval`, i.e. a log-log slope
 `p = 0` against inter-frame interval. Computed from the archived scores and the
 `v2/` re-measurement on the scoring host:
 
-| backend | fitted p (target 0) | within-base CV | test level profile (fps8 → fps2) |
-|---|---:|---:|---|
-| Official | **+0.4908** | 0.3177 | 16.51 → 19.72 → 24.25 → 32.87 |
-| Repair v1 (`d/dt`, in Table 2) | **−0.5107** | 0.2360 | 0.2632 → 0.2375 → 0.1936 → 0.1311 |
-| Repair v2 `fixed1` (`d/dt**1`, control) | −0.5107 | 0.2360 | identical to v1 — the fix is behaviour-preserving at exponent 1 |
-| Repair v2 `fixed05` (`d/dt**0.5`) | **−0.0107** | 0.1822 | 0.0930 → 0.0970 → 0.0968 → 0.0927 |
+| backend | fitted p (test, target 0) | within-base CV | tie-aware CPA | test level profile (fps8 → fps2) |
+|---|---:|---:|---:|---|
+| Official | **+0.4908** | 0.3177 | 0.8333 | 16.51 → 19.72 → 24.25 → 32.87 |
+| Repair v1 (`d/dt`, archived) | **−0.5107** | 0.2360 | 0.8444 | 0.2632 → 0.2375 → 0.1936 → 0.1311 |
+| Repair v2 `fixed1` (`d/dt**1`, control) | −0.5107 | 0.2360 | — | identical to v1 — the fix is behaviour-preserving at exponent 1 |
+| **Repair v2 `fixed05` (`d/dt**0.5`)** | **+0.0187** | **0.1822** | **0.7722** | 0.0878 → 0.0910 → 0.0932 → 0.0906 |
 
 `fixed1` reproducing v1 exactly is the control that the v2 plumbing changes
-nothing else. `fixed05` removes the frame-rate dependence.
+nothing else. `fixed05` is the shipped repair and removes the frame-rate
+dependence: `p` moves from −0.511 to **+0.019** against a target of 0, and the
+level profile flattens.
 
 Two caveats carried by the result itself:
 
@@ -79,16 +83,20 @@ Two caveats carried by the result itself:
 2. It is an **aggregate-level** fix only: per-base `fps2/fps8` median is still
    1.284, so individual clips remain dispersed.
 
-Note also that v2's tie-aware CPA (0.7722) is *lower* than v1's (0.8444) even
-though v2 is the one that satisfies the contract — a direct demonstration that
-CPA is anti-correlated with the contract in this family.
+**v2 satisfies the contract yet scores a *lower* CPA than the broken v1**
+(0.7722 vs 0.8444, Δ = −0.0611 against Official 0.8333). That is the clearest
+single demonstration that a tie-margin CPA is anti-correlated with the contract
+in this family, and the reason the exponent rather than the CPA is the headline
+here.
 
 ## What can still be claimed
 
 - **No dimension currently supports an unqualified "the repair is better" claim.**
   `scene`, `human_action` and `spatial_relationship` fail on family design;
   `multiplt_object` is a win on one contract half and a loss on the other;
-  `dynamics_degree` is an invariance family where CPA cannot adjudicate;
+  `dynamics_degree` is an invariance family where CPA cannot adjudicate — its
+  shipped v2 repair does satisfy the contract (`p=+0.019`), but it can only be
+  claimed on the exponent, never on CPA;
   `motion_smoothness` is a real deficit.
 - The most defensible positive result is **`subject_consistency` reported split by
   contract half**, where the invariance half improves from ≤11/60 to ≤42/60.

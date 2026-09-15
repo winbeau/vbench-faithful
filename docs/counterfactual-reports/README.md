@@ -17,20 +17,24 @@ files live in `<counterfactual-vbench>/reports/`. Machine-readable form:
 | `scene` | `environment_coverage` | 25 | 125 | 0.3850 | **0.9300** | **+0.5450** | [0.840, 0.985] |
 | `subject_consistency` | `temporal_relocation` | 25 | 100 | 0.5917 | **0.8500** | **+0.2583** | [0.758, 0.933] |
 | `multiplt_object` | `weakest_object_visibility` | 25 | 150 | 0.5967 | **0.7633** | **+0.1666** | [0.677, 0.830] |
-| `dynamics_degree` | `fps_resampling` | 40 | 160 | 0.8333 | 0.8444 | +0.0111 | [0.739, 0.933] |
+| `dynamics_degree` | `fps_resampling` | 40 | 160 | 0.8333 | 0.7722 | −0.0611 | [0.667, 0.867] |
 | `human_action` | `filename_invariance` | 25 | 75 | 1.0000 | 1.0000 | +0.0000 | — |
 | `motion_smoothness` | `temporal_jerk` | 25 | 125 | 0.8300 | 0.7250 | **−0.1050** | [0.650, 0.790] |
 | `spatial_relationship` | `directional_flip` | 40 | 80 | 0.3667 | 0.0667 | **−0.3000** | [0.000, 0.167] |
 
 `delta` is Repair minus Official on the test split. Intervals are 95% cluster
-bootstraps over `base_id` (2 000 resamples). Coverage is complete for every
-dimension except `human_action` (48/60 test clips scored on both backends).
+bootstraps over `base_id` (2 000 resamples). Coverage is **100%** on both
+backends for all seven dimensions (the earlier `human_action` 48/60 gap was a
+construction bug and is fixed).
 
 ## How to read this table
 
-**Three monotone families are genuine Repair wins with non-overlapping
-intervals**: `scene` (+0.545), `subject_consistency` (+0.258), `multiplt_object`
-(+0.167).
+**Only `subject_consistency` (+0.258) survives as a Repair win**, and only when
+reported split by contract half. `scene` (+0.545) **must not** be quoted as a
+win: its own review shows the two headline numbers are mutually inconsistent
+and the only informative number is the Official one. `multiplt_object`
+(+0.1666) is a win on the sensitivity half net of a **loss** on the invariance
+half. See `CONSOLIDATED.md` for the per-dimension verdicts.
 
 **One family is a genuine Repair loss**, reported as-is: `motion_smoothness`
 (−0.105). `spatial_relationship` (−0.300) must be read as **neither a loss nor a
@@ -46,7 +50,7 @@ and is also sign-blind. Use the dispersion:
 | dimension | Official CV | Repair CV | reading |
 |---|---:|---:|---|
 | `human_action` | 1.4142 | **0.0000** | Official swings with the filename; Repair is *exactly* filename-invariant — **see the caveat below** |
-| `dynamics_degree` | 0.3177 | 0.2360 | see the exponent warning below |
+| `dynamics_degree` | 0.3177 | 0.1822 | v2 repair; see the exponent section below |
 
 ### `human_action`'s CV 0 is an identity, not a result
 
@@ -60,31 +64,35 @@ its three levels share one query *and* one byte-identical video and CV 0 follows
 by construction. That shows the Repair reads its query from metadata; it does
 **not** show the Repair responds to the query. See `human_action.review.md`.
 
-### `dynamics_degree` is not a Repair win
+### `dynamics_degree`: v2 repair fixes the contract, and CPA still disagrees
 
-Its CPA row (`+0.0111`) is within noise and the family's own signed diagnostic
-contradicts it. The contract is `score independent of the sampling interval`,
-i.e. a log-log slope `p = 0` against inter-frame interval:
+Its CPA row is non-diagnostic. The contract is `score independent of the sampling
+interval`, i.e. a log-log slope `p = 0` against inter-frame interval:
 
-| backend | fitted `p` |
-|---|---:|
-| official | **+0.4908** |
-| repair | **−0.4813** |
+| backend | fitted `p` (target 0) | within-base CV | tie-aware CPA |
+|---|---:|---:|---:|
+| official | **+0.4908** | 0.3177 | 0.8333 |
+| repair v1 (`d/dt`, archived) | **−0.5107** | 0.2360 | 0.8444 |
+| **repair v2 (`d/dt**0.5`, shipped)** | **+0.0187** | **0.1822** | 0.7722 |
 
 Official's raw flow grows like `dt**+0.49`, so the same trajectory scores about
-2x higher at 2 fps than at 8 fps. The shipped repair divides displacement by `dt`
-once, giving `dt**(p−1)` = `dt**−0.48` — **the same violation with the opposite
-sign, not a fix**. Coefficient of variation is unsigned and cannot tell those two
-apart, which is why its apparent improvement is not evidence.
+2x higher at 2 fps than at 8 fps. The **archived** v1 repair divided displacement
+by `dt` once, giving `dt**(p−1)` = `dt**−0.51` — the same violation with the
+opposite sign, not a fix. Coefficient of variation is unsigned and cannot tell
+those two apart, which is why v1's apparent improvement was not evidence.
 
-A fixed exponent of 0.5 (the diffusive law `displacement ~ sqrt(dt)` that the
-40-base bootstrap supports, CI `[+0.417, +0.651]`) removes the dependence from the
-reported aggregate: the test-split level profile becomes `1 / 1.042 / 1.040 /
-0.996`, slope `−0.011`, against `+0.458` (Official) and `−0.511` (the archived
-repair). Individual clips stay dispersed — per-base `fps2/fps8` median `1.284` —
-so this is an aggregate-level fix only, and `dynamics_degree.md` now leads with
-the level profile, the calibrated exponent and the per-clip dispersion instead of
-the composite CPA.
+The **shipped** v2 repair fits the exponent and applies `d / dt**p`; with the
+diffusive exponent 0.5 (bootstrap CI `[0.417, 0.651]` over the same 40 bases) the
+aggregate slope moves to **+0.0187** and the level profile flattens
+(`0.0878 → 0.0910 → 0.0932 → 0.0906`). Individual clips stay dispersed — per-base
+`fps2/fps8` median `1.284` — so this is an aggregate-level fix, and the exponent
+is a default rather than an independently calibrated constant.
+
+**v2 satisfies the contract yet scores the *lower* CPA** (0.7722 vs v1's 0.8444,
+against Official 0.8333). This is the sharpest illustration in the whole audit
+that a tie-margin CPA is anti-correlated with the contract for a same-rank
+family, so `dynamics_degree.md` leads with the level profile and the exponent,
+not the composite CPA.
 
 ### `spatial_relationship` is neither a Repair win nor a Repair loss
 
