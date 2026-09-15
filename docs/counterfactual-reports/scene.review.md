@@ -511,3 +511,11 @@ Ordered by what unblocks the paper.
   repository's frozen selection. Every command in this review ran from that
   checkout; the report generator was copied to the host with `scp` into `/tmp`
   and never written into the dataset tree.
+- After this review was committed, the three copies were re-checked and are at
+  one revision: local working tree, `origin/winbeau` and
+  `/root/wenbiao_zhao/vbench-audit` all carry this text on top of `3a4586b`,
+  which is also the revision at which `scene.md` (`1c7d4152…`),
+  `run_dimension.py` (`4ae87492…`), `cpa.py` (`33d7d8f1…`),
+  `score.py` (`42f28b3d…`) and `configs/counterfactual/bases_published.jsonl`
+  (`29f8d439…`) were compared SHA-256 prefix by prefix across the three trees and
+  found identical.
