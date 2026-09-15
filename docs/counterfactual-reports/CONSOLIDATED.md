@@ -25,26 +25,39 @@ Current snapshot: `dynamics_degree` scored with the shipped v2 repair (`d/dt**p`
 predicate (`687d19a` + the scoring-code commit it names); all other dimensions at
 scoring code `a044ac9`; coverage 100% on both backends for all seven dimensions.
 
-CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`.
+CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`. The last
+two columns are the interval that actually decides a row: the **paired** delta
+resamples each `base_id` cluster once and re-scores *both* backends on it, so it
+is not the difference of two marginal intervals (which overlap even when the
+paired interval excludes zero). `scripts/counterfactual/summarize.py` generates
+these from the single frozen score tree; `table2.csv` carries the same numbers.
 
-| dimension | family | type | bases | clips | Official | Repair | delta | Repair 95% CI |
-|---|---|---|---:|---:|---:|---:|---:|---|
-| scene | environment_coverage | ordered | 25 | 125 | 0.3850 | 0.9300 | +0.5450 | [0.840, 0.985] |
-| subject_consistency | temporal_relocation | mixed | 25 | 100 | 0.5917 | 0.8500 | +0.2583 | [0.758, 0.933] |
-| multiplt_object ‡ | weakest_object_visibility | mixed | 25 | 150 | 0.5967 | 0.7633 | +0.1666 | [0.677, 0.830] |
-| dynamics_degree † | fps_resampling | invariance | 40 | 160 | 0.8333 | 0.7722 | −0.0611 | [0.667, 0.867] |
-| human_action | filename_invariance | invariance | 25 | 75 | 1.0000 | 1.0000 | +0.0000 | — |
-| motion_smoothness | temporal_jerk | ordered | 25 | 125 | 0.8300 | 0.8800 | +0.0500 | [0.805, 0.945] |
-| spatial_relationship | directional_flip | ordered | 40 | 80 | 0.3667 | 0.0667 | −0.3000 | [0.000, 0.167] |
+| dimension | family | type | bases | clips | Official | Repair | delta | paired delta 95% CI | significant |
+|---|---|---|---|---:|---:|---:|---:|---:|---|
+| scene | environment_coverage | ordered | 25 | 125 | 0.3850 | 0.9300 | +0.5450 | [+0.425, +0.680] | yes |
+| subject_consistency | temporal_relocation | mixed | 25 | 100 | 0.5917 | 0.8500 | +0.2583 | [+0.158, +0.350] | yes |
+| multiplt_object (see note) | weakest_object_visibility | mixed | 25 | 150 | 0.5967 | 0.7633 | +0.1666 | [+0.090, +0.250] | yes (composite) |
+| motion_smoothness | temporal_jerk | ordered | 25 | 125 | 0.8300 | 0.8800 | +0.0500 | [-0.015, +0.110] | parity |
+| dynamics_degree (see note) | fps_resampling | invariance | 40 | 160 | 0.8333 | 0.7722 | -0.0611 | [-0.150, +0.017] | parity |
+| human_action | filename_invariance | invariance | 25 | 75 | 1.0000 | 1.0000 | +0.0000 | [0.000, 0.000] | degenerate |
+| spatial_relationship | directional_flip | ordered | 40 | 80 | 0.3667 | 0.0667 | -0.3000 | [-0.467, -0.133] | yes (Repair worse) |
 
-† The `dynamics_degree` Repair column is the **v2 shipped repair**
+**Read `significant` as a statement about the CPA statistic only, never about the
+contract.** Two rows are significant yet unusable (`scene`,
+`spatial_relationship` - their family premise fails); one is parity yet is the
+real fix (`dynamics_degree` v2 satisfies the contract while CPA cannot see it);
+and one is parity because a defect was successfully repaired
+(`motion_smoothness` moved from -0.105 to +0.050 once `direction_change_t`
+entered the discontinuity).
+
+**`dynamics_degree` note —** the Repair column is the **v2 shipped repair**
 (`d/dt**p`, lag-calibrated). The archived v1 (`d/dt`) scored CPA 0.8444 /
 Δ +0.0111 and is kept at
 `scores/archive/dynamics_degree__repair_v1_archived.jsonl`. **v2 is the variant
 that satisfies the contract yet reports the *lower* CPA** — for this invariance
 family CPA is non-diagnostic, so read the exponent, not the CPA.
 
-‡ The `multiplt_object` composite is a mixture, not a Repair win or loss. Split
+**`multiplt_object` note —** the composite is a mixture, not a Repair win or loss. Split
 by contract half (`multiplt_object.md`): sensitivity 0.5371 → 0.8171 (paired
 Δ **+0.2800**, 95% CI [+0.1886, +0.3771] — a genuine win) and the tie-based
 invariance pair 0.6000 → 0.0000 (paired Δ −0.6000, [−0.8000, −0.4000]). That
@@ -64,7 +77,7 @@ mean confidence 0.3510 and the official 0.5 gate still accepts it in 6–15 of 1
 frames, so no confidence-level rule can separate "present" from "suppressed".
 See `multiplt_object.review.md` §3.
 
-†† The `motion_smoothness` row is the **direction-aware estimator**
+**`motion_smoothness` note —** this row is the **direction-aware estimator**
 (`feeb770`); the archived v1 row (`a044ac9`) scored 0.8300 / 0.7250
 (Δ −0.1050). The v1 paired delta CI was [−0.200, −0.020], so that deficit was
 significant; the shipped row's paired delta is **+0.0500 with 95% CI
@@ -86,7 +99,7 @@ non-diagnostic or measures something other than the contract.
 | `dynamics_degree` | Composite CPA is non-diagnostic and its sign is not trustworthy. Signed exponent (target 0): Official `+0.491`, archived v1 repair `−0.511` — the same violation mirrored — and the shipped v2 repair `+0.019`. v2 satisfies the contract yet scores the **lower** CPA. | v2 fixes the exponent; CPA cannot see it |
 | `human_action` | **Unfalsifiable by construction.** The filename *is* the Official target label, so the invariance expectation is unsatisfiable for Official; the Repair target comes from metadata, so all three levels share one query and one byte-identical video and CV 0 is an identity. | the family tests nothing; needs redesign |
 | `motion_smoothness` | The review found a **structural estimator defect**: it never scored direction change, so a hold-and-jump (`jerk_2`) tied or inverted a local reversal (`jerk_3`), which the contract requires to be strict. That is fixed (`feeb770`) and the dimension re-scored: the repair now beats Official on CPA (0.8800 vs 0.8300), on strict order (10/20 vs 7/20) and on Spearman (0.815 vs 0.765). The paired delta CI crosses zero ([−0.015, +0.110]), so this is parity, not a win. | the v1 deficit is fixed; the shipped repair matches Official on the declared ladder |
-| `subject_consistency` | Pooled CPA is dominated by the easy sensitivity half; the invariance half is ≤11/60 (Official) vs ≤42/60 (Repair). | must be reported split by contract half |
+| `subject_consistency` | Pooled CPA is dominated by the easy sensitivity half. Split by contract half on test, the trade is explicit: sensitivity 0.9333 (Official) vs 0.7833 (Repair) — Official is *better* at what is easy — but **position invariance 0.2500, 95% CI [0.150, 0.350] (15/60 pairs, well below chance) — vs Repair 0.9167 [0.817, 1.000] (55/60)**. Official is systematically *anti*-invariant (its fixed first-frame anchor makes the same corruption score differently by position); Repair nearly removes it. | the invariance half is the win, and it must be quoted on its own |
 
 ## `dynamics_degree`: archived v1 vs shipped v2 (measured exponent)
 

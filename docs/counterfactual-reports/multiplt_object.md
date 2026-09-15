@@ -6,7 +6,7 @@
 - bases: 25 (dev 5, test 20)
 - derived clips: 150 (dev 30, test 120)
 - levels: `conjunction_control`, `occlusion_100`, `occlusion_075`, `occlusion_050`, `occlusion_025`, `occlusion_000`
-- code SHA: `a660756` (the tree it names is content-identical to the scoring tree)
+- code SHA: `5c4a13091893273510794e45872eac3c59c3ad21`
 - repair variant: `ordered_role_identity_assignment` (detection-conditioned: false)
 
 ## Score coverage
@@ -29,12 +29,16 @@ CPA is dominated by whichever half is easier, so each is scored
 separately, and each half carries its own cluster-bootstrap interval:
 the composite's interval says nothing about either half.
 
-| backend | half | pairs | CPA (dev margin) | CPA (zero margin) | 95% CI |
-|---|---|---:|---:|---:|---|
-| official | sensitivity | 350 | 0.5371 | 0.5371 | [0.4171, 0.6457] |
-| official | invariance | 25 | 0.6000 | 0.6000 | [0.4000, 0.8000] |
-| repair | sensitivity | 350 | 0.8171 | 0.8171 | [0.7343, 0.8829] |
-| repair | invariance | 25 | 0.0000 | 0.0000 | [0.0000, 0.0000] |
+| backend | split | half | pairs | CPA (dev margin) | CPA (zero margin) | 95% CI |
+|---|---|---|---:|---:|---:|---|
+| official | dev | sensitivity | 70 | 0.3000 | 0.3000 | [0.0571, 0.5429] |
+| official | dev | invariance | 5 | 0.6000 | 0.6000 | [0.2000, 1.0000] |
+| official | test | sensitivity | 280 | 0.5964 | 0.5964 | [0.4750, 0.7036] |
+| official | test | invariance | 20 | 0.6000 | 0.6000 | [0.4000, 0.8000] |
+| repair | dev | sensitivity | 70 | 0.8143 | 0.8143 | [0.6143, 0.9714] |
+| repair | dev | invariance | 5 | 0.0000 | 0.0000 | [0.0000, 0.0000] |
+| repair | test | sensitivity | 280 | 0.8179 | 0.8179 | [0.7250, 0.8893] |
+| repair | test | invariance | 20 | 0.0000 | 0.0000 | [0.0000, 0.0000] |
 
 Per-half paired difference (the same `base_id` clusters resampled once
 and both backends re-scored on each resample, plan 5.4). This is the
@@ -158,20 +162,32 @@ Per-level score distribution. A metric with a single distinct value at
 every level is insensitive rather than ordered: it cannot detect the
 transformation at all, so no level pair can match.
 
-| backend | level | n | mean | std | min | max | distinct |
-|---|---|---:|---:|---:|---:|---:|---:|
-| official | `conjunction_control` | 25 | 0.1275 | 0.2012 | 0.0000 | 0.5000 | 5 |
-| official | `occlusion_000` | 25 | 0.5575 | 0.4294 | 0.0000 | 1.0000 | 9 |
-| official | `occlusion_025` | 25 | 0.4800 | 0.4354 | 0.0000 | 1.0000 | 9 |
-| official | `occlusion_050` | 25 | 0.4625 | 0.4261 | 0.0000 | 1.0000 | 11 |
-| official | `occlusion_075` | 25 | 0.4150 | 0.4031 | 0.0000 | 1.0000 | 11 |
-| official | `occlusion_100` | 25 | 0.1825 | 0.3288 | 0.0000 | 1.0000 | 9 |
-| repair | `conjunction_control` | 25 | 0.2009 | 0.1517 | 0.0417 | 0.4759 | 25 |
-| repair | `occlusion_000` | 25 | 0.5181 | 0.2595 | 0.0583 | 0.9278 | 25 |
-| repair | `occlusion_025` | 25 | 0.4928 | 0.2702 | 0.0749 | 0.9275 | 25 |
-| repair | `occlusion_050` | 25 | 0.4777 | 0.2702 | 0.0693 | 0.9221 | 25 |
-| repair | `occlusion_075` | 25 | 0.4286 | 0.2630 | 0.0471 | 0.9036 | 25 |
-| repair | `occlusion_100` | 25 | 0.2436 | 0.2203 | 0.0473 | 0.7085 | 25 |
+| backend | split | level | n | mean | std | min | max | distinct |
+|---|---|---|---:|---:|---:|---:|---:|---:|
+| official | dev | `conjunction_control` | 5 | 0.1250 | 0.1936 | 0.0000 | 0.5000 | 3 |
+| official | dev | `occlusion_000` | 5 | 0.4500 | 0.4583 | 0.0000 | 1.0000 | 3 |
+| official | dev | `occlusion_025` | 5 | 0.4250 | 0.4717 | 0.0000 | 1.0000 | 3 |
+| official | dev | `occlusion_050` | 5 | 0.4000 | 0.4899 | 0.0000 | 1.0000 | 2 |
+| official | dev | `occlusion_075` | 5 | 0.4000 | 0.4899 | 0.0000 | 1.0000 | 2 |
+| official | dev | `occlusion_100` | 5 | 0.2000 | 0.4000 | 0.0000 | 1.0000 | 2 |
+| official | test | `conjunction_control` | 20 | 0.1281 | 0.2030 | 0.0000 | 0.5000 | 4 |
+| official | test | `occlusion_000` | 20 | 0.5844 | 0.4175 | 0.0000 | 1.0000 | 9 |
+| official | test | `occlusion_025` | 20 | 0.4938 | 0.4248 | 0.0000 | 1.0000 | 9 |
+| official | test | `occlusion_050` | 20 | 0.4781 | 0.4071 | 0.0000 | 1.0000 | 11 |
+| official | test | `occlusion_075` | 20 | 0.4188 | 0.3782 | 0.0000 | 1.0000 | 11 |
+| official | test | `occlusion_100` | 20 | 0.1781 | 0.3083 | 0.0000 | 0.9375 | 8 |
+| repair | dev | `conjunction_control` | 5 | 0.1493 | 0.1317 | 0.0417 | 0.3897 | 5 |
+| repair | dev | `occlusion_000` | 5 | 0.4435 | 0.3124 | 0.1609 | 0.9278 | 5 |
+| repair | dev | `occlusion_025` | 5 | 0.4252 | 0.3326 | 0.1493 | 0.9275 | 5 |
+| repair | dev | `occlusion_050` | 5 | 0.4047 | 0.3427 | 0.0693 | 0.9221 | 5 |
+| repair | dev | `occlusion_075` | 5 | 0.3846 | 0.3506 | 0.0614 | 0.9036 | 5 |
+| repair | dev | `occlusion_100` | 5 | 0.2235 | 0.2380 | 0.0693 | 0.6967 | 5 |
+| repair | test | `conjunction_control` | 20 | 0.2138 | 0.1536 | 0.0473 | 0.4759 | 20 |
+| repair | test | `occlusion_000` | 20 | 0.5368 | 0.2409 | 0.0583 | 0.8780 | 20 |
+| repair | test | `occlusion_025` | 20 | 0.5097 | 0.2494 | 0.0749 | 0.8769 | 20 |
+| repair | test | `occlusion_050` | 20 | 0.4959 | 0.2454 | 0.0744 | 0.8477 | 20 |
+| repair | test | `occlusion_075` | 20 | 0.4396 | 0.2348 | 0.0471 | 0.8288 | 20 |
+| repair | test | `occlusion_100` | 20 | 0.2487 | 0.2153 | 0.0473 | 0.7085 | 20 |
 
 ## Official vs Repair (test, tie-aware)
 

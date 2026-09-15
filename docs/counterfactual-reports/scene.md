@@ -6,7 +6,8 @@
 - bases: 25 (dev 5, test 20)
 - derived clips: 125 (dev 25, test 100)
 - levels: `coverage_000`, `coverage_025`, `coverage_050`, `coverage_075`, `coverage_100`
-- code SHA: `bdfda5cc6e31725cddb6f45ce194ff1333f7c05d`
+- code SHA: `5c4a13091893273510794e45872eac3c59c3ad21`
+- repair variant: `ordered_role_identity_assignment` (detection-conditioned: false)
 
 ## Score coverage
 
@@ -18,17 +19,6 @@
 | official (test) | 100 | 100 | — |
 | repair (dev) | 25 | 25 | — |
 | repair (test) | 100 | 100 | — |
-
-## CPA by contract half
-
-This family mixes an inequality half (the counterfactual must move the
-score) with an invariance half (relocated variants must tie). A pooled CPA
-is dominated by whichever half is easier, so each is scored separately.
-
-| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |
-|---|---|---:|---:|---:|
-| official | sensitivity | 250 | 0.3760 | 0.3760 |
-| repair | sensitivity | 250 | 0.9240 | 0.9240 |
 
 ## CPA
 
@@ -44,62 +34,70 @@ margin. Intervals are 95% cluster-bootstrap CIs over `base_id`.
 | repair | test (zero-margin) | 0 | 200 | 0.9300 | [0.8400, 0.9850] |
 | repair | test (tie-aware) | 0 | 200 | 0.9300 | [0.8400, 0.9850] |
 
-## Contract decomposition
+## Sequence-level order statistics
 
-This family declares more than one expected rank, so its CPA is a
-mixture of two contracts and is dominated by whichever is easier. Rank
-gap > 0 pairs test sensitivity; rank gap 0 pairs test the invariance of
-the levels declared equal, and there the only correct prediction is a
-tie, so a widening dev margin raises this half without measuring
-anything. Read the two halves separately, never the composite alone.
+Per-base Spearman correlation between the declared rank and the score,
+and the fraction of bases whose levels come out in the declared strict
+order (plan 5.2 and 13.3). Unlike CPA this does not weight small rank
+gaps more heavily; levels the family declares equal are not required
+to be strictly ordered, and a base with a missing score is excluded
+rather than counted as a violation.
 
-| backend | split | rank gap | pairs | match rate | tie rate |
+| backend | split | bases | mean Spearman | median Spearman | strict order |
 |---|---|---:|---:|---:|---:|
-| official | test (zero-margin) | 1 | 80 | 0.2750 | 0.6875 |
-| official | test (zero-margin) | 2 | 60 | 0.3500 | 0.6167 |
-| official | test (zero-margin) | 3 | 40 | 0.5000 | 0.5000 |
-| official | test (zero-margin) | 4 | 20 | 0.7000 | 0.3000 |
-| official | test (tie-aware) | 1 | 80 | 0.2750 | 0.6875 |
-| official | test (tie-aware) | 2 | 60 | 0.3500 | 0.6167 |
-| official | test (tie-aware) | 3 | 40 | 0.5000 | 0.5000 |
-| official | test (tie-aware) | 4 | 20 | 0.7000 | 0.3000 |
-| repair | test (zero-margin) | 1 | 80 | 0.9000 | 0.0000 |
-| repair | test (zero-margin) | 2 | 60 | 0.9500 | 0.0000 |
-| repair | test (zero-margin) | 3 | 40 | 0.9500 | 0.0000 |
-| repair | test (zero-margin) | 4 | 20 | 0.9500 | 0.0000 |
-| repair | test (tie-aware) | 1 | 80 | 0.9000 | 0.0000 |
-| repair | test (tie-aware) | 2 | 60 | 0.9500 | 0.0000 |
-| repair | test (tie-aware) | 3 | 40 | 0.9500 | 0.0000 |
-| repair | test (tie-aware) | 4 | 20 | 0.9500 | 0.0000 |
-
-Rank-gap-0 pairs are the family's actual target. Splitting them out
-shows whether a Repair gain in the composite comes from sensitivity
-(which both backends usually already have) or from the invariant half.
+| official | dev | 5 | 0.4520 | 0.6669 | 0/5 (0.0000) |
+| official | test | 20 | 0.7480 | 0.7071 | 0/20 (0.0000) |
+| repair | dev | 5 | 0.8400 | 1.0000 | 3/5 (0.6000) |
+| repair | test | 20 | 0.8800 | 1.0000 | 14/20 (0.7000) |
 
 ## Score sensitivity
 
-Per-level score distribution. A metric with a single distinct value is
-insensitive rather than invariant: it cannot detect the transformation at
-all, so its CPA on an invariance family is vacuous (plan section 7.4).
+Per-level score distribution. A metric with a single distinct value at
+every level is insensitive rather than ordered: it cannot detect the
+transformation at all, so no level pair can match.
 
-| backend | level | n | mean | std | min | max | distinct |
-|---|---|---:|---:|---:|---:|---:|---:|
-| official | `coverage_000` | 25 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 1 |
-| official | `coverage_025` | 25 | 0.1150 | 0.3116 | 0.0000 | 1.0000 | 3 |
-| official | `coverage_050` | 25 | 0.1200 | 0.2663 | 0.0000 | 1.0000 | 6 |
-| official | `coverage_075` | 25 | 0.2500 | 0.3584 | 0.0000 | 1.0000 | 8 |
-| official | `coverage_100` | 25 | 0.3950 | 0.4049 | 0.0000 | 1.0000 | 6 |
-| repair | `coverage_000` | 25 | 0.3592 | 0.0114 | 0.3363 | 0.3805 | 25 |
-| repair | `coverage_025` | 25 | 0.3709 | 0.0105 | 0.3540 | 0.3952 | 25 |
-| repair | `coverage_050` | 25 | 0.3825 | 0.0131 | 0.3610 | 0.4158 | 25 |
-| repair | `coverage_075` | 25 | 0.3921 | 0.0132 | 0.3636 | 0.4228 | 25 |
-| repair | `coverage_100` | 25 | 0.4021 | 0.0154 | 0.3661 | 0.4317 | 25 |
+| backend | split | level | n | mean | std | min | max | distinct |
+|---|---|---|---:|---:|---:|---:|---:|---:|
+| official | dev | `coverage_000` | 5 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 1 |
+| official | dev | `coverage_025` | 5 | 0.1875 | 0.3750 | 0.0000 | 0.9375 | 2 |
+| official | dev | `coverage_050` | 5 | 0.2000 | 0.2915 | 0.0000 | 0.7500 | 3 |
+| official | dev | `coverage_075` | 5 | 0.4000 | 0.3636 | 0.0000 | 0.8125 | 3 |
+| official | dev | `coverage_100` | 5 | 0.2375 | 0.3881 | 0.0000 | 1.0000 | 3 |
+| official | test | `coverage_000` | 20 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 1 |
+| official | test | `coverage_025` | 20 | 0.0969 | 0.2908 | 0.0000 | 1.0000 | 3 |
+| official | test | `coverage_050` | 20 | 0.1000 | 0.2557 | 0.0000 | 1.0000 | 4 |
+| official | test | `coverage_075` | 20 | 0.2125 | 0.3471 | 0.0000 | 1.0000 | 7 |
+| official | test | `coverage_100` | 20 | 0.4344 | 0.3995 | 0.0000 | 1.0000 | 6 |
+| repair | dev | `coverage_000` | 5 | 0.3618 | 0.0101 | 0.3529 | 0.3805 | 5 |
+| repair | dev | `coverage_025` | 5 | 0.3713 | 0.0143 | 0.3540 | 0.3952 | 5 |
+| repair | dev | `coverage_050` | 5 | 0.3804 | 0.0139 | 0.3610 | 0.3984 | 5 |
+| repair | dev | `coverage_075` | 5 | 0.3886 | 0.0120 | 0.3716 | 0.4047 | 5 |
+| repair | dev | `coverage_100` | 5 | 0.3983 | 0.0116 | 0.3837 | 0.4156 | 5 |
+| repair | test | `coverage_000` | 20 | 0.3586 | 0.0116 | 0.3363 | 0.3753 | 20 |
+| repair | test | `coverage_025` | 20 | 0.3708 | 0.0092 | 0.3566 | 0.3949 | 20 |
+| repair | test | `coverage_050` | 20 | 0.3831 | 0.0129 | 0.3648 | 0.4158 | 20 |
+| repair | test | `coverage_075` | 20 | 0.3930 | 0.0133 | 0.3636 | 0.4228 | 20 |
+| repair | test | `coverage_100` | 20 | 0.4031 | 0.0161 | 0.3661 | 0.4317 | 20 |
 
 ## Official vs Repair (test, tie-aware)
 
-| metric | official | repair | repair - official |
-|---|---:|---:|---:|
-| environment_coverage | 0.3850 | 0.9300 | +0.5450 |
+`repair - official` is the paired difference over the same `base_id`
+clusters; its 95% CI resamples those clusters once and re-scores both
+backends on each resample (plan 5.4). The interval is what decides whether
+the delta is distinguishable from zero — the two marginal intervals in the
+`CPA` table do not.
+
+| metric | official | repair | repair - official | paired 95% CI |
+|---|---:|---:|---:|---|
+| environment_coverage | 0.3850 | 0.9300 | +0.5450 | [+0.4249, +0.6800] |
+
+Paired zero-margin delta: `+0.5450` over 20 test bases; paired tie-aware delta: `+0.5450`.
+
+## Frame evidence
+
+No per-clip evidence was recorded for this run, so a low repair score cannot be
+attributed to detector drop-outs rather than to a wrong direction. Re-score with the
+current `score.py` to populate it.
 
 ## Status and limitations
 

@@ -6,7 +6,7 @@
 - bases: 25 (dev 5, test 20)
 - derived clips: 125 (dev 25, test 100)
 - levels: `jerk_4_multiple`, `jerk_3_local_reverse`, `jerk_2_duplicate_skip`, `jerk_1_duplicate`, `jerk_0_original`
-- code SHA: `feeb77028c5c987b18a6cb2f27a402d757241d5d`
+- code SHA: `5c4a13091893273510794e45872eac3c59c3ad21`
 - repair variant: `ordered_role_identity_assignment` (detection-conditioned: false)
 
 ## Score coverage
@@ -56,18 +56,28 @@ Per-level score distribution. A metric with a single distinct value at
 every level is insensitive rather than ordered: it cannot detect the
 transformation at all, so no level pair can match.
 
-| backend | level | n | mean | std | min | max | distinct |
-|---|---|---:|---:|---:|---:|---:|---:|
-| official | `jerk_0_original` | 25 | 0.9565 | 0.0321 | 0.8475 | 0.9851 | 25 |
-| official | `jerk_1_duplicate` | 25 | 0.9559 | 0.0324 | 0.8460 | 0.9856 | 25 |
-| official | `jerk_2_duplicate_skip` | 25 | 0.9545 | 0.0338 | 0.8446 | 0.9866 | 25 |
-| official | `jerk_3_local_reverse` | 25 | 0.9482 | 0.0383 | 0.8418 | 0.9845 | 25 |
-| official | `jerk_4_multiple` | 25 | 0.9378 | 0.0474 | 0.8035 | 0.9835 | 25 |
-| repair | `jerk_0_original` | 25 | 0.5407 | 0.1156 | 0.4067 | 0.9207 | 25 |
-| repair | `jerk_1_duplicate` | 25 | 0.5011 | 0.0689 | 0.4184 | 0.6838 | 25 |
-| repair | `jerk_2_duplicate_skip` | 25 | 0.4855 | 0.0515 | 0.4198 | 0.6232 | 25 |
-| repair | `jerk_3_local_reverse` | 25 | 0.4760 | 0.0523 | 0.4100 | 0.6077 | 25 |
-| repair | `jerk_4_multiple` | 25 | 0.4268 | 0.0330 | 0.3875 | 0.5242 | 25 |
+| backend | split | level | n | mean | std | min | max | distinct |
+|---|---|---|---:|---:|---:|---:|---:|---:|
+| official | dev | `jerk_0_original` | 5 | 0.9667 | 0.0110 | 0.9521 | 0.9792 | 5 |
+| official | dev | `jerk_1_duplicate` | 5 | 0.9662 | 0.0116 | 0.9513 | 0.9797 | 5 |
+| official | dev | `jerk_2_duplicate_skip` | 5 | 0.9651 | 0.0137 | 0.9453 | 0.9807 | 5 |
+| official | dev | `jerk_3_local_reverse` | 5 | 0.9604 | 0.0153 | 0.9374 | 0.9795 | 5 |
+| official | dev | `jerk_4_multiple` | 5 | 0.9528 | 0.0213 | 0.9201 | 0.9797 | 5 |
+| official | test | `jerk_0_original` | 20 | 0.9539 | 0.0350 | 0.8475 | 0.9851 | 20 |
+| official | test | `jerk_1_duplicate` | 20 | 0.9533 | 0.0353 | 0.8460 | 0.9856 | 20 |
+| official | test | `jerk_2_duplicate_skip` | 20 | 0.9519 | 0.0367 | 0.8446 | 0.9866 | 20 |
+| official | test | `jerk_3_local_reverse` | 20 | 0.9452 | 0.0416 | 0.8418 | 0.9845 | 20 |
+| official | test | `jerk_4_multiple` | 20 | 0.9341 | 0.0512 | 0.8035 | 0.9835 | 20 |
+| repair | dev | `jerk_0_original` | 5 | 0.5307 | 0.1263 | 0.4067 | 0.7735 | 5 |
+| repair | dev | `jerk_1_duplicate` | 5 | 0.4926 | 0.0652 | 0.4233 | 0.6091 | 5 |
+| repair | dev | `jerk_2_duplicate_skip` | 5 | 0.4811 | 0.0468 | 0.4249 | 0.5602 | 5 |
+| repair | dev | `jerk_3_local_reverse` | 5 | 0.4582 | 0.0419 | 0.4217 | 0.5348 | 5 |
+| repair | dev | `jerk_4_multiple` | 5 | 0.4128 | 0.0191 | 0.3875 | 0.4457 | 5 |
+| repair | test | `jerk_0_original` | 20 | 0.5432 | 0.1126 | 0.4194 | 0.9207 | 20 |
+| repair | test | `jerk_1_duplicate` | 20 | 0.5032 | 0.0696 | 0.4184 | 0.6838 | 20 |
+| repair | test | `jerk_2_duplicate_skip` | 20 | 0.4867 | 0.0526 | 0.4198 | 0.6232 | 20 |
+| repair | test | `jerk_3_local_reverse` | 20 | 0.4805 | 0.0536 | 0.4100 | 0.6077 | 20 |
+| repair | test | `jerk_4_multiple` | 20 | 0.4303 | 0.0348 | 0.3890 | 0.5242 | 20 |
 
 ## Repair continuity components (dev + test)
 
