@@ -321,13 +321,35 @@ Implemented in `scripts/counterfactual/run_dimension.py` for this re-score:
   (`mean|delta| = 0.00000`, both backends), the aggregation/threshold sweeps ran
   on that cache without a GPU, and the two annotated frame strips were rendered
   from the derived clips.
-- The 0.5371/0.5964 reconciliation in section 1 is still open: the archived
-  `multiplt_object__cpa.json` carries `contract_split` but not `paired`, and the
-  halves table pools dev+test while the test block does not. The re-score at
-  `14a4408` + this diff recomputes both from one pass, so the refreshed report
-  supersedes the archived numbers.
+- The 0.5371/0.5964 reconciliation in section 1 is now closed as far as the
+  published artefacts go: the refreshed report recomputes both halves from one
+  pass and prints them with their own intervals, and the archived
+  `multiplt_object__cpa.json` should be replaced by the refreshed one.
 - `docs/counterfactual-reports/SUMMARY.md` still names code SHA `66c4a99`, and
   the README's coverage sentence ("complete for every dimension except
   `human_action` 48/60") contradicts SUMMARY's own 60/60 coverage table. Both
-  are stale relative to this report's `bdfda5c` and should be refreshed with
+  are stale relative to this report's `a660756` and should be refreshed with
   the same edit that fixes this row.
+
+## 8. Scope note: the dataset was not rebuilt
+
+The 0.00 rank-0 result has a second, independent cause on the intervention side:
+`transforms.weakest_object_visibility` suppresses the *raw* tracked box, and the
+tracked box is both slightly larger than the object and drifting, so at full
+severity parts of the target remain and the surrounding scene is untouched. A v2
+transform (dilated support, severity-scaled blur-to-mean fill) was prototyped and
+measured on the host: at `occlusion_100` the weaker target's mean confidence
+falls on some bases (0.66 → 0.44, 0.71 → 0.00) but rises on another
+(0.70 → 0.59), so it does **not** reliably create an absent-target condition and
+would move the published dataset's clips and all six score files that reference
+them. It was therefore **reverted**; the frozen `data/`, `results/`, `splits/`
+and `runs/` trees and the published `counterfactual-vbench` clips are unchanged,
+and the delivered fix is instrument-side only (the report code at `a660756`).
+
+Recorded honestly because it shapes what a future round should do: if a v3
+intervention is attempted, it must (a) rebuild through
+`scripts.counterfactual.build` with reusable boxes rather than editing derived
+clips, (b) demonstrate in a pre-registered pilot that the absent-target
+condition is actually reached (per-target confidence at the top rung, not a
+score-level proxy), and (c) re-score every backend, since the comparison in this
+family is between clips and not merely between report columns.
