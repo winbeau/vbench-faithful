@@ -26,8 +26,16 @@ Statistics: `scripts/evaluate_pairwise_statistics.py`, 2 000 bootstraps, seed 20
 | Official (frozen E0) | 0.6034 | 0.6845 | **0.6845** [0.6597, 0.7093] | 0.4612 | 1.0 | 2 160 |
 | **Repair v2** | 0.3471 | 0.3287 | **0.5690** [0.5426, 0.5953] | 0.2206 | 1.0 | 2 160 |
 
+Paired difference on the same 1 290 test pairs, each backend keeping its own
+dev-calibrated margin (`scripts/evaluate_paired_backend_delta.py`, 2 000
+resamples, seed 2026):
+
+| dimension | Official | Repair v2 | Delta (paired) | 95% CI | n test |
+|---|---:|---:|---:|---|---:|
+| dynamic_degree | 0.6845 | 0.5690 | **−0.1155** | [−0.1496, −0.0806] | 1 290 |
+
 **Result: the v2 repair is significantly worse than Official on the natural
-preference set** (−0.115 tie-aware accuracy; the intervals do not overlap).
+preference set** (−0.115 tie-aware accuracy; the paired interval excludes zero).
 
 Read together with the counterfactual result in `CONSOLIDATED.md`
 (Official `p = +0.491`, v2 `p = +0.019`), this is the paper's cleanest
@@ -59,28 +67,66 @@ P1.1 attempt reported coverage 0.2 (432/2 160 pairs) purely from this overwrite.
 
 ## P1.2 Motion Smoothness — natural preference set
 
-**Status: running.** Both backends are needed because no frozen Official natural
-scores exist for this dimension (`results/e0/raw_official_scores/` has only
-dynamics, human_action, spatial_relationship, subject_consistency).
+Both backends had to be rerun because no frozen Official natural scores exist for
+this dimension (`results/e0/raw_official_scores/` has only dynamics,
+human_action, spatial_relationship, subject_consistency).
 
-Scoring started 2026-09-15 21:33 on GPUs 1–5 via `run_natural.sh
-motion_smoothness official|repair`, which now calls `finalize_natural.py` so the
-sharded `predictions.csv` overwrite cannot recur.
+Scoring: `run_natural.sh motion_smoothness official|repair`, 5 shards over GPUs
+1–5, 2026-09-15 21:33–22:08, `finalize_natural.py` merging the shard-overwritten
+`predictions.csv` from `repair_results.jsonl`. Coverage: 1 440/1 440 `official`
+and 1 440/1 440 `audit` rows, all `succeeded_scalar`. Statistics:
+`scripts/evaluate_pairwise_statistics.py`, 2 000 bootstraps, seed 2026.
 
-**Observed rate is the problem**: the Official backend wraps upstream VBench
-`MotionSmoothness.motion_score` (AMT interpolation), which costs ~72 s per
-1 440-video shard-slot on an H100 already saturated at 80–100% utilisation and
-51 GB. That projects to roughly 29 h for the Official pass alone, plus the RAFT
-repair pass. The job is durable in tmux `nat2`; the numbers go here when it lands.
+| backend | dev acc | test acc (zero margin) | test tie-aware acc | Kendall tau-b | coverage | pairs |
+|---|---:|---:|---:|---:|---:|---:|
+| Official | 0.5506 | 0.5682 | **0.6364** [0.6101, 0.6636] | 0.4137 | 1.0 | 2 160 |
+| **Repair (direction-aware)** | 0.3356 | 0.3388 | **0.3248** [0.2992, 0.3512] | 0.0686 | 1.0 | 2 160 |
 
-Two caveats that hold regardless of when it finishes:
+Paired difference on the same 1 290 test pairs (each backend keeps its own
+dev-calibrated margin):
 
-- The pre-existing natural numbers in the status document (Official .636 /
-  Repair .395) come from an **older estimator**, so they cannot be compared with
-  the direction-aware shipped repair without this rerun.
-- The natural-set question is separate from the counterfactual one. The shipped
-  repair already moved the counterfactual row from −0.105 to +0.050 (parity); the
-  natural run decides whether that came with any human-agreement cost.
+| dimension | Official | Repair | Delta (paired) | 95% CI | n test |
+|---|---:|---:|---:|---|---:|
+| motion_smoothness | 0.6364 | 0.3248 | **−0.3116** | [−0.3473, −0.2760] | 1 290 |
+
+**Result: the shipped direction-aware repair is not merely worse than Official on
+the natural preference set — it is significantly *below chance* (0.3248 against
+0.5).** The marginal interval [0.2992, 0.3512] excludes 0.5 and the paired
+interval excludes zero, so this is not a precision problem.
+
+Three diagnostics, because a below-chance number invites a sign-bug hypothesis:
+
+1. **Not a plumbing artefact.** The evaluated `predictions.csv` matches the
+   `audit` rows of `repair_results.jsonl` value-for-value on all 1 440 videos, and
+   the Official path reproduces the status document's `.636` exactly.
+2. **The two backends do not agree at all, per video.** Spearman between the
+   Official AMT score and the Repair RAFT score on the same 1 440 videos is
+   **−0.1032** (Pearson 0.0198) — the repair score is essentially unrelated to the
+   official one, and if anything mildly inverted. Official scores occupy
+   0.7513–0.9959 (median 0.9649, 1 440 distinct values); Repair scores occupy
+   0.3396–0.9552 (median 0.4943, 1 440 distinct), so both are continuous and
+   neither is saturating.
+3. **The repair is nevertheless direction-correct on injected corruption.** Its
+   counterfactual row is parity-to-positive (`temporal_jerk` 0.8300 → 0.8800), so
+   the score does rank a corrupted clip below its clean source. The estimator is
+   therefore sensitive to the corruption it was built around while remaining
+   anti-correlated with human preference on unmodified generations.
+
+Read together with the counterfactual row, this is the strongest instance of the
+plan's "audit, not replacement" cell: the shipped motion repair buys counterfactual
+contract compliance at the cost of a large, significant loss of human agreement —
+a bigger loss than the dynamics v2 repair shows.
+
+Two scope caveats:
+
+- The pre-existing status-document numbers (Official .636 / Repair .395) came from
+  an **older estimator**; the rerun above is the comparable measurement, and the
+  old Repair .395 was already below chance, so the direction of this finding
+  predates the direction-aware change.
+- These numbers describe the **committed** repair at `ccbd89b`. The worktree
+  currently holds uncommitted motion-smoothness changes (raw-direction default,
+  top-k temporal aggregation, 0.5/0.5 magnitude/direction weights) that would
+  change this number and are deliberately **not** reflected here.
 
 ## P1.4 Multiple Objects — corrected ordered/control statistics
 
@@ -157,11 +203,13 @@ which is what the earlier in-sample CI could not establish.
 dependence on independent data; individual clips remain dispersed*, matching the
 in-sample caveat rather than contradicting it.
 
-## P1.2 Motion Smoothness — natural preference set (continued)
+### Operational note (natural runs)
 
-The Official pass finished: **tie-aware pair accuracy 0.6364** [0.6101, 0.6636],
-coverage 1.0, 2 160 pairs — reproducing the status document's `.636`. The repair
-pass was relaunched at 21:57 after two operational fixes: `results/` is frozen so
-the repair joins against the official scores this run produced itself, and the
-generated official `results.csv` needed the E0 `status == "success"` convention
-rather than the comparator's `succeeded_scalar`.
+Two fixes were needed for a dimension with no frozen official scores, both
+landed in the server-side `run_natural.sh` / `finalize_natural.py` helpers:
+
+1. `results/` is frozen and holds no `motion_smoothness` scores, so the repair
+   joins against the `official_scores/` tree this run produced itself.
+2. The generated official `results.csv` needs the E0 `status == "success"`
+   convention rather than the comparator's `succeeded_scalar`, because
+   `evaluate_pairwise_statistics.py` reads the official path with the former.
