@@ -406,25 +406,36 @@ def render_report(
                 f"{info.get('per_clip_p_std')} | {detail} |"
             )
 
-    lines += [
-        "",
-        "## CPA by contract half",
-        "",
-        "This family mixes an inequality half (the counterfactual must move the",
-        "score) with an invariance half (relocated variants must tie). A pooled CPA",
-        "is dominated by whichever half is easier, so each is scored separately.",
-        "",
-        "| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |",
-        "|---|---|---:|---:|---:|",
-    ]
-    for backend in ("official", "repair"):
-        for half, stats in (cpa.get("contract_split", {}).get(backend, {}) or {}).items():
-            if stats.get("cpa") is None:
-                continue
-            lines.append(
-                f"| {backend} | {half} | {stats['n_pairs']} | {stats['cpa']:.4f} | "
-                f"{stats['cpa_zero_margin']:.4f} |"
-            )
+    # A family is a *contract mixture* only when it declares more than one rank
+    # *and* at least one rank is shared by several levels (a tie contract).  A
+    # pure invariance family has one rank, and a purely ordered family has one
+    # level per rank; neither is a mixture, so the mixed-contract template does
+    # not describe them.
+    rank_groups = tied_level_groups(rows)
+    dispersion_rows = [(rank, levels) for rank, levels in rank_groups.items() if len(levels) > 1]
+    mixed_family = len(ranks) > 1 and bool(dispersion_rows)
+    if mixed_family:
+        lines += [
+            "",
+            "## CPA by contract half",
+            "",
+            "This family declares at least one group of levels that must tie, so its",
+            "CPA mixes an inequality half (the counterfactual must move the score)",
+            "with an invariance half (the declared-equal levels must tie). A pooled",
+            "CPA is dominated by whichever half is easier, so each is scored",
+            "separately.",
+            "",
+            "| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |",
+            "|---|---|---:|---:|---:|",
+        ]
+        for backend in ("official", "repair"):
+            for half, stats in (cpa.get("contract_split", {}).get(backend, {}) or {}).items():
+                if stats.get("cpa") is None:
+                    continue
+                lines.append(
+                    f"| {backend} | {half} | {stats['n_pairs']} | {stats['cpa']:.4f} | "
+                    f"{stats['cpa_zero_margin']:.4f} |"
+                )
 
     lines += [
         "",
@@ -477,13 +488,13 @@ def render_report(
                     f"{stats['mean_relative_range']:.4f} |"
                 )
 
-    if len(ranks) > 1:
+    if mixed_family:
         lines += [
             "",
             "## Contract decomposition",
             "",
-            "This family declares more than one expected rank, so its CPA is a",
-            "mixture of two contracts and is dominated by whichever is easier. Rank",
+            "This family declares levels that must tie, so its CPA is a mixture of",
+            "two contracts and is dominated by whichever is easier. Rank",
             "gap > 0 pairs test sensitivity; rank gap 0 pairs test the invariance of",
             "the levels declared equal, and there the only correct prediction is a",
             "tie, so a widening dev margin raises this half without measuring",
@@ -506,10 +517,6 @@ def render_report(
             "Rank-gap-0 pairs are the family's actual target. Splitting them out",
             "shows whether a Repair gain in the composite comes from sensitivity",
             "(which both backends usually already have) or from the invariant half.",
-        ]
-        tied = tied_level_groups(rows)
-        dispersion_rows = [
-            (rank, levels) for rank, levels in tied.items() if len(levels) > 1
         ]
         if dispersion_rows:
             lines += [
@@ -543,13 +550,24 @@ def render_report(
                             f"{stats['mean_relative_range']:.4f} |"
                         )
 
+    sensitivity_note = (
+        [
+            "Per-level score distribution. A metric with a single distinct value is",
+            "insensitive rather than invariant: it cannot detect the transformation at",
+            "all, so its CPA on an invariance family is vacuous (plan section 7.4).",
+        ]
+        if len(ranks) == 1
+        else [
+            "Per-level score distribution. A metric with a single distinct value at",
+            "every level is insensitive rather than ordered: it cannot detect the",
+            "transformation at all, so no level pair can match.",
+        ]
+    )
     lines += [
         "",
         "## Score sensitivity",
         "",
-        "Per-level score distribution. A metric with a single distinct value is",
-        "insensitive rather than invariant: it cannot detect the transformation at",
-        "all, so its CPA on an invariance family is vacuous (plan section 7.4).",
+        *sensitivity_note,
         "",
         "| backend | level | n | mean | std | min | max | distinct |",
         "|---|---|---:|---:|---:|---:|---:|---:|",

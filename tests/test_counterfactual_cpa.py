@@ -172,5 +172,81 @@ class MixedRankReportTests(unittest.TestCase):
         self.assertNotIn("## Contract decomposition", report)
 
 
+JERK_LEVELS = (
+    ("jerk_0_original", 4),
+    ("jerk_1_duplicate", 3),
+    ("jerk_2_duplicate_skip", 2),
+    ("jerk_3_local_reverse", 1),
+    ("jerk_4_multiple", 0),
+)
+
+
+def jerk_rows(n_bases: int, split: str = "test") -> list[dict]:
+    out = []
+    for i in range(n_bases):
+        for level, rank in JERK_LEVELS:
+            out.append(
+                {
+                    "derived_id": f"{split}{i:02d}::{level}",
+                    "base_id": f"{split}{i:02d}",
+                    "family": "temporal_jerk",
+                    "level": level,
+                    "expected_rank": rank,
+                    "split": split,
+                }
+            )
+    return out
+
+
+class OrderedFamilyReportTests(unittest.TestCase):
+    """A pure ordered family must not be described as a contract mixture.
+
+    `temporal_jerk` gives every level its own rank, so it has no rank-gap-0
+    pairs.  The generator used to emit the mixed-contract template for any
+    family with more than one rank, which told the reader the composite was a
+    mixture of a sensitivity and an invariance contract and that "rank-gap-0
+    pairs are the family's actual target" - neither of which held.
+    """
+
+    def _report(self) -> str:
+        test_rows = jerk_rows(4)
+        scores = {
+            row["derived_id"]: {"official": 0.9 - 0.01 * row["expected_rank"]}
+            for row in test_rows
+        }
+        flat = {row["derived_id"]: 0.9 - 0.01 * row["expected_rank"] for row in test_rows}
+        coverage = [{"backend": "official", "scored_clips": 20, "expected_clips": 20,
+                     "incomplete_shards": []}]
+        cpa = {
+            "coverage": [{"backend": "official", "split": "test", "scored": 20, "total": 20}],
+            "profiles": {"official": {"jerk_0_original": {
+                "n": 4, "mean": 0.9, "std": 0.0, "min": 0.9, "max": 0.9, "distinct": 1}}},
+            "contracts": {"official": {
+                "test_zero_margin": group_stats(rank_gap_groups(_base_pairs(test_rows, flat)), 0.0),
+                "test_tie_aware": group_stats(rank_gap_groups(_base_pairs(test_rows, flat)), 0.0),
+            }},
+            "contract_split": {"official": {
+                "sensitivity": {"n_pairs": 40, "cpa": 1.0, "cpa_zero_margin": 1.0},
+                "invariance": {"n_pairs": 0, "cpa": None},
+            }},
+            "official": {"dev_margin": 0.0},
+        }
+        return render_report(
+            "motion_smoothness", "temporal_jerk", test_rows, coverage, cpa,
+            "deadbeef", scores,
+        )
+
+    def test_ordered_family_omits_the_mixed_contract_template(self):
+        report = self._report()
+        self.assertNotIn("## Contract decomposition", report)
+        self.assertNotIn("## CPA by contract half", report)
+        self.assertNotIn("mixture of two contracts", report)
+
+    def test_ordered_family_still_reports_the_composite(self):
+        report = self._report()
+        self.assertIn("## CPA", report)
+        self.assertIn("## Score sensitivity", report)
+
+
 if __name__ == "__main__":
     unittest.main()
