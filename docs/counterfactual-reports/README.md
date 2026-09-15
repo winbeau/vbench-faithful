@@ -24,7 +24,7 @@ are re-scored on it), not the difference of two marginal intervals.
 |---|---|---|---|---|---:|---:|---:|---:|---:|---|
 | `scene` | `environment_coverage` | ordered | 25 | 125 | 0.3850 | 0.9300 | **+0.5450** | [+0.425, +0.680] | yes |
 | `subject_consistency` | `temporal_relocation` | mixed | 25 | 100 | 0.5917 | **0.8500** | **+0.2583** | [+0.158, +0.350] | yes |
-| `multiplt_object` ‡ | `weakest_object_visibility` | mixed | 25 | 150 | 0.5967 | 0.7633 | +0.1666 | [+0.090, +0.250] | yes (composite) |
+| `multiplt_object` ‡ | `weakest_object_visibility` | ordered | 25 | 150 | 0.5450 | **0.7850** | **+0.2400** | [+0.155, +0.330] | yes |
 | `motion_smoothness` | `temporal_jerk` | ordered | 25 | 125 | 0.8300 | 0.8800 | +0.0500 | [−0.015, +0.110] | parity |
 | `dynamics_degree` | `fps_resampling` | invariance | 40 | 160 | 0.8333 | 0.7722 | −0.0611 | [−0.150, +0.017] | parity |
 | `human_action` | `filename_invariance` | invariance | 25 | 75 | 1.0000 | 1.0000 | +0.0000 | [0.000, 0.000] | degenerate |
@@ -34,29 +34,31 @@ are re-scored on it), not the difference of two marginal intervals.
 contract.** Coverage is **100%** on both backends for all seven dimensions (the
 earlier `human_action` 48/60 gap was a construction bug and is fixed).
 
-‡ `multiplt_object` is a mixture and the composite must not be quoted alone. Its
-sensitivity half is 0.5371 → 0.8171 (paired Δ **+0.2800**, 95% CI
-[+0.1886, +0.3771]), a genuine Repair win; its tie-based invariance pair is
-0.6000 → 0.0000. That invariance criterion asks a continuous score for an *exact
-tie* between two different corruption geometries (a same-frame occlusion versus a
-clip in which no frame holds both targets) and is **not satisfiable by any
-continuous estimator** — the Official 0.60 is quantisation to sixteenths, and
-the same comparison reads 0.90 vs 0.70 as "control not higher". The plan's §11.4
-test is the level predicate (does the never-co-present control score as
-incomplete?), and both backends pass it: control means 0.2009/0.2436 against a
-clean level of 0.5181, with the control no higher than full occlusion in 18/25
-(Repair) and 22/25 (Official) bases. See `multiplt_object.md` and
-`multiplt_object.review.md` §3.
+‡ `multiplt_object`'s ladder is **occlusion-only**: the never-co-present
+`conjunction_control` used to share a rank with `occlusion_100`, so the composite
+counted "control == full occlusion" as a severity tie. With the control removed
+the composite *is* the ordered half (`contract_split` reports `invariance
+n_pairs = 0`), so the row is a clean ordered win: 0.5450 → 0.7850, paired Δ
+**+0.2400** [+0.155, +0.330]. The tie-based invariance comparison is now reported
+separately, where it reads 0.6000 → 0.0000: that criterion asks a continuous score
+for an *exact tie* between two different corruption geometries (a same-frame
+occlusion versus a clip in which no frame holds both targets) and is **not
+satisfiable by any continuous estimator** — the Official 0.60 is quantisation to
+sixteenths, and the same comparison reads 0.90 vs 0.70 as "control not higher".
+The plan's §11.4 test is the level predicate (does the never-co-present control
+score as incomplete?), and both backends pass it: control means
+0.2009 (Repair) / 0.1275 (Official) against occlusion means 0.2436 / 0.1825, with
+the control no higher than full occlusion in 18/25 (Repair) and 22/25 (Official)
+bases. See `multiplt_object.md` and `multiplt_object.review.md` §3.
 
 ## How to read this table
 
-**Only `subject_consistency` (+0.258) survives as a Repair win**, and only when
-reported split by contract half. `scene` (+0.545) **must not** be quoted as a
-win: its own review shows the two headline numbers are mutually inconsistent
-and the only informative number is the Official one. `multiplt_object`
-(+0.1666 ‡) is a genuine win on the sensitivity half, but its invariance half
-is a criterion no continuous metric satisfies — read it half by half, never as
-the composite. See `CONSOLIDATED.md` for the per-dimension verdicts.
+**Only `subject_consistency` (+0.258) survives as a Repair win on a split half**,
+and only when reported by contract half. `multiplt_object` (+0.2400 ‡) is now a
+clean ordered win on the occlusion-only ladder, with the §11.4 predicate as its
+invariance test. `scene` (+0.545) **must not** be quoted as a win: its own review
+shows the two headline numbers are mutually inconsistent and the only informative
+number is the Official one. See `CONSOLIDATED.md` for the per-dimension verdicts.
 
 **`motion_smoothness` was a genuine Repair loss and is no longer one.**
 The review found a structural defect (the estimator never scored direction

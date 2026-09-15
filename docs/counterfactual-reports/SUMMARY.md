@@ -5,7 +5,8 @@ counterfactuals. CPA is over all ordered level pairs within a family; the
 interval is a 95% cluster bootstrap over `base_id`; `delta` is Repair minus
 Official on the test split.
 
-Scoring code SHA: `66c4a99dba05aceaebe80276ffbffc607c3d2e40`.
+Dataset build code SHA: `66c4a99dba05aceaebe80276ffbffc607c3d2e40`.
+Scoring code SHA: a044ac9 for all dimensions, with later re-scores: dynamics_degree (v2 repair, d/dt**p) and motion_smoothness (direction-aware estimator, feeb770).
 
 | dimension | family | bases | clips (test) | Official CPA | Repair CPA | delta | delta 95% CI (paired) |
 |---|---|---:|---:|---:|---:|---:|---|
@@ -14,7 +15,7 @@ Scoring code SHA: `66c4a99dba05aceaebe80276ffbffc607c3d2e40`.
 | human_action | `filename_invariance` | 25 | 60 | 1.0000 | 1.0000 | +0.0000 | [+0.0000, +0.0000] |
 | spatial_relationship | `directional_flip` | 40 | 60 | 0.3667 | 0.0667 | -0.3000 | [-0.4667, -0.1333] |
 | scene | `environment_coverage` | 25 | 100 | 0.3850 | 0.9300 | +0.5450 | [+0.4249, +0.6800] |
-| multiplt_object | `weakest_object_visibility` | 25 | 120 | 0.5967 | 0.7633 | +0.1666 | [+0.0900, +0.2500] |
+| multiplt_object | `weakest_object_visibility` | 25 | 120 | 0.5450 | 0.7850 | +0.2400 | [+0.1550, +0.3300] |
 | motion_smoothness | `temporal_jerk` | 25 | 100 | 0.8300 | 0.8800 | +0.0500 | [-0.0150, +0.1100] |
 
 ## Invariance families — dispersion, not CPA
