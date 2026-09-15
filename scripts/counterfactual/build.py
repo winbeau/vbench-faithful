@@ -135,6 +135,7 @@ def build_base(base: dict[str, Any], ctx: BuildContext) -> list[dict[str, Any]]:
                 output_sha=sha256_file(out),
                 expected_relation=_relation(variant.expected_rank, reference_rank),
                 source_relative=base["relative_video_path"],
+                source_meta=meta,
             )
         )
     return rows
@@ -173,6 +174,7 @@ def _build_filename_family(
                 output_sha=input_sha,
                 expected_relation=0,
                 source_relative=base["relative_video_path"],
+                source_meta=meta,
             )
         )
     return rows
@@ -402,6 +404,7 @@ def _row(
     output_sha: str,
     expected_relation: int,
     source_relative: str,
+    source_meta: Any = None,
 ) -> dict[str, Any]:
     return {
         "schema_version": SCHEMA_VERSION,
@@ -431,6 +434,9 @@ def _row(
         "relative_video_path": source_relative,
         "source_dataset": SOURCE_DATASET,
         "source_video_sha256": input_sha,
+        "source_fps": getattr(source_meta, "fps", None),
+        "source_frame_count": getattr(source_meta, "frame_count", None),
+        "source_fps_source": getattr(source_meta, "fps_source", None),
         "transformation_parameters": variant.parameters,
         "transformation_note": variant.note,
         "manual_validity_status": "pending",

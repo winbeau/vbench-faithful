@@ -22,9 +22,15 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 
+# Conventional frame delay for a GIF that stores none (see `_probe_gif`).
+GIF_DEFAULT_DELAY_MS = 100
+
 # Pinned encoder settings.  `-threads 1` avoids slice-threading nondeterminism
-# and `+bitexact` strips encoder/version strings from the bitstream.
-X264_PRESET = "veryslow"
+# and `+bitexact` strips encoder/version strings from the bitstream.  The preset
+# is deliberately `medium`: determinism comes from the pinned thread count and
+# flags, not from the preset, and `veryslow` measured 3.5-4.5x slower for no
+# benefit on these 16-frame clips.
+X264_PRESET = "medium"
 X264_CRF = "18"
 ENCODE_FLAGS = (
     "-an",
@@ -64,6 +70,9 @@ class VideoMeta:
     frame_count: int
     duration_s: float
     container: str
+    # Where `fps` came from: a real container rate, or the documented GIF
+    # fallback for files that carry no frame-delay information at all.
+    fps_source: str = "container"
 
     def as_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -157,17 +166,32 @@ def _parse_rate(value: str | None) -> float | None:
 
 
 def _probe_gif(path: Path) -> VideoMeta:
+    """Probe a GIF, falling back to the conventional delay when none is stored.
+
+    The CogVideo GIFs in the VBench package carry no Graphic Control Extension
+    at all, so they record no per-frame delay: 43 of 48 sampled files have zero
+    delay blocks, and `ffprobe` reports a single 0.1 s frame.  The universal
+    convention for a delay-less GIF is 100 ms per frame, which is also what
+    `ffprobe` independently reports, so that is used -- and flagged in
+    `fps_source` so the assumption travels with every derived row.
+    """
     from PIL import Image
 
     with Image.open(path) as image:
         frame_count = int(getattr(image, "n_frames", 1))
-        total_ms = 0
+        delays: list[int] = []
         for index in range(frame_count):
             image.seek(index)
-            total_ms += int(image.info.get("duration") or 0)
+            delays.append(int(image.info.get("duration") or 0))
         width, height = image.size
-    if total_ms <= 0:
-        raise CounterfactualError(f"GIF has no frame delays: {path}")
+    if frame_count <= 0:
+        raise CounterfactualError(f"GIF has no frames: {path}")
+    if all(delays):
+        total_ms = sum(delays)
+        source = "container"
+    else:
+        total_ms = frame_count * GIF_DEFAULT_DELAY_MS
+        source = "gif_default_delay"
     duration = total_ms / 1000.0
     return VideoMeta(
         path=str(path),
@@ -177,6 +201,7 @@ def _probe_gif(path: Path) -> VideoMeta:
         frame_count=frame_count,
         duration_s=duration,
         container="gif",
+        fps_source=source,
     )
 
 

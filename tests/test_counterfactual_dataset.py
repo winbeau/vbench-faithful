@@ -387,3 +387,33 @@ def test_weaker_target_uses_median_box_area():
     small = [(0, 0, 10, 10)] * 3
     assert _weaker_target([big, small]) == 1
     assert _weaker_target([small, big]) == 0
+
+
+def test_gif_without_frame_delays_falls_back_to_the_conventional_delay(tmp_path):
+    """CogVideo GIFs store no delay at all; 100 ms/frame is the convention."""
+    from PIL import Image
+
+    from scripts.counterfactual.common import GIF_DEFAULT_DELAY_MS
+
+    path = tmp_path / "no_delay.gif"
+    frames = [Image.fromarray(frame) for frame in synthetic_frames(count=5)]
+    # No `duration=` argument: PIL writes no Graphic Control Extension delay.
+    frames[0].save(path, save_all=True, append_images=frames[1:], loop=0)
+
+    meta = probe_video(path)
+    assert meta.fps_source == "gif_default_delay"
+    assert meta.frame_count == 5
+    assert meta.fps == pytest.approx(1000.0 / GIF_DEFAULT_DELAY_MS)
+    assert meta.duration_s == pytest.approx(5 * GIF_DEFAULT_DELAY_MS / 1000.0)
+
+
+def test_gif_with_explicit_delays_uses_the_container_rate(tmp_path):
+    from PIL import Image
+
+    path = tmp_path / "with_delay.gif"
+    frames = [Image.fromarray(frame) for frame in synthetic_frames(count=5)]
+    frames[0].save(path, save_all=True, append_images=frames[1:], duration=40, loop=0)
+
+    meta = probe_video(path)
+    assert meta.fps_source == "container"
+    assert meta.fps == pytest.approx(25.0)
