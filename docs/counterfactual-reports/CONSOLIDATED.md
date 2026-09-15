@@ -18,8 +18,9 @@ worth after independent review.
 
 **This section is maintained at the latest revision and is the canonical table.**
 Update it in place whenever a dimension is re-scored; do not add parallel copies.
-Current snapshot: scoring code `a044ac9`, coverage 100% on both backends for all
-seven dimensions, plus the `dynamics_degree` v2 re-measurement marked below.
+Current snapshot: `dynamics_degree` scored with the shipped v2 repair (`d/dt**p`);
+all other dimensions at scoring code `a044ac9`; coverage 100% on both backends
+for all seven dimensions.
 
 CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`.
 
@@ -28,7 +29,7 @@ CPA over all ordered level pairs, 95% cluster bootstrap over `base_id`.
 | scene | environment_coverage | ordered | 25 | 125 | 0.3850 | 0.9300 | +0.5450 | [0.840, 0.985] |
 | subject_consistency | temporal_relocation | mixed | 25 | 100 | 0.5917 | 0.8500 | +0.2583 | [0.758, 0.933] |
 | multiplt_object | weakest_object_visibility | mixed | 25 | 150 | 0.5967 | 0.7633 | +0.1666 | [0.677, 0.830] |
-| dynamics_degree | fps_resampling | invariance | 40 | 160 | 0.8333 | 0.7722 | −0.0611 | [0.667, 0.867] |
+| dynamics_degree † | fps_resampling | invariance | 40 | 160 | 0.8333 | 0.7722 | −0.0611 | [0.667, 0.867] |
 | human_action | filename_invariance | invariance | 25 | 75 | 1.0000 | 1.0000 | +0.0000 | — |
 | motion_smoothness | temporal_jerk | ordered | 25 | 125 | 0.8300 | 0.7250 | −0.1050 | [0.650, 0.790] |
 | spatial_relationship | directional_flip | ordered | 40 | 80 | 0.3667 | 0.0667 | −0.3000 | [0.000, 0.167] |
