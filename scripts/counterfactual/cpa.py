@@ -27,7 +27,7 @@ BUDGET = {
     "human_action": (5, 20),
     "spatial_relationship": (10, 30),
     "scene": (5, 20),
-    "multiple_objects": (5, 20),
+    "multiplt_object": (5, 20),
     "motion_smoothness": (5, 20),
 }
 

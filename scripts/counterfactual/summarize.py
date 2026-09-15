@@ -25,7 +25,7 @@ ORDER = (
     "human_action",
     "spatial_relationship",
     "scene",
-    "multiple_objects",
+    "multiplt_object",
     "motion_smoothness",
 )
 

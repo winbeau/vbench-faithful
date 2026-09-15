@@ -28,7 +28,7 @@ DIMENSIONS = (
     "human_action",
     "spatial_relationship",
     "scene",
-    "multiple_objects",
+    "multiplt_object",
     "motion_smoothness",
 )
 
@@ -37,7 +37,7 @@ ANNOTATION_FILES = {
     "human_action": "Human_Action.json",
     "spatial_relationship": "Spatial_Relationship.json",
     "scene": "Scene.json",
-    "multiple_objects": "Multiplt_Object.json",
+    "multiplt_object": "Multiplt_Object.json",
 }
 
 
@@ -210,10 +210,10 @@ def make_scorer(dimension: str, backend: str, device: Any, upstream: Path) -> Ca
                 pretrained=os.environ.get("VBENCH_AUDIT_SCENE_PRETRAINED", "/root/.cache/clip/ViT-B-32.pt"),
             )
             def ev(video: Path, item: dict[str, Any]) -> dict[str, Any]:
-                return _first(evaluate_global_or_environment_batch([video], {video.name: item}, scorer, "environment"))
+                return _first(evaluate_global_or_environment_batch([video], {video.name: item}, scorer, "environment_grounded"))
         return ev
 
-    if dimension == "multiple_objects":
+    if dimension == "multiplt_object":
         from multiple_objects.backends.vbench import DEFAULT_WEIGHT as GRIT_WEIGHT
         from multiple_objects.backends.vbench import evaluate_official_batch
         from multiple_objects.backends.audit import evaluate_audit_batch as mo_audit_batch
