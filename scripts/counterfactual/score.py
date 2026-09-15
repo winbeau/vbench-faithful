@@ -155,9 +155,9 @@ def make_scorer(dimension: str, backend: str, device: Any, upstream: Path) -> Ca
 
     if dimension == "human_action":
         from human_action.backends.audit import AuditHumanActionEvaluator
-        from human_action.backends.vbench import OfficialHumanActionEvaluator, import_official_module, weight_path
+        from human_action.backends.vbench import OfficialHumanActionEvaluator, import_official_module
         from human_action.diagnostics import DiagnosticsLevel
-        from human_action.metric import evaluate_audit_batch, load_categories
+        from human_action.metric import evaluate_audit_batch, load_categories, weight_path
         from human_action.models import LockedUmtClassifier
 
         weight = Path(os.environ.get("VBENCH_AUDIT_UMT_WEIGHT", weight_path())).expanduser()
@@ -266,6 +266,8 @@ def main() -> int:
     parser.add_argument("--shard-index", type=int, default=0)
     parser.add_argument("--num-shards", type=int, default=1)
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--check-only", action="store_true",
+                        help="construct the scorer and exit; catches import/weight errors")
     args = parser.parse_args()
 
     os.environ["VBENCH_AUDIT_UPSTREAM"] = str(args.upstream)
@@ -298,6 +300,9 @@ def main() -> int:
     import torch
     scorer = make_scorer(args.dimension, args.backend, torch.device("cuda:0"), args.upstream)
     print(json.dumps({"event": "scorer_ready", "dimension": args.dimension, "backend": args.backend, "gpu": os.environ.get("CUDA_VISIBLE_DEVICES")}), flush=True)
+    if args.check_only:
+        print(json.dumps({"event": "check_ok", "dimension": args.dimension, "backend": args.backend}), flush=True)
+        return 0
 
     handle = args.output.open("a", encoding="utf-8")
     try:
