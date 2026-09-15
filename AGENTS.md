@@ -19,11 +19,26 @@
 `docs/counterfactual-reports/CONSOLIDATED.md`。要点：
 
 - **`CONSOLIDATED.md` 的 "Raw result" 一节是最新版本的唯一权威表**：任何维度
-  重跑后**原地更新**该表（并同步 `table2.csv`/`SUMMARY.md`），不要另存平行副本。
-  表下的脚注必须保留，因为 `dynamics_degree` 那一行是 v1 归档值。
+  重跑后**原地更新**该表（并同步 `table2.csv`/`SUMMARY.md`/`table2.json` 与
+  `README.md`），不要另存平行副本。`SUMMARY.md` 由
+  `scripts/counterfactual/summarize.py` 从同一份冻结 scores 树重新生成；表下的
+  脚注必须保留：`dynamics_degree` 的注释保存了 v1 归档值（0.8444）与 shipped
+  v2 的对照，`multiplt_object` 的注释记录 occlusion-only ladder 下组合值等于
+  ordered 半边。
 - **数据集** `counterfactual-vbench`：7 维、205 base、815 条派生片段，已发布到
   `xjuIcthub/counterfactual-vbench`；`Overall Consistency` 因需要人工撰写
   prompt 条件（计划 §12.2）本轮未做。构造代码在 `scripts/counterfactual/`。
+  `output/` 不入库，因此**已发布数据集的 base 选择固定在
+  `configs/counterfactual/bases_published.jsonl`**：单跑 `select_bases.py` 只能
+  复现 7 维中的 5 维，检测器相关维度（`multiplt_object`、`subject_consistency`）
+  还必须再跑 `pick_detectable.py`；两步合起来可 205/205 复现已发布清单，检测器
+  资格计数见 `configs/counterfactual/README.md`。
+- **P1 实验已完成**（P2 人工验证、P3 可选实验本轮未做），结果在
+  `docs/counterfactual-reports/P1_NATURAL_AND_CONTROL_RUNS.md`：自然偏好集上
+  Dynamic v2 与 Motion 方向感知修复都**显著差于 Official**（配对 Δ −0.1155、
+  −0.3116，后者低于随机），P1.3 的独立 holdout 只在聚合层验证了 alpha=0.5，
+  P1.4 的弱目标面积跨 62×，P1.5 的等面积 box 只是**减轻**而非消除位置混淆
+  （配对 CI 含 0）。
 - **评分** 在 `h100-server` 上进行：Official VBench 1.0 与 Repair 两个后端，
   6 卡并行、一维一维串行；7 维 × 2 后端覆盖率为 100%。
 - **评分环境**（H100 上，均在 `/root/wenbiao_zhao/` 下，不依赖他人目录）：
@@ -33,14 +48,19 @@
   但对 CUDA 不可用，可用范围是 1–5。**
 - **不要单独引用 pooled CPA。** 七份独立 review（`<dimension>.review.md`）
   指出：同 rank 族（`fps_resampling`、`filename_invariance`）的 tie-margin CPA
-  会因 margin 饱和而恒为 1.0 且对符号不敏感；混合族（`temporal_relocation`、
-  `weakest_object_visibility`）必须按敏感性半/不变性半分开报；`scene`、
+  会因 margin 饱和而恒为 1.0 且对符号不敏感；`temporal_relocation` 必须按敏感性
+  半/不变性半分开报；`multiplt_object` 的 ladder 已改为 occlusion-only，组合值
+  即 ordered 半边，旧的 tie 判据只作为独立的 control 统计量出现；`scene`、
   `human_action`、`spatial_relationship` 三个族的**族设计本身**不成立，结论
   必须连同 review 一起读。
-- **当前没有任何维度支持无保留的"Repair 更好"**：`subject_consistency` 按半边
-  拆分后最站得住；`dynamics_degree` 的 shipped repair 只是把违约镜像
-  （Official `p=+0.49`，repair `p=−0.51`），v2 的 `d/dt**0.5` 才把聚合层
-  拉回 `p=−0.011`（但指数是同一批数据上的 default，非独立校准）。
+- **唯一站得住的 ordered Repair 赢是 `multiplt_object`**（occlusion-only ladder，
+  +0.2400 [+0.155, +0.330]），其不变性契约用计划 §11.4 的 level predicate 判定，
+  两个后端都通过。其余维度都不能无保留地说 "Repair 更好"：
+  `subject_consistency` 只有**按半边拆开后**的不变性半边站得住；
+  `dynamics_degree` 的 shipped repair 只是把违约镜像（Official `p=+0.49`，
+  repair `p=−0.51`），v2 的 `d/dt**0.5` 才把聚合层拉回 `p=−0.011`（但指数是同一
+  批数据上的 default，非独立校准）；`motion_smoothness` 的方向感知修复只到
+  parity。
 - 真实模型、CUDA 与权重 parity 对冻结 E0 基线**尚未验证**，上述数值是首轮
   测量值，不是复现的官方基线。
 
