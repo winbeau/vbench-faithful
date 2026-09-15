@@ -55,7 +55,9 @@ def join(m,o):
   if len(a)!=1:raise RuntimeError(f'Official strict join {len(a)} matches: {tuple(x[k] for k in K)}')
   z[x['video_uid']]=a[0]
  return z
-def paths():sys.path[:0]=[str(R/x) for x in ['packages/audit-core/src','metrics/dynamic-degree/src','metrics/spatial-relationship/src','metrics/human-action/src','metrics/subject-consistency/src','metrics/motion-smoothness/src']]+[str(U)]
+# packages/audit-models/src is required: dynamic_degree.models imports
+# vbench_audit_models, and without it every dynamic_degree shard dies on import.
+def paths():sys.path[:0]=[str(R/x) for x in ['packages/audit-core/src','packages/audit-models/src','metrics/dynamic-degree/src','metrics/spatial-relationship/src','metrics/human-action/src','metrics/subject-consistency/src','metrics/motion-smoothness/src','metrics/scene/src','metrics/multiple-objects/src']]+[str(U)]
 def spatial():
  z={}
  for x in json.loads((U/'vbench/VBench_full_info.json').read_text(encoding='utf8')):
