@@ -6,18 +6,18 @@
 - bases: 25 (dev 5, test 20)
 - derived clips: 75 (dev 15, test 60)
 - levels: `filename_neutral`, `filename_correct`, `filename_wrong`
-- code SHA: `bdfda5cc6e31725cddb6f45ce194ff1333f7c05d`
+- code SHA: `f54fe67c53b44b39d5874df28632317b69477b52`
 
 ## Score coverage
 
 | backend | scored clips | expected | incomplete shards |
 |---|---:|---:|---|
-| official | 60 | 75 | none |
-| repair | 60 | 75 | none |
-| official (dev) | 12 | 15 | — |
-| official (test) | 48 | 60 | — |
-| repair (dev) | 12 | 15 | — |
-| repair (test) | 48 | 60 | — |
+| official | 75 | 75 | none |
+| repair | 75 | 75 | none |
+| official (dev) | 15 | 15 | — |
+| official (test) | 60 | 60 | — |
+| repair (dev) | 15 | 15 | — |
+| repair (test) | 60 | 60 | — |
 
 ## CPA by contract half
 
@@ -27,8 +27,8 @@ is dominated by whichever half is easier, so each is scored separately.
 
 | backend | half | pairs | CPA (dev margin) | CPA (zero margin) |
 |---|---|---:|---:|---:|
-| official | invariance | 60 | 1.0000 | 0.4333 |
-| repair | invariance | 60 | 1.0000 | 1.0000 |
+| official | invariance | 75 | 1.0000 | 0.4933 |
+| repair | invariance | 75 | 1.0000 | 1.0000 |
 
 ## CPA
 
@@ -37,12 +37,12 @@ margin. Intervals are 95% cluster-bootstrap CIs over `base_id`.
 
 | backend | split | margin | pairs | CPA | 95% CI |
 |---|---|---:|---:|---:|---|
-| official | dev (zero-margin) | 0 | 12 | 0.5000 | [0.3333, 0.8333] |
-| official | test (zero-margin) | 0 | 48 | 0.4167 | [0.3333, 0.5385] |
-| official | test (tie-aware) | 1 | 48 | 1.0000 | [1.0000, 1.0000] |
-| repair | dev (zero-margin) | 0 | 12 | 1.0000 | [1.0000, 1.0000] |
-| repair | test (zero-margin) | 0 | 48 | 1.0000 | [1.0000, 1.0000] |
-| repair | test (tie-aware) | 0 | 48 | 1.0000 | [1.0000, 1.0000] |
+| official | dev (zero-margin) | 0 | 15 | 0.4667 | [0.3333, 0.7333] |
+| official | test (zero-margin) | 0 | 60 | 0.5000 | [0.4000, 0.6333] |
+| official | test (tie-aware) | 1 | 60 | 1.0000 | [1.0000, 1.0000] |
+| repair | dev (zero-margin) | 0 | 15 | 1.0000 | [1.0000, 1.0000] |
+| repair | test (zero-margin) | 0 | 60 | 1.0000 | [1.0000, 1.0000] |
+| repair | test (tie-aware) | 0 | 60 | 1.0000 | [1.0000, 1.0000] |
 
 ## Invariance statistics
 
@@ -63,12 +63,12 @@ all, so its CPA on an invariance family is vacuous (plan section 7.4).
 
 | backend | level | n | mean | std | min | max | distinct |
 |---|---|---:|---:|---:|---:|---:|---:|
-| official | `filename_correct` | 20 | 0.8500 | 0.3571 | 0.0000 | 1.0000 | 2 |
-| official | `filename_neutral` | 20 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 1 |
-| official | `filename_wrong` | 20 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 1 |
-| repair | `filename_correct` | 20 | 0.9738 | 0.0567 | 0.7583 | 0.9999 | 20 |
-| repair | `filename_neutral` | 20 | 0.9738 | 0.0567 | 0.7583 | 0.9999 | 20 |
-| repair | `filename_wrong` | 20 | 0.9738 | 0.0567 | 0.7583 | 0.9999 | 20 |
+| official | `filename_correct` | 25 | 0.7600 | 0.4271 | 0.0000 | 1.0000 | 2 |
+| official | `filename_neutral` | 25 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 1 |
+| official | `filename_wrong` | 25 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 1 |
+| repair | `filename_correct` | 25 | 0.9291 | 0.1493 | 0.4326 | 0.9999 | 25 |
+| repair | `filename_neutral` | 25 | 0.9291 | 0.1493 | 0.4326 | 0.9999 | 25 |
+| repair | `filename_wrong` | 25 | 0.9291 | 0.1493 | 0.4326 | 0.9999 | 25 |
 
 ## Official vs Repair (test, tie-aware)
 

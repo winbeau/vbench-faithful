@@ -36,7 +36,7 @@ Repair CV of 0 with a large Official CV is the actual result.
 |---|---:|---:|
 | dynamics_degree | 120 / 120 | 120 / 120 |
 | subject_consistency | 80 / 80 | 80 / 80 |
-| human_action | 48 / 60 | 48 / 60 |
+| human_action | 60 / 60 | 60 / 60 |
 | spatial_relationship | 60 / 60 | 60 / 60 |
 | scene | 100 / 100 | 100 / 100 |
 | multiplt_object | 120 / 120 | 120 / 120 |
