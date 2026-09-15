@@ -21,7 +21,10 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from collections import defaultdict
 from typing import Any
+
+import numpy as np
 
 from .common import ROOT, read_jsonl, write_json
 from .cpa import BUDGET, _base_pairs, calibrate_margin, evaluate_method
@@ -162,6 +165,32 @@ def score_backend(
     }
 
 
+def score_profile(rows: list[dict[str, Any]], backend_scores: dict[str, float | None]) -> dict[str, dict[str, Any]]:
+    """Per-level score distribution, to separate invariance from insensitivity.
+
+    A metric that emits one constant value is trivially "invariant" (plan
+    section 7.4 explicitly refuses to call that a success), so the report has to
+    show whether the metric responds to the transformation at all.
+    """
+    by_level: dict[str, list[float]] = defaultdict(list)
+    for row in rows:
+        value = backend_scores.get(row["derived_id"])
+        if value is not None:
+            by_level[row["level"]].append(float(value))
+    profile: dict[str, dict[str, Any]] = {}
+    for level, values in sorted(by_level.items()):
+        array = np.asarray(values, dtype=float)
+        profile[level] = {
+            "n": len(values),
+            "mean": float(array.mean()),
+            "std": float(array.std()),
+            "min": float(array.min()),
+            "max": float(array.max()),
+            "distinct": int(len(set(values))),
+        }
+    return profile
+
+
 def render_report(
     dimension: str,
     family: str,
@@ -226,6 +255,32 @@ def render_report(
                     f"| {backend} | {split} ({label}) | {margin:.4g} | {stats['n_pairs']} | "
                     f"{stats['cpa']:.4f} | [{stats['ci_low']:.4f}, {stats['ci_high']:.4f}] |"
                 )
+    lines += [
+        "",
+        "## Score sensitivity",
+        "",
+        "Per-level score distribution. A metric with a single distinct value is",
+        "insensitive rather than invariant: it cannot detect the transformation at",
+        "all, so its CPA on an invariance family is vacuous (plan section 7.4).",
+        "",
+        "| backend | level | n | mean | std | min | max | distinct |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    for backend in ("official", "repair"):
+        for level, stats in cpa.get("profiles", {}).get(backend, {}).items():
+            lines.append(
+                f"| {backend} | `{level}` | {stats['n']} | {stats['mean']:.4f} | {stats['std']:.4f} | "
+                f"{stats['min']:.4f} | {stats['max']:.4f} | {stats['distinct']} |"
+            )
+    for backend in ("official", "repair"):
+        profile = cpa.get("profiles", {}).get(backend, {})
+        distinct = {stats["distinct"] for stats in profile.values()}
+        if distinct == {1} and profile:
+            lines.append(
+                f"\n**Warning:** the `{backend}` backend returned a single constant score at every "
+                "level, so its CPA here measures insensitivity, not invariance."
+            )
+
     lines += ["", "## Official vs Repair (test, tie-aware)", "", "| metric | official | repair | repair - official |", "|---|---:|---:|---:|"]
     for family_name in sorted({row["family"] for row in rows}):
         off = cpa.get("official", {}).get("test_tie_aware", {}).get(family_name, {})
@@ -271,6 +326,8 @@ def main() -> int:
     parser.add_argument("--python", default=sys.executable)
     parser.add_argument("--iterations", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=2026)
+    parser.add_argument("--report-only", action="store_true",
+                        help="rebuild the report from cached scores without scoring")
     args = parser.parse_args()
 
     if args.annotations_root is None:
@@ -286,7 +343,7 @@ def main() -> int:
 
     env = dict(os.environ)
     coverage = []
-    for backend in BACKENDS:
+    for backend in ([] if args.report_only else BACKENDS):
         print(f"[{args.dimension}] scoring {backend} on GPUs {gpus}", flush=True)
         coverage.append(
             score_backend(
@@ -303,13 +360,24 @@ def main() -> int:
             + " (check --annotations-root and the shard logs)"
         )
 
+    if args.report_only:
+        coverage = [
+            {"backend": backend,
+             "expected_clips": len(rows),
+             "scored_clips": sum(1 for r in read_jsonl(args.scores / f"{args.dimension}__{backend}.jsonl")
+                                  if r.get("status") == "succeeded" and r.get("score") is not None),
+             "merged_rows": 0, "merged": str(args.scores / f"{args.dimension}__{backend}.jsonl"),
+             "incomplete_shards": []}
+            for backend in BACKENDS
+        ]
+
     scores: dict[tuple[str, str], float | None] = {}
     for backend in BACKENDS:
         for row in read_jsonl(args.scores / f"{args.dimension}__{backend}.jsonl"):
             if row.get("status") == "succeeded" and row.get("score") is not None:
                 scores[(row["derived_id"], backend)] = float(row["score"])
 
-    cpa: dict[str, Any] = {"coverage": []}
+    cpa: dict[str, Any] = {"coverage": [], "profiles": {}}
     for backend in BACKENDS:
         backend_scores = {row["derived_id"]: scores.get((row["derived_id"], backend)) for row in rows}
         dev_rows = [row for row in rows if row["split"] == "dev"]
@@ -323,6 +391,7 @@ def main() -> int:
             "test_zero_margin": evaluate_method(test_rows, backend_scores, 0.0, args.iterations, args.seed),
             "test_tie_aware": evaluate_method(test_rows, backend_scores, margin, args.iterations, args.seed),
         }
+        cpa["profiles"][backend] = score_profile(rows, backend_scores)
         for split, split_rows in (("dev", dev_rows), ("test", test_rows)):
             scored = sum(1 for row in split_rows if backend_scores.get(row["derived_id"]) is not None)
             cpa["coverage"].append({"backend": backend, "split": split, "scored": scored, "total": len(split_rows)})
