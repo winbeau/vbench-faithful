@@ -192,6 +192,59 @@ def select_dimension(
     return selected, summary
 
 
+def ranked_pool(
+    dimension: str,
+    prompts: dict[tuple[str, str], str],
+    manifest: list[dict[str, str]],
+    seed: int = SEED,
+) -> list[dict[str, Any]]:
+    """Every eligible candidate for one dimension, in deterministic rank order.
+
+    Used by `pick_detectable.py` to oversample: a base that a detector cannot
+    ground (both named objects visible, or the subject tracked) is legitimately
+    ineligible under plan section 11.2, so the ranked pool lets the builder take
+    the next candidate until the budget is met.  The order is the same stable
+    hash as `select_dimension`, so the two agree on their shared prefix.
+    """
+    rows = [row for row in manifest if row["dimension"] == dimension]
+    by_prompt: dict[tuple[str, str], dict[str, dict[str, str]]] = {}
+    for row in rows:
+        key = (dimension, row["prompt_id"])
+        text = prompts.get(key)
+        if text is None:
+            continue
+        try:
+            parse_prompt(dimension, text)
+        except EligibilityError:
+            continue
+        by_prompt.setdefault((row["split"], row["prompt_id"]), {})[row["generator"]] = row
+
+    pool: list[dict[str, Any]] = []
+    for split in ("dev", "test"):
+        keys = sorted(key for key in by_prompt if key[0] == split)
+        for rank, key in enumerate(stable_sample(keys, len(keys), seed)):
+            generators = sorted(by_prompt[key])
+            generator = stable_sample(generators, 1, f"{seed}:{key[1]}")[0]
+            row = by_prompt[key][generator]
+            text = prompts[(dimension, row["prompt_id"])]
+            pool.append(
+                {
+                    "base_id": f"{dimension}-{row['video_uid']}",
+                    "dimension": dimension,
+                    "split": split,
+                    "rank": rank,
+                    "prompt_id": row["prompt_id"],
+                    "prompt_en": text,
+                    "group_id": row["group_id"],
+                    "generator": row["generator"],
+                    "video_uid": row["video_uid"],
+                    "relative_video_path": row["relative_video_path"],
+                    "parsed": parse_prompt(dimension, text),
+                }
+            )
+    return pool
+
+
 def select_all(seed: int = SEED) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     prompts = load_prompts()
     manifest = load_manifest()
