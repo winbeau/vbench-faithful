@@ -27,7 +27,7 @@ from typing import Any
 import numpy as np
 
 from .common import ROOT, read_jsonl, write_json
-from .cpa import BUDGET, _base_pairs, calibrate_margin, evaluate_method
+from .cpa import BUDGET, _base_pairs, calibrate_margin, cpa_at_margin, evaluate_method, family_pairs, group_stats, rank_gap_groups
 
 DEFAULT_GPUS = "1,2,3,4,5,6"
 BACKENDS = ("official", "repair")
@@ -191,7 +191,11 @@ def score_profile(rows: list[dict[str, Any]], backend_scores: dict[str, float | 
     return profile
 
 
-def invariance_stats(rows: list[dict[str, Any]], backend_scores: dict[str, float | None]) -> dict[str, Any]:
+def invariance_stats(
+    rows: list[dict[str, Any]],
+    backend_scores: dict[str, float | None],
+    levels: set[str] | None = None,
+) -> dict[str, Any]:
     """Within-base coefficient of variation and relative range.
 
     For an invariance family (every level sharing one expected rank) a
@@ -199,9 +203,16 @@ def invariance_stats(rows: list[dict[str, Any]], backend_scores: dict[str, float
     difference counts as a tie, which scores 1.0 while hiding the very
     instability the family exists to detect. Plan sections 6.4 and 8.3 ask for
     the dispersion statistics instead, so they are reported alongside.
+
+    `levels` restricts the dispersion to a declared-equal subset of a
+    mixed-rank family (for `temporal_relocation`, the three corrupted
+    positions): within that subset the contract is still "tie", so the same
+    degeneracy applies and the same statistic is the right one.
     """
     by_base: dict[str, list[float]] = defaultdict(list)
     for row in rows:
+        if levels is not None and row["level"] not in levels:
+            continue
         value = backend_scores.get(row["derived_id"])
         if value is not None:
             by_base[row["base_id"]].append(float(value))
@@ -220,6 +231,103 @@ def invariance_stats(rows: list[dict[str, Any]], backend_scores: dict[str, float
         "n_bases": len(cvs),
         "mean_cv": float(np.mean(cvs)) if cvs else None,
         "mean_relative_range": float(np.mean(ranges)) if ranges else None,
+    }
+
+
+def tied_level_groups(rows: list[dict[str, Any]]) -> dict[int, list[str]]:
+    """Levels grouped by `expected_rank`, largest group last, for mixed-rank families."""
+    by_rank: dict[int, set[str]] = defaultdict(set)
+    for row in rows:
+        by_rank[row["expected_rank"]].add(row["level"])
+    return {rank: sorted(levels) for rank, levels in sorted(by_rank.items())}
+
+
+
+def contract_split_cpa(
+    rows: list[dict[str, Any]], backend_scores: dict[str, float | None], margin: float
+) -> dict[str, Any]:
+    """CPA split by contract half.
+
+    A family may mix two contracts: an inequality half (the counterfactual must
+    move the score) and an invariance half (relocated variants must tie). A
+    single pooled CPA is dominated by whichever half is easier, so each is
+    scored on its own pairs. `expected` comes from `family_pairs`.
+    """
+    by_base: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+    for row in rows:
+        by_base[row["base_id"]][row["level"]] = {
+            "score": backend_scores.get(row["derived_id"]),
+            "expected_rank": row["expected_rank"],
+        }
+    halves: dict[str, list[tuple[int, int, float]]] = {"sensitivity": [], "invariance": []}
+    for levels in by_base.values():
+        for expected, rank_gap, delta in family_pairs(levels):
+            halves["invariance" if expected == 0 else "sensitivity"].append((expected, rank_gap, delta))
+    out: dict[str, Any] = {}
+    for name, pairs in halves.items():
+        if not pairs:
+            out[name] = {"n_pairs": 0, "cpa": None}
+            continue
+        out[name] = {
+            "n_pairs": len(pairs),
+            "cpa": round(cpa_at_margin(pairs, margin), 4),
+            "cpa_zero_margin": round(cpa_at_margin(pairs, 0.0), 4),
+        }
+    return out
+
+
+def lag_exponent(rows: list[dict[str, Any]], backend_scores: dict[str, float | None]) -> dict[str, Any]:
+    """Signed log-log slope of score against inter-frame interval.
+
+    For an FPS-invariance family the contract is `target exponent = 0`: the score
+    must not depend on the sampling interval. Unlike an unsigned dispersion
+    measure, the sign distinguishes a metric that inflates at low frame rates
+    from one that shrinks, so this is the diagnostic the family exists to supply.
+    """
+    import re as _re
+
+    by_level: dict[str, list[float]] = defaultdict(list)
+    for row in rows:
+        value = backend_scores.get(row["derived_id"])
+        if value is not None and value > 0:
+            by_level[row["level"]].append(float(value))
+    points: list[tuple[float, float]] = []
+    level_means: dict[str, float] = {}
+    for level, values in by_level.items():
+        match = _re.fullmatch(r"fps(\d+)", level)
+        if not match or not values:
+            continue
+        fps = float(match.group(1))
+        dt = 1.0 / fps
+        mean = float(np.mean(values))
+        level_means[level] = mean
+        if mean > 0:
+            points.append((float(np.log(dt)), float(np.log(mean))))
+    if len(points) < 2:
+        return {"p": None, "levels": level_means}
+    xs = np.array([pt[0] for pt in points])
+    ys = np.array([pt[1] for pt in points])
+    slope = float(np.polyfit(xs, ys, 1)[0])
+    # Per-clip slope: how the effect looks within a single base.
+    by_base: dict[str, list[tuple[float, float]]] = defaultdict(list)
+    for row in rows:
+        value = backend_scores.get(row["derived_id"])
+        match = _re.fullmatch(r"fps(\d+)", row["level"])
+        if value is None or value <= 0 or not match:
+            continue
+        by_base[row["base_id"]].append((float(np.log(1.0 / float(match.group(1)))), float(np.log(value))))
+    per_clip = []
+    for pts in by_base.values():
+        if len(pts) >= 2:
+            bx = np.array([pt[0] for pt in pts])
+            by = np.array([pt[1] for pt in pts])
+            per_clip.append(float(np.polyfit(bx, by, 1)[0]))
+    return {
+        "p": round(slope, 4),
+        "levels": {k: round(v, 4) for k, v in sorted(level_means.items())},
+        "per_clip_p_mean": round(float(np.mean(per_clip)), 4) if per_clip else None,
+        "per_clip_p_std": round(float(np.std(per_clip)), 4) if per_clip else None,
+        "n_clips_fitted": len(per_clip),
     }
 
 
@@ -264,6 +372,50 @@ def render_report(
         lines.append(
             f"| {entry['backend']} ({entry['split']}) | {entry['scored']} | {entry['total']} | — |"
         )
+    ranks = {row["expected_rank"] for row in rows}
+    if "fps" in "".join(levels):
+        lines += [
+            "",
+            "## Sampling-interval response (primary)",
+            "",
+            "The contract for this family is `score must not depend on the sampling",
+            "interval`, i.e. a signed log-log slope of `p = 0`. This is the primary",
+            "diagnostic: unlike the unsigned dispersion below it can tell a score that",
+            "inflates at low frame rates from one that shrinks.",
+            "",
+            "| backend | fitted p (target 0) | mean per-clip p | sd | levels (score vs rung) |",
+            "|---|---:|---:|---:|---|",
+        ]
+        for backend in ("official", "repair"):
+            info = cpa.get("lag_exponent", {}).get(backend, {})
+            if info.get("p") is None:
+                continue
+            detail = ", ".join(f"{k}={v:.4f}" for k, v in info["levels"].items())
+            lines.append(
+                f"| {backend} | {info['p']:+.4f} | {info.get('per_clip_p_mean')} | "
+                f"{info.get('per_clip_p_std')} | {detail} |"
+            )
+
+    lines += [
+        "",
+        "## CPA by contract half",
+        "",
+        "This family mixes an inequality half (the counterfactual must move the",
+        "score) with an invariance half (relocated variants must tie). A pooled CPA",
+        "is dominated by whichever half is easier, so each is scored separately.",
+        "",
+        "| backend | half | pairs | CPA (dev margin) | CPA (zero margin) |",
+        "|---|---|---:|---:|---:|",
+    ]
+    for backend in ("official", "repair"):
+        for half, stats in (cpa.get("contract_split", {}).get(backend, {}) or {}).items():
+            if stats.get("cpa") is None:
+                continue
+            lines.append(
+                f"| {backend} | {half} | {stats['n_pairs']} | {stats['cpa']:.4f} | "
+                f"{stats['cpa_zero_margin']:.4f} |"
+            )
+
     lines += [
         "",
         "## CPA",
@@ -314,6 +466,72 @@ def render_report(
                     f"| {backend} | {split} | {stats['n_bases']} | {stats['mean_cv']:.4f} | "
                     f"{stats['mean_relative_range']:.4f} |"
                 )
+
+    if len(ranks) > 1:
+        lines += [
+            "",
+            "## Contract decomposition",
+            "",
+            "This family declares more than one expected rank, so its CPA is a",
+            "mixture of two contracts and is dominated by whichever is easier. Rank",
+            "gap > 0 pairs test sensitivity; rank gap 0 pairs test the invariance of",
+            "the levels declared equal, and there the only correct prediction is a",
+            "tie, so a widening dev margin raises this half without measuring",
+            "anything. Read the two halves separately, never the composite alone.",
+            "",
+            "| backend | split | rank gap | pairs | match rate | tie rate |",
+            "|---|---|---:|---:|---:|---:|",
+        ]
+        for backend in ("official", "repair"):
+            for split, key in (("test (zero-margin)", "test_zero_margin"),
+                               ("test (tie-aware)", "test_tie_aware")):
+                contract = cpa.get("contracts", {}).get(backend, {}).get(key, {})
+                for rank_gap, stats in sorted(contract.items()):
+                    lines.append(
+                        f"| {backend} | {split} | {rank_gap} | {stats['n_pairs']} | "
+                        f"{stats['match_rate']:.4f} | {stats['tie_rate']:.4f} |"
+                    )
+        lines += [
+            "",
+            "Rank-gap-0 pairs are the family's actual target. Splitting them out",
+            "shows whether a Repair gain in the composite comes from sensitivity",
+            "(which both backends usually already have) or from the invariant half.",
+        ]
+        tied = tied_level_groups(rows)
+        dispersion_rows = [
+            (rank, levels) for rank, levels in tied.items() if len(levels) > 1
+        ]
+        if dispersion_rows:
+            lines += [
+                "",
+                "### Declared-equal subgroups — dispersion, not CPA",
+                "",
+                "Same degeneracy as a same-rank family, applied to each declared-equal",
+                "group: the tie-margin CPA of these pairs can be pushed to 1.0 by",
+                "widening the margin, so the within-base CV is the meaningful number.",
+                "",
+                "| backend | split | levels | bases | mean within-base CV | mean relative range |",
+                "|---|---|---|---:|---:|---:|",
+            ]
+            for backend in ("official", "repair"):
+                for split, split_rows in (
+                    ("dev", [r for r in rows if r["split"] == "dev"]),
+                    ("test", [r for r in rows if r["split"] == "test"]),
+                ):
+                    backend_scores = {
+                        r["derived_id"]: (scores or {}).get(r["derived_id"], {}).get(backend)
+                        for r in split_rows
+                    }
+                    for rank, levels in dispersion_rows:
+                        stats = invariance_stats(split_rows, backend_scores, set(levels))
+                        if stats["mean_cv"] is None:
+                            continue
+                        lines.append(
+                            f"| {backend} | {split} | rank {rank}: "
+                            f"{', '.join(f'`{level}`' for level in levels)} | "
+                            f"{stats['n_bases']} | {stats['mean_cv']:.4f} | "
+                            f"{stats['mean_relative_range']:.4f} |"
+                        )
 
     lines += [
         "",
@@ -432,12 +650,14 @@ def main() -> int:
         ]
 
     scores: dict[tuple[str, str], float | None] = {}
+    nested_scores: dict[str, dict[str, float]] = {}
     for backend in BACKENDS:
         for row in read_jsonl(args.scores / f"{args.dimension}__{backend}.jsonl"):
             if row.get("status") == "succeeded" and row.get("score") is not None:
                 scores[(row["derived_id"], backend)] = float(row["score"])
+                nested_scores.setdefault(row["derived_id"], {})[backend] = float(row["score"])
 
-    cpa: dict[str, Any] = {"coverage": [], "profiles": {}}
+    cpa: dict[str, Any] = {"coverage": [], "profiles": {}, "contracts": {}}
     for backend in BACKENDS:
         backend_scores = {row["derived_id"]: scores.get((row["derived_id"], backend)) for row in rows}
         dev_rows = [row for row in rows if row["split"] == "dev"]
@@ -451,15 +671,26 @@ def main() -> int:
             "test_zero_margin": evaluate_method(test_rows, backend_scores, 0.0, args.iterations, args.seed),
             "test_tie_aware": evaluate_method(test_rows, backend_scores, margin, args.iterations, args.seed),
         }
+        # Rank-gap split: a mixed-rank family's composite CPA is a mixture of a
+        # sensitivity contract and a tie contract, and only the latter is the
+        # invariance target, so it must be readable on its own.
+        test_base_pairs = _base_pairs(test_rows, backend_scores)
+        cpa["contracts"][backend] = {
+            "test_zero_margin": group_stats(rank_gap_groups(test_base_pairs), 0.0),
+            "test_tie_aware": group_stats(rank_gap_groups(test_base_pairs), margin),
+        }
         cpa["profiles"][backend] = score_profile(rows, backend_scores)
+        cpa.setdefault("contract_split", {})[backend] = contract_split_cpa(rows, backend_scores, margin)
+        cpa.setdefault("lag_exponent", {})[backend] = lag_exponent(rows, backend_scores)
         for split, split_rows in (("dev", dev_rows), ("test", test_rows)):
             scored = sum(1 for row in split_rows if backend_scores.get(row["derived_id"]) is not None)
             cpa["coverage"].append({"backend": backend, "split": split, "scored": scored, "total": len(split_rows)})
 
-    code_sha = next((row.get("code_sha") for row in rows if row.get("code_sha")), "unknown")
+    from .build import git_sha
+    code_sha = git_sha()  # scoring revision, not the dataset-build revision in the manifest
     args.scores.mkdir(parents=True, exist_ok=True)
     write_json(args.scores / f"{args.dimension}__cpa.json", cpa)
-    report = render_report(args.dimension, family, rows, coverage, cpa, code_sha, scores)
+    report = render_report(args.dimension, family, rows, coverage, cpa, code_sha, nested_scores)
     (args.reports / f"{args.dimension}.md").write_text(report, encoding="utf-8")
     print(json.dumps({"dimension": args.dimension, "coverage": coverage, "report": str(args.reports / f"{args.dimension}.md")}, indent=2))
     return 0
