@@ -1,0 +1,17 @@
+dimension,variant,vbench_score,human_preference
+dynamic_degree,official,0.624,0.684
+dynamic_degree,repair,0.255,0.590
+subject_consistency,official,0.898,0.585
+subject_consistency,repair,0.909,0.596
+human_action,official,0.900,0.553
+human_action,repair,--,--
+spatial_relationship,official,0.307,0.525
+spatial_relationship,repair,--,--
+scene,official,--,--
+scene,repair,--,--
+multiple_objects,official,--,--
+multiple_objects,repair,--,--
+overall_consistency,official,--,--
+overall_consistency,repair,--,--
+motion_smoothness,official,0.952,0.636
+motion_smoothness,repair,0.753,0.395
