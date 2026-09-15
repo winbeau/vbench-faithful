@@ -141,10 +141,35 @@ def build_base(base: dict[str, Any], ctx: BuildContext) -> list[dict[str, Any]]:
     return rows
 
 
+def _filename_stem(variant_name: str, correct: str, wrong: str, video_uid: str) -> str:
+    """Build a filename the Official backend parses into the intended action.
+
+    The locked Official Human Action backend derives its target from the
+    filename with `name.split("-")[0].split("person is ")[-1].split("_")[0]`, so
+    the filename *is* the experimental variable here: naming every variant after
+    its `base_id` would make all three parse to the same junk target and the
+    family would carry no signal.  The unique `video_uid` goes after the first
+    hyphen, where the parser discards it.
+    """
+    # A hyphen would truncate the action before the parser sees it.
+    def sanitise(action: str) -> str:
+        return action.replace("-", " ").strip()
+
+    if variant_name == "filename_correct":
+        return f"a person is {sanitise(correct)}-{video_uid}"
+    if variant_name == "filename_wrong":
+        return f"a person is {sanitise(wrong)}-{video_uid}"
+    return f"neutral-{video_uid}"
+
+
 def _build_filename_family(
     base: dict[str, Any], ctx: BuildContext, path: Path, input_sha: str, family: str
 ) -> list[dict[str, Any]]:
-    """Human Action: byte-identical copies differing only in the filename."""
+    """Human Action: byte-identical copies differing only in the filename.
+
+    The filenames are chosen so the Official filename parser resolves them to
+    the correct action, a wrong Kinetics action, and no action respectively.
+    """
     from .select_bases import choose_wrong_action
 
     vocabulary = _action_vocabulary(ctx)
@@ -156,7 +181,8 @@ def _build_filename_family(
     rows: list[dict[str, Any]] = []
     for variant in variants:
         derived_id = f"{base['base_id']}__{variant.name}"
-        out = ctx.output_root / base["dimension"] / "interventions" / family / f"{derived_id}.mp4"
+        stem = _filename_stem(variant.name, correct, wrong, base["video_uid"])
+        out = ctx.output_root / base["dimension"] / "interventions" / family / f"{stem}.mp4"
         out.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(path, out)
         if sha256_file(out) != input_sha:
