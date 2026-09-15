@@ -69,7 +69,7 @@ uv run dynamic-degree --both --video-dir /data/videos --gpu 0,2,4
 
 开发边界和测试要求见 [`AGENTS.md`](AGENTS.md)，贡献、uv extras 与提交规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。架构、CLI、依赖和上游映射分别见 [`docs/architecture.md`](docs/architecture.md)、[`docs/cli.md`](docs/cli.md)、[`docs/dependency-compatibility.md`](docs/dependency-compatibility.md) 与 [`docs/upstream-mapping.md`](docs/upstream-mapping.md)。实施计划在 [`docs/plans/2026-09-14-workspace-refactor.md`](docs/plans/2026-09-14-workspace-refactor.md)。
 
-本轮实际通过的检查及未验证范围见[重构验收记录](docs/plans/2026-09-14-workspace-refactor-verification.md)。补充实验计划与 H200 执行口径见[补充实验计划](docs/plans/2026-09-14-supplementary-experiments.md)。八维审计的总体实验协议见[八维实验协议](docs/plans/2026-09-14-experiment-plan-8d.md)。
+本轮实际通过的检查及未验证范围见[重构验收记录](docs/plans/2026-09-14-workspace-refactor-verification.md)。补充实验计划与 H200 执行口径见[补充实验计划](docs/plans/2026-09-14-supplementary-experiments.md)。八维审计的总体实验协议见[八维实验协议](docs/plans/2026-09-14-experiment-plan-8d.md)；反事实数据集（VBench-CF）的构造口径见[反事实数据集](docs/counterfactual-dataset.md)。
 
 补充实验的可直接执行命令、H200 四卡计时、8 卡恢复记录和当前主表结果见
 [补充实验运行手册](docs/supplementary-experiments.md)。主表交付物位于
