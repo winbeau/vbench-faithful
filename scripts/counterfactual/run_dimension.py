@@ -41,7 +41,15 @@ from .cpa import (
     rank_gap_groups,
 )
 
-DEFAULT_GPUS = "1,2,3,4,5,6"
+# Levels that are controls rather than rungs of the ordered ladder. They are
+# reported by their own predicate and must not enter the rank ordering: the
+# plan's conjunction control is a never-co-present clip, not a severity step,
+# so counting it as `occlusion_100`'s equal rewards a comparison that is not a
+# severity ordering at all (plan 11.4).
+CONTROL_LEVELS = ("conjunction_control",)
+
+# GPU 6 is visible to nvidia-smi but not CUDA-available in this container.
+DEFAULT_GPUS = "1,2,3,4,5"
 BACKENDS = ("official", "repair")
 FAMILY_DESCRIPTION = {
     "fps_resampling": (
@@ -441,6 +449,41 @@ def lag_exponent(rows: list[dict[str, Any]], backend_scores: dict[str, float | N
     }
 
 
+
+def weak_target_area_profile(rows: list[dict[str, Any]], split: str = "test") -> dict[str, Any]:
+    """Per-base area of the suppressed target, as a fraction of the frame.
+
+    The family's premise is that target B becomes progressively invisible, so the
+    report has to say how much of the frame B actually occupies: an occlusion of a
+    ~2%-of-frame box is a very different intervention from one covering a third of
+    it, and a base whose box is nearly the whole frame makes the ladder trivial.
+    """
+    seen: set[str] = set()
+    ratios: list[float] = []
+    for row in rows:
+        if row["split"] != split or row["base_id"] in seen:
+            continue
+        seen.add(row["base_id"])
+        parameters = row.get("transformation_parameters") or {}
+        boxes = parameters.get("boxes") or []
+        width, height = row.get("width"), row.get("height")
+        if not boxes or not width or not height:
+            continue
+        areas = [max(0, int(b[2]) - int(b[0])) * max(0, int(b[3]) - int(b[1])) for b in boxes]
+        ratios.append(float(np.median(areas)) / float(width * height))
+    if not ratios:
+        return {}
+    array = np.asarray(ratios, dtype=float)
+    return {
+        "n_bases": len(ratios),
+        "median": round(float(np.median(array)), 5),
+        "q25": round(float(np.percentile(array, 25)), 5),
+        "q75": round(float(np.percentile(array, 75)), 5),
+        "min": round(float(array.min()), 5),
+        "max": round(float(array.max()), 5),
+    }
+
+
 def render_report(
     dimension: str,
     family: str,
@@ -468,6 +511,11 @@ def render_report(
         f"test {len({r['base_id'] for r in rows if r['split'] == 'test'})})",
         f"- derived clips: {len(rows)} (dev {splits['dev']}, test {splits['test']})",
         f"- levels: {', '.join(f'`{level}`' for level in levels)}",
+        *(
+            [f"- control levels (excluded from the ordered ladder): "
+             + ", ".join(f'`{l}`' for l in sorted({r["level"] for r in rows} & set(CONTROL_LEVELS)))]
+            if {r["level"] for r in rows} & set(CONTROL_LEVELS) else []
+        ),
         f"- code SHA: `{code_sha}`",
         *(
             [
@@ -614,6 +662,23 @@ def render_report(
                 "them, which is a property of saturation rather than of contract",
                 "fidelity.",
             ]
+
+    area = cpa.get("weak_target_area")
+    if area:
+        lines += [
+            "",
+            "## Weak-target construction check",
+            "",
+            "Median area of the suppressed target B as a fraction of the frame, over",
+            "the test bases. This is the premise check for the occlusion ladder: the",
+            "severity levels only mean something if B occupies enough of the frame",
+            "that suppressing it is visible at all.",
+            "",
+            f"- bases: {area['n_bases']}",
+            f"- median area ratio: **{area['median']:.4f}** (IQR {area['q25']:.4f}–{area['q75']:.4f})",
+            f"- range: {area['min']:.4f} – {area['max']:.4f}",
+            "",
+        ]
 
     lines += [
         "",
@@ -1122,8 +1187,11 @@ def main() -> int:
     margins: dict[str, float] = {}
     for backend in BACKENDS:
         backend_scores = {row["derived_id"]: scores.get((row["derived_id"], backend)) for row in rows}
-        dev_rows = [row for row in rows if row["split"] == "dev"]
-        test_rows = [row for row in rows if row["split"] == "test"]
+        # Rank-based statistics see the ladder only; the control level is handled
+        # by its own predicate below.
+        ladder = [row for row in rows if row["level"] not in CONTROL_LEVELS]
+        dev_rows = [row for row in ladder if row["split"] == "dev"]
+        test_rows = [row for row in ladder if row["split"] == "test"]
         margin = calibrate_margin(
             [pair for group in _base_pairs(dev_rows, backend_scores).values() for pair in group]
         )
@@ -1160,13 +1228,16 @@ def main() -> int:
             rows, backend_scores, "conjunction_control", "occlusion_100"
         )
         cpa.setdefault("lag_exponent", {})[backend] = lag_exponent(rows, backend_scores)
+        if not cpa.get("weak_target_area"):
+            cpa["weak_target_area"] = weak_target_area_profile(rows)
         # Sequence-level order statistics answer the same question as CPA
         # without the pair-count weighting (plan 5.2 and 13.3).
         cpa["order"][backend] = {
             "dev": order_statistics(dev_rows, backend_scores),
             "test": order_statistics(test_rows, backend_scores),
         }
-        for split, split_rows in (("dev", dev_rows), ("test", test_rows)):
+        for split, split_rows in (("dev", [r for r in rows if r["split"] == "dev"]),
+                                  ("test", [r for r in rows if r["split"] == "test"])):
             scored = sum(1 for row in split_rows if backend_scores.get(row["derived_id"]) is not None)
             cpa["coverage"].append({"backend": backend, "split": split, "scored": scored, "total": len(split_rows)})
 
