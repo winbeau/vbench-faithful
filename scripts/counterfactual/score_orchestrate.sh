@@ -29,6 +29,16 @@ export VBENCH_AUDIT_TAG2TEXT_WEIGHT=/root/.cache/vbench/caption_model/tag2text_s
 export VBENCH_AUDIT_SCENE_PRETRAINED=/root/.cache/clip/ViT-B-32.pt
 export VBENCH_AUDIT_UPSTREAM="$UPSTREAM"
 
+# Spatial Relationship repair variant (plan section 9.6).  The default keeps the
+# published identity-first assignment; `ordered_role` maximises the signed score
+# over every (subject, object) role pair instead of committing to one instance,
+# and detection conditioning drops frames where a role was never detected from
+# the denominator instead of scoring them as direction violations.  Scoring a
+# different variant needs its own $SCORES tree, because the counterfactual
+# driver refuses to append a second variant into one shard file.
+export VBENCH_AUDIT_SPATIAL_MODE="${VBENCH_AUDIT_SPATIAL_MODE:-ordered_role_identity_assignment}"
+export VBENCH_AUDIT_SPATIAL_DETECTION_CONDITIONED="${VBENCH_AUDIT_SPATIAL_DETECTION_CONDITIONED:-0}"
+
 # GPU 6 is visible to nvidia-smi but not CUDA-available inside this container,
 # so the usable physical range is 1-5.
 GPUS=(1 2 3 4 5)

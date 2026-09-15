@@ -111,6 +111,39 @@ def metadata_item(dimension: str, row: dict[str, Any], annotation: dict[str, Any
     return item
 
 
+def frame_evidence(diagnostics: Any) -> dict[str, Any] | None:
+    """Compact per-clip evidence extracted from a backend's diagnostics.
+
+    Without this the scored rows keep only a scalar, so a repair that floors at
+    zero is indistinguishable from a repair that is systematically inverted:
+    both look like a low mean.  The frame reasons separate them.
+    """
+
+    if not isinstance(diagnostics, dict):
+        return None
+    frames = diagnostics.get("frame_results")
+    evidence: dict[str, Any] = {
+        "detected_frame_count": diagnostics.get("detected_frame_count"),
+        "scored_frame_count": diagnostics.get("scored_frame_count"),
+        "valid_frame_count": diagnostics.get("valid_frame_count"),
+        "missing_subject_count": diagnostics.get("missing_subject_count"),
+        "missing_object_count": diagnostics.get("missing_object_count"),
+        "ambiguous_role_count": diagnostics.get("ambiguous_role_count"),
+        "aggregation_method": diagnostics.get("aggregation_method"),
+    }
+    if isinstance(frames, list) and frames:
+        if isinstance(frames[0], dict):
+            counts: dict[str, int] = {}
+            for frame in frames:
+                reason = str(frame.get("frame_reason"))
+                counts[reason] = counts.get(reason, 0) + 1
+            evidence["frame_reason_counts"] = dict(sorted(counts.items()))
+        elif isinstance(frames[0], (int, float)):
+            evidence["frame_count"] = len(frames)
+            evidence["zero_frame_fraction"] = sum(1 for value in frames if float(value) == 0.0) / len(frames)
+    return evidence
+
+
 def _first(rows: list[dict[str, Any]]) -> dict[str, Any]:
     if not rows:
         return {"score": None, "status": "failed", "error": "backend returned no rows"}
@@ -123,11 +156,55 @@ def _first(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "score": float(score) if score is not None else None,
         "status": "succeeded" if score is not None else "failed",
         "error": None if score is not None else "backend returned no scalar score",
+        "evidence": frame_evidence(row.get("diagnostics")),
     }
 
 
-def make_scorer(dimension: str, backend: str, device: Any, upstream: Path) -> Callable[[Path, dict[str, Any]], dict[str, Any]]:
-    """Return ev(video_path, meta_item) -> {'score','status','error'} for one backend."""
+def existing_derived_ids(output: Path, backend: str, repair_config: dict[str, Any] | None) -> set[str]:
+    """Already-scored ids in one shard file, refusing to mix repair variants.
+
+    Resuming appends to the same file, so a shard that already holds rows from a
+    different repair configuration is fatal rather than skipped: the CPA
+    instrument would otherwise average two scoring contracts together.
+    """
+    done: set[str] = set()
+    if not output.is_file():
+        return done
+    for line in output.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        entry = json.loads(line)
+        if entry.get("backend") != backend:
+            continue
+        if repair_config is not None:
+            recorded = {
+                "repair_mode": entry.get("repair_mode", "ordered_role_identity_assignment"),
+                "detection_conditioned": bool(entry.get("detection_conditioned", False)),
+            }
+            if recorded != repair_config:
+                raise SystemExit(
+                    f"{output} already holds {backend} rows scored with {recorded}, "
+                    f"but this run requests {repair_config}; use a fresh --output"
+                )
+        done.add(entry["derived_id"])
+    return done
+
+
+def make_scorer(
+    dimension: str,
+    backend: str,
+    device: Any,
+    upstream: Path,
+    *,
+    repair_mode: str = "ordered_role_identity_assignment",
+    detection_conditioned: bool = False,
+) -> Callable[[Path, dict[str, Any]], dict[str, Any]]:
+    """Return ev(video_path, meta_item) -> {'score','status','error'} for one backend.
+
+    ``repair_mode``/``detection_conditioned`` only affect the Spatial Relationship
+    repair, which is the one dimension whose repair backend exposes scoring
+    variants (plan section 9.6).  Other dimensions ignore them.
+    """
     _syspath()
 
     if dimension == "dynamics_degree":
@@ -189,6 +266,7 @@ def make_scorer(dimension: str, backend: str, device: Any, upstream: Path) -> Ca
         )
         from spatial_relationship.diagnostics import DiagnosticsLevel
         from spatial_relationship.metric import evaluate_audit_batch, parse_query, weight_path
+        from spatial_relationship.models import AblationMode
 
         weight = Path(os.environ.get("VBENCH_AUDIT_GRIT_WEIGHT", weight_path())).expanduser()
         if backend == "official":
@@ -197,9 +275,13 @@ def make_scorer(dimension: str, backend: str, device: Any, upstream: Path) -> Ca
                 rows = normalize_official_results(raw, {video.name: item}, parse_query)
                 return _first(rows)
         else:
+            mode = AblationMode(repair_mode)
             detector = OfficialGritDetector(device, weight, upstream)
             def ev(video: Path, item: dict[str, Any]) -> dict[str, Any]:
-                return _first(evaluate_audit_batch([video], {video.name: item}, device, weight, DiagnosticsLevel.FULL, detector=detector))
+                return _first(evaluate_audit_batch(
+                    [video], {video.name: item}, device, weight, DiagnosticsLevel.FULL,
+                    detector=detector, mode=mode, condition_on_detection=detection_conditioned,
+                ))
         return ev
 
     if dimension == "scene":
@@ -273,6 +355,18 @@ def main() -> int:
     parser.add_argument("--shard-index", type=int, default=0)
     parser.add_argument("--num-shards", type=int, default=1)
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument(
+        "--repair-mode",
+        default=os.environ.get("VBENCH_AUDIT_SPATIAL_MODE", "ordered_role_identity_assignment"),
+        choices=("official", "signed_only", "ordered_role", "ordered_role_identity_assignment"),
+        help="Spatial Relationship repair variant (plan 9.6); ignored by other dimensions",
+    )
+    parser.add_argument(
+        "--repair-detection-conditioned",
+        action="store_true",
+        default=os.environ.get("VBENCH_AUDIT_SPATIAL_DETECTION_CONDITIONED", "").lower() in {"1", "true", "yes"},
+        help="Spatial Relationship repair: average only over frames where both roles were detected",
+    )
     parser.add_argument("--check-only", action="store_true",
                         help="construct the scorer and exit; catches import/weight errors")
     args = parser.parse_args()
@@ -293,19 +387,22 @@ def main() -> int:
     annotation = load_annotations(annotations_root, args.dimension)
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
-    # Resume: skip clips already scored by this backend.
-    done: set[str] = set()
-    if args.output.is_file():
-        for line in args.output.read_text(encoding="utf-8").splitlines():
-            if not line.strip():
-                continue
-            entry = json.loads(line)
-            if entry.get("backend") == args.backend:
-                done.add(entry["derived_id"])
+    # Resume: skip clips already scored by this backend.  A shard file must not
+    # silently mix two repair configurations.  The knobs only exist for the
+    # Spatial Relationship repair, so no other dimension records them.
+    repair_config = {
+        "repair_mode": args.repair_mode,
+        "detection_conditioned": bool(args.repair_detection_conditioned),
+    } if (args.dimension == "spatial_relationship" and args.backend == "repair") else None
+    done = existing_derived_ids(args.output, args.backend, repair_config)
     scored = len(done)
 
     import torch
-    scorer = make_scorer(args.dimension, args.backend, torch.device("cuda:0"), args.upstream)
+    scorer = make_scorer(
+        args.dimension, args.backend, torch.device("cuda:0"), args.upstream,
+        repair_mode=args.repair_mode,
+        detection_conditioned=args.repair_detection_conditioned,
+    )
     print(json.dumps({"event": "scorer_ready", "dimension": args.dimension, "backend": args.backend, "gpu": os.environ.get("CUDA_VISIBLE_DEVICES")}), flush=True)
     if args.check_only:
         print(json.dumps({"event": "check_ok", "dimension": args.dimension, "backend": args.backend}), flush=True)
@@ -335,6 +432,9 @@ def main() -> int:
                 "score": result.get("score"),
                 "status": result.get("status"),
                 "error": result.get("error"),
+                "repair_mode": repair_config["repair_mode"] if repair_config else None,
+                "detection_conditioned": repair_config["detection_conditioned"] if repair_config else None,
+                "evidence": result.get("evidence"),
             }
             handle.write(json.dumps(entry, ensure_ascii=False, sort_keys=True) + "\n")
             handle.flush()

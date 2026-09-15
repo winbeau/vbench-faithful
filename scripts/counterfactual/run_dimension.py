@@ -339,6 +339,8 @@ def render_report(
     cpa: dict[str, Any],
     code_sha: str,
     scores: dict[tuple[str, str], float | None] | None = None,
+    repair_config: dict[str, Any] | None = None,
+    evidence: dict[str, dict[str, Any]] | None = None,
 ) -> str:
     transformation, expectation = FAMILY_DESCRIPTION.get(family, ("", ""))
     levels = sorted({row["level"] for row in rows}, key=lambda name: next(r["expected_rank"] for r in rows if r["level"] == name))
@@ -357,6 +359,14 @@ def render_report(
         f"- derived clips: {len(rows)} (dev {splits['dev']}, test {splits['test']})",
         f"- levels: {', '.join(f'`{level}`' for level in levels)}",
         f"- code SHA: `{code_sha}`",
+        *(
+            [
+                f"- repair variant: `{repair_config['repair_mode']}`"
+                f" (detection-conditioned: {str(bool(repair_config['detection_conditioned'])).lower()})",
+            ]
+            if repair_config
+            else []
+        ),
         "",
         "## Score coverage",
         "",
@@ -574,6 +584,8 @@ def render_report(
             f"| {family_name} | {off.get('cpa', float('nan')):.4f} | "
             f"{rep.get('cpa', float('nan')):.4f} | {delta} |"
         )
+    lines += render_evidence_section(rows, evidence)
+
     lines += [
         "",
         "## Status and limitations",
@@ -587,6 +599,90 @@ def render_report(
         "",
     ]
     return "\n".join(lines)
+
+
+def evidence_summary(
+    rows: list[dict[str, Any]], evidence: dict[str, dict[str, Any]] | None, backend: str
+) -> dict[str, Any]:
+    """Aggregate the per-clip frame evidence recorded by the scoring driver.
+
+    A repair that floors at zero and a repair whose direction is inverted both
+    report a low mean; only the frame reasons tell them apart, so the report has
+    to carry them next to the CPA.
+    """
+
+    reasons: dict[str, int] = {}
+    clips_with_evidence = frames = 0
+    zero_fractions: list[float] = []
+    for row in rows:
+        entry = (evidence or {}).get(row["derived_id"], {}).get(backend)
+        if not entry:
+            continue
+        clips_with_evidence += 1
+        for reason, count in (entry.get("frame_reason_counts") or {}).items():
+            reasons[reason] = reasons.get(reason, 0) + int(count)
+        frames += int(entry.get("frame_count") or sum((entry.get("frame_reason_counts") or {}).values()))
+        if entry.get("zero_frame_fraction") is not None:
+            zero_fractions.append(float(entry["zero_frame_fraction"]))
+    satisfied = sum(count for reason, count in reasons.items() if reason.startswith("relation_satisfied"))
+    return {
+        "backend": backend,
+        "clips": clips_with_evidence,
+        "frames": frames,
+        "missing_subject": reasons.get("missing_subject", 0),
+        "missing_object": reasons.get("missing_object", 0),
+        "direction_mismatch": reasons.get("direction_mismatch", 0),
+        "axis_mismatch": reasons.get("axis_mismatch", 0),
+        "satisfied": satisfied,
+        "other": sum(reasons.values()) - sum(
+            reasons.get(reason, 0)
+            for reason in ("missing_subject", "missing_object", "direction_mismatch", "axis_mismatch")
+        ) - satisfied,
+        "mean_zero_frame_fraction": (
+            sum(zero_fractions) / len(zero_fractions) if zero_fractions else None
+        ),
+    }
+
+
+def render_evidence_section(
+    rows: list[dict[str, Any]], evidence: dict[str, dict[str, Any]] | None
+) -> list[str]:
+    test_rows = [row for row in rows if row["split"] == "test"]
+    summaries = {
+        backend: evidence_summary(test_rows, evidence, backend) for backend in ("official", "repair")
+    }
+    if not any(summary["clips"] for summary in summaries.values()):
+        return [
+            "",
+            "## Frame evidence",
+            "",
+            "No per-clip evidence was recorded for this run, so a low repair score cannot be",
+            "attributed to detector drop-outs rather than to a wrong direction. Re-score with the",
+            "current `score.py` to populate it.",
+        ]
+    lines = [
+        "",
+        "## Frame evidence (test split)",
+        "",
+        "Per-frame reasons behind each backend's scores. `missing_*` frames are detector",
+        "drop-outs, `direction_mismatch` is a resolved arrangement with the wrong sign, and",
+        "`axis_mismatch` is a resolved arrangement on the wrong axis. The official backend",
+        "reports raw frame scores instead of reasons, so only its zero-frame rate is shown.",
+        "",
+        "| backend | clips | frames | missing_subject | missing_object | direction_mismatch | axis_mismatch | other | satisfied | mean zero-frame rate |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for backend, summary in summaries.items():
+        zero = (
+            "—" if summary["mean_zero_frame_fraction"] is None
+            else f"{summary['mean_zero_frame_fraction']:.4f}"
+        )
+        lines.append(
+            f"| {backend} | {summary['clips']} | {summary['frames']} | {summary['missing_subject']} | "
+            f"{summary['missing_object']} | {summary['direction_mismatch']} | "
+            f"{summary['axis_mismatch']} | {summary['other']} | {summary['satisfied']} | {zero} |"
+        )
+    return lines
 
 
 def main() -> int:
@@ -606,6 +702,17 @@ def main() -> int:
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--report-only", action="store_true",
                         help="rebuild the report from cached scores without scoring")
+    parser.add_argument(
+        "--repair-mode",
+        default=os.environ.get("VBENCH_AUDIT_SPATIAL_MODE", "ordered_role_identity_assignment"),
+        help="Spatial Relationship repair variant forwarded to the scoring workers",
+    )
+    parser.add_argument(
+        "--repair-detection-conditioned",
+        action="store_true",
+        default=os.environ.get("VBENCH_AUDIT_SPATIAL_DETECTION_CONDITIONED", "").lower() in {"1", "true", "yes"},
+        help="score the Spatial Relationship repair only over frames where both roles were detected",
+    )
     args = parser.parse_args()
 
     if args.annotations_root is None:
@@ -620,6 +727,12 @@ def main() -> int:
     family = rows[0]["family"]
 
     env = dict(os.environ)
+    env["VBENCH_AUDIT_SPATIAL_MODE"] = args.repair_mode
+    env["VBENCH_AUDIT_SPATIAL_DETECTION_CONDITIONED"] = "1" if args.repair_detection_conditioned else "0"
+    repair_config = {
+        "repair_mode": args.repair_mode,
+        "detection_conditioned": bool(args.repair_detection_conditioned),
+    }
     coverage = []
     for backend in ([] if args.report_only else BACKENDS):
         print(f"[{args.dimension}] scoring {backend} on GPUs {gpus}", flush=True)
@@ -651,11 +764,14 @@ def main() -> int:
 
     scores: dict[tuple[str, str], float | None] = {}
     nested_scores: dict[str, dict[str, float]] = {}
+    nested_evidence: dict[str, dict[str, Any]] = {}
     for backend in BACKENDS:
         for row in read_jsonl(args.scores / f"{args.dimension}__{backend}.jsonl"):
             if row.get("status") == "succeeded" and row.get("score") is not None:
                 scores[(row["derived_id"], backend)] = float(row["score"])
                 nested_scores.setdefault(row["derived_id"], {})[backend] = float(row["score"])
+            if row.get("evidence"):
+                nested_evidence.setdefault(row["derived_id"], {})[backend] = row["evidence"]
 
     cpa: dict[str, Any] = {"coverage": [], "profiles": {}, "contracts": {}}
     for backend in BACKENDS:
@@ -690,7 +806,9 @@ def main() -> int:
     code_sha = git_sha()  # scoring revision, not the dataset-build revision in the manifest
     args.scores.mkdir(parents=True, exist_ok=True)
     write_json(args.scores / f"{args.dimension}__cpa.json", cpa)
-    report = render_report(args.dimension, family, rows, coverage, cpa, code_sha, nested_scores)
+    report = render_report(
+        args.dimension, family, rows, coverage, cpa, code_sha, nested_scores, repair_config, nested_evidence
+    )
     (args.reports / f"{args.dimension}.md").write_text(report, encoding="utf-8")
     print(json.dumps({"dimension": args.dimension, "coverage": coverage, "report": str(args.reports / f"{args.dimension}.md")}, indent=2))
     return 0

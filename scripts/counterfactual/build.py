@@ -470,6 +470,11 @@ def _row(
         "transformation_parameters": variant.parameters,
         "transformation_note": variant.note,
         "manual_validity_status": "pending",
+        # The `directional_flip` premise (`score(original) > score(flip)`) only
+        # holds when the source clip actually satisfies the ordered relation, so
+        # `pick_detectable.py` records how that was confirmed (plan section 9.2).
+        "relation_validity_oracle": base.get("relation_oracle"),
+        "relation_validity_frame_rate": base.get("relation_frame_rate"),
         "license_or_usage_note": LICENSE_NOTE,
     }
 
