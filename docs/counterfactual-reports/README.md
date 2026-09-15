@@ -11,7 +11,12 @@ Each report contains: score coverage per backend and split, per-family CPA
 (zero-margin and dev-calibrated tie-aware) with 95% cluster-bootstrap CIs over
 `base_id`, the Official-vs-Repair difference, and a limitations section.
 
-| dimension | family | Official (test, tie-aware) | Repair (test, tie-aware) | delta |
-|---|---|---:|---:|---:|
-| `dynamics_degree` | `fps_resampling` | 0.8333 | 0.8444 | +0.0111 |
-| `subject_consistency` | `temporal_relocation` | 0.5917 | 0.8500 | +0.2583 |
+| dimension | family | Official CPA | Repair CPA | delta | Official CV | Repair CV |
+|---|---|---:|---:|---:|---:|---:|
+| `dynamics_degree` | `fps_resampling` | 0.8333 | 0.8444 | +0.0111 | — | — |
+| `human_action` | `filename_invariance` | 1.0000 | 1.0000 | +0.0000 | — | — |
+| `spatial_relationship` | `directional_flip` | 0.3667 | 0.0667 | -0.3000 | — | — |
+| `subject_consistency` | `temporal_relocation` | 0.5917 | 0.8500 | +0.2583 | — | — |
+
+`CV` is the mean within-base coefficient of variation, reported only for
+same-rank (invariance) families where a tie-margin CPA is degenerate.
