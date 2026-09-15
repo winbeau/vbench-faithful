@@ -213,3 +213,117 @@ landed in the server-side `run_natural.sh` / `finalize_natural.py` helpers:
 2. The generated official `results.csv` needs the E0 `status == "success"`
    convention rather than the comparator's `succeeded_scalar`, because
    `evaluate_pairwise_statistics.py` reads the official path with the former.
+
+## P1.5 Subject Consistency — equal-area temporal relocation (confirmatory run)
+
+**Question**: `temporal_relocation` places one corruption at the start, middle
+and end of a clip and declares the three variants same-rank, so only *when* the
+corruption applies may move the score. The original construction tracked the
+subject per frame, which made the three placements differ in **area and content
+as well as position**, so the review's position finding (Official position
+invariance 0.2500 against Repair 0.9167) could not be attributed to position.
+The confirmatory construction broadcasts a single per-base **median box** to
+every frame (`VBENCH_AUDIT_SUBJECT_BOX=median`, the default since `61a65bc`), so
+the three placements differ only in *when*.
+
+Both constructions were rebuilt from the same 25 candidates in the same
+`bases.jsonl`; two bases fail GRiT subject tracking (`truck`, `bird`) in either
+construction, leaving **23 bases × 4 levels** scored by both backends
+(`scripts/counterfactual/score.py`; DINO for Official and Repair). Statistics:
+`scripts/counterfactual/subject_position_profile.py`, 10 000 bootstraps,
+seed 2026.
+
+### Sensitivity: clean versus corrupt
+
+| construction | backend | clean > start | clean > middle | clean > end |
+|---|---|---:|---:|---:|
+| equal-area | Official | 1.000 | 1.000 | 1.000 |
+| equal-area | Repair | 1.000 | 1.000 | 1.000 |
+| tracked | Official | 1.000 | 1.000 | 1.000 |
+| tracked | Repair | 1.000 | 1.000 | 1.000 |
+
+Saturated: on all 23 bases both backends rank `clean` above every corrupted
+position, in both constructions. The corruption is strong enough that this half
+of the contract is not the informative one.
+
+### Position profile
+
+Per base over the three corrupted scores; `relative range` is
+`(max − min) / mean`, so it is scale-free across bases.
+
+| construction | backend | max − min median (IQR) | CV median | relative range median (IQR) | within ±5% | ±10% | ±20% |
+|---|---|---:|---:|---|---:|---:|---:|
+| equal-area | Official | 0.0886 (0.0301–0.1224) | 0.0461 | 0.1017 (0.0357–0.1497) | 0.261 | 0.435 | 0.826 |
+| equal-area | Repair | 0.0183 (0.0083–0.0296) | 0.0097 | 0.0215 (0.0089–0.0387) | 0.783 | 0.957 | 1.000 |
+| tracked | Official | 0.1043 (0.0477–0.1365) | 0.0566 | 0.1299 (0.0564–0.1745) | 0.217 | 0.348 | 0.826 |
+| tracked | Repair | 0.0239 (0.0096–0.0406) | 0.0124 | 0.0296 (0.0109–0.0526) | 0.696 | 0.913 | 1.000 |
+
+### Paired comparison
+
+Paired bootstrap of the median relative range, equal-area − tracked, over the
+same 23 bases:
+
+| backend | equal-area | tracked | delta | 95% CI | significant |
+|---|---:|---:|---:|---|---|
+| Official | 0.1017 | 0.1299 | −0.0282 | [−0.0586, +0.0135] | no |
+| Repair | 0.0215 | 0.0296 | −0.0081 | [−0.0213, +0.0132] | no |
+
+### Result
+
+**The equal-area box reduces the position spread but, at 23 bases, does not
+establish the reduction.** The median relative range falls by 22% (Official) and
+27% (Repair), and the tighter tolerance is where the gain shows: Official's
+±10% consistency rises 0.348 → 0.435 and Repair's rises 0.913 → 0.957 (Repair's
+±5% rises 0.696 → 0.783). The ±20% rate is unchanged for Official (0.826) and
+already saturated for Repair (1.000). Both paired intervals include zero, so the
+honest claim is *the confound is reduced, not removed*.
+
+Two further observations that do hold at this sample size:
+
+- **Even with equal-area boxes the Official backend is not position-stable.**
+  Its relative range is still 0.1017 and only 26% of bases agree across the three
+  placements to within ±5%. Making the three regions identical removed the
+  *construction* asymmetry; it did not make the Official estimator
+  position-invariant, so part of the original gap was an estimator property
+  rather than a fixture artefact.
+- **The Repair backend is about five times tighter than Official** in both
+  constructions (0.0215 against 0.1017 with equal-area) and reaches 1.000
+  consistency within ±20%. Its position invariance is therefore real, not an
+  artefact of the box.
+
+The published headline for this family (Official position invariance 0.2500 →
+Repair 0.9167) was computed on the **tracked** construction over a *different*
+base set — see the provenance note below — so it is not directly comparable with
+this same-base A/B; the same-base tracked arm here is the comparable control.
+
+## Provenance note: `bases.jsonl` does not reproduce the published detector-dependent subsets
+
+`output/` is gitignored, so `output/counterfactual/bases.jsonl` is not versioned,
+and the published dataset's base sets are not all reconstructible from it.
+Comparing the base ids present in the published dataset against the base ids in
+the current `bases.jsonl`, per dimension:
+
+| dimension | published | `bases.jsonl` | overlap | match |
+|---|---:|---:|---:|:--:|
+| dynamics_degree | 40 | 40 | 40 | yes |
+| human_action | 25 | 25 | 25 | yes |
+| motion_smoothness | 25 | 25 | 25 | yes |
+| scene | 25 | 25 | 25 | yes |
+| spatial_relationship | 40 | 40 | 40 | yes |
+| **multiplt_object** | 25 | 25 | **6** | **no** |
+| **subject_consistency** | 25 | 25 | **9** | **no** |
+
+The two mismatching dimensions are exactly the detector-dependent ones, and the
+cause is *not* a selector-code change: running `select_bases.py` today and at
+`0e4d189` — the commit immediately before `66c4a99` — both reproduce the current
+`bases.jsonl` exactly. What `66c4a99` added alongside the ranked pool is
+`pick_detectable.py`, which re-selects precisely the detector dimensions by
+walking a ranked candidate pool and keeping the first `budget` candidates GRiT
+can actually ground. The published subsets are the **oversampled** ones, so the
+reconstruction path is `select_bases.py` **then** `pick_detectable.py`, while the
+version of `bases.jsonl` now on disk is the plain `select_bases.py` output.
+
+Consequence: the published dataset and the `CONSOLIDATED.md` table remain
+internally consistent — every reported score was computed on a published clip —
+but `build.py` against the current `bases.jsonl` reproduces only 5 of 7
+dimensions.
