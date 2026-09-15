@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import traceback
@@ -234,6 +235,16 @@ def _variants_for(
     if dimension == "subject_consistency":
         caption = _subject_caption(base, ctx)
         boxes = _track_boxes(ctx, caption, frames, base)
+        # The review found that per-frame tracked boxes make the start/middle/end
+        # corruption differ in area and content, so the three positions were not
+        # equally strong and the position gap was uninterpretable.  A single
+        # median box (broadcast to every frame) makes the three placements
+        # identical in area, ensuring the only variable is *when* it applies.
+        mode = os.environ.get("VBENCH_AUDIT_SUBJECT_BOX", "median")
+        if mode == "median":
+            boxes = [_median_box(boxes)]
+        elif mode != "tracked":
+            raise CounterfactualError(f"unknown VBENCH_AUDIT_SUBJECT_BOX mode: {mode}")
         return transforms.temporal_relocation(frames, meta, boxes)
     if dimension == "spatial_relationship":
         return transforms.directional_flip(frames, meta, _relation_of(base, ctx))
@@ -304,6 +315,21 @@ def _annotation_filename(dimension: str) -> str:
         return ANNOTATION_FILES[dimension]
     except KeyError as error:
         raise CounterfactualError(f"no annotation file known for {dimension}") from error
+
+
+def _median_box(boxes: Sequence[Sequence[int]]) -> tuple[int, int, int, int]:
+    """Elementwise median of a tracked box sequence.
+
+    Used to make the three temporal-relocation positions apply one identical
+    region, so corruption area and content are held fixed and only the position
+    varies (plan section 7.5 keeps a fixed ROI as an ablation; making it the
+    primary removes the confound the review identified).
+    """
+    array = np.asarray([[int(v) for v in box] for box in boxes], dtype=float)
+    if array.size == 0:
+        raise CounterfactualError("no tracked boxes to take a median of")
+    median = np.median(array, axis=0)
+    return (int(round(median[0])), int(round(median[1])), int(round(median[2])), int(round(median[3])))
 
 
 def _targets_of(base: dict[str, Any], ctx: BuildContext) -> list[str]:
