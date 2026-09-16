@@ -499,13 +499,19 @@ def main() -> int:
         ])),
     }
 
-    combined = {(row["derived_id"], "official"): scores["official"].get(row["derived_id"], {}).get(row["level"])
-                for row in rows}
-    combined.update({(row["derived_id"], "repair"): scores["v2_shipped"].get(row["derived_id"], {}).get(row["level"])
-                     for row in rows})
-    report["paired_ci"] = paired_ci(rows, combined, args.iterations, args.seed)
-    report["paired_ci_independent"] = cross_check_cpa(rows, combined, args.iterations, args.seed)
-    report["paired_ci_independent_seed_alt"] = cross_check_cpa(rows, combined, args.iterations, 20260915)
+    def combined_for(backend: str) -> dict[tuple[str, str], float | None]:
+        out = {(row["derived_id"], "official"): scores["official"].get(row["derived_id"], {}).get(row["level"])
+               for row in rows}
+        out.update({(row["derived_id"], "repair"): scores[backend].get(row["derived_id"], {}).get(row["level"])
+                    for row in rows})
+        return out
+
+    for label, backend in (("", "v2_shipped"), ("_v1", "v1_archived")):
+        combined = combined_for(backend)
+        report[f"paired_ci{label}"] = paired_ci(rows, combined, args.iterations, args.seed)
+        report[f"paired_ci{label}_independent"] = cross_check_cpa(rows, combined, args.iterations, args.seed)
+        if not label:
+            report["paired_ci_independent_seed_alt"] = cross_check_cpa(rows, combined, args.iterations, 20260915)
 
     report["holdout_p1_3"] = holdout_section(root / "validation_dynamic/validation_alpha.json",
                                              args.iterations, args.seed)
