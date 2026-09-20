@@ -1,0 +1,50 @@
+# M2 protocol and asset-inventory contract for the four candidate dimensions.
+# This file contains expected metadata and paths only.  It contains no model
+# weights and is deliberately usable on a host without CUDA or VBench assets.
+
+[protocol]
+schema_version = "four-dimension-m2-v1"
+date = "2026-09-20"
+dimensions = ["background_consistency", "temporal_style", "object_class", "color"]
+default_gpus = [1, 2, 3, 4]
+one_visible_gpu_per_process = true
+logical_device = "cuda:0"
+
+[protocol.dataset]
+metadata = "vbench/VBench_full_info.json"
+dimension_to_folder = "dimension_to_folder.json"
+# These are the generators used by the VBench human-preference archive.  The
+# inventory command does not require all of them to exist; missing generators
+# are reported as blocked instead of being silently skipped.
+generators = ["cogvideo", "lavie", "modelscope", "videocrafter"]
+video_suffixes = [".mp4", ".gif"]
+
+[protocol.source_code]
+required_upstream_sha = "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+required_dimensions = ["background_consistency", "temporal_style", "object_class", "color"]
+
+[dimensions.background_consistency]
+expected_prompt_count = 86
+source_dimension = "background_consistency"
+source_folder = "scene"
+shared_prompt_dimension = "scene"
+offline_checks = ["suite_coupling", "scene_prompt_set_equal", "no_model_measurement"]
+
+[dimensions.temporal_style]
+expected_prompt_count = 100
+expected_base_count = 10
+expected_style_count = 10
+expected_aux_count = 0
+source_dimension = "temporal_style"
+offline_checks = ["estimator_ast_equivalence", "style_clause_exchange", "token_truncation"]
+
+[dimensions.object_class]
+expected_prompt_count = 79
+expected_label_count = 79
+source_dimension = "object_class"
+offline_checks = ["target_label_fixture", "exact_string_rule", "fixed_frame_denominator"]
+
+[dimensions.color]
+expected_prompt_count = 85
+source_dimension = "color"
+offline_checks = ["instance_index_fixture", "word_boundary_fixture", "fixed_frame_denominator"]

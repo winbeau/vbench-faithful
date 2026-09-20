@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8"><title>主体语义人工审核</title>
+<style>body{font:17px system-ui;max-width:880px;margin:2rem auto}input,select,button{font:inherit;margin:.4rem}#prompt{line-height:1.7;padding:1rem;background:#f4f4f4}label{display:block}#message{white-space:pre-wrap}</style>
+<h1>主体语义人工审核</h1><p>仅根据原始提示词，独立判断主要主体。页面不显示大模型银标。phrase 为从原文抽取的名词短语，最多 6 个词；不添加推测的外观属性。</p>
+<p id="position"></p><p id="prompt"></p>
+<label>审核人 <input id="reviewer"></label><label>status <select id="state"><option>ok</option><option>none</option><option>ambiguous</option></select></label>
+<label>subject <input id="subject" list="vocabulary"><datalist id="vocabulary"></datalist></label>
+<label>phrase <input id="phrase" size="50"></label><label>count <select id="count"><option value="">null</option><option>1</option><option>2</option></select></label>
+<button id="confirm">确认本条</button><button id="prev">上一条</button><button id="next">下一条</button><button id="export">导出人工审核 JSONL</button><p id="message"></p>
+<script>
+const rows=/*ROWS*/[], vocabulary=/*VOCABULARY*/[];let index=0;const answers={};
+const el=id=>document.getElementById(id);for(const word of vocabulary){const option=document.createElement('option');option.value=word;el('vocabulary').appendChild(option);}
+function show(){const row=rows[index], value=answers[row.sample_id]?.label||{status:'ok',subject:'',phrase:'',count:null};el('position').textContent=`${index+1}/${rows.length}`;el('prompt').textContent=row.prompt;el('state').value=value.status;el('subject').value=value.subject||'';el('phrase').value=value.phrase;el('count').value=value.count||'';el('message').textContent=`已确认 ${Object.keys(answers).length}/${rows.length}`;}
+el('confirm').onclick=()=>{const row=rows[index], reviewer=el('reviewer').value.trim(), state=el('state').value;if(!reviewer){el('message').textContent='请填写审核人。';return;}let value={subject:el('subject').value.trim(),phrase:el('phrase').value.trim(),count:el('count').value?Number(el('count').value):null,status:state};if(state!=='ok')value={subject:null,phrase:'',count:null,status:state};else if(!vocabulary.includes(value.subject)||!value.phrase){el('message').textContent='请从冻结词表选择 subject，并从原文抽取 phrase。';return;}answers[row.sample_id]={...row,quality:'human_reviewed',reviewed:true,reviewer,label:value,reviewed_at:new Date().toISOString()};el('message').textContent=`已确认 ${Object.keys(answers).length}/${rows.length}`;};
+el('prev').onclick=()=>{index=Math.max(0,index-1);show();};el('next').onclick=()=>{index=Math.min(rows.length-1,index+1);show();};
+el('export').onclick=()=>{const values=rows.map(r=>answers[r.sample_id]).filter(Boolean);if(!values.length)return;const url=URL.createObjectURL(new Blob([values.map(r=>JSON.stringify(r)).join('\n')+'\n'],{type:'application/x-ndjson'}));const link=document.createElement('a');link.href=url;link.download='subject_human_review.jsonl';link.click();URL.revokeObjectURL(url);};show();
+</script>

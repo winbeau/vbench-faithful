@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "model": "nvidia/segformer-b0-finetuned-ade-512-512",
+  "revision": "489d5cd81a0b59fab9b7ea758d3548ebe99677da",
+  "classes": {
+    "person": ["person"],
+    "castle": ["building", "wall", "tower", "windowpane", "door", "house", "column", "skyscraper"],
+    "airplane": ["airplane"],
+    "bicycle": ["bicycle"],
+    "boat": ["boat"],
+    "bus": ["bus"],
+    "car": ["car"],
+    "truck": ["truck"]
+  },
+  "unoccupied_stuff_labels": ["sky", "floor", "ceiling", "road", "grass", "sidewalk", "earth", "mountain", "water", "sea", "field", "sand", "path", "runway", "river", "hill", "dirt track", "land", "lake"],
+  "absence_scope": "No SegFormer-labeled object pixels in the entire mirrored box; this is model-conditional evidence, not human instance ground truth.",
+  "unsupported_policy": "Reject categories not explicitly mapped. Do not map individual animal species to ADE20K animal or infer subjects from a prompt."
+}

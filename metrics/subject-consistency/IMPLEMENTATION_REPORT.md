@@ -50,7 +50,81 @@ The `0.5 / 0.5` weighting is the current simple default; it is not presented as 
 | Video-level score structure | Modified | `S_original` becomes `S_ours`. |
 | Dataset aggregation | Modified at implementation level only, not method contribution | Official single-GPU transition weighting and multi-GPU video averaging are preserved for parity; Ours uses arithmetic mean over successful video scores. |
 
-No ROI, SAM2, segmentation, or tracking is enabled. ROI remains outside the main method because earlier fixed-ROI evidence did not consistently preserve subject-corruption sensitivity.
+The aggregation variant enables no ROI, segmentation, or tracking. A second,
+representation-level variant was added afterwards and is documented below; the
+two are separate ablations and must not be conflated.
+
+## Subject-localised variant (`--audit-variant subject_masked`)
+
+Rationale: the whole-frame reduction cannot distinguish "the subject changed"
+from "the background, lighting, or camera moved". The repair therefore gives the
+score an explicit subject evidence unit instead of changing the aggregation
+again.
+
+Pipeline:
+
+```text
+decoded frames (loaded once, shared by both stages)
+  -> text-conditioned localizer, prompted with a phrase, returns per-frame
+     instance masks + presence
+  -> masks resampled onto the backbone's patch grid as coverage weights
+  -> per-frame subject vector = mask-pooled patch tokens, L2-normalised
+  -> position-invariant all-pairs cosine, fixed denominator C(T, 2)
+```
+
+Design decisions that the contract experiments depend on:
+
+- **The phrase never comes from parsing the prompt.** It is read from an
+  explicit metadata field (the official annotations carry `subject_en`);
+  a missing phrase fails the sample instead of falling back. This keeps the
+  repair from re-inventing the string-matching failure mode of the four
+  semantic dimensions.
+- **The localizer is swappable.** `SubjectMaskProvider` is a protocol and the
+  default implementation reads frozen per-video `.npz` masks
+  (`NpzSubjectMaskProvider`), so the localizer runs offline, its output is a
+  hashable input recorded in diagnostics (`mask_source`, `mask_source_sha256`),
+  and the metric's runtime keeps no localizer dependency. An in-process SAM 3
+  adapter (`Sam3SubjectMaskProvider`, per-frame image mode, no tracker) is
+  provided for convenience.
+- **Frames are decoded once.** The same `load_video` tensor is passed to the
+  localizer and to the patch extractor, so masks and tokens cannot come from two
+  different decodes.
+- **Two instance modes.** `union` pools the union of all matched instances into
+  one vector per frame; `mean` pools each instance and averages the vectors.
+  `union` needs no cross-frame instance matching.
+- **Missing evidence defaults to `zero`, not to exclusion.** A frame without
+  subject evidence contributes a zero similarity to every pair it belongs to and
+  the denominator stays `C(T, 2)`. Excluding such frames would let a corruption
+  that destroys detectability *raise* the score. `exclude` remains available as
+  the detection-conditioned bound; the plan's reporting rule is to give both.
+- **`max_frames` is a declared deviation**: `None` keeps every decoded frame,
+  exactly like the official path. A cap uses VBench-style interval midpoints.
+
+Original proposed contract (the equal-area construction is archived; see the
+current full-background protocol below):
+`clean > subject-corrupt` on every position; the three positions tie (margin-free
+relative range); an equal-area, same-operator **background** corruption moves the
+score much less than the subject corruption; camera translation and scale changes
+are near-invariant. The last two are the discrimination axes that the current
+aggregation repair does not address.
+
+Verified here: the masking, pooling, instance-mode, missing-policy, sampling,
+resampling and CLI wiring logic, with synthetic features and masks
+(`tests/test_subject_evidence.py`, `tests/test_masked_pipeline.py`), including a
+test that a background-only change is invisible to the masked score and visible
+to the whole-frame score when the synthetic subject features themselves are
+unchanged. This does not establish background-invariant real DINO tokens.
+
+The [2026-09-20 pilot](../../docs/counterfactual-reports/subject_region_discrimination_v2.md)
+ran real DINO and independent MobileSAM on H100, with seven human-confirmed
+scoring boxes. Full-background blur preserves subject pixels and edits their
+entire complement; there is no equal-area claim. Median absolute background
+score change was 0.0286 for Official, 0.0316 for the aggregation repair, and
+0.0294 for masked repair. The masked stability criterion did not pass, and
+subject-corruption sensitivity failed on five of seven clips. The user then
+judged only the presenter and swimmer images plausible candidates; the entire
+run remains a pilot with explicit image/mask-quality limitations. These numbers
+do not establish formal method performance. Frozen E0 parity remains `NOT RUN`.
 
 ## Tests
 
@@ -58,7 +132,16 @@ Synthetic normalized-feature tests cover Original formula parity, identical feat
 
 ## Known limitations
 
-- Whole-frame DINO can still respond to background and scale changes; the repair changes temporal aggregation, not subject representation.
+- Whole-frame DINO can still respond to background and scale changes; the
+  aggregation variant changes temporal aggregation, not subject representation.
+  The masked variant changes the representation; it is a separate ablation.
+- The masked variant's score depends on the localizer. A frame where the phrase
+  is not found is scored by the missing policy, not treated as ground truth, and
+  the localizer used to build the counterfactual masks must not be the one used
+  at scoring time or the experiment is self-fulfilling.
+- The masked variant has only a seven-clip pilot with inadequate image and
+  construction-mask quality. Natural-set validation and frozen E0 parity remain
+  `NOT RUN`; no confirmatory conclusion is claimed from the two retained candidates.
 - All-pairs similarity has quadratic temporary memory in the number of decoded frames, although the full matrix is not persisted in diagnostics.
 - The local DINO repository and ViT-B/16 checkpoint must already exist. The CLI does not download either asset.
 - The bundled local paper file is a 284-byte HTML response rather than a valid PDF; exact behavior was therefore grounded in the locked VBench1.0 source. A replacement official PDF could not be fetched in the current network environment.

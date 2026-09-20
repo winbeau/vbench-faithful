@@ -1,0 +1,29 @@
+# M1 model/asset contract for the H100 runner.
+# Paths are declarations only; this file contains no weights and is not a
+# download recipe. M2 must verify existence and hashes on the H100 host.
+
+[runtime]
+python = "/root/wenbiao_zhao/venvs/vbench/bin/python"
+upstream = "/root/wenbiao_zhao/VBench"
+upstream_sha = "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+
+[models]
+clip_vit_b32 = "/root/.cache/clip/ViT-B-32.pt"
+viclip_checkpoint = "/root/.cache/vbench/ViCLIP/ViClip-InternVid-10M-FLT.pth"
+viclip_bpe = "/root/.cache/vbench/ViCLIP/bpe_simple_vocab_16e6.txt.gz"
+grit_checkpoint = "/root/.cache/vbench/grit_model/grit_b_densecap_objectdet.pth"
+
+[dimensions.background_consistency]
+model = "clip_vit_b32"
+
+[dimensions.temporal_style]
+model = "viclip_checkpoint"
+text_assets = ["viclip_bpe"]
+
+[dimensions.object_class]
+model = "grit_checkpoint"
+head = "objectdet"
+
+[dimensions.color]
+model = "grit_checkpoint"
+heads = ["densecap", "objectdet"]

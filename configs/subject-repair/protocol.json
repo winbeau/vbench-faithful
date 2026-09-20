@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "family": "region_discrimination",
+  "positions": [
+    "full",
+    "start",
+    "middle",
+    "end"
+  ],
+  "levels": [
+    "clean",
+    "background_corrupt",
+    "subject_corrupt"
+  ],
+  "primary_operator": "gaussian",
+  "primary_position": "full",
+  "other_positions": "Quarter-duration start/middle/end are separately reported sensitivity controls, not independent bases.",
+  "missing_policies": [
+    "zero",
+    "exclude"
+  ],
+  "unsupported_score_zero": 0.0,
+  "unsupported_denominator": "All preregistered bases remain in the end-to-end mean; unsupported and failed entries have zero contribution and explicit status. Detection-conditioned means report their changed denominator.",
+  "minimum_subject_drop": 0.05,
+  "sensitivity_gate": "clean > subject_corrupt for every backend on the same base",
+  "ratio_population": "Secondary R: common bases passing subject drop >= 0.05 in every compared column, with all exclusions reported.",
+  "bootstrap_unit": "source_prompt_id",
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 20260920,
+  "confidence_level": 0.95,
+  "criterion": "Masked absolute-change CI upper bound < 0.02 and paired reduction CI lower bound > 0. Subject-corruption sensitivity must also be reported; background stability alone does not establish a useful metric.",
+  "natural_preference_measurement": "NOT RUN",
+  "real_model_parity": "NOT RUN",
+  "aggregation_repair": "Published implementation: 0.5 adjacent + 0.5 all_pairs; preserve as shipped.",
+  "masked_repair": "All_pairs, clamped nonnegative cosines; zero uses fixed C(T,2).",
+  "background_support": "Binary complement of the designated subject mask, covering every other pixel.",
+  "equal_area_claim": false,
+  "primary_statistic": "Median absolute score(clean)-score(background_corrupt) on common bases; paired official-minus-masked reduction in absolute change.",
+  "stability_tolerance": 0.02,
+  "ratio_interpretation": "Background and subject interventions have unequal areas. The former equal-area official-CI-contains-1 criterion is not applicable."
+}

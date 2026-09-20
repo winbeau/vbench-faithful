@@ -1,20 +1,31 @@
 # VBench Audit
 
-VBench 1.0 八个维度的可复现审计工作区。每个维度都是独立包，Python import 名使用下划线，发行包和命令使用 kebab-case：
+VBench 1.0 的可复现审计工作区。本轮范围 **11 维** = 已实现的 7 维 + 4 个候选维度
+（范围决定见 [`docs/plans/2026-09-15-dimension-scope-11d.md`](docs/plans/2026-09-15-dimension-scope-11d.md)）。
+每个维度都是独立包，Python import 名使用下划线，发行包和命令使用 kebab-case：
 
 ```text
-metrics/
+metrics/                     # 已实现的 7 维
 ├── dynamic-degree/          → dynamic_degree / dynamic-degree
 ├── motion-smoothness/       → motion_smoothness / motion-smoothness
 ├── subject-consistency/     → subject_consistency / subject-consistency
 ├── scene/                   → scene / scene
 ├── human-action/            → human_action / human-action
 ├── spatial-relationship/    → spatial_relationship / spatial-relationship
-├── overall-consistency/     → overall_consistency / overall-consistency
 └── multiple-objects/        → multiple_objects / multiple-objects
 packages/audit-core/         → vbench_audit_core
 packages/audit-models/       → vbench_audit_models
+
+候选 4 维（已在 configs/upstream.toml 钉住源码，尚无 metric 包）：
+background_consistency、temporal_style、object_class、color
 ```
+
+`overall_consistency` 已退出本轮范围：它与 `temporal_style` 是逐行同一份 ViCLIP 估计器，
+且其 prompt 条件需要人工撰写（八维计划 §12.2）。`metrics/overall-consistency/` 及其 CLI、
+测试暂时保留为 legacy，未删除。
+未入选的另外 4 维（`temporal_flickering`、`appearance_style`、`aesthetic_quality`、
+`imaging_quality`）的源码定位与不入选理由见
+[`docs/paper/unaudited-dimensions-triage.md`](docs/paper/unaudited-dimensions-triage.md)。
 
 ## 环境
 
@@ -69,9 +80,15 @@ uv run dynamic-degree --both --video-dir /data/videos --gpu 0,2,4
 
 开发边界和测试要求见 [`AGENTS.md`](AGENTS.md)，贡献、uv extras 与提交规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。架构、CLI、依赖和上游映射分别见 [`docs/architecture.md`](docs/architecture.md)、[`docs/cli.md`](docs/cli.md)、[`docs/dependency-compatibility.md`](docs/dependency-compatibility.md) 与 [`docs/upstream-mapping.md`](docs/upstream-mapping.md)。实施计划在 [`docs/plans/2026-09-14-workspace-refactor.md`](docs/plans/2026-09-14-workspace-refactor.md)。
 
-本轮实际通过的检查及未验证范围见[重构验收记录](docs/plans/2026-09-14-workspace-refactor-verification.md)。补充实验计划与 H200 执行口径见[补充实验计划](docs/plans/2026-09-14-supplementary-experiments.md)。八维审计的总体实验协议见[八维实验协议](docs/plans/2026-09-14-experiment-plan-8d.md)；反事实数据集（VBench-CF）的构造口径见[反事实数据集](docs/counterfactual-dataset.md)。
+本轮实际通过的检查及未验证范围见[重构验收记录](docs/plans/2026-09-14-workspace-refactor-verification.md)。补充实验计划与 H200 执行口径见[补充实验计划](docs/plans/2026-09-14-supplementary-experiments.md)。当前范围（11 维）见[十一维范围决定](docs/plans/2026-09-15-dimension-scope-11d.md)；其中 7 在办维度的总体实验协议见[八维实验协议](docs/plans/2026-09-14-experiment-plan-8d.md)；反事实数据集（VBench-CF）的构造口径见[反事实数据集](docs/counterfactual-dataset.md)。
 
 补充实验的可直接执行命令、H200 四卡计时、8 卡恢复记录和当前主表结果见
 [补充实验运行手册](docs/supplementary-experiments.md)。主表交付物位于
 `figures/supplementary_main_table.{csv,tex,pdf,png}`；逐视频研究输出仍写入
 被 Git 忽略的 `output/supplementary_20260914/`，避免把大量中间缓存提交到仓库。
+
+Subject 的表示层修复与完整背景糊化实验见 [数据、协议与复现说明](docs/subject-repair.md)。
+当前 v2 保留主体像素、模糊主体掩码的全部补集，独立 MobileSAM 评分定位与建库掩码隔离；
+历史镜像盒协议只归档重放。真实运行结果与质量限制单独报告，未验证项目保留 NOT RUN。
+当前 [7 条试跑](docs/counterfactual-reports/subject_region_discrimination_v2.md) 因图像与建库掩码质量不足，
+不作为正式主实验；用户只保留演讲者和游泳者为候选，后续先做原图质量筛选。

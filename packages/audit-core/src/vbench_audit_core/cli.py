@@ -28,6 +28,11 @@ def build_parser(metric: str, description: str) -> argparse.ArgumentParser:
     parser.add_argument("--output", default=None)
     parser.add_argument("--gpu", nargs="?", const="0")
     parser.add_argument("--metadata")
+    parser.add_argument(
+        "--model-config",
+        default=None,
+        help="optional TOML model/asset configuration; it is only read, never downloaded",
+    )
     parser.add_argument("--seed", type=int, default=42)
     return parser
 

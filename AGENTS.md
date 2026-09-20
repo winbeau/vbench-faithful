@@ -15,6 +15,13 @@
 
 ## 当前状态（2026-09-15）
 
+本轮审计范围已定为 **11 维**：在办 7 维（`dynamic_degree`、`motion_smoothness`、
+`subject_consistency`、`scene`、`human_action`、`spatial_relationship`、`multiple_objects`）
+加候选 4 维（`background_consistency`、`temporal_style`、`object_class`、`color`）；
+`overall_consistency` 退出本轮（估计器与 `temporal_style` 相同），其包只保留为 legacy，
+不删除。范围与候选源码 pin 见 `docs/plans/2026-09-15-dimension-scope-11d.md`，
+源码定位见 `docs/paper/unaudited-dimensions-triage.md`。
+
 反事实（metamorphic）审计已完成一轮全量测量，结论与产物见
 `docs/counterfactual-reports/CONSOLIDATED.md`。要点：
 

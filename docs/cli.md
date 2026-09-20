@@ -103,6 +103,17 @@ Scene audit supports `--audit-variant global` and
 `--audit-variant environment_grounded`; the variant is recorded as an audit
 configuration and does not change the official VBench backend.
 
+Subject Consistency audit supports `--audit-variant temporal_all_pairs` (default,
+whole-frame aggregation) and `--audit-variant subject_masked` (subject-localised
+evidence). The masked variant additionally requires `--subject-masks <dir>` with
+frozen `<stem>.npz` instance masks and reads the localizer phrase from
+`--subject-phrase-field` (default `subject_en`); `--subject-instance-mode`,
+`--subject-missing-policy` and `--subject-max-frames` select the instance
+aggregation, the undetected-frame policy and an optional frame cap. Mask files are
+hashed into each sample's diagnostics and the localizer itself runs outside this
+CLI. See `metrics/subject-consistency/IMPLEMENTATION_REPORT.md` for the pipeline
+and for what is not yet verified.
+
 Model-dependent commands require their model extras, external source/builds,
 and locally configured checkpoints. Third-party model constructors can
 download a default pretrained model when invoked (for example an OpenCLIP

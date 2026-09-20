@@ -49,3 +49,32 @@ module = "vbench.multiple_objects"
 entrypoint = "compute_multiple_objects"
 source = "vbench/multiple_objects.py"
 source_sha256 = "fa5047aa560158f017e46dea3ae763ed083df08ece63e47f61a7ea4fc55be672"
+
+# Candidate dimensions added to the 2026-09-15 eleven-dimension scope
+# (docs/plans/2026-09-15-dimension-scope-11d.md).  They are pinned here so
+# upstream verification covers them; no metric package or adapter exists yet.
+# overall_consistency stays above but is retired from this round's scope.
+
+[dimensions.background_consistency]
+module = "vbench.background_consistency"
+entrypoint = "compute_background_consistency"
+source = "vbench/background_consistency.py"
+source_sha256 = "7def92057819df0dad01c857eecf3b39b8b555c8cdfe881a672cc2b19dc226b4"
+
+[dimensions.temporal_style]
+module = "vbench.temporal_style"
+entrypoint = "compute_temporal_style"
+source = "vbench/temporal_style.py"
+source_sha256 = "9f9e950efca4673721d0a07ea83137be9ebdc9aef2364f412300ba979beef57a"
+
+[dimensions.object_class]
+module = "vbench.object_class"
+entrypoint = "compute_object_class"
+source = "vbench/object_class.py"
+source_sha256 = "8d4c4a7feee52503e3d27f8aba0ed467cbc356ed75da2598367b572237e05db2"
+
+[dimensions.color]
+module = "vbench.color"
+entrypoint = "compute_color"
+source = "vbench/color.py"
+source_sha256 = "03baffc12508fd7ce6c70a227d6794bbc7152c24ba2d2c447a816974466db3d7"

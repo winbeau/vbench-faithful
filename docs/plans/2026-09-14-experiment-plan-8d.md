@@ -1,5 +1,13 @@
 # Eight-Dimension VBench Audit: Experimental Protocol
 
+> **Scope update (2026-09-15):** the audit scope is now eleven dimensions — the
+> seven in-flight dimensions below (all except Overall Consistency) plus four
+> candidates: `background_consistency`, `temporal_style`, `object_class`,
+> `color`. `overall_consistency` is retired from this round (its estimator is
+> the same one `temporal_style` uses). See
+> [`2026-09-15-dimension-scope-11d.md`](2026-09-15-dimension-scope-11d.md);
+> the protocol below still governs the seven retained dimensions.
+
 ## 1. Purpose and claim boundary
 
 This document specifies the experiments required for the eight-dimension

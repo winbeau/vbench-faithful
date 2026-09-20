@@ -24,6 +24,10 @@ def test_locked_config_lists_all_dimensions_and_single_identity():
         "spatial_relationship",
         "overall_consistency",
         "multiple_objects",
+        "background_consistency",
+        "temporal_style",
+        "object_class",
+        "color",
     }
 
 

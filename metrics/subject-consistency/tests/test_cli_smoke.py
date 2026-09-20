@@ -67,6 +67,47 @@ class CliSmokeTests(unittest.TestCase):
             repaired = next((root / "out").glob("subject-consistency/audit/*"))
             self.assertEqual(official.name, repaired.name)
 
+    def test_masked_variant_requires_a_mask_directory(self):
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            video = root / "video.mp4"
+            video.touch()
+            code, _ = self.run_cli(["--audit", "--audit-variant", "subject_masked", "--video", str(video), "--output", str(root / "out")])
+        self.assertEqual(code, 2)
+
+    def test_masked_variant_dispatches_to_the_masked_evaluator(self):
+        calls = {}
+
+        def fake_masked(videos, metadata, gpu_ids, dino_config, mask_config, seed):
+            calls["mask_config"] = mask_config
+            calls["seed"] = seed
+            return fake_results("audit", videos, metadata, gpu_ids, dino_config, seed)
+
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            video = root / "video.mp4"
+            video.touch()
+            mask_root = root / "masks"
+            mask_root.mkdir()
+            config = {"repo_or_dir": "/tmp/dino", "path": "/etc/hosts", "model": "dino_vitb16", "source": "local", "read_frame": False}
+            with (
+                patch("subject_consistency.cli.verify_upstream"),
+                patch("subject_consistency.cli.check_cuda", return_value={"requested_gpu_ids": [0]}),
+                patch("subject_consistency.cli.build_dino_config", return_value=config),
+                patch("subject_consistency.cli.environment_record", return_value={}),
+                patch("subject_consistency.cli.evaluate_masked_sharded", side_effect=fake_masked),
+                patch("subject_consistency.cli.evaluate_backend_sharded") as backend,
+            ):
+                code = main([
+                    "--audit", "--audit-variant", "subject_masked", "--subject-masks", str(mask_root),
+                    "--subject-missing-policy", "exclude", "--video", str(video), "--output", str(root / "out"),
+                ])
+            self.assertEqual(code, 0)
+            backend.assert_not_called()
+            self.assertEqual(calls["mask_config"]["root"], str(mask_root))
+            self.assertEqual(calls["mask_config"]["missing_policy"], "exclude")
+            self.assertEqual(calls["seed"], 42)
+
 
 if __name__ == "__main__":
     unittest.main()

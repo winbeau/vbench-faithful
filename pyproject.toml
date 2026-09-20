@@ -13,6 +13,10 @@ dependencies = [
   "spatial-relationship",
   "overall-consistency",
   "multiple-objects",
+  "background-consistency",
+  "temporal-style",
+  "object-class",
+  "color",
 ]
 
 [dependency-groups]
@@ -35,6 +39,10 @@ models = [
   "spatial-relationship[models]",
   "overall-consistency[models]",
   "multiple-objects[models]",
+  "background-consistency[models]",
+  "temporal-style[models]",
+  "object-class[models]",
+  "color[models]",
 ]
 
 [tool.uv]
@@ -54,7 +62,12 @@ human-action = { workspace = true }
 spatial-relationship = { workspace = true }
 overall-consistency = { workspace = true }
 multiple-objects = { workspace = true }
+background-consistency = { workspace = true }
+temporal-style = { workspace = true }
+object-class = { workspace = true }
+color = { workspace = true }
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "metrics"]
+pythonpath = ["."]
 addopts = ["--import-mode=importlib"]

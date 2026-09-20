@@ -13,6 +13,9 @@ The active source of truth is the official Vchitect checkout described by
 - The eight adapters target only root `vbench/` VBench 1.0 modules. Real model
   execution and numerical parity are not verified in this workspace because
   weights/CUDA and some external model builds are unavailable.
+- The current audit scope is eleven dimensions (seven in flight plus four
+  candidates) with `overall_consistency` retired; see
+  [`plans/2026-09-15-dimension-scope-11d.md`](plans/2026-09-15-dimension-scope-11d.md).
 
 ## Current dimension entry points
 
@@ -24,8 +27,12 @@ The active source of truth is the official Vchitect checkout described by
 | scene | `vbench/scene.py` | `compute_scene` | adapter and audit variants present; model parity unverified |
 | human-action | `vbench/human_action.py` | `compute_human_action` | adapter and explicit-target audit present; model parity unverified |
 | spatial-relationship | `vbench/spatial_relationship.py` | `compute_spatial_relationship` | adapter and ordered-role audit present; GRiT parity unverified |
-| overall-consistency | `vbench/overall_consistency.py` | `compute_overall_consistency` | adapter and repair backend present; model parity unverified |
+| overall-consistency | `vbench/overall_consistency.py` | `compute_overall_consistency` | retired from the 2026-09-15 eleven-dimension scope; package and pin retained as legacy |
 | multiple-objects | `vbench/multiple_objects.py` | `compute_multiple_objects` | adapter and audit backend present; model parity unverified |
+| background-consistency | `vbench/background_consistency.py` | `compute_background_consistency` | candidate (2026-09-15); source pinned, no adapter or metric package yet |
+| temporal-style | `vbench/temporal_style.py` | `compute_temporal_style` | candidate (2026-09-15); source pinned, no adapter or metric package yet |
+| object-class | `vbench/object_class.py` | `compute_object_class` | candidate (2026-09-15); source pinned, no adapter or metric package yet |
+| color | `vbench/color.py` | `compute_color` | candidate (2026-09-15); source pinned, no adapter or metric package yet |
 
 ## Historical reference gate (pre-refactor)
 

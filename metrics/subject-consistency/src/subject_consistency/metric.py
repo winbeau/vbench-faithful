@@ -148,9 +148,148 @@ def evaluate_backend_sharded(backend: str, videos: list[Path], metadata: Mapping
     ).results
 
 
+def _masked_worker(result_path: str, gpu_id: int, videos: list[str], metadata: dict[str, dict[str, Any]], dino_config: dict[str, Any], mask_config: dict[str, Any], seed: int = 42) -> None:
+    from .models import NpzSubjectMaskProvider
+
+    paths = [Path(video) for video in videos]
+    try:
+        import torch
+        set_seed(seed)
+        torch.cuda.set_device(gpu_id)
+        provider = NpzSubjectMaskProvider(Path(str(mask_config["root"])))
+        results = evaluate_masked_batch(
+            paths,
+            metadata,
+            torch.device(f"cuda:{gpu_id}"),
+            dino_config,
+            provider,
+            phrase_field=str(mask_config["phrase_field"]),
+            max_frames=mask_config["max_frames"],
+            instance_mode=str(mask_config["instance_mode"]),
+            missing_policy=str(mask_config["missing_policy"]),
+        )
+    except Exception as exc:
+        results = [_failed_result("audit-masked", video, metadata, exc) for video in paths]
+    Path(result_path).write_text(json.dumps({"gpu_id": gpu_id, "results": results}, ensure_ascii=False), encoding="utf-8")
+
+
+def evaluate_masked_sharded(videos: list[Path], metadata: Mapping[str, Mapping[str, Any]], gpu_ids: list[int], dino_config: Mapping[str, Any], mask_config: Mapping[str, Any], seed: int = 42) -> list[dict[str, Any]]:
+    """Subject-localised variant: masks come from a frozen offline directory."""
+    metadata_dict = {key: dict(value) for key, value in metadata.items()}
+    config_dict = dict(dino_config)
+    mask_dict = dict(mask_config)
+    return run_spawn_coordinator(
+        _masked_worker,
+        [str(video) for video in videos],
+        gpu_ids,
+        worker_args=(metadata_dict, config_dict, mask_dict, seed),
+        backend="audit-masked",
+        label="subject-consistency-masked",
+    ).results
+
+
 def repaired_dataset_score(results: list[dict[str, object]]) -> tuple[float | None, int]:
     scores = [float(item["score"]) for item in results if item.get("status") == "succeeded" and item.get("score") is not None]
     return (sum(scores) / len(scores), len(scores)) if scores else (None, 0)
+
+
+def subject_phrase(metadata_item: Mapping[str, Any], phrase_field: str, prompt: str = "") -> str:
+    """Resolve the phrase the localizer is prompted with.
+
+    The prompt is never parsed here: the phrase must come from an explicit field
+    (the official annotations carry ``subject_en``), so this repair cannot
+    silently re-invent the string-matching failure mode of the semantic
+    dimensions.
+    """
+    for source in (metadata_item, metadata_item.get("dimension_metadata")):
+        if isinstance(source, Mapping):
+            value = source.get(phrase_field)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+    raise ValueError(f"metadata is missing a usable '{phrase_field}' subject phrase (prompt={prompt[:60]!r})")
+
+
+def evaluate_masked_batch(
+    videos: list[Path],
+    metadata: Mapping[str, Mapping[str, Any]],
+    device: Any,
+    dino_config: Mapping[str, Any],
+    mask_provider: Any,
+    *,
+    extractor: Any | None = None,
+    phrase_field: str = "subject_en",
+    max_frames: int | None = None,
+    instance_mode: str = "union",
+    missing_policy: str = "zero",
+) -> list[dict[str, Any]]:
+    """Score subject consistency on subject-localised evidence.
+
+    The decoded frames are loaded once and shared by the localizer and the
+    feature extractor, so masks and patch tokens cannot come from two different
+    decodes of the same clip.
+    """
+    from .models import OfficialDinoPatchExtractor
+    from .subject_evidence import masked_subject_consistency, resample_masks_to_grid, sample_frame_indices
+
+    import torch
+
+    extractor = extractor or OfficialDinoPatchExtractor(device, dino_config, upstream_path())
+    results = []
+    for video in videos:
+        item = metadata.get(video.name, {})
+        prompt = str(item.get("prompt", ""))
+        try:
+            phrase = subject_phrase(item, phrase_field, prompt)
+            frames = extractor.module.load_video(str(video))
+            patches, grid = extractor.patches_from_frames(frames)
+            masks = mask_provider.masks_for(video, frames, phrase)
+            instance_masks, present = masks.instance_masks, masks.instance_present
+            if int(instance_masks.shape[0]) != int(patches.shape[0]):
+                raise ValueError(
+                    f"{instance_masks.shape[0]} mask frames for {patches.shape[0]} feature frames: {video.name}"
+                )
+            frames_count, instances = int(instance_masks.shape[0]), int(instance_masks.shape[1])
+            grid_masks = resample_masks_to_grid(
+                instance_masks.reshape(frames_count * instances, *instance_masks.shape[2:]), grid[0], grid[1],
+                image_size=getattr(extractor, "transformed_size", None),
+            ).reshape(frames_count, instances, -1).to(patches.device)
+            present = present.to(patches.device)
+            indices = sample_frame_indices(frames_count, max_frames)
+            if len(indices) != frames_count:
+                index_tensor = torch.as_tensor(list(indices), device=patches.device)
+                patches = patches[index_tensor]
+                grid_masks = grid_masks[index_tensor]
+                present = present[index_tensor]
+            diagnostics = masked_subject_consistency(
+                patches, grid_masks, present, mode=instance_mode, missing_policy=missing_policy
+            )
+            payload = diagnostics.to_dict()
+            payload.update(
+                {
+                    "subject_phrase": phrase,
+                    "phrase_field": phrase_field,
+                    "patch_grid": [int(grid[0]), int(grid[1])],
+                    "max_frames": max_frames,
+                    "mask_source": masks.source,
+                    "mask_source_sha256": masks.source_sha256,
+                    "extractor": type(extractor).__name__,
+                }
+            )
+            results.append(
+                {
+                    "video": str(video),
+                    "prompt": prompt,
+                    "backend": "audit-masked",
+                    "score": diagnostics.score,
+                    "status": "succeeded",
+                    "failure_reason": None,
+                    "error": None,
+                    "diagnostics": payload,
+                }
+            )
+        except Exception as exc:
+            results.append(_failed_result("audit-masked", video, metadata, exc))
+    return results
 
 
 def environment_record(videos: list[Path], metadata_path: Path | None, dino_config: Mapping[str, Any]) -> dict[str, Any]:
