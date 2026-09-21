@@ -1,0 +1,10 @@
+{
+  "primary_bases": 60,
+  "identical_clean_decoded_inputs": 60,
+  "identical_independent_clean_mask_archives": 60,
+  "maximum_clean_score_error": 0.0,
+  "numeric_full_bases": 61,
+  "review_excluded_before_new_scores": [
+    "v_4f8abc7bb931501fb862"
+  ]
+}

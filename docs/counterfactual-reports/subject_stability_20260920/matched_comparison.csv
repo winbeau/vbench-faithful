@@ -1,0 +1,481 @@
+uid,prompt,method,position,fixed_pixel_abs_change,recovered_normalized_abs_change
+v_075ccc862d1b2d4936f0,an elephant running to join a herd of its kind,official,start,0.05006211996078491,0.048441410064697266
+v_075ccc862d1b2d4936f0,an elephant running to join a herd of its kind,official,middle,0.02665477991104126,0.02725803852081299
+v_075ccc862d1b2d4936f0,an elephant running to join a herd of its kind,official,end,0.030461609363555908,0.029187917709350586
+v_075ccc862d1b2d4936f0,an elephant running to join a herd of its kind,official,full,0.017735064029693604,0.01847773790359497
+v_075ccc862d1b2d4936f0,an elephant running to join a herd of its kind,hybrid_exclude,start,2.3245811462402344e-06,0.00021582841873168945
+v_075ccc862d1b2d4936f0,an elephant running to join a herd of its kind,hybrid_exclude,middle,5.811452865600586e-05,8.118152618408203e-05
+v_075ccc862d1b2d4936f0,an elephant running to join a herd of its kind,hybrid_exclude,end,0.0012409090995788574,0.0004215836524963379
+v_075ccc862d1b2d4936f0,an elephant running to join a herd of its kind,hybrid_exclude,full,0.00037723779678344727,0.0007038712501525879
+v_0925f4496cf55ade8e5d,an elephant spraying itself with water using its trunk to cool down,official,start,0.04229456186294556,0.033065080642700195
+v_0925f4496cf55ade8e5d,an elephant spraying itself with water using its trunk to cool down,official,middle,0.014988064765930176,0.017223834991455078
+v_0925f4496cf55ade8e5d,an elephant spraying itself with water using its trunk to cool down,official,end,0.012364208698272705,0.012025952339172363
+v_0925f4496cf55ade8e5d,an elephant spraying itself with water using its trunk to cool down,official,full,0.014578521251678467,0.004593372344970703
+v_0925f4496cf55ade8e5d,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,start,0.009556114673614502,0.000307619571685791
+v_0925f4496cf55ade8e5d,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,middle,0.007480919361114502,0.002705872058868408
+v_0925f4496cf55ade8e5d,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,end,0.006863594055175781,1.609325408935547e-05
+v_0925f4496cf55ade8e5d,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,full,0.008929848670959473,0.0033985376358032227
+v_0a1a6db568841167f9e8,a truck turning a corner,official,start,0.12863141298294067,0.17697393894195557
+v_0a1a6db568841167f9e8,a truck turning a corner,official,middle,0.07291710376739502,0.09468019008636475
+v_0a1a6db568841167f9e8,a truck turning a corner,official,end,0.030251264572143555,0.03777313232421875
+v_0a1a6db568841167f9e8,a truck turning a corner,official,full,0.039885520935058594,0.027906954288482666
+v_0a1a6db568841167f9e8,a truck turning a corner,hybrid_exclude,start,0.004662930965423584,0.0043291449546813965
+v_0a1a6db568841167f9e8,a truck turning a corner,hybrid_exclude,middle,0.009057402610778809,0.017264068126678467
+v_0a1a6db568841167f9e8,a truck turning a corner,hybrid_exclude,end,0.007481276988983154,0.0007902979850769043
+v_0a1a6db568841167f9e8,a truck turning a corner,hybrid_exclude,full,0.01799619197845459,0.0002707839012145996
+v_10d250e1b4b4a6ec0a82,a cow running to join a herd of its kind,official,start,0.1487066149711609,0.12662571668624878
+v_10d250e1b4b4a6ec0a82,a cow running to join a herd of its kind,official,middle,0.08283811807632446,0.08236348628997803
+v_10d250e1b4b4a6ec0a82,a cow running to join a herd of its kind,official,end,0.07355618476867676,0.05759912729263306
+v_10d250e1b4b4a6ec0a82,a cow running to join a herd of its kind,official,full,0.061121463775634766,0.056800663471221924
+v_10d250e1b4b4a6ec0a82,a cow running to join a herd of its kind,hybrid_exclude,start,0.03808736801147461,0.01624089479446411
+v_10d250e1b4b4a6ec0a82,a cow running to join a herd of its kind,hybrid_exclude,middle,0.035093486309051514,0.020671308040618896
+v_10d250e1b4b4a6ec0a82,a cow running to join a herd of its kind,hybrid_exclude,end,0.040393054485321045,0.00871366262435913
+v_10d250e1b4b4a6ec0a82,a cow running to join a herd of its kind,hybrid_exclude,full,0.028054654598236084,0.008356630802154541
+v_125269dc5fc640751fa4,a zebra running to join a herd of its kind,official,start,0.05372518301010132,0.082089364528656
+v_125269dc5fc640751fa4,a zebra running to join a herd of its kind,official,middle,0.021574676036834717,0.03240472078323364
+v_125269dc5fc640751fa4,a zebra running to join a herd of its kind,official,end,0.01640075445175171,0.024949312210083008
+v_125269dc5fc640751fa4,a zebra running to join a herd of its kind,official,full,0.0018295049667358398,0.00966101884841919
+v_125269dc5fc640751fa4,a zebra running to join a herd of its kind,hybrid_exclude,start,0.0015257596969604492,0.0014014244079589844
+v_125269dc5fc640751fa4,a zebra running to join a herd of its kind,hybrid_exclude,middle,0.0007113218307495117,0.0009923577308654785
+v_125269dc5fc640751fa4,a zebra running to join a herd of its kind,hybrid_exclude,end,0.0009331107139587402,0.00021827220916748047
+v_125269dc5fc640751fa4,a zebra running to join a herd of its kind,hybrid_exclude,full,0.002142488956451416,0.0026619434356689453
+v_13502c1b9c959957b46a,a zebra taking a peaceful walk,official,start,0.05056917667388916,0.0655217170715332
+v_13502c1b9c959957b46a,a zebra taking a peaceful walk,official,middle,0.02509838342666626,0.03198498487472534
+v_13502c1b9c959957b46a,a zebra taking a peaceful walk,official,end,0.02128821611404419,0.026974976062774658
+v_13502c1b9c959957b46a,a zebra taking a peaceful walk,official,full,0.0008831620216369629,0.0017758011817932129
+v_13502c1b9c959957b46a,a zebra taking a peaceful walk,hybrid_exclude,start,0.0018529295921325684,0.003482997417449951
+v_13502c1b9c959957b46a,a zebra taking a peaceful walk,hybrid_exclude,middle,0.002312600612640381,0.004156351089477539
+v_13502c1b9c959957b46a,a zebra taking a peaceful walk,hybrid_exclude,end,0.0014527440071105957,0.00431591272354126
+v_13502c1b9c959957b46a,a zebra taking a peaceful walk,hybrid_exclude,full,0.0005207657814025879,0.0029404163360595703
+v_1814b4d5b25ffa156aa6,an elephant running to join a herd of its kind,official,start,0.04494619369506836,0.05030250549316406
+v_1814b4d5b25ffa156aa6,an elephant running to join a herd of its kind,official,middle,0.014151453971862793,0.013633251190185547
+v_1814b4d5b25ffa156aa6,an elephant running to join a herd of its kind,official,end,0.010381817817687988,0.014466643333435059
+v_1814b4d5b25ffa156aa6,an elephant running to join a herd of its kind,official,full,0.015778303146362305,0.029010415077209473
+v_1814b4d5b25ffa156aa6,an elephant running to join a herd of its kind,hybrid_exclude,start,0.0078505277633667,0.00231015682220459
+v_1814b4d5b25ffa156aa6,an elephant running to join a herd of its kind,hybrid_exclude,middle,0.008533954620361328,0.0022426247596740723
+v_1814b4d5b25ffa156aa6,an elephant running to join a herd of its kind,hybrid_exclude,end,0.0038306117057800293,0.0019462108612060547
+v_1814b4d5b25ffa156aa6,an elephant running to join a herd of its kind,hybrid_exclude,full,0.017187654972076416,0.007425487041473389
+v_22506cf5d5a1e6088fc8,a truck slowing down to stop,official,start,0.15911346673965454,0.15737342834472656
+v_22506cf5d5a1e6088fc8,a truck slowing down to stop,official,middle,0.09305030107498169,0.08993226289749146
+v_22506cf5d5a1e6088fc8,a truck slowing down to stop,official,end,0.04846799373626709,0.03680044412612915
+v_22506cf5d5a1e6088fc8,a truck slowing down to stop,official,full,0.04697775840759277,0.05462610721588135
+v_22506cf5d5a1e6088fc8,a truck slowing down to stop,hybrid_exclude,start,0.04324263334274292,0.03176039457321167
+v_22506cf5d5a1e6088fc8,a truck slowing down to stop,hybrid_exclude,middle,0.08429497480392456,0.07416075468063354
+v_22506cf5d5a1e6088fc8,a truck slowing down to stop,hybrid_exclude,end,0.002232968807220459,0.003476262092590332
+v_22506cf5d5a1e6088fc8,a truck slowing down to stop,hybrid_exclude,full,0.030774176120758057,0.05709671974182129
+v_2ac6cf025d5e88563949,a zebra running to join a herd of its kind,official,start,0.0634729266166687,0.05464637279510498
+v_2ac6cf025d5e88563949,a zebra running to join a herd of its kind,official,middle,0.03745436668395996,0.03140479326248169
+v_2ac6cf025d5e88563949,a zebra running to join a herd of its kind,official,end,0.03522193431854248,0.025879859924316406
+v_2ac6cf025d5e88563949,a zebra running to join a herd of its kind,official,full,0.023757994174957275,0.010110557079315186
+v_2ac6cf025d5e88563949,a zebra running to join a herd of its kind,hybrid_exclude,start,0.0036970973014831543,0.0008118748664855957
+v_2ac6cf025d5e88563949,a zebra running to join a herd of its kind,hybrid_exclude,middle,0.005286693572998047,0.0010219216346740723
+v_2ac6cf025d5e88563949,a zebra running to join a herd of its kind,hybrid_exclude,end,0.007779538631439209,0.00111466646194458
+v_2ac6cf025d5e88563949,a zebra running to join a herd of its kind,hybrid_exclude,full,0.015098333358764648,0.0020782947540283203
+v_2fbefa11a17758f1cd8f,a zebra taking a peaceful walk,official,start,0.18135225772857666,0.13572049140930176
+v_2fbefa11a17758f1cd8f,a zebra taking a peaceful walk,official,middle,0.07389062643051147,0.05569571256637573
+v_2fbefa11a17758f1cd8f,a zebra taking a peaceful walk,official,end,0.06804943084716797,0.05540651082992554
+v_2fbefa11a17758f1cd8f,a zebra taking a peaceful walk,official,full,0.08194100856781006,0.0619465708732605
+v_2fbefa11a17758f1cd8f,a zebra taking a peaceful walk,hybrid_exclude,start,0.017842233180999756,0.006669878959655762
+v_2fbefa11a17758f1cd8f,a zebra taking a peaceful walk,hybrid_exclude,middle,0.011125683784484863,0.0032772421836853027
+v_2fbefa11a17758f1cd8f,a zebra taking a peaceful walk,hybrid_exclude,end,0.01724708080291748,0.008214116096496582
+v_2fbefa11a17758f1cd8f,a zebra taking a peaceful walk,hybrid_exclude,full,0.026426076889038086,0.01204150915145874
+v_304f65b790cd089803d4,a zebra bending down to drink water from a river,official,start,0.1456465721130371,0.14651620388031006
+v_304f65b790cd089803d4,a zebra bending down to drink water from a river,official,middle,0.0647439956665039,0.06235241889953613
+v_304f65b790cd089803d4,a zebra bending down to drink water from a river,official,end,0.04797583818435669,0.04693138599395752
+v_304f65b790cd089803d4,a zebra bending down to drink water from a river,official,full,0.016333162784576416,0.02503335475921631
+v_304f65b790cd089803d4,a zebra bending down to drink water from a river,hybrid_exclude,start,0.0049391984939575195,0.011019229888916016
+v_304f65b790cd089803d4,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.007761359214782715,0.010781526565551758
+v_304f65b790cd089803d4,a zebra bending down to drink water from a river,hybrid_exclude,end,0.004946291446685791,0.00014477968215942383
+v_304f65b790cd089803d4,a zebra bending down to drink water from a river,hybrid_exclude,full,0.009253978729248047,0.003323674201965332
+v_34025bb5b4d01c898f92,a motorcycle accelerating to gain speed,official,start,0.04501539468765259,0.04637622833251953
+v_34025bb5b4d01c898f92,a motorcycle accelerating to gain speed,official,middle,0.018160462379455566,0.0165594220161438
+v_34025bb5b4d01c898f92,a motorcycle accelerating to gain speed,official,end,0.015619635581970215,0.017053604125976562
+v_34025bb5b4d01c898f92,a motorcycle accelerating to gain speed,official,full,0.012955307960510254,0.00844883918762207
+v_34025bb5b4d01c898f92,a motorcycle accelerating to gain speed,hybrid_exclude,start,0.0029667019844055176,0.0008401274681091309
+v_34025bb5b4d01c898f92,a motorcycle accelerating to gain speed,hybrid_exclude,middle,0.00183790922164917,0.0027061104774475098
+v_34025bb5b4d01c898f92,a motorcycle accelerating to gain speed,hybrid_exclude,end,0.0025495290756225586,0.0030341148376464844
+v_34025bb5b4d01c898f92,a motorcycle accelerating to gain speed,hybrid_exclude,full,0.0007094144821166992,0.0008379220962524414
+v_355010ce10f66a681b88,a truck turning a corner,official,start,0.13051021099090576,0.08351469039916992
+v_355010ce10f66a681b88,a truck turning a corner,official,middle,0.042185306549072266,0.024799227714538574
+v_355010ce10f66a681b88,a truck turning a corner,official,end,0.022062838077545166,0.018164634704589844
+v_355010ce10f66a681b88,a truck turning a corner,official,full,0.045054733753204346,0.03642094135284424
+v_355010ce10f66a681b88,a truck turning a corner,hybrid_exclude,start,0.017281532287597656,0.006907999515533447
+v_355010ce10f66a681b88,a truck turning a corner,hybrid_exclude,middle,0.010046839714050293,0.0004309415817260742
+v_355010ce10f66a681b88,a truck turning a corner,hybrid_exclude,end,0.0004857182502746582,0.00016772747039794922
+v_355010ce10f66a681b88,a truck turning a corner,hybrid_exclude,full,0.024467825889587402,0.0078005194664001465
+v_35d320b87cf1354b75ab,a zebra running to join a herd of its kind,official,start,0.06328225135803223,0.09069538116455078
+v_35d320b87cf1354b75ab,a zebra running to join a herd of its kind,official,middle,0.02920544147491455,0.041114628314971924
+v_35d320b87cf1354b75ab,a zebra running to join a herd of its kind,official,end,0.02031099796295166,0.02959197759628296
+v_35d320b87cf1354b75ab,a zebra running to join a herd of its kind,official,full,0.00859755277633667,0.01318734884262085
+v_35d320b87cf1354b75ab,a zebra running to join a herd of its kind,hybrid_exclude,start,0.0011205077171325684,0.001008450984954834
+v_35d320b87cf1354b75ab,a zebra running to join a herd of its kind,hybrid_exclude,middle,0.0008538961410522461,0.00012868642807006836
+v_35d320b87cf1354b75ab,a zebra running to join a herd of its kind,hybrid_exclude,end,0.0006431341171264648,0.002097010612487793
+v_35d320b87cf1354b75ab,a zebra running to join a herd of its kind,hybrid_exclude,full,0.0010374188423156738,0.0029512643814086914
+v_38ae4c230155beb1b259,a zebra taking a peaceful walk,official,start,0.02915775775909424,0.04324173927307129
+v_38ae4c230155beb1b259,a zebra taking a peaceful walk,official,middle,0.015101611614227295,0.020371615886688232
+v_38ae4c230155beb1b259,a zebra taking a peaceful walk,official,end,0.011348485946655273,0.015733778476715088
+v_38ae4c230155beb1b259,a zebra taking a peaceful walk,official,full,0.0012918710708618164,0.002751588821411133
+v_38ae4c230155beb1b259,a zebra taking a peaceful walk,hybrid_exclude,start,0.0023140311241149902,0.0023920536041259766
+v_38ae4c230155beb1b259,a zebra taking a peaceful walk,hybrid_exclude,middle,0.0005377531051635742,0.0005942583084106445
+v_38ae4c230155beb1b259,a zebra taking a peaceful walk,hybrid_exclude,end,0.0011464953422546387,0.0011248588562011719
+v_38ae4c230155beb1b259,a zebra taking a peaceful walk,hybrid_exclude,full,0.003291606903076172,0.00312727689743042
+v_3b6ddfc07cc98fcf9fa0,an elephant running to join a herd of its kind,official,start,0.02719050645828247,0.030480027198791504
+v_3b6ddfc07cc98fcf9fa0,an elephant running to join a herd of its kind,official,middle,0.012000322341918945,0.013988494873046875
+v_3b6ddfc07cc98fcf9fa0,an elephant running to join a herd of its kind,official,end,0.010773718357086182,0.011776745319366455
+v_3b6ddfc07cc98fcf9fa0,an elephant running to join a herd of its kind,official,full,0.0008298754692077637,0.0018935203552246094
+v_3b6ddfc07cc98fcf9fa0,an elephant running to join a herd of its kind,hybrid_exclude,start,0.0011515021324157715,0.0004680156707763672
+v_3b6ddfc07cc98fcf9fa0,an elephant running to join a herd of its kind,hybrid_exclude,middle,0.0006104111671447754,0.00016510486602783203
+v_3b6ddfc07cc98fcf9fa0,an elephant running to join a herd of its kind,hybrid_exclude,end,0.00014770030975341797,0.0005040764808654785
+v_3b6ddfc07cc98fcf9fa0,an elephant running to join a herd of its kind,hybrid_exclude,full,0.0013412833213806152,0.001010298728942871
+v_427171327cff517973ed,a zebra bending down to drink water from a river,official,start,0.05417126417160034,0.054218411445617676
+v_427171327cff517973ed,a zebra bending down to drink water from a river,official,middle,0.027718067169189453,0.027718067169189453
+v_427171327cff517973ed,a zebra bending down to drink water from a river,official,end,0.025254011154174805,0.023500144481658936
+v_427171327cff517973ed,a zebra bending down to drink water from a river,official,full,0.0012325048446655273,0.00047200918197631836
+v_427171327cff517973ed,a zebra bending down to drink water from a river,hybrid_exclude,start,0.00114518404006958,0.0012279748916625977
+v_427171327cff517973ed,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.001225292682647705,0.001225292682647705
+v_427171327cff517973ed,a zebra bending down to drink water from a river,hybrid_exclude,end,0.005411505699157715,0.002796173095703125
+v_427171327cff517973ed,a zebra bending down to drink water from a river,hybrid_exclude,full,0.005083858966827393,0.0023962855339050293
+v_4719caef96c8df794757,an elephant running to join a herd of its kind,official,start,0.03563427925109863,0.046322643756866455
+v_4719caef96c8df794757,an elephant running to join a herd of its kind,official,middle,0.020216286182403564,0.02122795581817627
+v_4719caef96c8df794757,an elephant running to join a herd of its kind,official,end,0.01590949296951294,0.01890099048614502
+v_4719caef96c8df794757,an elephant running to join a herd of its kind,official,full,0.009345710277557373,0.013423740863800049
+v_4719caef96c8df794757,an elephant running to join a herd of its kind,hybrid_exclude,start,0.00015103816986083984,0.0010550618171691895
+v_4719caef96c8df794757,an elephant running to join a herd of its kind,hybrid_exclude,middle,0.0013733506202697754,0.0005635619163513184
+v_4719caef96c8df794757,an elephant running to join a herd of its kind,hybrid_exclude,end,0.0009930133819580078,0.00011426210403442383
+v_4719caef96c8df794757,an elephant running to join a herd of its kind,hybrid_exclude,full,9.417533874511719e-05,0.00018221139907836914
+v_4d76a76426a219a5f1bb,a zebra bending down to drink water from a river,official,start,0.03183746337890625,0.04416394233703613
+v_4d76a76426a219a5f1bb,a zebra bending down to drink water from a river,official,middle,0.01475512981414795,0.01980292797088623
+v_4d76a76426a219a5f1bb,a zebra bending down to drink water from a river,official,end,0.01638007164001465,0.019693970680236816
+v_4d76a76426a219a5f1bb,a zebra bending down to drink water from a river,official,full,0.012065470218658447,0.01279526948928833
+v_4d76a76426a219a5f1bb,a zebra bending down to drink water from a river,hybrid_exclude,start,0.001626431941986084,0.0015246868133544922
+v_4d76a76426a219a5f1bb,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.00025337934494018555,0.00011420249938964844
+v_4d76a76426a219a5f1bb,a zebra bending down to drink water from a river,hybrid_exclude,end,0.006366610527038574,0.005628407001495361
+v_4d76a76426a219a5f1bb,a zebra bending down to drink water from a river,hybrid_exclude,full,0.00883173942565918,0.005741238594055176
+v_4e7cf3a0868b1b118f55,a zebra running to join a herd of its kind,official,start,0.06294047832489014,0.0606379508972168
+v_4e7cf3a0868b1b118f55,a zebra running to join a herd of its kind,official,middle,0.0246274471282959,0.02644258737564087
+v_4e7cf3a0868b1b118f55,a zebra running to join a herd of its kind,official,end,0.018850088119506836,0.020927786827087402
+v_4e7cf3a0868b1b118f55,a zebra running to join a herd of its kind,official,full,0.010421454906463623,0.008472979068756104
+v_4e7cf3a0868b1b118f55,a zebra running to join a herd of its kind,hybrid_exclude,start,0.0009497404098510742,0.0008484125137329102
+v_4e7cf3a0868b1b118f55,a zebra running to join a herd of its kind,hybrid_exclude,middle,0.0009600520133972168,0.0014873743057250977
+v_4e7cf3a0868b1b118f55,a zebra running to join a herd of its kind,hybrid_exclude,end,5.0067901611328125e-06,0.003166377544403076
+v_4e7cf3a0868b1b118f55,a zebra running to join a herd of its kind,hybrid_exclude,full,0.0006995797157287598,0.0008327960968017578
+v_4ff816e35ca1960d8058,an elephant running to join a herd of its kind,official,start,0.08184140920639038,0.07692688703536987
+v_4ff816e35ca1960d8058,an elephant running to join a herd of its kind,official,middle,0.03435021638870239,0.03400486707687378
+v_4ff816e35ca1960d8058,an elephant running to join a herd of its kind,official,end,0.040174007415771484,0.04062312841415405
+v_4ff816e35ca1960d8058,an elephant running to join a herd of its kind,official,full,0.03915739059448242,0.0348895788192749
+v_4ff816e35ca1960d8058,an elephant running to join a herd of its kind,hybrid_exclude,start,9.930133819580078e-05,0.00019890069961547852
+v_4ff816e35ca1960d8058,an elephant running to join a herd of its kind,hybrid_exclude,middle,0.0004525184631347656,0.00042051076889038086
+v_4ff816e35ca1960d8058,an elephant running to join a herd of its kind,hybrid_exclude,end,0.0005285143852233887,0.0006996393203735352
+v_4ff816e35ca1960d8058,an elephant running to join a herd of its kind,hybrid_exclude,full,0.000569462776184082,0.001135110855102539
+v_50b265d3f9ccf281a518,an elephant spraying itself with water using its trunk to cool down,official,start,0.05303215980529785,0.03385317325592041
+v_50b265d3f9ccf281a518,an elephant spraying itself with water using its trunk to cool down,official,middle,0.019098639488220215,0.015608906745910645
+v_50b265d3f9ccf281a518,an elephant spraying itself with water using its trunk to cool down,official,end,0.015921592712402344,0.013768374919891357
+v_50b265d3f9ccf281a518,an elephant spraying itself with water using its trunk to cool down,official,full,0.016224920749664307,0.010607361793518066
+v_50b265d3f9ccf281a518,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,start,0.01862955093383789,0.008730053901672363
+v_50b265d3f9ccf281a518,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,middle,0.019118428230285645,0.007485628128051758
+v_50b265d3f9ccf281a518,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,end,0.012785494327545166,0.0033535361289978027
+v_50b265d3f9ccf281a518,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,full,0.011897563934326172,0.007981300354003906
+v_53b3d43654788945925c,a zebra running to join a herd of its kind,official,start,0.061513543128967285,0.09027200937271118
+v_53b3d43654788945925c,a zebra running to join a herd of its kind,official,middle,0.028092801570892334,0.04021632671356201
+v_53b3d43654788945925c,a zebra running to join a herd of its kind,official,end,0.01907062530517578,0.031248867511749268
+v_53b3d43654788945925c,a zebra running to join a herd of its kind,official,full,0.0037822723388671875,0.010131597518920898
+v_53b3d43654788945925c,a zebra running to join a herd of its kind,hybrid_exclude,start,0.001952528953552246,0.003929555416107178
+v_53b3d43654788945925c,a zebra running to join a herd of its kind,hybrid_exclude,middle,0.0012668967247009277,0.007480502128601074
+v_53b3d43654788945925c,a zebra running to join a herd of its kind,hybrid_exclude,end,0.002917170524597168,0.00533527135848999
+v_53b3d43654788945925c,a zebra running to join a herd of its kind,hybrid_exclude,full,0.0030940771102905273,0.006243407726287842
+v_55a4f07d56cda7470760,an elephant running to join a herd of its kind,official,start,0.05016881227493286,0.02738666534423828
+v_55a4f07d56cda7470760,an elephant running to join a herd of its kind,official,middle,0.03952229022979736,0.01816779375076294
+v_55a4f07d56cda7470760,an elephant running to join a herd of its kind,official,end,0.02325296401977539,0.01463007926940918
+v_55a4f07d56cda7470760,an elephant running to join a herd of its kind,official,full,0.052583277225494385,0.018753349781036377
+v_55a4f07d56cda7470760,an elephant running to join a herd of its kind,hybrid_exclude,start,0.015224874019622803,0.0008434653282165527
+v_55a4f07d56cda7470760,an elephant running to join a herd of its kind,hybrid_exclude,middle,0.016961276531219482,0.0011526942253112793
+v_55a4f07d56cda7470760,an elephant running to join a herd of its kind,hybrid_exclude,end,0.015509605407714844,0.0024396181106567383
+v_55a4f07d56cda7470760,an elephant running to join a herd of its kind,hybrid_exclude,full,0.02065068483352661,0.004564821720123291
+v_6015d56a898aa0948639,a zebra bending down to drink water from a river,official,start,0.1931273341178894,0.14695948362350464
+v_6015d56a898aa0948639,a zebra bending down to drink water from a river,official,middle,0.05572229623794556,0.03716784715652466
+v_6015d56a898aa0948639,a zebra bending down to drink water from a river,official,end,0.029823482036590576,0.016468167304992676
+v_6015d56a898aa0948639,a zebra bending down to drink water from a river,official,full,0.12795966863632202,0.10378998517990112
+v_6015d56a898aa0948639,a zebra bending down to drink water from a river,hybrid_exclude,start,0.08228814601898193,0.030981838703155518
+v_6015d56a898aa0948639,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.04476743936538696,0.013202428817749023
+v_6015d56a898aa0948639,a zebra bending down to drink water from a river,hybrid_exclude,end,0.019767343997955322,0.000859677791595459
+v_6015d56a898aa0948639,a zebra bending down to drink water from a river,hybrid_exclude,full,0.10253697633743286,0.049685776233673096
+v_67c0894760111d0087b6,a motorcycle accelerating to gain speed,official,start,0.1101195216178894,0.11087048053741455
+v_67c0894760111d0087b6,a motorcycle accelerating to gain speed,official,middle,0.029275476932525635,0.028995752334594727
+v_67c0894760111d0087b6,a motorcycle accelerating to gain speed,official,end,0.07639122009277344,0.06466352939605713
+v_67c0894760111d0087b6,a motorcycle accelerating to gain speed,official,full,0.10524553060531616,0.09706449508666992
+v_67c0894760111d0087b6,a motorcycle accelerating to gain speed,hybrid_exclude,start,0.07136142253875732,0.0400506854057312
+v_67c0894760111d0087b6,a motorcycle accelerating to gain speed,hybrid_exclude,middle,0.00032007694244384766,0.0020402073860168457
+v_67c0894760111d0087b6,a motorcycle accelerating to gain speed,hybrid_exclude,end,0.06017017364501953,0.021068155765533447
+v_67c0894760111d0087b6,a motorcycle accelerating to gain speed,hybrid_exclude,full,0.12205982208251953,0.04977387189865112
+v_6bee77846ce628e11d94,an elephant spraying itself with water using its trunk to cool down,official,start,0.07087641954421997,0.0366862416267395
+v_6bee77846ce628e11d94,an elephant spraying itself with water using its trunk to cool down,official,middle,0.024363994598388672,0.02296239137649536
+v_6bee77846ce628e11d94,an elephant spraying itself with water using its trunk to cool down,official,end,0.02094024419784546,0.024023354053497314
+v_6bee77846ce628e11d94,an elephant spraying itself with water using its trunk to cool down,official,full,0.05435323715209961,0.0413440465927124
+v_6bee77846ce628e11d94,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,start,0.015009522438049316,0.006689012050628662
+v_6bee77846ce628e11d94,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,middle,0.01884216070175171,0.013666987419128418
+v_6bee77846ce628e11d94,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,end,0.015589416027069092,0.010998547077178955
+v_6bee77846ce628e11d94,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,full,0.03229779005050659,0.02163851261138916
+v_6d2af08e0301e767c719,a cow running to join a herd of its kind,official,start,0.14731556177139282,0.15164625644683838
+v_6d2af08e0301e767c719,a cow running to join a herd of its kind,official,middle,0.0746803879737854,0.0697140097618103
+v_6d2af08e0301e767c719,a cow running to join a herd of its kind,official,end,0.05089437961578369,0.04677736759185791
+v_6d2af08e0301e767c719,a cow running to join a herd of its kind,official,full,0.05666619539260864,0.032835304737091064
+v_6d2af08e0301e767c719,a cow running to join a herd of its kind,hybrid_exclude,start,0.017477810382843018,0.01743847131729126
+v_6d2af08e0301e767c719,a cow running to join a herd of its kind,hybrid_exclude,middle,0.027247369289398193,0.000629723072052002
+v_6d2af08e0301e767c719,a cow running to join a herd of its kind,hybrid_exclude,end,0.003021240234375,0.0010890364646911621
+v_6d2af08e0301e767c719,a cow running to join a herd of its kind,hybrid_exclude,full,0.1609196662902832,0.014551103115081787
+v_6ee4476dec8615e1535f,a zebra bending down to drink water from a river,official,start,0.05230194330215454,0.061422884464263916
+v_6ee4476dec8615e1535f,a zebra bending down to drink water from a river,official,middle,0.01902616024017334,0.02237105369567871
+v_6ee4476dec8615e1535f,a zebra bending down to drink water from a river,official,end,0.015711069107055664,0.01882988214492798
+v_6ee4476dec8615e1535f,a zebra bending down to drink water from a river,official,full,0.011830449104309082,0.009733200073242188
+v_6ee4476dec8615e1535f,a zebra bending down to drink water from a river,hybrid_exclude,start,0.0023679733276367188,0.0001277923583984375
+v_6ee4476dec8615e1535f,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.009927868843078613,0.00018388032913208008
+v_6ee4476dec8615e1535f,a zebra bending down to drink water from a river,hybrid_exclude,end,0.006266474723815918,0.000493466854095459
+v_6ee4476dec8615e1535f,a zebra bending down to drink water from a river,hybrid_exclude,full,0.012544035911560059,0.000768125057220459
+v_74d5bd9982ed49689599,a truck turning a corner,official,start,0.07155811786651611,0.0830731987953186
+v_74d5bd9982ed49689599,a truck turning a corner,official,middle,0.03511863946914673,0.04874449968338013
+v_74d5bd9982ed49689599,a truck turning a corner,official,end,0.049085378646850586,0.03793102502822876
+v_74d5bd9982ed49689599,a truck turning a corner,official,full,0.055873990058898926,0.023220598697662354
+v_74d5bd9982ed49689599,a truck turning a corner,hybrid_exclude,start,0.0009722113609313965,0.0005113482475280762
+v_74d5bd9982ed49689599,a truck turning a corner,hybrid_exclude,middle,0.002363264560699463,0.00017940998077392578
+v_74d5bd9982ed49689599,a truck turning a corner,hybrid_exclude,end,0.02365291118621826,0.003526926040649414
+v_74d5bd9982ed49689599,a truck turning a corner,hybrid_exclude,full,0.0367242693901062,0.0037258267402648926
+v_795022cc03907dc7489e,an elephant spraying itself with water using its trunk to cool down,official,start,0.17046713829040527,0.10980832576751709
+v_795022cc03907dc7489e,an elephant spraying itself with water using its trunk to cool down,official,middle,0.03118884563446045,0.03495383262634277
+v_795022cc03907dc7489e,an elephant spraying itself with water using its trunk to cool down,official,end,0.019503235816955566,0.026867032051086426
+v_795022cc03907dc7489e,an elephant spraying itself with water using its trunk to cool down,official,full,0.11201465129852295,0.03743618726730347
+v_795022cc03907dc7489e,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,start,0.010992348194122314,0.0030950307846069336
+v_795022cc03907dc7489e,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,middle,0.0012880563735961914,0.0006290078163146973
+v_795022cc03907dc7489e,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,end,0.003627181053161621,0.0032622218132019043
+v_795022cc03907dc7489e,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,full,0.0059740543365478516,0.0026234984397888184
+v_7959de66f76bf5fc41d9,a zebra bending down to drink water from a river,official,start,0.02731478214263916,0.03150129318237305
+v_7959de66f76bf5fc41d9,a zebra bending down to drink water from a river,official,middle,0.010401308536529541,0.010644912719726562
+v_7959de66f76bf5fc41d9,a zebra bending down to drink water from a river,official,end,0.009587764739990234,0.009706974029541016
+v_7959de66f76bf5fc41d9,a zebra bending down to drink water from a river,official,full,6.210803985595703e-05,0.0003040432929992676
+v_7959de66f76bf5fc41d9,a zebra bending down to drink water from a river,hybrid_exclude,start,0.0013945698738098145,0.00017338991165161133
+v_7959de66f76bf5fc41d9,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.0013058781623840332,7.557868957519531e-05
+v_7959de66f76bf5fc41d9,a zebra bending down to drink water from a river,hybrid_exclude,end,0.001282334327697754,0.0003154873847961426
+v_7959de66f76bf5fc41d9,a zebra bending down to drink water from a river,hybrid_exclude,full,4.482269287109375e-05,0.000727236270904541
+v_82dc1689fd289adcc0d2,a zebra taking a peaceful walk,official,start,0.044387221336364746,0.056083083152770996
+v_82dc1689fd289adcc0d2,a zebra taking a peaceful walk,official,middle,0.020128607749938965,0.024132072925567627
+v_82dc1689fd289adcc0d2,a zebra taking a peaceful walk,official,end,0.017033517360687256,0.021314501762390137
+v_82dc1689fd289adcc0d2,a zebra taking a peaceful walk,official,full,0.0035596489906311035,0.005115509033203125
+v_82dc1689fd289adcc0d2,a zebra taking a peaceful walk,hybrid_exclude,start,0.0002065896987915039,0.0005227327346801758
+v_82dc1689fd289adcc0d2,a zebra taking a peaceful walk,hybrid_exclude,middle,0.0006941556930541992,0.00021988153457641602
+v_82dc1689fd289adcc0d2,a zebra taking a peaceful walk,hybrid_exclude,end,0.0009478926658630371,8.177757263183594e-05
+v_82dc1689fd289adcc0d2,a zebra taking a peaceful walk,hybrid_exclude,full,0.0014029145240783691,0.0016196966171264648
+v_88720509dffa7aea9e30,a zebra bending down to drink water from a river,official,start,0.047613680362701416,0.06203460693359375
+v_88720509dffa7aea9e30,a zebra bending down to drink water from a river,official,middle,0.025087475776672363,0.030485808849334717
+v_88720509dffa7aea9e30,a zebra bending down to drink water from a river,official,end,0.021971702575683594,0.023759782314300537
+v_88720509dffa7aea9e30,a zebra bending down to drink water from a river,official,full,0.00025528669357299805,0.0017616748809814453
+v_88720509dffa7aea9e30,a zebra bending down to drink water from a river,hybrid_exclude,start,0.0002720952033996582,0.00021332502365112305
+v_88720509dffa7aea9e30,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.0007175803184509277,0.0008587837219238281
+v_88720509dffa7aea9e30,a zebra bending down to drink water from a river,hybrid_exclude,end,0.0008565187454223633,0.0008096098899841309
+v_88720509dffa7aea9e30,a zebra bending down to drink water from a river,hybrid_exclude,full,1.3172626495361328e-05,0.0019956231117248535
+v_8887acf562b32cc84023,a zebra bending down to drink water from a river,official,start,0.2767753005027771,0.31628847122192383
+v_8887acf562b32cc84023,a zebra bending down to drink water from a river,official,middle,0.09830278158187866,0.08664947748184204
+v_8887acf562b32cc84023,a zebra bending down to drink water from a river,official,end,0.03988528251647949,0.032483816146850586
+v_8887acf562b32cc84023,a zebra bending down to drink water from a river,official,full,0.1455250382423401,0.2280753254890442
+v_8887acf562b32cc84023,a zebra bending down to drink water from a river,hybrid_exclude,start,0.038371741771698,0.033033907413482666
+v_8887acf562b32cc84023,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.03638482093811035,0.03203064203262329
+v_8887acf562b32cc84023,a zebra bending down to drink water from a river,hybrid_exclude,end,0.0062683820724487305,0.004281759262084961
+v_8887acf562b32cc84023,a zebra bending down to drink water from a river,hybrid_exclude,full,0.04687422513961792,0.048514723777770996
+v_8dca194984971f0a1124,a truck turning a corner,official,start,0.07687067985534668,0.06970733404159546
+v_8dca194984971f0a1124,a truck turning a corner,official,middle,0.049800336360931396,0.02761971950531006
+v_8dca194984971f0a1124,a truck turning a corner,official,end,0.05834031105041504,0.05175197124481201
+v_8dca194984971f0a1124,a truck turning a corner,official,full,0.053473472595214844,0.04422348737716675
+v_8dca194984971f0a1124,a truck turning a corner,hybrid_exclude,start,0.0021242499351501465,0.002448439598083496
+v_8dca194984971f0a1124,a truck turning a corner,hybrid_exclude,middle,0.009605765342712402,0.008956074714660645
+v_8dca194984971f0a1124,a truck turning a corner,hybrid_exclude,end,0.022762596607208252,0.022793889045715332
+v_8dca194984971f0a1124,a truck turning a corner,hybrid_exclude,full,0.037373125553131104,0.02656954526901245
+v_8e6a21dfeb7a106dae22,a zebra taking a peaceful walk,official,start,0.04991871118545532,0.05613541603088379
+v_8e6a21dfeb7a106dae22,a zebra taking a peaceful walk,official,middle,0.021136879920959473,0.02107328176498413
+v_8e6a21dfeb7a106dae22,a zebra taking a peaceful walk,official,end,0.02416515350341797,0.022273540496826172
+v_8e6a21dfeb7a106dae22,a zebra taking a peaceful walk,official,full,0.03698056936264038,0.03975456953048706
+v_8e6a21dfeb7a106dae22,a zebra taking a peaceful walk,hybrid_exclude,start,0.019122838973999023,0.011892974376678467
+v_8e6a21dfeb7a106dae22,a zebra taking a peaceful walk,hybrid_exclude,middle,0.018684089183807373,0.013872981071472168
+v_8e6a21dfeb7a106dae22,a zebra taking a peaceful walk,hybrid_exclude,end,0.017067372798919678,0.009493410587310791
+v_8e6a21dfeb7a106dae22,a zebra taking a peaceful walk,hybrid_exclude,full,0.03093695640563965,0.023483991622924805
+v_a18cdea6bd26987ddbc4,a cow running to join a herd of its kind,official,start,0.051271021366119385,0.06375759840011597
+v_a18cdea6bd26987ddbc4,a cow running to join a herd of its kind,official,middle,0.018619239330291748,0.023100316524505615
+v_a18cdea6bd26987ddbc4,a cow running to join a herd of its kind,official,end,0.019795477390289307,0.020698249340057373
+v_a18cdea6bd26987ddbc4,a cow running to join a herd of its kind,official,full,0.00578230619430542,0.011125743389129639
+v_a18cdea6bd26987ddbc4,a cow running to join a herd of its kind,hybrid_exclude,start,0.002497851848602295,0.0017086267471313477
+v_a18cdea6bd26987ddbc4,a cow running to join a herd of its kind,hybrid_exclude,middle,0.002160310745239258,0.0022113919258117676
+v_a18cdea6bd26987ddbc4,a cow running to join a herd of its kind,hybrid_exclude,end,0.0010161995887756348,0.002767503261566162
+v_a18cdea6bd26987ddbc4,a cow running to join a herd of its kind,hybrid_exclude,full,0.004973232746124268,0.005942642688751221
+v_a3b6d576bc5c5ef3517f,a zebra running to join a herd of its kind,official,start,0.041514575481414795,0.043125152587890625
+v_a3b6d576bc5c5ef3517f,a zebra running to join a herd of its kind,official,middle,0.018952012062072754,0.018952012062072754
+v_a3b6d576bc5c5ef3517f,a zebra running to join a herd of its kind,official,end,0.014985918998718262,0.014631927013397217
+v_a3b6d576bc5c5ef3517f,a zebra running to join a herd of its kind,official,full,0.0019131898880004883,0.00220412015914917
+v_a3b6d576bc5c5ef3517f,a zebra running to join a herd of its kind,hybrid_exclude,start,0.0007048249244689941,0.0009948015213012695
+v_a3b6d576bc5c5ef3517f,a zebra running to join a herd of its kind,hybrid_exclude,middle,0.0017559528350830078,0.0017559528350830078
+v_a3b6d576bc5c5ef3517f,a zebra running to join a herd of its kind,hybrid_exclude,end,0.007498264312744141,0.002867400646209717
+v_a3b6d576bc5c5ef3517f,a zebra running to join a herd of its kind,hybrid_exclude,full,0.006436765193939209,0.002072155475616455
+v_a522928f33a3f29c463c,a truck slowing down to stop,official,start,0.05716627836227417,0.06855839490890503
+v_a522928f33a3f29c463c,a truck slowing down to stop,official,middle,0.027347266674041748,0.029174327850341797
+v_a522928f33a3f29c463c,a truck slowing down to stop,official,end,0.03894650936126709,0.028011560440063477
+v_a522928f33a3f29c463c,a truck slowing down to stop,official,full,0.02476680278778076,0.009190201759338379
+v_a522928f33a3f29c463c,a truck slowing down to stop,hybrid_exclude,start,0.001995861530303955,0.002608001232147217
+v_a522928f33a3f29c463c,a truck slowing down to stop,hybrid_exclude,middle,0.006246626377105713,0.0032807588577270508
+v_a522928f33a3f29c463c,a truck slowing down to stop,hybrid_exclude,end,0.013850271701812744,0.004378676414489746
+v_a522928f33a3f29c463c,a truck slowing down to stop,hybrid_exclude,full,0.011086225509643555,0.002497732639312744
+v_a5b4d7c4b2a095c9e6cc,an elephant running to join a herd of its kind,official,start,0.026415884494781494,0.036861419677734375
+v_a5b4d7c4b2a095c9e6cc,an elephant running to join a herd of its kind,official,middle,0.01006627082824707,0.013368785381317139
+v_a5b4d7c4b2a095c9e6cc,an elephant running to join a herd of its kind,official,end,0.011095643043518066,0.01657891273498535
+v_a5b4d7c4b2a095c9e6cc,an elephant running to join a herd of its kind,official,full,0.02119147777557373,0.030531585216522217
+v_a5b4d7c4b2a095c9e6cc,an elephant running to join a herd of its kind,hybrid_exclude,start,0.004647791385650635,0.005886554718017578
+v_a5b4d7c4b2a095c9e6cc,an elephant running to join a herd of its kind,hybrid_exclude,middle,0.006109893321990967,0.006745398044586182
+v_a5b4d7c4b2a095c9e6cc,an elephant running to join a herd of its kind,hybrid_exclude,end,0.008207261562347412,0.008236885070800781
+v_a5b4d7c4b2a095c9e6cc,an elephant running to join a herd of its kind,hybrid_exclude,full,0.009998083114624023,0.011882901191711426
+v_aa14318968934ce72fb1,a zebra bending down to drink water from a river,official,start,0.07631891965866089,0.09356087446212769
+v_aa14318968934ce72fb1,a zebra bending down to drink water from a river,official,middle,0.028983116149902344,0.0412212610244751
+v_aa14318968934ce72fb1,a zebra bending down to drink water from a river,official,end,0.02061283588409424,0.02954155206680298
+v_aa14318968934ce72fb1,a zebra bending down to drink water from a river,official,full,0.01377791166305542,0.013760209083557129
+v_aa14318968934ce72fb1,a zebra bending down to drink water from a river,hybrid_exclude,start,0.002179443836212158,0.0015034675598144531
+v_aa14318968934ce72fb1,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.003468930721282959,0.0051403045654296875
+v_aa14318968934ce72fb1,a zebra bending down to drink water from a river,hybrid_exclude,end,0.0026553869247436523,0.005415976047515869
+v_aa14318968934ce72fb1,a zebra bending down to drink water from a river,hybrid_exclude,full,0.0007111430168151855,0.002484619617462158
+v_ad2f0d6ec69f9ff90382,a zebra taking a peaceful walk,official,start,0.060969650745391846,0.06536877155303955
+v_ad2f0d6ec69f9ff90382,a zebra taking a peaceful walk,official,middle,0.02959376573562622,0.0323978066444397
+v_ad2f0d6ec69f9ff90382,a zebra taking a peaceful walk,official,end,0.02037864923477173,0.02371513843536377
+v_ad2f0d6ec69f9ff90382,a zebra taking a peaceful walk,official,full,0.013213098049163818,0.0055353641510009766
+v_ad2f0d6ec69f9ff90382,a zebra taking a peaceful walk,hybrid_exclude,start,0.014018774032592773,0.0013476014137268066
+v_ad2f0d6ec69f9ff90382,a zebra taking a peaceful walk,hybrid_exclude,middle,0.011362910270690918,0.002520918846130371
+v_ad2f0d6ec69f9ff90382,a zebra taking a peaceful walk,hybrid_exclude,end,0.0058362483978271484,0.001901865005493164
+v_ad2f0d6ec69f9ff90382,a zebra taking a peaceful walk,hybrid_exclude,full,0.00947660207748413,0.003800690174102783
+v_b2657298416595015a2b,a zebra running to join a herd of its kind,official,start,0.041881680488586426,0.0538676381111145
+v_b2657298416595015a2b,a zebra running to join a herd of its kind,official,middle,0.04627537727355957,0.04291313886642456
+v_b2657298416595015a2b,a zebra running to join a herd of its kind,official,end,0.015170037746429443,0.019075095653533936
+v_b2657298416595015a2b,a zebra running to join a herd of its kind,official,full,0.028323769569396973,0.01995253562927246
+v_b2657298416595015a2b,a zebra running to join a herd of its kind,hybrid_exclude,start,0.01060795783996582,0.0010227560997009277
+v_b2657298416595015a2b,a zebra running to join a herd of its kind,hybrid_exclude,middle,0.008277714252471924,0.0020444393157958984
+v_b2657298416595015a2b,a zebra running to join a herd of its kind,hybrid_exclude,end,0.00014090538024902344,8.660554885864258e-05
+v_b2657298416595015a2b,a zebra running to join a herd of its kind,hybrid_exclude,full,0.01612234115600586,0.00234377384185791
+v_bc950a10e74a0a5447f1,a zebra bending down to drink water from a river,official,start,0.08723247051239014,0.08984148502349854
+v_bc950a10e74a0a5447f1,a zebra bending down to drink water from a river,official,middle,0.04675489664077759,0.04712432622909546
+v_bc950a10e74a0a5447f1,a zebra bending down to drink water from a river,official,end,0.03357213735580444,0.03128880262374878
+v_bc950a10e74a0a5447f1,a zebra bending down to drink water from a river,official,full,0.019460678100585938,0.025606155395507812
+v_bc950a10e74a0a5447f1,a zebra bending down to drink water from a river,hybrid_exclude,start,0.0018643736839294434,0.00033855438232421875
+v_bc950a10e74a0a5447f1,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.0006626248359680176,0.00219649076461792
+v_bc950a10e74a0a5447f1,a zebra bending down to drink water from a river,hybrid_exclude,end,0.0010457634925842285,5.137920379638672e-05
+v_bc950a10e74a0a5447f1,a zebra bending down to drink water from a river,hybrid_exclude,full,0.006174981594085693,0.003770112991333008
+v_bf4b3df29a9616bf26ae,a truck turning a corner,official,start,0.09876400232315063,0.11571431159973145
+v_bf4b3df29a9616bf26ae,a truck turning a corner,official,middle,0.06223738193511963,0.0661923885345459
+v_bf4b3df29a9616bf26ae,a truck turning a corner,official,end,0.045500099658966064,0.04298967123031616
+v_bf4b3df29a9616bf26ae,a truck turning a corner,official,full,0.04460054636001587,0.03494614362716675
+v_bf4b3df29a9616bf26ae,a truck turning a corner,hybrid_exclude,start,0.0004048943519592285,0.0005641579627990723
+v_bf4b3df29a9616bf26ae,a truck turning a corner,hybrid_exclude,middle,0.0007129311561584473,0.000985562801361084
+v_bf4b3df29a9616bf26ae,a truck turning a corner,hybrid_exclude,end,0.0011712312698364258,9.5367431640625e-06
+v_bf4b3df29a9616bf26ae,a truck turning a corner,hybrid_exclude,full,0.0011875033378601074,0.0014087557792663574
+v_c41543fe72d2e5493d15,a truck slowing down to stop,official,start,0.030525386333465576,0.02875620126724243
+v_c41543fe72d2e5493d15,a truck slowing down to stop,official,middle,0.017413198947906494,0.02003878355026245
+v_c41543fe72d2e5493d15,a truck slowing down to stop,official,end,0.022832810878753662,0.022595524787902832
+v_c41543fe72d2e5493d15,a truck slowing down to stop,official,full,0.02915048599243164,0.029233455657958984
+v_c41543fe72d2e5493d15,a truck slowing down to stop,hybrid_exclude,start,0.0017489790916442871,0.0010173320770263672
+v_c41543fe72d2e5493d15,a truck slowing down to stop,hybrid_exclude,middle,0.0029949545860290527,0.0018429160118103027
+v_c41543fe72d2e5493d15,a truck slowing down to stop,hybrid_exclude,end,0.011523008346557617,0.005579948425292969
+v_c41543fe72d2e5493d15,a truck slowing down to stop,hybrid_exclude,full,0.018265068531036377,0.00859081745147705
+v_c424c7aceaf2046394ad,a cow running to join a herd of its kind,official,start,0.13708078861236572,0.16738128662109375
+v_c424c7aceaf2046394ad,a cow running to join a herd of its kind,official,middle,0.058519601821899414,0.07252991199493408
+v_c424c7aceaf2046394ad,a cow running to join a herd of its kind,official,end,0.04697495698928833,0.05281102657318115
+v_c424c7aceaf2046394ad,a cow running to join a herd of its kind,official,full,0.012004315853118896,0.011803686618804932
+v_c424c7aceaf2046394ad,a cow running to join a herd of its kind,hybrid_exclude,start,0.002733469009399414,0.0012637972831726074
+v_c424c7aceaf2046394ad,a cow running to join a herd of its kind,hybrid_exclude,middle,0.0038195252418518066,0.0013450980186462402
+v_c424c7aceaf2046394ad,a cow running to join a herd of its kind,hybrid_exclude,end,0.003878772258758545,0.00161820650100708
+v_c424c7aceaf2046394ad,a cow running to join a herd of its kind,hybrid_exclude,full,0.0013308525085449219,0.0026755928993225098
+v_c4de504a244d437ac3ad,a zebra bending down to drink water from a river,official,start,0.07731825113296509,0.08093714714050293
+v_c4de504a244d437ac3ad,a zebra bending down to drink water from a river,official,middle,0.03600156307220459,0.045920491218566895
+v_c4de504a244d437ac3ad,a zebra bending down to drink water from a river,official,end,0.029709279537200928,0.038011789321899414
+v_c4de504a244d437ac3ad,a zebra bending down to drink water from a river,official,full,0.005550861358642578,0.030471742153167725
+v_c4de504a244d437ac3ad,a zebra bending down to drink water from a river,hybrid_exclude,start,0.0032281875610351562,0.0030546188354492188
+v_c4de504a244d437ac3ad,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.0018568038940429688,0.002695143222808838
+v_c4de504a244d437ac3ad,a zebra bending down to drink water from a river,hybrid_exclude,end,0.002865433692932129,0.00116652250289917
+v_c4de504a244d437ac3ad,a zebra bending down to drink water from a river,hybrid_exclude,full,0.002012312412261963,0.00550532341003418
+v_cdab6ebfbdf88aa1365e,an elephant running to join a herd of its kind,official,start,0.06876373291015625,0.0949748158454895
+v_cdab6ebfbdf88aa1365e,an elephant running to join a herd of its kind,official,middle,0.040496230125427246,0.05382019281387329
+v_cdab6ebfbdf88aa1365e,an elephant running to join a herd of its kind,official,end,0.0420001745223999,0.05302739143371582
+v_cdab6ebfbdf88aa1365e,an elephant running to join a herd of its kind,official,full,0.04886132478713989,0.051376402378082275
+v_cdab6ebfbdf88aa1365e,an elephant running to join a herd of its kind,hybrid_exclude,start,0.00013518333435058594,2.09808349609375e-05
+v_cdab6ebfbdf88aa1365e,an elephant running to join a herd of its kind,hybrid_exclude,middle,0.000520169734954834,0.0003859400749206543
+v_cdab6ebfbdf88aa1365e,an elephant running to join a herd of its kind,hybrid_exclude,end,0.00012701749801635742,0.00033026933670043945
+v_cdab6ebfbdf88aa1365e,an elephant running to join a herd of its kind,hybrid_exclude,full,0.0015895962715148926,0.0011875033378601074
+v_d111e2d8975fa9b850b3,a zebra taking a peaceful walk,official,start,0.09915274381637573,0.07341563701629639
+v_d111e2d8975fa9b850b3,a zebra taking a peaceful walk,official,middle,0.04938304424285889,0.039109647274017334
+v_d111e2d8975fa9b850b3,a zebra taking a peaceful walk,official,end,0.020619511604309082,0.02112901210784912
+v_d111e2d8975fa9b850b3,a zebra taking a peaceful walk,official,full,0.02410757541656494,0.03610152006149292
+v_d111e2d8975fa9b850b3,a zebra taking a peaceful walk,hybrid_exclude,start,0.03564262390136719,0.03127610683441162
+v_d111e2d8975fa9b850b3,a zebra taking a peaceful walk,hybrid_exclude,middle,0.014331459999084473,0.005142390727996826
+v_d111e2d8975fa9b850b3,a zebra taking a peaceful walk,hybrid_exclude,end,0.0044786930084228516,0.0027241110801696777
+v_d111e2d8975fa9b850b3,a zebra taking a peaceful walk,hybrid_exclude,full,0.055547475814819336,0.03428828716278076
+v_d51186bcfc23e2a780ab,a truck slowing down to stop,official,start,0.031112253665924072,0.025236308574676514
+v_d51186bcfc23e2a780ab,a truck slowing down to stop,official,middle,0.030799388885498047,0.032594501972198486
+v_d51186bcfc23e2a780ab,a truck slowing down to stop,official,end,0.020717501640319824,0.027299880981445312
+v_d51186bcfc23e2a780ab,a truck slowing down to stop,official,full,0.029809951782226562,0.00515824556350708
+v_d51186bcfc23e2a780ab,a truck slowing down to stop,hybrid_exclude,start,0.0009588003158569336,0.017796099185943604
+v_d51186bcfc23e2a780ab,a truck slowing down to stop,hybrid_exclude,middle,1.4841556549072266e-05,3.331899642944336e-05
+v_d51186bcfc23e2a780ab,a truck slowing down to stop,hybrid_exclude,end,0.00011485815048217773,0.00011593103408813477
+v_d51186bcfc23e2a780ab,a truck slowing down to stop,hybrid_exclude,full,0.005306661128997803,0.020957767963409424
+v_d86a4852b9a610b4e2ac,a motorcycle accelerating to gain speed,official,start,0.15121465921401978,0.09105658531188965
+v_d86a4852b9a610b4e2ac,a motorcycle accelerating to gain speed,official,middle,0.06310772895812988,0.03422856330871582
+v_d86a4852b9a610b4e2ac,a motorcycle accelerating to gain speed,official,end,0.03532421588897705,0.03532421588897705
+v_d86a4852b9a610b4e2ac,a motorcycle accelerating to gain speed,official,full,0.10289764404296875,0.04907560348510742
+v_d86a4852b9a610b4e2ac,a motorcycle accelerating to gain speed,hybrid_exclude,start,0.0035779476165771484,0.0007176995277404785
+v_d86a4852b9a610b4e2ac,a motorcycle accelerating to gain speed,hybrid_exclude,middle,0.00469595193862915,0.0006070733070373535
+v_d86a4852b9a610b4e2ac,a motorcycle accelerating to gain speed,hybrid_exclude,end,0.0012254714965820312,0.0012254714965820312
+v_d86a4852b9a610b4e2ac,a motorcycle accelerating to gain speed,hybrid_exclude,full,0.00750046968460083,0.0015469789505004883
+v_e7e6381187b3421f31f4,a zebra taking a peaceful walk,official,start,0.04168522357940674,0.04126918315887451
+v_e7e6381187b3421f31f4,a zebra taking a peaceful walk,official,middle,0.02166503667831421,0.0218203067779541
+v_e7e6381187b3421f31f4,a zebra taking a peaceful walk,official,end,0.017193496227264404,0.01993536949157715
+v_e7e6381187b3421f31f4,a zebra taking a peaceful walk,official,full,0.0078963041305542,0.010354578495025635
+v_e7e6381187b3421f31f4,a zebra taking a peaceful walk,hybrid_exclude,start,0.0005759596824645996,0.001987278461456299
+v_e7e6381187b3421f31f4,a zebra taking a peaceful walk,hybrid_exclude,middle,0.001407921314239502,0.001848459243774414
+v_e7e6381187b3421f31f4,a zebra taking a peaceful walk,hybrid_exclude,end,0.00029981136322021484,0.00115203857421875
+v_e7e6381187b3421f31f4,a zebra taking a peaceful walk,hybrid_exclude,full,0.0034953951835632324,0.008063018321990967
+v_e84cd21f77767e064452,an elephant running to join a herd of its kind,official,start,0.1655002236366272,0.1644015908241272
+v_e84cd21f77767e064452,an elephant running to join a herd of its kind,official,middle,0.09101539850234985,0.08756762742996216
+v_e84cd21f77767e064452,an elephant running to join a herd of its kind,official,end,0.07476925849914551,0.07328557968139648
+v_e84cd21f77767e064452,an elephant running to join a herd of its kind,official,full,0.05639386177062988,0.048528432846069336
+v_e84cd21f77767e064452,an elephant running to join a herd of its kind,hybrid_exclude,start,0.0012467503547668457,0.010103702545166016
+v_e84cd21f77767e064452,an elephant running to join a herd of its kind,hybrid_exclude,middle,0.000683903694152832,0.0059015750885009766
+v_e84cd21f77767e064452,an elephant running to join a herd of its kind,hybrid_exclude,end,0.00039631128311157227,0.0014996528625488281
+v_e84cd21f77767e064452,an elephant running to join a herd of its kind,hybrid_exclude,full,0.03255563974380493,0.027442574501037598
+v_f762ed821ba1fba906af,a zebra bending down to drink water from a river,official,start,0.07687801122665405,0.07238858938217163
+v_f762ed821ba1fba906af,a zebra bending down to drink water from a river,official,middle,0.03576362133026123,0.03429824113845825
+v_f762ed821ba1fba906af,a zebra bending down to drink water from a river,official,end,0.0297696590423584,0.029690563678741455
+v_f762ed821ba1fba906af,a zebra bending down to drink water from a river,official,full,0.016437828540802002,0.023136913776397705
+v_f762ed821ba1fba906af,a zebra bending down to drink water from a river,hybrid_exclude,start,0.008871793746948242,0.013361573219299316
+v_f762ed821ba1fba906af,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.002586960792541504,0.011426270008087158
+v_f762ed821ba1fba906af,a zebra bending down to drink water from a river,hybrid_exclude,end,0.0013491511344909668,0.002622246742248535
+v_f762ed821ba1fba906af,a zebra bending down to drink water from a river,hybrid_exclude,full,0.00587916374206543,0.01142728328704834
+v_f993f14cdb34fb8383ef,a zebra bending down to drink water from a river,official,start,0.04928559064865112,0.06858241558074951
+v_f993f14cdb34fb8383ef,a zebra bending down to drink water from a river,official,middle,0.02830660343170166,0.03729444742202759
+v_f993f14cdb34fb8383ef,a zebra bending down to drink water from a river,official,end,0.023521244525909424,0.02938365936279297
+v_f993f14cdb34fb8383ef,a zebra bending down to drink water from a river,official,full,0.0036984682083129883,0.003584146499633789
+v_f993f14cdb34fb8383ef,a zebra bending down to drink water from a river,hybrid_exclude,start,0.004462718963623047,0.0036468505859375
+v_f993f14cdb34fb8383ef,a zebra bending down to drink water from a river,hybrid_exclude,middle,0.0028886795043945312,0.003535449504852295
+v_f993f14cdb34fb8383ef,a zebra bending down to drink water from a river,hybrid_exclude,end,0.00441056489944458,0.0034241080284118652
+v_f993f14cdb34fb8383ef,a zebra bending down to drink water from a river,hybrid_exclude,full,0.002306044101715088,0.0017518997192382812
+v_fb03b6a21df9c0a51627,a cow running to join a herd of its kind,official,start,0.09256154298782349,0.07106614112854004
+v_fb03b6a21df9c0a51627,a cow running to join a herd of its kind,official,middle,0.07036066055297852,0.06937575340270996
+v_fb03b6a21df9c0a51627,a cow running to join a herd of its kind,official,end,0.041605234146118164,0.03956413269042969
+v_fb03b6a21df9c0a51627,a cow running to join a herd of its kind,official,full,0.05952787399291992,0.0478670597076416
+v_fb03b6a21df9c0a51627,a cow running to join a herd of its kind,hybrid_exclude,start,0.008337199687957764,0.001047372817993164
+v_fb03b6a21df9c0a51627,a cow running to join a herd of its kind,hybrid_exclude,middle,0.03425472974777222,0.012558579444885254
+v_fb03b6a21df9c0a51627,a cow running to join a herd of its kind,hybrid_exclude,end,0.007830023765563965,0.0038892626762390137
+v_fb03b6a21df9c0a51627,a cow running to join a herd of its kind,hybrid_exclude,full,0.028169631958007812,0.01410222053527832
+v_fc9b39a4b047b2db243c,an elephant spraying itself with water using its trunk to cool down,official,start,0.025706708431243896,0.03496873378753662
+v_fc9b39a4b047b2db243c,an elephant spraying itself with water using its trunk to cool down,official,middle,0.013987481594085693,0.01609039306640625
+v_fc9b39a4b047b2db243c,an elephant spraying itself with water using its trunk to cool down,official,end,0.00887000560760498,0.01011747121810913
+v_fc9b39a4b047b2db243c,an elephant spraying itself with water using its trunk to cool down,official,full,0.00618213415145874,0.007094085216522217
+v_fc9b39a4b047b2db243c,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,start,0.005075335502624512,0.005954921245574951
+v_fc9b39a4b047b2db243c,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,middle,0.007329702377319336,0.005434513092041016
+v_fc9b39a4b047b2db243c,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,end,0.005010724067687988,0.0021576881408691406
+v_fc9b39a4b047b2db243c,an elephant spraying itself with water using its trunk to cool down,hybrid_exclude,full,0.006162285804748535,0.006433248519897461
+v_fef8070abcd8dcd3af47,a zebra taking a peaceful walk,official,start,0.07026177644729614,0.10286110639572144
+v_fef8070abcd8dcd3af47,a zebra taking a peaceful walk,official,middle,0.011935293674468994,0.01953643560409546
+v_fef8070abcd8dcd3af47,a zebra taking a peaceful walk,official,end,0.00859147310256958,0.017062842845916748
+v_fef8070abcd8dcd3af47,a zebra taking a peaceful walk,official,full,0.05217432975769043,0.07052117586135864
+v_fef8070abcd8dcd3af47,a zebra taking a peaceful walk,hybrid_exclude,start,0.01621180772781372,0.01824641227722168
+v_fef8070abcd8dcd3af47,a zebra taking a peaceful walk,hybrid_exclude,middle,0.002074003219604492,0.0019620656967163086
+v_fef8070abcd8dcd3af47,a zebra taking a peaceful walk,hybrid_exclude,end,0.0005879402160644531,0.0011722445487976074
+v_fef8070abcd8dcd3af47,a zebra taking a peaceful walk,hybrid_exclude,full,0.01705467700958252,0.020402610301971436

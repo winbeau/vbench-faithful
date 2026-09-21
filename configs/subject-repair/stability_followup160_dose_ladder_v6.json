@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "stage": "posthoc_frozen_dose_diagnostic",
+  "registered_before_new_dose_pixels_and_scores": true,
+  "baseline_scoring_protocol_sha256": "c1445e0334523433e710d370de86294c3c2e64894ec2094ae74022294238d2ae",
+  "doses": [
+    1,
+    2,
+    4
+  ],
+  "primary_new_dose": 4,
+  "intermediate_control_dose": 2,
+  "primary_position": "start",
+  "all_positions": [
+    "full",
+    "start",
+    "middle",
+    "end"
+  ],
+  "primary_method": "hybrid_exclude",
+  "same_method_source_sha256": {
+    "metrics/subject-consistency/src/subject_consistency/temporal_localizer.py": "e2e2306fed180b18b0a9224c6616a26e95d1425650a8e289a20aabcc3191d109"
+  },
+  "cohort_candidates": 160,
+  "numeric_constructed": 61,
+  "primary_bases": 60,
+  "input_manifest_sha256": "c3113fde827b391149ce294f77f232557944a94a296ece5ac159184813f5eb7a",
+  "baseline_dataset_index_sha256": "1bb404bf4b767d82ad4d35cd969fc3b4e0d53467ae58c4b5bc7dccb212c968e2",
+  "construction_source": "/root/wenbiao_zhao/tmp/subject-stability-followup160-recovery-v3-20260920",
+  "construction_mask_rule": "Reuse every recovered v3 construction mask verbatim; no segmentation rerun and no dilation or area tuning.",
+  "input_review_exclusions": {
+    "v_4f8abc7bb931501fb862": "Frame 26 shows only a small cab edge preserved while most of the visible truck is blurred; major semantic construction failure, visually recorded before normalized scores."
+  },
+  "no_new_exclusions": true,
+  "score_based_sample_or_mask_selection": false,
+  "scoring_mask_rule": "Independent detector/SAM on each actual clip; no score masks reused from another dose or original.",
+  "targets": {
+    "origin_mean_absolute_change_minimum": 0.1,
+    "repair_mean_absolute_change_maximum": 0.01,
+    "require_complete_primary_cohort": true,
+    "report_joint_per_case_success_and_failures": true,
+    "subject_start_response_must_be_positive": true
+  },
+  "construction_protocols": {
+    "2": {
+      "path": "configs/subject-repair/protocol_resolution_dose2_v4.json",
+      "sha256": "a8bcb8bdcc052ee5f4d7c641f7a4f83ed9aa0bdf98b8d1db9293067b07e48020"
+    },
+    "4": {
+      "path": "configs/subject-repair/protocol_resolution_dose4_v4.json",
+      "sha256": "a4e8785353779fde5b1c12082cf7193a0ac083b8c91bab767eb6b35899257e76"
+    }
+  },
+  "rationale": "With 1x blur, the same 60 inputs yield Origin 0.080759 and repair 0.006353. Test a declared geometric dose ladder to determine whether larger background degradation produces stronger Origin response while the frozen repair remains stable; preserve all failed 1x results and all time-position controls.",
+  "claim_limit": "Reused follow-up mechanism diagnostic, not independent confirmation. A positive 4x result applies to that stronger intervention and does not make the original 1x target pass. Do not attribute differences to model repair updates; v5 remains unchanged.",
+  "human_preference": "NOT RUN; auxiliary only",
+  "construction_index_sha256": "5083105fa51bb3917ee13346dad83dfb534afd27f1f2406f4daed30be0fd58c6",
+  "construction_run_sha256": "ffd5ee4854e38497a7c5e776e5904128a2350ab97e13b46e42adb4eff78f9169"
+}

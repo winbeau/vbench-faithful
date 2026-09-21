@@ -16,6 +16,11 @@ background-intervention invariance and subject-change response. Human preference
 is auxiliary. The [new experiment report](counterfactual-reports/subject_stability_20260920.md)
 records temporal localization candidates on the entire developmental cohort,
 including incomplete coverage and negative results; completion is not claimed.
+The v5 repair reaches a mean absolute background change of 0.006353 on the same
+60 follow-up clips after construction recovery and resolution normalization
+(prompt-cluster 95% CI 0.004020–0.008724). All 60 retain a positive response to
+local subject corruption. Official changes by 0.080759, below the joint 0.10
+target; these reused follow-up inputs are a mechanism diagnostic.
 
 The earlier [official extension](counterfactual-reports/subject_official_extension_20260920.md)
 has scored all 1440 natural videos and evaluated 2160 human pairs. On 1290 test
