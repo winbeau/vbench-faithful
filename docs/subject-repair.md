@@ -45,6 +45,37 @@ or background inclusion do not require repeated review or delay experiments.
 This is not a measured contour IoU threshold. Full-score evaluation, missing
 evidence handling and subject-change sensitivity remain the effectiveness tests.
 
+## Run the measured v5 repair
+
+`--audit-variant subject_hybrid` uses current-frame target detections and a
+clip-local anchor only for missing detections. Each actual frame is segmented
+independently with MobileSAM. It needs metadata with `subject_en`, the pinned
+local detector, MobileSAM and DINO weights, and the existing MobileSAM source
+installed in the model environment. No construction masks are supplied.
+
+```bash
+subject-consistency --both --audit-variant subject_hybrid \
+  --video /path/to/clip.mp4 --metadata /path/to/metadata.json --gpu 0 \
+  --subject-detector-checkpoint /root/wenbiao_zhao/models/subject-repair/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth \
+  --subject-mobilesam-checkpoint /root/wenbiao_zhao/models/subject-repair/mobile_sam.pt \
+  --dino-repo /root/.cache/vbench/dino_model/facebookresearch_dino_main \
+  --dino-weight /root/.cache/vbench/dino_model/dino_vitbase16_pretrain.pth \
+  --output /path/to/new-output
+```
+
+This variant fixes the tested 0.5 detector threshold, 512 detector input,
+subject union, all frames, gray-filled 10% margin crop, all-pairs aggregation,
+and exclude policy. Options that would silently change those choices are
+rejected. Fewer than two usable subject frames produces an explicit failed
+result with coverage diagnostics, not a successful zero. Results include the
+current clip's localizer diagnostics and model hashes. `--both` retains the
+official backend alongside this repair. The existing default remains the
+historical aggregation repair; this option is an explicitly selected candidate.
+
+This evaluates subject consistency; it does not certify natural human-preference
+superiority. The dose experiment and the CLI entry share the frozen v5 method,
+while their input protocols and evaluation results remain separately recorded.
+
 The [2026-09-20 seven-clip run](counterfactual-reports/subject_region_discrimination_v2.md)
 is an archived pilot, not the main experiment. After viewing the images, the
 user retained only the presenter and swimmer as plausible image candidates.

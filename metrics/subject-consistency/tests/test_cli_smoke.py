@@ -134,6 +134,47 @@ class CliSmokeTests(unittest.TestCase):
             info = json.loads(next((root / "out").glob("subject-consistency/audit/*/summary.json")).read_text())
             self.assertIn("subject-isolated-full-all-pairs-v2", str(info))
 
+    def test_hybrid_both_keeps_origin_and_uses_frozen_current_clip_method(self):
+        calls = {}
+        def fake_masked(videos, metadata, gpu_ids, dino_config, mask_config, seed):
+            calls.update(mask_config)
+            return fake_results("audit", videos, metadata, gpu_ids, dino_config, seed)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            video, detector, sam = (root / name for name in ("video.mp4", "detector.pth", "sam.pt"))
+            for path in (video, detector, sam):
+                path.touch()
+            with patch("subject_consistency.cli.evaluate_masked_sharded", side_effect=fake_masked):
+                code, backend = self.run_cli(["--both", "--audit-variant", "subject_hybrid",
+                    "--subject-detector-checkpoint", str(detector), "--subject-mobilesam-checkpoint", str(sam),
+                    "--video", str(video), "--output", str(root / "out")])
+            self.assertEqual(code, 0)
+            self.assertEqual([call.args[0] for call in backend.call_args_list], ["vbench"])
+            self.assertEqual(calls["localizer"], "hybrid_v5")
+            self.assertEqual(calls["encoding_mode"], "preencode_crop")
+            self.assertEqual(calls["missing_policy"], "exclude")
+            self.assertEqual(calls["instance_mode"], "union")
+            self.assertIsNone(calls["root"])
+            summary = json.loads(next((root / "out").glob("subject-consistency/audit/*/summary.json")).read_text())
+            self.assertIn("subject-hybrid-v5-isolated-crop-all-pairs-exclude", str(summary))
+
+    def test_hybrid_rejects_options_that_would_change_the_measured_method(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            video, detector, sam = (root / name for name in ("video.mp4", "detector.pth", "sam.pt"))
+            for path in (video, detector, sam):
+                path.touch()
+            common = ["--audit", "--audit-variant", "subject_hybrid", "--video", str(video),
+                      "--subject-detector-checkpoint", str(detector), "--subject-mobilesam-checkpoint", str(sam)]
+            for option in (["--subject-missing-policy", "zero"], ["--subject-view", "full"],
+                           ["--subject-instance-mode", "mean"], ["--subject-max-frames", "8"],
+                           ["--subject-masks", str(root)], ["--subject-mobilesam-checkpoint", str(root / "absent")]):
+                with self.subTest(option=option), patch("subject_consistency.cli.evaluate_masked_sharded") as masked:
+                    code, backend = self.run_cli(common + option)
+                    self.assertEqual(code, 2)
+                    backend.assert_not_called()
+                    masked.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()

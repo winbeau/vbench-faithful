@@ -134,7 +134,9 @@ v3/v4 各自的 306 个 Origin 分数与原始开发运行精确相等（最大�
 
 入口为 `run_subject_stability.py`、`analyze_subject_stability.py` 和 `generate_subject_masks_parallel.py`。实验协议各轮单独冻结；不覆盖历史输出。该干预族与已发布 temporal-relocation 主表不同，不改写 `CONSOLIDATED.md` 的冻结主表行。历史自然偏好两轮结果保留在[官方扩展报告](subject_official_extension_20260920.md)，本轮尚未测新人类偏好一致率。
 
-本地已完成锁检查、锁定依赖同步、离线 CPU torch 2.14.0 overlay、Python 3.11.14 环境检查及原八个入口加 background 的 CLI help。完整 CPU 测试 726 passed、3 skipped，覆盖评分前语义排除的完整分母、分片合并、缺失证据、当前图像 SAM、构造恢复和归一化像素重放。跳过测试不计作模型验证；真实模型与上游函数 parity 以上述 H100 数值为准。
+本地已完成锁检查、锁定依赖同步、离线 CPU torch 2.14.0 overlay、Python 3.11.14 环境检查及原八个入口加 background 的 CLI help。接入正式 CLI 后完整 CPU 测试 **732 passed、3 skipped**，覆盖评分前语义排除的完整分母、分片合并、缺失证据、当前图像 SAM、构造恢复和归一化像素重放。跳过测试不计作模型验证；真实模型与上游函数 parity 以上述 H100 数值为准。
+
+正式命令行新增 `--audit-variant subject_hybrid`，直接使用本轮 v5；历史默认方法不变。该选项固定实测参数和三种权重 SHA，拒绝混用外部掩码或其它聚合/缺失策略，失败也保留当前片段的定位覆盖。H100 物理 5 上另用船和大象两个真实原文件核对 CLI 与实验脚本：两方法、两视频共四个分数误差均为 0，墙钟 33.37 秒；船补框 15/16 帧后无空帧，大象不需要补框。见 [CLI 实测回执](subject_stability_20260920/hybrid_cli_smoke.json)和[调用方法](../subject-repair.md#run-the-measured-v5-repair)。这验证入口接线，不能替代完整队列实验。
 
 复现时进入对应冻结 `-src`，设置 `VBENCH_AUDIT_UPSTREAM=/root/wenbiao_zhao/VBench`、`VBENCH_AUDIT_WORKSPACE` 为源码快照，`PYTHONPATH` 包含 MobileSAM、仓库根、audit-core、audit-models 和 subject-consistency 的 src。解释器固定 `/root/wenbiao_zhao/venvs/vbench/bin/python`。模型参数沿用本地 Mask R-CNN、MobileSAM 和 `/root/.cache/vbench/dino_model/` 中的 DINO 文件；具体路径与哈希在已保存的 run JSON。
 

@@ -90,6 +90,29 @@ class MaskedPipelineTests(unittest.TestCase):
         self.run_batch(provider)
         self.assertEqual(provider.calls, [("/tmp/clip.mp4", "person")])
 
+    def test_localizer_diagnostics_remain_bound_to_the_scored_clip(self):
+        provider = StaticProvider(self.masks, torch.ones((3, 1), dtype=torch.bool))
+        provider.provenance = {"prompt_policy": "direct_anchor", "construction_masks_reused": False}
+        provider.last_diagnostics = {"frames": [{"source": "current_clip"}], "tracked_empty_frames": 0}
+        result = self.run_batch(provider)[0]
+        provider.last_diagnostics["frames"][0]["source"] = "later_clip"
+        provider.provenance["prompt_policy"] = "later_policy"
+        saved = result["diagnostics"]["localizer"]
+        self.assertEqual(saved["diagnostics"]["frames"][0]["source"], "current_clip")
+        self.assertEqual(saved["provenance"]["prompt_policy"], "direct_anchor")
+
+    def test_missing_evidence_keeps_coverage_and_cannot_become_a_zero_success(self):
+        provider = StaticProvider(self.masks * 0, torch.zeros((3, 1), dtype=torch.bool))
+        provider.provenance = {"prompt_policy": "direct_anchor"}
+        provider.last_diagnostics = {"num_frames": 3, "tracked_empty_frames": 3}
+        result = evaluate_masked_batch([self.video, Path("no_metadata.mp4")], self.metadata, "cpu", {},
+            provider, extractor=FakeExtractor(self.frames, self.patches, self.grid), missing_policy="exclude")
+        self.assertEqual(result[0]["status"], "failed")
+        self.assertIsNone(result[0]["score"])
+        self.assertEqual(result[0]["diagnostics"]["localizer"]["diagnostics"]["tracked_empty_frames"], 3)
+        # A failure before localization must not inherit the previous video's evidence.
+        self.assertIsNone(result[1]["diagnostics"])
+
     def test_mask_frame_mismatch_fails_the_sample(self):
         provider = StaticProvider(self.masks[:2], torch.ones((2, 1), dtype=torch.bool))
         result = self.run_batch(provider)[0]

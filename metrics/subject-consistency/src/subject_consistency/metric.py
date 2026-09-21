@@ -156,7 +156,14 @@ def _masked_worker(result_path: str, gpu_id: int, videos: list[str], metadata: d
         import torch
         set_seed(seed)
         torch.cuda.set_device(gpu_id)
-        provider = NpzSubjectMaskProvider(Path(str(mask_config["root"])))
+        if mask_config.get("localizer") == "hybrid_v5":
+            from .hybrid import DINO_SHA256, load_hybrid_provider
+            if sha256_file(Path(dino_config["path"])) != DINO_SHA256:
+                raise ValueError("subject_hybrid requires the pinned DINO checkpoint")
+            provider = load_hybrid_provider(Path(mask_config["detector_checkpoint"]),
+                Path(mask_config["mobilesam_checkpoint"]), torch.device(f"cuda:{gpu_id}"))
+        else:
+            provider = NpzSubjectMaskProvider(Path(str(mask_config["root"])))
         results = evaluate_masked_batch(
             paths,
             metadata,
@@ -175,7 +182,7 @@ def _masked_worker(result_path: str, gpu_id: int, videos: list[str], metadata: d
 
 
 def evaluate_masked_sharded(videos: list[Path], metadata: Mapping[str, Mapping[str, Any]], gpu_ids: list[int], dino_config: Mapping[str, Any], mask_config: Mapping[str, Any], seed: int = 42) -> list[dict[str, Any]]:
-    """Subject-localised variant: masks come from a frozen offline directory."""
+    """Use independent offline masks or the current-clip v5 SAM localizer."""
     metadata_dict = {key: dict(value) for key, value in metadata.items()}
     config_dict = dict(dino_config)
     mask_dict = dict(mask_config)
@@ -241,10 +248,17 @@ def evaluate_masked_batch(
     for video in videos:
         item = metadata.get(video.name, {})
         prompt = str(item.get("prompt", ""))
+        localizer_record = None
         try:
             phrase = subject_phrase(item, phrase_field, prompt)
             frames = extractor.module.load_video(str(video))
             masks = mask_provider.masks_for(video, frames, phrase)
+            if getattr(mask_provider, "provenance", None) is not None:
+                from copy import deepcopy
+                localizer_record = deepcopy({
+                    "provenance": mask_provider.provenance,
+                    "diagnostics": getattr(mask_provider, "last_diagnostics", None),
+                })
             instance_masks, present = masks.instance_masks, masks.instance_present
             isolation = None
             if encoding_mode == "post_pool":
@@ -292,6 +306,8 @@ def evaluate_masked_batch(
                                   "crop_output_size": 224} if isolation is not None else None,
                 }
             )
+            if localizer_record is not None:
+                payload["localizer"] = localizer_record
             results.append(
                 {
                     "video": str(video),
@@ -305,7 +321,10 @@ def evaluate_masked_batch(
                 }
             )
         except Exception as exc:
-            results.append(_failed_result("audit-masked", video, metadata, exc))
+            failed = _failed_result("audit-masked", video, metadata, exc)
+            if localizer_record is not None:
+                failed["diagnostics"] = {"localizer": localizer_record}
+            results.append(failed)
     return results
 
 
