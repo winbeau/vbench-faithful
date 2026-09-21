@@ -179,6 +179,25 @@ start 主体干预 60/60 降分，平均降分 **0.090884**，CI [0.081044, 0.09
 
 [启动回执](subject_stability_20260920/official720_v9_launch.json)记录实际进程、完整命令、源码与协议哈希。[媒体清单](subject_stability_20260920/official720_v9_media_inventory.json)确认全部 720 个文件存在、逐文件 SHA 已记录：540 条已知容器时长合计 1,080 秒，180 条时长未知，不能当作零。控制入口为 `scripts/counterfactual/run_subject_official_census.py`，每个输出目录新建，后续不覆盖历史结果。
 
+#### 720 条构造已完成：评分仍待完成
+
+CPU 8 worker 的分割与恢复耗时 **2,039.14 秒**。全部 720 条都有构造记录，241 条通过数值门槛，涉及 58 个 prompt、17 个类别；479 条拒收。通过数按 cogvideo/lavie/modelscope/videocraft 分别为 77/74/50/40，因此虽然候选每生成器 180 条，构造后的队列并不平衡。这些通过项还没有逐片人工语义认证，不能把数值门槛当成主体分割真值。
+
+| 互斥构造状态 | 视频数 |
+| --- | ---: |
+| 数值门槛通过 | 241 |
+| 所有帧掩码为空 | 103 |
+| 部分帧为空 | 330 |
+| 掩码非空、面积门槛失败 | 16 |
+| 未生成掩码（train 类别未映射） | 30 |
+| 合计 | 720 |
+
+完整[构造审核](subject_stability_20260920/official720_construction_audit.json)逐文件检查了掩码哈希、二值性、实际面积与记录，以及全部候选身份。被拒项中有 83 条至少 80% 的帧达到面积门槛，35 条只有一帧全空；这个帧覆盖比例不是主体轮廓 IoU，也不据此改变本轮名单。空构造掩码不能推出原片不存在主体。bird 的 30 条均有空帧而拒收，train 的 30 条不支持；两类都保留在分母。
+
+[新建／缓存路径核验](subject_stability_20260920/official720_fresh_cached_parity.json)覆盖与旧 160 候选重叠的全部 **79 条**：资格完全一致，72 对实际主体掩码逐像素一致，源视频和所有通过项的 clean 帧哈希一致。其余 7 条为无掩码的未映射类别，不能记为掩码匹配。辅助其它物体掩码不参与当前补集背景操作。完整[逐例构造状态](subject_stability_20260920/official720_construction_per_base.json)、[索引](subject_stability_20260920/official720_construction_index.jsonl)与 [run](subject_stability_20260920/official720_construction_run.json)均保留；审核脚本 `audit_subject_construction.py` 另行部署，没有修改正在运行的冻结源码。
+
+评分前仅低频查看了一张人物首帧：[实际预览](subject_stability_20260920/official720_first_person_preview.png)。主讲人与观众的主要部分保留，墙面、白板与海报被糊化。这里保留的是 person 类别的多人区域，不能说成只定位了主讲人一个实例；[观察记录](subject_stability_20260920/official720_first_person_observation.json)未改变队列，也没有读取分数。当前在构造糊化版本，241 个数值通过项将全部评分，已知错误卡车继续按事先规则单独标记。Origin、repair 的 720 候选最终统计仍为 **RUNNING**。
+
 ## 重放、计时与产物
 
 v3/v4 各自的 306 个 Origin 分数与原始开发运行精确相等（最大误差 0），全部实际版本无运行失败。单张 H100 物理 GPU 1，逻辑 cuda:0；v3 约 695 秒，v4 约 709 秒。34 个输入源文件均存在且 SHA 匹配，其中 24 个 MP4 可读时长合计 48 秒，10 个 GIF 的容器 duration 不可得；没有把未知时长当零。
