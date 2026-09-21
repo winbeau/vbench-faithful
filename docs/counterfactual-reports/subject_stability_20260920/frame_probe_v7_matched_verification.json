@@ -1,0 +1,17 @@
+{
+  "candidate_identity_matches": 160,
+  "constructed": 61,
+  "matched_score_outputs": 915,
+  "matched_variant_names": [
+    "clean",
+    "full/background_corrupt",
+    "full/subject_corrupt"
+  ],
+  "matched_variants": 183,
+  "maximum_score_difference": 0,
+  "prior_scores_sha256": "80109a6728a223bb556eb087f702f8a6ea89833968dbd3e442aa38fc6c68c971",
+  "probe_scores_sha256": "20314c6318e98d689b5ab9c9d791954f5914845fcf00a20a0156c266634ccf96",
+  "qualification": "Hashes and score identities from checksum-validated raw score artifacts. Actual single-frame construction separately verified by exact parent frame composition; scoring reran each clip independently.",
+  "same_decoded_pixels": true,
+  "same_independent_scoring_mask_archive_hashes": true
+}

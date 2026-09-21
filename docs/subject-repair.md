@@ -16,11 +16,18 @@ background-intervention invariance and subject-change response. Human preference
 is auxiliary. The [new experiment report](counterfactual-reports/subject_stability_20260920.md)
 records temporal localization candidates on the entire developmental cohort,
 including incomplete coverage and negative results; completion is not claimed.
-The v5 repair reaches a mean absolute background change of 0.006353 on the same
-60 follow-up clips after construction recovery and resolution normalization
-(prompt-cluster 95% CI 0.004020–0.008724). All 60 retain a positive response to
-local subject corruption. Official changes by 0.080759, below the joint 0.10
-target; these reused follow-up inputs are a mechanism diagnostic.
+On the same 60 follow-up clips at the fixed 2× blur strength, an opening-quarter
+background edit changes Official by 0.088412 and v5 by 0.006389 on average
+(absolute paired differences). A single first-frame background edit gives
+0.102377/0.001275. These reused inputs are a mechanism diagnostic.
+Subject-response size matters too: the quarter-window control lowers v5 by
+0.115544 on average, with 57/60 drops at least 0.05. The single-frame control
+lowers it by only 0.031723, with 5/60 reaching 0.05; positive signs alone do not
+establish effective sensitivity. Changes at most 0.01 are negligible for this
+assessment. The original quarter-window joint target is not complete; the
+balanced 720-input official experiment (all 72 prompts, 180 videos per generator)
+is running for broader verification. The earlier 1,440-input plan was never run;
+the user reduced the cohort before construction started.
 
 The earlier [official extension](counterfactual-reports/subject_official_extension_20260920.md)
 has scored all 1440 natural videos and evaluated 2160 human pairs. On 1290 test

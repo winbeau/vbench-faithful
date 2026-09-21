@@ -1,0 +1,390 @@
+{
+  "interpretation": "Applied after completed v7/dose results following user clarification. Original scores and prior statistics are preserved. Future v8 binds this criterion before its construction and scoring.",
+  "runs": {
+    "dose2_per_case.csv": {
+      "full_numeric": {
+        "end": {
+          "absolute_change_le_001": 2,
+          "denominator": 61,
+          "drop_ge_005": 58,
+          "drop_ge_010": 44,
+          "drop_gt_001": 59,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.11859153333257456,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        },
+        "full": {
+          "absolute_change_le_001": 5,
+          "denominator": 61,
+          "drop_ge_005": 19,
+          "drop_ge_010": 11,
+          "drop_gt_001": 28,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.0824441747231917,
+          "subject_scored": 33,
+          "wrong_direction": 0
+        },
+        "middle": {
+          "absolute_change_le_001": 1,
+          "denominator": 61,
+          "drop_ge_005": 57,
+          "drop_ge_010": 46,
+          "drop_gt_001": 60,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.11722137400361358,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        },
+        "start": {
+          "absolute_change_le_001": 0,
+          "denominator": 61,
+          "drop_ge_005": 57,
+          "drop_ge_010": 42,
+          "drop_gt_001": 61,
+          "joint_background_and_substantive_subject_success": 8,
+          "mean_signed_drop": 0.11413211118979533,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        }
+      },
+      "primary": {
+        "end": {
+          "absolute_change_le_001": 1,
+          "denominator": 60,
+          "drop_ge_005": 58,
+          "drop_ge_010": 44,
+          "drop_gt_001": 59,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.1204370806614558,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        },
+        "full": {
+          "absolute_change_le_001": 5,
+          "denominator": 60,
+          "drop_ge_005": 18,
+          "drop_ge_010": 11,
+          "drop_gt_001": 27,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.08313612453639507,
+          "subject_scored": 32,
+          "wrong_direction": 0
+        },
+        "middle": {
+          "absolute_change_le_001": 1,
+          "denominator": 60,
+          "drop_ge_005": 57,
+          "drop_ge_010": 46,
+          "drop_gt_001": 59,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.11878850360711415,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        },
+        "start": {
+          "absolute_change_le_001": 0,
+          "denominator": 60,
+          "drop_ge_005": 57,
+          "drop_ge_010": 42,
+          "drop_gt_001": 60,
+          "joint_background_and_substantive_subject_success": 8,
+          "mean_signed_drop": 0.11554375290870667,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        }
+      },
+      "source_csv_sha256": "8c2c8517a45f523dca35c1aa13d8376ca0b006c717e7eeeb2acc0b1e549dc8d8"
+    },
+    "dose4_per_case.csv": {
+      "full_numeric": {
+        "end": {
+          "absolute_change_le_001": 2,
+          "denominator": 61,
+          "drop_ge_005": 59,
+          "drop_ge_010": 51,
+          "drop_gt_001": 59,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.14102629657651558,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        },
+        "full": {
+          "absolute_change_le_001": 4,
+          "denominator": 61,
+          "drop_ge_005": 19,
+          "drop_ge_010": 12,
+          "drop_gt_001": 27,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.09760699156791933,
+          "subject_scored": 31,
+          "wrong_direction": 1
+        },
+        "middle": {
+          "absolute_change_le_001": 0,
+          "denominator": 61,
+          "drop_ge_005": 58,
+          "drop_ge_010": 52,
+          "drop_gt_001": 61,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.14209857143339563,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        },
+        "start": {
+          "absolute_change_le_001": 0,
+          "denominator": 61,
+          "drop_ge_005": 57,
+          "drop_ge_010": 48,
+          "drop_gt_001": 61,
+          "joint_background_and_substantive_subject_success": 6,
+          "mean_signed_drop": 0.13582238603810795,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        }
+      },
+      "primary": {
+        "end": {
+          "absolute_change_le_001": 1,
+          "denominator": 60,
+          "drop_ge_005": 59,
+          "drop_ge_010": 51,
+          "drop_gt_001": 59,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.14325936337312062,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        },
+        "full": {
+          "absolute_change_le_001": 4,
+          "denominator": 60,
+          "drop_ge_005": 19,
+          "drop_ge_010": 12,
+          "drop_gt_001": 26,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.0995629906654358,
+          "subject_scored": 30,
+          "wrong_direction": 1
+        },
+        "middle": {
+          "absolute_change_le_001": 0,
+          "denominator": 60,
+          "drop_ge_005": 58,
+          "drop_ge_010": 52,
+          "drop_gt_001": 60,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.14416278004646302,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        },
+        "start": {
+          "absolute_change_le_001": 0,
+          "denominator": 60,
+          "drop_ge_005": 57,
+          "drop_ge_010": 48,
+          "drop_gt_001": 60,
+          "joint_background_and_substantive_subject_success": 6,
+          "mean_signed_drop": 0.13775741457939147,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        }
+      },
+      "source_csv_sha256": "e856088df26097ce1961eff5f03da44a985e3aae167fba6489e85e5730213155"
+    },
+    "frame_probe_v7_per_case.csv": {
+      "full_numeric": {
+        "first_frame": {
+          "absolute_change_le_001": 7,
+          "denominator": 61,
+          "drop_ge_005": 5,
+          "drop_ge_010": 0,
+          "drop_gt_001": 54,
+          "joint_background_and_substantive_subject_success": 2,
+          "mean_signed_drop": 0.031214252847139953,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        },
+        "full": {
+          "absolute_change_le_001": 5,
+          "denominator": 61,
+          "drop_ge_005": 19,
+          "drop_ge_010": 11,
+          "drop_gt_001": 28,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.0824441747231917,
+          "subject_scored": 33,
+          "wrong_direction": 0
+        },
+        "last_frame": {
+          "absolute_change_le_001": 3,
+          "denominator": 61,
+          "drop_ge_005": 7,
+          "drop_ge_010": 0,
+          "drop_gt_001": 58,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.032936477270282684,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        },
+        "middle_frame": {
+          "absolute_change_le_001": 4,
+          "denominator": 61,
+          "drop_ge_005": 7,
+          "drop_ge_010": 0,
+          "drop_gt_001": 57,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.03279502567697744,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        }
+      },
+      "primary": {
+        "first_frame": {
+          "absolute_change_le_001": 6,
+          "denominator": 60,
+          "drop_ge_005": 5,
+          "drop_ge_010": 0,
+          "drop_gt_001": 54,
+          "joint_background_and_substantive_subject_success": 2,
+          "mean_signed_drop": 0.0317233681678772,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        },
+        "full": {
+          "absolute_change_le_001": 5,
+          "denominator": 60,
+          "drop_ge_005": 18,
+          "drop_ge_010": 11,
+          "drop_gt_001": 27,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.08313612453639507,
+          "subject_scored": 32,
+          "wrong_direction": 0
+        },
+        "last_frame": {
+          "absolute_change_le_001": 2,
+          "denominator": 60,
+          "drop_ge_005": 7,
+          "drop_ge_010": 0,
+          "drop_gt_001": 58,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.03348202208677928,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        },
+        "middle_frame": {
+          "absolute_change_le_001": 3,
+          "denominator": 60,
+          "drop_ge_005": 7,
+          "drop_ge_010": 0,
+          "drop_gt_001": 57,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.03330272436141968,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        }
+      },
+      "source_csv_sha256": "b5bbb23f8ecc1c24e6d9774f70b4d6fed7891fd1287a9010c4af440481f22a1a"
+    },
+    "normalized_v5_per_case.csv": {
+      "full_numeric": {
+        "end": {
+          "absolute_change_le_001": 2,
+          "denominator": 61,
+          "drop_ge_005": 57,
+          "drop_ge_010": 23,
+          "drop_gt_001": 59,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.09114686192059127,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        },
+        "full": {
+          "absolute_change_le_001": 4,
+          "denominator": 61,
+          "drop_ge_005": 14,
+          "drop_ge_010": 9,
+          "drop_gt_001": 26,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.06786829233169556,
+          "subject_scored": 31,
+          "wrong_direction": 1
+        },
+        "middle": {
+          "absolute_change_le_001": 0,
+          "denominator": 61,
+          "drop_ge_005": 56,
+          "drop_ge_010": 23,
+          "drop_gt_001": 61,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.08976622585390436,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        },
+        "start": {
+          "absolute_change_le_001": 0,
+          "denominator": 61,
+          "drop_ge_005": 55,
+          "drop_ge_010": 22,
+          "drop_gt_001": 61,
+          "joint_background_and_substantive_subject_success": 5,
+          "mean_signed_drop": 0.08984273281253752,
+          "subject_scored": 61,
+          "wrong_direction": 0
+        }
+      },
+      "primary": {
+        "end": {
+          "absolute_change_le_001": 1,
+          "denominator": 60,
+          "drop_ge_005": 57,
+          "drop_ge_010": 23,
+          "drop_gt_001": 59,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.09255209664503733,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        },
+        "full": {
+          "absolute_change_le_001": 4,
+          "denominator": 60,
+          "drop_ge_005": 13,
+          "drop_ge_010": 9,
+          "drop_gt_001": 25,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.0682113786538442,
+          "subject_scored": 30,
+          "wrong_direction": 1
+        },
+        "middle": {
+          "absolute_change_le_001": 0,
+          "denominator": 60,
+          "drop_ge_005": 56,
+          "drop_ge_010": 23,
+          "drop_gt_001": 60,
+          "joint_background_and_substantive_subject_success": 0,
+          "mean_signed_drop": 0.09093645612398783,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        },
+        "start": {
+          "absolute_change_le_001": 0,
+          "denominator": 60,
+          "drop_ge_005": 55,
+          "drop_ge_010": 22,
+          "drop_gt_001": 60,
+          "joint_background_and_substantive_subject_success": 5,
+          "mean_signed_drop": 0.09088411827882131,
+          "subject_scored": 60,
+          "wrong_direction": 0
+        }
+      },
+      "source_csv_sha256": "0554003a09341f8c8964706eceb85ec2b896273dfc6bb7f0572e0d6af2bc441d"
+    }
+  },
+  "thresholds": {
+    "negligible_absolute_change_at_most": 0.01,
+    "strong_drop_at_least": 0.1,
+    "substantive_drop_at_least": 0.05
+  }
+}

@@ -96,7 +96,7 @@ uv run dynamic-degree --both --video-dir /data/videos --gpu 0,2,4
 Subject 的表示层修复与完整背景糊化实验见 [数据、协议与复现说明](docs/subject-repair.md)。
 当前目标已切换到 [Subject 背景干预稳定性修复](docs/plans/2026-09-20-subject-stability-goal.md)：
 开头背景糊化时，同一完整队列 Origin 平均绝对分差 ≥0.10、repair ≤0.01，且保留主体变化响应；人类偏好为辅助诊断。
-[本轮真实运行报告](docs/counterfactual-reports/subject_stability_20260920.md)：34 条开发集 Origin/repair 变化为 0.131364/0.009979；同一批 60 条后续视频经构造恢复和尺寸归一化后为 0.080759/0.006353，主体干预 60/60 降分。repair 已稳定，后续集 Origin 幅度仍不足，联合目标保持 active。
+[本轮真实运行报告](docs/counterfactual-reports/subject_stability_20260920.md)：同一批 60 条后续视频，单首帧背景干预的 Origin/repair 平均绝对变化为 **0.102377/0.001275**，背景逐例联合成功 21/60，但主体平均降分仅 0.031723、5/60 达到 0.05。四分之一时窗在 2× 下主体平均降分 0.115544、57/60 达到 0.05，但 Origin/repair 背景变化为 0.088412/0.006389，未联合通过。按用户要求固定选择官方 **720 条、全部 72 个 prompt、每生成器 180 条**的扩大实验已启动，目标保持 active。
 此前[官方扩展实验](docs/counterfactual-reports/subject_official_extension_20260920.md)已完成 1440 条自然视频、2160 对人工偏好：
 test 1290 对上 origin 为 58.53%，原有聚合 repair 为 59.61%，自动定位＋隔离裁剪为 48.76%。
 初轮候选整体退化；不能由两条背景示例宣称修复成功。所有官方/原聚合分数分别与历史值在 1e-6 内对齐。

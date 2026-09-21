@@ -1,0 +1,20 @@
+{
+  "1": {
+    "all_candidates": 160,
+    "same_constructed": 61,
+    "identical_clean_pixels_and_independent_masks": 61,
+    "maximum_clean_score_error": 0.0
+  },
+  "2": {
+    "all_candidates": 160,
+    "same_constructed": 61,
+    "identical_clean_pixels_and_independent_masks": 61,
+    "maximum_clean_score_error": 0.0
+  },
+  "4": {
+    "all_candidates": 160,
+    "same_constructed": 61,
+    "identical_clean_pixels_and_independent_masks": 61,
+    "maximum_clean_score_error": 0.0
+  }
+}

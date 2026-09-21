@@ -1,0 +1,45 @@
+{
+  "aggregation_repair": "Candidate hybrid v5 uses preencode subject crop and all_pairs; official formula is unchanged.",
+  "background_support": "Binary complement of the designated subject mask, covering every other pixel.",
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 20260920,
+  "bootstrap_unit": "source_prompt_id",
+  "confidence_level": 0.95,
+  "criterion": "Also report subject-change response, per-case joint success, missing frames and all time-window controls.",
+  "dose_multiplier": 2,
+  "equal_area_claim": false,
+  "family": "region_discrimination",
+  "gaussian_reference_short_side": 128,
+  "gaussian_sigma": "(18 if person else 12) * min(native_height,native_width) / 128",
+  "levels": [
+    "clean",
+    "background_corrupt",
+    "subject_corrupt"
+  ],
+  "masked_repair": "All_pairs, clamped nonnegative cosines; zero uses fixed C(T,2).",
+  "minimum_subject_drop": 0.05,
+  "missing_policies": [
+    "zero",
+    "exclude"
+  ],
+  "natural_preference_measurement": "NOT RUN",
+  "other_positions": "Quarter-duration start/middle/end are separately reported sensitivity controls, not independent bases.",
+  "positions": [
+    "full",
+    "start",
+    "middle",
+    "end"
+  ],
+  "primary_operator": "gaussian",
+  "primary_position": "start",
+  "primary_statistic": "Mean absolute paired change; Origin >=0.10 and hybrid v5 repair <=0.01; complete constructed cohort, no score-based filtering.",
+  "ratio_interpretation": "Background and subject interventions have unequal areas. The former equal-area official-CI-contains-1 criterion is not applicable.",
+  "ratio_population": "Secondary R: common bases passing subject drop >= 0.05 in every compared column, with all exclusions reported.",
+  "rationale": "User requested 720 instead of the unstarted 1440 census. Same frozen 2x dose, all quarter/full controls, and unchanged v5. Balanced score-independent selection declared before construction.",
+  "real_model_parity": "NOT RUN",
+  "schema_version": 9,
+  "sensitivity_gate": "clean > subject_corrupt for every backend on the same base",
+  "stability_tolerance": 0.01,
+  "unsupported_denominator": "All candidate and constructed denominators retained separately; missing scores are explicit and never counted as successful invariance.",
+  "unsupported_score_zero": 0.0
+}
