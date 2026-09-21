@@ -112,40 +112,58 @@ def build(construction: Path, output: Path, *, operator: str = "gaussian", worke
     return summary
 
 
-def verify(dataset: Path) -> dict:
-    """Recompute every accepted artifact/proof from its stored clean pixels."""
+def verify_entry(row: dict, dataset: Path, protocol_sha: str) -> int:
+    """Independently replay one complete base; failures propagate to the caller."""
+    cv2.setNumThreads(1)
     checked_frames = 0
+    path = artifact_path(dataset, row["manifest"])
+    if sha256_file(path) != row["manifest_sha256"]:
+        raise ValueError("manifest hash mismatch")
+    manifest = json.loads(path.read_text())
+    if manifest["protocol_sha256"] != protocol_sha:
+        raise ValueError("preregistered protocol changed")
+    if manifest["status"] != row["status"] or manifest["base"]["base_id"] != row["base_id"]:
+        raise ValueError("dataset index and manifest disagree")
+    if manifest["status"] != "accepted":
+        return 0
+    clean = read_png_sequence(dataset, manifest["variants"]["clean"])
+    mask_file = manifest["construction_masks"]
+    mask_path = artifact_path(dataset, mask_file["path"])
+    if sha256_file(mask_path) != mask_file["sha256"]:
+        raise ValueError("mask hash mismatch")
+    with np.load(mask_path, allow_pickle=False) as data:
+        masks, others = data["masks"], data["other_instances"]
+    for position in manifest["positions"]:
+        saved = manifest["positions"][position]
+        rebuilt = region_discrimination(clean, masks, others, subject=manifest["base"]["subject_en"],
+            position=position, operator=saved["parameters"]["operator"],
+            background_mode="complement" if saved["parameters"]["background_support"] == "subject_mask_complement" else "mirror",
+            gaussian_reference_short_side=saved['parameters'].get('gaussian_reference_short_side'))
+        if saved != {"parameters": rebuilt.parameters, "proofs": rebuilt.proofs}:
+            raise AssertionError("stored proof or parameters do not match replay")
+        for level in LEVELS[1:]:
+            actual = read_png_sequence(dataset, manifest["variants"][f"{position}/{level}"])
+            if not np.array_equal(actual, rebuilt.frames[level]):
+                raise AssertionError("derived pixels do not match deterministic replay")
+            checked_frames += len(actual)
+    return checked_frames
+
+
+def verify(dataset: Path, *, workers: int = 1) -> dict:
+    """Recompute all artifacts/proofs; worker count never changes the cohort."""
+    if workers < 1:
+        raise ValueError("workers must be positive")
     rows = read_jsonl(dataset / "index.jsonl")
-    for row in rows:
-        path = artifact_path(dataset, row["manifest"])
-        if sha256_file(path) != row["manifest_sha256"]:
-            raise ValueError("manifest hash mismatch")
-        manifest = json.loads(path.read_text())
-        if manifest["protocol_sha256"] != sha256_file(dataset / "protocol.json"):
-            raise ValueError("preregistered protocol changed")
-        if manifest["status"] != "accepted":
-            continue
-        clean = read_png_sequence(dataset, manifest["variants"]["clean"])
-        mask_file = manifest["construction_masks"]
-        mask_path = artifact_path(dataset, mask_file["path"])
-        if sha256_file(mask_path) != mask_file["sha256"]:
-            raise ValueError("mask hash mismatch")
-        with np.load(mask_path, allow_pickle=False) as data:
-            masks, others = data["masks"], data["other_instances"]
-        for position in manifest["positions"]:
-            saved = manifest["positions"][position]
-            rebuilt = region_discrimination(clean, masks, others, subject=manifest["base"]["subject_en"],
-                position=position, operator=saved["parameters"]["operator"],
-                background_mode="complement" if saved["parameters"]["background_support"] == "subject_mask_complement" else "mirror",
-                gaussian_reference_short_side=saved['parameters'].get('gaussian_reference_short_side'))
-            if saved != {"parameters": rebuilt.parameters, "proofs": rebuilt.proofs}:
-                raise AssertionError("stored proof or parameters do not match replay")
-            for level in LEVELS[1:]:
-                actual = read_png_sequence(dataset, manifest["variants"][f"{position}/{level}"])
-                if not np.array_equal(actual, rebuilt.frames[level]):
-                    raise AssertionError("derived pixels do not match deterministic replay")
-                checked_frames += len(actual)
-    return {"bases": len(rows), "verified_corrupted_frames": checked_frames, "outside_mask_changed_pixels": 0}
+    if len({row["base_id"] for row in rows}) != len(rows):
+        raise ValueError("duplicate bases in verification input")
+    protocol_sha = sha256_file(dataset / "protocol.json")
+    if workers == 1:
+        counts = [verify_entry(row, dataset, protocol_sha) for row in rows]
+    else:
+        from itertools import repeat
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            counts = list(pool.map(verify_entry, rows, repeat(dataset), repeat(protocol_sha)))
+    return {"bases": len(rows), "verified_corrupted_frames": sum(counts), "outside_mask_changed_pixels": 0}
 
 
 def main() -> int:
@@ -153,13 +171,13 @@ def main() -> int:
     parser.add_argument("--construction", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--operator", choices=("gaussian", "mosaic"), default="gaussian")
-    parser.add_argument("--workers", type=int, default=1, help="Independent CPU workers for lossless per-base construction")
+    parser.add_argument("--workers", type=int, default=1, help="Independent CPU workers for per-base construction or verification")
     parser.add_argument('--protocol',type=Path,help='Separate preregistration for a changed construction rule')
     parser.add_argument('--gaussian-reference-short-side',type=int)
     parser.add_argument("--verify", type=Path)
     args = parser.parse_args()
     if args.verify:
-        print(json.dumps(verify(args.verify), indent=2))
+        print(json.dumps(verify(args.verify, workers=args.workers), indent=2))
     else:
         if not args.construction or not args.output:
             parser.error("--construction and --output are required when building")

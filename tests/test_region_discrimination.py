@@ -135,14 +135,22 @@ def test_complete_dataset_replay_rechecks_pixels_and_every_artifact(tmp_path,ref
         kwargs={'protocol_path':protocol,'gaussian_reference_short_side':reference_short_side}
     for workers, output in enumerate(outputs, start=1):
         assert build(source, output, workers=workers,**kwargs)["accepted"] == 1
-        proof = verify(output)
+        proof = verify(output, workers=workers)
         assert proof["outside_mask_changed_pixels"] == 0
         assert proof["verified_corrupted_frames"] == 64
     assert tree_hashes(outputs[0]) == tree_hashes(outputs[1])
+    index = outputs[1] / "index.jsonl"
+    original = index.read_text()
+    index.write_text(original + original.splitlines()[0] + "\n")
+    with pytest.raises(ValueError, match="duplicate bases"):
+        verify(outputs[1], workers=2)
+    index.write_text(original)
+    with pytest.raises(ValueError, match="workers must be positive"):
+        verify(outputs[1], workers=0)
     png = next((outputs[0] / "clips").rglob("*.png"))
     png.write_bytes(b"tampered")
     with pytest.raises(ValueError, match="hash mismatch"):
-        verify(outputs[0])
+        verify(outputs[0], workers=2)
 
 
 def test_resolution_normalization_requires_its_own_protocol_and_preserves_subject(tmp_path):
