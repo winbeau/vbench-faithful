@@ -1,0 +1,11 @@
+{
+  "video_uid": "v_10d250e1b4b4a6ec0a82",
+  "frame": 0,
+  "selection": "Same previously reviewed cow, selected for input diagnosis before dose4 scores; no cohort changes.",
+  "reviewer": "assistant visual inspection",
+  "human_contour_truth": false,
+  "viewed_cases": 1,
+  "observation": "Strong blur removes most background texture. The primary brown cow trunk and most large body parts are retained; nose/head extremity and feet edges remain omitted. Coarse input observation only, no new exclusion or mask refinement.",
+  "preview_sha256": "f8a34d38250af683009f674d8ea116297d1760acfc215a67bfada5d9b235b3a2",
+  "observed_at_utc": "2026-09-21T05:09:27.064519+00:00"
+}

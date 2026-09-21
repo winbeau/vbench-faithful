@@ -116,6 +116,24 @@ start 主体干预 60/60 降分，平均降分 **0.090884**，CI [0.081044, 0.09
 
 完整数值队列 61 条（含预先标记的错误卡车）start Origin/repair 为 0.083261/0.007663，repair 最坏 0.086292，联合 5/61，主体 61/61 降分。其 [statistics JSON](subject_stability_20260920/normalized_v5_statistics.json) 顶层保留全部 61 条，`review_qualified` 才是预先定义的 60 条主分析；[逐例 CSV](subject_stability_20260920/normalized_v5_per_case.csv) 包含所有结果和审核资格。没有因新分数改变分析名单。
 
+### 固定 Gaussian 剂量梯度
+
+新像素与分数产生前提交的[剂量协议](../../configs/subject-repair/stability_followup160_dose_ladder_v6.json)固定 1×、2×、4×，4× 为本轮新主剂量、2× 为中间对照。输入、recovery v3 构造掩码、四个时窗和 v5 方法均保持不变；只把 sigma 乘以统一系数。以下仍是同一 60 条主分析，不能挑选其中某一剂量替代原 1× 负结果。
+
+| start 剂量 | Origin 平均绝对分差 | repair 平均绝对分差 | 逐例联合成功 | 主体平均降分 |
+| --- | ---: | ---: | ---: | ---: |
+| 1× | 0.080759 | 0.006353 | 5/60 | 0.090884 |
+| 2× | 0.088412 | 0.006389 | 9/60 | 0.115544 |
+| 4×（预定新主剂量） | RUNNING | RUNNING | RUNNING | RUNNING |
+
+2× 完成全部 61 条/549 版本，0 运行失败，两张 H100 墙钟 632.15 秒，Origin 上游 parity 最大误差 `1.453e-7`；9,712 个干预帧全部通过重放。60 条主分析 repair CI [0.003717, 0.009436]，最坏 0.051375，48/60 不超过 0.01；Origin CI [0.074700, 0.101909]，≥0.10 的 16 条、≥0.20 的 1 条。主体 start 60/60 降分，58/60 大于背景分差。Origin 均值仍不足 0.10，联合目标没有通过。
+
+2× 的 middle/end/full 背景 Origin 变化分别为 0.040474/0.031957/0.030267，repair 为 0.004927/0.003444/0.011154。三个局部主体条件均 60/60 降分；full 仅 32/60 可评分、32 条降分，缺失仍保留。完整数值队列 61 条的 start Origin/repair 为 0.090815/0.008072，联合 9/61；错误卡车仍未进入 60 条主分析。全部逐例与分母见 [2× 统计](subject_stability_20260920/dose2_statistics.json)和 [CSV](subject_stability_20260920/dose2_per_case.csv)。
+
+[输入与 clean 重放核验](subject_stability_20260920/dose2_matched_verification.json)覆盖全部 160 候选、61 构造：身份与资格不变，原片像素和独立 clean 评分掩码全部相同，五个评分输出最大差异为 0。4× 评分前只补看同一奶牛的首帧，背景纹理明显消失，主躯干保留；头部末端和脚边仍有遗漏，按用户要求记录粗主体问题，不再改变名单或精修。见[单例预览](subject_stability_20260920/cow_dose4_preview.png)和[观察记录](subject_stability_20260920/dose4_input_observation.json)，没有把目視判断当作人工 IoU 真值。
+
+2× 首次汇总因源码包漏带 `scripts/evaluate_pairwise_statistics.py` 而未启动；原始评分、上游 parity 和像素重放均已成功。补齐分析依赖后直接汇总，不重复模型评分。4× 构造和评分继续使用同一旧冻结源码，独立像素验证改为 8 个 CPU worker；逐基底校验逻辑、完整分母、错误传播和逐像素比较不变，串行/并行和篡改拒收测试通过。运行历史与原始错误日志保留。
+
 ## 重放、计时与产物
 
 v3/v4 各自的 306 个 Origin 分数与原始开发运行精确相等（最大误差 0），全部实际版本无运行失败。单张 H100 物理 GPU 1，逻辑 cuda:0；v3 约 695 秒，v4 约 709 秒。34 个输入源文件均存在且 SHA 匹配，其中 24 个 MP4 可读时长合计 48 秒，10 个 GIF 的容器 duration 不可得；没有把未知时长当零。

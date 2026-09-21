@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "family": "subject_single_frame_probe",
+  "stage": "posthoc_first_frame_anchor_mechanism_diagnostic",
+  "positions": [
+    "first_frame",
+    "middle_frame",
+    "last_frame",
+    "full"
+  ],
+  "primary_position": "first_frame",
+  "parent_dataset": "/root/wenbiao_zhao/tmp/subject-stability-followup160-dose2-v6-20260920-dataset",
+  "parent_index_sha256": "9f861c9fcea990465779b18c114fbdafa0214cac90b43175a2e01cf502fb7f6a",
+  "parent_integrity_sha256": "6f862d0d5f1006eff558254f68966e66c2d4d0acb60b19d9adda531a95da3989",
+  "parent_verified_frames": 9712,
+  "cohort_candidates": 160,
+  "expected_constructed": 61,
+  "expected_review_qualified": 60,
+  "parent_dose_multiplier": 2,
+  "gaussian_strength_changed": false,
+  "construction_masks_changed": false,
+  "frame_rule": {
+    "first_frame": "index 0",
+    "middle_frame": "floor((T-1)/2)",
+    "last_frame": "T-1",
+    "full": "all frames"
+  },
+  "composition": "Copy exact encoded clean PNGs except selected frames, which copy the corresponding already replayed full-background or full-subject PNG. Independently verify all output hashes and the parent replay receipt.",
+  "input_manifest_sha256": "c3113fde827b391149ce294f77f232557944a94a296ece5ac159184813f5eb7a",
+  "input_review_exclusions": {
+    "v_4f8abc7bb931501fb862": "Frame 26 shows only a small cab edge preserved while most of the visible truck is blurred; major semantic construction failure, visually recorded before normalized scores."
+  },
+  "score_based_selection": false,
+  "scoring_masks_reused": false,
+  "repair_method": "frozen hybrid v5, actual-clip-independent SAM",
+  "rationale": "Pinned Origin compares every later frame with frame zero as well as its predecessor. A single background-corrupted first frame can therefore affect the entire score. Match middle/last single-frame controls to separate first-anchor effects from edit count. Reuse the 2x intermediate dose from the declared ladder; no new severity sweep or selection of bases.",
+  "analytic_rationale": "For an ideal two-state feature sequence with cosine r, T=16 and K=4 opening edits reduce Origin by 13*(1-r)/30; a single first-frame edit gives 16*(1-r)/30. This is a mechanism model, not measured feature equality or a promised result.",
+  "targets": {
+    "no_constant_zero_success": true,
+    "origin_mae_minimum": 0.1,
+    "repair_mae_maximum": 0.01,
+    "report_joint_success": true,
+    "report_origin_ge_02": true
+  },
+  "human_preferences": "NOT RUN; auxiliary only",
+  "claim_limit": "Further mechanism diagnosis on already exposed follow-up videos. Preserves the original quarter-window results and all negative findings; cannot retroactively make the quarter-window target pass. Not an untouched confirmation set."
+}

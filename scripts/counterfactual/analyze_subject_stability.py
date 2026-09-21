@@ -41,7 +41,7 @@ def value(row, name, method):
     return float(number)
 
 
-def summarize(records, methods, *, resamples=10000):
+def summarize(records, methods, *, resamples=10000, positions=('start','middle','end','full')):
     ids = [r['base']['video_uid'] for r in records]
     if len(ids) != len(set(ids)):
         raise ValueError('duplicate video')
@@ -52,7 +52,9 @@ def summarize(records, methods, *, resamples=10000):
               'bootstrap': {'unit': 'source_prompt', 'resamples': resamples, 'seed': 20260920},
               'human_preferences': 'auxiliary_only_not_measured_in_this_run'}
     flat = []
-    for position in ('start','middle','end','full'):
+    if not positions or len(set(positions)) != len(positions):
+        raise ValueError('positions must be nonempty and unique')
+    for position in positions:
         report['positions'][position] = {}
         for method in methods:
             cases = []
@@ -124,7 +126,11 @@ def main():
     records = read_jsonl(args.run/'scores.jsonl')
     if len(records) != protocol['cohort_candidates']:
         raise ValueError('incomplete candidate population')
-    expected_variants = {'clean'} | {p+'/'+s for p in ('full','start','middle','end')
+    positions = protocol.get('positions', ['start','middle','end','full'])
+    primary_position = protocol.get('primary_intervention','start/background_corrupt').split('/')[0]
+    if primary_position not in positions:
+        raise ValueError('primary condition is absent from the declared positions')
+    expected_variants = {'clean'} | {p+'/'+s for p in positions
                                    for s in ('background_corrupt','subject_corrupt')}
     candidate = protocol.get('candidate_name', 'tracked')
     methods = ['official','direct_zero','direct_exclude',candidate+'_zero',candidate+'_exclude']
@@ -132,10 +138,10 @@ def main():
         if row['status'] == 'completed' and (set(row['variants']) != expected_variants or
             any(set(v['scores']) != set(methods) for v in row['variants'].values())):
             raise ValueError('completed row has incomplete score grid')
-    report, flat = summarize(records, methods[1:])
+    report, flat = summarize(records, methods[1:], positions=positions)
     if protocol.get('input_review_exclusions'):
         qualified=review_qualified_records(records,protocol['input_review_exclusions'])
-        reviewed_report,_=summarize(qualified,methods[1:])
+        reviewed_report,_=summarize(qualified,methods[1:], positions=positions)
         if reviewed_report['constructed_denominator'] != protocol['expected_review_qualified']:
             raise ValueError('pre-score review population changed')
         report['review_qualified']=reviewed_report
@@ -159,7 +165,8 @@ def main():
     out = new_output(args.output); write_json(out/'statistics.json', report)
     with (out/'per_case.csv').open('w',newline='') as handle:
         writer = csv.DictWriter(handle,fieldnames=list(flat[0]),lineterminator='\n');writer.writeheader();writer.writerows(flat)
-    print(json.dumps({'status_counts':report['status_counts'],'start':report['positions']['start'],
+    print(json.dumps({'status_counts':report['status_counts'],'primary_position':primary_position,
+                      primary_position:report['positions'][primary_position],
                       'origin_parity':report['maximum_origin_reference_error']},ensure_ascii=False,indent=2))
 
 

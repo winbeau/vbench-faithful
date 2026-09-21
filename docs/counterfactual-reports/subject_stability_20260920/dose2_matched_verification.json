@@ -1,0 +1,8 @@
+{
+  "candidates": 160,
+  "same_constructed_bases": 61,
+  "identical_clean_pixels": 61,
+  "identical_independent_clean_masks": 61,
+  "maximum_clean_score_error": 0.0,
+  "all_five_scoring_methods_checked": true
+}

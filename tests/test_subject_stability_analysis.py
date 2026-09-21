@@ -45,3 +45,15 @@ def test_pre_score_semantic_review_keeps_original_data_and_full_candidate_denomi
     assert report['status_counts']['input_review_rejected']==1
     assert rows[1]['construction_status']=='accepted' and rows[1]['status']=='completed'
     with pytest.raises(ValueError):review_qualified_records(rows,{'unknown':'bad mask'})
+
+
+def test_declared_single_frame_positions_are_not_relabelled_as_quarter_windows():
+    sample = row('a', .9, .905, .7)
+    sample['variants']['first_frame/background_corrupt'] = sample['variants'].pop('start/background_corrupt')
+    sample['variants']['first_frame/subject_corrupt'] = sample['variants'].pop('start/subject_corrupt')
+    report, cases = summarize([sample], ['tracked_exclude'], resamples=20, positions=['first_frame'])
+    assert set(report['positions']) == {'first_frame'}
+    assert cases[0]['position'] == 'first_frame'
+    assert report['positions']['first_frame']['tracked_exclude']['mean_target_on_complete_cohort']
+    with pytest.raises(ValueError, match='nonempty and unique'):
+        summarize([sample], ['tracked_exclude'], positions=['first_frame', 'first_frame'])
