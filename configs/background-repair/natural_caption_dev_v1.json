@@ -1,0 +1,25 @@
+{
+  "name": "caption_localizer_natural_dev_v1",
+  "candidate_protocol": "configs/background-repair/scoring_coco80_caption_dev_v1.json",
+  "candidate_protocol_sha256": "f7c3fc531af5ee0abb1207037fbd03131e596a3eb9392b049270943981462463",
+  "method_protocol": "configs/background-repair/holdout_protocol_v1.json",
+  "method_protocol_sha256": "f04e5db8433b00a6cc9231f9984079f53cc6fbcb96f72cd3a744c5f782c6d4ca",
+  "reference_sha256": "c4badef8950158b6bc6190789ef242f8b6e7bcbe65e815e422524847be3c81f8",
+  "reference_description": "output/background-repair/background-scale-analysis-v7-20260920/natural_scores.jsonl",
+  "manifest_sha256": "2d2e40629d84e5067b5723fa1b41b2514b221d3684453a2d4fabbf45fa4ff850",
+  "pair_labels_sha256": "788cd605d90a91c242da7a0642a6836e26ed06960798230ae0af7035cbd6d2ae",
+  "split": "dev",
+  "video_count": 680,
+  "pair_count": 1020,
+  "tie_margin": 0,
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 20260920,
+  "failure_rule": "Retain all 680 videos and 1020 pairs. Missing candidate scores are incorrect in the full denominator; also report coverage. No score-based subset selection.",
+  "coco80_ablation": "Reconstruct zero base masks on caption-fallback frames; reuse only the identical actual-frame CLIP patch features. No construction or clean-variant mask reuse.",
+  "natural_noninferiority_margin": 0.02,
+  "comparison": "Report paired accuracy change against both official origin and existing frozen19 repair. Development assessment only; no new independent heldout claim.",
+  "source_sha256": {
+    "scripts/counterfactual/run_background_natural_localizer.py": "d4b966c29d344d076bd810a6f1bee439d21eeccb56c380dad52e098b2e46c70b",
+    "scripts/counterfactual/analyze_background_natural_localizer.py": "d32e48f22c0931866cca9caeae471071c0a42a620f4a059fe21a2d039e22319f"
+  }
+}

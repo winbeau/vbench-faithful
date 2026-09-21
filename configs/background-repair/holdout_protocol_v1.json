@@ -1,0 +1,112 @@
+{
+  "analysis": {
+    "background_and_normalized_cluster": "disjoint source/donor prompt pair; equivalent connected components for accepted cases",
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260920,
+    "failure_rule": "All natural preference pairs stay in the denominator; missing scores count incorrect. All construction candidates/rejections and scoring failures retained. No failure counts as invariance success.",
+    "foreground_cluster": "source_prompt",
+    "natural_cluster": "source_prompt",
+    "primary_tie_margin": 0
+  },
+  "cli_variant": "patch_frame_calibrated",
+  "clip": {
+    "checkpoint": "/root/.cache/clip/ViT-B-32.pt",
+    "sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+  },
+  "configuration_sha256": {
+    "configs/background-repair/construction_test_v1.json": "88ec401645d7efe9ed3262c11f64fdbd7a982fdc0475adad1ff43d09cd025c1f",
+    "configs/background-repair/development_scale_v7.json": "e5ee3ea543738e24689cc68b0fdc34bd2adca4dd44476d28b818b2f8ac61f1c3",
+    "configs/background-repair/h100-models.toml": "f0db390bcd0308f85e6b9c2c9f7efecab0bf7abb0d367b668255bc0dec742b75",
+    "configs/background-repair/holdout_gate_addendum_v1.json": "379d09c5695fa53c6e76699a4ec5ae8c92cf4c7940c10b10ed401a33170e8cfa",
+    "configs/background-repair/natural1720_manifest_v2.jsonl": "2d2e40629d84e5067b5723fa1b41b2514b221d3684453a2d4fabbf45fa4ff850",
+    "configs/upstream.toml": "b2acad0e839dfb74e84c8deb7c16aa6d714c5db5adc25f5754e60611ca056ad0"
+  },
+  "construction_protocol_sha256": "88ec401645d7efe9ed3262c11f64fdbd7a982fdc0475adad1ff43d09cd025c1f",
+  "created_utc": "2026-09-20T16:00:16.726935+00:00",
+  "gates": {
+    "background_drop_gt_subject_abs_change_fraction_min": 0.75,
+    "background_positions": [
+      "start",
+      "middle",
+      "end"
+    ],
+    "background_response_retention_mean_min": 0.75,
+    "background_temporal_drop_ci95_lower_gt": 0,
+    "counterfactual_scoring_coverage_min": 1.0,
+    "foreground_mean_absolute_delta_max": 0.01,
+    "foreground_positions_for_absolute_delta_gate": [
+      "full",
+      "start",
+      "middle",
+      "end"
+    ],
+    "natural_accuracy_delta_ci95_lower_min": -0.02,
+    "natural_pair_coverage_min": 0.95,
+    "origin_parity_max_error": 1e-06,
+    "paired_robustness_improvement_ci95_lower_gt": 0,
+    "paired_robustness_improvement_position": "full",
+    "scale_adjusted_paired_improvement_ci95_lower_gt": 0
+  },
+  "localizer": {
+    "detector_checkpoint": "/root/wenbiao_zhao/models/subject-repair/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth",
+    "detector_sha256": "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0",
+    "sam_checkpoint": "/root/wenbiao_zhao/models/subject-repair/mobile_sam.pt",
+    "sam_sha256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f",
+    "size": 512,
+    "threshold": 0.8
+  },
+  "manifest": "configs/background-repair/natural1720_manifest_v2.jsonl",
+  "method": "Independent per-frame COCO 0.8 + MobileSAM background complement; same CLIP contextualized patch tokens, soft background-area pooling; uniform unordered temporal pairs in fp16; clamp(1 - 1.75*(1-raw), 0, 1).",
+  "methods": [
+    "aggregation",
+    "aggregation_fp16",
+    "official",
+    "patch_frame_all_pairs",
+    "patch_frame_all_pairs_calibrated",
+    "patch_frame_all_pairs_gain2",
+    "patch_frame_balanced_gain2",
+    "patch_frame_official",
+    "patch_frame_official_gain2",
+    "patch_global_all_pairs",
+    "patch_global_all_pairs_gain2",
+    "patch_global_balanced_gain2",
+    "patch_global_official",
+    "patch_global_official_gain2",
+    "patch_union_all_pairs",
+    "patch_union_all_pairs_gain2",
+    "patch_union_balanced_gain2",
+    "patch_union_official",
+    "patch_union_official_gain2"
+  ],
+  "natural_pair_count": 1560,
+  "natural_video_count": 1040,
+  "pair_labels_sha256": "788cd605d90a91c242da7a0642a6836e26ed06960798230ae0af7035cbd6d2ae",
+  "primary_method": "patch_frame_all_pairs_calibrated",
+  "repair_gain": 1.75,
+  "selection_evidence": {
+    "all_declared_dev_checks_passed": true,
+    "not_used": "No test metric scores; construction counts and source identities are known.",
+    "path": "output/background-repair/background-scale-analysis-v7-20260920/statistics.json",
+    "sha256": "8abea60955402ecf025f1b670ad11bc324f54853cc2f74345e3c947ab71a832c"
+  },
+  "source_sha256": {
+    "metrics/background-consistency/src/background_consistency/algorithms.py": "626bc123346938e93a070fc82752ac445e6d014b4c7b9416467d6388cdcbe0c6",
+    "metrics/background-consistency/src/background_consistency/calibration.py": "88d661684a419c78aefd053c67748efbe356bc82952748be44811beca2bfff68",
+    "metrics/background-consistency/src/background_consistency/candidates.py": "f79fdef843899982f95d3516901dc7c978ac57926ff7e743ffaa559de0d40e74",
+    "metrics/background-consistency/src/background_consistency/inference.py": "261443132172b3b85d223fd544a329bf77b74bbed605eb40c50a7d8257dc6c51",
+    "metrics/background-consistency/src/background_consistency/models.py": "582ed9ac7449575113ec7a82dbb4a46995cd54bfb1084cddc497acab0ce007a7",
+    "metrics/background-consistency/src/background_consistency/patches.py": "12591be6d37ee3158489a27d03738f6642caa03474b116b3aa240f81be0c3dd3",
+    "metrics/background-consistency/src/background_consistency/runtime.py": "a9c03dc9bf97a24aed3ae254966780b48bd216350aa0bee09f62be2e84cdd786",
+    "packages/audit-models/src/vbench_audit_models/foreground.py": "89dcf967459eecca22c5d75234b3b53f9619e2abb587492d497ad21b6a8aaee5",
+    "scripts/counterfactual/common.py": "191cec2c1e2ff0dc913a8a2c52f86e0a9b514bea138727f2393993b872762708",
+    "scripts/counterfactual/run_background_holdout.py": "d93cacd17b27fc03b55b280d025fd7be36c69f9c577689cb245375846d2bd68b",
+    "scripts/counterfactual/subject_artifacts.py": "3ba0328cf2d6d90739881c6bf46aba5fa8b0042e954df204e12b530e2bac3dc1"
+  },
+  "status": "frozen_before_test_scoring",
+  "test_construction_accepted": 188,
+  "test_construction_rejected": 852,
+  "test_dataset_index_sha256": "848627decb9515e4dc4144ae92e5f564ac33c3defbe199c72179f41b096e2c7a",
+  "test_donor_pair_count": 26,
+  "test_prompt_count": 52,
+  "test_rule": "One locked primary. Do not choose another method, refit gain, change masks, exclude videos or alter gates after test results. Any failing gate is a failed independent validation and must be reported; never claim excellent repair solely from dev."
+}

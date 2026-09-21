@@ -1,0 +1,562 @@
+{
+  "dataset_index_sha256": "892d6f9b36b6e2237914a1b993963e5a7b41657a6a0fd18bebd48e7c65da0139",
+  "metric_scores_used": false,
+  "reviewer": "assistant",
+  "all_visual_reviews_complete": false,
+  "scope": "Eighth input-only review snapshot: campus accepted in seventh snapshot; two vehicle-labeled candidates rejected for coarse subject/background failure. Review order broadened generator/class coverage without score inspection. Score all usable cases, retaining earlier failed localizations.",
+  "decisions": [
+    {
+      "video_uid": "v_ed33322ab25b3fe9b59a",
+      "decision": "reject",
+      "reason": "目标仅覆盖白色器具的前侧面，大片台面/内壁未覆盖；达不到大体完整主体糊化。不是因小块边缘误差拒收。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "3d1eca487c17a56123ca56a396af0712584fb3389bd895f9ab904d297d30fc20",
+      "panel": "output/background-repair/background-expanded-one-example-20260920/panels/01_v_ed33322ab25b3fe9b59a.png",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_5b21df6d8c834540581f",
+      "decision": "usable",
+      "reason": "构造目标为在建塔楼：首中末帧均覆盖中央黑色塔楼主体的大部，天空大体保留。附近部分立柱/下方建筑伴随掩码、细吊臂保留，按粗覆盖标准记录为局限；此判断不声称把整组吊机或所有周边建筑完整抠出。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "eb8d4155cef0d4e7cfdd13dbce3cfd967f5a7605d701018096281dfe79540231",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/02_v_5b21df6d8c834540581f.png",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_83a0647276c66dea826e",
+      "decision": "reject",
+      "reason": "首末帧建筑主体覆盖大体可用，但中帧把大片前景台阶/地面也划入building并糊化，掩码从约21%跳到45%；这会破坏主体以外的场景，属于整块误分而非边缘细节。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "fe098ed87fcabb68ebc04cb7c881843eb34a6ac9c09507ef342c58de04b14d2c",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/03_v_83a0647276c66dea826e.png",
+      "panel_sha256": "9b21a910d7e429f31651d0eee4ac1a0f0c646fd6af594269126d233ab12bfc72",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_4f4f6015ed444b671ad5",
+      "decision": "usable",
+      "reason": "首中末帧覆盖岸边城堡/建筑主体及相连墙体的大部分，海面与天空保留；少量墙体下缘或细塔边缘遗漏按粗覆盖标准接受。实际画面为建筑群/城堡形态，不将prompt的house当作独栋住宅人工标签。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "4511fb7a25ea0232068fcfaea9ec7e99254ef05c867128399d2e57f19f0705ac",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/04_v_4f4f6015ed444b671ad5.png",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_52812eb819755d6e7b09",
+      "decision": "usable",
+      "reason": "首中末帧均覆盖灯塔主体的大部分可见结构；只有顶端小范围遗漏，天空和地面保留，符合粗主体覆盖要求。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "3de8788abaa89efcd21a16626a7b9eafd407419ad32273e85b351859fc766289",
+      "panel": "output/background-repair/background-expanded-one-example-20260920/panels/02_v_52812eb819755d6e7b09.png",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_051ca8b59945c4101bf6",
+      "decision": "reject",
+      "reason": "沿用本轮已查看的同像素火车预览：首末帧大片车身遗漏。通过掩码与全部派生图哈希一致性复用判断，无需重复看图。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "metric_scores_used": false,
+      "manifest_sha256": "4aba793d43f97594cff53121d745360c3d9f443b7470aca03aa31c80beb93d7e"
+    },
+    {
+      "video_uid": "v_b135aa856871b15ee5a9",
+      "decision": "usable",
+      "reason": "主体按车站建筑整体处理：首中末帧屋顶及主要建筑体大部被糊化，天空、道路和多数绿篱保留。中帧小片中央格栅及建筑边缘遗漏，路牌保留、右侧少量附属建筑连入，按粗覆盖要求接受并记录局限；不是对所有前景物体的完整分割。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "c5ae8fcd1f9bc3f4205fe0ca0b818ac8df9a068b4e3e0af722f8fcef04b41323",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/07_v_b135aa856871b15ee5a9.png",
+      "panel_sha256": "e51538f2be339a4eb0fd706ee5c9a7a5539b5c24613f5890c934b39ad78864fb",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_e608789dcc6712cb14a5",
+      "decision": "reject",
+      "reason": "糊化主要集中在风车塔身，多片完整叶片在中末帧仍保留；首帧又把一片叶片的格栅间天空填入糊化。不能把仅塔身覆盖声称为整个风车主体大体抽离，问题为主要组成部分遗漏与时变区域，而不是要求细丝边缘精确抠图。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "09b3d31415857c342580304136f931e3e31116bb03cfa493f81b8fe91b217f11",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/08_v_e608789dcc6712cb14a5.png",
+      "panel_sha256": "23a31114e308b0bae3fadcf954ee13f4a21f7fd9b33092bbdc4cf01b90954cbe",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_b3f3367679a3ef41d5d1",
+      "decision": "reject",
+      "reason": "实际主体上方的风机、叶片与白色支撑结构大部保持清晰，主要只糊化下部平台/塔基；中帧甚至只覆盖塔基少量碎块，未达到主要主体的大体覆盖。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "f144389a81dfb2e70331daa093d2ae869460c13a0fdb5c217ef652a5056daee1",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/09_v_b3f3367679a3ef41d5d1.png",
+      "panel_sha256": "fc82d5990daa6767b5b38eec1ca95db8d401f2a0bd08a175b3a253bf067862ac",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_bc8188653da01b87174b",
+      "decision": "reject",
+      "reason": "主要覆盖塔身和随帧变化的部分叶片，多片叶片整体未糊化；选中的格栅叶片被填成实心区域，首帧还连入左下植被。主体覆盖与背景保留均有整块问题，不能仅凭19.29%平均面积认定成功。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "acb33385e84ac5922ea35fedd4e9295e22b2ef93513699a8bdff1e3a13924250",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/10_v_bc8188653da01b87174b.png",
+      "panel_sha256": "133782e4793e2585d82355f9224b1c489add555baf9058c03c9a6c0cd6ac5456",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_f37db458fa9b826b2ffd",
+      "decision": "reject",
+      "reason": "bed类别实际主要落在拱形景物下方的地面及上缘碎块，拱本体大部未糊化。属于误把场景表面当床，不能作为主体糊化实验。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "cd94b0fc608644167378a2d51eeac85800d8b048da718c2308ddaa70e5da068b",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/11_v_f37db458fa9b826b2ffd.png",
+      "panel_sha256": "e1ea89814c72cabad95b83cafed2e83a6cb2401d349ac984f6f1d3738a2058b2",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_e625432a8bdfaca538fa",
+      "decision": "reject",
+      "reason": "构造只糊化底部桌面；中后段进入画面的主要人物及其动作完全未被糊化，桌面本身也有较大块不连续遗漏。按前面椅组的相同标准，不能视为主要前景完整干预。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "6eba74d807c38767151dbda93392ea664eb80c02339ff286b17e6a02a5e074e4",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/12_v_e625432a8bdfaca538fa.png",
+      "panel_sha256": "78de4a6826e0dccbf03bff1d356e84e8f3686215aed21beca2938f947107b3a1",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_e9edb19ac0012add0b59",
+      "decision": "reject",
+      "reason": "末段主要前景人物出现但未被糊化，当前目标仍是椅组；椅组覆盖从约23%跌至6%，且部分桌面连入。不是完整主要主体干预。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "8033747e6ec9d608ccd4d47918f374489966d9d621a3a82f7db1ed52c29e6218",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/13_v_e9edb19ac0012add0b59.png",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_4e800707e9f7ad907e38",
+      "decision": "usable",
+      "reason": "首中末帧均大体覆盖前景木桌的台面、柜体和架体，墙面、窗帘及显示器保留；桌腿/底缘少量遗漏与底部小片混入按粗覆盖标准接受。目标是木桌本体，不把整组电脑设备声称为同一个完整主体。",
+      "reviewed_frames": [
+        0,
+        16,
+        32
+      ],
+      "manifest_sha256": "ee892f06c48b985f7147fef72adaf59f9e5cd256fbb0b1f6170a0afb07265741",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/14_v_4e800707e9f7ad907e38.png",
+      "panel_sha256": "61cce201abadb702a0af37c7bec24670f288a3b41b80cea151a7abececb8adcf",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_2d83139dd4efe1db7689",
+      "decision": "reject",
+      "reason_code": "ambiguous_subject_region",
+      "reason": "掩码把两侧窗帘和大块过曝的中央窗区一并纳入curtain；在这组画面上无法确认中央区域是窗面还是纱帘，不能证明约23%的区域均为明确主体。此项按主体不明确拒收，不声称已证实中央全部是误分，也不是因精细边缘拒收。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "75f67a241d1f805b1d09f4b5e6289aada898e7206e099a9c840298ab7946bb2a",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/15_v_2d83139dd4efe1db7689.png",
+      "panel_sha256": "458e58c5d4ab7b168f504ed8b71d58955aa13cc2bde79a33c0f7a24ce5489930",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_f417e95a0cc395ad74a6",
+      "decision": "usable",
+      "reason": "首中末帧均覆盖床垫、床罩及床侧面大部，枕头小部分保留；墙壁、窗户、地面保持。符合粗主体覆盖要求，不因小部件漏分拒收。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "725419432da7a4e03d5a4955b691e24509f4ce6bf423db04f7fbf457ecaa58b8",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/16_v_f417e95a0cc395ad74a6.png",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_5e360dde23acca6a9d7c",
+      "decision": "usable",
+      "reason": "首中末帧均覆盖床垫、床罩和床侧面大部，墙壁、窗户、地面保留；枕头和水印处少量空洞按粗约80%标准接受，不要求精确边界。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "91cc5192421b5a24795ed6e68a0df8581e5a69e7d1b516604470fd169b294b08",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/17_v_5e360dde23acca6a9d7c.png",
+      "panel_sha256": "763e049ed8db206110b1aa6f920e99e4dc50ea6a5289c627ce336a02b002eff6",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_8aecdfda380d15f9107e",
+      "decision": "usable",
+      "reason": "窗前可见连续纱帘褶皱及下摆，首中末帧大部纱帘被糊化，墙体、床和地面保留；下摆细缝与少量边缘差异按粗覆盖标准接受。此处主体定义为可见窗帘，不将窗后亮区当作单独被分割出的背景。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "1582c345e026960316a6e5c44f9f30eb1ea5d18007c942dc7844dd6891bb5ada",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/18_v_8aecdfda380d15f9107e.png",
+      "panel_sha256": "434051c5a50c82fd7e87e4031849a586709aadce9474ad7e5e8bdab5fc611e68",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_68395e5dce05d6e2a88b",
+      "decision": "reject",
+      "reason": "shelf类别实际落在施工建筑的几块零散楼层和部分机械臂，完整建筑/机械的大部未糊化，所选区域随帧明显变化；没有一个大体覆盖的独立架子主体。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "a6d7a0fa5240855267b71452f76b406701fdeaefd51c517308cbbb3857ace93e",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/19_v_68395e5dce05d6e2a88b.png",
+      "panel_sha256": "54b12ad014f6a4e677c12fad0d80428d44d96dbf16b8c0ef31820808e9c73a3d",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_8c5a251254ea52e77155",
+      "decision": "reject",
+      "reason": "区域主要落在旋转设施顶部的若干面板，中央立柱、下部座舱/座椅及外圈大部保持清晰，首帧部分区域又连入周边设施；不能把这种局部面板糊化声称为整个主要设施大体糊化。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "b0d7b50bcf0a303aa3d6876e858c100f35983e2a296104c70be9a0d2ae074e4b",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/20_v_8c5a251254ea52e77155.png",
+      "panel_sha256": "522d06be86298d67063a30f1255dcd27606b7eaf2372b27e813f3288c29c730b",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_ce094b3688e8dbd76145",
+      "decision": "usable",
+      "reason": "以可见建筑群为本例主体：首中末帧覆盖主要楼体的大部，草坪、道路、树木及天空大体保留；左楼白色屋顶有明显遗漏，作为整体粗覆盖的局限保留，不声称每栋楼均完整分割，也不是单实例精确掩码。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "2adf8e0e65219a8418fb7f93c4e54bfb6d8107dc5d8877b9a6b63cd279a6be55",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/21_v_ce094b3688e8dbd76145.png",
+      "panel_sha256": "d1970cb1e34013206e0287100ffc8a40310a70cbb5020d4f5a3ea11339f90682",
+      "metric_scores_used": false,
+      "stage_note": "Reviewed after sixth review was frozen; retain for the next scoring batch, not retroactively added to the nine-video result."
+    },
+    {
+      "video_uid": "v_cc6e134fd12ea7afa178",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "f345984033ecb66c7ccc6174fb3ecc41d7ab4d0fde8143e8d7776e8d5b6ff453"
+    },
+    {
+      "video_uid": "v_47eb7e2ef14a03b7a6d3",
+      "decision": "usable",
+      "reason": "首中末帧连续覆盖前景白色盥洗器具的大部分；顶部边缘遗漏和墙上少量误选按粗约80%标准接受并保留为局限。SegFormer类别为sink，视觉形状更接近长形浴盆，类别名不视为人工真值。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "7dddabafbd39f14e6c8118344f6c7dfef174356091afc8938cd3d431851f0ed9",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/23_v_47eb7e2ef14a03b7a6d3.png",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_a02179915716d32c55de",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "0dd005d3790940fcff2ad137333648301ca542ad6ef5314ff3e406a2592bf12d"
+    },
+    {
+      "video_uid": "v_d5f10f4564086a898336",
+      "decision": "reject",
+      "reason": "person类别实际落在游乐设施上；首中帧糊化大块轮体，末帧主要只余支柱、轮体大部遗漏，且轮内天空孔洞被填入。为明显目标覆盖/背景保留失败，不因少量边缘问题拒收。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "069081c7b4bd75aeb370de684b8396d897a0b2e723ae45e982f91b9450753a89",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/25_v_d5f10f4564086a898336.png",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_9932cfadc32c591e476d",
+      "decision": "reject",
+      "reason": "视频主体为钢琴，sofa预测只覆盖上方乐谱架及少量边板；键盘和大片琴身均未干预，明显不满足大体覆盖主体。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "1ba0bec595fbe7d727987da0b527a0e4feda8fa3e045d85f76a26d43272cf275",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/26_v_9932cfadc32c591e476d.png",
+      "metric_scores_used": false
+    },
+    {
+      "video_uid": "v_8ba9518d31234d5d93e8",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "1e8493b43a928df64a9b1d662bc062d465ed88d41c5bc44bafac6b08cb445055"
+    },
+    {
+      "video_uid": "v_d90347a0d152d7c865e7",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "9bb780ad27054be5c5311df0a3c89b0508002b4567924e05dfdc5052a83b968e"
+    },
+    {
+      "video_uid": "v_6de4abd7b793ceca2514",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "73d42ebbd6c5583c084a08834a72c606bded4b53859a40256b38838ec71483e4"
+    },
+    {
+      "video_uid": "v_30c61bda64eb0af032bc",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "c95f57eb169bccbfeec2ffcb1c97a6901d3bb1afa404b7dc213e50143f173881"
+    },
+    {
+      "video_uid": "v_b1cc5837d03a88d18706",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "d631975e72a5d7a1cec3f32150a940e7980f9bc85aa0cbe0a663889f07864682"
+    },
+    {
+      "video_uid": "v_b068eafd5a88f2e4321a",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "8303b6701a06038a966bbf73b63ac3bf3d948471ed77e5273cf4530b0f032e2c"
+    },
+    {
+      "video_uid": "v_c19cecb4e4648cc4c64c",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "9dc1c390f8102625790446d14cc1bde9c051e973dbd636665a15170fe9eb0ec6"
+    },
+    {
+      "video_uid": "v_7c84884b2656055e27bf",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "6cefef9c7e5cd7e4fa5158ff1d7168998ccf0d625d2b47539243fcc980459852"
+    },
+    {
+      "video_uid": "v_f49d2ffab724594d44e9",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "aaaf4c3f43707d854e652a80d6408654bdd665cd403108cd97932ffd4c6ecbff"
+    },
+    {
+      "video_uid": "v_ff8b1b21ef772144ac68",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "89177e84a764e15ebc2723f9a7dadb228318a756313e6eca81a81222702d5d61"
+    },
+    {
+      "video_uid": "v_7c5bfe6c7187be04df7a",
+      "decision": "reject",
+      "reason": "画面中可见的是城市道路、屋顶和停车区，airplane掩码实际沿道路及屋顶展开，没有对应的飞机主体，属于明确误分背景。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "54d3823d9613045e0c232387fa8ddafa233119b9f9cf54224a03c004b885c5c8",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/37_v_7c5bfe6c7187be04df7a.png",
+      "panel_sha256": "d9b39e5fb36214962810da759f2f29a892caa6f5ebdf1a6bf580375334cfef5b",
+      "metric_scores_used": false,
+      "stage_note": "Input-diversity review after sixth freeze, using generator/class only; no per-video scores read. Retain for next review snapshot."
+    },
+    {
+      "video_uid": "v_ee7856ce8e90297a6f80",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "f3a44243a273d629a380929dbc97e246d6ba9acb082a6f34f4b70459eff80e0d"
+    },
+    {
+      "video_uid": "v_1cac020b4e91472a4c3d",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "725f4d613bfd28f7c04e7a5981bebddfa870ad15f54a32dac1487fd140296448"
+    },
+    {
+      "video_uid": "v_99458d250579158fdeca",
+      "decision": "reject",
+      "reason": "右侧汽车是明确物体，但车外中央多层杂物和下方废料也被大片、跨帧变化地糊化；这些区域无法确认是同一车辆或清晰的车辆群主体。不能把整幅废料堆中零散预测凑成约20%的明确前景。小块轮缘漏分并非主要拒收原因。",
+      "reason_code": "ambiguous_foreground_group_and_intrusion",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "e3df22fbc5633c30f5e84a9ac8015225c8342d046ab103386591d5b93911e91a",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/40_v_99458d250579158fdeca.png",
+      "panel_sha256": "946281a78fbe9a4f01c8e2beb0c6951cf3a333bdab178807ebde6b17f1d907d4",
+      "metric_scores_used": false,
+      "created_unix": 1789942650.1146
+    },
+    {
+      "video_uid": "v_18fa77fcf7f65627bc19",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "2f2828d29d08c8559abd888d67fbe7fb60e413b8aa4046f0f70f89f07d91b570"
+    },
+    {
+      "video_uid": "v_5dfc3eeae63385b2918e",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "3ffef6631575718f6c004301d4cd2d73864f180931465ee8880a21664c683c8e"
+    },
+    {
+      "video_uid": "v_fcb9f2396b035782caf1",
+      "decision": "reject",
+      "reason": "首中末帧均把明显轨道/站台场景条带划入 car 并糊化；可见的蓝白车头及下方车体主体反而大部保留。掩码不是一个大体完整的车辆主体，属于大片背景误分与主物体遗漏。",
+      "reason_code": "background_intrusion_and_subject_omission",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "a71b2b1c8df63e8eb6586c8dd37881f34947425bbbaf547e77ac153a07f5e20e",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/43_v_fcb9f2396b035782caf1.png",
+      "panel_sha256": "f6ae98d9c4e4874f8dea5cbe869fb3ab00836351ee1cf8f8afce70947f8901ad",
+      "metric_scores_used": false,
+      "created_unix": 1789942558.655517
+    },
+    {
+      "video_uid": "v_2050a327b184aa38b7b2",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "a573edc8c481d8f380419467ab396ab76944c096a27b8e061f5412d318d76a45"
+    },
+    {
+      "video_uid": "v_68c9f2ccda42b41a1c16",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "4a2f19b9f41bbfa2229a3ec03b1a2e947a2a4ae58a797f6c2f081d2781cbd11c"
+    },
+    {
+      "video_uid": "v_fc933056a15488fa0c7e",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "b23ed55960824c1c6c073e10fd76b7e88cb04be11d1b6f37705aa93845956ef9"
+    },
+    {
+      "video_uid": "v_18333ee8ba078fa8e753",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "b71a332afc62b39f741de3e3393fdeebc1dc01ad51b21ba398e575f05fc25329"
+    },
+    {
+      "video_uid": "v_f15ccb5ad4e60f24bea3",
+      "decision": "pending",
+      "reason": "尚未视觉复核；按用户要求逐次少量核查，当前不评分。",
+      "manifest_sha256": "c8cfc876d2c6cb3d48bb9da1e70c32589ebbd76edb254d1b050a8b02a96a60b8"
+    },
+    {
+      "video_uid": "v_0713e3ea06a587335a13",
+      "decision": "reject",
+      "reason": "computer类别大范围混入蓝色柜体、椅子、桌面；首中末帧所覆盖对象也显著变化，末帧主要残留椅子。属于明显语义选错，不是边界细节问题。",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "f6dc9677ce915acef31e2f2a8a6688a30efb91673ad1eb0a02e7e5ccd2369d0e",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/49_v_0713e3ea06a587335a13.png",
+      "metric_scores_used": false
+    }
+  ],
+  "previous_review_sha256": "00fbd8d22ab71ea06dd844d71fe1c98d8ed8245a72e88b88b5ee9af261dffa45",
+  "newly_reviewed_uids": [
+    "v_fcb9f2396b035782caf1",
+    "v_99458d250579158fdeca"
+  ],
+  "additional_decisions": [
+    {
+      "video_uid": "v_fcb9f2396b035782caf1",
+      "decision": "reject",
+      "reason": "首中末帧均把明显轨道/站台场景条带划入 car 并糊化；可见的蓝白车头及下方车体主体反而大部保留。掩码不是一个大体完整的车辆主体，属于大片背景误分与主物体遗漏。",
+      "reason_code": "background_intrusion_and_subject_omission",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "a71b2b1c8df63e8eb6586c8dd37881f34947425bbbaf547e77ac153a07f5e20e",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/43_v_fcb9f2396b035782caf1.png",
+      "panel_sha256": "f6ae98d9c4e4874f8dea5cbe869fb3ab00836351ee1cf8f8afce70947f8901ad",
+      "metric_scores_used": false,
+      "created_unix": 1789942558.655517
+    },
+    {
+      "video_uid": "v_99458d250579158fdeca",
+      "decision": "reject",
+      "reason": "右侧汽车是明确物体，但车外中央多层杂物和下方废料也被大片、跨帧变化地糊化；这些区域无法确认是同一车辆或清晰的车辆群主体。不能把整幅废料堆中零散预测凑成约20%的明确前景。小块轮缘漏分并非主要拒收原因。",
+      "reason_code": "ambiguous_foreground_group_and_intrusion",
+      "reviewed_frames": [
+        0,
+        8,
+        15
+      ],
+      "manifest_sha256": "e3df22fbc5633c30f5e84a9ac8015225c8342d046ab103386591d5b93911e91a",
+      "panel": "output/background-repair/background-refined-dev-v3-expanded-20260920-review/panels/40_v_99458d250579158fdeca.png",
+      "panel_sha256": "946281a78fbe9a4f01c8e2beb0c6951cf3a333bdab178807ebde6b17f1d907d4",
+      "metric_scores_used": false,
+      "created_unix": 1789942650.1146
+    }
+  ],
+  "created_unix": 1789942650.1150076
+}

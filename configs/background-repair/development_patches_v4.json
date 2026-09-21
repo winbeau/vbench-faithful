@@ -1,0 +1,18 @@
+{
+  "stage": "background_patch_pooling_development_v4",
+  "date": "2026-09-20",
+  "parent_protocol": "development_protocol_v2.json",
+  "parent_protocol_sha256": "1237319e570482a768969169d9e871d6febf5e570fc3414eeb900ccf6a1aa900",
+  "rationale": "V3 lower-threshold masks improve some natural preference results but worsen full foreground-blur robustness on the completed 34-source diagnostic. Test pooling instead of gray pixel replacement, retaining the previous v2 independent masks.",
+  "encoder": "Same pinned CLIP ViT-B/32, checkpoint, all frames, resize and center crop as origin. Retain the 49 contextualized visual patch tokens; apply the existing final LayerNorm and projection to each, with unchanged weights.",
+  "representations": ["patch_global", "patch_frame", "patch_union"],
+  "aggregations": ["official", "all_pairs_same_dtype_cosine"],
+  "pooling": "Float32 soft area-weighted sum of projected patch tokens, L2 normalized and cast to the original CLIP feature dtype. Global patch mean is a representation-only ablation.",
+  "mask_geometry": "Apply the same first two VBench transform stages (bicubic Resize with antialias false, CenterCrop), clamp mask coverage to [0,1], then average into the 7x7 patch grid. Background weights are complements of independently predicted foreground coverage.",
+  "localizer": "Use content/asset/hash-verified v2 per-actual-variant scoring masks, never construction masks or masks propagated across changed pixels. Natural/native: COCO threshold 0.8 and MobileSAM. The reused diagnostic retains its previously documented subject-specific scoring localization.",
+  "min_background_fraction": 0.05,
+  "missing_background": "A missing-background frame contributes zero to every containing temporal pair at a fixed denominator.",
+  "limitations": "CLIP patch tokens already share transformer context. This method is a hypothesis, not a guarantee of foreground isolation; actual nuisance, background and natural tests decide.",
+  "cohorts": {"natural_dev": 680, "native_dev_candidates": 680, "native_dev_accepted": 142, "diagnostic_candidates": 288, "diagnostic_accepted": 34},
+  "test_status": "NOT RUN; no test scores or preference labels used in method development. Freeze final candidate and all gates before any heldout scoring."
+}

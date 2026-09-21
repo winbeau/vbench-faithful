@@ -1,0 +1,14 @@
+{
+  "completed": true,
+  "elapsed_seconds": 2.2539873123168945,
+  "physical_gpu": "5",
+  "construction_masks_read": false,
+  "metric_scores_read": false,
+  "policy_sha256": "99e1763d23002d369546e24dd9bc800b737ed303d9a7348fcc7404a54bedc225",
+  "runner_sha256": "7b9260c8b718a577a34ecac449ee21f18e7b995859c27e2f98f950b495b61e48",
+  "sam_weights_sha256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f",
+  "input_images": 30,
+  "source": "output/background-repair/background-caption-union-probe-v1-20260920/probe.json",
+  "source_sha256": "b9998071b872126777ac88f82295902f217d344c6e39d3bc46d24c27a8103619",
+  "status": "Input probe complete; mask-quality analysis and scoring NOT RUN before user pause; not a promoted provider."
+}

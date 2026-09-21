@@ -11,6 +11,29 @@ the masked repair, while subject corruption still affects the repair. A small
 background response alone is insufficient: a constant or failed detector could
 also be insensitive. No result is selected to make the repair win.
 
+The latest [official extension](counterfactual-reports/subject_official_extension_20260920.md)
+has scored all 1440 natural videos and evaluated 2160 human pairs. On 1290 test
+pairs, Official reaches 58.53%, the original aggregation repair 59.61%, and the
+automatic-localizer isolated-crop candidate 48.76%. The candidate is not a
+successful overall repair. Official and original aggregation scores reproduce
+all frozen 1440 values within 1e-6. Background construction was also expanded
+to 288 candidates, of which 34 pass automatic gates.
+
+A followup candidate keeps those coarse masks, reads isolated DINO CLS features,
+and uses Official only when fewer than two subject frames are available. With
+zero tie margin for every method, its test accuracy is 57.05% versus Official's
+58.45%. All 34 background bases are scored; mean full-background change is
+0.053575 versus Official's 0.060218, with a paired improvement CI crossing zero.
+The runner `run_subject_cls_candidate.py` and its separate frozen protocol retain
+all negative results. Background stability and subject sensitivity still need
+improvement; these reused evaluations do not establish overall superiority.
+
+The user's current practical standard is a roughly correct subject region,
+preserving its main parts (about 80% is sufficient). Minor boundary omissions
+or background inclusion do not require repeated review or delay experiments.
+This is not a measured contour IoU threshold. Full-score evaluation, missing
+evidence handling and subject-change sensitivity remain the effectiveness tests.
+
 The [2026-09-20 seven-clip run](counterfactual-reports/subject_region_discrimination_v2.md)
 is an archived pilot, not the main experiment. After viewing the images, the
 user retained only the presenter and swimmer as plausible image candidates.
@@ -18,7 +41,8 @@ The other five are excluded from future main-cohort consideration; the original
 scores and denominator are preserved. The presenter's construction mask also
 retains audience members, so neither image preference nor a scoring box counts
 as construction-mask approval. New raw-image screening precedes construction
-review and cohort freezing; no new scores are used to choose candidates.
+review and cohort freezing; no new scores are used to choose candidates. The
+full natural extension includes every official video without image-quality filtering.
 
 ## Model separation
 
@@ -28,6 +52,12 @@ review and cohort freezing; no new scores are used to choose candidates.
 | Scoring localization | MobileSAM vit_t, independent human-confirmed clean-frame box | Never reads SegFormer masks or DINO features |
 | Representation | DINO ViT-B/16 patch tokens | Never chooses localization prompts or pixels |
 | Optional semantic normalization | Text-only DeepSeek / optional shared-Qwen subject LoRA | No video, detections, captions derived from video, or masks |
+
+The human-box protocol above is retained for the two confirmed candidates.
+The expanded automatic protocol separately supplies per-frame Mask R-CNN
+target-class boxes to MobileSAM and explicitly records `human_confirmed=false`.
+Its scoring masks remain independent of SegFormer construction masks; it does
+not relabel automatically generated boxes as human confirmations.
 
 Breaking any separation makes the corresponding experiment circular. One
 MobileSAM prompt is frozen per **original clip** and reused unchanged on clean,
@@ -141,6 +171,79 @@ zero. Exclude is undefined with fewer than two present frames and records that
 failure. Coverage is reported separately. Mask projection follows DINO's actual
 resized image and stride-16 grid; an unrepresented right/bottom tail is not
 stretched into represented patches. GPU masks and patch tokens share a device.
+
+### Development variant: isolate before encoding
+
+`--audit-variant subject_isolated --subject-view crop` adds an explicit
+development variant. The previous `subject_masked` implementation remains an
+ablation and the shipped default aggregation variant is unchanged.
+
+```text
+native RGB frame + independent scoring mask
+  -> remove background before any resizing or DINO attention (fixed RGB 128)
+  -> optional mask-derived square crop, 10% margin, padding, 224x224
+  -> DINO patch tokens + masks transformed with the same crop
+  -> mask pooling, frame L2 normalization, all-pairs zero/exclude
+```
+
+The mask threshold is .5; absent instances contribute no input pixels. Cropping
+preserves aspect ratio and uses fixed gray padding. `--subject-view full` keeps
+the native framing as a separate ablation. Parameters are frozen in
+`configs/subject-repair/isolation_development_protocol.json` before development
+scoring. The localizer still sees the original, unmodified frame; only the
+encoder sees the isolated view. No construction support, clean-reference mask,
+metric score or DINO feature chooses the crop.
+
+For a fixed scoring mask, changes outside its support produce exactly identical
+encoder inputs, even when the encoder mixes information globally. This fixes a
+structural weakness of late patch pooling. It is a conditional property:
+incorrect masks and masks that change under background blur can still make the
+end-to-end score change. Crop boundaries and resampling can also introduce
+variation when localization changes. The development ablation explicitly
+measures these effects instead of claiming localization invariance.
+
+Uniform subject blur throughout a video is retained as a reported quality
+control, not treated as logically guaranteed identity inconsistency. Sensitivity
+to temporal subject change is separately evaluated with the existing partial
+start/middle/end interventions. This interpretation does not rewrite the old
+v2 protocol or its recorded failures. No aesthetic/sharpness bonus is added to
+force a consistency metric to satisfy a quality ranking.
+
+```bash
+subject-consistency --audit --audit-variant subject_isolated --subject-view crop \
+  --video /inputs/clip.mp4 --metadata /inputs/metadata.json \
+  --subject-masks /inputs/independent-scoring-masks --subject-missing-policy zero
+
+python -m scripts.counterfactual.diagnose_subject_isolation \
+  --dataset output/subject-repair/subject-quality2-background-provisional-20260920 \
+  --reference output/subject-repair/subject-quality2-float-reference-20260920 \
+  --protocol configs/subject-repair/isolation_quality2_float_protocol.json \
+  --dino-repo /models/facebookresearch_dino --dino-weight /models/dino_vitbase16_pretrain.pth \
+  --device cuda:0 --output output/subject-repair/new-isolation-development
+```
+
+All seven old clips remain in the development ablation, including rejected
+image-quality cases; this is not a confirmatory cohort or an automatic adoption
+decision. Each exact variant replays its separately generated, hash-verified
+MobileSAM masks. Clean masks are not substituted on corrupt variants.
+Construction/scoring overlap is measured in a separate diagnostic branch after
+scores are computed; it never feeds the encoder or sample selection.
+
+The subsequent [two-candidate diagnostic](counterfactual-reports/subject_isolation_quality2.md)
+used new human-reviewed coffee/guitar images and independent human scoring boxes
+from `localizer_quality2.jsonl`. `isolation_quality2_protocol.json` fixed the crop
+method and both source-prompt-disjoint cases before scoring. Mean background
+absolute change was 0.014485 for Official and 0.005910 for the new crop method;
+all six partial-window subject interventions lowered its score. These are two
+selected development examples with approximate scoring masks. Under the user's
+current standard, minor omissions do not block experiments. Uniform full-video
+subject blur increased both new-method scores. No overall
+superiority claim is made from these two selected videos.
+
+`diagnose_subject_isolation --protocol PATH` validates the frozen cohort, prompt
+separation, reference dataset, human localizer hash, and representation parameters.
+It verifies the dataset and requires the same DINO weights as the reference run.
+The new diagnostic does not rewrite the archived seven-clip results.
 
 The v2 preregistration is copied and hashed into every dataset before scoring.
 Primary: median absolute clean-to-background score change on the common
@@ -292,7 +395,8 @@ DINO self-attention can mix background information into subject patch tokens;
 masked pooling does not mathematically guarantee background invariance. SegFormer
 and MobileSAM mistakes remain possible. The two historical castle/girl images
 are feasibility examples only, not statistical observations in this run.
-Natural-preference measurements and parity against frozen E0 remain **NOT RUN**
-unless explicitly measured in the accompanying run report. No model is trained
-or fine-tuned, no subject contour is drawn manually, and no existing research
-inputs or outputs are rewritten.
+Natural-preference measurements and frozen E0 parity are measured for all 1440
+Subject videos in the [extension report](counterfactual-reports/subject_official_extension_20260920.md);
+the new candidate loses preference accuracy. This does not establish parity
+for other dimensions or certify masks as human ground truth. No model is trained
+or fine-tuned, and no existing research inputs or outputs are rewritten.

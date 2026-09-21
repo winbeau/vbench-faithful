@@ -1,0 +1,14 @@
+{
+  "protocol_sha256": "97f2038f5d9e698079ee9468aa624397de2604b3b488aa3e0ea5f3a0244e87f4",
+  "statistics_sha256": "7acd34f8a434c7dbd8e8c44fcede6f4cec9fc19a8fcbc691e56bf30c0907b65e",
+  "predeclared_margin": 0.02,
+  "comparison": "caption - frozen19, full development preference denominator",
+  "point_accuracy_delta": -0.01176470588235301,
+  "two_sided_ci95": [
+    -0.026470588235294024,
+    0.0019607843137254832
+  ],
+  "ci_lower_at_least_negative_margin": false,
+  "promote_default": false,
+  "interpretation": "The point estimate is lower; the paired interval includes zero but extends beyond the permitted 2 percentage point regression. Noninferiority is not established, not proof of a strict regression. Development evidence only."
+}

@@ -26,7 +26,7 @@ from .metric import (
     upstream_path,
 )
 
-AUDIT_VARIANTS = ("temporal_all_pairs", "subject_masked")
+AUDIT_VARIANTS = ("temporal_all_pairs", "subject_masked", "subject_isolated")
 
 
 def build_subject_parser() -> argparse.ArgumentParser:
@@ -39,6 +39,8 @@ def build_subject_parser() -> argparse.ArgumentParser:
     parser.add_argument("--subject-max-frames", type=int, default=None)
     parser.add_argument("--subject-instance-mode", choices=("union", "mean"), default="union")
     parser.add_argument("--subject-missing-policy", choices=("zero", "exclude", "carry"), default="zero")
+    parser.add_argument("--subject-view", choices=("full", "crop"), default="crop",
+                        help="subject_isolated: erase background before encoding; optionally normalize the subject crop")
     return parser
 
 
@@ -66,8 +68,8 @@ def execute(args: argparse.Namespace) -> int:
         videos = enumerate_videos(args.video, args.video_dir)
         metadata_path = find_metadata(args.video, args.video_dir, args.metadata)
         metadata = load_metadata(metadata_path, videos)
-        if args.audit_variant == "subject_masked" and not args.subject_masks:
-            raise InputError("--audit-variant subject_masked requires --subject-masks")
+        if args.audit_variant in ("subject_masked", "subject_isolated") and not args.subject_masks:
+            raise InputError(f"--audit-variant {args.audit_variant} requires --subject-masks")
         if args.subject_max_frames is not None and args.subject_max_frames < 2:
             raise InputError("--subject-max-frames must be at least two")
         verify_upstream(upstream_path())
@@ -86,6 +88,7 @@ def execute(args: argparse.Namespace) -> int:
         "max_frames": args.subject_max_frames,
         "instance_mode": args.subject_instance_mode,
         "missing_policy": args.subject_missing_policy,
+        "encoding_mode": f"preencode_{args.subject_view}" if args.audit_variant == "subject_isolated" else "post_pool",
     }
     output_root = output_base(args.output)
     current_run = run_id()
@@ -93,7 +96,7 @@ def execute(args: argparse.Namespace) -> int:
     base_environment = environment_record(videos, metadata_path, dino_config)
     overall_code = 0
     for backend in backends:
-        if backend == "audit" and args.audit_variant == "subject_masked":
+        if backend == "audit" and args.audit_variant in ("subject_masked", "subject_isolated"):
             results = evaluate_masked_sharded(videos, metadata, gpu_ids, dino_config, mask_config, args.seed)
         else:
             results = evaluate_backend_sharded(backend, videos, metadata, gpu_ids, dino_config, args.seed)
@@ -103,9 +106,10 @@ def execute(args: argparse.Namespace) -> int:
         if backend == "vbench":
             aggregate, valid_samples = _official_dataset_score(results)
             formula_version = "vbench1-single-process-transition-weighted-v2"
-        elif args.audit_variant == "subject_masked":
+        elif args.audit_variant in ("subject_masked", "subject_isolated"):
             aggregate, valid_samples = repaired_dataset_score(results)
-            formula_version = "subject-localised-all-pairs-v1"
+            formula_version = (f"subject-isolated-{args.subject_view}-all-pairs-v2" if args.audit_variant == "subject_isolated"
+                               else "subject-localised-all-pairs-v1")
         else:
             aggregate, valid_samples = repaired_dataset_score(results)
             formula_version = "local-adjacent-plus-global-all-pairs-v1"
@@ -114,7 +118,7 @@ def execute(args: argparse.Namespace) -> int:
         run_info = {
             "experiment": "subject consistency evaluation", "purpose": "official parity or symmetric temporal aggregation",
             "backend": backend, "audit_variant": args.audit_variant if backend == "audit" else None,
-            "subject_masks_root": args.subject_masks if backend == "audit" and args.audit_variant == "subject_masked" else None,
+            "subject_masks_root": args.subject_masks if backend == "audit" and args.audit_variant in ("subject_masked", "subject_isolated") else None,
             "command": sys.argv, "parsed_args": vars(args), "seed": args.seed,
             "device": device_info, "metadata": str(metadata_path) if metadata_path else None,
             "elapsed_seconds": time.monotonic() - started, "output": str(destination), "schedule": last_schedule(), **base_environment,

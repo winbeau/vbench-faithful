@@ -1,0 +1,13 @@
+{
+  "stage": "background_patch_scale_calibration_v5",
+  "date": "2026-09-20",
+  "parent_protocol": "development_patches_v4.json",
+  "rationale": "V4 background patch representations significantly improve normalized nuisance/sensitivity ratios and natural preference, but raw score variations have a smaller scale. The frame/all-pairs view retains 0.4922 of the origin mean background-switch response on dev. A fixed gain of 2 approximately restores that response scale, while expanding nuisance by the same factor. This cannot create the positive normalized improvement.",
+  "gain": 2.0,
+  "formula": "min(1, max(0, 1 - 2 * (1 - raw_patch_score)))",
+  "methods": "Apply the same gain to every one of the six v4 patch ablations; retain every original score and negative result.",
+  "selection": "Among calibrated region candidates passing every dev gate, select the smallest full-foreground MAE on all 142 native bases, while requiring the 34-base diagnostic to remain below 0.01. Natural preference labels are not used to fit the score gain. Freeze the final primary before test scoring.",
+  "gates": ["development_protocol_v2.json: proposed_holdout_gates", "holdout_gate_addendum_v1.json"],
+  "clipping": "Recompute scores and human-preference ties after clipping; never assume ranks are unchanged. Report counts of raw values outside [0.5,1].",
+  "test_status": "NOT RUN; all gains and choices are development-only"
+}

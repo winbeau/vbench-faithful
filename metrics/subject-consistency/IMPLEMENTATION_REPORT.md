@@ -124,9 +124,60 @@ score change was 0.0286 for Official, 0.0316 for the aggregation repair, and
 subject-corruption sensitivity failed on five of seven clips. The user then
 judged only the presenter and swimmer images plausible candidates; the entire
 run remains a pilot with explicit image/mask-quality limitations. These numbers
-do not establish formal method performance. Frozen E0 parity remains `NOT RUN`.
+do not establish formal method performance. Frozen E0 parity was not measured
+in that pilot; the subsequent all-1440 extension below measures it explicitly.
 
 ## Tests
+
+The experimental `--audit-variant subject_isolated` isolates native subject
+pixels before resizing or DINO attention, then optionally normalizes a square
+subject crop (`--subject-view crop`, default for this explicit variant).
+Independent scoring masks, fixed gray fill, 10% crop margin, and aligned mask
+projection are recorded in diagnostics. The localizer still sees the original
+frame. For a fixed mask, outside-mask pixels cannot affect encoder input;
+localization drift is not covered by that conditional guarantee.
+
+The [development ablation](../../docs/counterfactual-reports/subject_isolation_development.md)
+replayed all seven pilot clips. Background absolute-change medians were 0.0294
+(old masked), 0.0189 (isolation with full framing), and 0.0072 (isolated crop).
+The mean and worst case did not improve for the crop variant, and the paired CI
+crosses zero. This archived development result does not establish overall
+superiority. Uniform full-video blur remains a quality control; temporal subject
+change is evaluated separately with the partial-window interventions. Old v2
+results and its failed criterion remain intact.
+
+The subsequent [two-candidate run](../../docs/counterfactual-reports/subject_isolation_quality2.md)
+froze new human image confirmations and scoring boxes before inference. The crop
+method reduced mean background absolute change from Official's 0.014485 to
+0.005910; six of six partial-window subject interventions reduced its score.
+Both uniform full-video subject-blur scores increased. Coffee masks omit body
+parts and n=2 is insufficient for general superiority. All 96 reference and
+108 representation records succeeded; the 36 post-pool records replayed exactly.
+The affected tests, including frozen-cohort and prompt-leakage checks, report
+107 passed. The seven-clip development report remains separate.
+
+The subsequent [official extension](../../docs/counterfactual-reports/subject_official_extension_20260920.md)
+scored all 1440 official videos with per-frame automatic COCO boxes prompting
+MobileSAM, separately from the human-box protocol. Test preference accuracy is
+58.53% for Official, 59.61% for the original aggregation repair, and 48.76% for
+the preregistered isolated-crop zero candidate; its paired difference CI is
+[-13.57, -5.74] percentage points. The candidate therefore fails the broad
+effectiveness test. All 1440 Official and aggregation scores match their frozen
+references within 1e-6 after correcting float32-before-Resize preprocessing.
+Background construction also covers 288 candidates, with 34 automatic accepts.
+Minor contour inaccuracies are tolerated under the user's coarse-localization
+standard; representation and missing-evidence effects are evaluated directly.
+
+A later development-selected CLS candidate preserves those coarse masks, uses
+conditional frame-pair similarity, and falls back to Official when fewer than
+two subject frames exist. Its fixed followup protocol scores all 860 test videos
+and 306 background variants successfully. With a common zero tie margin, test
+accuracy is 57.05% versus Official's 58.45%; the paired difference CI is
+[-3.88, +1.09] percentage points. Full-background mean absolute change is
+0.053575 versus 0.060218, but the paired improvement CI crosses zero. This
+mitigates the original severe regression without establishing an excellent
+overall repair. It is available through `run_subject_cls_candidate.py`; all
+intermediate methods and failed criteria remain in the extension report.
 
 Synthetic normalized-feature tests cover Original formula parity, identical features, two-frame equivalence, negative-cosine clamping, local discontinuity, accumulated drift, all-pairs permutation symmetry, short inputs, counterfactual gap contracts, shared representation, and CLI output. These tests validate the method contract; they do not turn L2 normalization, equal weighting, `T < 2` handling, diagnostics, or dataset aggregation normalization into paper contributions. Real DINO parity is intentionally not a required unit test.
 
@@ -139,9 +190,11 @@ Synthetic normalized-feature tests cover Original formula parity, identical feat
   is not found is scored by the missing policy, not treated as ground truth, and
   the localizer used to build the counterfactual masks must not be the one used
   at scoring time or the experiment is self-fulfilling.
-- The masked variant has only a seven-clip pilot with inadequate image and
-  construction-mask quality. Natural-set validation and frozen E0 parity remain
-  `NOT RUN`; no confirmatory conclusion is claimed from the two retained candidates.
+- Measurements now include the seven-clip pilot, two human-prompted candidates,
+  and all 1440 official natural videos under a separate automatic protocol.
+  Natural-set accuracy degrades for the new candidate despite passing score
+  parity. Nonempty masks are not ground truth; missing-frame zero penalties
+  and representation changes both require further investigation.
 - All-pairs similarity has quadratic temporary memory in the number of decoded frames, although the full matrix is not persisted in diagnostics.
 - The local DINO repository and ViT-B/16 checkpoint must already exist. The CLI does not download either asset.
 - The bundled local paper file is a 284-byte HTML response rather than a valid PDF; exact behavior was therefore grounded in the locked VBench1.0 source. A replacement official PDF could not be fetched in the current network environment.

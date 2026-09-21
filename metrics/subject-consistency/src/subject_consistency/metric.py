@@ -167,6 +167,7 @@ def _masked_worker(result_path: str, gpu_id: int, videos: list[str], metadata: d
             max_frames=mask_config["max_frames"],
             instance_mode=str(mask_config["instance_mode"]),
             missing_policy=str(mask_config["missing_policy"]),
+            encoding_mode=str(mask_config.get("encoding_mode", "post_pool")),
         )
     except Exception as exc:
         results = [_failed_result("audit-masked", video, metadata, exc) for video in paths]
@@ -221,6 +222,7 @@ def evaluate_masked_batch(
     max_frames: int | None = None,
     instance_mode: str = "union",
     missing_policy: str = "zero",
+    encoding_mode: str = "post_pool",
 ) -> list[dict[str, Any]]:
     """Score subject consistency on subject-localised evidence.
 
@@ -230,6 +232,7 @@ def evaluate_masked_batch(
     """
     from .models import OfficialDinoPatchExtractor
     from .subject_evidence import masked_subject_consistency, resample_masks_to_grid, sample_frame_indices
+    from .isolation import isolate_subject_inputs
 
     import torch
 
@@ -241,9 +244,18 @@ def evaluate_masked_batch(
         try:
             phrase = subject_phrase(item, phrase_field, prompt)
             frames = extractor.module.load_video(str(video))
-            patches, grid = extractor.patches_from_frames(frames)
             masks = mask_provider.masks_for(video, frames, phrase)
             instance_masks, present = masks.instance_masks, masks.instance_present
+            isolation = None
+            if encoding_mode == "post_pool":
+                encoder_frames = frames
+            elif encoding_mode in ("preencode_full", "preencode_crop"):
+                isolation = isolate_subject_inputs(frames, instance_masks, present,
+                                                   view=encoding_mode.removeprefix("preencode_"))
+                encoder_frames, instance_masks, present = isolation.frames, isolation.masks, isolation.present
+            else:
+                raise ValueError(f"unknown subject encoding mode: {encoding_mode}")
+            patches, grid = extractor.patches_from_frames(encoder_frames)
             if int(instance_masks.shape[0]) != int(patches.shape[0]):
                 raise ValueError(
                     f"{instance_masks.shape[0]} mask frames for {patches.shape[0]} feature frames: {video.name}"
@@ -273,6 +285,11 @@ def evaluate_masked_batch(
                     "mask_source": masks.source,
                     "mask_source_sha256": masks.source_sha256,
                     "extractor": type(extractor).__name__,
+                    "encoding_mode": encoding_mode,
+                    "isolation": {"fill_rgb": [128, 128, 128], "mask_threshold": .5,
+                                  "source_coverage": list(isolation.source_coverage),
+                                  "boxes": list(isolation.boxes), "crop_margin": .10,
+                                  "crop_output_size": 224} if isolation is not None else None,
                 }
             )
             results.append(

@@ -1,0 +1,39 @@
+{
+  "analysis_unit": "Source prompt for subject blur; disjoint source/donor prompt pair for background switch. All failures retained.",
+  "background_control": "Replace background only during start/middle/end quarter. Sorted prompt pairs A<->B, same split, generator and seed; 52 test prompts form 26 disjoint pairs. Same interpolation and inward feather as development.",
+  "candidate_count": 1040,
+  "donor_strategy": "disjoint_sorted_pairs",
+  "feather": "inward-only 1.5 native pixels",
+  "foreground_frame_presence_min": 0.5,
+  "foreground_labels": [
+    "person",
+    "car",
+    "bus",
+    "truck",
+    "airplane",
+    "van",
+    "ship",
+    "boat",
+    "animal",
+    "bicycle"
+  ],
+  "frame_foreground_max": 0.95,
+  "frame_presence_min_area": 0.001,
+  "localization": "SegFormer semantic union; remove components smaller than 20 pixels; no GrabCut, largest-instance selection, or manual refinement",
+  "manifest_sha256": "2d2e40629d84e5067b5723fa1b41b2514b221d3684453a2d4fabbf45fa4ff850",
+  "mean_foreground_max": 0.65,
+  "mean_foreground_min": 0.01,
+  "positions": [
+    "full",
+    "start",
+    "middle",
+    "end"
+  ],
+  "scoring": "Final independent scoring method must be frozen before scoring these test videos. Construction masks must never be used as scoring masks.",
+  "selection": "all dev inputs; no score filtering; all rejections retained",
+  "sigma": 18,
+  "split": "test",
+  "stage": "official_background_heldout_foreground_intervention",
+  "test_status": "Construction protocol frozen before generation and before any test scores; final method remains under development. Construction does not evaluate the metric or read preference labels.",
+  "window": "quarter of frames, identical frozen region_discrimination window_indices"
+}

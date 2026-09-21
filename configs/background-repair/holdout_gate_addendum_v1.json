@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-20",
+  "status": "Additional safeguards declared during development, before any held-out metric score. Final candidate selection remains pending.",
+  "parent_gates": "All proposed_holdout_gates in development_protocol_v2.json remain required; none is weakened.",
+  "rationale": "Uniform compression of a score can reduce absolute nuisance variation while retaining ranking and a positive but equally compressed background response. This does not establish selective background repair.",
+  "background_response_retention_mean_min": 0.75,
+  "background_response_retention_definition": "candidate mean background temporal drop / origin mean background temporal drop, averaging start-middle-end within each base",
+  "scale_adjusted_nuisance_definition": "mean full foreground absolute change / mean start-middle-end background temporal drop, using the same bases for both methods",
+  "scale_adjusted_paired_improvement_ci95_lower_gt": 0,
+  "bootstrap": "Resample disjoint source/donor prompt pairs jointly in the heldout cohort; 10000 draws, seed 20260920. Development uses connected components of the existing donor graph.",
+  "invalid_response": "If a background denominator is nonpositive, or any bootstrap denominator is nonpositive, the normalized interval is undefined and this gate does not pass. Do not drop bad draws or count missing scores as successful invariance.",
+  "negative_control": "Uniform affine score compression must have zero normalized improvement. A property test checks this explicitly.",
+  "claim": "Passing raw absolute-delta thresholds alone is insufficient. Final independent natural preference, background sensitivity and nuisance evidence are all required."
+}

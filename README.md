@@ -2,6 +2,8 @@
 
 VBench 1.0 的可复现审计工作区。本轮范围 **11 维** = 已实现的 7 维 + 4 个候选维度
 （范围决定见 [`docs/plans/2026-09-15-dimension-scope-11d.md`](docs/plans/2026-09-15-dimension-scope-11d.md)）。
+2026-09-20 已另接通 background consistency 的官方与候选修复后端，验证进展见下文；
+原范围决定时的七维实现清单保留如下。
 Object Class / Color 也已完成独立包后端、共享 Qwen3-8B 的独立 LoRA 与四级消融，
 见[实现与复现](docs/object-color-repair.md)及[两维实测报告](docs/counterfactual-reports/object_color_repair_20260920.md)。
 Object 的 metadata 改写与 Color 的可见性响应分别报告；Color test 仅 5 个合格基底，
@@ -53,7 +55,7 @@ uv sync --locked --extra models
 
 不要在 CPU 测试 overlay 之后再次同步 models extra，以免替换 CPU wheel。
 
-模型权重、CUDA 驱动和 Detectron2/GRiT 等外部构建不由 uv.lock 提供。本机当前只有一张 RTX 4060（8 GiB），没有本项目权重；本机 CPU 验收不代表真实模型 parity；Object/Color 的 H100 parity 与多卡结果见上述实测报告。某些第三方模型构造器在传入默认 pretrained 配置时可能联网下载权重；本轮没有下载权重，正式运行应预置本地权重并使用对应的本地路径参数。纯算法、输入输出合约及 CLI help 不需要权重。
+模型权重、CUDA 驱动和 Detectron2/GRiT 等外部构建不由 uv.lock 提供。本机 CPU 测试不等于真实模型 parity；Subject 的 H100 全量 parity 已在下述扩展报告中逐条核验，其余维度以各自运行报告为准。某些第三方模型构造器在传入默认 pretrained 配置时可能联网下载权重；正式运行应预置本地权重并使用对应的本地路径参数。纯算法、输入输出合约及 CLI help 不需要权重。
 
 ## VBench 1.0 官方视频目录
 
@@ -92,7 +94,45 @@ uv run dynamic-degree --both --video-dir /data/videos --gpu 0,2,4
 被 Git 忽略的 `output/supplementary_20260914/`，避免把大量中间缓存提交到仓库。
 
 Subject 的表示层修复与完整背景糊化实验见 [数据、协议与复现说明](docs/subject-repair.md)。
+最新[官方扩展实验](docs/counterfactual-reports/subject_official_extension_20260920.md)已完成 1440 条自然视频、2160 对人工偏好：
+test 1290 对上 origin 为 58.53%，原有聚合 repair 为 59.61%，自动定位＋隔离裁剪为 48.76%。
+初轮候选整体退化；不能由两条背景示例宣称修复成功。所有官方/原聚合分数分别与历史值在 1e-6 内对齐。
+后续保持粗掩码、改用 CLS 并在主体证据不足时回退 origin：统一零平局容差下，test 为 57.05%，origin 为 58.45%。
+34 条完整背景干预的平均分差降到 0.053575（origin 0.060218），但配对改善区间跨零，主体响应仍有不足；尚未达到优秀修复。
+背景构造也已扩到 288 条候选，其中 34 条通过自动门槛；类别不支持和构造门槛限制了覆盖。
+后续接受大体正确的主体粗定位，不因少量边缘误差反复暂停实验；重点检查表示、缺失帧处理和整体效果。
 当前 v2 保留主体像素、模糊主体掩码的全部补集，独立 MobileSAM 评分定位与建库掩码隔离；
 历史镜像盒协议只归档重放。真实运行结果与质量限制单独报告，未验证项目保留 NOT RUN。
 当前 [7 条试跑](docs/counterfactual-reports/subject_region_discrimination_v2.md) 因图像与建库掩码质量不足，
 不作为正式主实验；用户只保留演讲者和游泳者为候选，后续先做原图质量筛选。
+编码前主体隔离与规范化裁剪已作为 `subject_isolated` 候选变体实现，
+[开发消融](docs/counterfactual-reports/subject_isolation_development.md) 显示中位背景扰动减小，
+但均值、最坏情况和独立验证仍未达标，尚不宣称修复效果优秀。
+后续 [咖啡、吉他两条新候选](docs/counterfactual-reports/subject_isolation_quality2.md) 已完成真实评分：
+背景平均绝对分差从 origin 的 0.01449 降至 0.00591，局部时窗主体干预 6/6 降分；
+咖啡评分掩码仍漏掉部分身体，两条样本不足以支持总体修复成功的结论。
+
+当前新增工作目标是 [Background Consistency 修复与主体糊化实验](docs/plans/2026-09-20-background-repair-goal-prompt.md)：
+糊化主体、保留背景，对比 origin 与 repair 的干预前后分数，同时验证背景变化响应与自然偏好表现。
+background 已完成真实 CLIP 后端与独立验证，[正式报告](docs/counterfactual-reports/background_holdout_20260920.md)
+覆盖 1,040 条自然测试视频、1,560 对偏好及 188 条基底的 1,504 个干预版本。
+完整主体糊化平均绝对分差从 origin 0.016240 降至 repair 0.006733（降低 58.54%）；
+自然偏好准确率从 52.12% 提高到 61.22%，三个时窗平均的背景响应保留 88.80%。
+18 项冻结门槛全部通过，默认 `repair` 已指向背景 patch 池化与全帧对方案；真实 CLI parity 误差为 0。
+仍有单片段失败与粗定位局限，所有旧候选负结果保留在[开发报告](docs/counterfactual-reports/background_development_20260920.md)。
+
+后续构造语义检查发现旧干预存在误选和漏分，以上数值通过不能证明所有编辑正确。
+按用户要求，background 原生开发集 680 条已用同一 SegFormer + GrabCut 流水线扩大到 104 类重构：
+全空从 450 降至 89，数值构造通过从 7 增至 49，待复核项目显式保留。
+评分端的 COCO80 与既有 MobileSAM 自动补充分支仍属开发候选；完整结果、逐步复核范围和未达标项见
+[空掩码审计与类别扩展](docs/counterfactual-reports/background_empty_masks_20260920.md)。
+后续复用 GRiT 区域描述与 MobileSAM 的评分定位候选，已完成 680 条自然开发视频和 1,020 对偏好：
+origin 52.35%、现有 repair 57.84%、COCO80 57.94%、Caption v2 56.67%。
+Caption v2 的检出覆盖改善，但未证明对现有 repair 非劣，因此保持开发候选；
+详见[定位修复与全量自然评估](docs/counterfactual-reports/background_caption_localizer_20260920.md)。
+104 类重构后的 49 条数值候选在暂停时已逐次复核 30 条：12 条可用、18 条拒收、19 条待复核。
+十条已完成干预对照，origin / 现有 repair / Caption v2 的全片主体糊化 MAE 为
+0.011578 / 0.003054 / 0.002704；origin 达到 0.10 或 0.20 的比例均为 0/10。
+仍有非空但错位的评分掩码，类别扩展改善了构造覆盖，尚未达到新的联合修复目标。
+按用户要求暂停实验，新增两条接受项尚未评分；[阶段总结与紧凑证据](docs/counterfactual-reports/background_repair_checkpoint_20260920.md)
+记录暂停状态、全部已完成结果和剩余工作。多物体 union 仅完成输入探测，未晋升默认。

@@ -1,0 +1,13 @@
+{
+  "name": "mobilesam_automatic_missing_foreground_probe_v1",
+  "points_per_side": 8,
+  "points_per_batch": 64,
+  "pred_iou_threshold": 0.88,
+  "stability_threshold": 0.95,
+  "minimum_area": 0.01,
+  "maximum_area": 0.6,
+  "maximum_touched_edges": 1,
+  "crop_n_layers": 0,
+  "selection": "largest eligible mask, then stability, predicted IoU, proposal index; no target area of 20%, no class or box from construction",
+  "scope": "Input-only development probe on clean and actual blurred lighthouse frames 0/16/32. No metric scores read to select proposals; no propagation between variants."
+}

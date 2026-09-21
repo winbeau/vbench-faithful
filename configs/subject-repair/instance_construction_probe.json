@@ -1,0 +1,18 @@
+{
+  "stage": "construction_quality_probe_only",
+  "created_at": "2026-09-20",
+  "model": "torchvision 0.20.1 MaskRCNN ResNet50 FPN COCO_V1",
+  "weight_url": "https://download.pytorch.org/models/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth",
+  "weight_sha256_prefix": "bf2d0c1e",
+  "weight_sha256": "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0",
+  "person_category": 1,
+  "detection_threshold": 0.8,
+  "mask_threshold": 0.5,
+  "resize_short_side": 512,
+  "resize_max_side": 512,
+  "person_scope": "Person instance only; held objects and other people are not automatically included.",
+  "selection": "Require exactly one person instance above threshold in each probed frame. Multiple people remain ambiguous rather than being merged or silently selecting the largest.",
+  "inputs": "Three raw-image candidates selected before any new metric scores; first/middle/last frames.",
+  "isolation": "Construction-only CNN family. Never consumes MobileSAM scoring masks, human scoring boxes, or DINO features/scores.",
+  "adoption_status": "Not a replacement for the frozen SegFormer v2 dataset. Full-frame coverage and human review are required before a new construction protocol or scoring cohort is adopted."
+}

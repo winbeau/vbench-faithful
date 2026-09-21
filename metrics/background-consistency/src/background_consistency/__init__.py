@@ -1,4 +1,4 @@
-"""Background consistency metric package (M1 interface skeleton)."""
+"""Official CLIP background consistency and independent foreground suppression."""
 
 __version__ = "0.1.0"
 

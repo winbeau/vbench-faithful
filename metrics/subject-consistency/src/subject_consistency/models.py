@@ -5,6 +5,20 @@ from pathlib import Path
 from typing import Any, Mapping, Protocol
 
 
+def native_rgb_uint8(frames: Any):
+    """Recover decoded bytes from VBench's float32, unnormalised RGB tensor."""
+    import torch
+    if frames.ndim != 4 or frames.shape[1] != 3:
+        raise ValueError('decoded frames must be TCHW RGB')
+    if frames.dtype == torch.uint8:
+        return frames
+    if (not torch.is_floating_point(frames) or not bool(torch.isfinite(frames).all())
+            or bool(((frames < 0) | (frames > 255)).any())
+            or not bool(torch.equal(frames, frames.round()))):
+        raise ValueError('decoded RGB must contain exact byte values, not normalized or fractional pixels')
+    return frames.to(torch.uint8)
+
+
 @dataclass(frozen=True)
 class SubjectMasks:
     """Per-frame instance masks for one subject phrase.
@@ -183,7 +197,9 @@ class OfficialDinoFeatureExtractor:
         return self.features_from_frames(images)
 
     def features_from_frames(self, images: Any):
-        images = self.module.dino_transform(224)(images)
+        # Upstream load_video uses torch.Tensor(buffer), hence float32 BEFORE
+        # Resize. Byte tensors resize with rounding and are not equivalent.
+        images = self.module.dino_transform(224)(images.float())
         features = []
         with self.module.torch.no_grad():
             for image in images:
@@ -208,7 +224,7 @@ class OfficialDinoPatchExtractor(OfficialDinoFeatureExtractor):
         return self.patches_from_frames(frames)
 
     def patches_from_frames(self, frames: Any):
-        images = self.module.dino_transform(224)(frames)
+        images = self.module.dino_transform(224)(frames.float())
         self.transformed_size = tuple(int(size) for size in images.shape[-2:])
         patch_size = int(getattr(self.model.patch_embed, "patch_size", 16))
         tokens = []

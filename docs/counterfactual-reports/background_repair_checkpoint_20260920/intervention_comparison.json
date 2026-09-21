@@ -1,0 +1,538 @@
+{
+  "stage": "Reviewed native development cases only; not representative of all 680 or an independent test.",
+  "validation_sha256": "ccbfafe97c2b76758bc8fc8595ecda0711b0058e40764a4bf3413be038f451cc",
+  "methods": {
+    "frozen19": {
+      "origin_mae": 0.011577657063802071,
+      "repair_mae": 0.0030537414550781293,
+      "repair_mae_ci95": [
+        0.001805207223603254,
+        0.005049086917530373
+      ],
+      "paired_improvement": {
+        "cluster_unit": "source_prompt",
+        "maximum": 0.030677564216382458,
+        "mean": 0.008523915608723943,
+        "mean_ci95": [
+          0.002700165112813351,
+          0.01565239224289397
+        ],
+        "median": 0.004258126923532279,
+        "median_ci95": [
+          -0.0004637284712357692,
+          0.018768310546874944
+        ],
+        "n_bases": 10,
+        "n_prompt_clusters": 8
+      },
+      "origin_large_change": {
+        "fraction_at_least_0.1": 0.0,
+        "fraction_at_least_0.2": 0.0,
+        "scored_bases": 10
+      },
+      "background_drop_origin": [
+        0.16000172932942708,
+        0.068831787109375,
+        0.05910263061523437
+      ],
+      "background_drop_repair": [
+        0.07773600260416672,
+        0.07898462931315109,
+        0.07923434170809661
+      ],
+      "scoring_seconds": 54.88471531867981,
+      "analysis_sha256": "8118b9935a8832505a6ec22fadac32acea0771d74c7c6050ea2181604318682b"
+    },
+    "coco80": {
+      "origin_mae": 0.011577657063802071,
+      "repair_mae": 0.0033459518895004427,
+      "repair_mae_ci95": [
+        0.0021309364203250534,
+        0.005081119248361323
+      ],
+      "paired_improvement": {
+        "cluster_unit": "source_prompt",
+        "maximum": 0.030638723662405387,
+        "mean": 0.00823170517430163,
+        "mean_ci95": [
+          0.0026560234301018226,
+          0.015605417887369827
+        ],
+        "median": 0.004293730764678094,
+        "median_ci95": [
+          -0.0005703550396544133,
+          0.018768310546874944
+        ],
+        "n_bases": 10,
+        "n_prompt_clusters": 8
+      },
+      "origin_large_change": {
+        "fraction_at_least_0.1": 0.0,
+        "fraction_at_least_0.2": 0.0,
+        "scored_bases": 10
+      },
+      "background_drop_origin": [
+        0.16000172932942708,
+        0.068831787109375,
+        0.05910263061523437
+      ],
+      "background_drop_repair": [
+        0.0787693879098603,
+        0.07998186053651751,
+        0.08024872750946974
+      ],
+      "scoring_seconds": 71.54604482650757,
+      "analysis_sha256": "140a1cc532509630ca593ffd7784c838a7738c00352ed1a09effee217043b58b"
+    },
+    "caption-v2": {
+      "origin_mae": 0.011577657063802071,
+      "repair_mae": 0.0027036585952296853,
+      "repair_mae_ci95": [
+        0.0015852124763258257,
+        0.004586705294522403
+      ],
+      "paired_improvement": {
+        "cluster_unit": "source_prompt",
+        "maximum": 0.03205640388257569,
+        "mean": 0.008873998468572387,
+        "mean_ci95": [
+          0.0028782607569838923,
+          0.016591381939974652
+        ],
+        "median": 0.004293730764678094,
+        "median_ci95": [
+          -0.0001894170587714572,
+          0.019320170084635213
+        ],
+        "n_bases": 10,
+        "n_prompt_clusters": 8
+      },
+      "origin_large_change": {
+        "fraction_at_least_0.1": 0.0,
+        "fraction_at_least_0.2": 0.0,
+        "scored_bases": 10
+      },
+      "background_drop_origin": [
+        0.16000172932942708,
+        0.068831787109375,
+        0.05910263061523437
+      ],
+      "background_drop_repair": [
+        0.08105408639618845,
+        0.08298938173236273,
+        0.08339533025568183
+      ],
+      "scoring_seconds": 268.03339099884033,
+      "analysis_sha256": "99c89cac209a99c2ec28069997776cd38927bca8621c7ec9931772a889f656bc"
+    }
+  },
+  "per_case": [
+    {
+      "video_uid": "v_5b21df6d8c834540581f",
+      "prompt": "a construction site",
+      "generator": "cogvideo",
+      "construction_target": "building",
+      "mean_construction_fraction": 0.22373697916666666,
+      "frames": 33,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.9811782836914062,
+          "origin_blur": 0.96844482421875,
+          "origin_delta": -0.01273345947265625,
+          "repair_clean": 0.9889530991062974,
+          "repair_blur": 0.9801735155510181,
+          "repair_delta": -0.008779583555279302,
+          "scoring_empty_frames_clean": 33,
+          "scoring_empty_frames_blur": 33
+        },
+        "coco80": {
+          "origin_clean": 0.9811782836914062,
+          "origin_blur": 0.96844482421875,
+          "origin_delta": -0.01273345947265625,
+          "repair_clean": 0.9889530991062974,
+          "repair_blur": 0.9801735155510181,
+          "repair_delta": -0.008779583555279302,
+          "scoring_empty_frames_clean": 33,
+          "scoring_empty_frames_blur": 33
+        },
+        "caption-v2": {
+          "origin_clean": 0.9811782836914062,
+          "origin_blur": 0.96844482421875,
+          "origin_delta": -0.01273345947265625,
+          "repair_clean": 0.9889530991062974,
+          "repair_blur": 0.9801735155510181,
+          "repair_delta": -0.008779583555279302,
+          "scoring_empty_frames_clean": 33,
+          "scoring_empty_frames_blur": 33
+        }
+      }
+    },
+    {
+      "video_uid": "v_4f4f6015ed444b671ad5",
+      "prompt": "a house",
+      "generator": "cogvideo",
+      "construction_target": "building",
+      "mean_construction_fraction": 0.18474247685185186,
+      "frames": 33,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.9472732543945312,
+          "origin_blur": 0.9433746337890625,
+          "origin_delta": -0.00389862060546875,
+          "repair_clean": 0.9784289273348721,
+          "repair_blur": 0.9734104040897253,
+          "repair_delta": -0.005018523245146733,
+          "scoring_empty_frames_clean": 30,
+          "scoring_empty_frames_blur": 33
+        },
+        "coco80": {
+          "origin_clean": 0.9472732543945312,
+          "origin_blur": 0.9433746337890625,
+          "origin_delta": -0.00389862060546875,
+          "repair_clean": 0.9784273089784565,
+          "repair_blur": 0.9734104040897253,
+          "repair_delta": -0.0050169048887311884,
+          "scoring_empty_frames_clean": 29,
+          "scoring_empty_frames_blur": 33
+        },
+        "caption-v2": {
+          "origin_clean": 0.9472732543945312,
+          "origin_blur": 0.9433746337890625,
+          "origin_delta": -0.00389862060546875,
+          "repair_clean": 0.9711010094844934,
+          "repair_blur": 0.9663818821762548,
+          "repair_delta": -0.0047191273082386465,
+          "scoring_empty_frames_clean": 20,
+          "scoring_empty_frames_blur": 12
+        }
+      }
+    },
+    {
+      "video_uid": "v_52812eb819755d6e7b09",
+      "prompt": "a lighthouse",
+      "generator": "cogvideo",
+      "construction_target": "tower",
+      "mean_construction_fraction": 0.17941590382996633,
+      "frames": 33,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.9867401123046875,
+          "origin_blur": 0.9775848388671875,
+          "origin_delta": -0.0091552734375,
+          "repair_clean": 0.9958861379912405,
+          "repair_blur": 0.9944182887221827,
+          "repair_delta": -0.0014678492690577416,
+          "scoring_empty_frames_clean": 33,
+          "scoring_empty_frames_blur": 33
+        },
+        "coco80": {
+          "origin_clean": 0.9867401123046875,
+          "origin_blur": 0.9775848388671875,
+          "origin_delta": -0.0091552734375,
+          "repair_clean": 0.9958861379912405,
+          "repair_blur": 0.9944182887221827,
+          "repair_delta": -0.0014678492690577416,
+          "scoring_empty_frames_clean": 33,
+          "scoring_empty_frames_blur": 33
+        },
+        "caption-v2": {
+          "origin_clean": 0.9867401123046875,
+          "origin_blur": 0.9775848388671875,
+          "origin_delta": -0.0091552734375,
+          "repair_clean": 0.995657949736624,
+          "repair_blur": 0.9944101969401041,
+          "repair_delta": -0.0012477527965198965,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 0
+        }
+      }
+    },
+    {
+      "video_uid": "v_b135aa856871b15ee5a9",
+      "prompt": "a train station platform",
+      "generator": "cogvideo",
+      "construction_target": "building",
+      "mean_construction_fraction": 0.15343000315656566,
+      "frames": 33,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.9510955810546875,
+          "origin_blur": 0.9177703857421875,
+          "origin_delta": -0.0333251953125,
+          "repair_clean": 0.9880856600674717,
+          "repair_blur": 0.9854380289713541,
+          "repair_delta": -0.002647631096117542,
+          "scoring_empty_frames_clean": 33,
+          "scoring_empty_frames_blur": 32
+        },
+        "coco80": {
+          "origin_clean": 0.9510955810546875,
+          "origin_blur": 0.9177703857421875,
+          "origin_delta": -0.0333251953125,
+          "repair_clean": 0.9881083170572916,
+          "repair_blur": 0.985421845407197,
+          "repair_delta": -0.002686471650094613,
+          "scoring_empty_frames_clean": 31,
+          "scoring_empty_frames_blur": 31
+        },
+        "caption-v2": {
+          "origin_clean": 0.9510955810546875,
+          "origin_blur": 0.9177703857421875,
+          "origin_delta": -0.0333251953125,
+          "repair_clean": 0.9858474731445312,
+          "repair_blur": 0.9845786817146069,
+          "repair_delta": -0.0012687914299243097,
+          "scoring_empty_frames_clean": 13,
+          "scoring_empty_frames_blur": 10
+        }
+      }
+    },
+    {
+      "video_uid": "v_4e800707e9f7ad907e38",
+      "prompt": "an office",
+      "generator": "cogvideo",
+      "construction_target": "desk",
+      "mean_construction_fraction": 0.23752038615319865,
+      "frames": 33,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.983184814453125,
+          "origin_blur": 0.9825592041015625,
+          "origin_delta": -0.0006256103515625,
+          "repair_clean": 0.9881665778882577,
+          "repair_blur": 0.9870855158025569,
+          "repair_delta": -0.0010810620857008013,
+          "scoring_empty_frames_clean": 33,
+          "scoring_empty_frames_blur": 33
+        },
+        "coco80": {
+          "origin_clean": 0.983184814453125,
+          "origin_blur": 0.9825592041015625,
+          "origin_delta": -0.0006256103515625,
+          "repair_clean": 0.9877587520714963,
+          "repair_blur": 0.9865627866802794,
+          "repair_delta": -0.0011959653912169133,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 1
+        },
+        "caption-v2": {
+          "origin_clean": 0.983184814453125,
+          "origin_blur": 0.9825592041015625,
+          "origin_delta": -0.0006256103515625,
+          "repair_clean": 0.9877587520714963,
+          "repair_blur": 0.9866922551935369,
+          "repair_delta": -0.0010664968779594552,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 0
+        }
+      }
+    },
+    {
+      "video_uid": "v_f417e95a0cc395ad74a6",
+      "prompt": "a bedroom",
+      "generator": "lavie",
+      "construction_target": "bed",
+      "mean_construction_fraction": 0.17880606651306152,
+      "frames": 16,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.98759765625,
+          "origin_blur": 0.9923665364583333,
+          "origin_delta": 0.004768880208333326,
+          "repair_clean": 0.9960408528645832,
+          "repair_blur": 0.9958343505859375,
+          "repair_delta": -0.0002065022786457149,
+          "scoring_empty_frames_clean": 16,
+          "scoring_empty_frames_blur": 16
+        },
+        "coco80": {
+          "origin_clean": 0.98759765625,
+          "origin_blur": 0.9923665364583333,
+          "origin_delta": 0.004768880208333326,
+          "repair_clean": 0.9952860514322917,
+          "repair_blur": 0.9951507568359376,
+          "repair_delta": -0.00013529459635408525,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 0
+        },
+        "caption-v2": {
+          "origin_clean": 0.98759765625,
+          "origin_blur": 0.9923665364583333,
+          "origin_delta": 0.004768880208333326,
+          "repair_clean": 0.9952860514322917,
+          "repair_blur": 0.9951507568359376,
+          "repair_delta": -0.00013529459635408525,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 0
+        }
+      }
+    },
+    {
+      "video_uid": "v_5e360dde23acca6a9d7c",
+      "prompt": "a bedroom",
+      "generator": "lavie",
+      "construction_target": "bed",
+      "mean_construction_fraction": 0.18380212783813477,
+      "frames": 16,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.982080078125,
+          "origin_blur": 0.961181640625,
+          "origin_delta": -0.020898437499999978,
+          "repair_clean": 0.9971232096354168,
+          "repair_blur": 0.9933278401692708,
+          "repair_delta": -0.0037953694661460036,
+          "scoring_empty_frames_clean": 16,
+          "scoring_empty_frames_blur": 16
+        },
+        "coco80": {
+          "origin_clean": 0.982080078125,
+          "origin_blur": 0.961181640625,
+          "origin_delta": -0.020898437499999978,
+          "repair_clean": 0.9971232096354168,
+          "repair_blur": 0.9933278401692708,
+          "repair_delta": -0.0037953694661460036,
+          "scoring_empty_frames_clean": 16,
+          "scoring_empty_frames_blur": 16
+        },
+        "caption-v2": {
+          "origin_clean": 0.982080078125,
+          "origin_blur": 0.961181640625,
+          "origin_delta": -0.020898437499999978,
+          "repair_clean": 0.9966959635416668,
+          "repair_blur": 0.9919820149739582,
+          "repair_delta": -0.00471394856770857,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 0
+        }
+      }
+    },
+    {
+      "video_uid": "v_8aecdfda380d15f9107e",
+      "prompt": "a bedroom",
+      "generator": "lavie",
+      "construction_target": "curtain",
+      "mean_construction_fraction": 0.23050379753112793,
+      "frames": 16,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.9806477864583333,
+          "origin_blur": 0.977294921875,
+          "origin_delta": -0.0033528645833332815,
+          "repair_clean": 0.9967102050781251,
+          "repair_blur": 0.9962259928385416,
+          "repair_delta": -0.00048421223958350357,
+          "scoring_empty_frames_clean": 16,
+          "scoring_empty_frames_blur": 16
+        },
+        "coco80": {
+          "origin_clean": 0.9806477864583333,
+          "origin_blur": 0.977294921875,
+          "origin_delta": -0.0033528645833332815,
+          "repair_clean": 0.9962544759114582,
+          "repair_blur": 0.9919606526692708,
+          "repair_delta": -0.004293823242187411,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 5
+        },
+        "caption-v2": {
+          "origin_clean": 0.9806477864583333,
+          "origin_blur": 0.977294921875,
+          "origin_delta": -0.0033528645833332815,
+          "repair_clean": 0.9962544759114582,
+          "repair_blur": 0.9956492106119792,
+          "repair_delta": -0.0006052652994790186,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 0
+        }
+      }
+    },
+    {
+      "video_uid": "v_ce094b3688e8dbd76145",
+      "prompt": "a campus",
+      "generator": "lavie",
+      "construction_target": "building",
+      "mean_construction_fraction": 0.207444429397583,
+      "frames": 16,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.9833170572916666,
+          "origin_blur": 0.9582194010416667,
+          "origin_delta": -0.025097656249999933,
+          "repair_clean": 0.9962544759114582,
+          "repair_blur": 0.9915903727213542,
+          "repair_delta": -0.004664103190104019,
+          "scoring_empty_frames_clean": 16,
+          "scoring_empty_frames_blur": 16
+        },
+        "coco80": {
+          "origin_clean": 0.9833170572916666,
+          "origin_blur": 0.9582194010416667,
+          "origin_delta": -0.025097656249999933,
+          "repair_clean": 0.9962544759114582,
+          "repair_blur": 0.9915903727213542,
+          "repair_delta": -0.004664103190104019,
+          "scoring_empty_frames_clean": 16,
+          "scoring_empty_frames_blur": 16
+        },
+        "caption-v2": {
+          "origin_clean": 0.9833170572916666,
+          "origin_blur": 0.9582194010416667,
+          "origin_delta": -0.025097656249999933,
+          "repair_clean": 0.9929646809895833,
+          "repair_blur": 0.9903228759765624,
+          "repair_delta": -0.0026418050130209147,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 1
+        }
+      }
+    },
+    {
+      "video_uid": "v_47eb7e2ef14a03b7a6d3",
+      "prompt": "a bathroom",
+      "generator": "lavie",
+      "construction_target": "sink",
+      "mean_construction_fraction": 0.20542526245117188,
+      "frames": 16,
+      "methods": {
+        "frozen19": {
+          "origin_clean": 0.9878580729166667,
+          "origin_blur": 0.9859375,
+          "origin_delta": -0.0019205729166666963,
+          "repair_clean": 0.9961120605468751,
+          "repair_blur": 0.9937194824218751,
+          "repair_delta": -0.0023925781249999334,
+          "scoring_empty_frames_clean": 16,
+          "scoring_empty_frames_blur": 16
+        },
+        "coco80": {
+          "origin_clean": 0.9878580729166667,
+          "origin_blur": 0.9859375,
+          "origin_delta": -0.0019205729166666963,
+          "repair_clean": 0.9951436360677083,
+          "repair_blur": 0.9937194824218751,
+          "repair_delta": -0.0014241536458331483,
+          "scoring_empty_frames_clean": 15,
+          "scoring_empty_frames_blur": 16
+        },
+        "caption-v2": {
+          "origin_clean": 0.9878580729166667,
+          "origin_blur": 0.9859375,
+          "origin_delta": -0.0019205729166666963,
+          "repair_clean": 0.9952290852864584,
+          "repair_blur": 0.9933705647786457,
+          "repair_delta": -0.0018585205078126554,
+          "scoring_empty_frames_clean": 0,
+          "scoring_empty_frames_blur": 0
+        }
+      }
+    }
+  ],
+  "source_sha256": "64167437a0b9288fc87aaf43f781ff2a0546b2c12a65d1a09b12e1aedbb924ed",
+  "counts": {
+    "completed": 10,
+    "construction_rejected": 631,
+    "semantic_rejected": 18,
+    "semantic_review_pending": 21
+  }
+}

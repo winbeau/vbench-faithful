@@ -101,6 +101,7 @@ version = "0.1.0"
 source = { editable = "metrics/background-consistency" }
 dependencies = [
     { name = "audit-core" },
+    { name = "audit-models" },
     { name = "numpy" },
 ]
 
@@ -123,6 +124,7 @@ models = [
 [package.metadata]
 requires-dist = [
     { name = "audit-core", editable = "packages/audit-core" },
+    { name = "audit-models", editable = "packages/audit-models" },
     { name = "audit-models", extras = ["models"], marker = "extra == 'models'", editable = "packages/audit-models" },
     { name = "decord", marker = "extra == 'models'" },
     { name = "fairscale", marker = "extra == 'models'", specifier = ">=0.4.4" },
@@ -1951,6 +1953,7 @@ version = "0.1.0"
 source = { editable = "metrics/subject-consistency" }
 dependencies = [
     { name = "audit-core" },
+    { name = "audit-models" },
     { name = "numpy" },
 ]
 
@@ -1967,6 +1970,7 @@ models = [
 [package.metadata]
 requires-dist = [
     { name = "audit-core", editable = "packages/audit-core" },
+    { name = "audit-models", editable = "packages/audit-models" },
     { name = "decord", marker = "extra == 'models'" },
     { name = "numpy", specifier = "<2" },
     { name = "opencv-python", marker = "extra == 'models'" },

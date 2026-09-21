@@ -68,22 +68,9 @@ def load_prompts(path: Path) -> dict[str, dict]:
     return prompts
 
 
-def deterministic_dense_position_encoding(layer: Any, size: tuple[int, int]):
-    """Exact dense SAM grid, avoiding CUDA's unsupported float cumsum kernel.
-
-    Pinned MobileSAM uses cumsum(ones) - 0.5 for this coordinate grid. Integer
-    arange yields the same exactly representable half-integers at SAM sizes.
-    All positional projection weights and sparse prompt encoding stay intact.
-    This local runtime adapter never edits the external MobileSAM checkout.
-    """
-    import torch
-
-    height, width = size
-    device = layer.positional_encoding_gaussian_matrix.device
-    y = ((torch.arange(1, height + 1, device=device, dtype=torch.float32) - .5) / height)
-    x = ((torch.arange(1, width + 1, device=device, dtype=torch.float32) - .5) / width)
-    yy, xx = torch.meshgrid(y, x, indexing="ij")
-    return layer._pe_encoding(torch.stack([xx, yy], dim=-1)).permute(2, 0, 1)
+from vbench_audit_models.foreground import (
+    deterministic_dense_position_encoding, load_mobile_sam_predictor,
+)
 
 
 class MobileSamSubjectMaskProvider:
@@ -98,14 +85,7 @@ class MobileSamSubjectMaskProvider:
         if predictor is None:
             if checkpoint is None or not checkpoint.is_file():
                 raise ValueError("local MobileSAM vit_t checkpoint is required")
-            try:
-                from mobile_sam import sam_model_registry, SamPredictor
-            except ImportError as exc:
-                raise ValueError("install the pinned MobileSAM source in the model environment") from exc
-            model = sam_model_registry["vit_t"](checkpoint=str(checkpoint)).to(device).eval()
-            layer = model.prompt_encoder.pe_layer
-            layer.forward = MethodType(deterministic_dense_position_encoding, layer)
-            predictor = SamPredictor(model)
+            predictor = load_mobile_sam_predictor(checkpoint, device)
         self.predictor = predictor
         self.provenance = {"role": "scoring", "family": "mobilesam", "model": "vit_t",
                            "weights_sha256": sha256_file(checkpoint) if checkpoint else None,

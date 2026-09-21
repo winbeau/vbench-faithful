@@ -1,0 +1,12 @@
+# Existing local H100 assets; no downloads. Select the GPU through --gpu.
+[clip]
+checkpoint = "/root/.cache/clip/ViT-B-32.pt"
+sha256 = "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+
+[localizer]
+detector_checkpoint = "/root/wenbiao_zhao/models/subject-repair/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth"
+detector_sha256 = "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0"
+sam_checkpoint = "/root/wenbiao_zhao/models/subject-repair/mobile_sam.pt"
+sam_sha256 = "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f"
+threshold = 0.8
+size = 512

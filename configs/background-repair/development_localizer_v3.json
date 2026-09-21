@@ -1,0 +1,19 @@
+{
+  "stage": "background_localizer_development_v3",
+  "date": "2026-09-20",
+  "parent_protocol": "development_protocol_v2.json",
+  "parent_protocol_sha256": "1237319e570482a768969169d9e871d6febf5e570fc3414eeb900ccf6a1aa900",
+  "rationale": "V2 native dev: scoring foreground frame presence falls from 0.373640 clean to 0.170481 after full subject blur; union MAE 0.015375 vs origin 0.017240. Test a fixed lower detection threshold and coarse rectangles. Do not tune on held-out data.",
+  "detector_threshold": 0.3,
+  "mask_kinds": ["sam03", "box03"],
+  "supports": ["frame", "union"],
+  "aggregations": ["official", "all_pairs_same_dtype_scalar_cosine"],
+  "min_background_fraction": 0.05,
+  "fill_rgb": [128, 128, 128],
+  "cohorts": {"natural_dev": 680, "native_dev_candidates": 680, "native_dev_accepted": 142, "subject_source_diagnostic_candidates": 288, "subject_source_diagnostic_accepted": 34},
+  "scoring": "Every actual variant has independent Mask R-CNN detections and MobileSAM inference at threshold 0.3. Coarse rectangles use these same independent detections, never construction masks or clean masks. No prompt text or human labels enter the models.",
+  "same_precision_control": "Recompute all-pairs from v2 cached CLIP features using the exact dtype and max(0, F.cosine_similarity) semantics of official, with no upper clamp. Preserve v2 float32 ablation separately.",
+  "selection": "Compare all eight candidates on every dev cohort; retain old negatives. Require nuisance improvement, background response and natural noninferiority jointly. No test data scored until candidate/criteria are frozen.",
+  "failures": "Retain every candidate/rejection and per-variant failure; never count missing scores as invariance successes.",
+  "test_status": "NOT RUN; held out"
+}

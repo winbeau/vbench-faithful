@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "scope": "Actual staged snapshot in a separate environment; no new model experiments after pause.",
+  "tested_index_tree": "a37fba6af59a216e729996d8431ac4cfe555137d",
+  "parent_commit": "afd48ecd6d4d66cd001adfd3e66dfe464345cc15",
+  "python": "3.11.14",
+  "torch": "2.14.0+cpu",
+  "uv_lock_check": "passed",
+  "uv_sync_locked_group_test": "passed",
+  "pytest": {
+    "command": "uv run --no-sync --group test pytest tests metrics -q",
+    "passed": 694,
+    "skipped": 3,
+    "failed": 0,
+    "seconds": 13.12
+  },
+  "cli_help": {
+    "dynamic-degree": "passed",
+    "motion-smoothness": "passed",
+    "subject-consistency": "passed",
+    "scene": "passed",
+    "human-action": "passed",
+    "spatial-relationship": "passed",
+    "multiple-objects": "passed",
+    "overall-consistency": "passed",
+    "background-consistency": "passed",
+    "temporal-style": "passed",
+    "object-class": "passed",
+    "color": "passed"
+  },
+  "evidence_and_frozen_source_hashes": "matched",
+  "diff_check": "passed",
+  "first_attempt_environment_issue": "One upstream sibling-path assertion failed because the temporary upstream was a symlink. Replaced only the validation layout with a local clone of the same pinned upstream; full rerun passed. No algorithm or test assertions changed."
+}

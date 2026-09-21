@@ -1,5 +1,10 @@
 # Goal 提示词：Subject Consistency 的表示层修复与背景糊化数据集
 
+> 历史任务提示词。当前工作目标已转为
+> [Background Consistency 修复与主体糊化实验](2026-09-20-background-repair-goal-prompt.md)。
+> 下文的镜像盒、逐条人工确认等旧约束已被用户后续指令覆盖；subject 的现行协议见
+> [数据流说明](2026-09-20-subject-repair-dataflow.md)。本文件保留历史，不表示旧目标已完成。
+
 > 用途：把本文件整段交给 GPT/Codex 作为任务目标。仓库工作区为
 > `/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-audit`，动手前必须先读
 > `AGENTS.md`、`README.md`、`docs/plans/2026-09-20-subject-repair-dataflow.md`。

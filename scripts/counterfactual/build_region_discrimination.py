@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from concurrent.futures import ProcessPoolExecutor
 import json
 from pathlib import Path
 
@@ -26,61 +27,70 @@ def load_construction(root: Path, entry: dict):
     return read_png_sequence(root, entry["frames"]), masks, others
 
 
-def build(construction: Path, output: Path, *, operator: str = "gaussian") -> dict:
+def build_entry(row: dict, construction: Path, output: Path, protocol_path: Path, operator: str) -> dict:
+    """One independent base; output paths are disjoint after ID validation."""
     cv2.setNumThreads(1)
-    protocol_path = ROOT / "configs/subject-repair/protocol.json"
-    protocol = json.loads(protocol_path.read_text())
-    rows = read_jsonl(construction / "index.jsonl")
-    results, counts = [], Counter()
-    for row in rows:
-        path = artifact_path(construction, row["manifest"])
-        source = json.loads(path.read_text())
-        base = source["base"]
-        if row["base_id"] != base["base_id"] or row["status"] != source["status"]:
-            raise ValueError("construction index and manifest disagree")
-        base_id = base["base_id"]
-        manifest = {"schema_version": 2, "family": "region_discrimination", "base": base,
+    path = artifact_path(construction, row["manifest"])
+    source = json.loads(path.read_text())
+    base = source["base"]
+    if row["base_id"] != base["base_id"] or row["status"] != source["status"]:
+        raise ValueError("construction index and manifest disagree")
+    base_id = base["base_id"]
+    manifest = {"schema_version": 2, "family": "region_discrimination", "base": base,
                     "construction_manifest_sha256": sha256_file(path),
                     "protocol_sha256": sha256_file(protocol_path),
                     "status": "rejected", "rejection_reasons": list(source["rejection_reasons"]),
                     "variants": {}, "positions": {}, "opencv_version": cv2.__version__,
                     "isolation": {"construction": "segformer+grabcut", "scoring_localizer": "mobilesam",
                                   "encoder": "dino_vitb16", "construction_masks_allowed_for_scoring": False}}
-        if source["status"] == "accepted":
-            frames, masks, others = load_construction(construction, source)
-            families = {}
-            try:
-                # All declared positions must be constructible before writing any
-                # derived clip; never retain a score-favorable position only.
-                for position in POSITIONS:
-                    families[position] = region_discrimination(frames, masks, others,
+    if source["status"] == "accepted":
+        frames, masks, others = load_construction(construction, source)
+        families = {}
+        try:
+            # All declared positions must be constructible before writing any
+            # derived clip; never retain a score-favorable position only.
+            for position in POSITIONS:
+                families[position] = region_discrimination(frames, masks, others,
                         subject=base["subject_en"], position=position, operator=operator)
-            except RejectedBase as exc:
-                manifest["rejection_reasons"].append(exc.reason)
-            else:
-                mask_path = output / "construction_masks" / f"{base_id}.npz"
-                write_npz(mask_path, masks=masks, other_instances=others)
-                manifest["construction_masks"] = {"path": str(mask_path.relative_to(output)), "sha256": sha256_file(mask_path)}
-                manifest["construction_localizer"] = source["localizer"]
-                manifest["source_video_sha256"] = source["source_video_sha256"]
-                manifest["shape"] = list(frames.shape)
-                manifest["area_ratio"] = masks.mean(axis=(1, 2)).tolist()
-                manifest["variants"]["clean"] = write_png_sequence(output, f"clips/{base_id}/clean", frames)
-                for position, family in families.items():
-                    manifest["positions"][position] = {"parameters": family.parameters, "proofs": family.proofs}
-                    for level in LEVELS[1:]:
-                        key = f"{position}/{level}"
-                        manifest["variants"][key] = write_png_sequence(output, f"clips/{base_id}/{key}", family.frames[level])
-                manifest["status"] = "accepted"
-        counts.update(manifest["rejection_reasons"])
-        relative = f"manifests/{base_id}.json"
-        write_json(output / relative, manifest)
-        results.append({"base_id": base_id, "video_uid": base["video_uid"],
-                        "source_prompt_id": base.get("prompt_id", base["prompt_en"]),
-                        "status": manifest["status"], "rejection_reasons": manifest["rejection_reasons"],
-                        "manifest": relative, "manifest_sha256": sha256_file(output / relative)})
-    if len({r["base_id"] for r in results}) != len(results):
+        except RejectedBase as exc:
+            manifest["rejection_reasons"].append(exc.reason)
+        else:
+            mask_path = output / "construction_masks" / f"{base_id}.npz"
+            write_npz(mask_path, masks=masks, other_instances=others)
+            manifest["construction_masks"] = {"path": str(mask_path.relative_to(output)), "sha256": sha256_file(mask_path)}
+            manifest["construction_localizer"] = source["localizer"]
+            manifest["source_video_sha256"] = source["source_video_sha256"]
+            manifest["shape"] = list(frames.shape)
+            manifest["area_ratio"] = masks.mean(axis=(1, 2)).tolist()
+            manifest["variants"]["clean"] = write_png_sequence(output, f"clips/{base_id}/clean", frames)
+            for position, family in families.items():
+                manifest["positions"][position] = {"parameters": family.parameters, "proofs": family.proofs}
+                for level in LEVELS[1:]:
+                    key = f"{position}/{level}"
+                    manifest["variants"][key] = write_png_sequence(output, f"clips/{base_id}/{key}", family.frames[level])
+            manifest["status"] = "accepted"
+    relative = f"manifests/{base_id}.json"
+    write_json(output / relative, manifest)
+    return {"base_id": base_id, "video_uid": base["video_uid"],
+            "source_prompt_id": base.get("prompt_id", base["prompt_en"]),
+            "status": manifest["status"], "rejection_reasons": manifest["rejection_reasons"],
+            "manifest": relative, "manifest_sha256": sha256_file(output / relative)}
+
+
+def build(construction: Path, output: Path, *, operator: str = "gaussian", workers: int = 1) -> dict:
+    protocol_path = ROOT / "configs/subject-repair/protocol.json"
+    rows = read_jsonl(construction / "index.jsonl")
+    if len({r["base_id"] for r in rows}) != len(rows):
         raise ValueError("duplicate bases in construction input")
+    if workers < 1:
+        raise ValueError("workers must be positive")
+    if workers == 1:
+        results = [build_entry(row, construction, output, protocol_path, operator) for row in rows]
+    else:
+        from itertools import repeat
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            results = list(pool.map(build_entry, rows, repeat(construction), repeat(output), repeat(protocol_path), repeat(operator)))
+    counts = Counter(reason for row in results for reason in row["rejection_reasons"])
     summary = {"family": "region_discrimination", "total_bases": len(results),
                "accepted": sum(row["status"] == "accepted" for row in results),
                "rejected": sum(row["status"] != "accepted" for row in results),
@@ -133,6 +143,7 @@ def main() -> int:
     parser.add_argument("--construction", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--operator", choices=("gaussian", "mosaic"), default="gaussian")
+    parser.add_argument("--workers", type=int, default=1, help="Independent CPU workers for lossless per-base construction")
     parser.add_argument("--verify", type=Path)
     args = parser.parse_args()
     if args.verify:
@@ -140,7 +151,7 @@ def main() -> int:
     else:
         if not args.construction or not args.output:
             parser.error("--construction and --output are required when building")
-        print(json.dumps(build(args.construction, new_output(args.output), operator=args.operator), indent=2))
+        print(json.dumps(build(args.construction, new_output(args.output), operator=args.operator, workers=args.workers), indent=2))
     return 0
 
 

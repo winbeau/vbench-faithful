@@ -127,8 +127,8 @@ def test_complete_dataset_replay_rechecks_pixels_and_every_artifact(tmp_path):
     assert summary["accepted"] == 1
     assert summary["base_rejection_counts"] == {"class_not_mapped": 1}
     outputs = [new_output(tmp_path / name) for name in ("a", "b")]
-    for output in outputs:
-        assert build(source, output)["accepted"] == 1
+    for workers, output in enumerate(outputs, start=1):
+        assert build(source, output, workers=workers)["accepted"] == 1
         proof = verify(output)
         assert proof["outside_mask_changed_pixels"] == 0
         assert proof["verified_corrupted_frames"] == 64

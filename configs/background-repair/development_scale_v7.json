@@ -1,0 +1,12 @@
+{
+  "stage": "background_patch_scale_development_v7",
+  "date": "2026-09-20",
+  "rationale": "The declared 0.5/0.5 temporal mixture v6 fails the stricter start-window nuisance gate (0.011317). Retain uniform all-pair aggregation and test one fixed intermediate gain 1.75. It keeps about 86% of the origin background response on dev, above the unchanged 75% floor, and expands nuisance equally; normalized selective improvement cannot be created by this calibration.",
+  "official_weight": 0,
+  "all_pairs_weight": 1,
+  "gain": 1.75,
+  "representation": "v4 per-frame independent background patch pooling; v2 threshold 0.8 and existing CLIP weights",
+  "formula": "min(1, max(0, 1 - 1.75 * (1 - raw_patch_frame_all_pairs)))",
+  "selection": "Require every full/start/middle/end native foreground MAE <=0.01; the original natural, background, scale-adjusted, coverage and 34-case diagnostic checks remain required. Preserve v5/v6 failures and all raw scores. Freeze this candidate only if these dev checks pass.",
+  "test_status": "NOT RUN; no heldout scores inspected or used"
+}

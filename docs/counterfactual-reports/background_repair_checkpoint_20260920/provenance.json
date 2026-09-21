@@ -1,0 +1,42 @@
+{
+  "status": "paused_by_user",
+  "goal_achieved": false,
+  "source_artifacts": {
+    "construction_comparison.json": {
+      "path": "output/background-repair/background-refined-dev-v3-expanded-20260920-comparison/comparison.json",
+      "sha256": "35908ffaa9592aeba922e9d5b38e1da63db7b5437284d6a64c8a91d0da8ed7f3"
+    },
+    "intervention_comparison.json": {
+      "path": "output/background-repair/background-refined-dev-v3-eighth-comparison-20260920/comparison.json",
+      "sha256": "5044297ba19c4da68f31f1ab5cf5aa0c3a162af2022bac9ed38cd08c693a654b"
+    },
+    "intervention_validation.json": {
+      "path": "output/background-repair/background-refined-dev-v3-eighth-comparison-20260920/validation.json",
+      "sha256": "ccbfafe97c2b76758bc8fc8595ecda0711b0058e40764a4bf3413be038f451cc"
+    },
+    "natural_statistics.json": {
+      "path": "output/background-repair/background-natural-caption-dev-v2-20260920-analysis/statistics.json",
+      "sha256": "7acd34f8a434c7dbd8e8c44fcede6f4cec9fc19a8fcbc691e56bf30c0907b65e"
+    },
+    "natural_noninferiority.json": {
+      "path": "output/background-repair/background-natural-caption-dev-v2-20260920-analysis/natural_noninferiority_check.json",
+      "sha256": "82ef5e3063550eea00bbf5c23dda377de611a4c9d3f5137f8485cec8eef245ab"
+    },
+    "scored_review.json": {
+      "path": "output/background-repair/background-refined-dev-v3-eighth-review-20260920/semantic_review.json",
+      "sha256": "0841c31bcdc5b3239640d30e7d7ab78eb2ea13ab89a9073f78bf62c5e5425c7d"
+    }
+  },
+  "exported_files_sha256": {
+    "construction_comparison.json": "35908ffaa9592aeba922e9d5b38e1da63db7b5437284d6a64c8a91d0da8ed7f3",
+    "intervention_comparison.json": "5044297ba19c4da68f31f1ab5cf5aa0c3a162af2022bac9ed38cd08c693a654b",
+    "intervention_validation.json": "ccbfafe97c2b76758bc8fc8595ecda0711b0058e40764a4bf3413be038f451cc",
+    "natural_noninferiority.json": "82ef5e3063550eea00bbf5c23dda377de611a4c9d3f5137f8485cec8eef245ab",
+    "natural_statistics.json": "7acd34f8a434c7dbd8e8c44fcede6f4cec9fc19a8fcbc691e56bf30c0907b65e",
+    "review_at_pause.json": "013667ba30ff755ca6e60e085e6479c63c057c84cb24a593375d9b039ceef979",
+    "scored_review.json": "0841c31bcdc5b3239640d30e7d7ab78eb2ea13ab89a9073f78bf62c5e5425c7d",
+    "union_probe_status.json": "2cdbf7d3f800df6ce94d31f8b2f8a97f56863bbfe6eb8c41a7935b8bbdf02330",
+    "repository_checks.json": "7d26131c37af0de0fecc2321ce7ddde18c7eae2a1e0f2ec1308ae1c41e67094c"
+  },
+  "scope": "Compact existing evidence for the requested checkpoint commit; no new experiment, inference, or score calculation after pause."
+}

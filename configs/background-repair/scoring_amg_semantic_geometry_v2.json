@@ -1,0 +1,13 @@
+{
+  "name": "mobilesam_semantic_proposal_probe_v2",
+  "points_per_side": 8,
+  "points_per_batch": 64,
+  "pred_iou_threshold": 0.88,
+  "stability_threshold": 0.95,
+  "minimum_area": 0.01,
+  "maximum_area": 0.6,
+  "maximum_touched_edges": 4,
+  "crop_n_layers": 0,
+  "selection": "Largest semantically eligible object proposal; all boundary contacts allowed; no target-area matching.",
+  "scope": "Input-only probe on all three previously reviewed inputs, clean and actual full-blur first/middle/last frames. No metric delta used to select a proposal."
+}

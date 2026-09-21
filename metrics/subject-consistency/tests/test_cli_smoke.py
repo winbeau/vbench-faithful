@@ -75,6 +75,14 @@ class CliSmokeTests(unittest.TestCase):
             code, _ = self.run_cli(["--audit", "--audit-variant", "subject_masked", "--video", str(video), "--output", str(root / "out")])
         self.assertEqual(code, 2)
 
+    def test_isolated_variant_requires_independent_masks(self):
+        with tempfile.TemporaryDirectory() as root:
+            video = Path(root) / "video.mp4"
+            video.touch()
+            code, backend = self.run_cli(["--audit", "--audit-variant", "subject_isolated", "--video", str(video)])
+            self.assertEqual(code, 2)
+            backend.assert_not_called()
+
     def test_masked_variant_dispatches_to_the_masked_evaluator(self):
         calls = {}
 
@@ -107,6 +115,24 @@ class CliSmokeTests(unittest.TestCase):
             self.assertEqual(calls["mask_config"]["root"], str(mask_root))
             self.assertEqual(calls["mask_config"]["missing_policy"], "exclude")
             self.assertEqual(calls["seed"], 42)
+
+    def test_isolated_variant_dispatches_preencoder_mode_and_records_version(self):
+        calls = {}
+        def fake_masked(videos, metadata, gpu_ids, dino_config, mask_config, seed):
+            calls.update(mask_config)
+            return fake_results("audit", videos, metadata, gpu_ids, dino_config, seed)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            video = root / "video.mp4"
+            video.touch()
+            with patch("subject_consistency.cli.evaluate_masked_sharded", side_effect=fake_masked):
+                code, backend = self.run_cli(["--audit", "--audit-variant", "subject_isolated", "--subject-view", "full",
+                    "--subject-masks", str(root / "masks"), "--video", str(video), "--output", str(root / "out")])
+            self.assertEqual(code, 0)
+            backend.assert_not_called()
+            self.assertEqual(calls["encoding_mode"], "preencode_full")
+            info = json.loads(next((root / "out").glob("subject-consistency/audit/*/summary.json")).read_text())
+            self.assertIn("subject-isolated-full-all-pairs-v2", str(info))
 
 
 if __name__ == "__main__":

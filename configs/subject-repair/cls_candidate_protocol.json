@@ -1,0 +1,17 @@
+{
+  "stage": "development_selected_candidate_on_reused_official_evaluation",
+  "primary_method": "cls_full_exclude_fallback_official",
+  "selection": "Chosen after development-only CLS and missing-policy diagnostics. Earlier patch-method test and background results were exposed; these are reused evaluation sets, not a new independent confirmatory cohort.",
+  "representation": "Same pinned DINO ViT-B/16 CLS on full-frame subject-isolated RGB; fill 128; float32 before official Resize; same frozen automatic per-variant scoring masks.",
+  "aggregation": "All-pairs cosine among frames with subject masks, clamp negative cosine at zero.",
+  "missing_rule": "At least two subject frames: conditional CLS score. Fewer than two: recorded Official score. Runtime failures never silently fall back.",
+  "parameters_fitted": false,
+  "tie_margin": 0.0,
+  "natural_test_videos": 860,
+  "natural_test_pairs": 1290,
+  "background_candidates": 288,
+  "background_constructed": 34,
+  "controls": ["official", "aggregation", "preencode_crop_zero"],
+  "analysis": "Keep complete denominators, runtime errors and fallback counts. Compare paired prompt-cluster bootstrap at seed 20260920 with 10000 draws. Report all background positions and subject responses. Do not change settings after followup results.",
+  "user_localization_tolerance": "Roughly capture the subject's main parts; minor boundary error does not block experiments. No measured contour IoU claim."
+}

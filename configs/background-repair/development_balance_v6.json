@@ -1,0 +1,11 @@
+{
+  "stage": "background_balanced_temporal_development_v6",
+  "date": "2026-09-20",
+  "rationale": "V5 frame/all-pairs gain2 passes full-blur, background-response and natural dev checks, but full-frame pair weighting slightly worsens end-window nuisance (0.010268 vs origin 0.009149). Test one fixed 0.5/0.5 mixture of the official and all-pair aggregations on the same background patch view, with unchanged gain2 and independent masks.",
+  "official_weight": 0.5,
+  "all_pairs_weight": 0.5,
+  "gain": 2,
+  "source": "completed raw v4 frame patch scores; no new localization, encoder or test labels",
+  "selection": "Require full and all three partial foreground-blur means <=0.01 on native dev, retain the natural and background gates and 34-case diagnostic. Record failed attempts; do not select from test.",
+  "test_status": "NOT RUN; candidate pending before final freeze"
+}

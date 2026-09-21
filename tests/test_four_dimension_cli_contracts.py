@@ -45,11 +45,11 @@ def test_new_cli_emits_null_statuses_for_both_backends(tmp_path: Path, distribut
         summary = json.loads((destination / "summary.json").read_text(encoding="utf-8"))
         assert len(rows) == 1
         assert rows[0]["video"] == str(video)
-        expected = "not_implemented" if distribution in {"background-consistency", "temporal-style"} else "failed"
+        expected = "not_implemented" if distribution == "temporal-style" else "failed"
         assert rows[0]["status"] == expected
         assert rows[0]["score"] is None
         assert rows[0]["backend"] in {"vbench", "audit"}
-        if distribution in {"background-consistency", "temporal-style"}:
+        if distribution == "temporal-style":
             assert rows[0]["implementation_status"] == "not_implemented"
         assert summary["status"] == expected
 
