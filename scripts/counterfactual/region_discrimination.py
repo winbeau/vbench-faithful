@@ -143,6 +143,21 @@ def inward_alpha(mask: np.ndarray) -> np.ndarray:
     return np.minimum(distance / 1.5, 1.0) * mask
 
 
+def recover_with_fallback(image: np.ndarray, mask: np.ndarray, *, person: bool,
+                          padding_fraction: float, keep_valid_initial: bool = False):
+    """One recovery rule for fresh and cached construction, without scoring input."""
+    valid_initial = .01 <= float(mask.mean()) <= .50
+    try:
+        current = recover_grabcut_extent(image, mask, person=person, padding_fraction=padding_fraction)
+    except RejectedBase as exc:
+        if keep_valid_initial and valid_initial:
+            return mask.copy(), exc.reason
+        raise
+    if keep_valid_initial and valid_initial and not .01 <= float(current.mean()) <= .50:
+        return mask.copy(), 'recovered_area_outside_frozen_gates'
+    return current, None
+
+
 def corrupt_image(image: np.ndarray, mask: np.ndarray, *, operator: str, scale: float) -> np.ndarray:
     """One float64 blend from the original, inward-only feather, one rounding."""
     if image.dtype != np.uint8 or image.ndim != 3 or image.shape[2] != 3:

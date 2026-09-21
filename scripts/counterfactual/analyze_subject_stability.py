@@ -71,6 +71,7 @@ def summarize(records, methods, *, resamples=10000, positions=('start','middle',
                         'clean': a, 'background': b, 'subject': c, 'origin_clean': ao, 'origin_background': bo,
                         'origin_abs_change': origin, 'repair_abs_change': delta, 'subject_signed_drop': subject,
                         'zero_to_zero': constant_zero, 'joint_success': joint, 'runtime_status': row['status']}
+                case['joint_success_with_subject_response'] = bool(joint and subject is not None and subject >= .05)
                 cases.append(case); flat.append(case)
             paired = [r for r in cases if None not in (r['origin_abs_change'], r['repair_abs_change'])]
             def stats(key, rows=paired):
@@ -81,11 +82,29 @@ def summarize(records, methods, *, resamples=10000, positions=('start','middle',
             response = stats('subject_signed_drop', subject_cases)
             complete = len(paired) == len(accepted) and bool(accepted)
             successful = sum(r['joint_success'] for r in cases)
+            # A positive sign alone is not material sensitivity. Keep the old
+            # background-only gate and add an explicit response requirement;
+            # missing subject evidence retains the full constructed denominator.
+            response_complete = len(subject_cases) == len(accepted) and bool(accepted)
+            substantive_response = bool(response_complete and response['mean'] >= .05)
+            combined = sum(r['joint_success_with_subject_response'] for r in cases)
             report['positions'][position][method] = {
                 'paired_scored': len(paired), 'unscored': len(accepted)-len(paired), 'full_coverage': complete,
                 'origin': origin, 'repair': repair, 'subject_response': response,
                 'subject_scored': len(subject_cases),
                 'subject_positive': sum(r['subject_signed_drop'] > 0 for r in subject_cases),
+                'subject_effect_size': {
+                    'negligible_absolute_change_at_most': .01,
+                    'minimum_substantive_drop': .05,
+                    'denominator': len(accepted),
+                    'unscored': len(accepted)-len(subject_cases),
+                    'absolute_change_le_001': sum(abs(r['subject_signed_drop']) <= .01 for r in subject_cases),
+                    'wrong_direction': sum(r['subject_signed_drop'] < 0 for r in subject_cases),
+                    'drop_gt_001': sum(r['subject_signed_drop'] > .01 for r in subject_cases),
+                    'drop_ge_005': sum(r['subject_signed_drop'] >= .05 for r in subject_cases),
+                    'drop_ge_010': sum(r['subject_signed_drop'] >= .1 for r in subject_cases),
+                    'mean_target_on_complete_cohort': substantive_response,
+                },
                 'subject_larger_than_background': sum(r['subject_signed_drop'] > r['repair_abs_change']
                     for r in subject_cases if r['repair_abs_change'] is not None),
                 'zero_to_zero': sum(r['zero_to_zero'] for r in cases),
@@ -96,6 +115,10 @@ def summarize(records, methods, *, resamples=10000, positions=('start','middle',
                 'mean_target_on_complete_cohort': bool(complete and origin['mean'] >= .1 and repair['mean'] <= .01
                                                     and not any(r['zero_to_zero'] for r in cases)),
                 'mean_target_on_scored_subset': bool(paired and origin['mean'] >= .1 and repair['mean'] <= .01),
+                'joint_success_with_subject_response_count': combined,
+                'joint_success_with_subject_response_fraction_full_constructed_denominator': combined/len(accepted) if accepted else None,
+                'combined_mean_target_on_complete_cohort': bool(complete and origin['mean'] >= .1 and repair['mean'] <= .01
+                    and not any(r['zero_to_zero'] for r in cases) and substantive_response),
             }
     return report, flat
 

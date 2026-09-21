@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 
 from .common import ROOT, sha256_file
-from .region_discrimination import RejectedBase, refine_grabcut, recover_grabcut_extent, window_indices
+from .region_discrimination import RejectedBase, refine_grabcut, recover_with_fallback, window_indices
 from .subject_artifacts import (new_output, object_sha256, read_jsonl, safe_id, upstream_frames,
                                 write_json, write_jsonl, write_npz, write_png_sequence)
 
@@ -75,7 +75,8 @@ class SegFormerConstructionLocalizer:
         return resized.argmax(dim=1)[0].cpu().numpy().astype(np.uint8)
 
 
-def localize_frames(frames: np.ndarray, subject: str, localizer, mapping: dict) -> tuple[np.ndarray, np.ndarray, list[list[str]]]:
+def localize_frames(frames: np.ndarray, subject: str, localizer, mapping: dict, *,
+                    recovery_log: list[str | None] | None = None) -> tuple[np.ndarray, np.ndarray, list[list[str]]]:
     labels_by_name = {name: key for key, name in localizer.id2label.items()}
     target_ids = [labels_by_name[name] for name in mapping["classes"][subject]]
     stuff_ids = [labels_by_name[name] for name in mapping["unoccupied_stuff_labels"]]
@@ -84,11 +85,13 @@ def localize_frames(frames: np.ndarray, subject: str, localizer, mapping: dict) 
         labels = localizer.labels_for(frame)
         target = np.isin(labels, target_ids).astype(np.uint8)
         why = []
+        fallback = None
         try:
             mask = refine_grabcut(frame, target, person=subject == "person")
             if mapping.get('recovery_padding_fraction') is not None:
-                mask = recover_grabcut_extent(frame, mask, person=subject == 'person',
-                                             padding_fraction=mapping['recovery_padding_fraction'])
+                mask, fallback = recover_with_fallback(frame, mask, person=subject == 'person',
+                    padding_fraction=mapping['recovery_padding_fraction'],
+                    keep_valid_initial=mapping.get('recovery_keep_valid_initial', False))
         except RejectedBase as exc:
             mask = np.zeros(frame.shape[:2], np.uint8)
             why.append(exc.reason)
@@ -100,6 +103,8 @@ def localize_frames(frames: np.ndarray, subject: str, localizer, mapping: dict) 
         masks.append(mask)
         occupied.append((~np.isin(labels, stuff_ids) & (mask == 0)).astype(np.uint8))
         reasons.append(why)
+        if recovery_log is not None:
+            recovery_log.append(fallback)
     return np.stack(masks), np.stack(occupied), reasons
 
 
@@ -138,7 +143,11 @@ def generate(bases: list[dict], video_root: Path, output: Path, mapping: dict, l
             entry["source_video_sha256"] = sha256_file(video)
             entry["decode"] = "VBench@fd18b3d.load_video; all frames; native resolution; RGB uint8"
             window_indices(len(frames), "middle")
-            masks, other_instances, why = localize_frames(frames, subject, localizer, mapping)
+            fallbacks = []
+            masks, other_instances, why = localize_frames(frames, subject, localizer, mapping, recovery_log=fallbacks)
+            if mapping.get('recovery_keep_valid_initial') and 'construction_recovery' in entry:
+                entry['frame_recovery_fallbacks'] = fallbacks
+                entry['construction_recovery']['keep_valid_initial_on_failed_recovery'] = True
             entry["shape"] = list(masks.shape)
             entry["area_pixels"] = masks.sum(axis=(1, 2)).tolist()
             entry["area_ratio"] = masks.mean(axis=(1, 2)).tolist()

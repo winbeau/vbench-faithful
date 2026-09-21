@@ -57,3 +57,27 @@ def test_declared_single_frame_positions_are_not_relabelled_as_quarter_windows()
     assert report['positions']['first_frame']['tracked_exclude']['mean_target_on_complete_cohort']
     with pytest.raises(ValueError, match='nonempty and unique'):
         summarize([sample], ['tracked_exclude'], positions=['first_frame', 'first_frame'])
+
+
+def test_small_positive_subject_change_does_not_pass_substantive_response():
+    records = [row('boundary', .01, .01, 0), row('tiny', .8, .805, .799)]
+    report, cases = summarize(records, ['tracked_exclude'], resamples=20, positions=['start'])
+    x = report['positions']['start']['tracked_exclude']
+    assert x['subject_positive'] == 2 and x['mean_target_on_complete_cohort']
+    assert x['subject_effect_size']['absolute_change_le_001'] == 2
+    assert x['subject_effect_size']['drop_gt_001'] == 0
+    assert not x['subject_effect_size']['mean_target_on_complete_cohort']
+    assert not x['combined_mean_target_on_complete_cohort']
+    assert not any(r['joint_success_with_subject_response'] for r in cases)
+
+
+def test_material_subject_response_preserves_failures_and_full_denominator():
+    records = [row('large', .9, .905, .7), row('missing', .9, .905, None),
+               row('wrong', .8, .805, .9)]
+    report, _ = summarize(records, ['tracked_exclude'], resamples=20, positions=['start'])
+    x = report['positions']['start']['tracked_exclude']; effect = x['subject_effect_size']
+    assert effect['denominator'] == 3 and effect['unscored'] == 1
+    assert effect['drop_ge_005'] == effect['drop_ge_010'] == 1
+    assert effect['wrong_direction'] == 1 and effect['absolute_change_le_001'] == 0
+    assert not x['combined_mean_target_on_complete_cohort']
+    assert x['joint_success_with_subject_response_fraction_full_constructed_denominator'] == 1/3

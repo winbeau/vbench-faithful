@@ -65,3 +65,35 @@ def test_failed_optional_recovery_does_not_erase_an_existing_valid_mask(tmp_path
     new=json.loads((output/'manifests/a.json').read_text())
     assert new['frame_recovery_fallbacks']==['recovery_grabcut_unusable_seeds']*2
     with np.load(output/new['mask_file']['path']) as arrays:assert np.array_equal(arrays['masks'],masks)
+
+
+@pytest.mark.parametrize('failure', ['seeds', 'area'])
+def test_fresh_generation_honors_the_same_fallback_and_records_each_frame(tmp_path, monkeypatch, failure):
+    import json
+    from scripts.counterfactual.generate_subject_masks import generate, localize_frames
+    mask = np.zeros((100, 100), np.uint8); mask[30:35, 20:80] = 1
+    frames = np.zeros((8, 100, 100, 3), np.uint8)
+    # An admissible initial refinement can lack the certain core required by
+    # the optional second pass; the regression is at that handoff.
+    monkeypatch.setattr('scripts.counterfactual.generate_subject_masks.refine_grabcut', lambda *a, **k: mask.copy())
+    if failure == 'area':
+        monkeypatch.setattr('scripts.counterfactual.region_discrimination.recover_grabcut_extent',
+                            lambda *a, **k: np.ones_like(mask))
+    class Localizer:
+        id2label = {0: 'sky', 1: 'person'}
+        provenance = {'role': 'construction', 'family': 'segformer', 'test_fixture': True}
+        def labels_for(self, frame): return mask
+    mapping = {'classes': {'person': ['person']}, 'unoccupied_stuff_labels': ['sky'],
+               'absence_scope': 'synthetic fixture', 'recovery_padding_fraction': .25,
+               'recovery_keep_valid_initial': True}
+    (tmp_path / 'video.bin').write_bytes(frames.tobytes()); out = tmp_path / 'output'
+    base = {'base_id': 'b0', 'video_uid': 'v0', 'subject_en': 'person',
+            'prompt_en': 'a person', 'relative_video_path': 'video.bin'}
+    assert generate([base], tmp_path, out, mapping, Localizer(), decoder=lambda _: frames)['accepted'] == 1
+    saved = json.loads((out / 'manifests/b0.json').read_text())
+    reason = 'recovery_grabcut_unusable_seeds' if failure == 'seeds' else 'recovered_area_outside_frozen_gates'
+    assert saved['frame_recovery_fallbacks'] == [reason] * 8
+    with np.load(out / saved['mask_file']['path']) as data:
+        assert np.array_equal(data['masks'], np.repeat(mask[None], 8, axis=0))
+    _, _, rejected = localize_frames(frames, 'person', Localizer(), {**mapping, 'recovery_keep_valid_initial': False})
+    assert all(rejected)

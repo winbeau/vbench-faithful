@@ -17,7 +17,7 @@ import cv2
 import numpy as np
 
 from .common import sha256_file
-from .region_discrimination import RejectedBase, recover_grabcut_extent
+from .region_discrimination import RejectedBase, recover_with_fallback
 from .subject_artifacts import (artifact_path,new_output,object_sha256,read_jsonl,read_png_sequence,
                                upstream_frames,write_json,write_jsonl,write_npz,write_png_sequence)
 
@@ -48,15 +48,11 @@ def recover_entry(arguments):
         recovered,reasons,fallbacks=[],[],[]
         for frame,mask in zip(frames,masks):
             why=[];fallback=None
-            try:current=recover_grabcut_extent(frame,mask,person=entry['base']['subject_en']=='person',
-                                              padding_fraction=mapping['recovery_padding_fraction'])
+            try:current,fallback=recover_with_fallback(frame,mask,person=entry['base']['subject_en']=='person',
+                padding_fraction=mapping['recovery_padding_fraction'],
+                keep_valid_initial=mapping.get('recovery_keep_valid_initial',False))
             except RejectedBase as exc:
-                if mapping.get('recovery_keep_valid_initial') and .01 <= float(mask.mean()) <= .50:
-                    current=mask.copy();fallback=exc.reason
-                else:current=np.zeros_like(mask);why.append(exc.reason)
-            if (mapping.get('recovery_keep_valid_initial') and .01 <= float(mask.mean()) <= .50
-                    and not .01 <= float(current.mean()) <= .50):
-                current=mask.copy();fallback='recovered_area_outside_frozen_gates'
+                current=np.zeros_like(mask);why.append(exc.reason)
             area=float(current.mean())
             if area<.01:why.append('mask_area_below_1_percent')
             if area>.50:why.append('mask_area_above_50_percent')
