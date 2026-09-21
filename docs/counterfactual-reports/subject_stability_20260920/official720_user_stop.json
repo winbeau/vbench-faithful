@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "user_request": "差不多快速收尾吧",
+  "scope": "Finish on completed quarter-window primary experiment; stop remaining supplemental single-frame scoring and its waiting postcheck; preserve partial outputs.",
+  "requested_stop_unix": 1789980239.0178678,
+  "host": "h100-server",
+  "root": "/root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920",
+  "process_group_before": [
+    {
+      "pid": 117180,
+      "state": "R",
+      "parent": 3925658,
+      "pgid": 3925658,
+      "start_ticks": 45177023,
+      "cmd": "/root/wenbiao_zhao/venvs/vbench/bin/python -m scripts.counterfactual.run_subject_stability --dataset /root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920/single-frame-dataset --output /root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920/single-frame/shard0 --protocol /root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920/single-frame/scoring_protocol.json --detector-checkpoint /root/wenbiao_zhao/models/subject-repair/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth --mobilesam-checkpoint /root/wenbiao_zhao/models/subject-repair/mobile_sam.pt --dino-repo /root/.cache/vbench/dino_model/facebookresearch_dino_main --dino-weight /root/.cache/vbench/dino_model/dino_vitbase16_pretrain.pth --device cuda:0 --num-shards 2 --shard-index 0 "
+    },
+    {
+      "pid": 117181,
+      "state": "R",
+      "parent": 3925658,
+      "pgid": 3925658,
+      "start_ticks": 45177023,
+      "cmd": "/root/wenbiao_zhao/venvs/vbench/bin/python -m scripts.counterfactual.run_subject_stability --dataset /root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920/single-frame-dataset --output /root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920/single-frame/shard1 --protocol /root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920/single-frame/scoring_protocol.json --detector-checkpoint /root/wenbiao_zhao/models/subject-repair/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth --mobilesam-checkpoint /root/wenbiao_zhao/models/subject-repair/mobile_sam.pt --dino-repo /root/.cache/vbench/dino_model/facebookresearch_dino_main --dino-weight /root/.cache/vbench/dino_model/dino_vitbase16_pretrain.pth --device cuda:0 --num-shards 2 --shard-index 1 "
+    },
+    {
+      "pid": 3925658,
+      "state": "S",
+      "parent": 1,
+      "pgid": 3925658,
+      "start_ticks": 44541060,
+      "cmd": "/root/wenbiao_zhao/venvs/vbench/bin/python -m scripts.counterfactual.run_subject_official_census --plan /root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920-src/configs/subject-repair/stability_official720_protocol_v9.json --expected-plan-sha256 14a4b7ad1b1d969c269bfbd4ea92f7fa1e20ad36a587fdf75d15f48cfd88c950 --source-archive-sha256 b43d809a0481755b0fa29cc148e224263a391f73be4c7d31bac51aa159e7bd95 --video-root /root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos --segformer-model /root/wenbiao_zhao/models/subject-repair/segformer-b0-ade20k --detector-checkpoint /root/wenbiao_zhao/models/subject-repair/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth --mobilesam-checkpoint /root/wenbiao_zhao/models/subject-repair/mobile_sam.pt --dino-repo /root/.cache/vbench/dino_model/facebookresearch_dino_main --dino-weight /root/.cache/vbench/dino_model/dino_vitbase16_pretrain.pth --output /root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920 --workers 8 "
+    }
+  ],
+  "waiting_postcheck_before": {
+    "pid": 137565,
+    "state": "S",
+    "parent": 137504,
+    "pgid": 137565,
+    "start_ticks": 45294221,
+    "cmd": "python3 - "
+  },
+  "waiting_postcheck_identity_basis": "Previously launched tool session 22986 recorded PID 137565; live Python stdin process, own process group and launch time revalidated.",
+  "primary_sha256_before": {
+    "quarter-merged/run.json": "33907f5fae3373a10021e5bf8681ad19f46617e9d4cadf1af28f5868e1efa712",
+    "quarter-merged/scores.jsonl": "3d18f4f81ed0e8bf2e4bd56fbf4c64edcbe2e5c6daf45905e418d8d87a4ea968",
+    "quarter-analysis/statistics.json": "a9e4c72399a57cd41f123b0b4ae1eaae6ee17091d93806f0f1711226ea0fd610"
+  },
+  "supplement_completed": false,
+  "signals": [
+    {
+      "target": "process_group",
+      "id": 3925658,
+      "signal": "SIGTERM",
+      "unix": 1789980239.0180905
+    },
+    {
+      "target": "waiting_postcheck",
+      "id": 137565,
+      "signal": "SIGTERM",
+      "unix": 1789980239.0181766
+    }
+  ],
+  "processes_after": {
+    "117180": {
+      "pid": 117180,
+      "state": "Z",
+      "parent": 1,
+      "pgid": 3925658,
+      "start_ticks": 45177023,
+      "cmd": ""
+    },
+    "117181": {
+      "pid": 117181,
+      "state": "Z",
+      "parent": 1,
+      "pgid": 3925658,
+      "start_ticks": 45177023,
+      "cmd": ""
+    },
+    "3925658": {
+      "pid": 3925658,
+      "state": "Z",
+      "parent": 1,
+      "pgid": 3925658,
+      "start_ticks": 44541060,
+      "cmd": ""
+    },
+    "137565": null
+  },
+  "all_owned_processes_stopped": true,
+  "primary_sha256_after": {
+    "quarter-merged/run.json": "33907f5fae3373a10021e5bf8681ad19f46617e9d4cadf1af28f5868e1efa712",
+    "quarter-merged/scores.jsonl": "3d18f4f81ed0e8bf2e4bd56fbf4c64edcbe2e5c6daf45905e418d8d87a4ea968",
+    "quarter-analysis/statistics.json": "a9e4c72399a57cd41f123b0b4ae1eaae6ee17091d93806f0f1711226ea0fd610"
+  },
+  "primary_outputs_unchanged": true,
+  "partial_shards": [
+    {
+      "shard": 0,
+      "output": "/root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920/single-frame/shard0",
+      "files": {
+        "run.json": {
+          "sha256": "a4c0d13f59653c3092205cad837a8a92c717760692b29e07eae4a71cb59d83af",
+          "bytes": 4868
+        },
+        "progress.json": {
+          "sha256": "83c080eb14f7a2b45c4243cf3b37220f95adaba28699f0f95bd0e045dd42124e",
+          "bytes": 109
+        },
+        "scores.jsonl": {
+          "sha256": "a46ebc7199197ec58bedda938a510a27f5a69011895e26519387681c4fa14307",
+          "bytes": 18605026
+        }
+      },
+      "run": {
+        "base_count": 360,
+        "dataset_index_sha256": "52a7fb046f9d3ca008e326ccf24cb746fad73e22c0ba7e4f228585cabaddfb72",
+        "device": "cuda:0",
+        "integrity": {
+          "index_sha256": "52a7fb046f9d3ca008e326ccf24cb746fad73e22c0ba7e4f228585cabaddfb72",
+          "status": "pending_analysis_gate"
+        },
+        "localizer": {
+          "box_detector": {
+            "batch_size": 4,
+            "family": "maskrcnn_resnet50_fpn_coco_v1_box_branch",
+            "max_size": 512,
+            "min_size": 512,
+            "native_roi_align_forward": true,
+            "strict_determinism_disabled_only_inside_box_forward": true,
+            "threshold": 0.5,
+            "weights_sha256": "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0"
+          },
+          "construction_masks_reused": false,
+          "cross_variant_state": false,
+          "family": "mobilesam",
+          "human_confirmed": false,
+          "instances": "union_all_target_tracks",
+          "model": "vit_t",
+          "multimask_output": false,
+          "prompt_policy": "direct_anchor",
+          "prompt_source": "clip_local_target_box_tracks",
+          "role": "scoring",
+          "tracking": {
+            "max_gap": 2,
+            "minimum_iou": 0.2,
+            "smooth_radius": 1
+          },
+          "weights_sha256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f"
+        },
+        "num_shards": 2,
+        "origin_reference": "pinned_upstream_function_actual_lossless_pixels",
+        "physical_gpu": "1",
+        "protocol_sha256": "4350a824afedd2a67189a70a8ab86cda7a8582412f2e5ef1fad5958d15cbd162",
+        "shard_index": 0,
+        "source_sha256": {
+          "metrics/subject-consistency/src/subject_consistency/__init__.py": "bcf97abf1ec8120b6bce19160c78036f2c6be10afe99097788715fdb411f036d",
+          "metrics/subject-consistency/src/subject_consistency/automatic_localizer.py": "f4500e52d17bc99175250f5b8e777b653ce59bc153a77c1ed5ee58d74651280d",
+          "metrics/subject-consistency/src/subject_consistency/backends/__init__.py": "fd5795b1a62a2908223587a54d3903bf081f65c0b9344b085e3199458eae456f",
+          "metrics/subject-consistency/src/subject_consistency/backends/audit.py": "344ef3b5cea2ea9a09e1e616baebde88177aede2839827a1ef779e05d433f858",
+          "metrics/subject-consistency/src/subject_consistency/backends/vbench.py": "1fd804f5630247d59f061fec20ccb66f890164c6029147744cab389ddf286d2e",
+          "metrics/subject-consistency/src/subject_consistency/cli.py": "2dcef183a139ebe626bcec478e7cb94f10174bfc985c721f8431b745e912b2cb",
+          "metrics/subject-consistency/src/subject_consistency/diagnostics.py": "ae0c6d64b50ebb1cdc280526d6b1af7950881ac758452d096660bb7e53532457",
+          "metrics/subject-consistency/src/subject_consistency/hybrid.py": "bdb7b1b8c1680ac10a0a6d36cea41014da7f7e9135459acab88dc44b565756d5",
+          "metrics/subject-consistency/src/subject_consistency/isolation.py": "731142a3ce876724c034f15f9680f7c5726e101185f55471bf7d838b1e6e7cfa",
+          "metrics/subject-consistency/src/subject_consistency/localizer.py": "8522c4416c1d6794072e7a78462fe599eea489630bb7eeb1ae6b2d0847b4cf33",
+          "metrics/subject-consistency/src/subject_consistency/metric.py": "f944d2207a1589529fbba66cecf346ab6d10ce6fdc2ef44a7184ddf8362da300",
+          "metrics/subject-consistency/src/subject_consistency/models.py": "aa4f5940851957ab6a046639a548b1e3b65f9d1483b61af1d5181b9bdc31f126",
+          "metrics/subject-consistency/src/subject_consistency/subject_evidence.py": "c31983580049df539f0742b4c9921a5187e3c79b97b7b92e469acf8ad1585da7",
+          "metrics/subject-consistency/src/subject_consistency/temporal_localizer.py": "e2e2306fed180b18b0a9224c6616a26e95d1425650a8e289a20aabcc3191d109",
+          "packages/audit-models/src/vbench_audit_models/foreground.py": "89dcf967459eecca22c5d75234b3b53f9619e2abb587492d497ad21b6a8aaee5",
+          "scripts/counterfactual/run_subject_stability.py": "81870ffa10f9c39615b66904bfd0bf98590eceaae843d3b6db2ee0665308e364",
+          "scripts/counterfactual/score_region_discrimination.py": "71c65013dadaddbd6794509a824777fc7955932f9077e292c4ade1b2ba9855b2",
+          "scripts/counterfactual/subject_artifacts.py": "3ba0328cf2d6d90739881c6bf46aba5fa8b0042e954df204e12b530e2bac3dc1"
+        },
+        "started_unix": 1789978128.046851,
+        "upstream": {
+          "branch": "",
+          "dirty": false,
+          "path": "/root/wenbiao_zhao/VBench",
+          "remote": "https://github.com/Vchitect/VBench.git",
+          "sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+          "source_hashes": {
+            "background_consistency": "7def92057819df0dad01c857eecf3b39b8b555c8cdfe881a672cc2b19dc226b4",
+            "color": "03baffc12508fd7ce6c70a227d6794bbc7152c24ba2d2c447a816974466db3d7",
+            "dynamic_degree": "2e93d3a7af38bfbe459c19c9d127894f687424a0bc534dbf7e6571d17b24dff7",
+            "human_action": "4cee71a1e09e0b2f7e1a8126300c9250be19e3866f49004c8b69b4a5a15e8945",
+            "motion_smoothness": "5ddc43f246b64e23d10540b8f9e6c302686e6a1ac9fa4e9942b5bd043d89e0b9",
+            "multiple_objects": "fa5047aa560158f017e46dea3ae763ed083df08ece63e47f61a7ea4fc55be672",
+            "object_class": "8d4c4a7feee52503e3d27f8aba0ed467cbc356ed75da2598367b572237e05db2",
+            "overall_consistency": "325beb4503699b08d441a467710240097c15c2267fe92dbed1ed8cdfaa96103e",
+            "scene": "f14c423710c812af2be953db619ed6e8b478acdc44f1df775815adfa30171965",
+            "spatial_relationship": "26f09a111dac904d1a92ae5bd1c332a029cebd22610d62376a09d7d634950270",
+            "subject_consistency": "55f5c9a3e5be543380a709b94712903fa67a76340c3c0cb2414ac090dbd1b78d",
+            "temporal_style": "9f9e950efca4673721d0a07ea83137be9ebdc9aef2364f412300ba979beef57a"
+          },
+          "submodules": []
+        }
+      },
+      "progress": {
+        "constructed_completed": 98,
+        "elapsed_s": 2092.1789829730988,
+        "processed": 305,
+        "runtime_failures": 0,
+        "total": 360
+      },
+      "score_jsonl_valid_lines": 305,
+      "score_jsonl_invalid_lines": 0
+    },
+    {
+      "shard": 1,
+      "output": "/root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920/single-frame/shard1",
+      "files": {
+        "run.json": {
+          "sha256": "039138ecb7dd06878f8181b17df54201c2a971ebdee939fe1dfd4e3878e447c5",
+          "bytes": 4869
+        },
+        "progress.json": {
+          "sha256": "6618b3335a708e6ee5938d2ef10afd593ce950a25b494e92166ad91c4831982a",
+          "bytes": 110
+        },
+        "scores.jsonl": {
+          "sha256": "98df03fb256982f4ac5439c350bd17a26bdd7882c37ea9b01fbef738d4028e8a",
+          "bytes": 19074462
+        }
+      },
+      "run": {
+        "base_count": 360,
+        "dataset_index_sha256": "52a7fb046f9d3ca008e326ccf24cb746fad73e22c0ba7e4f228585cabaddfb72",
+        "device": "cuda:0",
+        "integrity": {
+          "index_sha256": "52a7fb046f9d3ca008e326ccf24cb746fad73e22c0ba7e4f228585cabaddfb72",
+          "status": "pending_analysis_gate"
+        },
+        "localizer": {
+          "box_detector": {
+            "batch_size": 4,
+            "family": "maskrcnn_resnet50_fpn_coco_v1_box_branch",
+            "max_size": 512,
+            "min_size": 512,
+            "native_roi_align_forward": true,
+            "strict_determinism_disabled_only_inside_box_forward": true,
+            "threshold": 0.5,
+            "weights_sha256": "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0"
+          },
+          "construction_masks_reused": false,
+          "cross_variant_state": false,
+          "family": "mobilesam",
+          "human_confirmed": false,
+          "instances": "union_all_target_tracks",
+          "model": "vit_t",
+          "multimask_output": false,
+          "prompt_policy": "direct_anchor",
+          "prompt_source": "clip_local_target_box_tracks",
+          "role": "scoring",
+          "tracking": {
+            "max_gap": 2,
+            "minimum_iou": 0.2,
+            "smooth_radius": 1
+          },
+          "weights_sha256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f"
+        },
+        "num_shards": 2,
+        "origin_reference": "pinned_upstream_function_actual_lossless_pixels",
+        "physical_gpu": "5",
+        "protocol_sha256": "4350a824afedd2a67189a70a8ab86cda7a8582412f2e5ef1fad5958d15cbd162",
+        "shard_index": 1,
+        "source_sha256": {
+          "metrics/subject-consistency/src/subject_consistency/__init__.py": "bcf97abf1ec8120b6bce19160c78036f2c6be10afe99097788715fdb411f036d",
+          "metrics/subject-consistency/src/subject_consistency/automatic_localizer.py": "f4500e52d17bc99175250f5b8e777b653ce59bc153a77c1ed5ee58d74651280d",
+          "metrics/subject-consistency/src/subject_consistency/backends/__init__.py": "fd5795b1a62a2908223587a54d3903bf081f65c0b9344b085e3199458eae456f",
+          "metrics/subject-consistency/src/subject_consistency/backends/audit.py": "344ef3b5cea2ea9a09e1e616baebde88177aede2839827a1ef779e05d433f858",
+          "metrics/subject-consistency/src/subject_consistency/backends/vbench.py": "1fd804f5630247d59f061fec20ccb66f890164c6029147744cab389ddf286d2e",
+          "metrics/subject-consistency/src/subject_consistency/cli.py": "2dcef183a139ebe626bcec478e7cb94f10174bfc985c721f8431b745e912b2cb",
+          "metrics/subject-consistency/src/subject_consistency/diagnostics.py": "ae0c6d64b50ebb1cdc280526d6b1af7950881ac758452d096660bb7e53532457",
+          "metrics/subject-consistency/src/subject_consistency/hybrid.py": "bdb7b1b8c1680ac10a0a6d36cea41014da7f7e9135459acab88dc44b565756d5",
+          "metrics/subject-consistency/src/subject_consistency/isolation.py": "731142a3ce876724c034f15f9680f7c5726e101185f55471bf7d838b1e6e7cfa",
+          "metrics/subject-consistency/src/subject_consistency/localizer.py": "8522c4416c1d6794072e7a78462fe599eea489630bb7eeb1ae6b2d0847b4cf33",
+          "metrics/subject-consistency/src/subject_consistency/metric.py": "f944d2207a1589529fbba66cecf346ab6d10ce6fdc2ef44a7184ddf8362da300",
+          "metrics/subject-consistency/src/subject_consistency/models.py": "aa4f5940851957ab6a046639a548b1e3b65f9d1483b61af1d5181b9bdc31f126",
+          "metrics/subject-consistency/src/subject_consistency/subject_evidence.py": "c31983580049df539f0742b4c9921a5187e3c79b97b7b92e469acf8ad1585da7",
+          "metrics/subject-consistency/src/subject_consistency/temporal_localizer.py": "e2e2306fed180b18b0a9224c6616a26e95d1425650a8e289a20aabcc3191d109",
+          "packages/audit-models/src/vbench_audit_models/foreground.py": "89dcf967459eecca22c5d75234b3b53f9619e2abb587492d497ad21b6a8aaee5",
+          "scripts/counterfactual/run_subject_stability.py": "81870ffa10f9c39615b66904bfd0bf98590eceaae843d3b6db2ee0665308e364",
+          "scripts/counterfactual/score_region_discrimination.py": "71c65013dadaddbd6794509a824777fc7955932f9077e292c4ade1b2ba9855b2",
+          "scripts/counterfactual/subject_artifacts.py": "3ba0328cf2d6d90739881c6bf46aba5fa8b0042e954df204e12b530e2bac3dc1"
+        },
+        "started_unix": 1789978128.0240748,
+        "upstream": {
+          "branch": "",
+          "dirty": false,
+          "path": "/root/wenbiao_zhao/VBench",
+          "remote": "https://github.com/Vchitect/VBench.git",
+          "sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+          "source_hashes": {
+            "background_consistency": "7def92057819df0dad01c857eecf3b39b8b555c8cdfe881a672cc2b19dc226b4",
+            "color": "03baffc12508fd7ce6c70a227d6794bbc7152c24ba2d2c447a816974466db3d7",
+            "dynamic_degree": "2e93d3a7af38bfbe459c19c9d127894f687424a0bc534dbf7e6571d17b24dff7",
+            "human_action": "4cee71a1e09e0b2f7e1a8126300c9250be19e3866f49004c8b69b4a5a15e8945",
+            "motion_smoothness": "5ddc43f246b64e23d10540b8f9e6c302686e6a1ac9fa4e9942b5bd043d89e0b9",
+            "multiple_objects": "fa5047aa560158f017e46dea3ae763ed083df08ece63e47f61a7ea4fc55be672",
+            "object_class": "8d4c4a7feee52503e3d27f8aba0ed467cbc356ed75da2598367b572237e05db2",
+            "overall_consistency": "325beb4503699b08d441a467710240097c15c2267fe92dbed1ed8cdfaa96103e",
+            "scene": "f14c423710c812af2be953db619ed6e8b478acdc44f1df775815adfa30171965",
+            "spatial_relationship": "26f09a111dac904d1a92ae5bd1c332a029cebd22610d62376a09d7d634950270",
+            "subject_consistency": "55f5c9a3e5be543380a709b94712903fa67a76340c3c0cb2414ac090dbd1b78d",
+            "temporal_style": "9f9e950efca4673721d0a07ea83137be9ebdc9aef2364f412300ba979beef57a"
+          },
+          "submodules": []
+        }
+      },
+      "progress": {
+        "constructed_completed": 106,
+        "elapsed_s": 2077.3921871185303,
+        "processed": 299,
+        "runtime_failures": 0,
+        "total": 360
+      },
+      "score_jsonl_valid_lines": 299,
+      "score_jsonl_invalid_lines": 0
+    }
+  ],
+  "partial_constructed_completed": 204,
+  "partial_candidates_processed": 604,
+  "partial_runtime_failures": 0,
+  "constructed_total": 241,
+  "candidate_total": 720,
+  "partial_score_use": "Preserved, not merged or substituted for a completed 241-video single-frame experiment.",
+  "completed_primary_candidates": 720,
+  "completed_primary_constructed": 241,
+  "completed_primary_analysis": 240,
+  "stopped_unix": 1789980239.8765323,
+  "stopped_utc": "2026-09-21T08:43:59.876535+00:00"
+}

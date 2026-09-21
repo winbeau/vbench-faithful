@@ -1,0 +1,25 @@
+{
+  "exposure_group_counts": {
+    "grouped_followup": 100,
+    "prior_explicit_development": 620
+  },
+  "generator_counts": {
+    "cogvideo": 180,
+    "lavie": 180,
+    "modelscope": 180,
+    "videocraft": 180
+  },
+  "prompt_groups": 72,
+  "registered_plan_sha256": "14a4b7ad1b1d969c269bfbd4ea92f7fa1e20ad36a587fdf75d15f48cfd88c950",
+  "score_inputs_read": false,
+  "selected_candidates": 720,
+  "selected_manifest_sha256": "e5f5523821bcf23ba06b21cfc778034eb81c29937f795fd68028dd44dda0c40d",
+  "selection_reproduced_exactly": true,
+  "selection_rule": "Sorted 72 prompts; each gets 10 videos. Each of four sorted generators contributes two; generator indices i%4 and (i+2)%4 contribute one extra on prompt ordinal i. Within each prompt/generator, take the smallest SHA256(\"subject720-v9-seed20260920:\" + video_uid).",
+  "source_candidates": 1440,
+  "source_manifest_sha256": "04e289a8b553c9e8c85bde7a1e3e8e3bcf276a7345826585275c48bd901e06d7",
+  "verified_uid_order": "ascending video_uid",
+  "videos_per_prompt": {
+    "10": 72
+  }
+}

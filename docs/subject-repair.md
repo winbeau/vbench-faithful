@@ -11,11 +11,12 @@ the masked repair, while subject corruption still affects the repair. A small
 background response alone is insufficient: a constant or failed detector could
 also be insensitive. No result is selected to make the repair win.
 
-The active [stability goal](plans/2026-09-20-subject-stability-goal.md) prioritizes
+The [stability goal](plans/2026-09-20-subject-stability-goal.md) prioritizes
 background-intervention invariance and subject-change response. Human preference
 is auxiliary. The [new experiment report](counterfactual-reports/subject_stability_20260920.md)
 records temporal localization candidates on the entire developmental cohort,
-including incomplete coverage and negative results; completion is not claimed.
+including incomplete coverage and negative results. The completed primary run and
+the user's subsequent acceptance are reported below.
 On the same 60 follow-up clips at the fixed 2× blur strength, an opening-quarter
 background edit changes Official by 0.088412 and v5 by 0.006389 on average
 (absolute paired differences). A single first-frame background edit gives
@@ -24,9 +25,9 @@ Subject-response size matters too: the quarter-window control lowers v5 by
 0.115544 on average, with 57/60 drops at least 0.05. The single-frame control
 lowers it by only 0.031723, with 5/60 reaching 0.05; positive signs alone do not
 establish effective sensitivity. Changes at most 0.01 are negligible for this
-assessment. The original quarter-window joint target is not complete; the
+assessment. Those 60 clips did not meet the quarter-window joint target. The
 balanced 720-input official experiment (all 72 prompts, 180 videos per generator)
-is running for broader verification. The earlier 1,440-input plan was never run;
+provided broader verification below. The earlier 1,440-input plan was never run;
 the user reduced the cohort before construction started.
 
 The expanded quarter-window run has now completed all 241 numerical constructions
@@ -39,8 +40,13 @@ at least 0.05. Background joint success is 74/240, or 70/240 when also requiring
 that subject response. The original strict threshold is still missed; after seeing
 this result, the user accepted a mean change around 0.01. This practical acceptance
 does not alter the preregistered threshold or its stored failure flag. All 479
-construction rejections remain reported; the registered single-frame family is
-still running. Actual mask and encoder-coverage checks found no omitted frames
+construction rejections remain reported. The user then requested a quick wrap-up;
+the remaining supplemental single-frame scoring was stopped at 204/241 completed
+clips, with partial outputs preserved and no full-cohort claim. The
+[stop receipt](counterfactual-reports/subject_stability_20260920/official720_user_stop.json)
+confirms that the completed primary outputs are unchanged and the owned workers
+and waiting postcheck have stopped. This task is closed under the latest user
+acceptance and scope. Actual mask and encoder-coverage checks found no omitted frames
 in clean, background, or local subject conditions. Full subject corruption remains
 unscorable for 91/240 primary clips.
 

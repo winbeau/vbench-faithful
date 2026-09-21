@@ -1,0 +1,21 @@
+{
+  "completed": false,
+  "controller_sha256": "bb3f8a963124c45b2d2116bbbc2620c950f57b57fe283290a4f3e65f74b1e7a3",
+  "output": "/root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920",
+  "plan_sha256": "14a4b7ad1b1d969c269bfbd4ea92f7fa1e20ad36a587fdf75d15f48cfd88c950",
+  "scoring_gpus": [
+    1,
+    5
+  ],
+  "source_archive_sha256": "b43d809a0481755b0fa29cc148e224263a391f73be4c7d31bac51aa159e7bd95",
+  "source_root": "/root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920-src",
+  "started_unix": 1789971767.042533,
+  "workers": 8,
+  "stopped_at_user_request": true,
+  "stopped_unix": 1789980239.8765323,
+  "stop_reason": "差不多快速收尾吧",
+  "last_running_stage": "single-frame_scoring",
+  "stop_receipt": "/root/wenbiao_zhao/tmp/subject-stability-official720-v9-20260920/user-stop-20260921/stop_receipt.json",
+  "primary_quarter_completed": true,
+  "supplement_single_frame_completed": false
+}
