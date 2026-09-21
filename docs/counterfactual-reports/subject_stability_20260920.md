@@ -196,7 +196,15 @@ CPU 8 worker 的分割与恢复耗时 **2,039.14 秒**。全部 720 条都有构
 
 [新建／缓存路径核验](subject_stability_20260920/official720_fresh_cached_parity.json)覆盖与旧 160 候选重叠的全部 **79 条**：资格完全一致，72 对实际主体掩码逐像素一致，源视频和所有通过项的 clean 帧哈希一致。其余 7 条为无掩码的未映射类别，不能记为掩码匹配。辅助其它物体掩码不参与当前补集背景操作。完整[逐例构造状态](subject_stability_20260920/official720_construction_per_base.json)、[索引](subject_stability_20260920/official720_construction_index.jsonl)与 [run](subject_stability_20260920/official720_construction_run.json)均保留；审核脚本 `audit_subject_construction.py` 另行部署，没有修改正在运行的冻结源码。
 
-评分前仅低频查看了一张人物首帧：[实际预览](subject_stability_20260920/official720_first_person_preview.png)。主讲人与观众的主要部分保留，墙面、白板与海报被糊化。这里保留的是 person 类别的多人区域，不能说成只定位了主讲人一个实例；[观察记录](subject_stability_20260920/official720_first_person_observation.json)未改变队列，也没有读取分数。当前在构造糊化版本，241 个数值通过项将全部评分，已知错误卡车继续按事先规则单独标记。Origin、repair 的 720 候选最终统计仍为 **RUNNING**。
+评分前仅低频查看了一张人物首帧：[实际预览](subject_stability_20260920/official720_first_person_preview.png)。主讲人与观众的主要部分保留，墙面、白板与海报被糊化。这里保留的是 person 类别的多人区域，不能说成只定位了主讲人一个实例；[观察记录](subject_stability_20260920/official720_first_person_observation.json)未改变队列，也没有读取分数。241 个数值通过项将全部评分，已知错误卡车继续按事先规则单独标记。
+
+四分之一时窗与整段对照的 [Gaussian 构造](subject_stability_20260920/official720_quarter_build_run.json)已完成，8 worker 耗时 1,525.73 秒。[独立像素重放](subject_stability_20260920/official720_quarter_integrity.json)核验全部 41,320 个干预帧，编辑区域外变化为 0，8 worker 耗时 501.30 秒；这是相对于冻结构造掩码的像素保证，不能替代主体语义质量验证。[评分协议](../../configs/subject-repair/stability_official720_scoring_v9.json)仅在原模板上绑定索引及构造协议哈希、241 个数值构造和 240 个预定主分析数量，其余字段逐项相同。物理 GPU 1/5 已运行评分，两个族均完成前，720 候选的最终联合结论保持 **RUNNING**。
+
+#### 旧 2× 队列的掩码差异诊断
+
+等待扩大实验时，另对已经完成的旧 61 条数值构造／60 条主分析做[只读诊断](subject_stability_20260920/dose2_mask_agreement_diagnostic.json)，[实际运行源码](subject_stability_20260920/dose2_mask_agreement_diagnostic.py)与结果内 SHA 对应。先验证冻结分数、数据索引和独立评分掩码，再在分析阶段比较 clean 评分区域与构造保护区；构造掩码从未传入评分模型，队列和分数均未改变。
+
+60 条主分析中，开头受编辑帧的评分区域落在构造保护区外不足 20% 的有 53 条，repair 平均绝对变化 0.003233；比例为 20%–50% 的 5 条为 0.028980，至少 50% 的 2 条为 0.033534。全部 61 条均有诊断证据，预先排除的卡车也保留在数值全集。另有 2/60 条在未编辑帧出现独立评分掩码差异，表明片段内定位选择也可能影响未编辑帧。这里比较的是两个模型的预测区域：较大几何差异与较大 repair 波动同时出现，不能据此判定哪个掩码是真值或证明因果，也没有据此筛掉分数不佳的样本。
 
 ## 重放、计时与产物
 
