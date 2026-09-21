@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "stage": "development_v5_direct_detection_with_clip_anchor_gap_prompts",
+  "primary_intervention": "start/background_corrupt",
+  "controls": [
+    "full/background_corrupt",
+    "middle/background_corrupt",
+    "end/background_corrupt",
+    "start/subject_corrupt",
+    "middle/subject_corrupt",
+    "end/subject_corrupt",
+    "full/subject_corrupt"
+  ],
+  "representations": [
+    "preencode_crop"
+  ],
+  "primary_missing_policy": "exclude",
+  "reported_missing_policies": [
+    "zero",
+    "exclude"
+  ],
+  "cohort_candidates": 288,
+  "expected_constructed": 34,
+  "score_based_selection": false,
+  "detector": {
+    "threshold": 0.5,
+    "size": 512,
+    "weight_sha256": "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0"
+  },
+  "tracking": {
+    "minimum_iou": 0.2,
+    "max_gap": 2,
+    "smooth_radius": 1,
+    "union_all_target_instances": true,
+    "cross_variant_state": false
+  },
+  "representation": {
+    "fill_rgb": [
+      128,
+      128,
+      128
+    ],
+    "crop_margin": 0.1,
+    "crop_side": 224,
+    "aggregation": "all_pairs"
+  },
+  "targets": {
+    "origin_mae_minimum": 0.1,
+    "repair_mae_maximum": 0.01,
+    "report_origin_ge_02": true,
+    "report_joint_success": true,
+    "no_constant_zero_success": true
+  },
+  "human_preferences": "auxiliary_only",
+  "no_construction_masks_for_scoring": true,
+  "weights": "reuse_existing_local_pinned_models_only",
+  "candidate_name": "hybrid",
+  "prompt_policy": "direct_anchor",
+  "rationale": "v4 restores all background-condition masks but fixed boxes worsen motion handling. Preserve per-frame detections where present; use the same clip-local anchor only on frames with no target detection. SAM still observes each actual frame. No score-based routing.",
+  "selection_rule": "Use all current-frame target detections if any; otherwise prompt with all boxes of the highest-confidence frame from this actual clip. No target detection in any frame remains missing.",
+  "original_v3_protocol_sha256": "805a80482174078aa7cc6860e2b3a54aa37d624e23e4e5c849bba6f9330040a6",
+  "original_v4_protocol_sha256": "2ae7e4ab4e07b36be05de714c7666fcf94399d784071b10a26725652d5883749"
+}

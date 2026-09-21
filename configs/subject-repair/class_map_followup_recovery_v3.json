@@ -1,0 +1,98 @@
+{
+  "absence_scope": "Official subject category mapped to ADE20K; animal is a generic animal region, not species recognition or instance verification. Train remains unsupported. Coarse semantic input review required; no missing frame is proof the subject is absent.",
+  "classes": {
+    "airplane": [
+      "airplane"
+    ],
+    "bicycle": [
+      "bicycle"
+    ],
+    "boat": [
+      "boat"
+    ],
+    "bus": [
+      "bus"
+    ],
+    "car": [
+      "car"
+    ],
+    "castle": [
+      "building",
+      "wall",
+      "tower",
+      "windowpane",
+      "door",
+      "house",
+      "column",
+      "skyscraper"
+    ],
+    "person": [
+      "person"
+    ],
+    "truck": [
+      "truck"
+    ],
+    "bird": [
+      "animal"
+    ],
+    "cat": [
+      "animal"
+    ],
+    "dog": [
+      "animal"
+    ],
+    "horse": [
+      "animal"
+    ],
+    "sheep": [
+      "animal"
+    ],
+    "cow": [
+      "animal"
+    ],
+    "elephant": [
+      "animal"
+    ],
+    "bear": [
+      "animal"
+    ],
+    "zebra": [
+      "animal"
+    ],
+    "giraffe": [
+      "animal"
+    ],
+    "motorcycle": [
+      "minibike"
+    ]
+  },
+  "model": "nvidia/segformer-b0-finetuned-ade-512-512",
+  "revision": "subject_followup_v1_expand_generic_animal_and_minibike",
+  "schema_version": 1,
+  "unoccupied_stuff_labels": [
+    "sky",
+    "floor",
+    "ceiling",
+    "road",
+    "grass",
+    "sidewalk",
+    "earth",
+    "mountain",
+    "water",
+    "sea",
+    "field",
+    "sand",
+    "path",
+    "runway",
+    "river",
+    "hill",
+    "dirt track",
+    "land",
+    "lake"
+  ],
+  "unsupported_policy": "Reject categories not explicitly mapped. Do not map individual animal species to ADE20K animal or infer subjects from a prompt.",
+  "recovery_padding_fraction": 0.25,
+  "recovery_description": "Second GrabCut uses existing construction foreground cores and uncertain regions extending to each connected component bounding box plus 25% of its longest side. Fixed before new recovered-variant scores; no SAM scoring masks or DINO scores.",
+  "recovery_keep_valid_initial": true,
+  "fallback_description": "If the optional recovery lacks certain seeds or leaves the original 1%-50% area range, keep the valid initial SegFormer+GrabCut mask for that frame and explicitly record fallback. Never replace an initially valid mask with fabricated emptiness."
+}

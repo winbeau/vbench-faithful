@@ -1,0 +1,1057 @@
+{
+  "bootstrap": {
+    "resamples": 10000,
+    "seed": 20260920,
+    "unit": "source_prompt"
+  },
+  "constructed_denominator": 34,
+  "human_preferences": "auxiliary_only_not_measured_in_this_run",
+  "localization": {
+    "clean": {
+      "direct_empty_frames": 28,
+      "frames": 714,
+      "gap_prompt_count": 0,
+      "tracked_empty_frames": 0,
+      "variants": 34
+    },
+    "end/background_corrupt": {
+      "direct_empty_frames": 51,
+      "frames": 714,
+      "gap_prompt_count": 0,
+      "tracked_empty_frames": 0,
+      "variants": 34
+    },
+    "end/subject_corrupt": {
+      "direct_empty_frames": 86,
+      "frames": 714,
+      "gap_prompt_count": 0,
+      "tracked_empty_frames": 16,
+      "variants": 34
+    },
+    "full/background_corrupt": {
+      "direct_empty_frames": 109,
+      "frames": 714,
+      "gap_prompt_count": 0,
+      "tracked_empty_frames": 0,
+      "variants": 34
+    },
+    "full/subject_corrupt": {
+      "direct_empty_frames": 310,
+      "frames": 714,
+      "gap_prompt_count": 0,
+      "tracked_empty_frames": 113,
+      "variants": 34
+    },
+    "middle/background_corrupt": {
+      "direct_empty_frames": 46,
+      "frames": 714,
+      "gap_prompt_count": 0,
+      "tracked_empty_frames": 0,
+      "variants": 34
+    },
+    "middle/subject_corrupt": {
+      "direct_empty_frames": 100,
+      "frames": 714,
+      "gap_prompt_count": 0,
+      "tracked_empty_frames": 0,
+      "variants": 34
+    },
+    "start/background_corrupt": {
+      "direct_empty_frames": 47,
+      "frames": 714,
+      "gap_prompt_count": 0,
+      "tracked_empty_frames": 0,
+      "variants": 34
+    },
+    "start/subject_corrupt": {
+      "direct_empty_frames": 108,
+      "frames": 714,
+      "gap_prompt_count": 0,
+      "tracked_empty_frames": 0,
+      "variants": 34
+    }
+  },
+  "maximum_origin_reference_error": 0.0,
+  "positions": {
+    "end": {
+      "direct_exclude": {
+        "full_coverage": false,
+        "joint_success_count": 1,
+        "joint_success_fraction_full_constructed_denominator": 0.029411764705882353,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.1541425585746765,
+          "mean": 0.053751746813456215,
+          "mean_ci95": [
+            0.03956982570886612,
+            0.06784192080579753
+          ],
+          "median": 0.04127955436706543,
+          "median_ci95": [
+            0.030032694339752197,
+            0.06681546568870544
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 4,
+        "origin_ge_02": 0,
+        "paired_scored": 33,
+        "repair": {
+          "maximum": 0.07716977596282959,
+          "mean": 0.009130414688225948,
+          "mean_ci95": [
+            0.005356258336709153,
+            0.013733784304766317
+          ],
+          "median": 0.0026265382766723633,
+          "median_ci95": [
+            0.0022208690643310547,
+            0.005182147026062012
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 23,
+        "subject_positive": 30,
+        "subject_response": {
+          "maximum": 0.09311676025390625,
+          "mean": 0.03952471234581687,
+          "mean_ci95": [
+            0.028926253032270085,
+            0.0514124867434685
+          ],
+          "median": 0.04829496145248413,
+          "median_ci95": [
+            0.014016538858413696,
+            0.053793132305145264
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 33,
+        "unscored": 1,
+        "zero_to_zero": 0
+      },
+      "direct_zero": {
+        "full_coverage": true,
+        "joint_success_count": 1,
+        "joint_success_fraction_full_constructed_denominator": 0.029411764705882353,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.1541425585746765,
+          "mean": 0.05457543625551112,
+          "mean_ci95": [
+            0.04055765311502968,
+            0.06819320666559395
+          ],
+          "median": 0.0437932014465332,
+          "median_ci95": [
+            0.031598448753356934,
+            0.06825113296508789
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 4,
+        "origin_ge_02": 0,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.41216808557510376,
+          "mean": 0.05810641935643028,
+          "mean_ci95": [
+            0.021615424651939136,
+            0.10121026953577479
+          ],
+          "median": 0.002939939498901367,
+          "median_ci95": [
+            0.002105027437210083,
+            0.010520845651626587
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 26,
+        "subject_positive": 33,
+        "subject_response": {
+          "maximum": 0.4397229552268982,
+          "mean": 0.17149920016527176,
+          "mean_ci95": [
+            0.11590383186505422,
+            0.23456520918134657
+          ],
+          "median": 0.0828799307346344,
+          "median_ci95": [
+            0.06396239995956421,
+            0.2505619525909424
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 1
+      },
+      "hybrid_exclude": {
+        "full_coverage": true,
+        "joint_success_count": 1,
+        "joint_success_fraction_full_constructed_denominator": 0.029411764705882353,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.1541425585746765,
+          "mean": 0.05457543625551112,
+          "mean_ci95": [
+            0.04055765311502968,
+            0.06819320666559395
+          ],
+          "median": 0.0437932014465332,
+          "median_ci95": [
+            0.031598448753356934,
+            0.06825113296508789
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 4,
+        "origin_ge_02": 0,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.07716977596282959,
+          "mean": 0.01446399267982034,
+          "mean_ci95": [
+            0.008433112131972467,
+            0.020734053400034706
+          ],
+          "median": 0.005490362644195557,
+          "median_ci95": [
+            0.0022446513175964355,
+            0.016806185245513916
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 28,
+        "subject_positive": 32,
+        "subject_response": {
+          "maximum": 0.1284152865409851,
+          "mean": 0.06473275748166171,
+          "mean_ci95": [
+            0.056005171174183487,
+            0.0739553670575087
+          ],
+          "median": 0.06520622968673706,
+          "median_ci95": [
+            0.05334773659706116,
+            0.08097690343856812
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 33,
+        "unscored": 0,
+        "zero_to_zero": 0
+      },
+      "hybrid_zero": {
+        "full_coverage": true,
+        "joint_success_count": 1,
+        "joint_success_fraction_full_constructed_denominator": 0.029411764705882353,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.1541425585746765,
+          "mean": 0.05457543625551112,
+          "mean_ci95": [
+            0.04055765311502968,
+            0.06819320666559395
+          ],
+          "median": 0.0437932014465332,
+          "median_ci95": [
+            0.031598448753356934,
+            0.06825113296508789
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 4,
+        "origin_ge_02": 0,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.07716977596282959,
+          "mean": 0.01446399267982034,
+          "mean_ci95": [
+            0.008433112131972467,
+            0.020734053400034706
+          ],
+          "median": 0.005490362644195557,
+          "median_ci95": [
+            0.0022446513175964355,
+            0.016806185245513916
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 29,
+        "subject_positive": 33,
+        "subject_response": {
+          "maximum": 0.9467556476593018,
+          "mean": 0.09067460719276876,
+          "mean_ci95": [
+            0.0586741953378632,
+            0.14956336089763148
+          ],
+          "median": 0.06609907746315002,
+          "median_ci95": [
+            0.05468437075614929,
+            0.0809786319732666
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 0
+      }
+    },
+    "full": {
+      "direct_exclude": {
+        "full_coverage": false,
+        "joint_success_count": 1,
+        "joint_success_fraction_full_constructed_denominator": 0.029411764705882353,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.281119704246521,
+          "mean": 0.05827738299514308,
+          "mean_ci95": [
+            0.035513411450844544,
+            0.08406292587054293
+          ],
+          "median": 0.03459686040878296,
+          "median_ci95": [
+            0.02678847312927246,
+            0.055471956729888916
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 6,
+        "origin_ge_02": 2,
+        "paired_scored": 33,
+        "repair": {
+          "maximum": 0.12208706140518188,
+          "mean": 0.020256273674242424,
+          "mean_ci95": [
+            0.013939823977373264,
+            0.02839133139042293
+          ],
+          "median": 0.010135233402252197,
+          "median_ci95": [
+            0.0048937201499938965,
+            0.01998087763786316
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 16,
+        "subject_positive": 21,
+        "subject_response": {
+          "maximum": 0.17619651556015015,
+          "mean": 0.04347991281085544,
+          "mean_ci95": [
+            0.020938010033808258,
+            0.06632032955686251
+          ],
+          "median": 0.03066319227218628,
+          "median_ci95": [
+            0.008577525615692139,
+            0.060045719146728516
+          ],
+          "n_bases": 27,
+          "n_prompt_clusters": 18
+        },
+        "subject_scored": 27,
+        "unscored": 1,
+        "zero_to_zero": 0
+      },
+      "direct_zero": {
+        "full_coverage": true,
+        "joint_success_count": 2,
+        "joint_success_fraction_full_constructed_denominator": 0.058823529411764705,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.281119704246521,
+          "mean": 0.060218144865597,
+          "mean_ci95": [
+            0.03748832638141732,
+            0.08536498576620996
+          ],
+          "median": 0.03686818480491638,
+          "median_ci95": [
+            0.027077943086624146,
+            0.06065249443054199
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 7,
+        "origin_ge_02": 2,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.942230231128633,
+          "mean": 0.15900718397460878,
+          "mean_ci95": [
+            0.06710906056869637,
+            0.26539581073436525
+          ],
+          "median": 0.01998087763786316,
+          "median_ci95": [
+            0.007649455685168505,
+            0.1108357310295105
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 25,
+        "subject_positive": 29,
+        "subject_response": {
+          "maximum": 0.9792287349700928,
+          "mean": 0.4668422359288396,
+          "mean_ci95": [
+            0.317104908243934,
+            0.6169082530259966
+          ],
+          "median": 0.4265681952238083,
+          "median_ci95": [
+            0.1672447085380558,
+            0.8857461810112
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 0
+      },
+      "hybrid_exclude": {
+        "full_coverage": true,
+        "joint_success_count": 1,
+        "joint_success_fraction_full_constructed_denominator": 0.029411764705882353,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.281119704246521,
+          "mean": 0.060218144865597,
+          "mean_ci95": [
+            0.03748832638141732,
+            0.08536498576620996
+          ],
+          "median": 0.03686818480491638,
+          "median_ci95": [
+            0.027077943086624146,
+            0.06065249443054199
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 7,
+        "origin_ge_02": 2,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.12208706140518188,
+          "mean": 0.02490069410380195,
+          "mean_ci95": [
+            0.01767616392328189,
+            0.032926266985491684
+          ],
+          "median": 0.018762439489364624,
+          "median_ci95": [
+            0.008928358554840088,
+            0.02353574484586715
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 17,
+        "subject_positive": 23,
+        "subject_response": {
+          "maximum": 0.18614578247070312,
+          "mean": 0.05209186886038099,
+          "mean_ci95": [
+            0.029342805301504474,
+            0.07576171538659504
+          ],
+          "median": 0.038406699895858765,
+          "median_ci95": [
+            0.01522091031074524,
+            0.06257790327072144
+          ],
+          "n_bases": 28,
+          "n_prompt_clusters": 19
+        },
+        "subject_scored": 28,
+        "unscored": 0,
+        "zero_to_zero": 0
+      },
+      "hybrid_zero": {
+        "full_coverage": true,
+        "joint_success_count": 1,
+        "joint_success_fraction_full_constructed_denominator": 0.029411764705882353,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.281119704246521,
+          "mean": 0.060218144865597,
+          "mean_ci95": [
+            0.03748832638141732,
+            0.08536498576620996
+          ],
+          "median": 0.03686818480491638,
+          "median_ci95": [
+            0.027077943086624146,
+            0.06065249443054199
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 7,
+        "origin_ge_02": 2,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.12208706140518188,
+          "mean": 0.02490069410380195,
+          "mean_ci95": [
+            0.01767616392328189,
+            0.032926266985491684
+          ],
+          "median": 0.018762439489364624,
+          "median_ci95": [
+            0.008928358554840088,
+            0.02353574484586715
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 23,
+        "subject_positive": 29,
+        "subject_response": {
+          "maximum": 0.9792287349700928,
+          "mean": 0.20583661689477808,
+          "mean_ci95": [
+            0.08881313894447443,
+            0.32340924863007153
+          ],
+          "median": 0.05751734972000122,
+          "median_ci95": [
+            0.020435214042663574,
+            0.12127816677093506
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 0
+      }
+    },
+    "middle": {
+      "direct_exclude": {
+        "full_coverage": false,
+        "joint_success_count": 3,
+        "joint_success_fraction_full_constructed_denominator": 0.08823529411764706,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.17772841453552246,
+          "mean": 0.06281512795072614,
+          "mean_ci95": [
+            0.04743497015593888,
+            0.07833601569098637
+          ],
+          "median": 0.05679202079772949,
+          "median_ci95": [
+            0.04044339060783386,
+            0.06700989603996277
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 6,
+        "origin_ge_02": 0,
+        "paired_scored": 33,
+        "repair": {
+          "maximum": 0.038674354553222656,
+          "mean": 0.009498489625526197,
+          "mean_ci95": [
+            0.006282301469780933,
+            0.01210483695506244
+          ],
+          "median": 0.0059056878089904785,
+          "median_ci95": [
+            0.0021264851093292236,
+            0.00896751880645752
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 19,
+        "subject_positive": 26,
+        "subject_response": {
+          "maximum": 0.10753870010375977,
+          "mean": 0.03326855464415117,
+          "mean_ci95": [
+            0.022546132469461078,
+            0.045074392941135626
+          ],
+          "median": 0.02274012565612793,
+          "median_ci95": [
+            0.005666673183441162,
+            0.058309465646743774
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 33,
+        "unscored": 1,
+        "zero_to_zero": 0
+      },
+      "direct_zero": {
+        "full_coverage": true,
+        "joint_success_count": 2,
+        "joint_success_fraction_full_constructed_denominator": 0.058823529411764705,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.17772841453552246,
+          "mean": 0.06281979644999784,
+          "mean_ci95": [
+            0.04778662573659059,
+            0.07803115053015981
+          ],
+          "median": 0.05831417441368103,
+          "median_ci95": [
+            0.04071235656738281,
+            0.06677418947219849
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 6,
+        "origin_ge_02": 0,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.4018670916557312,
+          "mean": 0.061363076024195724,
+          "mean_ci95": [
+            0.02157761043026334,
+            0.11066125245997682
+          ],
+          "median": 0.006478667259216309,
+          "median_ci95": [
+            0.0020675957202911377,
+            0.020646333694458008
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 27,
+        "subject_positive": 33,
+        "subject_response": {
+          "maximum": 0.4427209496498108,
+          "mean": 0.2092632918673403,
+          "mean_ci95": [
+            0.1445722561345942,
+            0.27328657488552116
+          ],
+          "median": 0.15219661593437195,
+          "median_ci95": [
+            0.07003164291381836,
+            0.3795774593949275
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 1
+      },
+      "hybrid_exclude": {
+        "full_coverage": true,
+        "joint_success_count": 2,
+        "joint_success_fraction_full_constructed_denominator": 0.058823529411764705,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.17772841453552246,
+          "mean": 0.06281979644999784,
+          "mean_ci95": [
+            0.04778662573659059,
+            0.07803115053015981
+          ],
+          "median": 0.05831417441368103,
+          "median_ci95": [
+            0.04071235656738281,
+            0.06677418947219849
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 6,
+        "origin_ge_02": 0,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.10281211137771606,
+          "mean": 0.01565966536017025,
+          "mean_ci95": [
+            0.00841501623392105,
+            0.02331324765850386
+          ],
+          "median": 0.005067557096481323,
+          "median_ci95": [
+            0.001674354076385498,
+            0.00896751880645752
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 29,
+        "subject_positive": 34,
+        "subject_response": {
+          "maximum": 0.13510394096374512,
+          "mean": 0.06555074102738324,
+          "mean_ci95": [
+            0.05801093408854695,
+            0.07261016047790074
+          ],
+          "median": 0.06791737675666809,
+          "median_ci95": [
+            0.06112325191497803,
+            0.08019962906837463
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 0
+      },
+      "hybrid_zero": {
+        "full_coverage": true,
+        "joint_success_count": 2,
+        "joint_success_fraction_full_constructed_denominator": 0.058823529411764705,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.17772841453552246,
+          "mean": 0.06281979644999784,
+          "mean_ci95": [
+            0.04778662573659059,
+            0.07803115053015981
+          ],
+          "median": 0.05831417441368103,
+          "median_ci95": [
+            0.04071235656738281,
+            0.06677418947219849
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 6,
+        "origin_ge_02": 0,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.10281211137771606,
+          "mean": 0.01565966536017025,
+          "mean_ci95": [
+            0.00841501623392105,
+            0.02331324765850386
+          ],
+          "median": 0.005067557096481323,
+          "median_ci95": [
+            0.001674354076385498,
+            0.00896751880645752
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 29,
+        "subject_positive": 34,
+        "subject_response": {
+          "maximum": 0.13510394096374512,
+          "mean": 0.06555074102738324,
+          "mean_ci95": [
+            0.05801093408854695,
+            0.07261016047790074
+          ],
+          "median": 0.06791737675666809,
+          "median_ci95": [
+            0.06112325191497803,
+            0.08019962906837463
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 0
+      }
+    },
+    "start": {
+      "direct_exclude": {
+        "full_coverage": false,
+        "joint_success_count": 10,
+        "joint_success_fraction_full_constructed_denominator": 0.29411764705882354,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": true,
+        "origin": {
+          "maximum": 0.35902154445648193,
+          "mean": 0.13082417755415945,
+          "mean_ci95": [
+            0.09832738554653,
+            0.1647373211447422
+          ],
+          "median": 0.11542540788650513,
+          "median_ci95": [
+            0.08028334379196167,
+            0.1435382068157196
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 17,
+        "origin_ge_02": 6,
+        "paired_scored": 33,
+        "repair": {
+          "maximum": 0.035764336585998535,
+          "mean": 0.007855856057369348,
+          "mean_ci95": [
+            0.005036893774590948,
+            0.010924527895237715
+          ],
+          "median": 0.0037967562675476074,
+          "median_ci95": [
+            0.001531153917312622,
+            0.005581259727478027
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 20,
+        "subject_positive": 25,
+        "subject_response": {
+          "maximum": 0.10622286796569824,
+          "mean": 0.03259379032886389,
+          "mean_ci95": [
+            0.019999931817874312,
+            0.045971645673979884
+          ],
+          "median": 0.018121540546417236,
+          "median_ci95": [
+            0.0035126209259033203,
+            0.05668461322784424
+          ],
+          "n_bases": 33,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 33,
+        "unscored": 1,
+        "zero_to_zero": 0
+      },
+      "direct_zero": {
+        "full_coverage": true,
+        "joint_success_count": 8,
+        "joint_success_fraction_full_constructed_denominator": 0.23529411764705882,
+        "mean_target_on_complete_cohort": false,
+        "mean_target_on_scored_subset": false,
+        "origin": {
+          "maximum": 0.35902154445648193,
+          "mean": 0.13136376528178945,
+          "mean_ci95": [
+            0.09974578210350238,
+            0.1644480495859151
+          ],
+          "median": 0.1184522807598114,
+          "median_ci95": [
+            0.08028334379196167,
+            0.1491701602935791
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 18,
+        "origin_ge_02": 6,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.3674769401550293,
+          "mean": 0.04714549890281085,
+          "mean_ci95": [
+            0.022425966520819678,
+            0.07406961752089838
+          ],
+          "median": 0.005713015794754028,
+          "median_ci95": [
+            0.0022005438804626465,
+            0.02714085578918457
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 30,
+        "subject_positive": 33,
+        "subject_response": {
+          "maximum": 0.4412856101989746,
+          "mean": 0.22576516735203125,
+          "mean_ci95": [
+            0.16665462836017164,
+            0.288431099564251
+          ],
+          "median": 0.19868656247854233,
+          "median_ci95": [
+            0.07776731252670288,
+            0.40058642625808716
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 0
+      },
+      "hybrid_exclude": {
+        "full_coverage": true,
+        "joint_success_count": 10,
+        "joint_success_fraction_full_constructed_denominator": 0.29411764705882354,
+        "mean_target_on_complete_cohort": true,
+        "mean_target_on_scored_subset": true,
+        "origin": {
+          "maximum": 0.35902154445648193,
+          "mean": 0.13136376528178945,
+          "mean_ci95": [
+            0.09974578210350238,
+            0.1644480495859151
+          ],
+          "median": 0.1184522807598114,
+          "median_ci95": [
+            0.08028334379196167,
+            0.1491701602935791
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 18,
+        "origin_ge_02": 6,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.0516853928565979,
+          "mean": 0.009978623951182646,
+          "mean_ci95": [
+            0.006279941075364081,
+            0.014116997195939932
+          ],
+          "median": 0.004179775714874268,
+          "median_ci95": [
+            0.001879185438156128,
+            0.005844771862030029
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 31,
+        "subject_positive": 34,
+        "subject_response": {
+          "maximum": 0.13501077890396118,
+          "mean": 0.06729068475611069,
+          "mean_ci95": [
+            0.05731862275007632,
+            0.07761925467186503
+          ],
+          "median": 0.06567281484603882,
+          "median_ci95": [
+            0.0525892972946167,
+            0.07871729135513306
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 0
+      },
+      "hybrid_zero": {
+        "full_coverage": true,
+        "joint_success_count": 10,
+        "joint_success_fraction_full_constructed_denominator": 0.29411764705882354,
+        "mean_target_on_complete_cohort": true,
+        "mean_target_on_scored_subset": true,
+        "origin": {
+          "maximum": 0.35902154445648193,
+          "mean": 0.13136376528178945,
+          "mean_ci95": [
+            0.09974578210350238,
+            0.1644480495859151
+          ],
+          "median": 0.1184522807598114,
+          "median_ci95": [
+            0.08028334379196167,
+            0.1491701602935791
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "origin_ge_01": 18,
+        "origin_ge_02": 6,
+        "paired_scored": 34,
+        "repair": {
+          "maximum": 0.0516853928565979,
+          "mean": 0.009978623951182646,
+          "mean_ci95": [
+            0.006279941075364081,
+            0.014116997195939932
+          ],
+          "median": 0.004179775714874268,
+          "median_ci95": [
+            0.001879185438156128,
+            0.005844771862030029
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_larger_than_background": 31,
+        "subject_positive": 34,
+        "subject_response": {
+          "maximum": 0.13501077890396118,
+          "mean": 0.06729068475611069,
+          "mean_ci95": [
+            0.05731862275007632,
+            0.07761925467186503
+          ],
+          "median": 0.06567281484603882,
+          "median_ci95": [
+            0.0525892972946167,
+            0.07871729135513306
+          ],
+          "n_bases": 34,
+          "n_prompt_clusters": 20
+        },
+        "subject_scored": 34,
+        "unscored": 0,
+        "zero_to_zero": 0
+      }
+    }
+  },
+  "provenance": {
+    "analysis_sha256": "9728360407db12fa826710b03afd323a43cb4c1a2df870d1844d1a28cfb05e01",
+    "protocol_sha256": "b38721d2f74a0f9f39905471bde6007a8d91b4ef88f1f750a1c54ee664f772f4",
+    "run_sha256": "88a0a08382baf02e2ec4f91f32e8464e62dfa28bc4bacedc1938413d4192ac25",
+    "scores_sha256": "de8a325e2961b7c1abc8f99e801308c2ddc11c0fa7132c9bcc4fadc20d8ef7bd"
+  },
+  "status_counts": {
+    "completed": 34,
+    "construction_rejected": 254
+  },
+  "total_candidates": 288,
+  "wall_seconds": 615.0099759101868
+}

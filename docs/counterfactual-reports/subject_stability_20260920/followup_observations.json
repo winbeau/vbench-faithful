@@ -1,0 +1,47 @@
+[
+  {
+    "subject": "cow",
+    "video_uid": "v_10d250e1b4b4a6ec0a82",
+    "frame": 0,
+    "reviewed_at_unix": 1789960179.8881683,
+    "verdict": "major_subject_omission",
+    "observation": "Main cow lower torso, head and legs are blurred in the actual background variant. SegFormer animal captures mainly upper colored body, plus disconnected parts of other cows. This is more than minor boundary error and does not establish subject preservation.",
+    "score_access": false
+  },
+  {
+    "subject": "elephant",
+    "video_uid": "v_075ccc862d1b2d4936f0",
+    "frame": 0,
+    "reviewed_at_unix": 1789960210.289221,
+    "verdict": "coarse_subject_preservation_plausible",
+    "observation": "Entire main elephant trunk, head, torso and legs remain clear; ground and trees blur. Small tail/boundary omissions tolerated. First-frame inspection only, no measured contour IoU.",
+    "score_access": false
+  },
+  {
+    "subject": "truck",
+    "video_uid": "v_0a1a6db568841167f9e8",
+    "frame": 0,
+    "reviewed_at_unix": 1789960285.2894886,
+    "verdict": "coarse_subject_preservation_plausible",
+    "observation": "Visible red truck at right edge stays clear; trees, grass and road blur. Small boundary/roof omissions tolerated; watermark is already in original. First frame only.",
+    "score_access": false
+  },
+  {
+    "subject": "motorcycle",
+    "video_uid": "v_34025bb5b4d01c898f92",
+    "frame": 0,
+    "reviewed_at_unix": 1789960423.049855,
+    "verdict": "coarse_subject_mask_plausible",
+    "observation": "Mask covers nearly all visible motorcycle wheels, tank and chassis. Small handlebar/mirror omissions and holes tolerated. Derived blur was not yet in preview; this observation concerns original plus construction mask only.",
+    "score_access": false
+  },
+  {
+    "subject": "zebra",
+    "video_uid": "v_125269dc5fc640751fa4",
+    "frame": 0,
+    "reviewed_at_unix": 1789960575.9787996,
+    "verdict": "coarse_subject_preservation_plausible",
+    "observation": "Head, torso, hind legs and most front leg remain clear; grass and trees blur. Small lower-leg/boundary omissions tolerated. No contour-IoU measurement.",
+    "score_access": false
+  }
+]

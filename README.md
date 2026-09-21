@@ -94,7 +94,10 @@ uv run dynamic-degree --both --video-dir /data/videos --gpu 0,2,4
 被 Git 忽略的 `output/supplementary_20260914/`，避免把大量中间缓存提交到仓库。
 
 Subject 的表示层修复与完整背景糊化实验见 [数据、协议与复现说明](docs/subject-repair.md)。
-最新[官方扩展实验](docs/counterfactual-reports/subject_official_extension_20260920.md)已完成 1440 条自然视频、2160 对人工偏好：
+当前目标已切换到 [Subject 背景干预稳定性修复](docs/plans/2026-09-20-subject-stability-goal.md)：
+开头背景糊化时，同一完整队列 Origin 平均绝对分差 ≥0.10、repair ≤0.01，且保留主体变化响应；人类偏好为辅助诊断。
+[本轮真实运行报告](docs/counterfactual-reports/subject_stability_20260920.md)保留各定位候选、覆盖与失败，尚未宣布完成。
+此前[官方扩展实验](docs/counterfactual-reports/subject_official_extension_20260920.md)已完成 1440 条自然视频、2160 对人工偏好：
 test 1290 对上 origin 为 58.53%，原有聚合 repair 为 59.61%，自动定位＋隔离裁剪为 48.76%。
 初轮候选整体退化；不能由两条背景示例宣称修复成功。所有官方/原聚合分数分别与历史值在 1e-6 内对齐。
 后续保持粗掩码、改用 CLS 并在主体证据不足时回退 origin：统一零平局容差下，test 为 57.05%，origin 为 58.45%。
@@ -112,7 +115,7 @@ test 1290 对上 origin 为 58.53%，原有聚合 repair 为 59.61%，自动定�
 背景平均绝对分差从 origin 的 0.01449 降至 0.00591，局部时窗主体干预 6/6 降分；
 咖啡评分掩码仍漏掉部分身体，两条样本不足以支持总体修复成功的结论。
 
-当前新增工作目标是 [Background Consistency 修复与主体糊化实验](docs/plans/2026-09-20-background-repair-goal-prompt.md)：
+此前的 [Background Consistency 修复与主体糊化实验](docs/plans/2026-09-20-background-repair-goal-prompt.md)：
 糊化主体、保留背景，对比 origin 与 repair 的干预前后分数，同时验证背景变化响应与自然偏好表现。
 background 已完成真实 CLIP 后端与独立验证，[正式报告](docs/counterfactual-reports/background_holdout_20260920.md)
 覆盖 1,040 条自然测试视频、1,560 对偏好及 188 条基底的 1,504 个干预版本。

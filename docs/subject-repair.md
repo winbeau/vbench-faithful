@@ -11,7 +11,13 @@ the masked repair, while subject corruption still affects the repair. A small
 background response alone is insufficient: a constant or failed detector could
 also be insensitive. No result is selected to make the repair win.
 
-The latest [official extension](counterfactual-reports/subject_official_extension_20260920.md)
+The active [stability goal](plans/2026-09-20-subject-stability-goal.md) prioritizes
+background-intervention invariance and subject-change response. Human preference
+is auxiliary. The [new experiment report](counterfactual-reports/subject_stability_20260920.md)
+records temporal localization candidates on the entire developmental cohort,
+including incomplete coverage and negative results; completion is not claimed.
+
+The earlier [official extension](counterfactual-reports/subject_official_extension_20260920.md)
 has scored all 1440 natural videos and evaluated 2160 human pairs. On 1290 test
 pairs, Official reaches 58.53%, the original aggregation repair 59.61%, and the
 automatic-localizer isolated-crop candidate 48.76%. The candidate is not a

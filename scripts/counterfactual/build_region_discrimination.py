@@ -27,7 +27,8 @@ def load_construction(root: Path, entry: dict):
     return read_png_sequence(root, entry["frames"]), masks, others
 
 
-def build_entry(row: dict, construction: Path, output: Path, protocol_path: Path, operator: str) -> dict:
+def build_entry(row: dict, construction: Path, output: Path, protocol_path: Path, operator: str,
+                gaussian_reference_short_side: int | None = None) -> dict:
     """One independent base; output paths are disjoint after ID validation."""
     cv2.setNumThreads(1)
     path = artifact_path(construction, row["manifest"])
@@ -51,7 +52,8 @@ def build_entry(row: dict, construction: Path, output: Path, protocol_path: Path
             # derived clip; never retain a score-favorable position only.
             for position in POSITIONS:
                 families[position] = region_discrimination(frames, masks, others,
-                        subject=base["subject_en"], position=position, operator=operator)
+                        subject=base["subject_en"], position=position, operator=operator,
+                        gaussian_reference_short_side=gaussian_reference_short_side)
         except RejectedBase as exc:
             manifest["rejection_reasons"].append(exc.reason)
         else:
@@ -77,19 +79,24 @@ def build_entry(row: dict, construction: Path, output: Path, protocol_path: Path
             "manifest": relative, "manifest_sha256": sha256_file(output / relative)}
 
 
-def build(construction: Path, output: Path, *, operator: str = "gaussian", workers: int = 1) -> dict:
-    protocol_path = ROOT / "configs/subject-repair/protocol.json"
+def build(construction: Path, output: Path, *, operator: str = "gaussian", workers: int = 1,
+          protocol_path: Path | None = None, gaussian_reference_short_side: int | None = None) -> dict:
+    protocol_path = protocol_path or ROOT / "configs/subject-repair/protocol.json"
+    protocol = json.loads(protocol_path.read_text())
+    if protocol.get('gaussian_reference_short_side') != gaussian_reference_short_side:
+        raise ValueError('blur normalization must match its separately frozen protocol')
     rows = read_jsonl(construction / "index.jsonl")
     if len({r["base_id"] for r in rows}) != len(rows):
         raise ValueError("duplicate bases in construction input")
     if workers < 1:
         raise ValueError("workers must be positive")
     if workers == 1:
-        results = [build_entry(row, construction, output, protocol_path, operator) for row in rows]
+        results = [build_entry(row, construction, output, protocol_path, operator, gaussian_reference_short_side) for row in rows]
     else:
         from itertools import repeat
         with ProcessPoolExecutor(max_workers=workers) as pool:
-            results = list(pool.map(build_entry, rows, repeat(construction), repeat(output), repeat(protocol_path), repeat(operator)))
+            results = list(pool.map(build_entry, rows, repeat(construction), repeat(output), repeat(protocol_path), repeat(operator),
+                                    repeat(gaussian_reference_short_side)))
     counts = Counter(reason for row in results for reason in row["rejection_reasons"])
     summary = {"family": "region_discrimination", "total_bases": len(results),
                "accepted": sum(row["status"] == "accepted" for row in results),
@@ -98,6 +105,8 @@ def build(construction: Path, output: Path, *, operator: str = "gaussian", worke
                "background_support": "subject_mask_complement", "equal_area_claim": False,
                "natural_preference_measurement": "NOT RUN", "real_model_parity": "NOT RUN"}
     write_jsonl(output / "index.jsonl", results)
+    if gaussian_reference_short_side is not None:
+        summary['gaussian_reference_short_side'] = gaussian_reference_short_side
     (output / "protocol.json").write_bytes(protocol_path.read_bytes())
     write_json(output / "summary.json", summary)
     return summary
@@ -127,7 +136,8 @@ def verify(dataset: Path) -> dict:
             saved = manifest["positions"][position]
             rebuilt = region_discrimination(clean, masks, others, subject=manifest["base"]["subject_en"],
                 position=position, operator=saved["parameters"]["operator"],
-                background_mode="complement" if saved["parameters"]["background_support"] == "subject_mask_complement" else "mirror")
+                background_mode="complement" if saved["parameters"]["background_support"] == "subject_mask_complement" else "mirror",
+                gaussian_reference_short_side=saved['parameters'].get('gaussian_reference_short_side'))
             if saved != {"parameters": rebuilt.parameters, "proofs": rebuilt.proofs}:
                 raise AssertionError("stored proof or parameters do not match replay")
             for level in LEVELS[1:]:
@@ -144,6 +154,8 @@ def main() -> int:
     parser.add_argument("--output", type=Path)
     parser.add_argument("--operator", choices=("gaussian", "mosaic"), default="gaussian")
     parser.add_argument("--workers", type=int, default=1, help="Independent CPU workers for lossless per-base construction")
+    parser.add_argument('--protocol',type=Path,help='Separate preregistration for a changed construction rule')
+    parser.add_argument('--gaussian-reference-short-side',type=int)
     parser.add_argument("--verify", type=Path)
     args = parser.parse_args()
     if args.verify:
@@ -151,7 +163,8 @@ def main() -> int:
     else:
         if not args.construction or not args.output:
             parser.error("--construction and --output are required when building")
-        print(json.dumps(build(args.construction, new_output(args.output), operator=args.operator, workers=args.workers), indent=2))
+        print(json.dumps(build(args.construction, new_output(args.output), operator=args.operator, workers=args.workers,
+                               protocol_path=args.protocol,gaussian_reference_short_side=args.gaussian_reference_short_side), indent=2))
     return 0
 
 

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "stage": "development_v4_fixed_clip_prompt_after_v3_empty_case_diagnosis",
+  "primary_intervention": "start/background_corrupt",
+  "controls": [
+    "full/background_corrupt",
+    "middle/background_corrupt",
+    "end/background_corrupt",
+    "start/subject_corrupt",
+    "middle/subject_corrupt",
+    "end/subject_corrupt",
+    "full/subject_corrupt"
+  ],
+  "representations": [
+    "preencode_crop"
+  ],
+  "primary_missing_policy": "exclude",
+  "reported_missing_policies": [
+    "zero",
+    "exclude"
+  ],
+  "cohort_candidates": 288,
+  "expected_constructed": 34,
+  "score_based_selection": false,
+  "detector": {
+    "threshold": 0.5,
+    "size": 512,
+    "weight_sha256": "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0"
+  },
+  "tracking": {
+    "minimum_iou": 0.2,
+    "max_gap": 2,
+    "smooth_radius": 1,
+    "union_all_target_instances": true,
+    "cross_variant_state": false
+  },
+  "representation": {
+    "fill_rgb": [
+      128,
+      128,
+      128
+    ],
+    "crop_margin": 0.1,
+    "crop_side": 224,
+    "aggregation": "all_pairs"
+  },
+  "targets": {
+    "origin_mae_minimum": 0.1,
+    "repair_mae_maximum": 0.01,
+    "report_origin_ge_02": true,
+    "report_joint_success": true,
+    "no_constant_zero_success": true
+  },
+  "human_preferences": "auxiliary_only",
+  "no_construction_masks_for_scoring": true,
+  "weights": "reuse_existing_local_pinned_models_only",
+  "candidate_name": "anchor",
+  "prompt_policy": "clip_anchor",
+  "rationale": "Earlier human-box successes used one prompt box independently applied to each actual frame. In v3 a cropped boat is detected in only one of sixteen frames, so bounded interpolation cannot restore scoring coverage. Choose one anchor by highest target detector confidence, retain all its target instances, and rerun SAM independently on each actual frame. No construction mask or clean-reference frame is consumed.",
+  "selection_rule": "Within the actual clip: maximize (maximum target detection confidence, summed target confidence, earliest frame). Same fixed boxes for all its frames. If no target detection exists anywhere, record no anchor; no fabricated score.",
+  "original_v3_protocol_sha256": "805a80482174078aa7cc6860e2b3a54aa37d624e23e4e5c849bba6f9330040a6"
+}

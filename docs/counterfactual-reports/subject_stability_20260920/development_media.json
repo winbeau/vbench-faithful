@@ -1,0 +1,280 @@
+{
+  "videos": 34,
+  "known_duration_videos": 24,
+  "known_media_seconds": 48.0,
+  "unknown_duration_videos": 10,
+  "rows": [
+    {
+      "video_uid": "v_015a48a198ce0a7a6684",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a car stuck in traffic during rush hour-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_038af9e85946208b9d08",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a boat accelerating to gain speed-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_0b88becab5cd91669727",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a car slowing down to stop-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_14499454e08d4adb6d22",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a boat accelerating to gain speed-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_2211afa97c13b0d7479c",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a bicycle gliding through a snowy field-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_22198fc0eb29ccf872ca",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a bicycle accelerating to gain speed-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_223dffdfd43f07ff254e",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a boat slowing down to stop-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_2390b54e0d7162ecc8e1",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/an airplane accelerating to gain speed-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_24aff3375dfcba813f6e",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a car turning a corner-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_2541a276b12785e4ded5",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a person walking in the snowstorm-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_2567bc088498a76bf296",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a truck stuck in traffic during rush hour-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_271c63952df0de2e6cdf",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a person washing the dishes-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_2be9a6688c35336f245c",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/an airplane landing smoothly on a runway-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_34ae89f5afbb4409d146",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a person eating a burger-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_3e0e478175044cb2ea97",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a person eating a burger-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_425065ae2beb7ec16285",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/an airplane landing smoothly on a runway-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_4e6e34f0f85ace192464",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a person eating a burger-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_4f2d8b98e55b77fec7e4",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a person drinking coffee in a cafe-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_4f6246de363a4189bf81",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a bus turning a corner-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_5054c5414a363dab8171",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a car slowing down to stop-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_74c3a91e1cd5ac167338",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a bicycle gliding through a snowy field-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_7a15ece21d814f0fce0f",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a bicycle leaning against a tree-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_8e99ea486ff07419b6c1",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a person giving a presentation to a room full of colleagues-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_9cec858297ae985418ba",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a boat slowing down to stop-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_b5ee130b761930dd2521",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a person eating a burger-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_bc0ac2c371a024e73050",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a car accelerating to gain speed-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_c0930358df5ed15fef8d",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a car accelerating to gain speed-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_c819cb86a8e25dfb3e97",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a bicycle gliding through a snowy field-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_d38b247e9db157715244",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a bicycle leaning against a tree-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_e3ac9d38cb8ebbad7180",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/an airplane taking off-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_e710114a4f938d3d6562",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a person giving a presentation to a room full of colleagues-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_e9cc23e6e032e0839ecb",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a person giving a presentation to a room full of colleagues-0.gif",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null,
+      "raw_ffprobe_duration": null
+    },
+    {
+      "video_uid": "v_f3ccc1d9909eb2eafed7",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a person playing guitar-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    },
+    {
+      "video_uid": "v_f88a0a406794823274a6",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a person giving a presentation to a room full of colleagues-0.mp4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0,
+      "raw_ffprobe_duration": "2.000000"
+    }
+  ]
+}

@@ -1,0 +1,488 @@
+{
+  "videos": 60,
+  "known_duration_videos": 47,
+  "known_media_seconds": 94.0,
+  "unknown_duration_videos": 13,
+  "rows": [
+    {
+      "video_uid": "v_075ccc862d1b2d4936f0",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/an elephant running to join a herd of its kind-3.mp4",
+      "source_sha256": "c04a39ace05b618b89169e7d4071c966d32aa3c2d34bc4b4ccf990abd802cd59",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_0925f4496cf55ade8e5d",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/an elephant spraying itself with water using its trunk to cool down-2.mp4",
+      "source_sha256": "7f59abed1944867455d564c3f5e109d769cb6ac8a9b2237382d721fefd8e5f2c",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_0a1a6db568841167f9e8",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a truck turning a corner-4.mp4",
+      "source_sha256": "115f8621bdae11860b1053e8335e04e5b00841062ca68292375d56c05c7254c6",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_10d250e1b4b4a6ec0a82",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a cow running to join a herd of its kind-1.mp4",
+      "source_sha256": "e455a6707185a212ce61f023fc38bb561dd6f76e3e821b7aad1341817e45f874",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_125269dc5fc640751fa4",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra running to join a herd of its kind-4.mp4",
+      "source_sha256": "08e34ece8adc7227c32e58585e37819576f1c55d29d7ffbcc45ecb47991289d1",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_13502c1b9c959957b46a",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra taking a peaceful walk-2.mp4",
+      "source_sha256": "b1bff19f8afdb586ff0ca45630b77699fa23d52596a6fbdc4d6d67000c590777",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_1814b4d5b25ffa156aa6",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/an elephant running to join a herd of its kind-1.gif",
+      "source_sha256": "dc8e88e5df53acee99da8080e14cba5edec61fa5d174144334c7f6d85f9e11f9",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_22506cf5d5a1e6088fc8",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a truck slowing down to stop-4.mp4",
+      "source_sha256": "2e7fc14dfa9d18ec4bc495ccade3e1d0a031d13238ec2228a35911f24dbbb5a4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_2ac6cf025d5e88563949",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a zebra running to join a herd of its kind-3.mp4",
+      "source_sha256": "e2b793c47c9e04e0b63f0664e3172d30b889df96946915ff4917a9c50eacab4a",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_2fbefa11a17758f1cd8f",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a zebra taking a peaceful walk-2.mp4",
+      "source_sha256": "9f458391866fd41a415792c79514cc9a2b8af9166ff186b73ab2e0ac3260d044",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_304f65b790cd089803d4",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a zebra bending down to drink water from a river-3.mp4",
+      "source_sha256": "f7f641784adf8c2a18c160f5aee70b29dd1ba710caab9bc1df82b47ece340afe",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_34025bb5b4d01c898f92",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a motorcycle accelerating to gain speed-3.gif",
+      "source_sha256": "0c89e605dd0c17272078190f633b6f7e6599dfc0ebdda4a173c00ff5b8ceb970",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_355010ce10f66a681b88",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a truck turning a corner-2.mp4",
+      "source_sha256": "8ae17acaa3e1cb0bdc694a8ebaf4d77272076b0fed67151bfc636d82a4dbc061",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_35d320b87cf1354b75ab",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra running to join a herd of its kind-2.mp4",
+      "source_sha256": "9fe2126b34cc6d55ba3bafcb0ad1fbc0b09df8c78e88d65ab2ea9ce809db3271",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_38ae4c230155beb1b259",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra taking a peaceful walk-3.mp4",
+      "source_sha256": "0aa40f4c5d38cb7b71597e07a9d22882a3f4781aaef13b123abfdbb0ab992dc0",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_3b6ddfc07cc98fcf9fa0",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/an elephant running to join a herd of its kind-1.mp4",
+      "source_sha256": "c6e1b27bc5cf022b37769d2a278091b28a513f176ea303250c0aae9f59e88ab4",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_427171327cff517973ed",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a zebra bending down to drink water from a river-4.mp4",
+      "source_sha256": "7c6197fac603d250d80a44b1c308af902fac0e73fa0ddba21a59a26237e8b243",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_4719caef96c8df794757",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/an elephant running to join a herd of its kind-4.mp4",
+      "source_sha256": "97c6e9adb613a37eda230f4d1fb73db092e9d0213c0021024a1c9fd21e8284d2",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_4d76a76426a219a5f1bb",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a zebra bending down to drink water from a river-1.gif",
+      "source_sha256": "88f792a6df774393c7f4ba7b8a22f6eeca5cd1c6d257f5c3b41caabf4b61f424",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_4e7cf3a0868b1b118f55",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a zebra running to join a herd of its kind-4.mp4",
+      "source_sha256": "3906bea226e5687841e365db36937add26e6e1393467a89ee7fbb24a292fe11a",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_4ff816e35ca1960d8058",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/an elephant running to join a herd of its kind-2.mp4",
+      "source_sha256": "6cb574ce3c32169103f4f4c97174538cf7140d90d4275cfa1ac43fcd06ee32ae",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_50b265d3f9ccf281a518",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/an elephant spraying itself with water using its trunk to cool down-4.mp4",
+      "source_sha256": "ce4bd770a986ba66f0b6249a92b015819ff4bdaf474dac6c8e0fe2411ac8e23a",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_53b3d43654788945925c",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra running to join a herd of its kind-3.mp4",
+      "source_sha256": "40e7667ed3856520ef5b4411784790065665307565dc9201a80624b13ce18d0e",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_55a4f07d56cda7470760",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/an elephant running to join a herd of its kind-2.mp4",
+      "source_sha256": "0fcc5abad65fa7d875ebee34d5ff79f4438c928fa97f201d9bfa981c7287d52f",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_6015d56a898aa0948639",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a zebra bending down to drink water from a river-4.gif",
+      "source_sha256": "6bdb6f2468564b52ddf9c6253131548a9c12497df971ac25e2143e114aab0a2a",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_67c0894760111d0087b6",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a motorcycle accelerating to gain speed-3.mp4",
+      "source_sha256": "bfd82be328c5157210746a77f0891b15e93643a94f17b15ddf195bd5b4f8904b",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_6bee77846ce628e11d94",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/an elephant spraying itself with water using its trunk to cool down-4.gif",
+      "source_sha256": "0f396d533a5c00beda4f4fc3f07c137eb4431c54b89d8433630e0f8c55e31c49",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_6d2af08e0301e767c719",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a cow running to join a herd of its kind-2.mp4",
+      "source_sha256": "0e657c4a79c2ca37e3b5ce62b7fcffd76343af588bbc39a9c951d353f5b0201e",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_6ee4476dec8615e1535f",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a zebra bending down to drink water from a river-3.gif",
+      "source_sha256": "a7031adb79fdb9bba9e81279fa0b28ffc2a96262d34779ae01ffa6493acde7ae",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_74d5bd9982ed49689599",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a truck turning a corner-3.mp4",
+      "source_sha256": "df4cc6b3444419fa6ff54c7fa600b8ffc5f0e4499fd72b4cda83a2cb7e010230",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_795022cc03907dc7489e",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/an elephant spraying itself with water using its trunk to cool down-3.gif",
+      "source_sha256": "2bf7f45fb082fd3ca85f890099ec342fbb67a3c2ab01c0f19815bd547df84c14",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_7959de66f76bf5fc41d9",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a zebra bending down to drink water from a river-2.gif",
+      "source_sha256": "bf5375166b76c23bae843e3bf76ce54dd62a2b217c4b42a0483a85ca622c9f06",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_82dc1689fd289adcc0d2",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra taking a peaceful walk-1.mp4",
+      "source_sha256": "c89795050db693d9bfa6c330d4f0c1d4e9519f047ad395be80d362b89301115d",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_88720509dffa7aea9e30",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra bending down to drink water from a river-4.mp4",
+      "source_sha256": "e0f68ec845a46f223e1f12cea5b2d9f34064e9b87bda8d068a7213f661558aa0",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_8887acf562b32cc84023",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a zebra bending down to drink water from a river-1.mp4",
+      "source_sha256": "de0483ed3b90ec5d7488f8990383132f90e929fe1e8f3553ece90ddd59d2152e",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_8dca194984971f0a1124",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a truck turning a corner-4.mp4",
+      "source_sha256": "cc21d33c905ea3c9d3c1c3626f6b967a712ebc688ab62236cbb8cf731699eafc",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_8e6a21dfeb7a106dae22",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a zebra taking a peaceful walk-4.gif",
+      "source_sha256": "c99d27e82332150e6cffc3b25899b0da2c5c93e56a7089cb4e8ebae1b72de220",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_a18cdea6bd26987ddbc4",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a cow running to join a herd of its kind-2.gif",
+      "source_sha256": "5c9b815d4f414099ee29354d15b2de6bbb7b4f4a780ccd8bdf3c180c51696518",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_a3b6d576bc5c5ef3517f",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a zebra running to join a herd of its kind-2.mp4",
+      "source_sha256": "097d214b0ad6023a97981719220ca7353401dd3815060280a9d68ac40bffa14d",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_a522928f33a3f29c463c",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a truck slowing down to stop-4.mp4",
+      "source_sha256": "4c2c08b48af8bf67832231891c2cf0fd904ac777bb270059c8a104ca62ae50cd",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_a5b4d7c4b2a095c9e6cc",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/an elephant running to join a herd of its kind-2.gif",
+      "source_sha256": "c3180d97029337d8bae003fbec4e5d11a7bd2c0cf3f75ebdaac80448320d970f",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_aa14318968934ce72fb1",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra bending down to drink water from a river-2.mp4",
+      "source_sha256": "503004c3aae23572dac946e424d51bf7737f4b4d04257293eebd3ace7a7f56cf",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_ad2f0d6ec69f9ff90382",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra taking a peaceful walk-4.mp4",
+      "source_sha256": "46751dd4acafabf3e682b1175afe5fc776c3f916bc6f61d870c6ea590bb6287e",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_b2657298416595015a2b",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra running to join a herd of its kind-1.mp4",
+      "source_sha256": "350dfef579e5c60e6205608e9d03616f73d8e132edab3e683ff00c50327c201d",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_bc950a10e74a0a5447f1",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a zebra bending down to drink water from a river-1.mp4",
+      "source_sha256": "9b316a8f81e5178ea7d261444eb20a86446f2e849c8124c42d5cb3c4800878c5",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_bf4b3df29a9616bf26ae",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a truck turning a corner-1.mp4",
+      "source_sha256": "c3f85b889b9203483d7ce85928290028f95aa7d68a719b9c877f1bcea3ef2081",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_c41543fe72d2e5493d15",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a truck slowing down to stop-2.gif",
+      "source_sha256": "81d86eea1886a98bac43dccf40c51073215abe0b26a046aaa6a78c715ebf80ba",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    },
+    {
+      "video_uid": "v_c424c7aceaf2046394ad",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a cow running to join a herd of its kind-3.mp4",
+      "source_sha256": "d759c44e0cb661fd6cb2be428dce609ac84520a22cc56cb5bb3718879e776d66",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_c4de504a244d437ac3ad",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra bending down to drink water from a river-1.mp4",
+      "source_sha256": "9e86c655c0a4ec4dcd464795de36983244285d0e440d70f5608bf896c3f00894",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_cdab6ebfbdf88aa1365e",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/an elephant running to join a herd of its kind-3.mp4",
+      "source_sha256": "b366f9923f71178f3004c0240ea3b537552595555700f2ff4e1b7e4517503301",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_d111e2d8975fa9b850b3",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/videocrafter/subject_consistency/a zebra taking a peaceful walk-2.mp4",
+      "source_sha256": "4e6911d58faf725ef3b2f23d4a6e605c12472202d8eb426f6f93c9b528658fc8",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_d51186bcfc23e2a780ab",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a truck slowing down to stop-2.mp4",
+      "source_sha256": "892c78948f61d00124f0dec6f10383a9e192179b15a919c8f2eeb643d7edc573",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_d86a4852b9a610b4e2ac",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a motorcycle accelerating to gain speed-3.mp4",
+      "source_sha256": "c90427cee6e69e4c324ed0cfc19ef6982569ae23fafa56d6065ccbce3646ae18",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_e7e6381187b3421f31f4",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a zebra taking a peaceful walk-4.mp4",
+      "source_sha256": "5000923e5c063ecfd44623a9017d39b2286e3da8315a7d545ccac9156a75d0c1",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_e84cd21f77767e064452",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/an elephant running to join a herd of its kind-4.mp4",
+      "source_sha256": "af127f791f05fc3108d75b98df20956b02ce68df19dd8bc44741b29607536bf5",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_f762ed821ba1fba906af",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a zebra bending down to drink water from a river-2.mp4",
+      "source_sha256": "85779a364986408a0d8a481cfdccd8ab4b2ae0b18d22e894e7a042a0637f0064",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_f993f14cdb34fb8383ef",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a zebra bending down to drink water from a river-3.mp4",
+      "source_sha256": "142bf4ca6fa88f0f2db1079758c50db53fd800ccaff356f8084dc73c97193ed3",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_fb03b6a21df9c0a51627",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/a cow running to join a herd of its kind-4.mp4",
+      "source_sha256": "5b80fbd7daf5cbcaeb8ec1789afd7f16143fd7868a1a89c7135b6df5b856e12d",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_fc9b39a4b047b2db243c",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/lavie/subject_consistency/an elephant spraying itself with water using its trunk to cool down-1.mp4",
+      "source_sha256": "8017ecacd4ecc19be173f772c6a27d367864a419e7d2d0c51deea0f5136d43e7",
+      "frames": 16,
+      "suffix": ".mp4",
+      "media_duration_seconds": 2.0
+    },
+    {
+      "video_uid": "v_fef8070abcd8dcd3af47",
+      "source": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/cogvideo/subject_consistency/a zebra taking a peaceful walk-2.gif",
+      "source_sha256": "61f1ff098bf7ab0ccce6d3e8749aaf11d18dd7fa3a4348ef01a239fedd9323d5",
+      "frames": 33,
+      "suffix": ".gif",
+      "media_duration_seconds": null
+    }
+  ]
+}

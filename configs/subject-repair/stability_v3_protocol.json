@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "stage": "development_replay_of_all_34_previously_exposed_bases",
+  "primary_intervention": "start/background_corrupt",
+  "controls": ["full/background_corrupt", "middle/background_corrupt", "end/background_corrupt", "start/subject_corrupt", "middle/subject_corrupt", "end/subject_corrupt", "full/subject_corrupt"],
+  "representations": ["preencode_crop"],
+  "primary_missing_policy": "exclude",
+  "reported_missing_policies": ["zero", "exclude"],
+  "cohort_candidates": 288,
+  "expected_constructed": 34,
+  "score_based_selection": false,
+  "detector": {"threshold": 0.5, "size": 512, "weight_sha256": "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0"},
+  "tracking": {"minimum_iou": 0.2, "max_gap": 2, "smooth_radius": 1, "union_all_target_instances": true, "cross_variant_state": false},
+  "representation": {"fill_rgb": [128, 128, 128], "crop_margin": 0.1, "crop_side": 224, "aggregation": "all_pairs"},
+  "targets": {"origin_mae_minimum": 0.1, "repair_mae_maximum": 0.01, "report_origin_ge_02": true, "report_joint_success": true, "no_constant_zero_success": true},
+  "human_preferences": "auxiliary_only",
+  "no_construction_masks_for_scoring": true,
+  "weights": "reuse_existing_local_pinned_models_only"
+}

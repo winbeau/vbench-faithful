@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 
 from .common import ROOT, sha256_file
-from .region_discrimination import RejectedBase, refine_grabcut, window_indices
+from .region_discrimination import RejectedBase, refine_grabcut, recover_grabcut_extent, window_indices
 from .subject_artifacts import (new_output, object_sha256, read_jsonl, safe_id, upstream_frames,
                                 write_json, write_jsonl, write_npz, write_png_sequence)
 
@@ -86,6 +86,9 @@ def localize_frames(frames: np.ndarray, subject: str, localizer, mapping: dict) 
         why = []
         try:
             mask = refine_grabcut(frame, target, person=subject == "person")
+            if mapping.get('recovery_padding_fraction') is not None:
+                mask = recover_grabcut_extent(frame, mask, person=subject == 'person',
+                                             padding_fraction=mapping['recovery_padding_fraction'])
         except RejectedBase as exc:
             mask = np.zeros(frame.shape[:2], np.uint8)
             why.append(exc.reason)
@@ -115,6 +118,10 @@ def generate(bases: list[dict], video_root: Path, output: Path, mapping: dict, l
         entry = {"schema_version": 1, "role": "construction", "base": base,
                  "class_map_sha256": object_sha256(mapping), "localizer": localizer.provenance,
                  "rejection_reasons": [], "status": "rejected"}
+        if mapping.get('recovery_padding_fraction') is not None:
+            entry['construction_recovery'] = {'method':'second_grabcut_with_padded_component_boxes',
+                                              'padding_fraction':mapping['recovery_padding_fraction'],
+                                              'scores_used':False}
         subject = base.get("subject_en")
         try:
             if not subject:

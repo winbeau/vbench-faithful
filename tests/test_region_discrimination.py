@@ -103,7 +103,8 @@ def test_component_cleanup_fills_only_small_internal_holes_and_keeps_largest():
     assert result[15, 65] == 0
 
 
-def test_complete_dataset_replay_rechecks_pixels_and_every_artifact(tmp_path):
+@pytest.mark.parametrize('reference_short_side',[None,256])
+def test_complete_dataset_replay_rechecks_pixels_and_every_artifact(tmp_path,reference_short_side):
     frames, masks, _ = pixels()
     frames[:] = 15
     frames[masks > 0] = [230, 30, 100]
@@ -127,8 +128,13 @@ def test_complete_dataset_replay_rechecks_pixels_and_every_artifact(tmp_path):
     assert summary["accepted"] == 1
     assert summary["base_rejection_counts"] == {"class_not_mapped": 1}
     outputs = [new_output(tmp_path / name) for name in ("a", "b")]
+    kwargs={}
+    if reference_short_side:
+        protocol=tmp_path/'normalized-protocol.json'
+        protocol.write_text(json.dumps({'gaussian_reference_short_side':reference_short_side}))
+        kwargs={'protocol_path':protocol,'gaussian_reference_short_side':reference_short_side}
     for workers, output in enumerate(outputs, start=1):
-        assert build(source, output, workers=workers)["accepted"] == 1
+        assert build(source, output, workers=workers,**kwargs)["accepted"] == 1
         proof = verify(output)
         assert proof["outside_mask_changed_pixels"] == 0
         assert proof["verified_corrupted_frames"] == 64
@@ -137,6 +143,17 @@ def test_complete_dataset_replay_rechecks_pixels_and_every_artifact(tmp_path):
     png.write_bytes(b"tampered")
     with pytest.raises(ValueError, match="hash mismatch"):
         verify(outputs[0])
+
+
+def test_resolution_normalization_requires_its_own_protocol_and_preserves_subject(tmp_path):
+    with pytest.raises(ValueError,match='separately frozen'):
+        build(tmp_path,tmp_path,gaussian_reference_short_side=256)
+    frames,masks,other=pixels()
+    legacy=region_discrimination(frames,masks,other,subject='person',position='start')
+    normalized=region_discrimination(frames,masks,other,subject='person',position='start',gaussian_reference_short_side=256)
+    assert normalized.parameters['scale']/80 == legacy.parameters['scale']/256
+    assert not np.array_equal(normalized.frames['background_corrupt'],legacy.frames['background_corrupt'])
+    assert np.array_equal(normalized.frames['background_corrupt'][masks>0],frames[masks>0])
 
 
 def test_protected_trees_cannot_be_outputs():

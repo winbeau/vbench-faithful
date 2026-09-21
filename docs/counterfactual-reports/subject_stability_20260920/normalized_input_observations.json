@@ -1,0 +1,20 @@
+[
+  {
+    "subject": "cow",
+    "video_uid": "v_10d250e1b4b4a6ec0a82",
+    "frame": 0,
+    "reviewed_at_unix": 1789963123.1254835,
+    "verdict": "major_initial_omission_substantially_recovered",
+    "observation": "Actual normalized blur now retains the main foreground cow torso and much more of its head/lower body. Some limb tips and parts of other herd members remain imperfect; coarse improvement, no contour-IoU claim and no whole-clip certification.",
+    "new_scores_access": false
+  },
+  {
+    "subject": "truck",
+    "video_uid": "v_4f8abc7bb931501fb862",
+    "frame": 26,
+    "reviewed_at_unix": 1789963414.5977294,
+    "verdict": "major_subject_omission_excluded_from_primary_before_new_scores",
+    "observation": "Frame 26 shows only a small cab edge preserved while most of the visible truck is blurred; major semantic construction failure, visually recorded before normalized scores.",
+    "new_scores_access": false
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "subject": "cow",
+    "video_uid": "v_10d250e1b4b4a6ec0a82",
+    "prompt": "a cow running to join a herd of its kind",
+    "area_first": 0.087249755859375,
+    "panel_count": 3,
+    "png_sha256": "76fbf864e278de5f8d6473cad8a9e6c5ea3e171cacd6718f29a5536c8e05f441",
+    "selection": "lexicographically first accepted UID per subject; no scores"
+  },
+  {
+    "subject": "elephant",
+    "video_uid": "v_075ccc862d1b2d4936f0",
+    "prompt": "an elephant running to join a herd of its kind",
+    "area_first": 0.178955078125,
+    "panel_count": 3,
+    "png_sha256": "79e4da1ef59e9b67f0cc374e4608f25a95694326374dc97fb2f66b1025d5058d",
+    "selection": "lexicographically first accepted UID per subject; no scores"
+  },
+  {
+    "subject": "motorcycle",
+    "video_uid": "v_34025bb5b4d01c898f92",
+    "prompt": "a motorcycle accelerating to gain speed",
+    "area_first": 0.23332899305555554,
+    "panel_count": 2,
+    "png_sha256": "7acccb20c3ee580a84773a57dc7088df9ae9693aaa1e3b70a01f312d1a95ea6c",
+    "selection": "lexicographically first accepted UID per subject; no scores"
+  },
+  {
+    "subject": "truck",
+    "video_uid": "v_0a1a6db568841167f9e8",
+    "prompt": "a truck turning a corner",
+    "area_first": 0.033306121826171875,
+    "panel_count": 3,
+    "png_sha256": "effac31cba7d619b92ddd306ec99dc173a19e3fcbe038103e0c102372c180959",
+    "selection": "lexicographically first accepted UID per subject; no scores"
+  },
+  {
+    "subject": "zebra",
+    "video_uid": "v_125269dc5fc640751fa4",
+    "prompt": "a zebra running to join a herd of its kind",
+    "area_first": 0.07097625732421875,
+    "panel_count": 3,
+    "png_sha256": "bcc465b82d750b6aca1716e560ad71f54269c46aa3a89de18ee2dbc239d87809",
+    "selection": "lexicographically first accepted UID per subject; no scores"
+  }
+]

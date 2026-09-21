@@ -105,6 +105,38 @@ def refine_grabcut(image: np.ndarray, semantic_mask: np.ndarray, *, person: bool
     return clean_components(np.isin(seeds, [cv2.GC_FGD, cv2.GC_PR_FGD]).astype(np.uint8), person=person)
 
 
+def recover_grabcut_extent(image: np.ndarray, mask: np.ndarray, *, person: bool,
+                           padding_fraction: float) -> np.ndarray:
+    """A separately configured second pass can recover coarse semantic omissions.
+
+    Existing foreground cores stay fixed. Unknown pixels extend to padded
+    component boxes rather than only a five-pixel dilation. The complement
+    remains certain background; no scoring evidence or other clip is used.
+    """
+    binary_masks(mask, image.shape[:2])
+    if not np.isfinite(padding_fraction) or not 0 < padding_fraction <= 1:
+        raise ValueError('invalid component-box padding')
+    height, width = mask.shape
+    extent = np.zeros_like(mask)
+    _, _, components, _ = cv2.connectedComponentsWithStats(mask, 8)
+    for x, y, w, h, area in components[1:]:
+        if area < 20:
+            continue
+        pad = int(np.ceil(padding_fraction * max(w, h)))
+        extent[max(0,y-pad):min(height,y+h+pad),max(0,x-pad):min(width,x+w+pad)] = 1
+    core = cv2.erode(mask, cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(11,11)))
+    if not core.any() or extent.all():
+        raise RejectedBase('recovery_grabcut_unusable_seeds')
+    seeds = np.full(mask.shape, cv2.GC_BGD, np.uint8)
+    seeds[extent > 0] = cv2.GC_PR_BGD
+    seeds[mask > 0] = cv2.GC_PR_FGD
+    seeds[core > 0] = cv2.GC_FGD
+    cv2.setRNGSeed(0)
+    cv2.grabCut(image, seeds, None, np.zeros((1,65),np.float64),
+               np.zeros((1,65),np.float64), 4, cv2.GC_INIT_WITH_MASK)
+    return clean_components(np.isin(seeds,[cv2.GC_FGD,cv2.GC_PR_FGD]).astype(np.uint8),person=person)
+
+
 def inward_alpha(mask: np.ndarray) -> np.ndarray:
     # Padding defines the exterior even when the mask touches an image edge.
     distance = cv2.distanceTransform(np.pad(mask, 1), cv2.DIST_L2, cv2.DIST_MASK_PRECISE)[1:-1, 1:-1]
@@ -148,7 +180,8 @@ class RegionFamily:
 
 def region_discrimination(frames: np.ndarray, masks: np.ndarray, other_instances: np.ndarray,
                           *, subject: str, position: str = "full", operator: str = "gaussian",
-                          background_mode: str = "complement") -> RegionFamily:
+                          background_mode: str = "complement",
+                          gaussian_reference_short_side: int | None = None) -> RegionFamily:
     if frames.dtype != np.uint8 or frames.ndim != 4 or frames.shape[-1] != 3:
         raise ValueError("frames must be uint8 [T,H,W,3]")
     shape = frames.shape[:3]
@@ -164,6 +197,10 @@ def region_discrimination(frames: np.ndarray, masks: np.ndarray, other_instances
         raise RejectedBase("mask_area_above_50_percent")
     # One preregistered category rule; never tune corruption against scores.
     scale = (18 if subject == "person" else 12) if operator == "gaussian" else (22 if subject == "person" else 16)
+    if gaussian_reference_short_side is not None:
+        if operator != 'gaussian' or gaussian_reference_short_side <= 0:
+            raise ValueError('Gaussian reference short side must be positive and Gaussian-only')
+        scale = scale * min(frames.shape[1:3]) / gaussian_reference_short_side
     variants = {level: frames.copy() for level in LEVELS}
     proofs = []
     for t in indexes:
@@ -205,8 +242,11 @@ def region_discrimination(frames: np.ndarray, masks: np.ndarray, other_instances
                        "subject_mask_area": int(masks[t].sum()), "background_mask_area": int(background.sum()),
                        "subject_pixels_changed_by_background": subject_changed,
                        **geometry, **changes})
-    return RegionFamily(variants, {"operator": operator, "scale": scale, "feather_px": 1.5,
+    parameters = {"operator": operator, "scale": scale, "feather_px": 1.5,
                                    "position": position, "window_indices": list(indexes),
                                    "window_frames": len(indexes), "window_fraction": 1.0 if position == "full" else 0.25,
                                    "background_support": "subject_mask_complement" if background_mode == "complement" else "horizontally_reflected_subject_mask",
-                                   "expected": "clean ~= background_corrupt > subject_corrupt"}, proofs)
+                                   "expected": "clean ~= background_corrupt > subject_corrupt"}
+    if gaussian_reference_short_side is not None:
+        parameters['gaussian_reference_short_side'] = gaussian_reference_short_side
+    return RegionFamily(variants, parameters, proofs)
