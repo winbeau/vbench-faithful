@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "dataset": "VBench 1.0 paper official per-dimension human preference videos",
+  "generation_models": [
+    "cogvideo",
+    "lavie",
+    "modelscope",
+    "videocraft"
+  ],
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "hf_dataset_revision": "8c89bb0218a12323d04821d11ec03c780d0dfb9c",
+  "source_manifest": {
+    "path": "data/processed/e0_scoring_manifest.csv",
+    "sha256": "1e08807b42045afc43a71397b115fe8045c6c88251762fea1aafa1fc8b203f47"
+  },
+  "source_pairs": {
+    "path": "data/processed/pairwise_master_split.csv",
+    "sha256": "788cd605d90a91c242da7a0642a6836e26ed06960798230ae0af7035cbd6d2ae"
+  },
+  "vocabulary_sha256": "bdc9af5a3eaf54eccd7beb5253cd05e50ededd488c4c98041ee5ee34d2faba04",
+  "primary_backends": [
+    "official",
+    "repair_deterministic"
+  ],
+  "additional_backends": [
+    "repair_base",
+    "repair_lora"
+  ],
+  "train_new_weights": false,
+  "primary_population": "all official annotated videos; deterministic repair uses no learned prompt adapter",
+  "paper_alignment": "4-generator win-ratio Pearson; metric exact ties and human ties each 0.5; undefined pairs retained and coverage disclosed",
+  "additional_alignment": "frozen prompt-disjoint dev/test pair accuracy, zero margin and dev-only calibrated ties; full expected-pair denominator with undefined counted unsuccessful, plus common-scored-pair comparison",
+  "lora_evaluation_populations": [
+    "all descriptive with training overlap disclosed",
+    "official test intersect original semantic test (not train or semantic dev)"
+  ],
+  "bootstrap": {
+    "resamples": 10000,
+    "seed": 20260920,
+    "cluster": "raw prompt",
+    "paired": true
+  },
+  "missing_policy": "retain every expected video and pair; no selective removal or post-score filtering",
+  "formula_policy": "use committed afd48ec formulas without tuning",
+  "files": {
+    "color-manifest.json": "235708d77365ef2577f19a5c01dd3fee14003cd819a53a9dcc78268e6c338db4",
+    "color-pairs.json": "43b514fc498d50289271719edcf67fd9a63f47e5d28497314ace3a17f4104193",
+    "object_class-manifest.json": "d4b35e049d24d240d1f85b1cd63355086d58b522b5a037ad808a2549bdcba529",
+    "object_class-pairs.json": "c77af2b1a071e154160717fab7a0d73f9a1f8e0b27fc5970a2d9ddcc4ccfa3af"
+  }
+}

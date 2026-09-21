@@ -230,5 +230,9 @@ dev 分支动过这些文件（`origin/dev/torch2` `4427aa8`、`origin/dev/video
 | `vbench/imaging_quality.py` | `ac6c648cb4d5e82cd29c63be04977e9288c3540558cf12f979e66bef3e1f9e3a` |
 
 - 待补（需要权重/CUDA）：① GRiT 生成类名与 COCO 目标串的实际不一致率；
-  ② `temporal_style` 32-token 截断的精确条数（需 `bpe_simple_vocab_16e6.txt.gz`）；
-  ③ `color` 中 `[2][0]` 错位在真实视频上的帧占比与分数偏移。
+  ~~② `temporal_style` 32-token 截断的精确条数~~；③ `color` 中 `[2][0]` 错位在真实视频上的帧占比与分数偏移。
+- ②已实测（2026-09-20，锁定 checkout 自带 `SimpleTokenizer` + CLIP BPE 词表，纯 CPU，无权重）：
+  `prompts/prompts_per_dimension/temporal_style.txt` 共 100 条，内容 token 数
+  min/中位/最大 = 6/13/37，**超出 30-token 预算的是 10/100**，全部来自同一条长场景
+  "Snow rocky mountains peaks canyon. …"（10 种风格各一条），其尾部风格子句被
+  `viclip_text.py:147-152` 截掉。这是 prompt 池的截断率，不等于采样视频上的影响面。
