@@ -29,6 +29,21 @@ balanced 720-input official experiment (all 72 prompts, 180 videos per generator
 is running for broader verification. The earlier 1,440-input plan was never run;
 the user reduced the cohort before construction started.
 
+The expanded quarter-window run has now completed all 241 numerical constructions
+(2,169 variants, no runtime failures) from those 720 candidates. On the fixed 240
+primary clips, Official changes from 0.936417 to 0.816382 and v5 from 0.951413 to
+0.941724. Their paired mean absolute differences are **0.120035/0.010596**;
+the signed mean v5 drop of 0.009689 must not be substituted for the absolute
+criterion. Subject corruption lowers v5 by 0.099319 on average, with 221/240 drops
+at least 0.05. Background joint success is 74/240, or 70/240 when also requiring
+that subject response. The original strict threshold is still missed; after seeing
+this result, the user accepted a mean change around 0.01. This practical acceptance
+does not alter the preregistered threshold or its stored failure flag. All 479
+construction rejections remain reported; the registered single-frame family is
+still running. Actual mask and encoder-coverage checks found no omitted frames
+in clean, background, or local subject conditions. Full subject corruption remains
+unscorable for 91/240 primary clips.
+
 The earlier [official extension](counterfactual-reports/subject_official_extension_20260920.md)
 has scored all 1440 natural videos and evaluated 2160 human pairs. On 1290 test
 pairs, Official reaches 58.53%, the original aggregation repair 59.61%, and the
