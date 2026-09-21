@@ -1,0 +1,25 @@
+dimension,split,quality,mode,n_prompts,n_source_groups,reference_matches,n_unique_prompts,reference_agreement,invalid_outputs,null_object_outputs,group_bootstrap_ci95,human_review_completed,claim
+object_class,dev,gold_seed,deterministic,5,5,5,5,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,dev,gold_seed,base,5,5,3,5,0.6,0,0,"[0.2, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,dev,gold_seed,lora,5,5,5,5,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,dev,silver,deterministic,40,5,35,39,0.875,0,19,"[0.8, 0.95]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,dev,silver,base,40,5,6,39,0.15,10,0,"[0.075, 0.225]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,dev,silver,lora,40,5,39,39,0.975,0,15,"[0.925, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,test,gold_seed,deterministic,20,20,20,20,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,test,gold_seed,base,20,20,12,20,0.6,0,0,"[0.4, 0.8]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,test,gold_seed,lora,20,20,20,20,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,test,silver,deterministic,160,20,136,157,0.85,0,81,"[0.80625, 0.8875]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,test,silver,base,160,20,39,157,0.24375,21,0,"[0.15625, 0.33125]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+object_class,test,silver,lora,160,20,151,157,0.94375,0,58,"[0.90625, 0.975]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,dev,gold_seed,deterministic,5,5,5,5,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,dev,gold_seed,base,5,5,5,5,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,dev,gold_seed,lora,5,5,5,5,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,dev,silver,deterministic,40,5,35,39,0.875,0,16,"[0.725, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,dev,silver,base,40,5,17,39,0.425,1,0,"[0.325, 0.5]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,dev,silver,lora,40,5,40,39,1.0,0,15,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,test,gold_seed,deterministic,20,20,20,20,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,test,gold_seed,base,20,20,20,20,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,test,gold_seed,lora,20,20,20,20,1.0,0,0,"[1.0, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,test,silver,deterministic,160,20,131,153,0.81875,0,64,"[0.76875, 0.8625]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,test,silver,base,160,20,80,153,0.5,0,0,"[0.4625, 0.5375]",0,agreement with official seed/silver reference; not human-verified annotation accuracy
+color,test,silver,lora,160,20,159,153,0.99375,0,59,"[0.98125, 1.0]",0,agreement with official seed/silver reference; not human-verified annotation accuracy

@@ -1,6 +1,7 @@
 # CLI contract
 
-All eight metric entry points use the same top-level contract:
+All twelve installed metric entry points (including legacy Overall Consistency)
+use the same top-level contract:
 
 ```text
 uv run <metric> (--vbench | --audit | --both)
@@ -43,6 +44,9 @@ CPU or to another GPU.
 For multiple videos, work is assigned round-robin (`videos[k::len(gpu_ids)]`)
 and one worker per selected GPU is started concurrently. Results retain the
 worker's logical GPU ID and are merged in deterministic input order.
+The common Object/Color runner isolates one inherited visible GPU per worker;
+its model receives logical `cuda:0`. `worker_device` retains the original
+visible index and mask token, and duplicate `video_uid` values are rejected.
 
 ## Metadata
 
@@ -76,6 +80,8 @@ The required minimum differs by dimension:
 | Spatial Relationship | `dimension_metadata.spatial_relationship` containing `object_a`, `object_b`, and `relationship` |
 | Overall Consistency | a non-empty `prompt`; optional semantic conditions may be nested in `dimension_metadata` |
 | Multiple Objects | `dimension_metadata.target_objects` (or the supported object collection) |
+| Object Class | Official: `dimension_metadata.object_class.object`; default audit: raw `prompt`, compiled deterministically or from a frozen prompt-only JSON |
+| Color | Official: raw `prompt` plus `dimension_metadata.color.color`; default audit: raw `prompt` compiled to nullable object/color fields |
 
 Human Action's `--vbench` backend intentionally derives its target from the
 original filename. A generic name such as `video_000.mp4` does not encode an
@@ -102,6 +108,24 @@ For example, a spatial record is:
 Scene audit supports `--audit-variant global` and
 `--audit-variant environment_grounded`; the variant is recorded as an audit
 configuration and does not change the official VBench backend.
+
+Object Class and Color accept `--model-config FILE`; the local asset and compiler
+example is [`configs/four_dimension/object-color.h100.example.toml`](../configs/four_dimension/object-color.h100.example.toml).
+Object defaults to `repair`, with `legacy` as the exact-string evidence variant.
+Color defaults to `repair`, with `binding` and `binding_lexical` retaining a
+conditional frame denominator. The complete repair uses all sampled frames.
+The `base/lora` compiler modes read frozen prompt-only outputs; they do not
+feed video detections back into the language model. Their generation commands,
+schemas, observed failures and validation scope are in the
+[Object/Color runbook](object-color-repair.md).
+
+Both packages retain every input row, including official drops, unsupported
+queries and model failures. Unscored rows use `score=null`; a partial batch has
+`aggregate=null`, with the observed-subset mean explicitly diagnostic. A
+successfully processed frame without target/color evidence contributes zero
+under the complete repair and does not certify visual ground truth. An
+independently installed wheel can use an explicit `--output` outside a checkout;
+unavailable workspace code identity is recorded as null.
 
 Subject Consistency audit supports `--audit-variant temporal_all_pairs` (default,
 whole-frame aggregation) and `--audit-variant subject_masked` (subject-localised

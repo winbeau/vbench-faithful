@@ -11,4 +11,5 @@ METRIC = "color"
 
 
 def evaluate_batch(backend: str, videos: Sequence[Path], metadata: Mapping[str, Mapping[str, Any]], device: str | None, config: Mapping[str, Any]) -> list[VideoResult]:
-    return not_implemented_batch(METRIC, backend, videos, variant="repair", reason="color repair backend is deferred")
+    from ..runtime import evaluate_audit
+    return evaluate_audit(videos, metadata, device, config, variant="repair")

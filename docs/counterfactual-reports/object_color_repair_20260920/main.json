@@ -1,0 +1,1423 @@
+{
+  "prompt_compilation": [
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "deterministic",
+      "n_prompts": 5,
+      "n_source_groups": 5,
+      "n_unique_prompts": 5,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 5,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        0.2,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "base",
+      "n_prompts": 5,
+      "n_source_groups": 5,
+      "n_unique_prompts": 5,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 0.6,
+      "reference_matches": 3,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "lora",
+      "n_prompts": 5,
+      "n_source_groups": 5,
+      "n_unique_prompts": 5,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 5,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        0.8,
+        0.95
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "deterministic",
+      "n_prompts": 40,
+      "n_source_groups": 5,
+      "n_unique_prompts": 39,
+      "null_object_outputs": 19,
+      "quality": "silver",
+      "reference_agreement": 0.875,
+      "reference_matches": 35,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        0.075,
+        0.225
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 10,
+      "mode": "base",
+      "n_prompts": 40,
+      "n_source_groups": 5,
+      "n_unique_prompts": 39,
+      "null_object_outputs": 0,
+      "quality": "silver",
+      "reference_agreement": 0.15,
+      "reference_matches": 6,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        0.925,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "lora",
+      "n_prompts": 40,
+      "n_source_groups": 5,
+      "n_unique_prompts": 39,
+      "null_object_outputs": 15,
+      "quality": "silver",
+      "reference_agreement": 0.975,
+      "reference_matches": 39,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "deterministic",
+      "n_prompts": 20,
+      "n_source_groups": 20,
+      "n_unique_prompts": 20,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 20,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        0.4,
+        0.8
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "base",
+      "n_prompts": 20,
+      "n_source_groups": 20,
+      "n_unique_prompts": 20,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 0.6,
+      "reference_matches": 12,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "lora",
+      "n_prompts": 20,
+      "n_source_groups": 20,
+      "n_unique_prompts": 20,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 20,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        0.80625,
+        0.8875
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "deterministic",
+      "n_prompts": 160,
+      "n_source_groups": 20,
+      "n_unique_prompts": 157,
+      "null_object_outputs": 81,
+      "quality": "silver",
+      "reference_agreement": 0.85,
+      "reference_matches": 136,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        0.15625,
+        0.33125
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 21,
+      "mode": "base",
+      "n_prompts": 160,
+      "n_source_groups": 20,
+      "n_unique_prompts": 157,
+      "null_object_outputs": 0,
+      "quality": "silver",
+      "reference_agreement": 0.24375,
+      "reference_matches": 39,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "object_class",
+      "group_bootstrap_ci95": [
+        0.90625,
+        0.975
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "lora",
+      "n_prompts": 160,
+      "n_source_groups": 20,
+      "n_unique_prompts": 157,
+      "null_object_outputs": 58,
+      "quality": "silver",
+      "reference_agreement": 0.94375,
+      "reference_matches": 151,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "deterministic",
+      "n_prompts": 5,
+      "n_source_groups": 5,
+      "n_unique_prompts": 5,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 5,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "base",
+      "n_prompts": 5,
+      "n_source_groups": 5,
+      "n_unique_prompts": 5,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 5,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "lora",
+      "n_prompts": 5,
+      "n_source_groups": 5,
+      "n_unique_prompts": 5,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 5,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        0.725,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "deterministic",
+      "n_prompts": 40,
+      "n_source_groups": 5,
+      "n_unique_prompts": 39,
+      "null_object_outputs": 16,
+      "quality": "silver",
+      "reference_agreement": 0.875,
+      "reference_matches": 35,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        0.325,
+        0.5
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 1,
+      "mode": "base",
+      "n_prompts": 40,
+      "n_source_groups": 5,
+      "n_unique_prompts": 39,
+      "null_object_outputs": 0,
+      "quality": "silver",
+      "reference_agreement": 0.425,
+      "reference_matches": 17,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "lora",
+      "n_prompts": 40,
+      "n_source_groups": 5,
+      "n_unique_prompts": 39,
+      "null_object_outputs": 15,
+      "quality": "silver",
+      "reference_agreement": 1.0,
+      "reference_matches": 40,
+      "split": "dev"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "deterministic",
+      "n_prompts": 20,
+      "n_source_groups": 20,
+      "n_unique_prompts": 20,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 20,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "base",
+      "n_prompts": 20,
+      "n_source_groups": 20,
+      "n_unique_prompts": 20,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 20,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        1.0,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "lora",
+      "n_prompts": 20,
+      "n_source_groups": 20,
+      "n_unique_prompts": 20,
+      "null_object_outputs": 0,
+      "quality": "gold_seed",
+      "reference_agreement": 1.0,
+      "reference_matches": 20,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        0.76875,
+        0.8625
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "deterministic",
+      "n_prompts": 160,
+      "n_source_groups": 20,
+      "n_unique_prompts": 153,
+      "null_object_outputs": 64,
+      "quality": "silver",
+      "reference_agreement": 0.81875,
+      "reference_matches": 131,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        0.4625,
+        0.5375
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "base",
+      "n_prompts": 160,
+      "n_source_groups": 20,
+      "n_unique_prompts": 153,
+      "null_object_outputs": 0,
+      "quality": "silver",
+      "reference_agreement": 0.5,
+      "reference_matches": 80,
+      "split": "test"
+    },
+    {
+      "claim": "agreement with official seed/silver reference; not human-verified annotation accuracy",
+      "dimension": "color",
+      "group_bootstrap_ci95": [
+        0.98125,
+        1.0
+      ],
+      "human_review_completed": 0,
+      "invalid_outputs": 0,
+      "mode": "lora",
+      "n_prompts": 160,
+      "n_source_groups": 20,
+      "n_unique_prompts": 153,
+      "null_object_outputs": 59,
+      "quality": "silver",
+      "reference_agreement": 0.99375,
+      "reference_matches": 159,
+      "split": "test"
+    }
+  ],
+  "reports": {
+    "color": {
+      "accepted_bases": 7,
+      "dimension": "color",
+      "freeze_sha256": "8c6713b7bd3077eb071d944a52bf29a5d5416861e3a54a5e39497942fcafd867",
+      "main": [
+        {
+          "abs_ci95": [
+            0.0,
+            1.0
+          ],
+          "accepted_bases": 2,
+          "backend": "official",
+          "dimension": "color",
+          "effect_gate_passed": false,
+          "family": "color_visibility_denominator",
+          "gate_passed": false,
+          "median_abs_delta": 0.5,
+          "median_base_spearman": 0.49999999999999994,
+          "median_delta": 0.5,
+          "monotonic_n": 2,
+          "n": 2,
+          "ordering_gate_passed": false,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "scope": "maximum absolute departure over defined conditional levels; undefined retained",
+          "signed_ci95": [
+            0.0,
+            1.0
+          ],
+          "split": "dev",
+          "strict_monotonic_base_fraction": 0.5,
+          "zero_effect_count": 1
+        },
+        {
+          "abs_ci95": null,
+          "accepted_bases": 2,
+          "backend": "official",
+          "dimension": "color",
+          "family": "color_synonym_control",
+          "gate_passed": null,
+          "median_abs_delta": null,
+          "missing_pairs_prevent_full_control_claim": true,
+          "n": 0,
+          "paired_coverage": 0.0,
+          "relation": "invariance",
+          "signed_ci95": null,
+          "split": "dev",
+          "zero_effect_count": 0
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            1.0
+          ],
+          "accepted_bases": 2,
+          "backend": "binding",
+          "dimension": "color",
+          "effect_gate_passed": false,
+          "family": "color_visibility_denominator",
+          "gate_passed": false,
+          "median_abs_delta": 0.5,
+          "median_base_spearman": 0.49999999999999994,
+          "median_delta": 0.5,
+          "monotonic_n": 2,
+          "n": 2,
+          "ordering_gate_passed": false,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "scope": "maximum absolute departure over defined conditional levels; undefined retained",
+          "signed_ci95": [
+            0.0,
+            1.0
+          ],
+          "split": "dev",
+          "strict_monotonic_base_fraction": 0.5,
+          "zero_effect_count": 1
+        },
+        {
+          "abs_ci95": null,
+          "accepted_bases": 2,
+          "backend": "binding",
+          "dimension": "color",
+          "family": "color_synonym_control",
+          "gate_passed": null,
+          "median_abs_delta": null,
+          "missing_pairs_prevent_full_control_claim": true,
+          "n": 0,
+          "paired_coverage": 0.0,
+          "relation": "invariance",
+          "signed_ci95": null,
+          "split": "dev",
+          "zero_effect_count": 0
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            1.0
+          ],
+          "accepted_bases": 2,
+          "backend": "binding_lexical",
+          "dimension": "color",
+          "effect_gate_passed": false,
+          "family": "color_visibility_denominator",
+          "gate_passed": false,
+          "median_abs_delta": 0.5,
+          "median_base_spearman": 0.49999999999999994,
+          "median_delta": 0.5,
+          "monotonic_n": 2,
+          "n": 2,
+          "ordering_gate_passed": false,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "scope": "maximum absolute departure over defined conditional levels; undefined retained",
+          "signed_ci95": [
+            0.0,
+            1.0
+          ],
+          "split": "dev",
+          "strict_monotonic_base_fraction": 0.5,
+          "zero_effect_count": 1
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.0
+          ],
+          "accepted_bases": 2,
+          "backend": "binding_lexical",
+          "dimension": "color",
+          "family": "color_synonym_control",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_delta": 0.0,
+          "missing_pairs_prevent_full_control_claim": false,
+          "n": 2,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "signed_ci95": [
+            0.0,
+            0.0
+          ],
+          "split": "dev",
+          "zero_effect_count": 2
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            1.0
+          ],
+          "accepted_bases": 2,
+          "backend": "repair",
+          "dimension": "color",
+          "effect_gate_passed": false,
+          "family": "color_visibility_denominator",
+          "gate_passed": false,
+          "median_abs_delta": 0.5,
+          "median_base_spearman": 0.49999999999999994,
+          "median_delta": 0.5,
+          "monotonic_n": 2,
+          "n": 2,
+          "ordering_gate_passed": false,
+          "paired_coverage": 1.0,
+          "relation": "ordered_drop",
+          "scope": "100-to-0 endpoints",
+          "signed_ci95": [
+            0.0,
+            1.0
+          ],
+          "split": "dev",
+          "strict_monotonic_base_fraction": 0.5,
+          "zero_effect_count": 1
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.0
+          ],
+          "accepted_bases": 2,
+          "backend": "repair",
+          "dimension": "color",
+          "family": "color_synonym_control",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_delta": 0.0,
+          "missing_pairs_prevent_full_control_claim": false,
+          "n": 2,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "signed_ci95": [
+            0.0,
+            0.0
+          ],
+          "split": "dev",
+          "zero_effect_count": 2
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.6
+          ],
+          "accepted_bases": 5,
+          "backend": "official",
+          "dimension": "color",
+          "effect_gate_passed": true,
+          "family": "color_visibility_denominator",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_base_spearman": 0.7071067811865475,
+          "median_delta": 0.0,
+          "monotonic_n": 3,
+          "n": 5,
+          "ordering_gate_passed": false,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "scope": "maximum absolute departure over defined conditional levels; undefined retained",
+          "signed_ci95": [
+            0.0,
+            0.6
+          ],
+          "split": "test",
+          "strict_monotonic_base_fraction": 0.3333333333333333,
+          "zero_effect_count": 3
+        },
+        {
+          "abs_ci95": null,
+          "accepted_bases": 5,
+          "backend": "official",
+          "dimension": "color",
+          "family": "color_synonym_control",
+          "gate_passed": null,
+          "median_abs_delta": null,
+          "missing_pairs_prevent_full_control_claim": true,
+          "n": 0,
+          "paired_coverage": 0.0,
+          "relation": "invariance",
+          "signed_ci95": null,
+          "split": "test",
+          "zero_effect_count": 0
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.4
+          ],
+          "accepted_bases": 5,
+          "backend": "binding",
+          "dimension": "color",
+          "effect_gate_passed": true,
+          "family": "color_visibility_denominator",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_base_spearman": 0.7071067811865475,
+          "median_delta": 0.0,
+          "monotonic_n": 3,
+          "n": 5,
+          "ordering_gate_passed": false,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "scope": "maximum absolute departure over defined conditional levels; undefined retained",
+          "signed_ci95": [
+            0.0,
+            0.4
+          ],
+          "split": "test",
+          "strict_monotonic_base_fraction": 0.3333333333333333,
+          "zero_effect_count": 3
+        },
+        {
+          "abs_ci95": null,
+          "accepted_bases": 5,
+          "backend": "binding",
+          "dimension": "color",
+          "family": "color_synonym_control",
+          "gate_passed": null,
+          "median_abs_delta": null,
+          "missing_pairs_prevent_full_control_claim": true,
+          "n": 0,
+          "paired_coverage": 0.0,
+          "relation": "invariance",
+          "signed_ci95": null,
+          "split": "test",
+          "zero_effect_count": 0
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            1.0
+          ],
+          "accepted_bases": 5,
+          "backend": "binding_lexical",
+          "dimension": "color",
+          "effect_gate_passed": false,
+          "family": "color_visibility_denominator",
+          "gate_passed": false,
+          "median_abs_delta": 0.125,
+          "median_base_spearman": 0.9999999999999999,
+          "median_delta": 0.0,
+          "monotonic_n": 3,
+          "n": 5,
+          "ordering_gate_passed": true,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "scope": "maximum absolute departure over defined conditional levels; undefined retained",
+          "signed_ci95": [
+            -0.125,
+            1.0
+          ],
+          "split": "test",
+          "strict_monotonic_base_fraction": 0.6666666666666666,
+          "zero_effect_count": 2
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.0
+          ],
+          "accepted_bases": 5,
+          "backend": "binding_lexical",
+          "dimension": "color",
+          "family": "color_synonym_control",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_delta": 0.0,
+          "missing_pairs_prevent_full_control_claim": false,
+          "n": 5,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "signed_ci95": [
+            0.0,
+            0.0
+          ],
+          "split": "test",
+          "zero_effect_count": 5
+        },
+        {
+          "abs_ci95": [
+            0.625,
+            1.0
+          ],
+          "accepted_bases": 5,
+          "backend": "repair",
+          "dimension": "color",
+          "effect_gate_passed": true,
+          "family": "color_visibility_denominator",
+          "gate_passed": true,
+          "median_abs_delta": 1.0,
+          "median_base_spearman": 0.9999999999999999,
+          "median_delta": 1.0,
+          "monotonic_n": 5,
+          "n": 5,
+          "ordering_gate_passed": true,
+          "paired_coverage": 1.0,
+          "relation": "ordered_drop",
+          "scope": "100-to-0 endpoints",
+          "signed_ci95": [
+            0.625,
+            1.0
+          ],
+          "split": "test",
+          "strict_monotonic_base_fraction": 1.0,
+          "zero_effect_count": 0
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.0
+          ],
+          "accepted_bases": 5,
+          "backend": "repair",
+          "dimension": "color",
+          "family": "color_synonym_control",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_delta": 0.0,
+          "missing_pairs_prevent_full_control_claim": false,
+          "n": 5,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "signed_ci95": [
+            0.0,
+            0.0
+          ],
+          "split": "test",
+          "zero_effect_count": 5
+        }
+      ],
+      "monotonic_per_base": [
+        {
+          "backend": "official",
+          "base_id": "45da8c2232669ce73b0d",
+          "spearman": 0.0,
+          "split": "dev",
+          "strictly_monotonic": false
+        },
+        {
+          "backend": "official",
+          "base_id": "49fce5ff3ddd74a04f0d",
+          "spearman": 0.9999999999999999,
+          "split": "dev",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "binding",
+          "base_id": "45da8c2232669ce73b0d",
+          "spearman": 0.0,
+          "split": "dev",
+          "strictly_monotonic": false
+        },
+        {
+          "backend": "binding",
+          "base_id": "49fce5ff3ddd74a04f0d",
+          "spearman": 0.9999999999999999,
+          "split": "dev",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "binding_lexical",
+          "base_id": "45da8c2232669ce73b0d",
+          "spearman": 0.0,
+          "split": "dev",
+          "strictly_monotonic": false
+        },
+        {
+          "backend": "binding_lexical",
+          "base_id": "49fce5ff3ddd74a04f0d",
+          "spearman": 0.9999999999999999,
+          "split": "dev",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "repair",
+          "base_id": "45da8c2232669ce73b0d",
+          "spearman": 0.0,
+          "split": "dev",
+          "strictly_monotonic": false
+        },
+        {
+          "backend": "repair",
+          "base_id": "49fce5ff3ddd74a04f0d",
+          "spearman": 0.9999999999999999,
+          "split": "dev",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "official",
+          "base_id": "013a582e290cf7b6109c",
+          "spearman": 0.9999999999999999,
+          "split": "test",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "official",
+          "base_id": "1191409152a26c2e3a7b",
+          "spearman": 0.7071067811865475,
+          "split": "test",
+          "strictly_monotonic": false
+        },
+        {
+          "backend": "official",
+          "base_id": "2483a015995b733ff350",
+          "spearman": 0.0,
+          "split": "test",
+          "strictly_monotonic": false
+        },
+        {
+          "backend": "binding",
+          "base_id": "013a582e290cf7b6109c",
+          "spearman": 0.9999999999999999,
+          "split": "test",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "binding",
+          "base_id": "1191409152a26c2e3a7b",
+          "spearman": 0.0,
+          "split": "test",
+          "strictly_monotonic": false
+        },
+        {
+          "backend": "binding",
+          "base_id": "2483a015995b733ff350",
+          "spearman": 0.7071067811865475,
+          "split": "test",
+          "strictly_monotonic": false
+        },
+        {
+          "backend": "binding_lexical",
+          "base_id": "013a582e290cf7b6109c",
+          "spearman": 0.9999999999999999,
+          "split": "test",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "binding_lexical",
+          "base_id": "1191409152a26c2e3a7b",
+          "spearman": -0.09999999999999999,
+          "split": "test",
+          "strictly_monotonic": false
+        },
+        {
+          "backend": "binding_lexical",
+          "base_id": "2483a015995b733ff350",
+          "spearman": 0.9999999999999999,
+          "split": "test",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "repair",
+          "base_id": "008cf1d73ad9d83fb48f",
+          "spearman": 0.9999999999999999,
+          "split": "test",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "repair",
+          "base_id": "013a582e290cf7b6109c",
+          "spearman": 0.9999999999999999,
+          "split": "test",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "repair",
+          "base_id": "1191409152a26c2e3a7b",
+          "spearman": 0.9999999999999999,
+          "split": "test",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "repair",
+          "base_id": "2483a015995b733ff350",
+          "spearman": 0.9999999999999999,
+          "split": "test",
+          "strictly_monotonic": true
+        },
+        {
+          "backend": "repair",
+          "base_id": "357738f0c9ffc6b001b9",
+          "spearman": 0.9999999999999999,
+          "split": "test",
+          "strictly_monotonic": true
+        }
+      ],
+      "n_input_bases": 25,
+      "queries": 42,
+      "rejected_bases": 18,
+      "scope": "qualified automatic construction cohort, not human mask/color accuracy or natural preference improvement",
+      "status_counts": {
+        "binding": {
+          "dropped_by_condition": 9,
+          "succeeded": 33
+        },
+        "binding_lexical": {
+          "dropped_by_condition": 2,
+          "succeeded": 40
+        },
+        "official": {
+          "dropped_by_official": 9,
+          "succeeded": 33
+        },
+        "repair": {
+          "succeeded": 42
+        }
+      }
+    },
+    "object_class": {
+      "accepted_bases": 16,
+      "dimension": "object_class",
+      "freeze_sha256": "15ea58da8811b9371d3b1d041ed3a1034e5c53e8b7bb119f69ee7165a5983188",
+      "main": [
+        {
+          "abs_ci95": [
+            1.0,
+            1.0
+          ],
+          "accepted_bases": 2,
+          "backend": "official",
+          "contrast": "uppercase",
+          "defined_pair_coverage_of_eligible": 1.0,
+          "dimension": "object_class",
+          "eligible_bases": 2,
+          "family": "object_label_invariance",
+          "gate_passed": true,
+          "median_abs_delta": 1.0,
+          "median_delta": 1.0,
+          "n": 2,
+          "paired_coverage": 1.0,
+          "relation": "change",
+          "signed_ci95": [
+            1.0,
+            1.0
+          ],
+          "split": "dev",
+          "zero_effect_count": 0
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.0
+          ],
+          "accepted_bases": 2,
+          "backend": "repair",
+          "contrast": "uppercase",
+          "defined_pair_coverage_of_eligible": 1.0,
+          "dimension": "object_class",
+          "eligible_bases": 2,
+          "family": "object_label_invariance",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_delta": 0.0,
+          "n": 2,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "signed_ci95": [
+            0.0,
+            0.0
+          ],
+          "split": "dev",
+          "zero_effect_count": 2
+        },
+        {
+          "abs_ci95": [
+            1.0,
+            1.0
+          ],
+          "accepted_bases": 2,
+          "backend": "official",
+          "contrast": "synonym",
+          "defined_pair_coverage_of_eligible": 1.0,
+          "dimension": "object_class",
+          "eligible_bases": 2,
+          "family": "object_label_invariance",
+          "gate_passed": true,
+          "median_abs_delta": 1.0,
+          "median_delta": 1.0,
+          "n": 2,
+          "paired_coverage": 1.0,
+          "relation": "change",
+          "signed_ci95": [
+            1.0,
+            1.0
+          ],
+          "split": "dev",
+          "zero_effect_count": 0
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.0
+          ],
+          "accepted_bases": 2,
+          "backend": "repair",
+          "contrast": "synonym",
+          "defined_pair_coverage_of_eligible": 1.0,
+          "dimension": "object_class",
+          "eligible_bases": 2,
+          "family": "object_label_invariance",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_delta": 0.0,
+          "n": 2,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "signed_ci95": [
+            0.0,
+            0.0
+          ],
+          "split": "dev",
+          "zero_effect_count": 2
+        },
+        {
+          "absence_human_verified": false,
+          "backend": "official",
+          "contrast": "automatic_absence_proxy",
+          "dimension": "object_class",
+          "family": "object_absent_control",
+          "gate_passed": true,
+          "median_score": 0.0,
+          "n": 2,
+          "relation": "both_low",
+          "split": "dev"
+        },
+        {
+          "absence_human_verified": false,
+          "backend": "repair",
+          "contrast": "automatic_absence_proxy",
+          "dimension": "object_class",
+          "family": "object_absent_control",
+          "gate_passed": true,
+          "median_score": 0.0,
+          "n": 2,
+          "relation": "both_low",
+          "split": "dev"
+        },
+        {
+          "abs_ci95": [
+            1.0,
+            1.0
+          ],
+          "accepted_bases": 14,
+          "backend": "official",
+          "contrast": "uppercase",
+          "defined_pair_coverage_of_eligible": 1.0,
+          "dimension": "object_class",
+          "eligible_bases": 14,
+          "family": "object_label_invariance",
+          "gate_passed": true,
+          "median_abs_delta": 1.0,
+          "median_delta": 1.0,
+          "n": 14,
+          "paired_coverage": 1.0,
+          "relation": "change",
+          "signed_ci95": [
+            1.0,
+            1.0
+          ],
+          "split": "test",
+          "zero_effect_count": 0
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.0
+          ],
+          "accepted_bases": 14,
+          "backend": "repair",
+          "contrast": "uppercase",
+          "defined_pair_coverage_of_eligible": 1.0,
+          "dimension": "object_class",
+          "eligible_bases": 14,
+          "family": "object_label_invariance",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_delta": 0.0,
+          "n": 14,
+          "paired_coverage": 1.0,
+          "relation": "invariance",
+          "signed_ci95": [
+            0.0,
+            0.0
+          ],
+          "split": "test",
+          "zero_effect_count": 14
+        },
+        {
+          "abs_ci95": [
+            1.0,
+            1.0
+          ],
+          "accepted_bases": 14,
+          "backend": "official",
+          "contrast": "synonym",
+          "defined_pair_coverage_of_eligible": 1.0,
+          "dimension": "object_class",
+          "eligible_bases": 13,
+          "family": "object_label_invariance",
+          "gate_passed": true,
+          "median_abs_delta": 1.0,
+          "median_delta": 1.0,
+          "n": 13,
+          "paired_coverage": 0.9285714285714286,
+          "relation": "change",
+          "signed_ci95": [
+            1.0,
+            1.0
+          ],
+          "split": "test",
+          "zero_effect_count": 0
+        },
+        {
+          "abs_ci95": [
+            0.0,
+            0.0
+          ],
+          "accepted_bases": 14,
+          "backend": "repair",
+          "contrast": "synonym",
+          "defined_pair_coverage_of_eligible": 1.0,
+          "dimension": "object_class",
+          "eligible_bases": 13,
+          "family": "object_label_invariance",
+          "gate_passed": true,
+          "median_abs_delta": 0.0,
+          "median_delta": 0.0,
+          "n": 13,
+          "paired_coverage": 0.9285714285714286,
+          "relation": "invariance",
+          "signed_ci95": [
+            0.0,
+            0.0
+          ],
+          "split": "test",
+          "zero_effect_count": 13
+        },
+        {
+          "absence_human_verified": false,
+          "backend": "official",
+          "contrast": "automatic_absence_proxy",
+          "dimension": "object_class",
+          "family": "object_absent_control",
+          "gate_passed": true,
+          "median_score": 0.0,
+          "n": 14,
+          "relation": "both_low",
+          "split": "test"
+        },
+        {
+          "absence_human_verified": false,
+          "backend": "repair",
+          "contrast": "automatic_absence_proxy",
+          "dimension": "object_class",
+          "family": "object_absent_control",
+          "gate_passed": true,
+          "median_score": 0.0,
+          "n": 14,
+          "relation": "both_low",
+          "split": "test"
+        }
+      ],
+      "n_input_bases": 25,
+      "official_status_counts": {
+        "succeeded": 63
+      },
+      "queries": 63,
+      "raw_trace_exact_rule_parity": {
+        "max_abs_error": 0.0,
+        "n": 63
+      },
+      "rejected_bases": 9,
+      "repair_status_counts": {
+        "succeeded": 63
+      },
+      "scope": "metadata-only lexical counterfactual; not observed natural synonym frequency, human accuracy, or E0 replication"
+    }
+  },
+  "source_files": {
+    "configs/four_dimension/object_color_vocabulary.json": "bdc9af5a3eaf54eccd7beb5253cd05e50ededd488c4c98041ee5ee34d2faba04",
+    "output/object_color_20260920/reports/color/main.json": "da57ed0c6b5b8d5acf807bffd670fbba91010061243a5b5053fc9cf28cd54f40",
+    "output/object_color_20260920/reports/object_class/main.json": "f5d59236d1a5407f47e37c224d8360899c9c1d4a58f0239887a5c181571e1f25",
+    "output/object_color_20260920/semantics/freeze.json": "c74fcb78779153bb9ae8e1b16553a05308453f9363f6572b8b98f3d2ad0c1dce"
+  },
+  "video_ablation": [
+    {
+      "aggregate": 0.9910714285714286,
+      "coverage": 1.0,
+      "dimension": "object_class",
+      "n_inputs": 14,
+      "n_scored": 14,
+      "observed_subset_mean_diagnostic_only": 0.9910714285714286,
+      "scope": "original queries only; metadata-only label interventions never enter prompt-only model",
+      "source_results_sha256": "8050a2b55737cacb506aba20555289f1d0623f766962c8d7f0f1629727f4b03a",
+      "split": "test",
+      "stage": "old_string_official",
+      "status_counts": {
+        "succeeded": 14
+      }
+    },
+    {
+      "aggregate": 0.9910714285714286,
+      "coverage": 1.0,
+      "dimension": "object_class",
+      "n_inputs": 14,
+      "n_scored": 14,
+      "observed_subset_mean_diagnostic_only": 0.9910714285714286,
+      "scope": "original queries only; metadata-only label interventions never enter prompt-only model",
+      "source_results_sha256": "b7fc93fce4f30154019945b9ff150ed5be6389b50f774c2c1f5b0bc3b7c8619d",
+      "split": "test",
+      "stage": "deterministic_alias_repair",
+      "status_counts": {
+        "succeeded": 14
+      }
+    },
+    {
+      "aggregate": 0.6339285714285714,
+      "coverage": 1.0,
+      "dimension": "object_class",
+      "n_inputs": 14,
+      "n_scored": 14,
+      "observed_subset_mean_diagnostic_only": 0.6339285714285714,
+      "scope": "original queries only; metadata-only label interventions never enter prompt-only model",
+      "source_results_sha256": "1489691fa6d6d80e05ac8324d8365184a51422cc0c4f8e18d75f25f4e5a23107",
+      "split": "test",
+      "stage": "unfinetuned_same_base_repair",
+      "status_counts": {
+        "succeeded": 14
+      }
+    },
+    {
+      "aggregate": 0.9910714285714286,
+      "coverage": 1.0,
+      "dimension": "object_class",
+      "n_inputs": 14,
+      "n_scored": 14,
+      "observed_subset_mean_diagnostic_only": 0.9910714285714286,
+      "scope": "original queries only; metadata-only label interventions never enter prompt-only model",
+      "source_results_sha256": "e8c54030fab82b65b302ee531379ee04656613ecb0155c4e417604b47674f30c",
+      "split": "test",
+      "stage": "independent_lora_repair",
+      "status_counts": {
+        "succeeded": 14
+      }
+    },
+    {
+      "aggregate": 1.0,
+      "coverage": 1.0,
+      "dimension": "color",
+      "n_inputs": 5,
+      "n_scored": 5,
+      "observed_subset_mean_diagnostic_only": 1.0,
+      "scope": "original queries only; metadata-only label interventions never enter prompt-only model",
+      "source_results_sha256": "67378b30f9531e181f1b2282a3c600e4c48ac37556240af9f71c9106f2d15225",
+      "split": "test",
+      "stage": "old_string_official",
+      "status_counts": {
+        "succeeded": 5
+      }
+    },
+    {
+      "aggregate": 0.975,
+      "coverage": 1.0,
+      "dimension": "color",
+      "n_inputs": 5,
+      "n_scored": 5,
+      "observed_subset_mean_diagnostic_only": 0.975,
+      "scope": "original queries only; metadata-only label interventions never enter prompt-only model",
+      "source_results_sha256": "da72eb5c6377013e15d793d60bb0d72f11929e38e9fa36567a9847aed3ac4d5d",
+      "split": "test",
+      "stage": "deterministic_alias_repair",
+      "status_counts": {
+        "succeeded": 5
+      }
+    },
+    {
+      "aggregate": 0.975,
+      "coverage": 1.0,
+      "dimension": "color",
+      "n_inputs": 5,
+      "n_scored": 5,
+      "observed_subset_mean_diagnostic_only": 0.975,
+      "scope": "original queries only; metadata-only label interventions never enter prompt-only model",
+      "source_results_sha256": "ffe608c69751ed4ee6e5e1fb52f88488fe240e2c50afdf54c4504f11099217cf",
+      "split": "test",
+      "stage": "unfinetuned_same_base_repair",
+      "status_counts": {
+        "succeeded": 5
+      }
+    },
+    {
+      "aggregate": 0.975,
+      "coverage": 1.0,
+      "dimension": "color",
+      "n_inputs": 5,
+      "n_scored": 5,
+      "observed_subset_mean_diagnostic_only": 0.975,
+      "scope": "original queries only; metadata-only label interventions never enter prompt-only model",
+      "source_results_sha256": "c48bf11bc9b8a2e53819de8fe5af18bf5c5d4e55227b5bf64f40492e60651d53",
+      "split": "test",
+      "stage": "independent_lora_repair",
+      "status_counts": {
+        "succeeded": 5
+      }
+    }
+  ]
+}

@@ -1,0 +1,370 @@
+{
+  "color_aliases": {
+    "gray": [
+      "grey"
+    ]
+  },
+  "colors": [
+    "black",
+    "blue",
+    "brown",
+    "crimson",
+    "cyan",
+    "gold",
+    "gray",
+    "green",
+    "magenta",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "silver",
+    "teal",
+    "violet",
+    "white",
+    "yellow"
+  ],
+  "object_aliases": {
+    "airplane": [
+      "airplanes",
+      "aeroplane",
+      "aeroplanes",
+      "plane",
+      "planes"
+    ],
+    "apple": [
+      "apples"
+    ],
+    "backpack": [
+      "backpacks"
+    ],
+    "banana": [
+      "bananas"
+    ],
+    "baseball bat": [
+      "baseball bats"
+    ],
+    "baseball glove": [
+      "baseball gloves"
+    ],
+    "bear": [
+      "bears"
+    ],
+    "bed": [
+      "beds"
+    ],
+    "bench": [
+      "benches"
+    ],
+    "bicycle": [
+      "bicycles",
+      "bike",
+      "bikes"
+    ],
+    "bird": [
+      "birds"
+    ],
+    "boat": [
+      "boats"
+    ],
+    "book": [
+      "books"
+    ],
+    "bottle": [
+      "bottles"
+    ],
+    "bowl": [
+      "bowls"
+    ],
+    "broccoli": [],
+    "bus": [
+      "buses"
+    ],
+    "cake": [
+      "cakes"
+    ],
+    "car": [
+      "cars"
+    ],
+    "carrot": [
+      "carrots"
+    ],
+    "cat": [
+      "cats"
+    ],
+    "cell phone": [
+      "cell phones",
+      "cellphone",
+      "cellphones",
+      "mobile phone",
+      "mobile phones"
+    ],
+    "chair": [
+      "chairs"
+    ],
+    "clock": [
+      "clocks"
+    ],
+    "couch": [
+      "couches",
+      "sofa",
+      "sofas"
+    ],
+    "cow": [
+      "cows"
+    ],
+    "cup": [
+      "cups"
+    ],
+    "dining table": [
+      "dining tables"
+    ],
+    "dog": [
+      "dogs"
+    ],
+    "donut": [
+      "donuts",
+      "doughnut",
+      "doughnuts"
+    ],
+    "elephant": [
+      "elephants"
+    ],
+    "fire hydrant": [
+      "fire hydrants"
+    ],
+    "fork": [
+      "forks"
+    ],
+    "frisbee": [
+      "frisbees"
+    ],
+    "giraffe": [
+      "giraffes"
+    ],
+    "hair drier": [
+      "hair driers",
+      "hair dryer",
+      "hair dryers"
+    ],
+    "handbag": [
+      "handbags"
+    ],
+    "horse": [
+      "horses"
+    ],
+    "hot dog": [
+      "hot dogs"
+    ],
+    "keyboard": [
+      "keyboards"
+    ],
+    "kite": [
+      "kites"
+    ],
+    "knife": [
+      "knives"
+    ],
+    "laptop": [
+      "laptops"
+    ],
+    "microwave": [
+      "microwaves"
+    ],
+    "motorcycle": [
+      "motorcycles",
+      "motorbike",
+      "motorbikes"
+    ],
+    "orange": [
+      "oranges"
+    ],
+    "oven": [
+      "ovens"
+    ],
+    "parking meter": [
+      "parking meters"
+    ],
+    "person": [
+      "people"
+    ],
+    "pizza": [
+      "pizzas"
+    ],
+    "potted plant": [
+      "potted plants"
+    ],
+    "refrigerator": [
+      "refrigerators"
+    ],
+    "remote": [
+      "remotes"
+    ],
+    "sandwich": [
+      "sandwiches"
+    ],
+    "scissors": [],
+    "sheep": [],
+    "sink": [
+      "sinks"
+    ],
+    "skateboard": [
+      "skateboards"
+    ],
+    "skis": [],
+    "snowboard": [
+      "snowboards"
+    ],
+    "spoon": [
+      "spoons"
+    ],
+    "sports ball": [
+      "sports balls"
+    ],
+    "stop sign": [
+      "stop signs"
+    ],
+    "suitcase": [
+      "suitcases"
+    ],
+    "surfboard": [
+      "surfboards"
+    ],
+    "teddy bear": [
+      "teddy bears"
+    ],
+    "tennis racket": [
+      "tennis rackets",
+      "tennis racquet",
+      "tennis racquets"
+    ],
+    "tie": [
+      "ties"
+    ],
+    "toaster": [
+      "toasters"
+    ],
+    "toilet": [
+      "toilets"
+    ],
+    "toothbrush": [
+      "toothbrushes"
+    ],
+    "traffic light": [
+      "traffic lights"
+    ],
+    "train": [
+      "trains"
+    ],
+    "truck": [
+      "trucks"
+    ],
+    "tv": [
+      "tvs",
+      "television",
+      "televisions",
+      "television set"
+    ],
+    "umbrella": [
+      "umbrellas"
+    ],
+    "vase": [
+      "vases"
+    ],
+    "wine glass": [
+      "wine glasses"
+    ],
+    "zebra": [
+      "zebras"
+    ]
+  },
+  "objects": [
+    "airplane",
+    "apple",
+    "backpack",
+    "banana",
+    "baseball bat",
+    "baseball glove",
+    "bear",
+    "bed",
+    "bench",
+    "bicycle",
+    "bird",
+    "boat",
+    "book",
+    "bottle",
+    "bowl",
+    "broccoli",
+    "bus",
+    "cake",
+    "car",
+    "carrot",
+    "cat",
+    "cell phone",
+    "chair",
+    "clock",
+    "couch",
+    "cow",
+    "cup",
+    "dining table",
+    "dog",
+    "donut",
+    "elephant",
+    "fire hydrant",
+    "fork",
+    "frisbee",
+    "giraffe",
+    "hair drier",
+    "handbag",
+    "horse",
+    "hot dog",
+    "keyboard",
+    "kite",
+    "knife",
+    "laptop",
+    "microwave",
+    "motorcycle",
+    "orange",
+    "oven",
+    "parking meter",
+    "person",
+    "pizza",
+    "potted plant",
+    "refrigerator",
+    "remote",
+    "sandwich",
+    "scissors",
+    "sheep",
+    "sink",
+    "skateboard",
+    "skis",
+    "snowboard",
+    "spoon",
+    "sports ball",
+    "stop sign",
+    "suitcase",
+    "surfboard",
+    "teddy bear",
+    "tennis racket",
+    "tie",
+    "toaster",
+    "toilet",
+    "toothbrush",
+    "traffic light",
+    "train",
+    "truck",
+    "tv",
+    "umbrella",
+    "vase",
+    "wine glass",
+    "zebra"
+  ],
+  "provenance": {
+    "kind": "declared_true_synonym_and_plural_controls_before_any_scores",
+    "no_hypernym_rules": true,
+    "observed_surface_validation": "pending independent training-only GRiT pass"
+  },
+  "version": "premeasurement-v1"
+}

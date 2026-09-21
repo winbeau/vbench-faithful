@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
+from collections import Counter
 from dataclasses import asdict
 from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
@@ -21,7 +23,7 @@ from .outputs import run_id, write_results
 from .paths import output_base
 from .provenance import collect_provenance
 from .schemas import RunSummary, VideoResult
-from .coordinator import run_spawn_coordinator
+from .coordinator import run_spawn_coordinator, last_schedule
 
 
 Metadata = Mapping[str, Mapping[str, Any]]
@@ -95,6 +97,10 @@ def validate_batch_results(
     for item in normalized:
         if not item.status:
             raise ValueError(f"batch result has an empty status: {item.video}")
+    uids = [(item.metric or {}).get("video_uid") for item in normalized]
+    present_uids = [uid for uid in uids if uid is not None]
+    if len(present_uids) != len(set(present_uids)):
+        raise ValueError("batch result video_uid duplicates; refusing overlapping shards or query views")
     by_video = {item.video: item for item in normalized}
     return [by_video[video] for video in expected]
 
@@ -130,6 +136,17 @@ def _spawn_batch_worker(
     schedule/provenance; it is not passed as a second logical CUDA index.
     """
 
+    inherited = os.environ.get("CUDA_VISIBLE_DEVICES")
+    if inherited is None:
+        selected = str(gpu_id)
+    else:
+        visible = [value.strip() for value in inherited.split(",") if value.strip()]
+        if gpu_id >= len(visible):
+            raise ValueError("worker GPU index outside inherited CUDA_VISIBLE_DEVICES")
+        selected = visible[gpu_id]
+    # The child has not loaded a CUDA model. Respect parent remapping/UUIDs,
+    # expose exactly one physical device, and use logical cuda:0 below.
+    os.environ["CUDA_VISIBLE_DEVICES"] = selected
     paths = [Path(video) for video in videos]
     results = run_batch_contract(
         evaluator,
@@ -139,6 +156,10 @@ def _spawn_batch_worker(
         device="cuda:0",
         config=config,
     )
+    for item in results:
+        item.metric = dict(item.metric or {})
+        item.metric["worker_device"] = {"parent_visible_index": gpu_id,
+                                         "cuda_visible_devices": selected, "logical_device": "cuda:0"}
     Path(result_path).write_text(
         json.dumps({"results": [asdict(item) for item in results]}, ensure_ascii=False),
         encoding="utf-8",
@@ -225,6 +246,7 @@ def _summary(metric: str, backend: str, results: Sequence[VideoResult]) -> RunSu
         aggregate=sum(scores) / len(scores) if scores else None,
         formula_version="unimplemented" if not_implemented else "metric-defined",
         errors=errors,
+        status_counts=dict(Counter(item.status for item in results)),
     )
 
 
@@ -234,6 +256,7 @@ def execute_metric(
     evaluator: BatchEvaluator,
     *,
     description: str | None = None,
+    summarize: Callable[[str, Sequence[VideoResult]], RunSummary] | None = None,
 ) -> int:
     """Run a metric CLI using the shared core interfaces.
 
@@ -252,9 +275,11 @@ def execute_metric(
         print(f"error: {exc}", file=sys.stderr)
         return 2
 
-    needs_vbench = bool(args.vbench or args.both)
-    requires_cuda = bool(getattr(evaluator, "requires_cuda", False))
-    if requires_cuda and needs_vbench:
+    backends = ["vbench", "audit"] if args.both else (["vbench"] if args.vbench else ["audit"])
+    cuda_requirement = getattr(evaluator, "requires_cuda", False)
+    requires_cuda = (cuda_requirement(model_config, backends) if callable(cuda_requirement)
+                     else bool(cuda_requirement))
+    if requires_cuda:
         try:
             device_info = check_cuda(gpu_ids)
         except AuditError as exc:
@@ -269,7 +294,6 @@ def execute_metric(
         }
         device = None
 
-    backends = ["vbench", "audit"] if args.both else (["vbench"] if args.vbench else ["audit"])
     base = output_base(args.output)
     current_run = run_id()
     overall_code = 0
@@ -277,17 +301,16 @@ def execute_metric(
         "audit_variant": getattr(args, "audit_variant", "diagnostic"),
         "seed": args.seed,
     }
-    config = {"model": model_config, "runtime": runtime}
     for backend in backends:
+        config = {"model": model_config, "runtime": {**runtime,
+                  "evidence_dir": str(base / metric / "evidence" / backend / current_run)}}
         try:
-            results = run_batch_contract(
-                evaluator,
-                backend,
-                videos,
-                metadata,
-                device=device,
-                config=config,
-            )
+            if requires_cuda:
+                results = run_batch_sharded(evaluator, backend, videos, metadata,
+                                            gpu_ids, config=config, label=metric)
+            else:
+                results = run_batch_contract(evaluator, backend, videos, metadata,
+                                             device=device, config=config)
         except Exception as exc:
             error = f"{type(exc).__name__}: {exc}"
             results = [
@@ -300,7 +323,7 @@ def execute_metric(
                 )
                 for video in videos
             ]
-        summary = _summary(metric, backend, results)
+        summary = summarize(backend, results) if summarize else _summary(metric, backend, results)
         destination = base / metric / backend / current_run
         run_info = {
             "metric": metric,
@@ -319,7 +342,12 @@ def execute_metric(
                 Path(args.model_config).expanduser() if getattr(args, "model_config", None) else None,
             ),
             "status": summary.status,
+            "scheduling": last_schedule() if requires_cuda else {"workers": []},
         }
+        provenances = {(json.dumps((item.metric or {}).get("provenance"), sort_keys=True))
+                       for item in results if (item.metric or {}).get("provenance")}
+        if provenances:
+            run_info["provenance"]["backends"] = [json.loads(value) for value in sorted(provenances)]
         write_results(destination, results, summary, run_info)
         print(json.dumps({"backend": backend, "status": summary.status, "output": str(destination)}, ensure_ascii=False))
         if summary.status != "complete":

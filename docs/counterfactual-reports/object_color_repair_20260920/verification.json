@@ -1,0 +1,75 @@
+{
+  "built_artifacts": {
+    "audit_core-0.1.0-py3-none-any.whl": "369e9997140df526fb25b9b6b25c05bc01ef42a3e6fa4de1c26df2039335d23f",
+    "audit_core-0.1.0.tar.gz": "a70ecd79418b02a4eaa8283b6048100b38ec8b58a8edbca7f1c6570c57641634",
+    "audit_models-0.1.0-py3-none-any.whl": "e4d5c2b278e8a754013f2b653f6a901d865d32ff273966117adb07ef04abc261",
+    "audit_models-0.1.0.tar.gz": "a1de0c6826334e1cfa9ed4397e9156050e9c36ea587c889acad6360d34cd6d5f",
+    "color-0.1.0-py3-none-any.whl": "d31a331298137fd4b6944133716b91ebf48271d2186ee323257aa762893b8660",
+    "color-0.1.0.tar.gz": "8a33ba036619262d1b668297fd7002e4ede6ce686a72a2f17294c68ed97c152c",
+    "object_class-0.1.0-py3-none-any.whl": "cbd94c0db98bb257dd4e25d1c55397f2078588bf2abcc941fcfaf9a40300be33",
+    "object_class-0.1.0.tar.gz": "a5a4b54b6b2e9d41a9d27c78801af0cc576f866c1b76daa022690387bf15a07f"
+  },
+  "environment_logs": {
+    "cpu-overlay.log": "eef9aa823525c33e9fc7e8c46e56eb0a7bfab6abc65ac802dcd96b8dc95b0498",
+    "lock-check.log": "ac5a5b8c1322914484b62966efd726e3b9e28eb7dda52325a85bb02025c70846",
+    "sync.log": "1e28e037c2b241772528c1920976bee530f9c412ace8f59d914a2ec79fc8c9ba"
+  },
+  "full_test_command": "uv run --no-sync --group test pytest tests metrics -q -rs",
+  "help_logs": {
+    "background-consistency-help.txt": "bcd424e50af67a2d46ed2abbfcab364f45488d03c2b5bdf473891cbe1e35890e",
+    "color-help.txt": "4fdc1f08f2237bb095c887f17662d0da3c70ad3873a2f827779ed0b1399b499c",
+    "dynamic-degree-help.txt": "1f7605c61e87637f62200ff66128118bc1730e48ee73532e78ac7b7762154dc0",
+    "human-action-help.txt": "a06a98fc4bab949b39ec2a1533f5758f46909a0aeea6c22a388d9a8c78904c23",
+    "motion-smoothness-help.txt": "15e8bcfbedd3a8b7237bcf8da2102d2e58900205f61d0c23c5e298469ae6e212",
+    "multiple-objects-help.txt": "89148e2129c239461d5a690c2e8adb347afc571b26fd300324e6e5568f664881",
+    "object-class-help.txt": "c6df8da6916d7accaff8f610cfa40db6ca747ea9fa214f7b6ce8c4b8d3f00f0a",
+    "overall-consistency-help.txt": "7b84437caed9e351a7cd2e9b192d7894c9ac61e0e28fd0bfbf6a60eb91223118",
+    "scene-help.txt": "6f38b78bfebce1d4c90f0b0256e2dc169a36d02f15f56090bd7c70e6a715900e",
+    "spatial-relationship-help.txt": "10acf882ab6e5d3a9bbec4a311dfa8d95cd0519286ee4a065ad1e6212429a975",
+    "subject-consistency-help.txt": "94d5ce5b3f8337f2691a668db6c07214ce1ce068d8a560ded1c3a2938cf1f6ff",
+    "temporal-style-help.txt": "38906b34b4e3e259b7ba0b2ab1c53817ce64a1a761964452f649822809fb5098"
+  },
+  "isolated_wheels": [
+    {
+      "final_source_sha256": {
+        "init": "2dc0e3c6e7aaca12d8e36cfed4da829d47df74cee6553d0c2b129b74ffa682dc",
+        "runtime": "673bf5b296f21ae3ce51c49f0aa0bc2adda344b488b9051866a8eb09bb365770"
+      },
+      "help_exit": 0,
+      "metric": "object-class",
+      "missing_config_exit": 1,
+      "module_path": "/tmp/vbench-object-class-wheel-nea78keh/venv/lib/python3.11/site-packages/object_class/__init__.py",
+      "null_failure_rows": 2,
+      "other_metric_installed": false,
+      "test_root": "/tmp/vbench-object-class-wheel-nea78keh",
+      "wheel_sha256": "cbd94c0db98bb257dd4e25d1c55397f2078588bf2abcc941fcfaf9a40300be33",
+      "workspace_found": false
+    },
+    {
+      "final_runtime_sha256": "bac7e3a13410452e36350ba336a7cda012e7c3ec95e98795d580c454d1821d0c",
+      "final_source_sha256": {
+        "init": "b5dd69f70fc25f3f2e5672a2e47d8cee3267603d3b8259a21dd74e9636274542",
+        "runtime": "bac7e3a13410452e36350ba336a7cda012e7c3ec95e98795d580c454d1821d0c"
+      },
+      "help_exit": 0,
+      "metric": "color",
+      "missing_config_exit": 1,
+      "module_path": "/tmp/vbench-color-wheel-p45zvv6c/venv/lib/python3.11/site-packages/color/__init__.py",
+      "null_failure_rows": 2,
+      "other_metric_installed": false,
+      "test_root": "/tmp/vbench-color-wheel-p45zvv6c",
+      "wheel_sha256": "d31a331298137fd4b6944133716b91ebf48271d2186ee323257aa762893b8660",
+      "workspace_found": false
+    }
+  ],
+  "log_sha256": "4cb6e26bfa83a7badea47b60c0a0772e239b59d517265754692ebabb54be15e4",
+  "passed": 676,
+  "scope": "local CPU/build/interface checks; real H100 parity is recorded separately",
+  "seconds": 10.3,
+  "skip_reasons": [
+    "SKIPPED [1] metrics/dynamic-degree/tests/test_official_parity.py:122: requires real video, CUDA, locked RAFT Things weight",
+    "SKIPPED [1] metrics/human-action/tests/test_official_parity.py:96: requires real video, CUDA, locked UMT weight",
+    "SKIPPED [1] metrics/spatial-relationship/tests/test_official_parity.py:178: requires real video, CUDA, Detectron2, GRiT and official weight"
+  ],
+  "skipped": 3
+}

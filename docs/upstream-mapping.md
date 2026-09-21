@@ -10,9 +10,10 @@ The active source of truth is the official Vchitect checkout described by
 - Default path: sibling `../VBench`; `VBENCH_AUDIT_UPSTREAM` may select an explicit checkout.
 - A detached HEAD at the fixed revision is allowed. Runtime checks require the
   expected remote, revision, clean state, and source hashes before import.
-- The eight adapters target only root `vbench/` VBench 1.0 modules. Real model
-  execution and numerical parity are not verified in this workspace because
-  weights/CUDA and some external model builds are unavailable.
+- Official adapters target only root `vbench/` VBench 1.0 modules. Source
+  verification is separate from model parity. Object/Color have now been
+  measured on H100; see the [scoped results](counterfactual-reports/object_color_repair_20260920.md).
+  Local CPU tests alone do not verify CUDA or an independent frozen E0 baseline.
 - The current audit scope is eleven dimensions (seven in flight plus four
   candidates) with `overall_consistency` retired; see
   [`plans/2026-09-15-dimension-scope-11d.md`](plans/2026-09-15-dimension-scope-11d.md).
@@ -29,10 +30,10 @@ The active source of truth is the official Vchitect checkout described by
 | spatial-relationship | `vbench/spatial_relationship.py` | `compute_spatial_relationship` | adapter and ordered-role audit present; GRiT parity unverified |
 | overall-consistency | `vbench/overall_consistency.py` | `compute_overall_consistency` | retired from the 2026-09-15 eleven-dimension scope; package and pin retained as legacy |
 | multiple-objects | `vbench/multiple_objects.py` | `compute_multiple_objects` | adapter and audit backend present; model parity unverified |
-| background-consistency | `vbench/background_consistency.py` | `compute_background_consistency` | candidate (2026-09-15); source pinned, no adapter or metric package yet |
-| temporal-style | `vbench/temporal_style.py` | `compute_temporal_style` | candidate (2026-09-15); source pinned, no adapter or metric package yet |
-| object-class | `vbench/object_class.py` | `compute_object_class` | candidate (2026-09-15); source pinned, no adapter or metric package yet |
-| color | `vbench/color.py` | `compute_color` | candidate (2026-09-15); source pinned, no adapter or metric package yet |
+| background-consistency | `vbench/background_consistency.py` | `compute_background_consistency` | independent package present; current backend/validation status in its [implementation report](../metrics/background-consistency/IMPLEMENTATION_REPORT.md) |
+| temporal-style | `vbench/temporal_style.py` | `compute_temporal_style` | independent CLI package present; unimplemented backend returns `not_implemented` |
+| object-class | `vbench/object_class.py` | `compute_object_class` | independent package, direct Official call, all-instance/all-frame repair; H100 trace parity 63/63 and four-shard CLI parity verified |
+| color | `vbench/color.py` | `compute_color` | independent package, direct Official call, binding/lexical/all-frame variants; H100 parity includes 9 retained official nulls; see [limitations](counterfactual-reports/object_color_repair_20260920.review.md) |
 
 ## Historical reference gate (pre-refactor)
 

@@ -7,5 +7,9 @@ def required_assets() -> tuple[str, ...]:
     return MODEL_ASSETS
 
 
-def build_model(*_args, **_kwargs):
-    raise NotImplementedError("object-class models are deferred to a later milestone")
+def build_model(config, *, device):
+    from pathlib import Path
+    from vbench_audit_models.grit import GritEvidenceModel
+    return GritEvidenceModel("object_class", Path(config["grit"]["checkpoint"]),
+                             device=device or "cpu",
+                             upstream=config.get("runtime", {}).get("upstream_root"))

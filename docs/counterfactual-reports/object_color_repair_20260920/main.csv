@@ -1,0 +1,29 @@
+abs_ci95,accepted_bases,backend,contrast,dimension,family,gate_passed,median_abs_delta,median_delta,n,paired_coverage,relation,signed_ci95,split,zero_effect_count,eligible_bases,defined_pair_coverage_of_eligible,absence_human_verified,median_score,effect_gate_passed,median_base_spearman,monotonic_n,ordering_gate_passed,scope,strict_monotonic_base_fraction,missing_pairs_prevent_full_control_claim
+"[1.0, 1.0]",2,official,uppercase,object_class,object_label_invariance,True,1.0,1.0,2,1.0,change,"[1.0, 1.0]",dev,0,2,1.0,,,,,,,,,
+"[0.0, 0.0]",2,repair,uppercase,object_class,object_label_invariance,True,0.0,0.0,2,1.0,invariance,"[0.0, 0.0]",dev,2,2,1.0,,,,,,,,,
+"[1.0, 1.0]",2,official,synonym,object_class,object_label_invariance,True,1.0,1.0,2,1.0,change,"[1.0, 1.0]",dev,0,2,1.0,,,,,,,,,
+"[0.0, 0.0]",2,repair,synonym,object_class,object_label_invariance,True,0.0,0.0,2,1.0,invariance,"[0.0, 0.0]",dev,2,2,1.0,,,,,,,,,
+,,official,automatic_absence_proxy,object_class,object_absent_control,True,,,2,,both_low,,dev,,,,False,0.0,,,,,,,
+,,repair,automatic_absence_proxy,object_class,object_absent_control,True,,,2,,both_low,,dev,,,,False,0.0,,,,,,,
+"[1.0, 1.0]",14,official,uppercase,object_class,object_label_invariance,True,1.0,1.0,14,1.0,change,"[1.0, 1.0]",test,0,14,1.0,,,,,,,,,
+"[0.0, 0.0]",14,repair,uppercase,object_class,object_label_invariance,True,0.0,0.0,14,1.0,invariance,"[0.0, 0.0]",test,14,14,1.0,,,,,,,,,
+"[1.0, 1.0]",14,official,synonym,object_class,object_label_invariance,True,1.0,1.0,13,0.9285714285714286,change,"[1.0, 1.0]",test,0,13,1.0,,,,,,,,,
+"[0.0, 0.0]",14,repair,synonym,object_class,object_label_invariance,True,0.0,0.0,13,0.9285714285714286,invariance,"[0.0, 0.0]",test,13,13,1.0,,,,,,,,,
+,,official,automatic_absence_proxy,object_class,object_absent_control,True,,,14,,both_low,,test,,,,False,0.0,,,,,,,
+,,repair,automatic_absence_proxy,object_class,object_absent_control,True,,,14,,both_low,,test,,,,False,0.0,,,,,,,
+"[0.0, 1.0]",2,official,,color,color_visibility_denominator,False,0.5,0.5,2,1.0,invariance,"[0.0, 1.0]",dev,1,,,,,False,0.49999999999999994,2,False,maximum absolute departure over defined conditional levels; undefined retained,0.5,
+,2,official,,color,color_synonym_control,,,,0,0.0,invariance,,dev,0,,,,,,,,,,,True
+"[0.0, 1.0]",2,binding,,color,color_visibility_denominator,False,0.5,0.5,2,1.0,invariance,"[0.0, 1.0]",dev,1,,,,,False,0.49999999999999994,2,False,maximum absolute departure over defined conditional levels; undefined retained,0.5,
+,2,binding,,color,color_synonym_control,,,,0,0.0,invariance,,dev,0,,,,,,,,,,,True
+"[0.0, 1.0]",2,binding_lexical,,color,color_visibility_denominator,False,0.5,0.5,2,1.0,invariance,"[0.0, 1.0]",dev,1,,,,,False,0.49999999999999994,2,False,maximum absolute departure over defined conditional levels; undefined retained,0.5,
+"[0.0, 0.0]",2,binding_lexical,,color,color_synonym_control,True,0.0,0.0,2,1.0,invariance,"[0.0, 0.0]",dev,2,,,,,,,,,,,False
+"[0.0, 1.0]",2,repair,,color,color_visibility_denominator,False,0.5,0.5,2,1.0,ordered_drop,"[0.0, 1.0]",dev,1,,,,,False,0.49999999999999994,2,False,100-to-0 endpoints,0.5,
+"[0.0, 0.0]",2,repair,,color,color_synonym_control,True,0.0,0.0,2,1.0,invariance,"[0.0, 0.0]",dev,2,,,,,,,,,,,False
+"[0.0, 0.6]",5,official,,color,color_visibility_denominator,True,0.0,0.0,5,1.0,invariance,"[0.0, 0.6]",test,3,,,,,True,0.7071067811865475,3,False,maximum absolute departure over defined conditional levels; undefined retained,0.3333333333333333,
+,5,official,,color,color_synonym_control,,,,0,0.0,invariance,,test,0,,,,,,,,,,,True
+"[0.0, 0.4]",5,binding,,color,color_visibility_denominator,True,0.0,0.0,5,1.0,invariance,"[0.0, 0.4]",test,3,,,,,True,0.7071067811865475,3,False,maximum absolute departure over defined conditional levels; undefined retained,0.3333333333333333,
+,5,binding,,color,color_synonym_control,,,,0,0.0,invariance,,test,0,,,,,,,,,,,True
+"[0.0, 1.0]",5,binding_lexical,,color,color_visibility_denominator,False,0.125,0.0,5,1.0,invariance,"[-0.125, 1.0]",test,2,,,,,False,0.9999999999999999,3,True,maximum absolute departure over defined conditional levels; undefined retained,0.6666666666666666,
+"[0.0, 0.0]",5,binding_lexical,,color,color_synonym_control,True,0.0,0.0,5,1.0,invariance,"[0.0, 0.0]",test,5,,,,,,,,,,,False
+"[0.625, 1.0]",5,repair,,color,color_visibility_denominator,True,1.0,1.0,5,1.0,ordered_drop,"[0.625, 1.0]",test,0,,,,,True,0.9999999999999999,5,True,100-to-0 endpoints,1.0,
+"[0.0, 0.0]",5,repair,,color,color_synonym_control,True,0.0,0.0,5,1.0,invariance,"[0.0, 0.0]",test,5,,,,,,,,,,,False

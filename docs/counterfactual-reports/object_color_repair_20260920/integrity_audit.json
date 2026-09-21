@@ -1,0 +1,65 @@
+{
+  "conflicting_reference_prompts_retained": [
+    {
+      "dimension": "object_class",
+      "prompt": "a basin",
+      "references": [
+        {
+          "source_group": "33afb0cd686b57fec7d2",
+          "split": "test",
+          "target": {
+            "object": "bowl"
+          },
+          "training_eligible": false
+        },
+        {
+          "source_group": "8cb7aa529233e42a4dce",
+          "split": "train",
+          "target": {
+            "object": "sink"
+          },
+          "training_eligible": false
+        }
+      ]
+    },
+    {
+      "dimension": "object_class",
+      "prompt": "a sandwich",
+      "references": [
+        {
+          "source_group": "4f3b6efe3dd1ec84c486",
+          "split": "test",
+          "target": {
+            "object": "sandwich"
+          },
+          "training_eligible": false
+        },
+        {
+          "source_group": "6a16838c5a4d62a9b43d",
+          "split": "train",
+          "target": {
+            "object": null
+          },
+          "training_eligible": false
+        }
+      ]
+    }
+  ],
+  "human_review_completed": 0,
+  "human_review_slots": 200,
+  "object_vocabulary_count": 80,
+  "observed_training_sources": 24,
+  "scope": "integrity and split checks, not human correctness or successful scientific gates",
+  "seed_counts": {
+    "color": 85,
+    "object_class": 79
+  },
+  "semantic_records": 1444,
+  "training_heldout_normalized_prompt_overlap": 0,
+  "training_heldout_source_overlap": 0,
+  "training_records": {
+    "color": 465,
+    "object_class": 424
+  },
+  "verified_frozen_files": 360
+}

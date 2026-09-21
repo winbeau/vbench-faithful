@@ -1,0 +1,14 @@
+# Run from the workspace root. All assets are already local; no auto-download.
+[runtime]
+upstream_root = "/root/wenbiao_zhao/VBench"
+
+[grit]
+checkpoint = "/root/.cache/vbench/grit_model/grit_b_densecap_objectdet.pth"
+
+[labels]
+path = "configs/four_dimension/object_color_vocabulary.json"
+
+[prompt_compiler]
+# deterministic | base | lora. Base/LoRA additionally require a `path` to a
+# frozen prompt-only compilation JSON. Metadata probes explicitly use metadata.
+kind = "deterministic"

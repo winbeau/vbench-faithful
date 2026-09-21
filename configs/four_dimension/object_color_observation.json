@@ -1,0 +1,287 @@
+{
+  "labels": {
+    "apple": 30,
+    "backpack": 33,
+    "banana": 5,
+    "baseball bat": 3,
+    "baseball glove": 15,
+    "bed": 34,
+    "bench": 12,
+    "bicycle": 25,
+    "bird": 16,
+    "book": 3,
+    "bottle": 18,
+    "bowl": 1,
+    "broccoli": 3,
+    "bus": 1,
+    "car": 14,
+    "carrot": 8,
+    "cell phone": 8,
+    "chair": 4,
+    "clock": 66,
+    "couch": 16,
+    "cow": 31,
+    "cup": 48,
+    "dining table": 35,
+    "dog": 22,
+    "elephant": 54,
+    "fire hydrant": 1,
+    "frisbee": 1,
+    "giraffe": 19,
+    "handbag": 25,
+    "horse": 18,
+    "hot dog": 59,
+    "keyboard": 40,
+    "microwave": 16,
+    "motorcycle": 49,
+    "mouse": 1,
+    "orange": 12,
+    "person": 62,
+    "pizza": 16,
+    "potted plant": 19,
+    "refrigerator": 8,
+    "remote": 1,
+    "sandwich": 1,
+    "sheep": 44,
+    "sink": 3,
+    "skis": 7,
+    "snowboard": 5,
+    "spoon": 2,
+    "sports ball": 1,
+    "suitcase": 7,
+    "toilet": 46,
+    "traffic light": 25,
+    "train": 20,
+    "truck": 3,
+    "tv": 50,
+    "umbrella": 34,
+    "vase": 32
+  },
+  "observation_sha256": "484f128ac3d0169600fcf45fca288f54280b10ebc6a7c8f9ce3c056935bf005d",
+  "provenance": {
+    "checkpoint": "/root/.cache/vbench/grit_model/grit_b_densecap_objectdet.pth",
+    "checkpoint_sha256": "53b6e9b3fd948eac55b574c9b6f94ad0743dff46ba449df7ac2d33009ee92ef1",
+    "num_frames": 16,
+    "rgb": true,
+    "threshold": 0.5,
+    "upstream": {
+      "branch": "",
+      "dirty": false,
+      "path": "/root/wenbiao_zhao/VBench",
+      "remote": "https://github.com/Vchitect/VBench.git",
+      "sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_hashes": {
+        "background_consistency": "7def92057819df0dad01c857eecf3b39b8b555c8cdfe881a672cc2b19dc226b4",
+        "color": "03baffc12508fd7ce6c70a227d6794bbc7152c24ba2d2c447a816974466db3d7",
+        "dynamic_degree": "2e93d3a7af38bfbe459c19c9d127894f687424a0bc534dbf7e6571d17b24dff7",
+        "human_action": "4cee71a1e09e0b2f7e1a8126300c9250be19e3866f49004c8b69b4a5a15e8945",
+        "motion_smoothness": "5ddc43f246b64e23d10540b8f9e6c302686e6a1ac9fa4e9942b5bd043d89e0b9",
+        "multiple_objects": "fa5047aa560158f017e46dea3ae763ed083df08ece63e47f61a7ea4fc55be672",
+        "object_class": "8d4c4a7feee52503e3d27f8aba0ed467cbc356ed75da2598367b572237e05db2",
+        "overall_consistency": "325beb4503699b08d441a467710240097c15c2267fe92dbed1ed8cdfaa96103e",
+        "scene": "f14c423710c812af2be953db619ed6e8b478acdc44f1df775815adfa30171965",
+        "spatial_relationship": "26f09a111dac904d1a92ae5bd1c332a029cebd22610d62376a09d7d634950270",
+        "subject_consistency": "55f5c9a3e5be543380a709b94712903fa67a76340c3c0cb2414ac090dbd1b78d",
+        "temporal_style": "9f9e950efca4673721d0a07ea83137be9ebdc9aef2364f412300ba979beef57a"
+      },
+      "submodules": []
+    }
+  },
+  "records": [
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/63fa7a7e02803fecc379.json",
+      "sha256": "70b76d068bd609960bebe3a79ec5bf0be45e182640637f73f5345d83d236b451",
+      "source_group": "63fa7a7e02803fecc379"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/6440eda76a6259c37f9e.json",
+      "sha256": "36dd1f46a048d86ad01459e9e010a257cef4d7afaf6f59db91e850bc67fe98a9",
+      "source_group": "6440eda76a6259c37f9e"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/69b4717a4206e07fca08.json",
+      "sha256": "f6cf200656ae5279ee29f9ff0705d45370532483baec7783e1efae96cec382aa",
+      "source_group": "69b4717a4206e07fca08"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/6a16838c5a4d62a9b43d.json",
+      "sha256": "5d2efb944441addd7dfbad44305be0f6a7efbde6662c305d4ed21df7d024cc1a",
+      "source_group": "6a16838c5a4d62a9b43d"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/6ad1d6cc0fde2052144b.json",
+      "sha256": "f081f364afd59b76c13d3937c9adf72705b1bde206347d9a5eefba037c7cbc79",
+      "source_group": "6ad1d6cc0fde2052144b"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/702f3a9a98c96f0355d2.json",
+      "sha256": "d139129d6841bafe2c6e40272a532f283626a760b9dca583cbd52c8b95fa9af0",
+      "source_group": "702f3a9a98c96f0355d2"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/75aae65cb330a7e27a9f.json",
+      "sha256": "b0617193b90cc13a06b72b92e1dc32ef8af4cb39a278f253ad50d5258b79f052",
+      "source_group": "75aae65cb330a7e27a9f"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/783f7001be49ee778ac9.json",
+      "sha256": "b4f70049d80f70830521347b66c4fdc30ea9f825a63c950132416a789fe17080",
+      "source_group": "783f7001be49ee778ac9"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/7dbdf68ac0bb3482a281.json",
+      "sha256": "9b9cc6d359bab4348ff23319bf7b27b4cfb0ecd1dcd624c2443948b9f54784b1",
+      "source_group": "7dbdf68ac0bb3482a281"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/88828051bcb4b36ff978.json",
+      "sha256": "17f40fa19aaaa9bca1b710b1d8439250aea0c9ebcfa12fed08105f99b75af155",
+      "source_group": "88828051bcb4b36ff978"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/8b94b960d779474f3f02.json",
+      "sha256": "48c634bf1f77ad8f91cd27964bc4ac00901d3d22a57cee9408031eedfacc5544",
+      "source_group": "8b94b960d779474f3f02"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/8cb7aa529233e42a4dce.json",
+      "sha256": "14614f8692bb301b4ebc5f9d79919590109c3f684d3d72e266d68802d6c0ae66",
+      "source_group": "8cb7aa529233e42a4dce"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/90ee1d2600ffab8b4fd4.json",
+      "sha256": "7d3338db6589d18a0ec90f527bf1f1d4409aaf322910113ccbe7ef9914b3b0c1",
+      "source_group": "90ee1d2600ffab8b4fd4"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/99511b7402c1d438e4b3.json",
+      "sha256": "1e46eaa4fdc37bf77aad27bee694e872959eb57d1287582d4aad2a7845a5830f",
+      "source_group": "99511b7402c1d438e4b3"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/9a6406c2504cfb3ed75d.json",
+      "sha256": "060c33bfeba42bd7b10beeef631a8bbba6ada591bb44e2db82995d15e1f2337a",
+      "source_group": "9a6406c2504cfb3ed75d"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/9c0af891499fa032f3da.json",
+      "sha256": "67176bef323d3672b23f218f6c09722177553c3ad2137230a7cd7f5a94fc8354",
+      "source_group": "9c0af891499fa032f3da"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/9e5b3d53982c82e689e1.json",
+      "sha256": "21e04ff2549c043990d57ac219ee940ab4b079dd6a6633c6e3581a9ffe06d6b2",
+      "source_group": "9e5b3d53982c82e689e1"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/a1ba265b86ff34d1aefa.json",
+      "sha256": "bda822ff4977db6a9ba2f26a77f3aba732b36d7b5173a26146b55137bea77bec",
+      "source_group": "a1ba265b86ff34d1aefa"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/a3cf2787d70b51af3165.json",
+      "sha256": "29ea4f6a736bd63c00512417fbe63d0d814d4f20166f823063e3a55dd52fe4d6",
+      "source_group": "a3cf2787d70b51af3165"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/a3f81e0d397d4260b5b9.json",
+      "sha256": "d27db235444413d7a402aa5aeeb2cf2ec6f54ba157ee7ba74607fe02065c9e89",
+      "source_group": "a3f81e0d397d4260b5b9"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/a58220be955b5cffb0b1.json",
+      "sha256": "058c393b227148bac1655f30d16cc0a5134f407cef1683da67091ac273a3dd7d",
+      "source_group": "a58220be955b5cffb0b1"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/ae35964219d1b24bba10.json",
+      "sha256": "a460652fec5fdcc7efc49f64d1cc54e97a194cc004e5e9c79be819a762dc1e8b",
+      "source_group": "ae35964219d1b24bba10"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/b131d32f3f21ae5e7123.json",
+      "sha256": "2eee39076f26e3f64a3b6a91e76a4a1e918a3574771fcaf8188aa6c4b9588cf8",
+      "source_group": "b131d32f3f21ae5e7123"
+    },
+    {
+      "frame_statuses": {
+        "succeeded": 16
+      },
+      "path": "/root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation/b1fca003a545a6f5d1a5.json",
+      "sha256": "c57ff0ab20c48920991414ec7b71e82187f7909b8a26c53622050f40778469d5",
+      "source_group": "b1fca003a545a6f5d1a5"
+    }
+  ],
+  "scope": "one frozen training-only pass; observed labels are not a capability inventory",
+  "source_group_count": 24,
+  "trace_location": "H100 /root/wenbiao_zhao/vbench-audit/output/object_color_20260920/observation; local mirrored under output/object_color_20260920/observation"
+}

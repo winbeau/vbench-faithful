@@ -1,0 +1,100 @@
+{
+  "families": {
+    "color_synonym_control": {
+      "base_count": {
+        "dev": 5,
+        "test": 20
+      },
+      "dimension": "color",
+      "relation": "invariance",
+      "scope": "available aliases only; eligible counts explicit",
+      "transformation": "gray/grey where applicable, otherwise frozen object true synonym in raw prompt; no image changes"
+    },
+    "color_visibility_denominator": {
+      "base_count": {
+        "dev": 5,
+        "test": 20
+      },
+      "construction": "independent Mask R-CNN locator plus SegFormer-B0 target mask; MobileSAM point fallback; inward feather only; scoring never consumes construction masks",
+      "dimension": "color",
+      "official_relation": "invariance_where_defined",
+      "repair_relation": "ordered_drop",
+      "visible_fraction": [
+        1,
+        0.75,
+        0.5,
+        0.25,
+        0
+      ]
+    },
+    "object_absent_control": {
+      "base_count": {
+        "dev": 5,
+        "test": 20
+      },
+      "dimension": "object_class",
+      "low_threshold": 0.1,
+      "relation": "both_low",
+      "transformation": "first frozen vocabulary class by source hash not located by independent Mask R-CNN; unconfirmed absence explicitly unverified"
+    },
+    "object_label_invariance": {
+      "base_count": {
+        "dev": 5,
+        "test": 20
+      },
+      "dimension": "object_class",
+      "official_relation": "change",
+      "primary_pair": "canonical vs uppercase",
+      "repair_relation": "invariance",
+      "secondary_pairs": "canonical vs first frozen alias; no replacement of zero effects",
+      "transformation": "same bytes and raw prompt; metadata object replaced by uppercase canonical and first frozen true alias (when available)"
+    }
+  },
+  "gates": {
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20260920,
+    "bootstrap_unit": "base",
+    "change_ci_lower_exclusive": 0.1,
+    "change_median_abs_min": 0.2,
+    "color_spearman_min": 0.8,
+    "color_strict_monotonic_base_fraction_min": 0.7,
+    "invariance_median_abs_max": 0.05,
+    "invariance_signed_ci_contains": 0,
+    "missing": "retain null rows and coverage, no imputation as observed score",
+    "zero_effect_keep": true
+  },
+  "sampling": {
+    "eligibility": "independent target presence, no GRiT score gate, retained rejected ledger, no backfill",
+    "frames": 16,
+    "generator_selection": "sha256(source prompt) modulo3 over lavie/modelscope/videocrafter; lowest available seed",
+    "locator": "maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth",
+    "locator_score_min": 0.7,
+    "observation": "first24 train object_class source groups;16 official sampled frames;not score-selected",
+    "target_presence_min_fraction": 0.75
+  },
+  "training": {
+    "adapters": [
+      "object_class",
+      "color"
+    ],
+    "alpha": 32,
+    "backbone": "Qwen/Qwen3-8B",
+    "batch_size": 1,
+    "dropout": 0.05,
+    "gradient_accumulation": 4,
+    "human_review_slots": 200,
+    "input_fields": [
+      "prompt"
+    ],
+    "learning_rate": 0.0001,
+    "max_length": 2048,
+    "max_steps": 300,
+    "rank": 16,
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "seed": 20260920,
+    "silver_per_source": 8,
+    "stacking": false
+  },
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "version": "object-color-preregistered-v1"
+}

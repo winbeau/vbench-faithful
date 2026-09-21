@@ -1,0 +1,13 @@
+dimension,variant,n_inputs,status_counts,n_scored,score_coverage,denominator_kind,n_retained_null
+color,binding,42,"{""succeeded"": 33, ""dropped_by_condition"": 9}",33,0.7857142857142857,equal_video_mean_of_conditional_rates,9
+color,binding_lexical,42,"{""succeeded"": 40, ""dropped_by_condition"": 2}",40,0.9523809523809523,equal_video_mean_of_conditional_rates,2
+color,official,42,"{""succeeded"": 33, ""dropped_by_official"": 9}",33,0.7857142857142857,official_retained_video_mean,9
+color,repair,42,"{""succeeded"": 42}",42,1.0,equal_video_mean_of_all_frame_rates,0
+color,repair-base-canonical,7,"{""succeeded"": 7}",7,1.0,equal_video_mean_of_all_frame_rates,0
+color,repair-deterministic-canonical,7,"{""succeeded"": 7}",7,1.0,equal_video_mean_of_all_frame_rates,0
+color,repair-lora-canonical,7,"{""succeeded"": 7}",7,1.0,equal_video_mean_of_all_frame_rates,0
+object_class,official,63,"{""succeeded"": 63}",63,1.0,all_sampled_frames,0
+object_class,repair,63,"{""succeeded"": 63}",63,1.0,all_sampled_frames,0
+object_class,repair-base-canonical,16,"{""succeeded"": 16}",16,1.0,all_sampled_frames,0
+object_class,repair-deterministic-canonical,16,"{""succeeded"": 16}",16,1.0,all_sampled_frames,0
+object_class,repair-lora-canonical,16,"{""succeeded"": 16}",16,1.0,all_sampled_frames,0

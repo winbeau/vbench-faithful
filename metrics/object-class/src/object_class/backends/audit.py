@@ -11,4 +11,7 @@ METRIC = "object-class"
 
 
 def evaluate_batch(backend: str, videos: Sequence[Path], metadata: Mapping[str, Mapping[str, Any]], device: str | None, config: Mapping[str, Any]) -> list[VideoResult]:
-    return not_implemented_batch(METRIC, backend, videos, variant="diagnostic", reason="object-class audit backend is deferred")
+    from ..runtime import evaluate_audit
+    variant = config.get("runtime", {}).get("audit_variant", "repair")
+    return evaluate_audit(videos, metadata, device, config,
+                          variant="repair" if variant == "diagnostic" else variant)

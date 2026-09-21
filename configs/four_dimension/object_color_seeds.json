@@ -1,0 +1,1732 @@
+{
+  "rows": [
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "broccoli"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "broccoli",
+      "source_group": "067d83642a45da492b3e",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "teddy bear"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a teddy bear",
+      "source_group": "15f2ee65eccc7813c5a8",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "spoon"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a spoon",
+      "source_group": "1736abb91ae7667952ff",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "donut"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a donut",
+      "source_group": "1bd29565e4d7646286c6",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "bed"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a bed",
+      "source_group": "1c3e4841315ea957362f",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "boat"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a boat",
+      "source_group": "1cb78dba07d74a7bd099",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "zebra"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a zebra",
+      "source_group": "1fe740b56828f4cc402f",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "banana"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a banana",
+      "source_group": "22c8586101346a587f22",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "laptop"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a laptop",
+      "source_group": "24ff1173e361da5ac3cf",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "train"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a train",
+      "source_group": "2ab532eb98b3e8c3712e",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "bowl"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a bowl",
+      "source_group": "33afb0cd686b57fec7d2",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "parking meter"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a parking meter",
+      "source_group": "3ad86c3845dd479b501b",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "knife"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a knife",
+      "source_group": "3d193bf00889a559388f",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "car"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a car",
+      "source_group": "45aa82a214b52f19d081",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "carrot"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a carrot",
+      "source_group": "47bb0eabb030fb9ba48c",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "handbag"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a handbag",
+      "source_group": "48a1dcf696a82a6b87dd",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "scissors"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "scissors",
+      "source_group": "493a15e7bda88b072720",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "vase"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a vase",
+      "source_group": "4c84e8e13cdfc1571a3e",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "sandwich"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a sandwich",
+      "source_group": "4f3b6efe3dd1ec84c486",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "orange"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "an orange",
+      "source_group": "50982fe25d73be528fd0",
+      "split": "test"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "keyboard"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a keyboard",
+      "source_group": "5107ba0d22f4869fd971",
+      "split": "dev"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "cat"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a cat",
+      "source_group": "51e467415607798220a3",
+      "split": "dev"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "refrigerator"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a refrigerator",
+      "source_group": "5410394a8967a207ee29",
+      "split": "dev"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "bench"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a bench",
+      "source_group": "5662797c6d4c27f9f770",
+      "split": "dev"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "hair drier"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a hair drier",
+      "source_group": "61db0d0f9423e16431bb",
+      "split": "dev"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "motorcycle"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a motorcycle",
+      "source_group": "63fa7a7e02803fecc379",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "pizza"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a pizza",
+      "source_group": "6440eda76a6259c37f9e",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "sheep"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a sheep",
+      "source_group": "69b4717a4206e07fca08",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "hot dog"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a hot dog",
+      "source_group": "6a16838c5a4d62a9b43d",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "umbrella"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "an umbrella",
+      "source_group": "6ad1d6cc0fde2052144b",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "backpack"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a backpack",
+      "source_group": "702f3a9a98c96f0355d2",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "toilet"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a toilet",
+      "source_group": "75aae65cb330a7e27a9f",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "couch"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a couch",
+      "source_group": "783f7001be49ee778ac9",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "dog"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a dog",
+      "source_group": "7dbdf68ac0bb3482a281",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "tv"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a tv",
+      "source_group": "88828051bcb4b36ff978",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "elephant"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "an elephant",
+      "source_group": "8b94b960d779474f3f02",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "sink"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a sink",
+      "source_group": "8cb7aa529233e42a4dce",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "microwave"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a microwave",
+      "source_group": "90ee1d2600ffab8b4fd4",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "bicycle"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a bicycle",
+      "source_group": "99511b7402c1d438e4b3",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "horse"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a horse",
+      "source_group": "9a6406c2504cfb3ed75d",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "snowboard"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a snowboard",
+      "source_group": "9c0af891499fa032f3da",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "bird"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a bird",
+      "source_group": "9e5b3d53982c82e689e1",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "traffic light"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a traffic light",
+      "source_group": "a1ba265b86ff34d1aefa",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "cow"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a cow",
+      "source_group": "a3cf2787d70b51af3165",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "baseball glove"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a baseball glove",
+      "source_group": "a3f81e0d397d4260b5b9",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "cup"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a cup",
+      "source_group": "a58220be955b5cffb0b1",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "book"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a book",
+      "source_group": "ae35964219d1b24bba10",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "giraffe"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a giraffe",
+      "source_group": "b131d32f3f21ae5e7123",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "potted plant"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a potted plant",
+      "source_group": "b1fca003a545a6f5d1a5",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "cake"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a cake",
+      "source_group": "b695b4c2562ea3541d8b",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "surfboard"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a surfboard",
+      "source_group": "b715b7568f16e274c1d4",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "bear"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a bear",
+      "source_group": "bc1fe67d124ae27f44e0",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "truck"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a truck",
+      "source_group": "be1e12420ef0ed57d298",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "toaster"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a toaster",
+      "source_group": "be40b0e14499e49264da",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "tie"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a tie",
+      "source_group": "bf875919ab72f0e34c5d",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "bus"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a bus",
+      "source_group": "bfeebfb615ce21639ac2",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "chair"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a chair",
+      "source_group": "c47923ffc381bc1ea418",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "suitcase"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a suitcase",
+      "source_group": "c54df992c57e4de5ca00",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "bottle"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a bottle",
+      "source_group": "d054e115f775781691e8",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "toothbrush"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a toothbrush",
+      "source_group": "d0ed2b0146b43cbd8e20",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "baseball bat"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a baseball bat",
+      "source_group": "d46b73ec97a5f959f14f",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "skateboard"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a skateboard",
+      "source_group": "d92dc33089ea3da96247",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "remote"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a remote",
+      "source_group": "dd7cfb8b46ddf35a6cd8",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "person"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a person",
+      "source_group": "df381eb4bb572dafc91d",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "apple"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "an apple",
+      "source_group": "df700c02354d6d0e0308",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "tennis racket"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a tennis racket",
+      "source_group": "e1aee189528b2b0645ac",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "sports ball"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a sports ball",
+      "source_group": "e458eb74a1a46ec89a46",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "airplane"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "an airplane",
+      "source_group": "e4a02badaa19837d589e",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "stop sign"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a stop sign",
+      "source_group": "e54432998092e793962e",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "frisbee"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a frisbee",
+      "source_group": "e75880c1c141bcc5d76a",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "fork"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a fork",
+      "source_group": "ebe26227744511318ae7",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "wine glass"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a wine glass",
+      "source_group": "ec53f84f3e7566c58905",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "oven"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "an oven",
+      "source_group": "ec7ef5d591fcf76e2de5",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "fire hydrant"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a fire hydrant",
+      "source_group": "eeab63b9f291c2141121",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "clock"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a clock",
+      "source_group": "f583a793a95fd25c6358",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "cell phone"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a cell phone",
+      "source_group": "f79b227cb24c8f9a0886",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "dining table"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a dining table",
+      "source_group": "f8532d31a6b838329844",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "kite"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "a kite",
+      "source_group": "facf5131ec5957f4bb2a",
+      "split": "train"
+    },
+    {
+      "dimension": "object_class",
+      "gold": {
+        "object": "skis"
+      },
+      "label_source": "official_auxiliary_info",
+      "prompt": "skis",
+      "source_group": "fb1d6060d754fe72fa81",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "car"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white car",
+      "source_group": "008cf1d73ad9d83fb48f",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "red",
+        "object": "umbrella"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a red umbrella",
+      "source_group": "013a582e290cf7b6109c",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "bowl"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black bowl",
+      "source_group": "023878c59236751ee6ff",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "red",
+        "object": "vase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a red vase",
+      "source_group": "058411c6ee086758e872",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "pink",
+        "object": "suitcase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a pink suitcase",
+      "source_group": "0c2ae71042339b571e9a",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "red",
+        "object": "bicycle"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a red bicycle",
+      "source_group": "1191409152a26c2e3a7b",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "purple",
+        "object": "chair"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a purple chair",
+      "source_group": "163ad4e780a0c87e516e",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "purple",
+        "object": "umbrella"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a purple umbrella",
+      "source_group": "1823400ea88dfb1673ce",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "vase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange vase",
+      "source_group": "1a3ce753c0808891a9ed",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "green",
+        "object": "vase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a green vase",
+      "source_group": "1b304be982e9194f7439",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "bird"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow bird",
+      "source_group": "1bac92059a42fc24d9cd",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "pink",
+        "object": "bicycle"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a pink bicycle",
+      "source_group": "22a14806d95babcfc4f0",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "pink",
+        "object": "umbrella"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a pink umbrella",
+      "source_group": "230aeff3327749d845de",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "umbrella"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white umbrella",
+      "source_group": "2483a015995b733ff350",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "clock"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black clock",
+      "source_group": "2e44358d551fafe3ca5f",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "bird"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange bird",
+      "source_group": "2f6ef63d7894637df7d4",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "suitcase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black suitcase",
+      "source_group": "34dbf210a8ce1f1924e3",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "green",
+        "object": "car"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a green car",
+      "source_group": "357738f0c9ffc6b001b9",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "green",
+        "object": "chair"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a green chair",
+      "source_group": "39fcb577e8a1ba515273",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "chair"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange chair",
+      "source_group": "3f7f85f2f80081ef55c0",
+      "split": "test"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "green",
+        "object": "bicycle"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a green bicycle",
+      "source_group": "3faabd126b1a962d9383",
+      "split": "dev"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "cat"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow cat",
+      "source_group": "45da8c2232669ce73b0d",
+      "split": "dev"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "purple",
+        "object": "bird"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a purple bird",
+      "source_group": "48bf03feecef39bef48b",
+      "split": "dev"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "pink",
+        "object": "bird"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a pink bird",
+      "source_group": "49fce5ff3ddd74a04f0d",
+      "split": "dev"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "purple",
+        "object": "suitcase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a purple suitcase",
+      "source_group": "4d10e612e834349662fa",
+      "split": "dev"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "suitcase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow suitcase",
+      "source_group": "4e691df65290bf50591a",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "red",
+        "object": "car"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a red car",
+      "source_group": "4ff7ca0b5aba7ae1185e",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "bicycle"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange bicycle",
+      "source_group": "56ed5979986712e484f9",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "car"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black car",
+      "source_group": "5fab10d6ad435e584eaa",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "green",
+        "object": "clock"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a green clock",
+      "source_group": "638f8e22738cead6fb6d",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "green",
+        "object": "bird"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a green bird",
+      "source_group": "6c717a46cf89d909789d",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "umbrella"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black umbrella",
+      "source_group": "70cdac0327b5954e6cb7",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "pink",
+        "object": "vase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a pink vase",
+      "source_group": "72b885823ee071c2ea97",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "clock"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange clock",
+      "source_group": "73d01910b3667f7313b5",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "chair"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow chair",
+      "source_group": "76c10e89296e98b1735d",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "purple",
+        "object": "bicycle"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a purple bicycle",
+      "source_group": "7de987bb3f2710f64e99",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "purple",
+        "object": "car"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a purple car",
+      "source_group": "7e29f222134dc34c47c9",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "bird"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black bird",
+      "source_group": "8085e025d7049e3dda4b",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "blue",
+        "object": "bird"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a blue bird",
+      "source_group": "85e9725de9dc1633fd53",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "blue",
+        "object": "clock"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a blue clock",
+      "source_group": "874a4a8f7d4db293e79a",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "cat"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange cat",
+      "source_group": "891cfd5ab9d570847141",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "purple",
+        "object": "clock"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a purple clock",
+      "source_group": "89517d10a611443bc9aa",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "purple",
+        "object": "bowl"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a purple bowl",
+      "source_group": "8a71e22e944064098c25",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "bowl"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange bowl",
+      "source_group": "8a77565f849dab1a0902",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "blue",
+        "object": "vase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a blue vase",
+      "source_group": "8dcd8cb84c8d330f4e28",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "pink",
+        "object": "car"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a pink car",
+      "source_group": "8ddeb1dc19ecb4752758",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "suitcase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange suitcase",
+      "source_group": "925a33b9079fbb85fc68",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "clock"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow clock",
+      "source_group": "95fddc38460c1882e3db",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "vase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black vase",
+      "source_group": "9c2255543e31c576ed9a",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "green",
+        "object": "bowl"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a green bowl",
+      "source_group": "9dbb6d98e0a0d5d9ed4f",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "blue",
+        "object": "chair"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a blue chair",
+      "source_group": "a007aedfe5c6bbc6b2bb",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "red",
+        "object": "suitcase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a red suitcase",
+      "source_group": "a251e4aa591b301a6c78",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "vase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white vase",
+      "source_group": "aaf3e2bbdc742c7ec069",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "blue",
+        "object": "suitcase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a blue suitcase",
+      "source_group": "b280eb02d038da87af38",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "pink",
+        "object": "clock"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a pink clock",
+      "source_group": "b29f748673d5a749a250",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "car"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange car",
+      "source_group": "b2b9c79b33889285088e",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "bicycle"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white bicycle",
+      "source_group": "b32d5079d6872b17e5fc",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "bird"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white bird",
+      "source_group": "b44e5f1d0c716fed085a",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "red",
+        "object": "bowl"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a red bowl",
+      "source_group": "b613316a476ca2b76fe9",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "bowl"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white bowl",
+      "source_group": "b701c8021ac46a7585db",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "red",
+        "object": "bird"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a red bird",
+      "source_group": "b858e86ff86e6ef81388",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "cat"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black cat",
+      "source_group": "ba06184a8dcd3c1fc52e",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "chair"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black chair",
+      "source_group": "ba595fb6cbad233c51d9",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "bicycle"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow bicycle",
+      "source_group": "bf8895c0308a5e600581",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "pink",
+        "object": "bowl"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a pink bowl",
+      "source_group": "c213380cb912c074c761",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "blue",
+        "object": "car"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a blue car",
+      "source_group": "c26902d16f2915316ba0",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "blue",
+        "object": "bowl"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a blue bowl",
+      "source_group": "c56b4ce6abdecbaf1473",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "red",
+        "object": "chair"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a red chair",
+      "source_group": "c73dad2c6746504005c7",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "green",
+        "object": "suitcase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a green suitcase",
+      "source_group": "cbe0606d3eaf701b95df",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "car"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow car",
+      "source_group": "d10401e463eb1f68026a",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "blue",
+        "object": "bicycle"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a blue bicycle",
+      "source_group": "d2424eab050db87f02f0",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "orange",
+        "object": "umbrella"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "an orange umbrella",
+      "source_group": "d2e1099bb75239615790",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "black",
+        "object": "bicycle"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a black bicycle",
+      "source_group": "d720ac74ebff13599978",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "pink",
+        "object": "chair"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a pink chair",
+      "source_group": "d8c47f62305bd39e9a6e",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "blue",
+        "object": "umbrella"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a blue umbrella",
+      "source_group": "da71c0b60cc618aa9e1d",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "bowl"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow bowl",
+      "source_group": "dd422a9081de9e46f22d",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "red",
+        "object": "clock"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a red clock",
+      "source_group": "df879b02a45c329ecf88",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "chair"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white chair",
+      "source_group": "e00e477ec7add368ae79",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "suitcase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white suitcase",
+      "source_group": "e51801926ce1cf5f1b80",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "clock"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white clock",
+      "source_group": "e5d7c149da3939c00ef9",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "umbrella"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow umbrella",
+      "source_group": "f638513a019ee8ce5789",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "white",
+        "object": "cat"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a white cat",
+      "source_group": "f6a7f8a35981b74ebe02",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "purple",
+        "object": "vase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a purple vase",
+      "source_group": "fb2395d508dedb05dc16",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "green",
+        "object": "umbrella"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a green umbrella",
+      "source_group": "fcac852dec26ebc9d4ea",
+      "split": "train"
+    },
+    {
+      "dimension": "color",
+      "gold": {
+        "color": "yellow",
+        "object": "vase"
+      },
+      "label_source": "official_color_aux_plus_unambiguous_template_object",
+      "prompt": "a yellow vase",
+      "source_group": "fdbca80bf78c8bb680d4",
+      "split": "train"
+    }
+  ],
+  "split_rule": "sha256(normalized source prompt), first20 test,next5 dev,rest train per dimension BEFORE expansion",
+  "suite_sha256": "5dd2de80ee43cda750b2b72ea7023657c0b90d3702041c7e4608c65dbe50dccd",
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+}

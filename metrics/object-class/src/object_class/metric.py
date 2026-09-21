@@ -8,6 +8,7 @@ from vbench_audit_core.contracts import not_implemented_batch
 from vbench_audit_core.schemas import VideoResult
 
 from .backends import audit, repair, vbench
+from .runtime import requires_cuda, summarize
 
 METRIC = "object-class"
 
@@ -19,17 +20,17 @@ def evaluate_batch(
     device: str | None,
     config: Mapping[str, Any],
 ) -> list[VideoResult]:
-    """Shared batch shape; GRiT parsing and class predicates are deferred."""
+    """Independent formulas behind the shared batch contract."""
 
     if backend == "vbench":
         return vbench.evaluate_batch(backend, videos, metadata, device, config)
     if backend == "audit":
-        variant = config.get("runtime", {}).get("audit_variant", "diagnostic")
+        variant = config.get("runtime", {}).get("audit_variant", "repair")
         return repair.evaluate_batch(backend, videos, metadata, device, config) if variant == "repair" else audit.evaluate_batch(backend, videos, metadata, device, config)
     return not_implemented_batch(METRIC, backend, videos, reason=f"unknown backend: {backend}")
 
 
-evaluate_batch.requires_cuda = False
+evaluate_batch.requires_cuda = requires_cuda
 
 
 __all__ = ["METRIC", "evaluate_batch"]

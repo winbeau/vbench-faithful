@@ -1,0 +1,12 @@
+{
+  "api_model": "deepseek-flash",
+  "base_url": "https://api.deepseek.com",
+  "version_lock": "first response model and system_fingerprint; reject subsequent drift",
+  "max_requests": 165,
+  "max_tokens": 1600,
+  "temperature": 0,
+  "workers": 4,
+  "expansions_per_source": 8,
+  "human_review_slots": 200,
+  "categories": ["synonym", "attributes", "plural", "negation", "two_objects_two_colors", "scene_color", "hypernym_not_synonym", "expanded_color"]
+}

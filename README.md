@@ -2,6 +2,10 @@
 
 VBench 1.0 的可复现审计工作区。本轮范围 **11 维** = 已实现的 7 维 + 4 个候选维度
 （范围决定见 [`docs/plans/2026-09-15-dimension-scope-11d.md`](docs/plans/2026-09-15-dimension-scope-11d.md)）。
+Object Class / Color 也已完成独立包后端、共享 Qwen3-8B 的独立 LoRA 与四级消融，
+见[实现与复现](docs/object-color-repair.md)及[两维实测报告](docs/counterfactual-reports/object_color_repair_20260920.md)。
+Object 的 metadata 改写与 Color 的可见性响应分别报告；Color test 仅 5 个合格基底，
+Official 同义控制缺失，人工语义审核尚未完成，不据此宣称总体修复优越。
 每个维度都是独立包，Python import 名使用下划线，发行包和命令使用 kebab-case：
 
 ```text
@@ -16,7 +20,7 @@ metrics/                     # 已实现的 7 维
 packages/audit-core/         → vbench_audit_core
 packages/audit-models/       → vbench_audit_models
 
-候选 4 维（已在 configs/upstream.toml 钉住源码，尚无 metric 包）：
+后续 4 维（已在 configs/upstream.toml 钉住源码，均已有独立包）：
 background_consistency、temporal_style、object_class、color
 ```
 
@@ -49,7 +53,7 @@ uv sync --locked --extra models
 
 不要在 CPU 测试 overlay 之后再次同步 models extra，以免替换 CPU wheel。
 
-模型权重、CUDA 驱动和 Detectron2/GRiT 等外部构建不由 uv.lock 提供。本机当前只有一张 RTX 4060（8 GiB），没有本项目权重；真实模型 parity 和多卡验收因此尚未验证。某些第三方模型构造器在传入默认 pretrained 配置时可能联网下载权重；本轮没有下载权重，正式运行应预置本地权重并使用对应的本地路径参数。纯算法、输入输出合约及 CLI help 不需要权重。
+模型权重、CUDA 驱动和 Detectron2/GRiT 等外部构建不由 uv.lock 提供。本机当前只有一张 RTX 4060（8 GiB），没有本项目权重；本机 CPU 验收不代表真实模型 parity；Object/Color 的 H100 parity 与多卡结果见上述实测报告。某些第三方模型构造器在传入默认 pretrained 配置时可能联网下载权重；本轮没有下载权重，正式运行应预置本地权重并使用对应的本地路径参数。纯算法、输入输出合约及 CLI help 不需要权重。
 
 ## VBench 1.0 官方视频目录
 

@@ -1,0 +1,8 @@
+{
+  "files": {
+    "object_color_aliases.json": "87e91bf9894c2fe2958e9812a036f24c831cdaa429ca43418e00cb7d37760663",
+    "object_color_protocol.json": "74c5e0cddf4b9aeced82c1e4b1f982c93ba241f84d5d5ac24d7d16360a91c5e3",
+    "object_color_seeds.json": "e74dac48214a3c0e3e299e797cd5b8dc9cee5afb7da21d9f7bc074f87d7fb2d2"
+  },
+  "stage": "before visual observation or scores"
+}

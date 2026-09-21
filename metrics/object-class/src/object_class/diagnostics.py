@@ -10,4 +10,5 @@ def status_counts(statuses: Iterable[str]) -> dict[str, int]:
 
 
 def skeleton_diagnostic(**extra: Any) -> dict[str, Any]:
+    """Legacy M1 fixture helper; implemented backends do not call this."""
     return {"implementation_status": "not_implemented", **extra}

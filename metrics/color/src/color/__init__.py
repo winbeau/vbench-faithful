@@ -1,4 +1,4 @@
-"""Color metric package (M1 interface skeleton)."""
+"""Independent Color metric with pinned Official and audit backends."""
 
 __version__ = "0.1.0"
 

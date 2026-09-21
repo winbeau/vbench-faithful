@@ -1,0 +1,15 @@
+dimension,run,n_video_requests,physical_gpu,wall_seconds,four_card_wall_seconds,output,scope
+color,official,42,5,77.27659559249878,,output/object_color_20260920/scores/color/official,one-card GRiT scoring; compiled prompt cache already prepared
+color,repair,42,5,206.33318519592285,,output/object_color_20260920/scores/color/repair,one-card GRiT scoring; compiled prompt cache already prepared
+color,repair-base-canonical,7,5,37.44849252700806,,output/object_color_20260920/scores/color/repair-base-canonical,one-card GRiT scoring; compiled prompt cache already prepared
+color,repair-deterministic-canonical,7,5,48.408305406570435,,output/object_color_20260920/scores/color/repair-deterministic-canonical,one-card GRiT scoring; compiled prompt cache already prepared
+color,repair-lora-canonical,7,5,38.2958128452301,,output/object_color_20260920/scores/color/repair-lora-canonical,one-card GRiT scoring; compiled prompt cache already prepared
+object_class,official,63,5,80.38495516777039,,output/object_color_20260920/scores/object_class/official,one-card GRiT scoring; compiled prompt cache already prepared
+object_class,repair,63,5,81.89257669448853,,output/object_color_20260920/scores/object_class/repair,one-card GRiT scoring; compiled prompt cache already prepared
+object_class,repair-base-canonical,16,5,37.241825580596924,,output/object_color_20260920/scores/object_class/repair-base-canonical,one-card GRiT scoring; compiled prompt cache already prepared
+object_class,repair-deterministic-canonical,16,5,63.55945873260498,,output/object_color_20260920/scores/object_class/repair-deterministic-canonical,one-card GRiT scoring; compiled prompt cache already prepared
+object_class,repair-lora-canonical,16,5,58.12833261489868,,output/object_color_20260920/scores/object_class/repair-lora-canonical,one-card GRiT scoring; compiled prompt cache already prepared
+object_class,cli_four_shards_both_backends,4,"1,3,4,5",34.357637882232666,34.357637882232666,output/object_color_20260920/cli_parity/object_class,"four original videos, both backends; not full-cohort four-card timing"
+color,cli_four_shards_both_backends,4,"1,3,4,5",35.366626501083374,35.366626501083374,output/object_color_20260920/cli_parity/color,"four original videos, both backends; not full-cohort four-card timing"
+object_class,lora_300_steps,0,RTX4090:5,393.8683,,/data1/wenbiao_zhao/vbench-audit-object-color-20260920/output/adapters/object_class,"trainer time; excludes model loading, silver generation and compilation"
+color,lora_300_steps,0,RTX4090:5,388.995,,/data1/wenbiao_zhao/vbench-audit-object-color-20260920/output/adapters/color,"trainer time; excludes model loading, silver generation and compilation"

@@ -1,0 +1,17 @@
+{
+  "stage": "frozen before any color scores",
+  "target_localizer": "independent Mask R-CNN COCO, score >= 0.7",
+  "source_gate": "target localized in all 16 sampled frames for an actual 100-percent visibility endpoint",
+  "construction": "SegFormer-B0 exact ADE class inside independent boxes, mask/box area >= 0.2; otherwise MobileSAM independent box plus center foreground point",
+  "all_target_instances": true,
+  "hidden_fill": "per-frame outside-mask median RGB",
+  "feather": "inward only, min(distance_to_mask_exterior / 1.5, 1)",
+  "frame_order": "numpy default_rng(int(source_group,16) modulo 2**32).permutation(16), nested visible prefixes",
+  "zero_endpoint_gate": "independent locator must return no target on every fully occluded frame; failed constructions stay in rejection ledger",
+  "levels": [1.0, 0.75, 0.5, 0.25, 0.0],
+  "codec": "libx264rgb crf0 rgb24, single-thread, bitexact flags, metadata removed",
+  "checks": ["outside-mask RGB bytes unchanged", "lossless decode equals constructed frames", "second encode sha256 identical"],
+  "scorer_mask_input": false,
+  "ground_truth_scope": "automatic construction qualification, not human mask accuracy",
+  "no_backfill": true
+}
