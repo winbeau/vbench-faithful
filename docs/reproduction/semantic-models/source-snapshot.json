@@ -1,0 +1,790 @@
+{
+  "source": "vbench-prompts-compile",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "83aa8763e93ec2734ca34244cdde0fb2e06cd7625ccdac55b905d1a11c8dae88"
+    },
+    {
+      "path": "docs/EXECUTION-2026-09-20.md",
+      "sha256": "6527ab7fd6fedea45ffcd98e7da795f2c5017f49b10b2606cfcc7efa12d58494"
+    },
+    {
+      "path": "docs/STATUS-2026-09-20.md",
+      "sha256": "c983c8e038a8b36c4ec3060ddf2b8b85aaa20361baad41355565f56f56a2ef8d"
+    },
+    {
+      "path": "docs/contracts.md",
+      "sha256": "f7b6716c52b4446cda87eee14ed30bfd2171bd4ac21de3102633cabb16c44773"
+    },
+    {
+      "path": "docs/curves/0.6b/action-accuracy.svg",
+      "sha256": "cffff5e242f89479a82804d492fb7a68827da692ff00cf6d6959e42d37da5fd8"
+    },
+    {
+      "path": "docs/curves/0.6b/action-curves.html",
+      "sha256": "b78159c03cc7c0b0193e61c8c63ef3a514d5961813fe37f2cb8d626fddbc9e25"
+    },
+    {
+      "path": "docs/curves/0.6b/action-history.csv",
+      "sha256": "39a05a1d26b112e80995ecf6bd597ab9450916fa249c2e2d63f448fcbecc615f"
+    },
+    {
+      "path": "docs/curves/0.6b/action-loss.svg",
+      "sha256": "8de80f8306fc4ad686c8f80fddba1bde7bebb72980d55662411658fdcd3e31e8"
+    },
+    {
+      "path": "docs/curves/0.6b/objects-accuracy.svg",
+      "sha256": "cfec6e7c27f5b5cea3b4da026a203f04d1b702806045514039154fb9d8ae973a"
+    },
+    {
+      "path": "docs/curves/0.6b/objects-curves.html",
+      "sha256": "df005c230fb5a02ab8383498d2af3107e25be9250ae2ee6658ff246b0e6d70db"
+    },
+    {
+      "path": "docs/curves/0.6b/objects-history.csv",
+      "sha256": "f25533ed2bf287a4c86e1efa27640b6ffa0dde7d420ee9f1c7170cfa32b915dd"
+    },
+    {
+      "path": "docs/curves/0.6b/objects-loss.svg",
+      "sha256": "c99b78487c3ddd82fe9fe23ed6038e9c878496a1eb88f07133597cb372a31236"
+    },
+    {
+      "path": "docs/curves/0.6b/scene-accuracy.svg",
+      "sha256": "2090f30eb3f905d9cc2b1f568c0961f5a6b6a6e5dc521d8029d93551b55a15d8"
+    },
+    {
+      "path": "docs/curves/0.6b/scene-curves.html",
+      "sha256": "4b550d7e1b26d8a56af0d94a354c36b5e97cae7e7a029b44c6c841f390473592"
+    },
+    {
+      "path": "docs/curves/0.6b/scene-history.csv",
+      "sha256": "f4053881ab3a1b46a0ccf749628667626d81ac1932b94d4000d4d48153b7adcd"
+    },
+    {
+      "path": "docs/curves/0.6b/scene-loss.svg",
+      "sha256": "360a0321aae7bbbf3ef9175f5bc0b714325d27ceb65a4ad86b99d7e8114d549b"
+    },
+    {
+      "path": "docs/curves/0.6b/spatial-accuracy.svg",
+      "sha256": "d604365534b99a411a626ea9e7ccf97b2646d550814f79797cd2d0e228f3907c"
+    },
+    {
+      "path": "docs/curves/0.6b/spatial-curves.html",
+      "sha256": "1f25a2fa757ece628515d8abe67f10efdd9c9ff2ae58ed5fd42ebfaabf0e21f5"
+    },
+    {
+      "path": "docs/curves/0.6b/spatial-history.csv",
+      "sha256": "cd148f1832320167e298093d4d06bb539f8d224d8d9ab0d3e4bb8ffbbb7fd62f"
+    },
+    {
+      "path": "docs/curves/0.6b/spatial-loss.svg",
+      "sha256": "b494627a80edaa385a55b445d96078b0cee2265e1e858a777d8227cadfc2417d"
+    },
+    {
+      "path": "docs/curves/0.6b/summary.json",
+      "sha256": "11406c0794118804236e7fb3758a4deb7279a4dc5ea67cf025aa2fa46f3a1caa"
+    },
+    {
+      "path": "docs/curves/8b/action-accuracy.svg",
+      "sha256": "6dcd0865fa1a0d62dee8dcfd9dea8183857aa30d56a13b3a5bb65aefe71279ec"
+    },
+    {
+      "path": "docs/curves/8b/action-curves.html",
+      "sha256": "5a7fcc1cbb84c7f048ed4c239b71fc44fa7c9011e55e22e2f4d8af57f7a70f72"
+    },
+    {
+      "path": "docs/curves/8b/action-history.csv",
+      "sha256": "e69b40589839dfae1cc1a2115b2c9edbfa4d6529e88d8242c91d0333ae153589"
+    },
+    {
+      "path": "docs/curves/8b/action-loss.svg",
+      "sha256": "6ceb9b3c34c4df36b84c82fd1b8c4a2aa0c969ab183b1899adb758b843a75a57"
+    },
+    {
+      "path": "docs/curves/8b/objects-accuracy.svg",
+      "sha256": "a0666f8bbf090af705ee89e7e2a57e81d5ffa6ce5b2fb551b20ab47ed019abf2"
+    },
+    {
+      "path": "docs/curves/8b/objects-curves.html",
+      "sha256": "9e3907602c3afb682cb391c90611ab426bece2c46b53c198a1b2e939d79ffc06"
+    },
+    {
+      "path": "docs/curves/8b/objects-history.csv",
+      "sha256": "d9d6233f6aa659c10f2885eaf53710b22506a6efb8e0cb56b87e5aa749e48d28"
+    },
+    {
+      "path": "docs/curves/8b/objects-loss.svg",
+      "sha256": "f0389894f8610457cccf1b70a0681adf07a183d9ceabd7123e4043b4a197649f"
+    },
+    {
+      "path": "docs/curves/8b/scene-accuracy.svg",
+      "sha256": "02a879a57ade3b16e5ea362a4eff3c282954ca113e953f0aedbe29f62a36fd1f"
+    },
+    {
+      "path": "docs/curves/8b/scene-curves.html",
+      "sha256": "a0c3bfe792bf204616fd8bb34de8febfa83cd9de302f887a5c9c7fc3998a25fe"
+    },
+    {
+      "path": "docs/curves/8b/scene-history.csv",
+      "sha256": "b89232db6540bac2775a2a9576c079e5444b8606621f6d54878e478c0bc93771"
+    },
+    {
+      "path": "docs/curves/8b/scene-loss.svg",
+      "sha256": "60a9084dae621ff0c212d3aa170bf386dd45c07f605b77f86720e35503e7888f"
+    },
+    {
+      "path": "docs/curves/8b/spatial-accuracy.svg",
+      "sha256": "7f2c03dcbc15c6d2a5d4cbe7a630d7d6fd25e8d56c779f6ce910eea919063299"
+    },
+    {
+      "path": "docs/curves/8b/spatial-curves.html",
+      "sha256": "7991d3392919735a5c691256195ea6a1edc432b5eba4c9c48245a4a0b8cb5e50"
+    },
+    {
+      "path": "docs/curves/8b/spatial-history.csv",
+      "sha256": "b334f58c54f353f607afadccbebe4f6a7055e8802006e233a92fc11256ae6f67"
+    },
+    {
+      "path": "docs/curves/8b/spatial-loss.svg",
+      "sha256": "448f261661c21495797a98b91642674fa164f7ea6bde7a403838d99b9062fd87"
+    },
+    {
+      "path": "docs/curves/8b/summary.json",
+      "sha256": "993752001d1ac40ebd5bd6b2c81d4219b8618d5515be7935d305f542a9f8a2a4"
+    },
+    {
+      "path": "docs/curves/v4-8b/action-accuracy.svg",
+      "sha256": "c5eae098ba8aef4681121c346f2e8c1ec4a04e10f4275ce880cbea0bce9e472d"
+    },
+    {
+      "path": "docs/curves/v4-8b/action-curves.html",
+      "sha256": "888ce38861105c549b262417ca6ae207458f7eabd311d4f8f20bfd672f89cd09"
+    },
+    {
+      "path": "docs/curves/v4-8b/action-history.csv",
+      "sha256": "bd8b20a3e2f11f26acb0a97a029f2ae481f1cc905063286468e62ac01967a450"
+    },
+    {
+      "path": "docs/curves/v4-8b/action-loss.svg",
+      "sha256": "939f0641457383e8fe8e8429f201bace108563d8715871c91603a816dcd52a06"
+    },
+    {
+      "path": "docs/curves/v4-8b/objects-accuracy.svg",
+      "sha256": "ed768ec97b220222f64519a1853d117fafef61417de039472911193093039e2e"
+    },
+    {
+      "path": "docs/curves/v4-8b/objects-curves.html",
+      "sha256": "57e5483e21b2fb8490d09b095515fad8abe5f6fbe25b4bb40fbb7de4e06a0de3"
+    },
+    {
+      "path": "docs/curves/v4-8b/objects-history.csv",
+      "sha256": "b78853d863cd33950dcf466dd65eaabf941cbfbeb7f1fb1db2fcb7c751f42094"
+    },
+    {
+      "path": "docs/curves/v4-8b/objects-loss.svg",
+      "sha256": "4b8563b89710742e2510ac134c5ae837a75f4ad209bb59aa4a23213a20d9aec8"
+    },
+    {
+      "path": "docs/curves/v4-8b/scene-accuracy.svg",
+      "sha256": "f4503877ca1ced7362916089c9264cbf379da97665bdad14f9971822cdb0f5c1"
+    },
+    {
+      "path": "docs/curves/v4-8b/scene-curves.html",
+      "sha256": "0d55521a7437cf52508d11c875c9f97312dd14600072287ca2d66ca0550b7757"
+    },
+    {
+      "path": "docs/curves/v4-8b/scene-history.csv",
+      "sha256": "4287de2c057d60c9e65d0b3cd69552e527fe9cb6d43220c3624a55e361f60e3c"
+    },
+    {
+      "path": "docs/curves/v4-8b/scene-loss.svg",
+      "sha256": "ec4c29b247b36a4e000eb6cbe220760c3941920d06c11045628795c692a5ec43"
+    },
+    {
+      "path": "docs/curves/v4-8b/spatial-accuracy.svg",
+      "sha256": "face879bc93cf9c6dc618002e0974adf357652d541cdd7e484e3a547ad64b5ee"
+    },
+    {
+      "path": "docs/curves/v4-8b/spatial-curves.html",
+      "sha256": "a137d4d0078daba8a257f306f2ff04204f017dd704edb386dbca047852d82594"
+    },
+    {
+      "path": "docs/curves/v4-8b/spatial-history.csv",
+      "sha256": "845cd00e2bbda47403f0e9e4bc6c9b559848fad890a604c1bc08b7cfae3bf2db"
+    },
+    {
+      "path": "docs/curves/v4-8b/spatial-loss.svg",
+      "sha256": "fc5e3b982db902fb4ade77ed1e57887364b641e9adf99a4e9ec19130b76ad937"
+    },
+    {
+      "path": "docs/curves/v4-8b/summary.json",
+      "sha256": "361a3c01fa65ddd4eb5f271c55d5643aecdb66e4e0869e81fd0b1781bba644a9"
+    },
+    {
+      "path": "docs/data/README.md",
+      "sha256": "67e25dc239ee7c1b891f1e4761998e81f6abe50273fa8c52454af1bfa1e4701f"
+    },
+    {
+      "path": "docs/data/k400.md",
+      "sha256": "da7970e982b2aeb75099ff36228d2bc3329f9f691645c297f31612b466483f5d"
+    },
+    {
+      "path": "docs/data/moviegen-flickr.md",
+      "sha256": "e29592c0dfba397b65f6a24a23fa326750558c970279c4582334dc8f20a2e821"
+    },
+    {
+      "path": "docs/data/vg-snli.md",
+      "sha256": "cd8306d5d075bac432462ab08383cc9ff9c9d42e173b98e4e1a385bdc722a210"
+    },
+    {
+      "path": "docs/decisions.md",
+      "sha256": "64b5a5e7d525e79d9e20c34f1be32a581ed2a0796d7ed9ca563cf3a2fa0e0835"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/README.md",
+      "sha256": "a70464ee8fcc03e803e5e9eba0883ff96c39b79c916356b287b5133504d60c86"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/accuracy.csv",
+      "sha256": "37c0b1212b742d9b5c1a70ff6cf6974e647793fa155fe8886624f1d3c9e1c314"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/action-components.csv",
+      "sha256": "89ebdb919e87dcd16fa5199f683ac99253d0a0597bb4da4aac2c4347fa03097e"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/action-scope-regression.csv",
+      "sha256": "72bfe78af00c0f3c188b942aada8d5960a81640be122095e36629c649077bd9c"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/action-scope-regression.json",
+      "sha256": "279f2bdd03fcef1f6cbe55dfd8e83f73b522bd0e042817494cf7d4c01a29f309"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/component-manifest.json",
+      "sha256": "9a300c6ff6d0a8bdbd8813eca406234a4634c512197e1e9eb7f6a6635b6bbd16"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/frozen-analysis.json",
+      "sha256": "0b5869280c01ee4f84c58937adb530695d8398a72b2e85457eb0746516915998"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/groups.csv",
+      "sha256": "f02b2cdb6d71d5649465feaa76d3b4e02a3c3015f1b5a716a78342b5ac407f40"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/latency.csv",
+      "sha256": "e3aad840d1765174f7be3a415bbe5791f8b5891a816ed08a0b73750e89144638"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/manifest.json",
+      "sha256": "9dc5f0da8b8679941c0ec4871e9a3e0815ad61ce4f7272fc674fdaff1352f9d5"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/method.md",
+      "sha256": "07a6c0f1baf947bd29c95574a8ae4d073113226ef32bf1d414bd203d26037463"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/objects-balanced-correctness.csv",
+      "sha256": "e3271beaf9986214ebdd95c2f1a1a0f1e6e397e989a789684d6b0b43024a0128"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/objects-components.csv",
+      "sha256": "d14418f3245748db8c5f06b98ba659df97ef960a4cefa98ea309d206fe2109e1"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/objects-retention.csv",
+      "sha256": "08d3c61cab6e24f5d6e38b2dac71dc29937fbb202aeb77cc8b91c3c8004dfbe1"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/report.json",
+      "sha256": "b7a8efb7d18a39496e04863b85c3c5e92956d45e71b712c8fd3c78496181fa7d"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/resources.csv",
+      "sha256": "34f3b8ddcd6addb5477e444d3d4b795e6b997dda583662a3ea49e472116ec19c"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/scene-evidence.csv",
+      "sha256": "f2414d07933895ff465b7e14df1e743835a86ec8ff4d6df513f48ab419f5cdd9"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/source-audit.json",
+      "sha256": "a3d5b7778a5cbcd1c104be1f7e30743d9ceaffd853e3bb58e1ff01600bb13886"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/spatial-components.csv",
+      "sha256": "94f0bf288dcb3cb344b3f9e971babdd8c73e86946357ac77957cd9908feda2b2"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/training-summary.json",
+      "sha256": "44aae586221631f943f7d02329b8115be840891233b2bfe1eaeef3d285d00217"
+    },
+    {
+      "path": "docs/deterministic/ablation-v1/training.csv",
+      "sha256": "89241de7f1ad0d3605130110ac7401ba3dd2c166ff5597d66e0949c02d085225"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/README.md",
+      "sha256": "d090a033174c65ceb45afa6fdb1e7b7d4bddbabd370cbd665fc88c9470e9fc52"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/ablations.csv",
+      "sha256": "89ebdb919e87dcd16fa5199f683ac99253d0a0597bb4da4aac2c4347fa03097e"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/ablations.md",
+      "sha256": "cc309531e4a6e757fed2e294d91af849fa436d053e8fe391a93fc739cfeee233"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/acceptance.json",
+      "sha256": "f6067288e9342036c80278f06b83bf6fbf858703fb92c95dc47ec3b477896966"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/consistency.csv",
+      "sha256": "5db1c4e9c6f34eee9371486da066f8a57d5cac7f3214ac4eedff143227b6582a"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/consistency.md",
+      "sha256": "e7ce81bcdaf9d38348203f232425531df6ee7c7a9f6ea56273572c09fc30d5ea"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/parsing.csv",
+      "sha256": "d0c0f721718bc0f7302e95906a50239a07c8ff533bf0b13b35e92be0d42ef23e"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/parsing.md",
+      "sha256": "ce1d467344b7ea8f3c09ae7c8968f81f32748274f453f4b7d1097fd6dffcbd0a"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/report.json",
+      "sha256": "22abf4b0d3419a6b4ad69dd31e32bb0799ebc14e6622abdaf49896deced4eb1a"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/scores.csv",
+      "sha256": "1d2f2d51625574bdc99dbc7716a20a3b3c6b7816e9a247f0d1126e4efa44bf6a"
+    },
+    {
+      "path": "docs/deterministic/action-repair-v2/scores.md",
+      "sha256": "6d57612b4b4f37139253f334672b12b98674947be0369abf1bf9c07d62486507"
+    },
+    {
+      "path": "docs/deterministic/current-summary/README.md",
+      "sha256": "8746f7d25213723765e949bb0a12e2f1cee056f8dd6b3aeb3c66efd00d52f3a6"
+    },
+    {
+      "path": "docs/deterministic/current-summary/manifest.json",
+      "sha256": "29bba31d11ad8c1e628d004fbef2d800a5f2b191f49fd673168711b19f8add81"
+    },
+    {
+      "path": "docs/deterministic/current-summary/matrix-scores.csv",
+      "sha256": "d380a04488fa3e890ff6fca551d7004a7089dbebf6c34d6ff10ff8449251388a"
+    },
+    {
+      "path": "docs/deterministic/current-summary/original-scores.csv",
+      "sha256": "72911037d4b4a72ad0f7d5abca0e89c4cdda6b6fc882b32b3f9a8642d49adaed"
+    },
+    {
+      "path": "docs/deterministic/current-summary/summary.json",
+      "sha256": "113829ce98010a679ef898fee6b741db9485a8ccde45028b910c3eceb106c707"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/README.md",
+      "sha256": "797f8f2860d73a704338e9ad18074459eb55faa785205165c61197454953e02a"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/acceptance.json",
+      "sha256": "37467dd295068c612d42d4051962959b3a52734faf781669b43db915887583d2"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/manifest.json",
+      "sha256": "025919ab01068254dd668072ecd2ed44fbf3644931b05633625368f5dbd9723b"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/paper-main.csv",
+      "sha256": "8f2148f1de4a75b96fa9ea80f737016fa1640c42d6ddc8a719be96f5ba260bd8"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/paper-main.md",
+      "sha256": "e016a174241a6648a4973361294190b5a0cde2834cfb0d425c4c7d90bffdabc3"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/provenance.json",
+      "sha256": "d81c4f1e510c193aec9e300fb9f4832f9aa067900565712ed0a52086467d99e6"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/scene-macro-f1.json",
+      "sha256": "4b17ff81d4295e1e0b344e104324c88e67effe12d21381a107d2c8684fba8c9b"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/scene-paired-synonym-effects.json",
+      "sha256": "aca5258b185e5c6a949e358cb1066c0535a0c12821427009963c0b4efab366dc"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-a-parsing.csv",
+      "sha256": "5145c484c2ced42c7b2a6b9b60426a8d1640cb849f53e500041364e0d5d75c35"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-a-parsing.md",
+      "sha256": "bd7e450f54fd6329ba9311fa6c4fb5b71f626422a7515f27e20205e8017351be"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-b-originals.csv",
+      "sha256": "18057eebed2b06d8eba9c16e799e751bd9485e4dfb0185685f7b9fcb76225412"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-b-originals.md",
+      "sha256": "d137b9592edc2998e415de28f74f9eed2cc53ba9bfaa035ee6dc634cbb047994"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-c-transforms.csv",
+      "sha256": "7b67e25f5a0a23b6ed053306d6a96a9eb9214aa07b5f6ca37b4d7a2b690441ba"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-c-transforms.md",
+      "sha256": "a79bc71b123740d5572b31585bc4c2162a3d62541537422bd62716ef785c5e2d"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-d-visibility.csv",
+      "sha256": "c49adbe7bbb24008ec46355b3d03702056caff964afb60b994c5fe88ece7edb9"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-d-visibility.md",
+      "sha256": "b4c884ec4df306cd61ee5ed3e3b5b3b26b2855aa6350432869306a2ba744832a"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-e-scene-classification.csv",
+      "sha256": "a0680040e1309c73d0c1cecd7fb0167b67ff489a8746abeeaf66d53b827e9554"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-e-scene-classification.md",
+      "sha256": "d8e4385c3fea5977d94a298b3a403fdfc76f8217e4bae947867ec3afefa29e07"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-f-complete-pairs.csv",
+      "sha256": "e1e5e676477ba59eca7c818fc76bd4a870fd34a39627fa9a867038fd3e34bd2a"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-f-complete-pairs.md",
+      "sha256": "3834577253d8badf07f8942d5d38a67b5a60b88ee254b02a737439a10e9a5b94"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-g-action-protocol.csv",
+      "sha256": "5c93bbdf50c2ae9c2fb27e61c1240aef108bd8f761d9c8d0df6b9aa38c0d96a6"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-g-action-protocol.md",
+      "sha256": "87169f6fe94be96a378a6225148d94de48e34eaf0d82dec1c5ad32f7f87e187b"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-h-scene-synonyms.csv",
+      "sha256": "4f3578b2dc2064d7cdd7172068b9ab0abe76318b5a8abae65e38dda0d6e2ac7c"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-h-scene-synonyms.md",
+      "sha256": "d853ad6c0a30c76a20da0f1dc38606a4f416b6179766f45ac1656583095a487c"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-i-spatial-axes.csv",
+      "sha256": "386b51a6350e7b44e06fccd2869617fd7707c4e261152e195d8c01f1c28ce509"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-i-spatial-axes.md",
+      "sha256": "e2289116d7ddbf59f181e3ed8e7cdcbab7020dc69d04d7d0f3042cf5c5a1d2b6"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-j-matched-controls.csv",
+      "sha256": "cfeed6a58ad80e8301b425ac6d09d7f035bdac0ab954740bb76a2687e2e05c5a"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-j-matched-controls.md",
+      "sha256": "3f4a4e6e31f030d60e178bb93c10392730e8489df7438791632338fc0e324c57"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-k-metamorphic-checks.csv",
+      "sha256": "ab6c5ea24f11406a1c54376b40c846ed4893678f89827efaace82ddb0c99b257"
+    },
+    {
+      "path": "docs/deterministic/matrix-v1/table-k-metamorphic-checks.md",
+      "sha256": "fca5e8044efb64cef5f803e582a7ca1a236393c79726b6c9ec24c7300222266c"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/README.md",
+      "sha256": "3bcc34799b5b12a82eaf3271b3336d59e52bdec0316be2e163edb7909f215af6"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/acceptance.json",
+      "sha256": "0165ecb620a245b49c039c355e30d4db63bfdfb3dcba1a66b11e1bf157c4fc68"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/controls.csv",
+      "sha256": "c8d76478b1c74dcc8cfdb0d08e98f6ae8f34636e8e643e0779e83f829ddc422f"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/controls.md",
+      "sha256": "6df25eaced05133130498c90d0855fa8e2fd6163d8ed657b95789c252ea8f5f3"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/endpoints.csv",
+      "sha256": "d14418f3245748db8c5f06b98ba659df97ef960a4cefa98ea309d206fe2109e1"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/endpoints.md",
+      "sha256": "46daa50e7ea554cd99954a7425f8b9afde7a2c6e3ca9a89ab918393aacfc92d1"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/original-impact.csv",
+      "sha256": "08d3c61cab6e24f5d6e38b2dac71dc29937fbb202aeb77cc8b91c3c8004dfbe1"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/original-impact.md",
+      "sha256": "2626981fd46975f3de43cb5f740b02ae5f20cb0e31670d0b3a9f33c2bd4be854"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/report.json",
+      "sha256": "94f8c28422103a623373f61c073f756dafb431a2f36e1d264559b6ccb995cbd2"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/scores.csv",
+      "sha256": "a2aedf4ce30cc00d0212f295dc7f0e3b3f690525192d411296999e73ec057303"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/scores.md",
+      "sha256": "e812147965025a868afba6e200c304af9a06e7c1de63c25540a128910e64776e"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/visibility.csv",
+      "sha256": "c3ff75490d3829552f710c14dceaadaccfb54bde2dd02f3085b783f017bd9a93"
+    },
+    {
+      "path": "docs/deterministic/objects-repair-v2/visibility.md",
+      "sha256": "b890402a0fa7116e250179980c42b5965c26ebe5f24fe4d65f78e98ad97ac5b6"
+    },
+    {
+      "path": "docs/deterministic/origin-vs-repair-spatial-summary.json",
+      "sha256": "3561adfee0bff45d6d76dcf164592c5e0899afa1ea728e77112af52149d54763"
+    },
+    {
+      "path": "docs/deterministic/origin-vs-repair-table.json",
+      "sha256": "4566cab7a06b25f6e04c2b3e0b01a7c8380ff102d6caa6304c2481a834526c09"
+    },
+    {
+      "path": "docs/deterministic/scene-metamorphic-test-v5.json",
+      "sha256": "c80edfc025bc7cccfa0989eb8fccddf84ec14b33161ca645f3736f33f186b260"
+    },
+    {
+      "path": "docs/deterministic/scene-metamorphic-test-v7.json",
+      "sha256": "9d2ae80d2487055d984c82dddff0a23804709341fd943fe869beaf664a9a83b4"
+    },
+    {
+      "path": "docs/deterministic/scene-metamorphic-v5.json",
+      "sha256": "5b0ef7e2152890e677332a0f8e6165f33f96c84ba6965b9a9e0f18815c85544d"
+    },
+    {
+      "path": "docs/deterministic/scene-synonym-v5.json",
+      "sha256": "e1a274dcc79e739be4d9093c1240394c0f042933edc07f41c72d32e09d6ecc0f"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/README.md",
+      "sha256": "b9cc18aa4ec8276fdedf4db3febaf03f4e8cbdad10af519121428f93678206c4"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/ablations.csv",
+      "sha256": "94f0bf288dcb3cb344b3f9e971babdd8c73e86946357ac77957cd9908feda2b2"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/ablations.md",
+      "sha256": "ff4d3be4feb3ce576d137ef3f29f97c7f409b39daf565ab0d7406e5ca2bdd418"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/acceptance.json",
+      "sha256": "4728c7ba7fcd544df86f4652678ea13d4c39280b52ade7f7df08f23cf2b117c1"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/frame-trends.csv",
+      "sha256": "f9ff239c2a1259a4d2dbace69b199afe3e0bf200de437a4a6c770edf767626d4"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/frame-trends.md",
+      "sha256": "979f61283663041b34d95058518bad71e2fa76928d588ba9511ff22bcf617a8f"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/physical-mirror.csv",
+      "sha256": "246ab807f472ddcdad154c01c5f41f8813dfc10b558c3d010695f5537c29fd14"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/physical-mirror.md",
+      "sha256": "21024c0968d5a7c4c38325912e31e5c8f0ffa3b36c809c266a1e96d64624dc9a"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/regression.json",
+      "sha256": "be83d70188d957788fe60c6dc3fbd97532b3308d30174026c869c564bd912f12"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/report.json",
+      "sha256": "b6ea8affb0934c5693b52501dc736f5f197aaf3528aceec68c4916c693a42e3e"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/scores.csv",
+      "sha256": "765182f2b8d5d3478206085b42243adb51090567702936e919a271b007aab5e8"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/scores.md",
+      "sha256": "b8f2a0b8504f84487f3a2d28a513e1283e64f1488210c7e50ace82d0bed6659a"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/video-trends.csv",
+      "sha256": "de83358286ab11a0536faf1c7bab6687b2c056af562c604b0ecf1b66da949454"
+    },
+    {
+      "path": "docs/deterministic/spatial-repair-v2/video-trends.md",
+      "sha256": "312b62de44b4d8ecb78084fcb270b4769b8382031b7ad6bc14d9f3886a5d1815"
+    },
+    {
+      "path": "docs/deterministic-experiments-report.md",
+      "sha256": "81a2391338d65a460667a574f2a3e827f2edaef177aadceb48324be2e62b1d12"
+    },
+    {
+      "path": "docs/eval/8b/action-metrics.json",
+      "sha256": "81de4b3bc1ecb0caf722aaa9884fcf14b0f92661d7f58ef5bee241e5d0e6f81d"
+    },
+    {
+      "path": "docs/eval/8b/objects-metrics.json",
+      "sha256": "c3d9bd1d267192ae75f56cfd90e9b2e4bdca87812fcec6b625f4134c5a14fead"
+    },
+    {
+      "path": "docs/eval/8b/scene-metrics.json",
+      "sha256": "abdb542d6b545e7cdb10aadfd763fc65dff81ba077eb8e23e5d7481f0997ac0d"
+    },
+    {
+      "path": "docs/eval/8b/spatial-metrics.json",
+      "sha256": "0b3395dcb3d2d6fac1a8ba966993ba6229fd3bc4e3bd23ca64de5dc0d16e52e7"
+    },
+    {
+      "path": "docs/eval/v4-8b/action-metrics.json",
+      "sha256": "a641668a9590a48a71637ae1f976dd1988c0cb44fb5383daf47079d5026c5255"
+    },
+    {
+      "path": "docs/eval/v4-8b/objects-metrics.json",
+      "sha256": "d94e986ecc80b2314692e486371698284945685408a236052810e5397db6636b"
+    },
+    {
+      "path": "docs/eval/v4-8b/scene-metrics.json",
+      "sha256": "cbe8c2d2393c5f0d12e501481deb3e740d4bc235eddd0b60013dbc8dc2316fb7"
+    },
+    {
+      "path": "docs/eval/v4-8b/spatial-metrics.json",
+      "sha256": "117547630509ab9c3ff217c35833b68af1040d587608c9471b6531d3446a1ddb"
+    },
+    {
+      "path": "docs/evaluation-audit.md",
+      "sha256": "af1d047986d206051207e522e134cc12a89d382670f11a229b4a22586eabf7ae"
+    },
+    {
+      "path": "docs/formal-training-report.md",
+      "sha256": "47b7ac5e968da12645a977a38469059536fb7a21a8d9779bb7714be3ba6a44e8"
+    },
+    {
+      "path": "docs/gold-annotation-pilot.md",
+      "sha256": "31489b7177cc27a6620886c0016b57f6c3b4e674815151be2f6aea7eb40e95f3"
+    },
+    {
+      "path": "docs/limitations-and-remediation.md",
+      "sha256": "b688e0a0418ca962016d0602a3ce2c01e14819d54aed9c11c82cda3024a2bddc"
+    },
+    {
+      "path": "docs/model-cards.md",
+      "sha256": "64d423588fac40151097f69d55200137294d685f4163fbac883b9c5b381ed459"
+    },
+    {
+      "path": "docs/plans/01-environment.md",
+      "sha256": "512000d5433d29eedb8947ccef16955f867f98991c6cbd932efa4f5da6bc3f25"
+    },
+    {
+      "path": "docs/plans/02-data.md",
+      "sha256": "f2dac300b0da5fc7f84e95694a605e6d05103979d6eaf98c2b9b3df8ba573c09"
+    },
+    {
+      "path": "docs/plans/03-training.md",
+      "sha256": "35e0cd00f8f201516d6220e5cd2de50266ea77893770ede79d80f1a7d9e70f4f"
+    },
+    {
+      "path": "docs/plans/04-evaluation.md",
+      "sha256": "0abd6e417d35d2aece17269b24aee99340ea7fa8d8a830ffeb2a17b99bc6646a"
+    },
+    {
+      "path": "docs/plans/05-smoke-master.md",
+      "sha256": "538e78479fbbd4774680ceb5b0e173060373c5ab2134932d9e6ba6a09d6b2c05"
+    },
+    {
+      "path": "docs/plans/06-smoke-data.md",
+      "sha256": "3c5c44d37ca1ac2ea30d80a00d83e758c8ef64b551e1b1ba1542485cb5859b0c"
+    },
+    {
+      "path": "docs/plans/07-smoke-training-code.md",
+      "sha256": "900ffc640c32b7e901a00f9d3e5e1f53aee98e1d035f98f7a01559fcf58b9a99"
+    },
+    {
+      "path": "docs/plans/08-smoke-validation.md",
+      "sha256": "23446138cb35349622bac7aabc8c7c519223117d139c5ce540f87b0216913706"
+    },
+    {
+      "path": "docs/plans/09-length-generalization.md",
+      "sha256": "b30334ca9392a4b6b7f763b7656fdaa42648f8e631d3f2b1682e9102e1c6b88e"
+    },
+    {
+      "path": "docs/plans/10-teacher-data.md",
+      "sha256": "838a062cb969e0d4e9e80cd3933c354aa3ab940823e21732d1f8e927fc8d1778"
+    },
+    {
+      "path": "docs/plans/11-deterministic-experiments.md",
+      "sha256": "93b903c14adec4c67981bd44e818df186e71be96a154aec2e805c3c01c97d5ca"
+    },
+    {
+      "path": "docs/plans/12-next-stage-action-guide.md",
+      "sha256": "f2622ff814a23d9712675516565eb80fb832c27182894faae287a16970e60236"
+    },
+    {
+      "path": "docs/plans/13-spatial-direction-repair.md",
+      "sha256": "f8ef45c1ea585cf4ebe123f8a59a6ea131c2a75f7cb414435620c7274692d2f7"
+    },
+    {
+      "path": "docs/plans/14-action-synonym-repair.md",
+      "sha256": "ef1d5d90a31314e8d376cb5fbc24a5e89a99ee4ea5cd2c58c8469f991c9ca87d"
+    },
+    {
+      "path": "docs/plans/15-objects-temporal-repair.md",
+      "sha256": "80dbb715dec80a945c126801b80700955f46482d43a384f3ae3ca07279e227aa"
+    },
+    {
+      "path": "docs/plans/16-ablation-generalization.md",
+      "sha256": "0ac58f9e41881c507cadaa6c013dc96038c470938a2d34711b6b08a39d9ccb20"
+    },
+    {
+      "path": "docs/plans/README.md",
+      "sha256": "17791d793fb39b38eb4b12db7ce386df34a8a4e07b2e535b6901025bd4fb53bf"
+    },
+    {
+      "path": "docs/runbook.md",
+      "sha256": "07755ac1b385a81780f87ffe2afa96795b1e7c333c1e583c92361f1e331f95a5"
+    },
+    {
+      "path": "docs/smoke-report.md",
+      "sha256": "94986a73a7ee12ea81054d276fd7e1fbb43bcbe9a7c8a88c5aa8698b4fd95b83"
+    },
+    {
+      "path": "docs/teacher-pilot-report.md",
+      "sha256": "2276c6664d7eb4375a433c51b4ecc8ff1a786dca7c4825ba1afe61ec43680041"
+    },
+    {
+      "path": "docs/upstream.md",
+      "sha256": "8a35ff3bd4f143d0546ff1712f4be1ad3850a795e515a11fed860c29059acdc3"
+    },
+    {
+      "path": "docs/verification.md",
+      "sha256": "a5c8e624267b009421e8a57dc2c532b0ed53e468da4f4149bdda8df87aee7ce9"
+    }
+  ],
+  "status": "historical_research_documentation_not_a_new_evaluation"
+}

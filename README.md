@@ -9,6 +9,10 @@
 实际发布范围、哈希校验和来源问题见[发布验收](docs/publication/README.md)。
 数据覆盖 16 维不表示本仓库为 16 维都实现了 Repair。
 
+[复现入口与验收范围](docs/reproduction/README.md)提供固定 HF revision 的恢复命令、
+八维主表复算及六维训练输入；[失败/废弃实验索引](docs/reproduction/REJECTED_EXPERIMENTS.md)
+保留未采用方案的原因。上传完整性通过不代表全八维 GPU 重推理或从头训练已验收。
+
 H100 可用 `scripts/h100_python.sh -m dynamic_degree.cli --help` 调用新 checkout，
 复用既有 CUDA 依赖，固定上游及已有权重。Python 包和 CLI 名称保持兼容。
 原有审计范围、算法状态和历史证据如下。

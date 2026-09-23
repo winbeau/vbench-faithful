@@ -1,0 +1,37 @@
+{
+  "execution_complete": true,
+  "matrix_rows": 29660,
+  "scored_rows": 88980,
+  "summary_rows": 81,
+  "scorer_commit": "4d2a78d8694744909f39b7af1b92c830da6eac9c",
+  "input_hashes_verified": 13,
+  "objects_conditions_identical_across_schemes": 12740,
+  "cases": 11,
+  "human_reviewed_gold": false,
+  "tests_passed": 151,
+  "pdf_pages": {
+    "paper": 2,
+    "tables": 14
+  },
+  "pdf_build_warnings": 0,
+  "linked_files_present": true,
+  "api_totals": {
+    "current_purposes_requests": 5829,
+    "successful_responses": 5820,
+    "prompt_tokens": 9157964,
+    "completion_tokens": 1752819,
+    "currency_cost": null,
+    "historical_failed_test2_requests": 1571,
+    "note": "Request reservations are not currency spending. Historical failed test2 is separate; older training annotation budgets are not included."
+  },
+  "artifact_sha256": {
+    "output/deterministic/matrix-v1/report.json": "a867d531dce7e7ad2f640eec730ea6b4a4d349b16cf5f07492e098317175be26",
+    "output/deterministic/matrix-v1/paired-rows.jsonl": "954ee2599c0cb47046259ffc389acd2a31fcc6c143f0db99bf2728b3feef904c",
+    "output/deterministic/matrix-v1/tables/paper.pdf": "3367ce7c63131ae3c839ad7d020c608568430b32eeb98aa245977515039631c4",
+    "output/deterministic/matrix-v1/tables/tables.pdf": "758b9964b577659c72e9c1501630bdcb820e3db944a1be08b75cbbb482401a3c",
+    "output/deterministic/matrix-v1/gallery-final/cases.json": "e6948049ecb75b63e101dfd5ee7a8eaca8dd9acb39a9fad3a0c8025e5e49de18",
+    "docs/deterministic/matrix-v1/provenance.json": "d81c4f1e510c193aec9e300fb9f4832f9aa067900565712ed0a52086467d99e6"
+  },
+  "csv_line_endings": "LF",
+  "csv_md_tex_content_unchanged_after_format_fix": true
+}

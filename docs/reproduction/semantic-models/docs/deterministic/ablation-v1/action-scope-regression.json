@@ -1,0 +1,28 @@
+{
+  "status": "post_audit_development_regression_not_blind_generalization",
+  "frozen_v2_full_result_matches": 1238,
+  "old_unique_predictions_unchanged": 234,
+  "matrix_scores_targets_coverage_unchanged": {
+    "Origin": 6000,
+    "Repair-rule": 6000,
+    "Repair-model": 6000
+  },
+  "lexicon_sha256": "e63ea694b8fe2edb0a07b73a6c20fd39bea372aa0e65d11b40d80f70162e8cbc",
+  "new_training_steps": 0,
+  "new_generations": 0,
+  "test_labels_changed": 0,
+  "input_sha256": {
+    "data/ablation-v1/eval-extended.jsonl": "cb09758edc198850129ac8ed3b9a3cc245e949a592a0de9a907f529bd7ef5011",
+    "data/repair/matrix-v1/action-v9.jsonl": "bc48451c39f9f5a2fea1e83a3a54e71e5defd08f75ae8cc826c01d10f2aa6798",
+    "data/deterministic/matrix-v1/matrix.jsonl": "366a14d3238be203fad30786ee024c4e26fbfe3a4565b0aef5baeff1f68eb037",
+    "data/backend-cache/matrix-v1/action-test.jsonl": "d0514c96405344704c76560f10f71301205f43b594c5d9793036c00f48acb184",
+    "output/ablation-v1/frozen-action-repair-v2.py": "b92d4a66f484cc83985e8eb8df0cc4bc18c34a2c837825fa28700904b3bff314"
+  },
+  "source_sha256": {
+    "src/vbench_prompts_compile/action_repair.py": "896cd39d5ecb195c6df13a1003b225c10dba66ffca1c6a03ebcf2c34bcdf14bb",
+    "src/vbench_prompts_compile/action_lexicon.py": "0f721886d08196c4969eca10d21663fdd20a880ac182ee41fc48b2ea161940fd",
+    "scripts/evaluate_action_scope.py": "ca99dec17c35dd224e1962a84f1d4d75b5a55fa727fcee2acec7a308ac18c88c",
+    "scripts/score_matrix.py": "57840be5df48268cd9ac94952a64c5d66d92a138ca831137d3c89d03f30b1491"
+  },
+  "note": "The interface bug was discovered on v1. Keep the original v1 table frozen. This replay verifies the fix and old-score preservation, not independent generalization."
+}

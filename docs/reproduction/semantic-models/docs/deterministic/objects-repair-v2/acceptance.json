@@ -1,0 +1,78 @@
+{
+  "status": "implemented_and_evaluated_with_residual_errors_and_recall_tradeoff",
+  "checks": {
+    "pytest_passed": 219,
+    "pytest_existing_warnings": 1,
+    "uv_lock_check": true,
+    "cli_help": [
+      "vbench-prompts",
+      "scripts/score_matrix.py",
+      "scripts/evaluate_objects_repair.py",
+      "scripts/analyze_object_controls.py",
+      "scripts/render_matrix_tables.py"
+    ],
+    "all_input_source_supporting_output_sha256_verified": true,
+    "origin_official_source_unchanged": true,
+    "regression": {
+      "total_rows": 88980,
+      "untouched_rows_exact": {
+        "spatial/Origin": 7800,
+        "spatial/Repair-rule": 7800,
+        "spatial/Repair-model": 7800,
+        "objects/Origin": 12740,
+        "scene/Origin": 3120,
+        "scene/Repair-rule": 3120,
+        "scene/Repair-model": 3120,
+        "action/Origin": 6000,
+        "action/Repair-rule": 6000,
+        "action/Repair-model": 6000
+      },
+      "legacy_full_rows_exact": 38220,
+      "legacy_replayed_rows": 25480,
+      "identity_or_zero_exact_rows": 7840
+    },
+    "origin_and_other_dimensions_rows_exact": 63500,
+    "transformed_positive_scores_subset_of_legacy": true,
+    "original_delta_ci_within_preexisting_0_03_margin": true,
+    "outside_patch_equal_area_and_zero_mask_checks": true,
+    "all_81_matrix_summary_tables_rendered": true
+  },
+  "observations": {
+    "invisible_model_consensus_videos": 275,
+    "remaining_positive_before": 29,
+    "remaining_positive_after": 15,
+    "no_positive_after": 260,
+    "all_decisive_negative_after": 246,
+    "original_visible_true_positive_before": 3120,
+    "original_visible_true_positive_after": 3023,
+    "original_visible_frame_denominator": 4887,
+    "transformed_visible_true_positive_before": 38,
+    "transformed_visible_true_positive_after": 19,
+    "transformed_visible_frame_denominator": 1024,
+    "same_legacy_positive_isolated_cohort": 115,
+    "isolated_raw_drop_before": 114,
+    "isolated_raw_drop_after": 106,
+    "isolated_decisive_drop_after": 87
+  },
+  "resources": {
+    "new_training_steps": 0,
+    "new_gpu_inference_calls": 0,
+    "new_paid_api_calls": 0,
+    "new_weight_downloads": 0,
+    "scoring_wall_seconds": 30.159121917000448
+  },
+  "limitations": [
+    "Visibility labels are model consensus, not human gold.",
+    "Post-hoc engineering repair; temporal abstention does not establish semantic absence.",
+    "15 invisible-labelled endpoints retain positive scores; original and transformed visible recall also decrease.",
+    "Confirmed negative endpoint count remains 246; no general detection-accuracy gain claimed."
+  ],
+  "commit_push_performed": false,
+  "artifact_sha256": {
+    "output/deterministic/objects-repair-v2/report.json": "94f8c28422103a623373f61c073f756dafb431a2f36e1d264559b6ccb995cbd2",
+    "output/deterministic/matrix-objects-v2/report.json": "5c21be43d499fa018e559d6520ac709b99e5a331a8b183d812ff46dcfe0f84f2",
+    "output/deterministic/matrix-objects-v2/paired-rows.jsonl": "da966075072e63935c481daa2865dd8830e72085aad5b0480800cce2e7e3bf16",
+    "output/deterministic/matrix-objects-v2/object-controls.json": "9ff410f5cf25ad97efe6c50d64e83564e0c7bf98ab0936329374d46a4090d5f6",
+    "output/deterministic/matrix-objects-v2/tables/manifest.json": "e1a96834ad481a8fb8738f1cb3d1bde9fd3c18a8d2024aff7654712bd802183c"
+  }
+}

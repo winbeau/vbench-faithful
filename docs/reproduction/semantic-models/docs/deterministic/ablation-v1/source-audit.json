@@ -1,0 +1,200 @@
+{
+  "tasks": {
+    "spatial": {
+      "train_dev_group_overlap": 0,
+      "splits": {
+        "train": {
+          "train_rows": 2679,
+          "unique_prompts": 2127,
+          "planned": {
+            "engineered/canonical": 24,
+            "engineered/paraphrase": 24,
+            "engineered/changed": 24,
+            "engineered/composition": 24,
+            "engineered/long_head": 24,
+            "engineered/long_middle": 24,
+            "engineered/long_tail": 24,
+            "engineered_boundary/unsupported_relation": 24
+          },
+          "normalized_exact_items": {
+            "engineered/canonical": 0,
+            "engineered/changed": 0
+          },
+          "near_or_exact_items": {
+            "engineered/canonical": 2,
+            "engineered/changed": 2
+          }
+        },
+        "dev": {
+          "train_rows": 312,
+          "unique_prompts": 275,
+          "planned": {
+            "engineered/canonical": 24,
+            "engineered/paraphrase": 24,
+            "engineered/changed": 24,
+            "engineered/composition": 24,
+            "engineered/long_head": 24,
+            "engineered/long_middle": 24,
+            "engineered/long_tail": 24,
+            "engineered_boundary/unsupported_relation": 24
+          },
+          "normalized_exact_items": {},
+          "near_or_exact_items": {}
+        }
+      }
+    },
+    "action": {
+      "train_dev_group_overlap": 0,
+      "splits": {
+        "train": {
+          "train_rows": 605,
+          "unique_prompts": 523,
+          "planned": {
+            "engineered/canonical": 24,
+            "engineered/paraphrase": 24,
+            "engineered/changed": 24,
+            "engineered/composition": 24,
+            "engineered/long_head": 24,
+            "engineered/long_middle": 24,
+            "engineered/long_tail": 24,
+            "engineered_boundary/nonperformed": 24,
+            "engineered_boundary/unsupported_action": 12
+          },
+          "normalized_exact_items": {
+            "engineered/canonical": 17,
+            "engineered/changed": 17
+          },
+          "near_or_exact_items": {
+            "engineered/canonical": 17,
+            "engineered/changed": 17
+          }
+        },
+        "dev": {
+          "train_rows": 67,
+          "unique_prompts": 56,
+          "planned": {
+            "engineered/canonical": 24,
+            "engineered/paraphrase": 24,
+            "engineered/changed": 24,
+            "engineered/composition": 24,
+            "engineered/long_head": 24,
+            "engineered/long_middle": 24,
+            "engineered/long_tail": 24,
+            "engineered_boundary/nonperformed": 24,
+            "engineered_boundary/unsupported_action": 12
+          },
+          "normalized_exact_items": {
+            "engineered/changed": 2,
+            "engineered/canonical": 2
+          },
+          "near_or_exact_items": {
+            "engineered/changed": 2,
+            "engineered/canonical": 2
+          }
+        }
+      }
+    },
+    "objects": {
+      "train_dev_group_overlap": 0,
+      "splits": {
+        "train": {
+          "train_rows": 7688,
+          "unique_prompts": 6203,
+          "planned": {
+            "engineered/canonical": 24,
+            "engineered/paraphrase": 24,
+            "engineered/changed": 24,
+            "engineered/composition": 24,
+            "engineered/long_head": 24,
+            "engineered/long_middle": 24,
+            "engineered/long_tail": 24
+          },
+          "normalized_exact_items": {},
+          "near_or_exact_items": {}
+        },
+        "dev": {
+          "train_rows": 811,
+          "unique_prompts": 720,
+          "planned": {
+            "engineered/canonical": 24,
+            "engineered/paraphrase": 24,
+            "engineered/changed": 24,
+            "engineered/composition": 24,
+            "engineered/long_head": 24,
+            "engineered/long_middle": 24,
+            "engineered/long_tail": 24
+          },
+          "normalized_exact_items": {},
+          "near_or_exact_items": {}
+        }
+      }
+    },
+    "scene": {
+      "train_dev_group_overlap": 0,
+      "splits": {
+        "train": {
+          "train_rows": 455,
+          "unique_prompts": 112,
+          "planned": {
+            "engineered/canonical": 24,
+            "engineered/paraphrase": 24,
+            "engineered/changed": 24,
+            "engineered/composition": 24,
+            "engineered/long_head": 24,
+            "engineered/long_middle": 24,
+            "engineered/long_tail": 24,
+            "snli_test_locations/natural": 74
+          },
+          "normalized_exact_items": {
+            "engineered/canonical": 2,
+            "engineered/changed": 2
+          },
+          "near_or_exact_items": {
+            "engineered/canonical": 2,
+            "engineered/changed": 2
+          }
+        },
+        "dev": {
+          "train_rows": 108,
+          "unique_prompts": 7,
+          "planned": {
+            "engineered/canonical": 24,
+            "engineered/paraphrase": 24,
+            "engineered/changed": 24,
+            "engineered/composition": 24,
+            "engineered/long_head": 24,
+            "engineered/long_middle": 24,
+            "engineered/long_tail": 24,
+            "snli_test_locations/natural": 74
+          },
+          "normalized_exact_items": {
+            "engineered/canonical": 1,
+            "engineered/changed": 1
+          },
+          "near_or_exact_items": {
+            "engineered/canonical": 1,
+            "engineered/changed": 1
+          }
+        }
+      }
+    }
+  },
+  "input_sha256": {
+    "data/ablation-v1/eval-extended.jsonl": "cb09758edc198850129ac8ed3b9a3cc245e949a592a0de9a907f529bd7ef5011",
+    "data/formal/v8/spatial/train.jsonl": "867803d984803cc92231dedf9d316a1eb6d4da5aab066a8197e50b618d94e4b6",
+    "data/formal/v8/spatial/dev.jsonl": "e8b88b4b424fde7b3d12efa6966b19f1a896d69bfe41dbb4f7aa99c3dd940e01",
+    "data/formal/v9/action/train.jsonl": "5d2b6bc69447f8df63c1c416dd7c2194d2aeb898514ff4eefbf66cb3909ba9ce",
+    "data/formal/v9/action/dev.jsonl": "a4746be124d26c384b6de064b79615d949507eb86af626c0594efdea99ec523a",
+    "data/formal/v6/objects/train.jsonl": "cd04c5d24c004ee921301cf1d87cab1664318f0291463e5bfd6e15d7ec74de60",
+    "data/formal/v6/objects/dev.jsonl": "076469a83f63f0ff4c951b8055d2923489b1e631f40b0ffd1c217ad0f62a8946",
+    "data/formal/v8/scene/train.jsonl": "f5651979e44206de1f3c9edcf0c41bf2c86da7012e27068e619bbd4100fc9951",
+    "data/formal/v8/scene/dev.jsonl": "af6d5888c23def4dcf074815ff68b6c297ee9e3cfaa1c5eab74e3cdaf846bbdf"
+  },
+  "method": "Existing fixed audit: normalized exact, character ratio >=0.90, or >=12-word containment.",
+  "limits": [
+    "No evaluation items removed; no outcome information used.",
+    "Lexical resemblance is neither proof nor disproof of common provenance.",
+    "Engineered text tests have no independent new visual source identity.",
+    "Existing dev excluded from blind-text audit because it is intentionally a seen diagnostic."
+  ]
+}

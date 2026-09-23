@@ -1,0 +1,3738 @@
+{
+  "action_interface": "repair-v2",
+  "model": "unchanged Action v9 final plus declared text contract",
+  "execution_complete": true,
+  "legacy_failure_attribution": {
+    "legacy_other": 35,
+    "raw_other": 4,
+    "non_other_raw_rejected_by_legacy_canonicalizer": 31
+  },
+  "regression": {
+    "total_rows": 88980,
+    "untouched_rows_exact": {
+      "spatial/Origin": 7800,
+      "spatial/Repair-rule": 7800,
+      "spatial/Repair-model": 7800,
+      "objects/Origin": 12740,
+      "objects/Repair-rule": 12740,
+      "objects/Repair-model": 12740,
+      "scene/Origin": 3120,
+      "scene/Repair-rule": 3120,
+      "scene/Repair-model": 3120,
+      "action/Origin": 6000,
+      "action/Repair-rule": 6000
+    },
+    "updated_action_model_rows": 6000,
+    "live_replay_scoring_rows_exact": 6000
+  },
+  "declared_lexicon_unchanged_from_commit": "ea9d500f21d800507ef220b6e95fee672d0e70f1",
+  "lexicon_sha256": "e63ea694b8fe2edb0a07b73a6c20fd39bea372aa0e65d11b40d80f70162e8cbc",
+  "k400_roundtrip": 400,
+  "unique_requests": 234,
+  "resolution_methods": {
+    "complete_prompt_contract": 173,
+    "model_output": 1,
+    "partial_prompt_contract": 60
+  },
+  "parsing": [
+    {
+      "variant": "legacy_model",
+      "transform": "class_swap",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "legacy_model",
+      "transform": "identity",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.9666666666666667,
+        "ci": [
+          0.9166666666666666,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "legacy_model",
+      "transform": "mixed_oov",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.75,
+        "ci": [
+          0.6333333333333333,
+          0.85
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "legacy_model",
+      "transform": "oov",
+      "correct": {
+        "n": 1,
+        "families": 1,
+        "estimate": 1.0,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "legacy_model",
+      "transform": "synonym",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.4166666666666667,
+        "ci": [
+          0.3,
+          0.55
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "output_normalization_only",
+      "transform": "class_swap",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "output_normalization_only",
+      "transform": "identity",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.9666666666666667,
+        "ci": [
+          0.9166666666666666,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "output_normalization_only",
+      "transform": "mixed_oov",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.75,
+        "ci": [
+          0.6333333333333333,
+          0.85
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "output_normalization_only",
+      "transform": "oov",
+      "correct": {
+        "n": 1,
+        "families": 1,
+        "estimate": 1.0,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "output_normalization_only",
+      "transform": "synonym",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.85,
+        "ci": [
+          0.75,
+          0.9333333333333333
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "repair_v2",
+      "transform": "class_swap",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "repair_v2",
+      "transform": "identity",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "repair_v2",
+      "transform": "mixed_oov",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "repair_v2",
+      "transform": "oov",
+      "correct": {
+        "n": 1,
+        "families": 1,
+        "estimate": 1.0,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "repair_v2",
+      "transform": "synonym",
+      "correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    }
+  ],
+  "synonym_consistency": [
+    {
+      "variant": "legacy_model",
+      "correct_and_consistent": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.4166666666666667,
+        "ci": [
+          0.3,
+          0.55
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "target_unchanged": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.45,
+        "ci": [
+          0.31666666666666665,
+          0.5666666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "output_normalization_only",
+      "correct_and_consistent": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.85,
+        "ci": [
+          0.75,
+          0.9333333333333333
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "target_unchanged": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.8833333333333333,
+        "ci": [
+          0.8,
+          0.95
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "repair_v2",
+      "correct_and_consistent": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "target_unchanged": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    }
+  ],
+  "score_ablations": [
+    {
+      "variant": "legacy_model",
+      "original": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.865,
+        "ci": [
+          0.805,
+          0.915
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "synonym": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.37833333333333335,
+        "ci": [
+          0.26166666666666666,
+          0.49666666666666665
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.4866666666666667,
+        "ci": [
+          -0.5975,
+          -0.37583333333333335
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "exact_invariance": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.4166666666666667,
+        "ci": [
+          0.3,
+          0.55
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "output_normalization_only",
+      "original": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.865,
+        "ci": [
+          0.805,
+          0.915
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "synonym": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.77,
+        "ci": [
+          0.6741666666666667,
+          0.855
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.095,
+        "ci": [
+          -0.16666666666666666,
+          -0.035833333333333335
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "exact_invariance": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.85,
+        "ci": [
+          0.75,
+          0.9333333333333333
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "variant": "repair_v2",
+      "original": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "synonym": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "exact_invariance": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    }
+  ],
+  "summary": [
+    {
+      "task": "action",
+      "scheme": "Origin",
+      "transform": "class_swap",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0016666666666666668,
+        "ci": [
+          0.0,
+          0.005
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8875,
+        "ci": [
+          -0.9275,
+          -0.8416666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0016666666666666668,
+        "ci": [
+          0.0,
+          0.005
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0016666666666666668,
+        "ci": [
+          0.0,
+          0.005
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8875,
+        "ci": [
+          -0.9275,
+          -0.8416666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 0.9981255857544518,
+        "ci": [
+          0.9940944881889764,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 60,
+      "action_protocol_correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Origin",
+      "transform": "identity",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 0,
+      "action_protocol_correct": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Origin",
+      "transform": "mixed_oov",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 60,
+      "action_protocol_correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Origin",
+      "transform": "oov",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 1,
+      "action_protocol_correct": {
+        "n": 1,
+        "families": 1,
+        "estimate": 0.0,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Origin",
+      "transform": "synonym",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.11083333333333334,
+        "ci": [
+          0.07166666666666667,
+          0.15666666666666668
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 60,
+      "action_protocol_correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-model",
+      "transform": "class_swap",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0016666666666666668,
+        "ci": [
+          0.0,
+          0.005
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8875,
+        "ci": [
+          -0.9275,
+          -0.8416666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0016666666666666668,
+        "ci": [
+          0.0,
+          0.005
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0016666666666666668,
+        "ci": [
+          0.0,
+          0.005
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8875,
+        "ci": [
+          -0.9275,
+          -0.8416666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 0.9981255857544518,
+        "ci": [
+          0.9940944881889764,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 60,
+      "action_protocol_correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-model",
+      "transform": "identity",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 0,
+      "action_protocol_correct": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-model",
+      "transform": "mixed_oov",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.44458333333333333,
+        "ci": [
+          0.42125,
+          0.46375
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.44458333333333333,
+        "ci": [
+          -0.46416666666666667,
+          -0.4216666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.5,
+        "ci": [
+          0.5,
+          0.5
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.44458333333333333,
+        "ci": [
+          0.42125,
+          0.46375
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.44458333333333333,
+        "ci": [
+          0.42125,
+          0.46375
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.44458333333333333,
+        "ci": [
+          -0.46416666666666667,
+          -0.4216666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 60,
+      "action_protocol_correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-model",
+      "transform": "oov",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 1,
+      "action_protocol_correct": {
+        "n": 1,
+        "families": 1,
+        "estimate": 1.0,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-model",
+      "transform": "synonym",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 60,
+      "action_protocol_correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-rule",
+      "transform": "class_swap",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0016666666666666668,
+        "ci": [
+          0.0,
+          0.005
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8875,
+        "ci": [
+          -0.9275,
+          -0.8416666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0016666666666666668,
+        "ci": [
+          0.0,
+          0.005
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0016666666666666668,
+        "ci": [
+          0.0,
+          0.005
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8875,
+        "ci": [
+          -0.9275,
+          -0.8416666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 0.9981255857544518,
+        "ci": [
+          0.9940944881889764,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 60,
+      "action_protocol_correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-rule",
+      "transform": "identity",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 0,
+      "action_protocol_correct": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-rule",
+      "transform": "mixed_oov",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.44458333333333333,
+        "ci": [
+          0.42125,
+          0.46375
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.44458333333333333,
+        "ci": [
+          -0.46416666666666667,
+          -0.4216666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.5,
+        "ci": [
+          0.5,
+          0.5
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.44458333333333333,
+        "ci": [
+          0.42125,
+          0.46375
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.44458333333333333,
+        "ci": [
+          0.42125,
+          0.46375
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.44458333333333333,
+        "ci": [
+          -0.46416666666666667,
+          -0.4216666666666667
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 60,
+      "action_protocol_correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-rule",
+      "transform": "oov",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": -0.8891666666666667,
+        "ci": [
+          -0.9283333333333333,
+          -0.8433333333333334
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 1,
+      "action_protocol_correct": {
+        "n": 1,
+        "families": 1,
+        "estimate": 1.0,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      }
+    },
+    {
+      "task": "action",
+      "scheme": "Repair-rule",
+      "transform": "synonym",
+      "planned": 1200,
+      "eligible": 1200,
+      "ineligible": 0,
+      "families": 60,
+      "status": {
+        "ok": 1200
+      },
+      "verified_expectation": 0,
+      "human_verified_expectation": 0,
+      "vision_model_verified_invisible_endpoints": 0,
+      "vision_model_verified_isolated_removals": 0,
+      "original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_coverage": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "original_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "transformed_abstention": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pairs": 1200,
+      "complete_pair_original_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_transformed_score": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.8891666666666667,
+        "ci": [
+          0.8425,
+          0.9275
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "complete_pair_paired_delta": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "invariance_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "raw_drop_given_positive_base": {
+        "n": 1067,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "validated_sensitivity_success": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_all_rejected": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "verified_endpoint_negative_frame_fraction": {
+        "n": 0,
+        "families": 0,
+        "estimate": null,
+        "ci": null,
+        "bootstrap_valid": 0,
+        "bootstrap_rounds": 2000
+      },
+      "full_plan_verified_endpoint_success": {
+        "n": 1200,
+        "families": 60,
+        "estimate": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      },
+      "action_protocol_unique_prompts": 60,
+      "action_protocol_correct": {
+        "n": 60,
+        "families": 60,
+        "estimate": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid": 2000,
+        "bootstrap_rounds": 2000
+      }
+    }
+  ],
+  "input_sha256": {
+    "data/deterministic/matrix-v1/matrix.jsonl": "366a14d3238be203fad30786ee024c4e26fbfe3a4565b0aef5baeff1f68eb037",
+    "output/deterministic/matrix-spatial-v2/paired-rows.jsonl": "0d86f1abc2d5df4eaf3e3877b21dda4fa7c7e2c84098e545670eca37c06081df",
+    "output/deterministic/matrix-action-v2/paired-rows.jsonl": "6ca18cd2b6569fdf0e3aeaf5d519ec8d3f18b35e1d48a3dd6943c5616fa0ac70",
+    "output/deterministic/matrix-action-v2/report.json": "3610a6f18f373217e5e0f5edbd68d98067f31578f5529b369fa571c19ecc7a25",
+    "data/repair/matrix-v1/action-v9.jsonl": "bc48451c39f9f5a2fea1e83a3a54e71e5defd08f75ae8cc826c01d10f2aa6798",
+    "output/deterministic/action-repair-v2/predictions.jsonl": "f57d6d05e9455fcf3d19e99149408a2aacfb736b0ddf8f468bb457decf7d4236",
+    "data/backend-cache/matrix-v1/action-test.jsonl": "d0514c96405344704c76560f10f71301205f43b594c5d9793036c00f48acb184",
+    "/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-prompts-compile/data/raw/k400/labels.json": "97f3e3ee0e60d1b35ba47fe0fc2fce86f6124d25950af4c8df5cec88eee8f1a9"
+  },
+  "source_sha256": {
+    "scripts/evaluate_action_repair.py": "833f4b877b298f390668468b9f77a1ccb963d1dcde9eeb5cef31d8976c313dc7",
+    "scripts/repair_action_predictions.py": "9884d6daaa0da3adb762f81d54d023a105cf40a3bc2192b54ad2e2defa8c4c14",
+    "scripts/score_matrix.py": "a7dc32e9aa555df52b946c0f05dd12a80f4f5f7c9977c660b5cc0ce15606f5e9",
+    "scripts/render_matrix_tables.py": "22cb6daedf089f3fbed287a11f3836864be6836ed8ddbe345aa9f9eb32f7fcb5",
+    "src/vbench_prompts_compile/action_repair.py": "b92d4a66f484cc83985e8eb8df0cc4bc18c34a2c837825fa28700904b3bff314",
+    "src/vbench_prompts_compile/action_lexicon.py": "0f721886d08196c4969eca10d21663fdd20a880ac182ee41fc48b2ea161940fd",
+    "src/vbench_prompts_compile/inference.py": "26fc24ef32a5776ea157286872ea979631dc4ba4061a5f2a39824771dd7a4ac8",
+    "src/vbench_prompts_compile/official_replay.py": "3ffbf0ad2dab5554b190291bfa7169eeaeeb295b3fa932d0f3fc133f36928d22",
+    "src/vbench_prompts_compile/experiments.py": "357a0dc77b93251879e87f95b96b3246f5ca772fe5e3851f73778c4bd390c8aa",
+    "src/vbench_prompts_compile/sources.py": "7d5b155e6f179f4fddcd56a504766218a03a54be8fe35af9364038616f73b7ae",
+    "src/vbench_prompts_compile/records.py": "229b7621bda598f172ad25d55c9f15f995abdc3fc425476d384416de74b7b639"
+  },
+  "new_training_steps": 0,
+  "new_model_generations": 0,
+  "new_api_calls": 0,
+  "notes": [
+    "Closed 60-pair declared synonym contract, not an unseen-synonym generalization test.",
+    "Repair-model means v9 plus explicit deterministic interface; native/legacy model remains separately reported.",
+    "No visual predictions or transformed/original-pair identity enter the normalizer.",
+    "Other scores zero. Repeated OOV text is one unique protocol input, not 1200 independent samples.",
+    "2000 family bootstrap draws, seed 20260919. Model weights, UMT evidence and .85 threshold are unchanged."
+  ],
+  "output_sha256": {
+    "parsing-audit.jsonl": "ffb2d7ec26129fb9fd50753cdc17624a4f96480908e98a539aa5674aa334d2fc"
+  }
+}

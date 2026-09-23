@@ -1,0 +1,34 @@
+| Scheme | Variant | Condition | N | Original | Mirrored | Delta (CI) |
+| --- | --- | --- | --- | --- | --- | --- |
+| Repair-model | articles_only | all | 980 | 0.2981 | 0.2981 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | articles_only | mixed_or_no_direction | 776 | 0.2345 | 0.2345 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | articles_only | one_sided_contradicted | 98 | 0.5187 | 0.5187 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | articles_only | one_sided_supported | 106 | 0.5597 | 0.5597 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | legacy | all | 980 | 0.2802 | 0.2802 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | legacy | mixed_or_no_direction | 776 | 0.2173 | 0.2173 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | legacy | one_sided_contradicted | 98 | 0.5079 | 0.5079 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | legacy | one_sided_supported | 106 | 0.5304 | 0.5304 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | ordered_unsigned | all | 980 | 0.1226 | 0.1226 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | ordered_unsigned | mixed_or_no_direction | 776 | 0.0471 | 0.0471 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | ordered_unsigned | one_sided_contradicted | 98 | 0.3724 | 0.3724 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | ordered_unsigned | one_sided_supported | 106 | 0.4442 | 0.4442 | 0.0000 [0.0000, 0.0000] |
+| Repair-model | signed_repair_v2 | all | 980 | 0.0758 | 0.0606 | -0.0153 [-0.0291, -0.0008] |
+| Repair-model | signed_repair_v2 | mixed_or_no_direction | 776 | 0.0351 | 0.0295 | -0.0057 [-0.0148, 0.0026] |
+| Repair-model | signed_repair_v2 | one_sided_contradicted | 98 | 0.0000 | 0.3724 | 0.3724 [0.2989, 0.4471] |
+| Repair-model | signed_repair_v2 | one_sided_supported | 106 | 0.4442 | 0.0000 | -0.4442 [-0.5253, -0.3492] |
+| Repair-rule | articles_only | all | 980 | 0.2981 | 0.2981 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | articles_only | mixed_or_no_direction | 776 | 0.2345 | 0.2345 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | articles_only | one_sided_contradicted | 98 | 0.5187 | 0.5187 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | articles_only | one_sided_supported | 106 | 0.5597 | 0.5597 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | legacy | all | 980 | 0.2981 | 0.2981 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | legacy | mixed_or_no_direction | 776 | 0.2345 | 0.2345 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | legacy | one_sided_contradicted | 98 | 0.5187 | 0.5187 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | legacy | one_sided_supported | 106 | 0.5597 | 0.5597 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | ordered_unsigned | all | 980 | 0.1226 | 0.1226 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | ordered_unsigned | mixed_or_no_direction | 776 | 0.0471 | 0.0471 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | ordered_unsigned | one_sided_contradicted | 98 | 0.3724 | 0.3724 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | ordered_unsigned | one_sided_supported | 106 | 0.4442 | 0.4442 | 0.0000 [0.0000, 0.0000] |
+| Repair-rule | signed_repair_v2 | all | 980 | 0.0758 | 0.0606 | -0.0153 [-0.0291, -0.0008] |
+| Repair-rule | signed_repair_v2 | mixed_or_no_direction | 776 | 0.0351 | 0.0295 | -0.0057 [-0.0148, 0.0026] |
+| Repair-rule | signed_repair_v2 | one_sided_contradicted | 98 | 0.0000 | 0.3724 | 0.3724 [0.2989, 0.4471] |
+| Repair-rule | signed_repair_v2 | one_sided_supported | 106 | 0.4442 | 0.0000 | -0.4442 [-0.5253, -0.3492] |

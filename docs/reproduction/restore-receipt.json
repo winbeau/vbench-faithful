@@ -1,0 +1,11 @@
+{
+  "status": "restored_and_hash_verified",
+  "endpoint": "https://huggingface.co",
+  "dataset_revision": "673fadf22d3c28296bbdb9f4caf0ac0d6496de38",
+  "model_revision": "249469f26000175cbf0f0ee7d06821bfbb7c25e0",
+  "files_verified": 183,
+  "replay_members_verified": 45,
+  "adapters_downloaded": false,
+  "training_started": false,
+  "online_teacher_called": false
+}

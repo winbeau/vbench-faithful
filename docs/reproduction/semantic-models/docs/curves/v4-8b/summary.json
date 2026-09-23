@@ -1,0 +1,74 @@
+[
+  {
+    "run": "spatial",
+    "steps": 60,
+    "final": {
+      "train_loss": 0.0038,
+      "eval_loss": 0.009318899363279343,
+      "token_accuracy": 0.99375,
+      "eval_token_accuracy": 0.9972506562868754,
+      "grad_norm": 0.001688930788077414,
+      "learning_rate": 7.088179461267608e-10,
+      "dev_exact_match": 1.0,
+      "dev_parseable_rate": 1.0
+    },
+    "csv": "runs/curves/v4-8b/spatial-history.csv",
+    "loss_svg": "runs/curves/v4-8b/spatial-loss.svg",
+    "accuracy_svg": "runs/curves/v4-8b/spatial-accuracy.svg",
+    "html": "runs/curves/v4-8b/spatial-curves.html"
+  },
+  {
+    "run": "action",
+    "steps": 30,
+    "final": {
+      "train_loss": 0.0468,
+      "eval_loss": 0.07024837285280228,
+      "token_accuracy": 0.9800000011920929,
+      "eval_token_accuracy": 0.9788096438754689,
+      "grad_norm": 0.07172956317663193,
+      "learning_rate": 2.9338608443452154e-09,
+      "dev_exact_match": 0.875,
+      "dev_parseable_rate": 1.0
+    },
+    "csv": "runs/curves/v4-8b/action-history.csv",
+    "loss_svg": "runs/curves/v4-8b/action-loss.svg",
+    "accuracy_svg": "runs/curves/v4-8b/action-accuracy.svg",
+    "html": "runs/curves/v4-8b/action-curves.html"
+  },
+  {
+    "run": "objects",
+    "steps": 90,
+    "final": {
+      "train_loss": 0.0106,
+      "eval_loss": 0.04197068512439728,
+      "token_accuracy": 0.997916667163372,
+      "eval_token_accuracy": 0.9876313034225913,
+      "grad_norm": 0.008769904263317585,
+      "learning_rate": 3.115008885612447e-10,
+      "dev_exact_match": 0.9166666666666666,
+      "dev_parseable_rate": 1.0
+    },
+    "csv": "runs/curves/v4-8b/objects-history.csv",
+    "loss_svg": "runs/curves/v4-8b/objects-loss.svg",
+    "accuracy_svg": "runs/curves/v4-8b/objects-accuracy.svg",
+    "html": "runs/curves/v4-8b/objects-curves.html"
+  },
+  {
+    "run": "scene",
+    "steps": 24,
+    "final": {
+      "train_loss": 0.0006,
+      "eval_loss": 0.11753927171230316,
+      "token_accuracy": 1.0,
+      "eval_token_accuracy": 0.9117647111415863,
+      "grad_norm": 0.0033952943049371243,
+      "learning_rate": 6.834750376549792e-09,
+      "dev_exact_match": 0.8125,
+      "dev_parseable_rate": 1.0
+    },
+    "csv": "runs/curves/v4-8b/scene-history.csv",
+    "loss_svg": "runs/curves/v4-8b/scene-loss.svg",
+    "accuracy_svg": "runs/curves/v4-8b/scene-accuracy.svg",
+    "html": "runs/curves/v4-8b/scene-curves.html"
+  }
+]

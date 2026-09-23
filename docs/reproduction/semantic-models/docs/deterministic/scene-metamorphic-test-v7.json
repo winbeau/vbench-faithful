@@ -1,0 +1,173 @@
+{
+  "summary": {
+    "conditions": {
+      "contradicted": {
+        "n": 90,
+        "families": 5,
+        "expected_label_counts": {
+          "contradicted": 88,
+          "insufficient": 1,
+          "supported": 1
+        },
+        "official": {
+          "applicable": true,
+          "n": 90,
+          "accuracy": 0.9444444444444444,
+          "ci": [
+            0.8333333333333334,
+            1.0
+          ]
+        },
+        "repair": {
+          "n": 90,
+          "accuracy": 0.8444444444444444,
+          "ci": [
+            0.8,
+            0.8888888888888888
+          ],
+          "label_counts": {
+            "insufficient": 10,
+            "contradicted": 75,
+            "supported": 5
+          }
+        },
+        "constant_baselines": {
+          "always_supported": 0.011111111111111112,
+          "always_contradicted": 0.9777777777777777,
+          "always_insufficient": 0.011111111111111112
+        }
+      },
+      "insufficient": {
+        "n": 60,
+        "families": 60,
+        "expected_label_counts": {
+          "contradicted": 20,
+          "insufficient": 40
+        },
+        "official": {
+          "applicable": false,
+          "n": 0,
+          "accuracy": null,
+          "ci": null
+        },
+        "repair": {
+          "n": 60,
+          "accuracy": 0.8833333333333333,
+          "ci": [
+            0.8,
+            0.95
+          ],
+          "label_counts": {
+            "insufficient": 43,
+            "contradicted": 17
+          }
+        },
+        "constant_baselines": {
+          "always_supported": 0.0,
+          "always_contradicted": 0.3333333333333333,
+          "always_insufficient": 0.6666666666666666
+        }
+      },
+      "supported": {
+        "n": 90,
+        "families": 5,
+        "expected_label_counts": {
+          "supported": 70,
+          "insufficient": 14,
+          "contradicted": 6
+        },
+        "official": {
+          "applicable": true,
+          "n": 90,
+          "accuracy": 0.4,
+          "ci": [
+            0.17,
+            0.6285714285714286
+          ]
+        },
+        "repair": {
+          "n": 90,
+          "accuracy": 0.8,
+          "ci": [
+            0.74,
+            0.875
+          ],
+          "label_counts": {
+            "supported": 68,
+            "contradicted": 18,
+            "insufficient": 4
+          }
+        },
+        "constant_baselines": {
+          "always_supported": 0.7777777777777778,
+          "always_contradicted": 0.06666666666666667,
+          "always_insufficient": 0.15555555555555556
+        }
+      },
+      "synonym": {
+        "n": 20,
+        "families": 1,
+        "expected_label_counts": {
+          "insufficient": 6,
+          "supported": 14
+        },
+        "official": {
+          "applicable": false,
+          "n": 0,
+          "accuracy": null,
+          "ci": null
+        },
+        "repair": {
+          "n": 20,
+          "accuracy": 0.7,
+          "ci": [
+            0.7,
+            0.7
+          ],
+          "label_counts": {
+            "supported": 18,
+            "contradicted": 2
+          }
+        },
+        "constant_baselines": {
+          "always_supported": 0.7,
+          "always_contradicted": 0.0,
+          "always_insufficient": 0.3
+        }
+      }
+    },
+    "unmatched_synonym_pairs": 80,
+    "official": {
+      "name": "VBench scene rule re-implementation",
+      "defined_conditions": [
+        "supported",
+        "contradicted"
+      ],
+      "balanced_over_defined": 0.6722222222222223,
+      "ci": [
+        0.58,
+        0.7785714285714286
+      ],
+      "note": "no insufficient concept and prompt-key matching is not verified against the official entry point"
+    },
+    "repair": {
+      "balanced_all_conditions": 0.8069444444444445,
+      "per_condition": {
+        "contradicted": 0.8444444444444444,
+        "insufficient": 0.8833333333333333,
+        "supported": 0.8,
+        "synonym": 0.7
+      },
+      "ci": [
+        0.7875,
+        0.8705882352941177
+      ]
+    },
+    "caveats": [
+      "expected labels are LLM-annotated (two passes + arbitration), not human gold",
+      "the synonym condition expectation is inherited from the annotated original pair",
+      "cross-frame and cross-pair records share prompt families; family-level CI is reported for that reason"
+    ]
+  },
+  "rows": []
+}

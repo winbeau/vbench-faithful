@@ -1,0 +1,45 @@
+{
+  "summary": {
+    "conditions": {
+      "insufficient": {
+        "n": 21,
+        "expected": "insufficient",
+        "official_accuracy": 0.0,
+        "repair_accuracy": 0.8095238095238095,
+        "repair_label_counts": {
+          "insufficient": 17,
+          "contradicted": 4
+        },
+        "official_label_counts": {
+          "contradicted": 21
+        }
+      },
+      "synonym": {
+        "n": 100,
+        "expected": "supported",
+        "official_accuracy": 0.0,
+        "repair_accuracy": 0.92,
+        "repair_label_counts": {
+          "supported": 92,
+          "contradicted": 7,
+          "insufficient": 1
+        },
+        "official_label_counts": {
+          "contradicted": 100
+        }
+      }
+    },
+    "official_balanced_accuracy": 0.0,
+    "repair_balanced_accuracy": 0.8647619047619048,
+    "official_label_ci": [
+      0.0,
+      0.0
+    ],
+    "repair_label_ci": [
+      0.8429752066115702,
+      0.9504132231404959
+    ],
+    "note": "balanced metamorphic accuracy averages the per-condition accuracies; a constant answer cannot win both halves"
+  },
+  "rows": []
+}

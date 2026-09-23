@@ -1,0 +1,44 @@
+{
+  "test2": {
+    "model_minus_Origin": {
+      "n": 38,
+      "families": 1,
+      "estimate": 0.2631578947368421,
+      "ci": null,
+      "bootstrap_valid": 0,
+      "bootstrap_rounds": 2000
+    },
+    "model_minus_Repair-rule": {
+      "n": 38,
+      "families": 1,
+      "estimate": 0.0,
+      "ci": null,
+      "bootstrap_valid": 0,
+      "bootstrap_rounds": 2000
+    }
+  },
+  "synonym-census": {
+    "model_minus_Origin": {
+      "n": 3200,
+      "families": 10,
+      "estimate": 0.6540625,
+      "ci": [
+        0.5728125,
+        0.73375
+      ],
+      "bootstrap_valid": 2000,
+      "bootstrap_rounds": 2000
+    },
+    "model_minus_Repair-rule": {
+      "n": 3200,
+      "families": 10,
+      "estimate": 0.296875,
+      "ci": [
+        0.1615625,
+        0.425
+      ],
+      "bootstrap_valid": 2000,
+      "bootstrap_rounds": 2000
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "tests": {
+    "passed": 195,
+    "warnings": [
+      "existing Trainer mtime fallback warning"
+    ]
+  },
+  "input_source_output_sha_verified": true,
+  "official_source_unchanged": true,
+  "raw_generation_unchanged": true,
+  "declared_lexicon_unchanged_from_commit": "ea9d500f21d800507ef220b6e95fee672d0e70f1",
+  "lexicon_sha256": "e63ea694b8fe2edb0a07b73a6c20fd39bea372aa0e65d11b40d80f70162e8cbc",
+  "k400_roundtrip": 400,
+  "regression": {
+    "total_rows": 88980,
+    "untouched_rows_exact": {
+      "spatial/Origin": 7800,
+      "spatial/Repair-rule": 7800,
+      "spatial/Repair-model": 7800,
+      "objects/Origin": 12740,
+      "objects/Repair-rule": 12740,
+      "objects/Repair-model": 12740,
+      "scene/Origin": 3120,
+      "scene/Repair-rule": 3120,
+      "scene/Repair-model": 3120,
+      "action/Origin": 6000,
+      "action/Repair-rule": 6000
+    },
+    "updated_action_model_rows": 6000,
+    "live_replay_scoring_rows_exact": 6000
+  },
+  "report_sha256": "22abf4b0d3419a6b4ad69dd31e32bb0799ebc14e6622abdaf49896deced4eb1a",
+  "repaired_predictions_sha256": "f57d6d05e9455fcf3d19e99149408a2aacfb736b0ddf8f468bb457decf7d4236",
+  "full_matrix_report_sha256": "3610a6f18f373217e5e0f5edbd68d98067f31578f5529b369fa571c19ecc7a25",
+  "full_matrix_paired_sha256": "6ca18cd2b6569fdf0e3aeaf5d519ec8d3f18b35e1d48a3dd6943c5616fa0ac70",
+  "related_cli_help_passed": true,
+  "uv_lock_check_passed": true,
+  "new_training_steps": 0,
+  "new_gpu_generations": 0,
+  "new_api_calls": 0
+}

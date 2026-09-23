@@ -1,0 +1,2 @@
+# Preserve the archived CSV byte identities, including standard CRLF record endings.
+docs/reproduction/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -1,0 +1,5 @@
+| Variant | Invisible videos | Still positive | No positive | All decisive negative | Positive video delta (CI) | Positive frames (CI) | Unconfirmed frames (CI) | Same isolated cohort drop (CI) | Same isolated cohort decisive drop (CI) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| legacy | 275 | 29 | 246 | 246 | 0.0000 [0.0000, 0.0000] | 0.0359 [0.0142, 0.0641] | 0.0000 [0.0000, 0.0000] | 0.9913 [0.9722, 1.0000] | 0.9913 [0.9722, 1.0000] |
+| adjacent_labels | 275 | 15 | 260 | 246 | -0.0509 [-0.0839, -0.0224] | 0.0282 [0.0094, 0.0518] | 0.0077 [0.0032, 0.0138] | 0.9391 [0.8936, 0.9756] | 0.8174 [0.7287, 0.8990] |
+| adjacent_boxes | 275 | 15 | 260 | 246 | -0.0509 [-0.0839, -0.0224] | 0.0268 [0.0086, 0.0498] | 0.0091 [0.0043, 0.0155] | 0.9217 [0.8769, 0.9608] | 0.7565 [0.6560, 0.8519] |

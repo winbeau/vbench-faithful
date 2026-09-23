@@ -1,0 +1,32 @@
+| Axis | Scheme | Condition | N | Families | Before | After | Delta (CI) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| hflip | Origin | evidence_mirror | 600 | 30 | 0.2815 | 0.2815 | 0.0000 [0.0000, 0.0000] |
+| hflip | Origin | evidence_mirror_joint | 600 | 30 | 0.2815 | 0.2815 | 0.0000 [0.0000, 0.0000] |
+| hflip | Origin | prompt_swap | 600 | 30 | 0.2815 | 0.2815 | 0.0000 [0.0000, 0.0000] |
+| hflip | Origin | video_mirror | 600 | 30 | 0.2815 | 0.2871 | 0.0056 [-0.0058, 0.0182] |
+| hflip | Origin | video_mirror_joint | 600 | 30 | 0.2815 | 0.2871 | 0.0056 [-0.0058, 0.0182] |
+| hflip | Repair-model | evidence_mirror | 600 | 30 | 0.2815 | 0.2815 | 0.0000 [0.0000, 0.0000] |
+| hflip | Repair-model | evidence_mirror_joint | 600 | 30 | 0.2815 | 0.2815 | 0.0000 [0.0000, 0.0000] |
+| hflip | Repair-model | prompt_swap | 600 | 30 | 0.2815 | 0.2815 | 0.0000 [0.0000, 0.0000] |
+| hflip | Repair-model | video_mirror | 600 | 30 | 0.2815 | 0.2871 | 0.0056 [-0.0058, 0.0182] |
+| hflip | Repair-model | video_mirror_joint | 600 | 30 | 0.2815 | 0.2871 | 0.0056 [-0.0058, 0.0182] |
+| hflip | Repair-rule | evidence_mirror | 600 | 30 | 0.2815 | 0.2815 | 0.0000 [0.0000, 0.0000] |
+| hflip | Repair-rule | evidence_mirror_joint | 600 | 30 | 0.2815 | 0.2815 | 0.0000 [0.0000, 0.0000] |
+| hflip | Repair-rule | prompt_swap | 600 | 30 | 0.2815 | 0.2815 | 0.0000 [0.0000, 0.0000] |
+| hflip | Repair-rule | video_mirror | 600 | 30 | 0.2815 | 0.2871 | 0.0056 [-0.0058, 0.0182] |
+| hflip | Repair-rule | video_mirror_joint | 600 | 30 | 0.2815 | 0.2871 | 0.0056 [-0.0058, 0.0182] |
+| vflip | Origin | evidence_mirror | 380 | 19 | 0.3244 | 0.3244 | 0.0000 [0.0000, 0.0000] |
+| vflip | Origin | evidence_mirror_joint | 380 | 19 | 0.3244 | 0.3244 | 0.0000 [0.0000, 0.0000] |
+| vflip | Origin | prompt_swap | 380 | 19 | 0.3244 | 0.3244 | 0.0000 [0.0000, 0.0000] |
+| vflip | Origin | video_mirror | 380 | 19 | 0.3244 | 0.3123 | -0.0121 [-0.0373, 0.0151] |
+| vflip | Origin | video_mirror_joint | 380 | 19 | 0.3244 | 0.3123 | -0.0121 [-0.0373, 0.0151] |
+| vflip | Repair-model | evidence_mirror | 380 | 19 | 0.2782 | 0.2782 | 0.0000 [0.0000, 0.0000] |
+| vflip | Repair-model | evidence_mirror_joint | 380 | 19 | 0.2782 | 0.2810 | 0.0027 [-0.0323, 0.0406] |
+| vflip | Repair-model | prompt_swap | 380 | 19 | 0.2782 | 0.2810 | 0.0027 [-0.0323, 0.0406] |
+| vflip | Repair-model | video_mirror | 380 | 19 | 0.2782 | 0.2599 | -0.0183 [-0.0399, 0.0059] |
+| vflip | Repair-model | video_mirror_joint | 380 | 19 | 0.2782 | 0.2641 | -0.0142 [-0.0537, 0.0324] |
+| vflip | Repair-rule | evidence_mirror | 380 | 19 | 0.3244 | 0.3244 | 0.0000 [0.0000, 0.0000] |
+| vflip | Repair-rule | evidence_mirror_joint | 380 | 19 | 0.3244 | 0.3244 | 0.0000 [0.0000, 0.0000] |
+| vflip | Repair-rule | prompt_swap | 380 | 19 | 0.3244 | 0.3244 | 0.0000 [0.0000, 0.0000] |
+| vflip | Repair-rule | video_mirror | 380 | 19 | 0.3244 | 0.3123 | -0.0121 [-0.0373, 0.0151] |
+| vflip | Repair-rule | video_mirror_joint | 380 | 19 | 0.3244 | 0.3123 | -0.0121 [-0.0373, 0.0151] |

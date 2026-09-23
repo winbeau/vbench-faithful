@@ -1,0 +1,75 @@
+{
+  "summary": {
+    "conditions": {
+      "contradicted": {
+        "n": 90,
+        "expected": "contradicted",
+        "official_accuracy": 0.9444444444444444,
+        "repair_accuracy": 0.6888888888888889,
+        "repair_label_counts": {
+          "insufficient": 25,
+          "contradicted": 62,
+          "supported": 3
+        },
+        "official_label_counts": {
+          "contradicted": 85,
+          "supported": 5
+        }
+      },
+      "insufficient": {
+        "n": 60,
+        "expected": "insufficient",
+        "official_accuracy": 0.0,
+        "repair_accuracy": 0.8333333333333334,
+        "repair_label_counts": {
+          "insufficient": 50,
+          "contradicted": 10
+        },
+        "official_label_counts": {
+          "contradicted": 60
+        }
+      },
+      "supported": {
+        "n": 90,
+        "expected": "supported",
+        "official_accuracy": 0.3333333333333333,
+        "repair_accuracy": 0.7555555555555555,
+        "repair_label_counts": {
+          "supported": 68,
+          "insufficient": 10,
+          "contradicted": 12
+        },
+        "official_label_counts": {
+          "contradicted": 60,
+          "supported": 30
+        }
+      },
+      "synonym": {
+        "n": 100,
+        "expected": "supported",
+        "official_accuracy": 0.0,
+        "repair_accuracy": 0.92,
+        "repair_label_counts": {
+          "supported": 92,
+          "contradicted": 7,
+          "insufficient": 1
+        },
+        "official_label_counts": {
+          "contradicted": 100
+        }
+      }
+    },
+    "official_balanced_accuracy": 0.3194444444444444,
+    "repair_balanced_accuracy": 0.7994444444444444,
+    "official_label_ci": [
+      0.28823529411764703,
+      0.3911764705882353
+    ],
+    "repair_label_ci": [
+      0.7558823529411764,
+      0.8411764705882353
+    ],
+    "note": "balanced metamorphic accuracy averages the per-condition accuracies; a constant answer cannot win both halves"
+  },
+  "rows": []
+}

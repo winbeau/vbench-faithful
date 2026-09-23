@@ -1,0 +1,7 @@
+Dataset,Scheme,Pairs,Source blocks,Binary correct and consistent (CI),Exact-label consistent (CI),Copy original (CI),Always supported,Always not-supported
+test2,Origin,38,1,0.6579 [N/A],0.7368 [N/A],0.9211 [N/A],0.34210526315789475,0.6578947368421053
+test2,Repair-rule,38,1,0.9211 [N/A],1.0000 [N/A],0.9211 [N/A],0.34210526315789475,0.6578947368421053
+test2,Repair-model,38,1,0.9211 [N/A],0.9211 [N/A],0.9211 [N/A],0.34210526315789475,0.6578947368421053
+synonym-census,Origin,3200,10,"0.2672 [0.1906, 0.3481]","0.6419 [0.5131, 0.7744]","0.5722 [0.4091, 0.7253]",0.73375,0.26625
+synonym-census,Repair-rule,3200,10,"0.6244 [0.4922, 0.7503]","1.0000 [1.0000, 1.0000]","0.6244 [0.4922, 0.7503]",0.73375,0.26625
+synonym-census,Repair-model,3200,10,"0.9213 [0.8844, 0.9556]","0.9609 [0.9403, 0.9803]","0.9291 [0.8944, 0.9609]",0.73375,0.26625

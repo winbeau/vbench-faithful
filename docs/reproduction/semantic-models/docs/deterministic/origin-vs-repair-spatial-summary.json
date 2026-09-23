@@ -1,0 +1,20 @@
+{
+  "dimension": "spatial",
+  "cache": "data/backend-cache/spatial-200.jsonl",
+  "repair": "data/backend-cache/repair-spatial.jsonl",
+  "videos_in_cache": 216,
+  "prompts_in_cache": 108,
+  "repair_prompts": 108,
+  "result": {
+    "origin_frame_mean": 0.10775658363305358,
+    "repair_frame_mean": 0.05790788780266971,
+    "origin_frames": 2368,
+    "repair_frames": 3456,
+    "repair_frames_without_mappable_target": 1856
+  },
+  "caveats": [
+    "the Origin interface is a reconstruction of the official prompt parsing, not the official auxiliary_info file",
+    "the visual backend is identical on both sides; only the text interface differs",
+    "insufficient answers are reported as abstention rather than counted as successes"
+  ]
+}

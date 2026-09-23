@@ -1,0 +1,20 @@
+{
+  "status": "verified_download_restore_replay_and_training_inputs",
+  "dataset_revision": "673fadf22d3c28296bbdb9f4caf0ac0d6496de38",
+  "model_revision": "249469f26000175cbf0f0ee7d06821bfbb7c25e0",
+  "downloaded_files": 183,
+  "replay_score_cells": 20808,
+  "fresh_gpu_inference": false,
+  "fresh_training": false,
+  "unit_contract_tests_passed": 5,
+  "files": {
+    "prepare_reproduction.py": "ee28f2945329edd2bea16ddef2ab0f16343b46228adaafbe0bbe19305856c74f",
+    "reproduce_main_table.py": "2e2470b90178ec1bba0f11354d8920847ad15b5faec06bb7a2221850a60d6884",
+    "release.json": "87b67bcae6894e9ddf74f2c5ba2dd8de1b4f90572a121362e7808695544ffd5f"
+  },
+  "remaining_unverified": [
+    "all_eight_dimension_fresh_model_inference",
+    "fresh_six_dimension_training",
+    "full_four_dimension_matrix_and_all_ablation_appendices"
+  ]
+}

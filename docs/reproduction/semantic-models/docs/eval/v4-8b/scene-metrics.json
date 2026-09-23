@@ -1,0 +1,74 @@
+{
+  "created_utc": "2026-09-19T12:11:27+00:00",
+  "task": "scene",
+  "data": {
+    "path": "/data1/wenbiao_zhao/vbench-prompts-compile/data/formal/v4/scene/dev.jsonl",
+    "sha256": "ed551339110364a17672ad4248278084f20ec992e303fa90b30a0752580fc543",
+    "samples": 16
+  },
+  "git": {
+    "commit": "1c3427a9daf8db772bb193e3553ccd24d7c54032",
+    "dirty": "M README.md\n M docs/model-cards.md\n M scripts/build_formal_sets.py\n M scripts/prepare_data.py\n M scripts/run_formal_training.sh\n M src/vbench_prompts_compile/records.py\n M src/vbench_prompts_compile/sources.py\n M src/vbench_prompts_compile/teacher.py\n?? configs/formal/v3/\n?? configs/formal/v4/\n?? docs/gold-annotation-pilot.md\n?? docs/limitations-and-remediation.md\n?? scripts/annotate_gold.py\n?? scripts/annotate_scene_vision.py\n?? scripts/build_families.py\n?? scripts/caption_frames.py\n?? scripts/inspect_vg_regions.py\n?? scripts/tmux_train_control.sh\n?? src/vbench_prompts_compile/annotate.py\n?? src/vbench_prompts_compile/llm.py"
+  },
+  "environment": {
+    "python": "3.11.14",
+    "cuda_visible_devices": "2",
+    "hf_hub_offline": "1",
+    "torch": "2.7.1+cu126",
+    "cuda_available": true,
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "device_total_memory_mib": 48508,
+    "device_index_visible": 0,
+    "transformers": "4.52.4",
+    "trl": "0.19.1",
+    "peft": "0.15.2",
+    "datasets": "3.6.0"
+  },
+  "max_new_tokens": 8,
+  "greedy_decoding": true,
+  "scene_stop_at_newline": true,
+  "metrics": {
+    "finetuned": {
+      "task": "scene",
+      "total": 16,
+      "scored": 16,
+      "unparseable": 0,
+      "exact_match": 0.8125,
+      "macro_f1": 0.8102240896358542,
+      "per_class": {
+        "supported": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.8571428571428571,
+          "support": 3
+        },
+        "contradicted": {
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.7499999999999999,
+          "support": 5
+        },
+        "insufficient": {
+          "precision": 0.7777777777777778,
+          "recall": 0.875,
+          "f1": 0.823529411764706,
+          "support": 8
+        }
+      },
+      "matrix": {
+        "supported": {
+          "supported": 3
+        },
+        "contradicted": {
+          "insufficient": 2,
+          "contradicted": 3
+        },
+        "insufficient": {
+          "insufficient": 7,
+          "supported": 1
+        }
+      }
+    }
+  },
+  "caveat": "engineering smoke on fixtures/candidates; not a generalization or benchmark result"
+}

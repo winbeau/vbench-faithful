@@ -1,0 +1,16 @@
+{
+  "scorer": "c58b62f812bdc144d96a38395ad0feecb33d5571a80fe0c380102beeacd5c741",
+  "action_interface": "b92d4a66f484cc83985e8eb8df0cc4bc18c34a2c837825fa28700904b3bff314",
+  "metric": "7df3ac5a458943f66c0482367f9c97bf13577ad52a543e121be414dfb392ba5b",
+  "reports": {
+    "objects-balanced-correctness.csv": "e3271beaf9986214ebdd95c2f1a1a0f1e6e397e989a789684d6b0b43024a0128",
+    "groups.csv": "f02b2cdb6d71d5649465feaa76d3b4e02a3c3015f1b5a716a78342b5ac407f40",
+    "training.csv": "89241de7f1ad0d3605130110ac7401ba3dd2c166ff5597d66e0949c02d085225",
+    "scene-evidence.csv": "f2414d07933895ff465b7e14df1e743835a86ec8ff4d6df513f48ab419f5cdd9",
+    "objects-retention.csv": "08d3c61cab6e24f5d6e38b2dac71dc29937fbb202aeb77cc8b91c3c8004dfbe1",
+    "spatial-components.csv": "94f0bf288dcb3cb344b3f9e971babdd8c73e86946357ac77957cd9908feda2b2",
+    "accuracy.csv": "37c0b1212b742d9b5c1a70ff6cf6974e647793fa155fe8886624f1d3c9e1c314",
+    "action-components.csv": "89ebdb919e87dcd16fa5199f683ac99253d0a0597bb4da4aac2c4347fa03097e",
+    "objects-components.csv": "d14418f3245748db8c5f06b98ba659df97ef960a4cefa98ea309d206fe2109e1"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "grit": {
+    "available": true,
+    "example_path": "/root/.cache/vbench/grit_model/grit_b_densecap_objectdet.pth",
+    "bytes": 417381733,
+    "sha256": "53b6e9b3fd948eac55b574c9b6f94ad0743dff46ba449df7ac2d33009ee92ef1"
+  },
+  "tag2text": {
+    "available": true,
+    "example_path": "/root/.cache/vbench/caption_model/tag2text_swin_14m.pth",
+    "bytes": 4478705095,
+    "sha256": "4ce96f0ce98f940a6680d567f66a38ccc9ca8c4e638e5f5c5c2e881a0e3502ac"
+  },
+  "umt": {
+    "available": true,
+    "example_path": "/root/.cache/vbench/umt_model/l16_ptk710_ftk710_ftk400_f16_res224.pth",
+    "bytes": 607024201,
+    "sha256": "bfee78a03bf806fbc0c216309e8f92792011b7db6556fa860e9d869c1e69fecd"
+  },
+  "dino": {
+    "available": true,
+    "example_path": "/root/.cache/vbench/dino_model/dino_vitbase16_pretrain.pth",
+    "bytes": 343242485,
+    "sha256": "bf34ad0f424b9029b593e8dc3ed553bf26e88bcba0d32bf3e62a6209cb64c85e"
+  },
+  "clip": {
+    "available": true,
+    "example_path": "/root/.cache/clip/ViT-B-32.pt",
+    "bytes": 353976522,
+    "sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+  },
+  "mobilesam": {
+    "available": true,
+    "example_path": "/root/wenbiao_zhao/models/subject-repair/mobile_sam.pt",
+    "bytes": 40728226,
+    "sha256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f"
+  },
+  "maskrcnn": {
+    "available": true,
+    "example_path": "/root/wenbiao_zhao/models/subject-repair/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth",
+    "bytes": 178090079,
+    "sha256": "bf2d0c1efbc936eeee2bc95a48e80ebc86b891f61b0106485937fc29f9315fc0"
+  }
+}

@@ -1,0 +1,3 @@
+size,predictions,generation_seconds,peak_allocated_gib,gpu,gpu_uuid,max_input_tokens,input_over_budget,output_budget_exhausted
+0.6,2292,263.10442288732156,1.7609810829162598,NVIDIA GeForce RTX 4090,GPU-70f0792b-3dcf-6b1b-8c58-bffaf406353a,428,0,0
+8,2292,304.8088976298459,16.857872486114502,NVIDIA GeForce RTX 4090,GPU-70f0792b-3dcf-6b1b-8c58-bffaf406353a,428,0,0

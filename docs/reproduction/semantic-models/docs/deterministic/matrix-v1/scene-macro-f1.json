@@ -1,0 +1,24 @@
+{
+  "test2": {
+    "estimate": 0.7933681544792656,
+    "ci": [
+      0.7621030478409562,
+      0.8195575381619778
+    ],
+    "n": 492,
+    "families": 5,
+    "bootstrap_valid": 2000,
+    "bootstrap_rounds": 2000
+  },
+  "synonym-census": {
+    "estimate": 0.7941172459982617,
+    "ci": [
+      0.7270612467901042,
+      0.8507258591481358
+    ],
+    "n": 3200,
+    "families": 10,
+    "bootstrap_valid": 2000,
+    "bootstrap_rounds": 2000
+  }
+}

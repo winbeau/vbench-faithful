@@ -1,0 +1,47 @@
+{
+  "family": "scene-synonym",
+  "pairs": 100,
+  "official_full_prompt": {
+    "original_pass": 48,
+    "variant_pass": 0,
+    "false_failures": 48
+  },
+  "official_scene_noun_only": {
+    "original_pass": 62,
+    "variant_pass": 0,
+    "false_failures": 62
+  },
+  "by_pair": {
+    "bathroom->washroom": {
+      "n": 20,
+      "official_false_failures": 18
+    },
+    "beach->seaside": {
+      "n": 20,
+      "official_false_failures": 20
+    },
+    "bedroom->bedchamber": {
+      "n": 20,
+      "official_false_failures": 10
+    },
+    "garden->yard": {
+      "n": 20,
+      "official_false_failures": 0
+    },
+    "shop->store": {
+      "n": 20,
+      "official_false_failures": 0
+    }
+  },
+  "repair": {
+    "label_stability": 0.99,
+    "supported_both": 92,
+    "supported_original": 92,
+    "supported_variant": 92,
+    "label_counts": {
+      "supported": 92,
+      "contradicted": 8
+    }
+  },
+  "note": "rows omitted from git; regenerate with scripts/score_deterministic.py"
+}

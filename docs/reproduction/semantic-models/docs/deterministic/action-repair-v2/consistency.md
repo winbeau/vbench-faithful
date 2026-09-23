@@ -1,0 +1,5 @@
+| Variant | Unique pairs | Correct and consistent (CI) | Same target (CI) |
+| --- | --- | --- | --- |
+| legacy_model | 60 | 0.4167 [0.3000, 0.5500] | 0.4500 [0.3167, 0.5667] |
+| output_normalization_only | 60 | 0.8500 [0.7500, 0.9333] | 0.8833 [0.8000, 0.9500] |
+| repair_v2 | 60 | 1.0000 [1.0000, 1.0000] | 1.0000 [1.0000, 1.0000] |

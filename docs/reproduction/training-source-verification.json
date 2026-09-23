@@ -1,0 +1,13 @@
+{
+  "four_dimensional_local_and_training_host_sha256": {
+    "v8/spatial/train.jsonl": "867803d984803cc92231dedf9d316a1eb6d4da5aab066a8197e50b618d94e4b6",
+    "v8/spatial/dev.jsonl": "e8b88b4b424fde7b3d12efa6966b19f1a896d69bfe41dbb4f7aa99c3dd940e01",
+    "v8/scene/train.jsonl": "f5651979e44206de1f3c9edcf0c41bf2c86da7012e27068e619bbd4100fc9951",
+    "v8/scene/dev.jsonl": "af6d5888c23def4dcf074815ff68b6c297ee9e3cfaa1c5eab74e3cdaf846bbdf",
+    "v9/action/train.jsonl": "5d2b6bc69447f8df63c1c416dd7c2194d2aeb898514ff4eefbf66cb3909ba9ce",
+    "v9/action/dev.jsonl": "a4746be124d26c384b6de064b79615d949507eb86af626c0594efdea99ec523a",
+    "v6/objects/train.jsonl": "cd04c5d24c004ee921301cf1d87cab1664318f0291463e5bfd6e15d7ec74de60",
+    "v6/objects/dev.jsonl": "076469a83f63f0ff4c951b8055d2923489b1e631f40b0ffd1c217ad0f62a8946"
+  },
+  "object_color_records_sha256": "5ab4d8c2fc5b303e454f53c199e79ff9cf3ab135b59ff7e3ca04cde94eee251a"
+}

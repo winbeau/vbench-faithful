@@ -1,0 +1,29 @@
+{
+  "tests": {
+    "passed": 170,
+    "warnings": [
+      "existing Trainer mtime fallback warning"
+    ]
+  },
+  "input_source_output_sha_verified": true,
+  "official_source_unchanged": true,
+  "legacy_spatial_rows_exact": 23400,
+  "origin_spatial_rows_exact": 7800,
+  "matrix_regression": {
+    "exact_unchanged_or_rescored": {
+      "spatial": 7800,
+      "spatial_repair_rescored": 15600,
+      "objects": 38220,
+      "scene": 9360,
+      "action": 18000
+    },
+    "total_rows": 88980,
+    "execution_complete": true
+  },
+  "report_sha256": "b6ea8affb0934c5693b52501dc736f5f197aaf3528aceec68c4916c693a42e3e",
+  "full_matrix_report_sha256": "36fde9b25aedb3e989df97f149144b8c75dbe96aa926dd0d8187aa8cdfdacd76",
+  "full_matrix_paired_sha256": "0d86f1abc2d5df4eaf3e3877b21dda4fa7c7e2c84098e545670eca37c06081df",
+  "related_cli_help_passed": true,
+  "uv_lock_check_passed": true,
+  "gpu_training_or_api_calls": 0
+}

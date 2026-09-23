@@ -1,0 +1,11 @@
+{
+  "exact_unchanged_or_rescored": {
+    "spatial": 7800,
+    "spatial_repair_rescored": 15600,
+    "objects": 38220,
+    "scene": 9360,
+    "action": 18000
+  },
+  "total_rows": 88980,
+  "execution_complete": true
+}

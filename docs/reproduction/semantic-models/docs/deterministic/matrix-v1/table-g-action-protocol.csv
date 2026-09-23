@@ -1,0 +1,13 @@
+Scheme,Transform,Videos,Unique prompts,Target set correct (CI),Score invariant (CI),Abstain
+Origin,class_swap,1200,60,"1.0000 [1.0000, 1.0000]",N/A [N/A],0.0
+Origin,mixed_oov,1200,60,"0.0000 [0.0000, 0.0000]",N/A [N/A],0.0
+Origin,oov,1200,1,0.0000 [N/A],N/A [N/A],0.0
+Origin,synonym,1200,60,"0.0000 [0.0000, 0.0000]","0.1108 [0.0717, 0.1567]",0.0
+Repair-model,class_swap,1200,60,"1.0000 [1.0000, 1.0000]",N/A [N/A],0.0
+Repair-model,mixed_oov,1200,60,"0.7500 [0.6333, 0.8500]",N/A [N/A],0.625
+Repair-model,oov,1200,1,1.0000 [N/A],N/A [N/A],1.0
+Repair-model,synonym,1200,60,"0.4167 [0.3000, 0.5500]","0.4167 [0.3000, 0.5500]",0.5833333333333334
+Repair-rule,class_swap,1200,60,"1.0000 [1.0000, 1.0000]",N/A [N/A],0.0
+Repair-rule,mixed_oov,1200,60,"1.0000 [1.0000, 1.0000]",N/A [N/A],0.5
+Repair-rule,oov,1200,1,1.0000 [N/A],N/A [N/A],1.0
+Repair-rule,synonym,1200,60,"1.0000 [1.0000, 1.0000]","1.0000 [1.0000, 1.0000]",0.0

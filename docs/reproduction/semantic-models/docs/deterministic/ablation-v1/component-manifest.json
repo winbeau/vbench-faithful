@@ -1,0 +1,11 @@
+{
+  "source_sha256": {
+    "docs/deterministic/spatial-repair-v2/ablations.csv": "94f0bf288dcb3cb344b3f9e971babdd8c73e86946357ac77957cd9908feda2b2",
+    "docs/deterministic/action-repair-v2/ablations.csv": "89ebdb919e87dcd16fa5199f683ac99253d0a0597bb4da4aac2c4347fa03097e",
+    "docs/deterministic/objects-repair-v2/endpoints.csv": "d14418f3245748db8c5f06b98ba659df97ef960a4cefa98ea309d206fe2109e1",
+    "docs/deterministic/objects-repair-v2/original-impact.csv": "08d3c61cab6e24f5d6e38b2dac71dc29937fbb202aeb77cc8b91c3c8004dfbe1",
+    "docs/deterministic/objects-repair-v2/report.json": "94f8c28422103a623373f61c073f756dafb431a2f36e1d264559b6ccb995cbd2"
+  },
+  "mode": "Reused frozen regression aggregates; added post-hoc descriptive balanced correctness; no new independent visual labels.",
+  "objects_metric": "(visible positive rate + not-visible decisive-negative rate)/2; abstention does not count as correct negative; uncertain visibility excluded with original denominators reported. No new CI from aggregate inputs."
+}

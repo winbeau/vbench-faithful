@@ -1,0 +1,273 @@
+{
+  "status": "passed",
+  "scope": "frozen_evidence_formula_replay_and_score_reaggregation",
+  "fresh_gpu_inference": false,
+  "fresh_training": false,
+  "dimensions": [
+    {
+      "dimension": "scene",
+      "planned_primary": 200,
+      "complete_pairs": 200,
+      "origin_base": 0.3059375,
+      "origin_cf": 0.0540625,
+      "repair_base": 0.6909375,
+      "repair_cf": 0.6946875
+    },
+    {
+      "dimension": "human_action",
+      "planned_primary": 1200,
+      "complete_pairs": 1200,
+      "origin_base": 0.8891666666666667,
+      "origin_cf": 0.0,
+      "repair_base": 0.8891666666666667,
+      "repair_cf": 0.8891666666666667
+    },
+    {
+      "dimension": "object_class",
+      "planned_primary": 14,
+      "complete_pairs": 14,
+      "origin_base": 0.9910714285714286,
+      "origin_cf": 0.0,
+      "repair_base": 0.9910714285714286,
+      "repair_cf": 0.9910714285714286
+    },
+    {
+      "dimension": "subject_consistency",
+      "planned_primary": 240,
+      "complete_pairs": 240,
+      "origin_base": 0.936416570097208,
+      "origin_cf": 0.8163817012061675,
+      "repair_base": 0.9514129181702932,
+      "repair_cf": 0.9417236382762592
+    },
+    {
+      "dimension": "background_consistency",
+      "planned_primary": 188,
+      "complete_pairs": 188,
+      "origin_base": 0.9468453265250998,
+      "origin_cf": 0.9347057586020612,
+      "repair_base": 0.9629986490609952,
+      "repair_cf": 0.9595924896397643
+    },
+    {
+      "dimension": "spatial_relationship",
+      "planned_primary": 106,
+      "complete_pairs": 106,
+      "origin_base": 0.5597319946651382,
+      "origin_cf": 0.532152885100321,
+      "repair_base": 0.4441518500833803,
+      "repair_cf": 0.009378770197988433
+    },
+    {
+      "dimension": "multiple_objects",
+      "planned_primary": 980,
+      "complete_pairs": 505,
+      "origin_base": 0.4142326732673267,
+      "origin_cf": 0.027722772277227723,
+      "repair_base": 0.3982673267326733,
+      "repair_cf": 0.01782178217821782
+    },
+    {
+      "dimension": "color",
+      "planned_primary": 5,
+      "complete_pairs": 3,
+      "origin_base": 1.0,
+      "origin_cf": 0.7166666666666667,
+      "repair_base": 0.9583333333333334,
+      "repair_cf": 0.1875
+    }
+  ],
+  "exact_score_cells_checked": {
+    "scene": 800,
+    "human_action": 4800,
+    "object_class": 188,
+    "subject_consistency": 2880,
+    "background_consistency": 4160,
+    "spatial_relationship": 3920,
+    "multiple_objects": 3920,
+    "color": 140
+  },
+  "all_primary_flags_and_statuses_checked": true,
+  "input_files": [
+    {
+      "path": "dimensions/background_consistency/historical-scores/shard0/scores.jsonl",
+      "sha256": "919829b05cb0c3b620061536eaae4b6404b87cfa21032896fb809c788272d254"
+    },
+    {
+      "path": "dimensions/background_consistency/historical-scores/shard1/scores.jsonl",
+      "sha256": "a4f5d9bf68c964481bf7bd5b653e72d9a5d3664d6a37a582c8f12ed6a22517be"
+    },
+    {
+      "path": "dimensions/background_consistency/pairs.jsonl",
+      "sha256": "f5ea1502479995dd60a5be5255d1e19dbb8bd763c81120e422f4f765972052df"
+    },
+    {
+      "path": "dimensions/background_consistency/scores/paired-verified.jsonl",
+      "sha256": "afa7c28ddd0fb2c33e1cb5c61e5668d5857b4ff056e6787db5c4c4bd504f969f"
+    },
+    {
+      "path": "dimensions/color/constructed/metadata.json",
+      "sha256": "3e9ac091d96a491144b6d96a2835fd3c058201db8294b2e3afa031fe8e15c86d"
+    },
+    {
+      "path": "dimensions/color/historical-scores/official/results.json",
+      "sha256": "67378b30f9531e181f1b2282a3c600e4c48ac37556240af9f71c9106f2d15225"
+    },
+    {
+      "path": "dimensions/color/historical-scores/repair/results.json",
+      "sha256": "be34de8a072bd8ca3255f4d562010fa8e91840b020c859334a2f4068f6bce777"
+    },
+    {
+      "path": "dimensions/color/historical-scores/repair-base-canonical/results.json",
+      "sha256": "ffe608c69751ed4ee6e5e1fb52f88488fe240e2c50afdf54c4504f11099217cf"
+    },
+    {
+      "path": "dimensions/color/historical-scores/repair-deterministic-canonical/results.json",
+      "sha256": "da72eb5c6377013e15d793d60bb0d72f11929e38e9fa36567a9847aed3ac4d5d"
+    },
+    {
+      "path": "dimensions/color/historical-scores/repair-lora-canonical/results.json",
+      "sha256": "c48bf11bc9b8a2e53819de8fe5af18bf5c5d4e55227b5bf64f40492e60651d53"
+    },
+    {
+      "path": "dimensions/color/pairs.jsonl",
+      "sha256": "6b3e9122c0c7c4327a89c01a6a56df34ecbcb0439a10a62987f693a887b572b7"
+    },
+    {
+      "path": "dimensions/color/scores/paired-fresh.jsonl",
+      "sha256": "2656105715d256dbac69aa2ee799ff738d898a5aaa652be583e8b6bac8147765"
+    },
+    {
+      "path": "dimensions/human_action/evidence/original.jsonl",
+      "sha256": "d0514c96405344704c76560f10f71301205f43b594c5d9793036c00f48acb184"
+    },
+    {
+      "path": "dimensions/human_action/evidence/semantic_predictions.jsonl",
+      "sha256": "bc48451c39f9f5a2fea1e83a3a54e71e5defd08f75ae8cc826c01d10f2aa6798"
+    },
+    {
+      "path": "dimensions/human_action/pairs.jsonl",
+      "sha256": "3ec5485c89e9ba8d19245fe79019a252b34289510f39af1b0ca014ce5165b7b4"
+    },
+    {
+      "path": "dimensions/human_action/scores/paired-replay.jsonl",
+      "sha256": "5b99bd20345ae1fc14b3e8f590c358b0db578d648b71e268f4f8cce7822376aa"
+    },
+    {
+      "path": "dimensions/multiple_objects/evidence/original.jsonl",
+      "sha256": "d288ec5af53e8913a1eab77b3798ec6f66f516e712d33239f6eb9e822b379815"
+    },
+    {
+      "path": "dimensions/multiple_objects/evidence/semantic_predictions.jsonl",
+      "sha256": "e817832914fe195c72cfd3954293bf47754168f648211e3d0fd0a961476c5b48"
+    },
+    {
+      "path": "dimensions/multiple_objects/evidence/transforms.jsonl",
+      "sha256": "b2b99be4f445e36dea8ab6e276ae75e97317d38edf329db566486c58aefbbb9a"
+    },
+    {
+      "path": "dimensions/multiple_objects/pairs.jsonl",
+      "sha256": "772144ccd45306c16f96762dacb5fdee550ab6e38c83c2196bd8474fe4854c5a"
+    },
+    {
+      "path": "dimensions/multiple_objects/scores/paired-replay.jsonl",
+      "sha256": "23666ae5ad6096f423e58f940859c8ad53f879453b3b705b1c9a8383beebe26f"
+    },
+    {
+      "path": "dimensions/object_class/constructed/metadata.json",
+      "sha256": "7ef574dc3647355e682f91be83fd45e82496e3b876cfef3d3ba76d8ef3c8c936"
+    },
+    {
+      "path": "dimensions/object_class/historical-scores/official/results.json",
+      "sha256": "8050a2b55737cacb506aba20555289f1d0623f766962c8d7f0f1629727f4b03a"
+    },
+    {
+      "path": "dimensions/object_class/historical-scores/repair/results.json",
+      "sha256": "93eec2eca1f52275b4f168f67f3ccaa237fb43e6fb1aae719cba626b2e265b63"
+    },
+    {
+      "path": "dimensions/object_class/historical-scores/repair-base-canonical/results.json",
+      "sha256": "1489691fa6d6d80e05ac8324d8365184a51422cc0c4f8e18d75f25f4e5a23107"
+    },
+    {
+      "path": "dimensions/object_class/historical-scores/repair-deterministic-canonical/results.json",
+      "sha256": "b7fc93fce4f30154019945b9ff150ed5be6389b50f774c2c1f5b0bc3b7c8619d"
+    },
+    {
+      "path": "dimensions/object_class/historical-scores/repair-lora-canonical/results.json",
+      "sha256": "e8c54030fab82b65b302ee531379ee04656613ecb0155c4e417604b47674f30c"
+    },
+    {
+      "path": "dimensions/object_class/pairs.jsonl",
+      "sha256": "1f865db9f10f359f8f3706a5e54f9a4908d3c2c82320ba883e9060ab2e6d3791"
+    },
+    {
+      "path": "dimensions/object_class/scores/paired-fresh.jsonl",
+      "sha256": "725559227ef4034b7fc187b00c4c9c77ab7c7b4e5ef996ee7242721725075dd3"
+    },
+    {
+      "path": "dimensions/scene/evidence/original.jsonl",
+      "sha256": "5923d640aa4c25c0c7b9c55d60dbfbbacf132e0b727f19de623101bcf16f2f7f"
+    },
+    {
+      "path": "dimensions/scene/evidence/semantic_predictions.jsonl",
+      "sha256": "bde51fa77e807a22af98074895048a1734c224e6369abd1a5fe7351758cb0514"
+    },
+    {
+      "path": "dimensions/scene/pairs.jsonl",
+      "sha256": "a36df2a7338453f561a3e020c454b13e25ad1892445589ec8d452404cdd16ab5"
+    },
+    {
+      "path": "dimensions/scene/scores/paired-replay.jsonl",
+      "sha256": "2a4874a19ac2974773919e967ec42bdb4f68a68a22d089cf89a90d6cd8f60437"
+    },
+    {
+      "path": "dimensions/spatial_relationship/evidence/original.jsonl",
+      "sha256": "bf729815e3ec8751c2418bf3694f3026ae2e5210f8483efa2ade38441836cde2"
+    },
+    {
+      "path": "dimensions/spatial_relationship/evidence/semantic_predictions.jsonl",
+      "sha256": "41d66875f43259af1e065b3287a67c6b2687669116ca366942113888dd28226b"
+    },
+    {
+      "path": "dimensions/spatial_relationship/evidence/transforms.jsonl",
+      "sha256": "e926f1f0f174d4582c119bbc85bafb40269eb167d4355b7669fb9eaff930d88a"
+    },
+    {
+      "path": "dimensions/spatial_relationship/pairs.jsonl",
+      "sha256": "2a842c0591162643297f881317029c0d39d4e417cc7d988dbf386295e2e38b2d"
+    },
+    {
+      "path": "dimensions/spatial_relationship/scores/paired-replay.jsonl",
+      "sha256": "d749b18f44d55bfb94b16c08bb12c35e225b96418ff3a681c661419efc0f7b4b"
+    },
+    {
+      "path": "dimensions/subject_consistency/historical-scores/scores.jsonl",
+      "sha256": "3d18f4f81ed0e8bf2e4bd56fbf4c64edcbe2e5c6daf45905e418d8d87a4ea968"
+    },
+    {
+      "path": "dimensions/subject_consistency/pairs.jsonl",
+      "sha256": "2dcbf6a610830289288ec7ca7b03337a0804ad2aa1b918a99e1b74eab1e488ca"
+    },
+    {
+      "path": "dimensions/subject_consistency/scores/paired-verified.jsonl",
+      "sha256": "e08423e37ea27010a76e2e66cc0bdf68c434ac076ffc06d0ca219dd8b291cc00"
+    },
+    {
+      "path": "provenance/VBench_full_info.json",
+      "sha256": "5dd2de80ee43cda750b2b72ea7023657c0b90d3702041c7e4608c65dbe50dccd"
+    },
+    {
+      "path": "provenance/historical-four-scores.jsonl.gz",
+      "sha256": "ef4b5f44d532469311213bd23131260f908bfeade890ae51d20b6aee11da152b"
+    },
+    {
+      "path": "reports/main-table.csv",
+      "sha256": "a200c8a872b6285b9d68a15ce677479adb708fdbfb6a61313757334bcfc5b3ab"
+    },
+    {
+      "path": "reports/summary.json",
+      "sha256": "5b60d697ee7d11e4d0801510715f4ddc3248043a2f253c329bdee07921c9055e"
+    }
+  ]
+}

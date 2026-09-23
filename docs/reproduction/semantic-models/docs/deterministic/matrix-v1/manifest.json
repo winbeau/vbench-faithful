@@ -1,0 +1,23 @@
+{
+  "execution_complete": true,
+  "input_sha256": {
+    "data/deterministic/matrix-v1/matrix.jsonl": "366a14d3238be203fad30786ee024c4e26fbfe3a4565b0aef5baeff1f68eb037",
+    "output/upstream-parity/VBench_full_info.json": "5dd2de80ee43cda750b2b72ea7023657c0b90d3702041c7e4608c65dbe50dccd",
+    "output/deterministic/matrix-v1/paired-rows.jsonl": "954ee2599c0cb47046259ffc389acd2a31fcc6c143f0db99bf2728b3feef904c",
+    "output/deterministic/matrix-v1/report.json": "a867d531dce7e7ad2f640eec730ea6b4a4d349b16cf5f07492e098317175be26",
+    "data/repair/matrix-v1/spatial.jsonl": "41d66875f43259af1e065b3287a67c6b2687669116ca366942113888dd28226b",
+    "data/repair/matrix-v1/objects.jsonl": "e817832914fe195c72cfd3954293bf47754168f648211e3d0fd0a961476c5b48",
+    "data/repair/matrix-v1/action-v9.jsonl": "bc48451c39f9f5a2fea1e83a3a54e71e5defd08f75ae8cc826c01d10f2aa6798",
+    "data/repair/matrix-v1/scene.jsonl": "bde51fa77e807a22af98074895048a1734c224e6369abd1a5fe7351758cb0514",
+    "output/deterministic/matrix-v1/scene-test2-scorecard.json": "a48ad48adc53aadeb4f7b3b906fb4970659e4ad5ebeffc4246f2bf9252938247",
+    "output/deterministic/matrix-v1/scene-matrix-syn-scorecard.json": "40ee64847f1a8a62a7e6fa7b996524f31404e58e1773f79ce4c2b1089f5a6c82",
+    "output/deterministic/matrix-v1/object-controls.json": "11756f9d0e893222e0530304efeba0a9e11dba053f3dc278d50e400ae41547dc"
+  },
+  "renderer_sha256": "71084d74e24ca98acf306e9515657ceb4771eed738d7077a130aa3c205c6606c",
+  "notes": [
+    "Parsing references are official structural metadata, not human gold.",
+    "Scene labels are model consensus.",
+    "Source-family bootstrap: 2000 draws, seed 20260919.",
+    "Scores and score gains are not measures of human correctness."
+  ]
+}

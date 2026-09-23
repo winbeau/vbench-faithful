@@ -1,0 +1,83 @@
+[
+  {
+    "run": "action",
+    "steps": 30,
+    "final": {
+      "train_loss": 0.0002,
+      "eval_loss": 0.0020777047611773014,
+      "token_accuracy": 1.0,
+      "eval_token_accuracy": 1.0,
+      "grad_norm": 0.007293099071830511,
+      "learning_rate": 2.9338608443452154e-09,
+      "dev_exact_match": 1.0,
+      "dev_parseable_rate": 1.0
+    },
+    "csv": "runs/curves/0.6b/action-history.csv",
+    "loss_svg": "runs/curves/0.6b/action-loss.svg",
+    "accuracy_svg": "runs/curves/0.6b/action-accuracy.svg",
+    "html": "runs/curves/0.6b/action-curves.html"
+  },
+  {
+    "run": "logs",
+    "steps": 0,
+    "final": {},
+    "csv": "runs/curves/0.6b/logs-history.csv",
+    "loss_svg": "runs/curves/0.6b/logs-loss.svg",
+    "accuracy_svg": "runs/curves/0.6b/logs-accuracy.svg",
+    "html": "runs/curves/0.6b/logs-curves.html"
+  },
+  {
+    "run": "objects",
+    "steps": 90,
+    "final": {
+      "train_loss": 0.0411,
+      "eval_loss": 0.0486166886985302,
+      "token_accuracy": 0.9882995277643204,
+      "eval_token_accuracy": 0.9861984078614217,
+      "grad_norm": 1.9080036878585815,
+      "learning_rate": 3.115008885612447e-10,
+      "dev_exact_match": 1.0,
+      "dev_parseable_rate": 1.0
+    },
+    "csv": "runs/curves/0.6b/objects-history.csv",
+    "loss_svg": "runs/curves/0.6b/objects-loss.svg",
+    "accuracy_svg": "runs/curves/0.6b/objects-accuracy.svg",
+    "html": "runs/curves/0.6b/objects-curves.html"
+  },
+  {
+    "run": "scene",
+    "steps": 24,
+    "final": {
+      "train_loss": 0.0,
+      "eval_loss": 2.4549277441110462e-05,
+      "token_accuracy": 1.0,
+      "eval_token_accuracy": 1.0,
+      "grad_norm": 0.0007119145011529326,
+      "learning_rate": 6.834750376549792e-09,
+      "dev_exact_match": 1.0,
+      "dev_parseable_rate": 1.0
+    },
+    "csv": "runs/curves/0.6b/scene-history.csv",
+    "loss_svg": "runs/curves/0.6b/scene-loss.svg",
+    "accuracy_svg": "runs/curves/0.6b/scene-accuracy.svg",
+    "html": "runs/curves/0.6b/scene-curves.html"
+  },
+  {
+    "run": "spatial",
+    "steps": 60,
+    "final": {
+      "train_loss": 0.0002,
+      "eval_loss": 0.004505726043134928,
+      "token_accuracy": 1.0,
+      "eval_token_accuracy": 0.9997821345048792,
+      "grad_norm": 0.00030662788776680827,
+      "learning_rate": 7.088179461267608e-10,
+      "dev_exact_match": 1.0,
+      "dev_parseable_rate": 1.0
+    },
+    "csv": "runs/curves/0.6b/spatial-history.csv",
+    "loss_svg": "runs/curves/0.6b/spatial-loss.svg",
+    "accuracy_svg": "runs/curves/0.6b/spatial-accuracy.svg",
+    "html": "runs/curves/0.6b/spatial-curves.html"
+  }
+]

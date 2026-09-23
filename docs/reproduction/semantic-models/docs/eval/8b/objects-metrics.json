@@ -1,0 +1,58 @@
+{
+  "created_utc": "2026-09-19T02:50:33+00:00",
+  "task": "objects",
+  "data": {
+    "path": "/data1/wenbiao_zhao/vbench-prompts-compile/data/formal/v1/objects/dev.jsonl",
+    "sha256": "f89ee6db41ae5314b033b1784a50892f1807eefabd56db4852b86eae1c2c65ba",
+    "samples": 200
+  },
+  "git": {
+    "commit": "21d0f0d5ee47092ce70089b60c1622f109cbf6f1",
+    "dirty": "M .gitignore\n M README.md\n M docs/plans/02-data.md\n M docs/plans/README.md\n M docs/verification.md\n?? configs/\n?? docs/decisions.md\n?? docs/plans/05-smoke-master.md\n?? docs/plans/06-smoke-data.md\n?? docs/plans/07-smoke-training-code.md\n?? docs/plans/08-smoke-validation.md\n?? docs/plans/09-length-generalization.md\n?? docs/plans/10-teacher-data.md\n?? docs/runbook.md\n?? docs/smoke-report.md\n?? docs/teacher-pilot-report.md\n?? scripts/build_formal_sets.py\n?? scripts/build_smoke_mix.py\n?? scripts/evaluate_smoke.py\n?? scripts/inspect_k400.py\n?? scripts/inspect_moviegen_flickr.py\n?? scripts/inspect_vg_snli.py\n?? scripts/make_tiny_model.py\n?? scripts/plot_training_curves.py\n?? scripts/predict.py\n?? scripts/prepare_data.py\n?? scripts/run_formal_training.sh\n?? scripts/run_teacher_pilot.py\n?? scripts/train_adapter.py\n?? scripts/train_scene.py\n?? src/vbench_prompts_compile/inference.py\n?? src/vbench_prompts_compile/metrics.py\n?? src/vbench_prompts_compile/pilot.py\n?? src/vbench_prompts_compile/provenance.py\n?? src/vbench_prompts_compile/records.py\n?? src/vbench_prompts_compile/sources.py\n?? src/vbench_prompts_compile/teacher.py\n?? src/vbench_prompts_compile/training.py\n?? tests/fixtures/\n?? tests/test_formal_pipeline.py\n?? tests/test_k400.py\n?? tests/test_metrics.py\n?? tests/test_moviegen_flickr.py\n?? tests/test_pilot_sources.py\n?? tests/test_prepare_data.py\n?? tests/test_records.py\n?? tests/test_teacher.py\n?? tests/test_training_data.py\n?? tests/test_training_stack.py\n?? tests/test_vg_snli.py"
+  },
+  "environment": {
+    "python": "3.11.14",
+    "cuda_visible_devices": "3",
+    "hf_hub_offline": "1",
+    "torch": "2.7.1+cu126",
+    "cuda_available": true,
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "device_total_memory_mib": 48508,
+    "device_index_visible": 0,
+    "transformers": "4.52.4",
+    "trl": "0.19.1",
+    "peft": "0.15.2",
+    "datasets": "3.6.0"
+  },
+  "max_new_tokens": 96,
+  "greedy_decoding": true,
+  "scene_stop_at_newline": false,
+  "metrics": {
+    "finetuned": {
+      "task": "objects",
+      "total": 200,
+      "scored": 200,
+      "unparseable": 0,
+      "precision": 0.9779116465863453,
+      "recall": 0.9779116465863453,
+      "f1": 0.9779116465863453,
+      "exact_match": 0.92,
+      "error_counts": {}
+    },
+    "adapter_names": [
+      "objects"
+    ],
+    "base": {
+      "task": "objects",
+      "total": 200,
+      "scored": 200,
+      "unparseable": 0,
+      "precision": 0.4989816700610998,
+      "recall": 0.4919678714859438,
+      "f1": 0.4954499494438827,
+      "exact_match": 0.455,
+      "error_counts": {}
+    }
+  },
+  "caveat": "engineering smoke on fixtures/candidates; not a generalization or benchmark result"
+}

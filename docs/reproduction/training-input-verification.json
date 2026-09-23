@@ -1,0 +1,49 @@
+{
+  "status": "passed_input_schema_and_provenance_checks",
+  "fresh_training": false,
+  "k400_labels": 400,
+  "dimensions": [
+    {
+      "dimension": "spatial_relationship",
+      "training_records": 2679,
+      "development_records": 312,
+      "schema_valid": true,
+      "disjoint_source_groups": true
+    },
+    {
+      "dimension": "scene",
+      "training_records": 455,
+      "development_records": 108,
+      "schema_valid": true,
+      "disjoint_source_groups": true
+    },
+    {
+      "dimension": "human_action",
+      "training_records": 605,
+      "development_records": 67,
+      "schema_valid": true,
+      "disjoint_source_groups": true
+    },
+    {
+      "dimension": "multiple_objects",
+      "training_records": 7688,
+      "development_records": 811,
+      "schema_valid": true,
+      "disjoint_source_groups": true
+    },
+    {
+      "dimension": "object_class",
+      "training_records": 424,
+      "original_shared_records_hash_verified": true,
+      "disjoint_source_groups": true,
+      "development_selected": false
+    },
+    {
+      "dimension": "color",
+      "training_records": 465,
+      "original_shared_records_hash_verified": true,
+      "disjoint_source_groups": true,
+      "development_selected": false
+    }
+  ]
+}

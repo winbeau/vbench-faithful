@@ -1,0 +1,7 @@
+Dataset,Scheme,Binary N,Source blocks,Binary accuracy (CI),Three-way N,Three-way macro F1 (CI)
+test2,Origin,432,5,"0.8171 [0.7789, 0.8985]",,N/A
+test2,Repair-rule,432,5,"0.8171 [0.7789, 0.8985]",,N/A
+test2,Repair-model,432,5,"0.9630 [0.9420, 0.9898]",492,"0.7934 [0.7621, 0.8196]"
+synonym-census,Origin,3200,10,"0.5722 [0.4091, 0.7253]",,N/A
+synonym-census,Repair-rule,3200,10,"0.6244 [0.4922, 0.7503]",,N/A
+synonym-census,Repair-model,3200,10,"0.9291 [0.8944, 0.9609]",3200,"0.7941 [0.7271, 0.8507]"

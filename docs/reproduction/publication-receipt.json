@@ -1,0 +1,10 @@
+{
+  "card_revision": "5557fe3218dc121efc768f03a8759dc2383f056d",
+  "reproduction_asset_revision": "673fadf22d3c28296bbdb9f4caf0ac0d6496de38",
+  "dataset_repo": "xju-arlab/vbench-repair",
+  "model_repo": "xju-arlab/vbench-model",
+  "model_revision": "249469f26000175cbf0f0ee7d06821bfbb7c25e0",
+  "additional_dataset_files": 44,
+  "imported_research_documentation_files": 196,
+  "dynamic_weights_published": false
+}

@@ -1,0 +1,45 @@
+{
+  "objects": {
+    "dimension": "objects",
+    "cache": "data/backend-cache/objects-200.jsonl",
+    "repair": "data/backend-cache/repair-objects.jsonl",
+    "videos_in_cache": 164,
+    "prompts_in_cache": 82,
+    "repair_prompts": 82,
+    "result": {
+      "origin_frame_rate": 0.2663871951219512,
+      "repair_frame_rate": 0.2663871951219512,
+      "origin_frames": 2624,
+      "repair_frames": 2624
+    },
+    "caveats": [
+      "the Origin interface is a reconstruction of the official prompt parsing, not the official auxiliary_info file",
+      "the visual backend is identical on both sides; only the text interface differs",
+      "insufficient answers are reported as abstention rather than counted as successes"
+    ]
+  },
+  "scene": {
+    "dimension": "scene",
+    "cache": "data/backend-cache/scene-200.jsonl",
+    "repair": "data/backend-cache/repair-scene.jsonl",
+    "videos_in_cache": 172,
+    "prompts_in_cache": 86,
+    "repair_prompts": 86,
+    "result": {
+      "origin_frame_rate": 0.38117732558139533,
+      "origin_video_rate": 0.38117732558139533,
+      "repair_video_rate": 0.8553459119496856,
+      "origin_frames": 2752,
+      "repair_decided_videos": 159,
+      "repair_abstain_videos": 13,
+      "repair_supported_videos": 136,
+      "repair_contradicted_videos": 23,
+      "repair_support_rate_decided": 0.8553459119496856
+    },
+    "caveats": [
+      "the Origin interface is a reconstruction of the official prompt parsing, not the official auxiliary_info file",
+      "the visual backend is identical on both sides; only the text interface differs",
+      "insufficient answers are reported as abstention rather than counted as successes"
+    ]
+  }
+}
