@@ -1,0 +1,15 @@
+{
+  "metric": "dynamic-degree",
+  "backend": "vbench",
+  "status": "complete",
+  "total": 1,
+  "succeeded": 1,
+  "failed": 0,
+  "valid_samples": 1,
+  "aggregate": 1.0,
+  "formula_version": "vbench1-mean-video-booleans",
+  "errors": [],
+  "status_counts": {},
+  "denominator_kind": null,
+  "counts": {}
+}

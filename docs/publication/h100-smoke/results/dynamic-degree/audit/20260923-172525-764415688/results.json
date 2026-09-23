@@ -1,0 +1,1268 @@
+[
+  {
+    "video": "/root/wenbiao_zhao/datasets/vbench-1.0-human-preference/videos/modelscope/subject_consistency/a person swimming in ocean-0.mp4",
+    "status": "succeeded",
+    "score": 0.04317164457276153,
+    "error": null,
+    "prompt": "a person swimming in ocean",
+    "backend": "audit",
+    "failure_reason": null,
+    "prompt_motion_target": "subject",
+    "selected_evidence_channel": "residual",
+    "apparent_intensity": 0.10498760792145055,
+    "camera_intensity": 0.08393428879884898,
+    "residual_intensity": 0.04317164457276153,
+    "apparent_coverage": 0.6,
+    "camera_coverage": 0.5333333333333333,
+    "residual_coverage": 0.3333333333333333,
+    "task_relevant_motion_evidence": {
+      "channel": "residual",
+      "motion_intensity": 0.04317164457276153,
+      "temporal_coverage": 0.3333333333333333,
+      "valid_transition_count": 15,
+      "valid_duration": 1.875,
+      "evidence_components": [
+        "motion_intensity",
+        "temporal_coverage"
+      ],
+      "aggregation": "structured_intensity_and_temporal_coverage"
+    },
+    "score_metadata": {
+      "source": "task_relevant_motion_evidence.motion_intensity",
+      "independently_calibrated": false,
+      "status": "succeeded_scalarized",
+      "scalarization": "task_relevant_motion_evidence.motion_intensity"
+    },
+    "diagnostics": {
+      "sampling": {
+        "sampled_source_frame_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "timestamps": [
+          0.0,
+          0.125,
+          0.25,
+          0.375,
+          0.5,
+          0.625,
+          0.75,
+          0.875,
+          1.0,
+          1.125,
+          1.25,
+          1.375,
+          1.5,
+          1.625,
+          1.75,
+          1.875
+        ],
+        "timestamp_source": "opencv_pos_msec",
+        "source_fps": 8.0,
+        "sampling_interval": 1,
+        "delta_t": [
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125
+        ],
+        "frame_shape": [
+          256,
+          256
+        ]
+      },
+      "transitions": [
+        {
+          "source_frame_index_a": 0,
+          "source_frame_index_b": 1,
+          "timestamp_a": 0.0,
+          "timestamp_b": 0.125,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.13435714183560918,
+          "global_displacement": 0.11678495874700773,
+          "residual_displacement": 0.04230703568924995,
+          "apparent_speed": 1.0748571346848734,
+          "global_speed": 0.9342796699760618,
+          "residual_speed": 0.3384562855139996,
+          "apparent_intensity": 0.3800193843712081,
+          "global_intensity": 0.33031774508240147,
+          "residual_intensity": 0.11966236731107967,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": true,
+            "camera": true,
+            "residual": true
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 48.64248119951464,
+              "mean": 38.725043414652916,
+              "median": 39.094196733950625,
+              "maximum": 51.851406051772194
+            },
+            "camera": {
+              "top5_mean": 42.280671370547395,
+              "mean": 39.60220259247797,
+              "median": 39.60650711751412,
+              "maximum": 42.907382828684916
+            },
+            "residual": {
+              "top5_mean": 15.316783015818201,
+              "mean": 4.149496674483579,
+              "median": 3.3363191040080387,
+              "maximum": 36.368655735793496
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                0.9890699539374594,
+                0.016857771994485727,
+                -39.46086886704011
+              ],
+              [
+                -0.016857771994485727,
+                0.9890699539374594,
+                11.791889439437611
+              ]
+            ],
+            "inlier_ratio": 0.28759765625,
+            "candidate_count": 3211,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 3.3298263549804688,
+            "residual_mad": 1.7569259405136108
+          }
+        },
+        {
+          "source_frame_index_a": 1,
+          "source_frame_index_b": 2,
+          "timestamp_a": 0.125,
+          "timestamp_b": 0.25,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.012742641122102008,
+          "global_displacement": 0.011464134559073238,
+          "residual_displacement": 0.00895727344280366,
+          "apparent_speed": 0.10194112897681606,
+          "global_speed": 0.0917130764725859,
+          "residual_speed": 0.07165818754242928,
+          "apparent_intensity": 0.03604163179065954,
+          "global_intensity": 0.032425469148622946,
+          "residual_intensity": 0.02533499516939456,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": false,
+            "camera": false,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 4.613328869204422,
+              "mean": 3.0632899248111323,
+              "median": 2.901533747221843,
+              "maximum": 5.1005355670703985
+            },
+            "camera": {
+              "top5_mean": 4.150460051023738,
+              "mean": 2.6988493549506405,
+              "median": 2.776730657886216,
+              "maximum": 4.552954915442523
+            },
+            "residual": {
+              "top5_mean": 3.242879381682504,
+              "mean": 1.2455748000410147,
+              "median": 1.058128098212599,
+              "maximum": 5.203211041911126
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                1.0099723956266131,
+                -0.0046854779372611155,
+                -0.035681591186849215
+              ],
+              [
+                0.0046854779372611155,
+                1.0099723956266131,
+                0.6219197935430689
+              ]
+            ],
+            "inlier_ratio": 0.79010009765625,
+            "candidate_count": 8074,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 1.0581321716308594,
+            "residual_mad": 0.5672256946563721
+          }
+        },
+        {
+          "source_frame_index_a": 2,
+          "source_frame_index_b": 3,
+          "timestamp_a": 0.25,
+          "timestamp_b": 0.375,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.1305858816663329,
+          "global_displacement": 0.08136820080046406,
+          "residual_displacement": 0.0569255132295353,
+          "apparent_speed": 1.0446870533306631,
+          "global_speed": 0.6509456064037125,
+          "residual_speed": 0.4554041058362824,
+          "apparent_intensity": 0.36935264981395216,
+          "global_intensity": 0.2301440262358272,
+          "residual_intensity": 0.16100966570851571,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": true,
+            "camera": true,
+            "residual": true
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 47.27713917618588,
+              "mean": 31.777318395132202,
+              "median": 30.756348830452286,
+              "maximum": 54.7763904576469
+            },
+            "camera": {
+              "top5_mean": 29.458435358185884,
+              "mean": 26.725097833921943,
+              "median": 26.74026355910354,
+              "maximum": 30.1587120806321
+            },
+            "residual": {
+              "top5_mean": 20.609237210690015,
+              "mean": 6.788347992149786,
+              "median": 5.295709927191126,
+              "maximum": 28.568870560808943
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                0.987391710575428,
+                0.015219901136536707,
+                -26.73327043053964
+              ],
+              [
+                -0.015219901136536707,
+                0.987391710575428,
+                7.43666140060472
+              ]
+            ],
+            "inlier_ratio": 0.17034912109375,
+            "candidate_count": 2010,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 5.297172546386719,
+            "residual_mad": 3.1214051246643066
+          }
+        },
+        {
+          "source_frame_index_a": 3,
+          "source_frame_index_b": 4,
+          "timestamp_a": 0.375,
+          "timestamp_b": 0.5,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.047806722821184304,
+          "global_displacement": 0.04474783108248407,
+          "residual_displacement": 0.02078750468907413,
+          "apparent_speed": 0.38245378256947443,
+          "global_speed": 0.35798264865987256,
+          "residual_speed": 0.16630003751259304,
+          "apparent_intensity": 0.13521783157266037,
+          "global_intensity": 0.1265659792072586,
+          "residual_intensity": 0.05879594211836588,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": true,
+            "camera": true,
+            "residual": true
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 17.30788244130053,
+              "mean": 12.530604889107696,
+              "median": 12.72307958545803,
+              "maximum": 18.258221729849204
+            },
+            "camera": {
+              "top5_mean": 16.200445338529104,
+              "mean": 13.274746577732142,
+              "median": 13.340208035040577,
+              "maximum": 16.97896839387264
+            },
+            "residual": {
+              "top5_mean": 7.525880591150834,
+              "mean": 2.101350242282986,
+              "median": 1.5730580073273255,
+              "maximum": 10.990877171627565
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                1.0065169295348377,
+                0.02010106470091567,
+                -15.657211883071897
+              ],
+              [
+                -0.02010106470091567,
+                1.0065169295348377,
+                6.567882746267496
+              ]
+            ],
+            "inlier_ratio": 0.65478515625,
+            "candidate_count": 7803,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 1.5719752311706543,
+            "residual_mad": 0.7019962072372437
+          }
+        },
+        {
+          "source_frame_index_a": 4,
+          "source_frame_index_b": 5,
+          "timestamp_a": 0.5,
+          "timestamp_b": 0.625,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.02250838448395632,
+          "global_displacement": 0.01968976480044766,
+          "residual_displacement": 0.009175425123408826,
+          "apparent_speed": 0.18006707587165055,
+          "global_speed": 0.1575181184035813,
+          "residual_speed": 0.0734034009872706,
+          "apparent_intensity": 0.06366332520863832,
+          "global_intensity": 0.055691064841458915,
+          "residual_intensity": 0.02595202130012718,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": true,
+            "camera": true,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 8.148905626705707,
+              "mean": 4.376825284049105,
+              "median": 4.228050972118235,
+              "maximum": 10.087427771087562
+            },
+            "camera": {
+              "top5_mean": 7.128456299706743,
+              "mean": 4.384942628951823,
+              "median": 4.492219663667395,
+              "maximum": 7.8968810084538035
+            },
+            "residual": {
+              "top5_mean": 3.3218587264162798,
+              "mean": 0.7863633038995372,
+              "median": 0.5932805832172134,
+              "maximum": 7.876923242838922
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                0.9980061861017929,
+                0.02170448254947864,
+                -5.922804499678281
+              ],
+              [
+                -0.02170448254947864,
+                0.9980061861017929,
+                5.223132826213504
+              ]
+            ],
+            "inlier_ratio": 0.95843505859375,
+            "candidate_count": 11465,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 0.5917303562164307,
+            "residual_mad": 0.3028542995452881
+          }
+        },
+        {
+          "source_frame_index_a": 5,
+          "source_frame_index_b": 6,
+          "timestamp_a": 0.625,
+          "timestamp_b": 0.75,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.04726070714066132,
+          "global_displacement": 0.04678676709480502,
+          "residual_displacement": 0.007019829177105669,
+          "apparent_speed": 0.3780856571252906,
+          "global_speed": 0.37429413675844014,
+          "residual_speed": 0.05615863341684535,
+          "apparent_intensity": 0.13367346601133243,
+          "global_intensity": 0.13233296113012902,
+          "residual_intensity": 0.019855075255610397,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": true,
+            "camera": true,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 17.110203649450554,
+              "mean": 14.872791302202218,
+              "median": 14.875857441272,
+              "maximum": 19.565144982322277
+            },
+            "camera": {
+              "top5_mean": 16.938619024656514,
+              "mean": 14.846224428500092,
+              "median": 14.851358726117025,
+              "maximum": 17.428946194596033
+            },
+            "residual": {
+              "top5_mean": 2.5414496327181313,
+              "mean": 0.852350313706473,
+              "median": 0.6716952305510355,
+              "maximum": 5.943308662889857
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                0.9941497698414012,
+                0.014872562946566126,
+                -15.931827979123154
+              ],
+              [
+                -0.014872562946566126,
+                0.9941497698414012,
+                3.3623283997393836
+              ]
+            ],
+            "inlier_ratio": 0.94580078125,
+            "candidate_count": 11315,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 0.6705783605575562,
+            "residual_mad": 0.33503401279449463
+          }
+        },
+        {
+          "source_frame_index_a": 6,
+          "source_frame_index_b": 7,
+          "timestamp_a": 0.75,
+          "timestamp_b": 0.875,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.01166965545622595,
+          "global_displacement": 0.0056945982320425505,
+          "residual_displacement": 0.007949665107276514,
+          "apparent_speed": 0.0933572436498076,
+          "global_speed": 0.045556785856340404,
+          "residual_speed": 0.06359732085821211,
+          "apparent_intensity": 0.03300677002883185,
+          "global_intensity": 0.01610675610404085,
+          "residual_intensity": 0.02248504842206922,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": false,
+            "camera": false,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 4.224866563690478,
+              "mean": 1.3335851322919148,
+              "median": 1.1398202283323897,
+              "maximum": 9.598397670220393
+            },
+            "camera": {
+              "top5_mean": 2.0616647813172286,
+              "mean": 1.1749033240423217,
+              "median": 1.1886869165794387,
+              "maximum": 2.318721358117767
+            },
+            "residual": {
+              "top5_mean": 2.8780861980248607,
+              "mean": 0.6000845081501638,
+              "median": 0.4799264602298195,
+              "maximum": 8.445557718401787
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                0.9934464311983999,
+                0.004041225157392432,
+                -0.4347016499217802
+              ],
+              [
+                -0.004041225157392432,
+                0.9934464311983999,
+                2.000984084451548
+              ]
+            ],
+            "inlier_ratio": 0.9818115234375,
+            "candidate_count": 11830,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 0.48043471574783325,
+            "residual_mad": 0.19523006677627563
+          }
+        },
+        {
+          "source_frame_index_a": 7,
+          "source_frame_index_b": 8,
+          "timestamp_a": 0.875,
+          "timestamp_b": 1.0,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.016215998099933022,
+          "global_displacement": 0.012238333020801635,
+          "residual_displacement": 0.009337719149304011,
+          "apparent_speed": 0.12972798479946418,
+          "global_speed": 0.09790666416641308,
+          "residual_speed": 0.07470175319443209,
+          "apparent_intensity": 0.045865768880683236,
+          "global_intensity": 0.034615233077712325,
+          "residual_intensity": 0.026411058125153382,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": false,
+            "camera": false,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 5.870818416727455,
+              "mean": 3.291070904802094,
+              "median": 3.1151211777733527,
+              "maximum": 13.743047430819082
+            },
+            "camera": {
+              "top5_mean": 4.430749833947178,
+              "mean": 3.310963310402488,
+              "median": 3.310473417879776,
+              "maximum": 4.661929842379495
+            },
+            "residual": {
+              "top5_mean": 3.3806154400196333,
+              "mean": 0.9471149950316673,
+              "median": 0.7849106954855198,
+              "maximum": 12.602867205890021
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                1.0020009105086594,
+                -0.008992156768133523,
+                1.1971407940427643
+              ],
+              [
+                0.008992156768133523,
+                1.0020009105086594,
+                1.8217684789748514
+              ]
+            ],
+            "inlier_ratio": 0.94708251953125,
+            "candidate_count": 11249,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 0.7850283980369568,
+            "residual_mad": 0.30821794271469116
+          }
+        },
+        {
+          "source_frame_index_a": 8,
+          "source_frame_index_b": 9,
+          "timestamp_a": 1.0,
+          "timestamp_b": 1.125,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.01927572968882202,
+          "global_displacement": 0.010542390209875576,
+          "residual_displacement": 0.019863299002380895,
+          "apparent_speed": 0.15420583751057615,
+          "global_speed": 0.0843391216790046,
+          "residual_speed": 0.15890639201904716,
+          "apparent_intensity": 0.054519996701139634,
+          "global_intensity": 0.029818382429270755,
+          "residual_intensity": 0.05618189368527806,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": true,
+            "camera": false,
+            "residual": true
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 6.978559577745874,
+              "mean": 2.8844214196682225,
+              "median": 2.894563451397957,
+              "maximum": 10.532211816602894
+            },
+            "camera": {
+              "top5_mean": 3.816752950946657,
+              "mean": 2.0716719755904407,
+              "median": 2.041528997288959,
+              "maximum": 4.429924452684809
+            },
+            "residual": {
+              "top5_mean": 7.191282391715593,
+              "mean": 2.787756400158652,
+              "median": 2.1334104407858208,
+              "maximum": 8.197376086009303
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                0.9837184713977398,
+                0.009543253690842145,
+                0.1372151915840725
+              ],
+              [
+                -0.009543253690842145,
+                0.9837184713977398,
+                2.4471402176670916
+              ]
+            ],
+            "inlier_ratio": 0.47601318359375,
+            "candidate_count": 4551,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 2.130122661590576,
+            "residual_mad": 1.486961841583252
+          }
+        },
+        {
+          "source_frame_index_a": 9,
+          "source_frame_index_b": 10,
+          "timestamp_a": 1.125,
+          "timestamp_b": 1.25,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.02123632490267586,
+          "global_displacement": 0.02017574528630976,
+          "residual_displacement": 0.003647127764273487,
+          "apparent_speed": 0.16989059922140687,
+          "global_speed": 0.16140596229047807,
+          "residual_speed": 0.029177022114187896,
+          "apparent_intensity": 0.06006539738465139,
+          "global_intensity": 0.05706562522976861,
+          "residual_intensity": 0.010315635095886058,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": true,
+            "camera": true,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 7.688370865235379,
+              "mean": 6.513189879167026,
+              "median": 6.619011263826971,
+              "maximum": 8.172725488707357
+            },
+            "camera": {
+              "top5_mean": 7.304400029410383,
+              "mean": 6.435831106362324,
+              "median": 6.436265364049662,
+              "maximum": 7.47317804003039
+            },
+            "residual": {
+              "top5_mean": 1.3204012922734156,
+              "mean": 0.5189885060934972,
+              "median": 0.47415480854916453,
+              "maximum": 1.7112867748136755
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                0.998082013079517,
+                0.006711392717802301,
+                -3.346487600177363
+              ],
+              [
+                -0.006711392717802301,
+                0.998082013079517,
+                -4.702389371631533
+              ]
+            ],
+            "inlier_ratio": 1.0,
+            "candidate_count": 11753,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 0.4748971164226532,
+            "residual_mad": 0.1833164095878601
+          }
+        },
+        {
+          "source_frame_index_a": 10,
+          "source_frame_index_b": 11,
+          "timestamp_a": 1.25,
+          "timestamp_b": 1.375,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.017536619051278644,
+          "global_displacement": 0.01694306157350216,
+          "residual_displacement": 0.003652346760836901,
+          "apparent_speed": 0.14029295241022915,
+          "global_speed": 0.1355444925880173,
+          "residual_speed": 0.02921877408669521,
+          "apparent_intensity": 0.04960104900097731,
+          "global_intensity": 0.04792221493073837,
+          "residual_intensity": 0.010330396647329976,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": true,
+            "camera": true,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 6.3489342721250965,
+              "mean": 3.808173941889058,
+              "median": 3.6347390023910386,
+              "maximum": 6.921567391883508
+            },
+            "camera": {
+              "top5_mean": 6.134043511134513,
+              "mean": 3.890530136923935,
+              "median": 3.86930723653514,
+              "maximum": 6.525408123402143
+            },
+            "residual": {
+              "top5_mean": 1.3222907708582372,
+              "mean": 0.361895864683873,
+              "median": 0.28771533352490264,
+              "maximum": 3.2251841949822566
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                1.0011942702843009,
+                0.019122270157926134,
+                -2.773289018273292
+              ],
+              [
+                -0.019122270157926134,
+                1.0011942702843009,
+                5.87274246685341
+              ]
+            ],
+            "inlier_ratio": 0.99365234375,
+            "candidate_count": 11557,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 0.28638917207717896,
+            "residual_mad": 0.11006510257720947
+          }
+        },
+        {
+          "source_frame_index_a": 11,
+          "source_frame_index_b": 12,
+          "timestamp_a": 1.375,
+          "timestamp_b": 1.5,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.016369904893397107,
+          "global_displacement": 0.013476935721390377,
+          "residual_displacement": 0.009718783328435097,
+          "apparent_speed": 0.13095923914717686,
+          "global_speed": 0.10781548577112302,
+          "residual_speed": 0.07775026662748077,
+          "apparent_intensity": 0.046301083029999766,
+          "global_intensity": 0.0381185305528414,
+          "residual_intensity": 0.027488870385676885,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": false,
+            "camera": false,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 5.92653862783997,
+              "mean": 4.660041222417955,
+              "median": 4.565058545356319,
+              "maximum": 6.5891179025951905
+            },
+            "camera": {
+              "top5_mean": 4.8791719107637,
+              "mean": 4.494385939798993,
+              "median": 4.494620566552589,
+              "maximum": 4.955088192149843
+            },
+            "residual": {
+              "top5_mean": 3.518575409366642,
+              "mean": 1.0408782802664256,
+              "median": 0.7590955289202328,
+              "maximum": 4.805652565878683
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                1.0030440228957618,
+                0.00016334786259738314,
+                -1.0460961227200962
+              ],
+              [
+                -0.00016334786259738314,
+                1.0030440228957618,
+                4.075989575326484
+              ]
+            ],
+            "inlier_ratio": 0.86712646484375,
+            "candidate_count": 9108,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 0.7596726417541504,
+            "residual_mad": 0.3269854187965393
+          }
+        },
+        {
+          "source_frame_index_a": 12,
+          "source_frame_index_b": 13,
+          "timestamp_a": 1.5,
+          "timestamp_b": 1.625,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.013171311680956223,
+          "global_displacement": 0.013007554792486702,
+          "residual_displacement": 0.0018955610168609974,
+          "apparent_speed": 0.10537049344764979,
+          "global_speed": 0.10406043833989362,
+          "residual_speed": 0.01516448813488798,
+          "apparent_intensity": 0.037254095226902914,
+          "global_intensity": 0.03679092080169168,
+          "residual_intensity": 0.005361456196701115,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": false,
+            "camera": false,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 4.768524189043574,
+              "mean": 3.2090073256656675,
+              "median": 3.100193186328501,
+              "maximum": 5.302366568289924
+            },
+            "camera": {
+              "top5_mean": 4.709237862616536,
+              "mean": 3.1909692026818397,
+              "median": 3.1848294857814112,
+              "maximum": 5.0128318170005715
+            },
+            "residual": {
+              "top5_mean": 0.6862663931777429,
+              "mean": 0.3027639771592723,
+              "median": 0.2755940644054765,
+              "maximum": 0.9326572480690938
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                1.0015141596677752,
+                0.01264291325464706,
+                -1.923563719827935
+              ],
+              [
+                -0.01264291325464706,
+                1.0015141596677752,
+                4.455118143746016
+              ]
+            ],
+            "inlier_ratio": 1.0,
+            "candidate_count": 12138,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 0.27530986070632935,
+            "residual_mad": 0.09857675433158875
+          }
+        },
+        {
+          "source_frame_index_a": 13,
+          "source_frame_index_b": 14,
+          "timestamp_a": 1.625,
+          "timestamp_b": 1.75,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.01167702661329578,
+          "global_displacement": 0.011734957791581775,
+          "residual_displacement": 0.0026840239392247776,
+          "apparent_speed": 0.09341621290636624,
+          "global_speed": 0.0938796623326542,
+          "residual_speed": 0.02147219151379822,
+          "apparent_intensity": 0.03302761880942892,
+          "global_intensity": 0.03319147292546154,
+          "residual_intensity": 0.00759156611317148,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": false,
+            "camera": false,
+            "residual": false
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 4.227535207606903,
+              "mean": 2.8864940184154055,
+              "median": 2.8655337659225806,
+              "maximum": 4.625022069154368
+            },
+            "camera": {
+              "top5_mean": 4.248508534459077,
+              "mean": 2.872306975422022,
+              "median": 2.928883618049438,
+              "maximum": 4.624920678833467
+            },
+            "residual": {
+              "top5_mean": 0.9717204624859496,
+              "mean": 0.32374024447292643,
+              "median": 0.28228401053715535,
+              "maximum": 1.7600468204270465
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                0.9998265429613715,
+                0.010419030405684265,
+                -2.825884689679111
+              ],
+              [
+                -0.010419030405684265,
+                0.9998265429613715,
+                3.661183825778025
+              ]
+            ],
+            "inlier_ratio": 1.0,
+            "candidate_count": 12208,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 0.28215160965919495,
+            "residual_mad": 0.12690003216266632
+          }
+        },
+        {
+          "source_frame_index_a": 14,
+          "source_frame_index_b": 15,
+          "timestamp_a": 1.75,
+          "timestamp_b": 1.875,
+          "dt_seconds": 0.125,
+          "frame_shape": [
+            256,
+            256
+          ],
+          "valid": true,
+          "invalid_reason": null,
+          "apparent_displacement": 0.03436682180716085,
+          "global_displacement": 0.020473552165749247,
+          "residual_displacement": 0.02503111232304294,
+          "apparent_speed": 0.2749345744572868,
+          "global_speed": 0.16378841732599397,
+          "residual_speed": 0.20024889858434353,
+          "apparent_intensity": 0.09720405099069263,
+          "global_intensity": 0.057907950285511274,
+          "residual_intensity": 0.07079867705706326,
+          "significant_motion_threshold": 0.04687499999999999,
+          "moving_static_decision": {
+            "apparent": true,
+            "camera": true,
+            "residual": true
+          },
+          "magnitude_statistics": {
+            "apparent": {
+              "top5_mean": 12.442118526808658,
+              "mean": 6.8113381426144395,
+              "median": 6.5014176859506305,
+              "maximum": 15.31195877262818
+            },
+            "camera": {
+              "top5_mean": 7.412217636545444,
+              "mean": 5.317302612155406,
+              "median": 5.3160914832453825,
+              "maximum": 7.87189586954749
+            },
+            "residual": {
+              "top5_mean": 9.0622306633041,
+              "mean": 3.3904300195164647,
+              "median": 2.990528376069979,
+              "maximum": 13.96360787007804
+            }
+          },
+          "global_estimation": {
+            "affine_parameters": [
+              [
+                1.010409583892127,
+                0.013791845576170475,
+                -5.579415753626412
+              ],
+              [
+                -0.013791845576170475,
+                1.010409583892127,
+                4.942454054215875
+              ]
+            ],
+            "inlier_ratio": 0.31787109375,
+            "candidate_count": 4616,
+            "initial_candidate_count": 16384,
+            "candidate_strategy": "geometric_inlier_residual_consistent_border_band_prior",
+            "fallback": false,
+            "fallback_reason": null,
+            "residual_median": 2.9949777126312256,
+            "residual_mad": 1.602532148361206
+          }
+        }
+      ],
+      "audit_video": {
+        "apparent": {
+          "channel": "apparent",
+          "motion_intensity": 0.10498760792145055,
+          "temporal_coverage": 0.6,
+          "valid_transition_count": 15,
+          "valid_duration": 1.875
+        },
+        "camera": {
+          "channel": "camera",
+          "motion_intensity": 0.08393428879884898,
+          "temporal_coverage": 0.5333333333333333,
+          "valid_transition_count": 15,
+          "valid_duration": 1.875
+        },
+        "residual": {
+          "channel": "residual",
+          "motion_intensity": 0.04317164457276153,
+          "temporal_coverage": 0.3333333333333333,
+          "valid_transition_count": 15,
+          "valid_duration": 1.875
+        },
+        "valid_transition_count": 15,
+        "valid_transition_duration": 1.875,
+        "prompt_motion_target": {
+          "target": "subject",
+          "source": "explicit_override",
+          "matched_subject_cues": [],
+          "matched_camera_cues": [],
+          "matched_generic_cues": []
+        },
+        "selected_evidence_channel": "residual",
+        "task_relevant_motion_evidence": {
+          "channel": "residual",
+          "motion_intensity": 0.04317164457276153,
+          "temporal_coverage": 0.3333333333333333,
+          "valid_transition_count": 15,
+          "valid_duration": 1.875,
+          "evidence_components": [
+            "motion_intensity",
+            "temporal_coverage"
+          ],
+          "aggregation": "structured_intensity_and_temporal_coverage"
+        },
+        "scalar_score": 0.04317164457276153,
+        "scalar_score_source": "task_relevant_motion_evidence.motion_intensity",
+        "scalar_score_independently_calibrated": false,
+        "aggregation_method": "duration_weighted_mean_speed_and_duration_fraction",
+        "component_provenance": {
+          "time_normalization": true,
+          "source_decomposition": true,
+          "duration_persistence": true,
+          "task_routing": true
+        },
+        "time_normalization": {
+          "exponent": 0.5,
+          "exponent_source": "diffusive_sqrt_lag_default_bootstrap_ci_0p39_0p65_not_independently_calibrated",
+          "exponent_independently_calibrated": false,
+          "intensity_units": "image_diagonals_per_second_pow_0.5",
+          "ballistic_default_exponent": 1.0,
+          "role": "applied_to_motion_intensity_and_scalar; coverage_fraction_still_uses_the_ballistic_speed_against_the_official_derived_threshold"
+        },
+        "lag_scaling": {
+          "exponent": 1.2151611283673969,
+          "exponent_source": "measured_within_clip_power_law",
+          "measured_on_channel": "apparent",
+          "lags_frames": [
+            1,
+            2,
+            4
+          ],
+          "lag_seconds": [
+            0.125,
+            0.25,
+            0.5
+          ],
+          "chord_displacement_diagonals": [
+            0.03711872475090609,
+            0.10523827948231754,
+            0.19692004755124878
+          ],
+          "path_displacement_diagonals": [
+            0.03711872475090609,
+            0.06748841277745807,
+            0.1273629221089976
+          ],
+          "straightness": [
+            1.0,
+            1.559353304534499,
+            1.546133241059937
+          ],
+          "pair_counts": [
+            15,
+            14,
+            12
+          ],
+          "fit_rmse_log_log": 0.09831383602503765,
+          "independently_calibrated": false,
+          "model": "displacement ~ lag**exponent"
+        }
+      },
+      "threshold": {
+        "value": 0.04687499999999999,
+        "units": "image_diagonals_per_second_pow_0.5",
+        "exponent": 0.5,
+        "source": "derived_from_vbench1_pixel_threshold_at_0.125s_normalized_by_dt_pow_0.5_not_independently_calibrated",
+        "independently_calibrated": false,
+        "role": "compared against the lag-normalised intensity in the same exponent domain"
+      },
+      "boundary": {
+        "official_count_num": 4,
+        "audit_effective_count_num": 4,
+        "boundary_fix_applied": false,
+        "role": "compatibility_diagnostics_only_not_used_by_audit_score"
+      }
+    }
+  }
+]

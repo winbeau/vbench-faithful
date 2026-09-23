@@ -1,0 +1,15 @@
+{
+  "metric": "dynamic-degree",
+  "backend": "audit",
+  "status": "complete",
+  "total": 1,
+  "succeeded": 1,
+  "failed": 0,
+  "valid_samples": 1,
+  "aggregate": 0.04317164457276153,
+  "formula_version": "structured-intensity-and-temporal-coverage-no-default-scalarization",
+  "errors": [],
+  "status_counts": {},
+  "denominator_kind": null,
+  "counts": {}
+}

@@ -1,0 +1,291 @@
+{
+  "experiments": [
+    {
+      "dimension": "object_class",
+      "version": "main-table-8d-20260922",
+      "root": "/root/wenbiao_zhao/datasets/vbench-main-table-8d-20260922",
+      "include": [
+        "dimensions/object_class",
+        "provenance",
+        "reports/main-table.csv",
+        "reports/summary.json",
+        "reports/verification.json",
+        "README.md"
+      ],
+      "exclude_components": [
+        "scoring-evidence",
+        "fresh-inference",
+        "prompts-code"
+      ],
+      "records_file": "dimensions/object_class/pairs.jsonl",
+      "note": "Frozen eight-dimension main-table archive. Includes original videos, actual counterfactual media or frame arrays, construction records and score evidence. Model feature caches are excluded. Semantic interventions may reuse the same video; records describe the changed conditions. This archive is not a new model evaluation."
+    },
+    {
+      "dimension": "color",
+      "version": "main-table-8d-20260922",
+      "root": "/root/wenbiao_zhao/datasets/vbench-main-table-8d-20260922",
+      "include": [
+        "dimensions/color",
+        "provenance",
+        "reports/main-table.csv",
+        "reports/summary.json",
+        "reports/verification.json",
+        "README.md"
+      ],
+      "exclude_components": [
+        "scoring-evidence",
+        "fresh-inference",
+        "prompts-code"
+      ],
+      "records_file": "dimensions/color/pairs.jsonl",
+      "note": "Frozen eight-dimension main-table archive. Includes original videos, actual counterfactual media or frame arrays, construction records and score evidence. Model feature caches are excluded. Semantic interventions may reuse the same video; records describe the changed conditions. This archive is not a new model evaluation."
+    },
+    {
+      "dimension": "scene",
+      "version": "main-table-8d-20260922",
+      "root": "/root/wenbiao_zhao/datasets/vbench-main-table-8d-20260922",
+      "include": [
+        "dimensions/scene",
+        "provenance",
+        "reports/main-table.csv",
+        "reports/summary.json",
+        "reports/verification.json",
+        "README.md"
+      ],
+      "exclude_components": [
+        "scoring-evidence",
+        "fresh-inference",
+        "prompts-code"
+      ],
+      "records_file": "dimensions/scene/pairs.jsonl",
+      "note": "Frozen eight-dimension main-table archive. Includes original videos, actual counterfactual media or frame arrays, construction records and score evidence. Model feature caches are excluded. Semantic interventions may reuse the same video; records describe the changed conditions. This archive is not a new model evaluation."
+    },
+    {
+      "dimension": "human_action",
+      "version": "main-table-8d-20260922",
+      "root": "/root/wenbiao_zhao/datasets/vbench-main-table-8d-20260922",
+      "include": [
+        "dimensions/human_action",
+        "provenance",
+        "reports/main-table.csv",
+        "reports/summary.json",
+        "reports/verification.json",
+        "README.md"
+      ],
+      "exclude_components": [
+        "scoring-evidence",
+        "fresh-inference",
+        "prompts-code"
+      ],
+      "records_file": "dimensions/human_action/pairs.jsonl",
+      "note": "Frozen eight-dimension main-table archive. Includes original videos, actual counterfactual media or frame arrays, construction records and score evidence. Model feature caches are excluded. Semantic interventions may reuse the same video; records describe the changed conditions. This archive is not a new model evaluation."
+    },
+    {
+      "dimension": "spatial_relationship",
+      "version": "main-table-8d-20260922",
+      "root": "/root/wenbiao_zhao/datasets/vbench-main-table-8d-20260922",
+      "include": [
+        "dimensions/spatial_relationship",
+        "provenance",
+        "reports/main-table.csv",
+        "reports/summary.json",
+        "reports/verification.json",
+        "README.md"
+      ],
+      "exclude_components": [
+        "scoring-evidence",
+        "fresh-inference",
+        "prompts-code"
+      ],
+      "records_file": "dimensions/spatial_relationship/pairs.jsonl",
+      "note": "Frozen eight-dimension main-table archive. Includes original videos, actual counterfactual media or frame arrays, construction records and score evidence. Model feature caches are excluded. Semantic interventions may reuse the same video; records describe the changed conditions. This archive is not a new model evaluation."
+    },
+    {
+      "dimension": "multiple_objects",
+      "version": "main-table-8d-20260922",
+      "root": "/root/wenbiao_zhao/datasets/vbench-main-table-8d-20260922",
+      "include": [
+        "dimensions/multiple_objects",
+        "provenance",
+        "reports/main-table.csv",
+        "reports/summary.json",
+        "reports/verification.json",
+        "README.md"
+      ],
+      "exclude_components": [
+        "scoring-evidence",
+        "fresh-inference",
+        "prompts-code"
+      ],
+      "records_file": "dimensions/multiple_objects/pairs.jsonl",
+      "note": "Frozen eight-dimension main-table archive. Includes original videos, actual counterfactual media or frame arrays, construction records and score evidence. Model feature caches are excluded. Semantic interventions may reuse the same video; records describe the changed conditions. This archive is not a new model evaluation."
+    },
+    {
+      "dimension": "background_consistency",
+      "version": "main-table-8d-20260922",
+      "root": "/root/wenbiao_zhao/datasets/vbench-main-table-8d-20260922",
+      "include": [
+        "dimensions/background_consistency",
+        "provenance",
+        "reports/main-table.csv",
+        "reports/summary.json",
+        "reports/verification.json",
+        "README.md"
+      ],
+      "exclude_components": [
+        "scoring-evidence",
+        "fresh-inference",
+        "prompts-code"
+      ],
+      "records_file": "dimensions/background_consistency/pairs.jsonl",
+      "note": "Frozen eight-dimension main-table archive. Includes original videos, actual counterfactual media or frame arrays, construction records and score evidence. Model feature caches are excluded. Semantic interventions may reuse the same video; records describe the changed conditions. This archive is not a new model evaluation."
+    },
+    {
+      "dimension": "subject_consistency",
+      "version": "main-table-8d-20260922",
+      "root": "/root/wenbiao_zhao/datasets/vbench-main-table-8d-20260922",
+      "include": [
+        "dimensions/subject_consistency",
+        "provenance",
+        "reports/main-table.csv",
+        "reports/summary.json",
+        "reports/verification.json",
+        "README.md"
+      ],
+      "exclude_components": [
+        "scoring-evidence",
+        "fresh-inference",
+        "prompts-code"
+      ],
+      "records_file": "dimensions/subject_consistency/pairs.jsonl",
+      "note": "Frozen eight-dimension main-table archive. Includes original videos, actual counterfactual media or frame arrays, construction records and score evidence. Model feature caches are excluded. Semantic interventions may reuse the same video; records describe the changed conditions. This archive is not a new model evaluation."
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "legacy-seven-dimension-v1",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench",
+      "include": [
+        "dynamics_degree",
+        "manifest.jsonl",
+        "README.md"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "dynamics_degree",
+      "note": "Historical seven-dimension counterfactual release. Preserve the recorded relation, eligibility and validity limitations; this is not a claim that all historical intervention contracts are valid."
+    },
+    {
+      "dimension": "human_action",
+      "version": "legacy-seven-dimension-v1",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench",
+      "include": [
+        "human_action",
+        "manifest.jsonl",
+        "README.md"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "human_action",
+      "note": "Historical seven-dimension counterfactual release. Preserve the recorded relation, eligibility and validity limitations; this is not a claim that all historical intervention contracts are valid."
+    },
+    {
+      "dimension": "motion_smoothness",
+      "version": "legacy-seven-dimension-v1",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench",
+      "include": [
+        "motion_smoothness",
+        "manifest.jsonl",
+        "README.md"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "motion_smoothness",
+      "note": "Historical seven-dimension counterfactual release. Preserve the recorded relation, eligibility and validity limitations; this is not a claim that all historical intervention contracts are valid."
+    },
+    {
+      "dimension": "scene",
+      "version": "legacy-seven-dimension-v1",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench",
+      "include": [
+        "scene",
+        "manifest.jsonl",
+        "README.md"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "scene",
+      "note": "Historical seven-dimension counterfactual release. Preserve the recorded relation, eligibility and validity limitations; this is not a claim that all historical intervention contracts are valid."
+    },
+    {
+      "dimension": "spatial_relationship",
+      "version": "legacy-seven-dimension-v1",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench",
+      "include": [
+        "spatial_relationship",
+        "manifest.jsonl",
+        "README.md"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "spatial_relationship",
+      "note": "Historical seven-dimension counterfactual release. Preserve the recorded relation, eligibility and validity limitations; this is not a claim that all historical intervention contracts are valid."
+    },
+    {
+      "dimension": "multiple_objects",
+      "version": "legacy-seven-dimension-v1",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench",
+      "include": [
+        "multiplt_object",
+        "manifest.jsonl",
+        "README.md"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "multiplt_object",
+      "note": "Historical seven-dimension counterfactual release. Preserve the recorded relation, eligibility and validity limitations; this is not a claim that all historical intervention contracts are valid."
+    },
+    {
+      "dimension": "subject_consistency",
+      "version": "legacy-seven-dimension-v1",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench",
+      "include": [
+        "subject_consistency",
+        "manifest.jsonl",
+        "README.md"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "subject_consistency",
+      "note": "Historical seven-dimension counterfactual release. Preserve the recorded relation, eligibility and validity limitations; this is not a claim that all historical intervention contracts are valid."
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "validation_dynamic",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench/validation_dynamic",
+      "include": [
+        "dynamics_degree",
+        "manifest.jsonl",
+        "metadata"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "dynamics_degree"
+    },
+    {
+      "dimension": "subject_consistency",
+      "version": "subject_confirmatory",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench/subject_confirmatory",
+      "include": [
+        "subject_consistency",
+        "manifest.jsonl",
+        "metadata"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "subject_consistency"
+    },
+    {
+      "dimension": "subject_consistency",
+      "version": "subject_tracked",
+      "root": "/root/wenbiao_zhao/datasets/counterfactual-vbench/subject_tracked",
+      "include": [
+        "subject_consistency",
+        "manifest.jsonl",
+        "metadata"
+      ],
+      "records_file": "manifest.jsonl",
+      "records_dimension": "subject_consistency"
+    }
+  ]
+}

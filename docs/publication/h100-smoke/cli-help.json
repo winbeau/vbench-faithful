@@ -1,0 +1,17 @@
+{
+  "passed": [
+    "background_consistency",
+    "color",
+    "dynamic_degree",
+    "human_action",
+    "motion_smoothness",
+    "multiple_objects",
+    "object_class",
+    "overall_consistency",
+    "scene",
+    "spatial_relationship",
+    "subject_consistency",
+    "temporal_style"
+  ],
+  "count": 12
+}

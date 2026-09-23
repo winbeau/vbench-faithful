@@ -1,0 +1,130 @@
+{
+  "experiments": [
+    {
+      "dimension": "dynamic_degree",
+      "version": "local-texture-dev32-mp4-8px-v1",
+      "root": "/data/chenjiayu/dynamic-structural-motion-20260922",
+      "include": [
+        "local-texture-dev32-mp4-8px-v1"
+      ],
+      "exclude_components": [
+        "code",
+        "audit-code-initial",
+        "features",
+        "assets",
+        "deps"
+      ],
+      "exclude_suffixes": [
+        ".pt",
+        ".pth",
+        ".safetensors"
+      ],
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-probe-v1",
+      "root": "/data/chenjiayu/dynamic-structural-motion-20260922",
+      "include": [
+        "vjepa-probe-v1"
+      ],
+      "exclude_components": [
+        "code",
+        "audit-code-initial",
+        "features",
+        "assets",
+        "deps"
+      ],
+      "exclude_suffixes": [
+        ".pt",
+        ".pth",
+        ".safetensors"
+      ],
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-validation-v1",
+      "root": "/data/chenjiayu/dynamic-structural-motion-20260922",
+      "include": [
+        "vjepa-validation-v1"
+      ],
+      "exclude_components": [
+        "code",
+        "audit-code-initial",
+        "features",
+        "assets",
+        "deps"
+      ],
+      "exclude_suffixes": [
+        ".pt",
+        ".pth",
+        ".safetensors"
+      ],
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-expansion450-v1",
+      "root": "/data/chenjiayu/dynamic-structural-motion-20260922",
+      "include": [
+        "vjepa-expansion450-v1"
+      ],
+      "exclude_components": [
+        "code",
+        "audit-code-initial",
+        "features",
+        "assets",
+        "deps"
+      ],
+      "exclude_suffixes": [
+        ".pt",
+        ".pth",
+        ".safetensors"
+      ],
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-static-frame-v1",
+      "root": "/data/chenjiayu/dynamic-structural-motion-20260922",
+      "include": [
+        "vjepa-static-frame-v1"
+      ],
+      "exclude_components": [
+        "code",
+        "audit-code-initial",
+        "features",
+        "assets",
+        "deps"
+      ],
+      "exclude_suffixes": [
+        ".pt",
+        ".pth",
+        ".safetensors"
+      ],
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-anchored-v1",
+      "root": "/data/chenjiayu/dynamic-structural-motion-20260922",
+      "include": [
+        "vjepa-anchored-v1"
+      ],
+      "exclude_components": [
+        "code",
+        "audit-code-initial",
+        "features",
+        "assets",
+        "deps"
+      ],
+      "exclude_suffixes": [
+        ".pt",
+        ".pth",
+        ".safetensors"
+      ],
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+    }
+  ]
+}

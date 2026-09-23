@@ -1,4 +1,16 @@
-# VBench Audit
+# VBench Repair
+
+从 `vbench-audit` 的 `winbeau` 分支迁入，保留全部历史与当前研究实现。
+代码仓库为私有的 [winbeau/vbench-repair](https://github.com/winbeau/vbench-repair)。
+16 维原始数据、独立人类偏好标注及版本化反事实归档发布到
+[xju-arlab/vbench-repair](https://huggingface.co/datasets/xju-arlab/vbench-repair)；
+选定训练模型按维度发布到 [xju-arlab/vbench-model](https://huggingface.co/xju-arlab/vbench-model)。
+整理协议、来源问题和验收见[迁移计划](docs/plans/2026-09-23-vbench-repair-migration.md)。
+数据覆盖 16 维不表示本仓库为 16 维都实现了 Repair。
+
+H100 可用 `scripts/h100_python.sh -m dynamic_degree.cli --help` 调用新 checkout，
+复用既有 CUDA 依赖，固定上游及已有权重。Python 包和 CLI 名称保持兼容。
+原有审计范围、算法状态和历史证据如下。
 
 VBench 1.0 的可复现审计工作区。本轮范围 **11 维** = 已实现的 7 维 + 4 个候选维度
 （范围决定见 [`docs/plans/2026-09-15-dimension-scope-11d.md`](docs/plans/2026-09-15-dimension-scope-11d.md)）。
