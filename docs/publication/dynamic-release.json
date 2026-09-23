@@ -1,0 +1,26 @@
+{
+  "current_paper_dimensions": 9,
+  "model_revision": "5fe53c4c7eb1a8a4fcd5b6e22f748da1d073a78e",
+  "dataset_asset_revision": "8f0ae5b29480695dcf07a0474f2dce21da1ec339",
+  "dataset_card_revision": "45b55415f6a382171bfccb07f0d030f16d75df37",
+  "weights": [
+    "dynamic_degree/aligned.pt",
+    "dynamic_degree/backbone/vjepa2_1_vitb_dist_vitG_384.pt"
+  ],
+  "remote_hash_verification": "dynamic-verification.json",
+  "mirror_backbone_upload": {
+    "revision": "5fe53c4c7eb1a8a4fcd5b6e22f748da1d073a78e",
+    "endpoint": "https://hf-mirror.com",
+    "bytes": 1664223428,
+    "sha256": "848a77c33cc9e6649ed2119c9bea1e2c569bcdab9539ff3e7c02ccc2959ddf4d",
+    "path": "dynamic_degree/backbone/vjepa2_1_vitb_dist_vitG_384.pt"
+  },
+  "hf_visibility": "public",
+  "dynamic_selection": "User accepted paper aligned-v1, fixed final step 300, not dev selected",
+  "fresh_hf_restore_files": 222,
+  "replay_dimensions": 9,
+  "replay_score_cells": 24408,
+  "h100_single_clip_exact_parity": true,
+  "full_all_dimension_retraining_or_gpu_replay_verified": false,
+  "validation": "22 affected tests passed; uv lock --check and git diff --check passed"
+}

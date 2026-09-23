@@ -1,0 +1,22 @@
+{
+  "status": "passed_exact_single_video_gpu_parity",
+  "scope": "One original official ModelScope clip on H100; not a full 450-source GPU rerun",
+  "evaluation_id": "v_000196a4daf916f2a539:original:0",
+  "score": 0.6755738467711915,
+  "latent": 0.7335045337677002,
+  "head_sha256": "6dcfbdce2e604cdd669e54015fee34e034c8004726d06c46611532f451ca8a53",
+  "all_input_pixel_feature_hashes_match": true,
+  "score_error": 0,
+  "source_result_sha256": "a50b58222e0718cc9af34ce0f52eb7652ee34fe330f26051ba9bf4a003c12f87",
+  "inference_entrypoint": "scripts/score_dynamic_aligned.py",
+  "entrypoint_sha256": "a08fe25ed75d60dbe97f59a0db3bdb3f124ba768578a67396b645f47d798485f",
+  "h100_model_directory": "/root/wenbiao_zhao/models/dynamic-degree-aligned-v1/dynamic_degree",
+  "h100_upstream_directory": "/root/wenbiao_zhao/models/dynamic-degree-aligned-v1/upstream-vjepa2",
+  "runtime": {
+    "python": "3.10.20",
+    "torch": "2.5.1+cu121",
+    "opencv": "4.11.0",
+    "numpy": "1.26.4"
+  },
+  "original_h200_torch": "2.6.0+cu124"
+}

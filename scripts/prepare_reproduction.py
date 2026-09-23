@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Restore pinned replay/training assets; optionally fetch the six published adapters."""
+"""Restore pinned nine-dimension assets, optionally including all selected models."""
 from __future__ import annotations
 
 import argparse
@@ -78,7 +78,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--endpoint", default="https://hf-mirror.com")
     parser.add_argument("--allow-official-fallback", action="store_true")
-    parser.add_argument("--include-models", action="store_true", help="also download the six adapters and tokenizers, about 1.1 GB")
+    parser.add_argument("--include-models", action="store_true", help="also download six adapters and Dynamic head/backbone, about 2.8 GB")
     parser.add_argument("--base-model", type=Path, help="existing pinned Qwen3-8B directory for generated training configurations")
     args = parser.parse_args()
     release = json.loads(args.release.read_text())
@@ -91,6 +91,11 @@ def main():
              for entry in release["dataset_files"]]
     tasks += [(entry, "model", release["model_repo"], release["model_revision"], root / "model-assets")
               for entry in release["model_code_files"]]
+    tasks += [(entry, "model", release["model_repo"], release["model_revision"], root / "models")
+              for entry in release.get("model_metadata_files", [])]
+    if args.include_models:
+        tasks += [(entry, "model", release["model_repo"], release["model_revision"], root / "models")
+                  for entry in release.get("dynamic_weights", [])]
 
     def fetch(task):
         entry, kind, repo, revision, destination = task
@@ -139,6 +144,7 @@ def main():
                "dataset_revision": release["dataset_revision"], "model_revision": release["model_revision"],
                "files_verified": len(tasks), "replay_members_verified": sum(len(a["members"]) for a in release["replay_archives"]),
                "adapters_downloaded": args.include_models, "training_started": False,
+               "dynamic_weights_downloaded": args.include_models and bool(release.get("dynamic_weights")),
                "online_teacher_called": False}
     (root / "restore-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
     print(json.dumps(receipt), flush=True)

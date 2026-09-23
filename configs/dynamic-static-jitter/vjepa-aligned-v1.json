@@ -1,0 +1,18 @@
+{
+  "protocol": "dynamic-vjepa-origin-scale-model-training-v1",
+  "authorization": "2026-09-23 user requested Origin-comparable scores, static sensitivity and filtering the SAME 8px local jitter; user explicitly excluded luminance flicker",
+  "parent_config": "configs/dynamic-static-jitter/vjepa-anchored-v1.json",
+  "parent_config_sha256": "3dcb93cd365ac0b7023890e1200dbe13e4a09919fe6e7ee12ac0869cc7a38712",
+  "initial_head_sha256": "8e10add01e050417baeccd191d80525afa3a7f6d60754de549703427823dd045",
+  "parent_summary_sha256": "e5a6404f41b00e5efe335a640f43ee6af80c906e64a2fe42d23a985dabf4df8c",
+  "source_manifest_sha256": "b2bbc3fd06d9bcb56ba4e11a3486184b2a32da13caa626001b7add394c6df15b",
+  "origin_upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "raft_sha256": "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1",
+  "sources": {"train": 210, "validation": 60, "train_prompts": 14, "validation_prompts": 4, "calibration45_unopened": true, "test450_excluded": true},
+  "teacher": {"metric": "unmodified VBench 1.0 dynamic degree boolean", "use": "ONLY the mean of 210 TRAIN originals; no individual binary targets and no CF teacher labels", "validation_origin": "report and evaluate only; never enters training loss", "test_origin_mean_used_for_training": false},
+  "optimization": {"steps": 300, "learning_rate": 0.001, "weight_decay": 0.01, "seed": 20260928, "optimizer": "AdamW", "initialization": "previous anchored head", "full_batch": true, "chunk_views": 24, "checkpoint_selection": "last fixed step only", "sweep": false},
+  "loss": {"parent_objective_unchanged": true, "origin_mean_weight": 1.0, "origin_mean_loss": "(mean(sigmoid(native_train_latent)) - mean(origin_train_boolean))^2"},
+  "acceptance": {"retain_all_parent_dev_gates": true, "validation_native_mean_abs_error_vs_origin_max": 0.05},
+  "scope": {"encoder_frozen": true, "train_head_parameters": 51393, "posthoc_mapping_changed": false, "default_changed": false, "new_downloads": false, "luminance_flicker_added": false, "local_jitter_native_pixels": 8, "new_synthetic_views": false, "train_on_single_user_case": false, "read_test450_for_tuning": false},
+  "limitations": ["Matching TRAIN population mean is weak scale supervision, not physical intensity ground truth", "Origin has known individual false negatives and false positives; individual boolean labels are not copied", "No guarantee that unseen populations match Origin mean; do not force TEST450 to 0.68", "Four validation prompts are already used for development; passing these gates is not independent scientific certification", "Retain prior failures and stop after this fixed candidate; no result-driven sweep"]
+}

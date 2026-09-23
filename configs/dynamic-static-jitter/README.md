@@ -1,5 +1,189 @@
 # Dynamic Degree jitter development protocols
 
+## Completed evaluation of the accepted aligned head on450 sources
+
+`vjepa-aligned450-v1.json` pins the accepted `aligned-v1` checkpoint and the same
+1800 existing videos:450 official originals,900 local8px CFs,450 encoding
+controls. **1800/1800 completed, zero failures**, fresh decode/encoder forward
+for every input; all feature hashes equal previous caches, oldjoint replay error0,
+all450 controls exact. Origin is the same hash-pinned previous result, not a new
+RAFT run. No training, remapping, reconstruction, download or calibration45 read.
+
+Current Repair **0.629251→0.623035**, delta−0.006216, MAE0.021731; Origin
+**0.680000→0.857778**. Natural preference base/CF1701/CF2904 each144/171.
+The batch-increase check passes, but28/900 CFs drop by more than0.1 and the worst
+drop is0.377932. Not per-video invariance; original DEV gates remain unchanged.
+Default unchanged; no further tuning. [Full current results](../../docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-aligned450).
+
+Task root: `/data/chenjiayu/dynamic-structural-motion-20260922/vjepa-aligned450-v1/`.
+From its `code/` snapshot, use the H200 Python interpreter recorded below and
+set `VBENCH_AUDIT_WORKSPACE` to that absolute `code/` directory, the same
+PYTHONPATH and one physical4–7 UUID as in the training recipe. For each shard0–3,
+run on its own UUID with a fresh output directory:
+
+```bash
+python -m scripts.counterfactual.score_vjepa_aligned450 \
+  --config configs/dynamic-static-jitter/vjepa-aligned450-v1.json \
+  --previous-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-expansion450-v1 \
+  --probe-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-probe-v1 \
+  --trained-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-aligned-v1 \
+  --video-root /data/chenjiayu/wenbiao_zhao/vbench-official-v1 \
+  --shard 0 --output ../reproduction-scores/shard-0
+```
+
+To reproduce statistics on the already completed, copied run from the local
+repository root (fresh outputs; never overwrite original analysis):
+
+```bash
+.venv/bin/python -m scripts.counterfactual.summarize_vjepa_aligned450 \
+  --config configs/dynamic-static-jitter/vjepa-aligned450-v1.json \
+  --root output/dynamic-static-jitter/vjepa-aligned450-v1 \
+  --previous-root output/dynamic-static-jitter/vjepa-expansion450-v1 \
+  --human-pairs data/processed/pairwise_master_split.csv \
+  --output output/dynamic-static-jitter/vjepa-aligned450-v1/analysis-reproduction
+
+.venv/bin/python -m scripts.counterfactual.audit_vjepa_aligned450 \
+  --root output/dynamic-static-jitter/vjepa-aligned450-v1 \
+  --previous-root output/dynamic-static-jitter/vjepa-expansion450-v1 \
+  --human-pairs data/processed/pairwise_master_split.csv \
+  --output output/dynamic-static-jitter/vjepa-aligned450-v1/audit-reproduction.json
+```
+
+The saved `analysis/summary.json`, `pairs.jsonl`, `human_pairs.jsonl` and
+`independent-audit.json` retain all means, intervals, human ties and failures.
+Four-card wall time approximately93.85s including loading/parity; single-shard
+times93.30/91.55/89.85/85.85s. Media:1800×2s. No new independent holdout claim.
+
+## Origin-scale supervision inside model training (`vjepa-aligned-v1`)
+
+The user's “flicker” here means **the existing 8px local texture-coordinate
+jitter**, not luminance flicker. `vjepa-aligned-v1.json` freezes one 300-step
+continuation of the anchored head. Retain all existing supervision and add the
+squared difference between the **TRAIN210 native sigmoid mean** and the
+**TRAIN210 unmodified Origin mean**, weight1. No per-video binary imitation,
+posthoc mapping, validation teacher in the loss, TEST450 fitting, or new weights.
+All eleven parent DEV gates remain, plus DEV native mean within0.05 of Origin.
+Only one fixed final checkpoint; no sweep or validation checkpoint selection.
+
+The 270 original MP4s were actually rescored with pinned official RAFT:
+TRAIN210 Origin **0.638095**, DEV60 Origin **0.800000**, zero failures. This
+population difference is retained; the test mean0.68 is not a training target.
+Training uses existing2160 feature views; no new counterfactual construction.
+The user's five still/motion controls are evaluated only after saving the head.
+
+Completed: DEV60 Repair **0.657326→0.651620**, MAE0.010285; still/pan8/pan32
+user control **0.007435/0.351916/0.554858**, still+jitter0.013868. Original gates
+10/12 pass: natural preference17/23 and DEV mean gap0.142674 fail. The user
+subsequently **accepted scores in the0.6 range and requested closure**. Stop
+tuning; this is a post-result scale acceptance, not a retroactive gate pass.
+Do not edit the frozen config or receipts. At training handoff new-head TEST450
+was NOT RUN; the subsequently authorized evaluation is now completed above.
+Default unchanged. [Training result](../../docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-aligned).
+
+Task root: `/data/chenjiayu/dynamic-structural-motion-20260922/vjepa-aligned-v1/`.
+From its `code/` snapshot, use the recorded H200 Python interpreter. Set the
+workspace explicitly (required because the isolated snapshot has no root
+packaging files), PYTHONPATH and a single available physical4–7 GPU UUID:
+
+```bash
+export VBENCH_AUDIT_WORKSPACE=/data/chenjiayu/dynamic-structural-motion-20260922/vjepa-aligned-v1/code
+export PYTHONPATH=.:packages/audit-core/src:packages/audit-models/src:metrics/dynamic-degree/src
+export CUDA_VISIBLE_DEVICES=GPU-490b4a76-6210-31b9-4e03-838a113cf5f4
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+
+python -m scripts.counterfactual.score_vjepa_origin_dev \
+  --config configs/dynamic-static-jitter/vjepa-aligned-v1.json \
+  --probe-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-probe-v1 \
+  --video-root /data/chenjiayu/wenbiao_zhao/vbench-official-v1 \
+  --upstream /data/chenjiayu/dynamic-static-jitter-20260922/VBench \
+  --raft-weight /data/chenjiayu/.cache/vbench/raft_model/models/raft-things.pth \
+  --shard 0 --output ../origin-dev-reproduction/shard-0
+```
+
+Repeat for shards1/2/3 on their own UUIDs. All four must complete before training;
+the original run's `origin-dev/` is immutable. A reproduction uses a fresh teacher
+and output directory, not an overwrite:
+
+```bash
+python -m scripts.counterfactual.train_vjepa_aligned \
+  --config configs/dynamic-static-jitter/vjepa-aligned-v1.json \
+  --probe-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-probe-v1 \
+  --anchored-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-anchored-v1 \
+  --origin-root ../origin-dev-reproduction \
+  --diagnostic-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-static-frame-v1 \
+  --output ../training-reproduction
+```
+
+Audit the actual run's copied small artifacts from the local repository root:
+
+```bash
+.venv/bin/python -m scripts.counterfactual.audit_vjepa_aligned \
+  --root output/dynamic-static-jitter/vjepa-aligned-v1 \
+  --probe-root output/dynamic-static-jitter/vjepa-probe-v1 \
+  --anchored-root output/dynamic-static-jitter/vjepa-anchored-v1 \
+  --output output/dynamic-static-jitter/vjepa-aligned-v1/audit-reproduction.json
+```
+
+`verify_vjepa_aligned` independently reloads the two checkpoints on H200 and
+replays all480 DEV views plus five controls from hash-checked cached tokens.
+Neither audit/replay is an additional training trial or a fresh encoder run.
+The initial four Origin workers failed at import because the explicit workspace
+was absent; the failed launches are recorded in `origin-launch-failure.md`.
+They produced no scores/model and changed no source, parameter or gate on retry.
+
+## Completed anchored-head evaluation on the existing 450 TEST sources
+
+`vjepa-anchored450-v1.json` freezes the trained anchored head and all 1800 existing
+inputs: 450 original official MP4s, 900 8px CFs and 450 encoding controls. All
+**1800/1800 completed with zero failures**, with fresh decoding/encoder inference,
+exact prior feature hashes and zero old-head replay error. No training, remapping,
+new construction, model download or calibration45 access. Origin is reused from
+the hash-pinned previous run, not a newly executed RAFT result.
+
+New Repair **0.171554→0.166466**, delta **−0.005088**, MAE **0.015694**. Natural
+preference is **143/171** on base and **145/146** on the two CF seeds; old head
+base was147/171. The relative-scale mean-increase check passes, but the earlier
+DEV60 natural-ordering gate remains failed. Default unchanged; exposed test
+prompts are not a new independent holdout. [Full evidence and limitations](../../docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-anchored450).
+
+Task root: `/data/chenjiayu/dynamic-structural-motion-20260922/vjepa-anchored450-v1/`.
+From its `code/` snapshot with the recorded H200 interpreter and PYTHONPATH, mask
+one available physical4–7 GPU per process. Run shard0/1/2/3 with fresh outputs:
+
+```bash
+python -m scripts.counterfactual.score_vjepa_anchored450 \
+  --config configs/dynamic-static-jitter/vjepa-anchored450-v1.json \
+  --previous-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-expansion450-v1 \
+  --probe-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-probe-v1 \
+  --trained-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-anchored-v1 \
+  --video-root /data/chenjiayu/wenbiao_zhao/vbench-official-v1 \
+  --shard 0 --output ../reproduction-scores/shard-0
+```
+
+After all four shards finish, copy the small score/provenance files locally.
+To recompute statistics on the completed authoritative run from the repository
+root (use fresh output paths, never overwrite the original analysis):
+
+```bash
+.venv/bin/python -m scripts.counterfactual.summarize_vjepa_anchored450 \
+  --config configs/dynamic-static-jitter/vjepa-anchored450-v1.json \
+  --root output/dynamic-static-jitter/vjepa-anchored450-v1 \
+  --previous-root output/dynamic-static-jitter/vjepa-expansion450-v1 \
+  --human-pairs data/processed/pairwise_master_split.csv \
+  --output output/dynamic-static-jitter/vjepa-anchored450-v1/analysis-reproduction
+
+.venv/bin/python -m scripts.counterfactual.audit_vjepa_anchored450 \
+  --root output/dynamic-static-jitter/vjepa-anchored450-v1 \
+  --previous-root output/dynamic-static-jitter/vjepa-expansion450-v1 \
+  --human-pairs data/processed/pairwise_master_split.csv \
+  --output output/dynamic-static-jitter/vjepa-anchored450-v1/audit-reproduction.json
+```
+
+`analysis/summary.json` and `analysis/pairs.jsonl` contain all group/seed statistics;
+`independent-audit.json` independently verifies every scalar, interval, input,
+control and human pair. Dense feature arrays need not be written again: fresh
+features match the old cached NPY SHA before each new score is accepted.
+
 ## Model retraining after the still-frame counterexample
 
 `vjepa-anchored-v1.json` is a user-authorized **model training** trial, not an
@@ -21,8 +205,9 @@ selection. The new head fixes the user control (still/pan8/pan32:
 **0.008533/0.134990/0.293819**) and achieves 60/60 on each of three controlled
 motion orderings in DEV60. However, natural preference falls **20/23→18/23**,
 below the predeclared ≥19/23 gate: **overall acceptance failed (10/11 pass)**.
-The model is not promoted to default. New-head TEST450 inference is NOT RUN;
-the prior 450-source numbers belong only to the old frozen joint head.
+The model is not promoted to default. At training handoff, new-head TEST450 was
+NOT RUN; the subsequent user-authorized frozen evaluation is completed above.
+The prior 0.518089→0.516319 numbers belong only to the old frozen joint head.
 
 Actual checkpoint: `training-chunked/anchored.pt`, SHA-256
 `8e10add01e050417baeccd191d80525afa3a7f6d60754de549703427823dd045`.

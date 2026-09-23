@@ -1,0 +1,256 @@
+{
+  "status": "all_remote_sizes_and_sha256_verified",
+  "dataset_revision": "8f0ae5b29480695dcf07a0474f2dce21da1ec339",
+  "model_revision": "5fe53c4c7eb1a8a4fcd5b6e22f748da1d073a78e",
+  "endpoint": "https://huggingface.co",
+  "files": [
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/reproduction/aligned450-v1/evidence.tar.gz",
+      "bytes": 1055206,
+      "sha256": "a7780cf1a40623188443d58add0766c62f990c052dbb579d6b60163121f5a3f1"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/README.md",
+      "bytes": 1278,
+      "sha256": "09ad056d695d8fd4c0f0d310411968a684dac65f8a14aed0c388f32159892669"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/configs/vjepa-aligned-v1.json",
+      "bytes": 2687,
+      "sha256": "2ef8c59f1b8111a6070ca881e297394631061aed07c4fc5acfcf926278b1d94f"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/configs/vjepa-aligned450-v1.json",
+      "bytes": 3390,
+      "sha256": "2cc38fd7bc4ab0005f85b2e899a14c237b9f6afb8b71aa9a7419f060285ab58b"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/configs/vjepa-anchored-v1.json",
+      "bytes": 2757,
+      "sha256": "3dcb93cd365ac0b7023890e1200dbe13e4a09919fe6e7ee12ac0869cc7a38712"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/configs/vjepa-probe-v1.json",
+      "bytes": 2937,
+      "sha256": "6c5e1464f903f6434cfa3a707ff2b6f93d10142a57fc0f586ac4cea82f3116af"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/independent-audit.json",
+      "bytes": 3297,
+      "sha256": "794700c2e37aabf5a2c99bf9e2bcae5ba864baab1c32ff3766c673aa4a3247ff"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-0/completion.json",
+      "bytes": 244,
+      "sha256": "bfc6908f6a1f6b7ac2b6641cded8fd87bc73b21398ade3a81ea01d55b04373ff"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-0/provenance.json",
+      "bytes": 4554,
+      "sha256": "710a71879e118260d66967cd05eaa8049a94314b81644fa04d855d5cbd17bf91"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-0/scores.jsonl",
+      "bytes": 99873,
+      "sha256": "9b6b97cb2c0cfaed11c2fdcb656f9fa3268c5f0803b02eac353549fcd9b19d42"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-1/completion.json",
+      "bytes": 245,
+      "sha256": "859711faccbdfaa110f9cc9f3b76847ce2b6c61394bb2927554e578559b9cdea"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-1/provenance.json",
+      "bytes": 4554,
+      "sha256": "0d49d4e41c18f347bbbbf6c86f5c4c35c1e14c96a7f5115994e9b691f81fb204"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-1/scores.jsonl",
+      "bytes": 99786,
+      "sha256": "c2a4aabca28ca614517448a614145ad1c37f5a1d355af1fce2029b34493a1af1"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-2/completion.json",
+      "bytes": 246,
+      "sha256": "7b4c098160e92582352ec08a85ad5a29e64717ecfecf57468192189163432a7a"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-2/provenance.json",
+      "bytes": 4524,
+      "sha256": "8566b344337384506ba7ef02d78d76de3e805efa52c1e1a85f7b07bee101046d"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-2/scores.jsonl",
+      "bytes": 98075,
+      "sha256": "e34a2d30878acd401b09a2d4d3ab7160c4c21ff99ac30d0829aff6fb8df80bbf"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-3/completion.json",
+      "bytes": 246,
+      "sha256": "b73e924fc05f8140c9ac9c459d749fb897437d6ff9db92ad14ee4015b157a027"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-3/provenance.json",
+      "bytes": 4524,
+      "sha256": "4be83e0d9e6ea49c014ddfb64dabfca6f453972187c57427998a067ed4e4d5d2"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-dev/shard-3/scores.jsonl",
+      "bytes": 98073,
+      "sha256": "6526648286b9be2df379218919d38c34fd232954d4ba04ef68661047b7a7d540"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/origin-independent-audit.json",
+      "bytes": 915,
+      "sha256": "6477fb09278b0dc30a8a421282f5d36dac0eca7b23d88c6c89347db369dd942a"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/reload-verification/receipt.json",
+      "bytes": 918,
+      "sha256": "e3b72d53930a06be96763cf558590b28b32541a070be947a2818644fe2506a11"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/training/progress.jsonl",
+      "bytes": 105964,
+      "sha256": "152218b1bc8d3a4569a2c4284f31b86c3328b4773a2b8811491a3d09b1ad9721"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/training/provenance.json",
+      "bytes": 4162,
+      "sha256": "37857cba15b2f2dcf8af6ed5da032234ab21dccb5b92f3d890bf87162f892e72"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/training/scores.jsonl",
+      "bytes": 318512,
+      "sha256": "e8f529ebb3edfc9bce308872065d0b05df2eac7e0e2d9665f6c51f9aeaeb94c5"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/training/summary.json",
+      "bytes": 10377,
+      "sha256": "5e7a1bc77f87eea147bea24724700e59dcc8de1ab24db00dbb9756468beaa0ac"
+    },
+    {
+      "type": "dataset",
+      "path": "dimensions/dynamic_degree/training/aligned-v1/training/training_curves.json",
+      "bytes": 121266,
+      "sha256": "707cd9a3af384423d0594700ea00050f57b505e0fd9d1a9b320cfd13c3d737e7"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/aligned.pt",
+      "bytes": 207940,
+      "sha256": "6dcfbdce2e604cdd669e54015fee34e034c8004726d06c46611532f451ca8a53"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/backbone/vjepa2_1_vitb_dist_vitG_384.pt",
+      "bytes": 1664223428,
+      "sha256": "848a77c33cc9e6649ed2119c9bea1e2c569bcdab9539ff3e7c02ccc2959ddf4d"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/README.md",
+      "bytes": 2312,
+      "sha256": "3beaf867e89c9d1969f64cd91ad4b12a04a2ed853b43a73837d11dc4a2dea489"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/backbone/LICENSE",
+      "bytes": 1088,
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/backbone/README.md",
+      "bytes": 319,
+      "sha256": "a0b7ebaec72d77927a57d8596cc8d4721e7ac52e94a99e348adadb774565906d"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/configs/vjepa-aligned-v1.json",
+      "bytes": 2687,
+      "sha256": "2ef8c59f1b8111a6070ca881e297394631061aed07c4fc5acfcf926278b1d94f"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/configs/vjepa-aligned450-v1.json",
+      "bytes": 3390,
+      "sha256": "2cc38fd7bc4ab0005f85b2e899a14c237b9f6afb8b71aa9a7419f060285ab58b"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/configs/vjepa-anchored-v1.json",
+      "bytes": 2757,
+      "sha256": "3dcb93cd365ac0b7023890e1200dbe13e4a09919fe6e7ee12ac0869cc7a38712"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/configs/vjepa-probe-v1.json",
+      "bytes": 2937,
+      "sha256": "6c5e1464f903f6434cfa3a707ff2b6f93d10142a57fc0f586ac4cea82f3116af"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/evaluation/summary.json",
+      "bytes": 36780,
+      "sha256": "3325e173ad8cd7cd33938e463177c9f31d03298d6b8ef5f14d385197d60cba16"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/record.json",
+      "bytes": 475,
+      "sha256": "bd4203d109e4dd2fc9d8ef09efd41c6ea289a45152f0227046f4f5bfd1b7c42f"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/selection.json",
+      "bytes": 1676,
+      "sha256": "47fe469d4e33c9aa08fd5f0a00228b6e7b8b69d801ad7008c2c1ffa98bf0802f"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/training/provenance.json",
+      "bytes": 4162,
+      "sha256": "37857cba15b2f2dcf8af6ed5da032234ab21dccb5b92f3d890bf87162f892e72"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/training/summary.json",
+      "bytes": 10377,
+      "sha256": "5e7a1bc77f87eea147bea24724700e59dcc8de1ab24db00dbb9756468beaa0ac"
+    },
+    {
+      "type": "model",
+      "path": "dynamic_degree/training/training_curves.json",
+      "bytes": 121266,
+      "sha256": "707cd9a3af384423d0594700ea00050f57b505e0fd9d1a9b320cfd13c3d737e7"
+    }
+  ],
+  "model_visibility": "public",
+  "source_publication": "Existing two permitted source trees only; no additional Dynamic source copied to public model repo"
+}

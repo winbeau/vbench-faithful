@@ -1,0 +1,48 @@
+{
+  "version": "aligned-v1",
+  "score": 0.6755738467711915,
+  "latent": 0.7335045337677002,
+  "video_sha256": "d3b5b08406b3620fff62b6d2713a1dfd858ded796f28ad6f939ae512a31eb1f2",
+  "head_sha256": "6dcfbdce2e604cdd669e54015fee34e034c8004726d06c46611532f451ca8a53",
+  "feature_sha256": "0a77bdcaef2a7bc6815660d716ac8a3c02c01722501ba3392f7a643b6ec6543b",
+  "decoded_pixels_sha256": "7ed999ba8e3fa278de506ab3313d093fe05127a2d0541066452057ce7cb9d8ff",
+  "frames": 16,
+  "fps": 8.0,
+  "encoder": {
+    "source_commit": "204698b45b3712590f06245fbfba32d3be539812",
+    "checkpoint_sha256": "848a77c33cc9e6649ed2119c9bea1e2c569bcdab9539ff3e7c02ccc2959ddf4d",
+    "checkpoint_size_bytes": 1664223428,
+    "strict_state_load": true,
+    "checkpoint_key": "ema_encoder",
+    "torch": "2.5.1+cu121",
+    "cuda": "12.1",
+    "encoder_parameters": 86833152,
+    "trainable_encoder_parameters": 0,
+    "model_factory": "vjepa2_1_vit_base_384",
+    "autodownload": false,
+    "preprocessing": {
+      "frames": 16,
+      "fps": 8,
+      "size": 384,
+      "resize": "whole_square_bilinear_antialias",
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ],
+      "frame_skip": 0,
+      "crop": false,
+      "encoder_autocast": "bfloat16",
+      "cache_dtype": "float16"
+    },
+    "source_root": "/dev/shm/vbench-repair-dynamic-20260923/vjepa2"
+  },
+  "torch": "2.5.1+cu121",
+  "opencv": "4.11.0",
+  "numpy": "1.26.4"
+}

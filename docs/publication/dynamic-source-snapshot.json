@@ -1,0 +1,124 @@
+{
+  "source_head": "fdf4890c67bee5881e53fc43926d555a63f9cef8",
+  "source_state": "working-tree snapshot; latest Dynamic work was uncommitted in the research checkout",
+  "captured_utc": "2026-09-23T12:03:19.478027+00:00",
+  "scope": "Latest user-accepted aligned-v1 / aligned450, nine paper dimensions; research scope remains eleven",
+  "files": [
+    {
+      "path": "configs/dynamic-static-jitter/README.md",
+      "sha256": "e56b7bb5600a19e1244d5de58a0c6d248899821b2925bb4f9de520d0672c6aab",
+      "bytes": 96169
+    },
+    {
+      "path": "configs/dynamic-static-jitter/vjepa-aligned-v1.json",
+      "sha256": "2ef8c59f1b8111a6070ca881e297394631061aed07c4fc5acfcf926278b1d94f",
+      "bytes": 2687
+    },
+    {
+      "path": "configs/dynamic-static-jitter/vjepa-aligned450-v1.json",
+      "sha256": "2cc38fd7bc4ab0005f85b2e899a14c237b9f6afb8b71aa9a7419f060285ab58b",
+      "bytes": 3390
+    },
+    {
+      "path": "docs/DIMENSION_METHODS_AND_EXPERIMENTS.md",
+      "sha256": "526af893d3c29db720c9a5a886d2990f6ec8fa8d8f59a9a701931b25faee4ac7",
+      "bytes": 45408
+    },
+    {
+      "path": "docs/EXPERIMENT_INDEX.md",
+      "sha256": "b3c954ecd76db6144a1d94fbdd4aadc43d4d2afef445ee20eff7ec45cf92ebfa",
+      "bytes": 30010
+    },
+    {
+      "path": "docs/VBENCH_DIMENSION_METHODS_PAPER_STYLE.md",
+      "sha256": "a0f037c5078f83da8bb1e9e6b01db9ceef1a1857f62210e9d75249f0b30e235a",
+      "bytes": 39111
+    },
+    {
+      "path": "docs/counterfactual-reports/dynamic_static_jitter.md",
+      "sha256": "80205a8b9ce73d1f05e5e70bf26f9d934dfde385112c418baa88cbdb97b99a6d",
+      "bytes": 271847
+    },
+    {
+      "path": "docs/plans/2026-09-22-dynamic-structural-motion-repair-goal.md",
+      "sha256": "370d88028b575fba11c8f00bcf871ce7a0ad6a60d46eac48044c98e704354c55",
+      "bytes": 67358
+    },
+    {
+      "path": "metrics/dynamic-degree/src/dynamic_degree/aligned_probe.py",
+      "sha256": "b6e186e4d678fde03b9daf4fa420b0f7a88ef893c040847168ec13c575690172",
+      "bytes": 863
+    },
+    {
+      "path": "scripts/counterfactual/audit_vjepa_aligned.py",
+      "sha256": "b72a03fc8f709d07c02de73dda566ca039726f0b90df1cc871e2022f4c0b9a20",
+      "bytes": 15548
+    },
+    {
+      "path": "scripts/counterfactual/audit_vjepa_aligned450.py",
+      "sha256": "db831f8e383b4cedf5f0bf28e1b0cf3b8e6b4ebe0500ba3b6b2e0c82d07ec26b",
+      "bytes": 12726
+    },
+    {
+      "path": "scripts/counterfactual/score_vjepa_aligned450.py",
+      "sha256": "fb337ce4ad59a4c8698e7bed2ac38b64a4d1efb20c4a35aebaf728709bc24eca",
+      "bytes": 10170
+    },
+    {
+      "path": "scripts/counterfactual/score_vjepa_origin_dev.py",
+      "sha256": "473d9628c87b3f3738d2157841c0e5939d8f16bc2e67a3c01cb0358f03f32975",
+      "bytes": 5072
+    },
+    {
+      "path": "scripts/counterfactual/summarize_vjepa_aligned450.py",
+      "sha256": "4111d1dfa746b7bb6e21ec20648f1198da2ec009b930efba156f12aa317265e7",
+      "bytes": 11549
+    },
+    {
+      "path": "scripts/counterfactual/train_vjepa_aligned.py",
+      "sha256": "3157340e56731fe1aaf5b1b06d8ae7c17ec0a5081b59ac46bd3c2e4279367809",
+      "bytes": 13494
+    },
+    {
+      "path": "scripts/counterfactual/verify_vjepa_aligned.py",
+      "sha256": "1f40ba1c645815394b00da1c87e696e63f08dde9fcf1fe8ee8093fc886b25f5f",
+      "bytes": 5076
+    },
+    {
+      "path": "tests/test_vjepa_aligned.py",
+      "sha256": "4f88d137f7f4e61b0e4027196029e2a4b8ba6e8b2ba812c4a50164ae3cfd215e",
+      "bytes": 3599
+    },
+    {
+      "path": "tests/test_vjepa_aligned450.py",
+      "sha256": "bc9ff2c1898cd5f364d5f3e600b9a730a09cdb4646d78010c62c595dbd7d7970",
+      "bytes": 3650
+    }
+  ],
+  "adapted_files": {
+    "docs/counterfactual-reports/dynamic_static_jitter.md": {
+      "reason": "Replace unavailable sibling Overleaf link with local paper explanation; research contents unchanged",
+      "published_sha256": "5ffa145e31f1bd5747bd61717fa9a4a792d6aab0676e6de422673e1a33b05208"
+    },
+    "docs/DIMENSION_METHODS_AND_EXPERIMENTS.md": {
+      "reason": "Replace unavailable sibling Overleaf link with local paper explanation; research contents unchanged",
+      "published_sha256": "d8690e2be5cf2761f96de9319f8e7d374c556fea8ed4ba7e2f579c84ba8f9819"
+    },
+    "docs/VBENCH_DIMENSION_METHODS_PAPER_STYLE.md": {
+      "reason": "Replace unavailable sibling Overleaf link with local paper explanation; research contents unchanged",
+      "published_sha256": "1a8699b0f3c36b9cb4245e06d559559bb59f7cf41e7548d6220a8658758d9932"
+    }
+  },
+  "paper_document": {
+    "source": "overleaf/docs/dynamic-degree-stability.md",
+    "source_sha256": "bb0c1b9ce19c08db693a635b2807b478f096af57c1373c1ab437264968329721",
+    "published_path": "docs/reproduction/paper-dynamic-degree-stability.md",
+    "adaptation": "Only repository-relative links and copied-document provenance were adapted."
+  },
+  "readme_dynamic_excerpt": {
+    "source_file_sha256": "a30caf57187a9a92f379435ec8127adb1c61772ae3f4daabb956bc63ecad8dad",
+    "section": "anchored training through current aligned450 / nine-dimension paper update",
+    "source_excerpt_sha256": "60c563d0101693620e8fe7d1a5dd442d25eae78e8d75c419f5f0e7c7e0f82264",
+    "adaptation": "Retain migration introduction; localize paper-document link"
+  }
+}

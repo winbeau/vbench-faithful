@@ -1,6 +1,6 @@
 # 各维度 Origin / Repair 方法与反事实实验（初稿）
 
-本文件是供确认的独立初稿。正文只汇总当前仓库中准备保留的最新方法、主实验和必要的失败边界；Dynamic Degree 与 Motion Smoothness 章节按当前要求暂空。待确认后，再处理旧方法清理、AGENTS.md、README.md 和最终提交。
+本文件是供确认的独立初稿。**2026-09-23仅补齐Dynamic Degree当前aligned-v1与450组冻结结果**，同步论文、AGENTS.md和README.md；Motion Smoothness仍暂空。其余维度保留此前初稿快照，本轮未重新核验，不能把旧解析器/旧结果当作当前论文表值。较新论文风格说明见 [VBENCH_DIMENSION_METHODS_PAPER_STYLE.md](VBENCH_DIMENSION_METHODS_PAPER_STYLE.md)。本次不清理旧代码，不替换公开默认，不提交其他任务的改动。
 
 ## 统一阅读规则
 
@@ -14,9 +14,40 @@
 
 ---
 
-## 1. Dynamic Degree（本版暂空）
+## 1. Dynamic Degree（2026-09-23当前aligned-v1）
 
-本版按要求暂不整理 Dynamic Degree 的 Origin、问题、Repair、反事实实验和消融，待方法确认后补写。
+### Origin实现与问题
+
+```text
+官方视频 → 约8 fps采样 → 相邻帧RAFT → top-5%光流幅值均值
+  → 分辨率缩放阈值 + 超阈值帧对计数 → 视频二值判分 → 动态视频比例
+```
+
+原版将足够大的局部位移作为动态证据，因此纹理快速往返抖动也可能得到高分，却没有新增连贯对象/相机运动。对应问题是Nuisance Entanglement，本实验检验无关抖动下的**不变性/稳定性**，而非让评分对真实运动也不敏感。
+
+### Repair数据流
+
+```text
+原生16帧/8 fps → 全帧384² → 冻结V-JEPA 2.1 ViT-B
+  → 4608×768时空tokens → 投影 + 注意力池化 + MLP（51,393参数）
+  → sigmoid连续相对运动分数
+```
+
+210训练源/60开发验证源，联合人类偏好、原片/抖动一致性、静止低分锚点、平移/连贯往返排序。最后从既有锚点头继续固定300步，只用TRAIN原片Origin总体均分提供弱尺度监督；不用450评估视频训练、不复制逐视频0/1、不后处理调分。实际源码：[冻结编码器](../packages/audit-models/src/vbench_audit_models/vjepa.py)、[小头](../metrics/dynamic-degree/src/dynamic_degree/learned_probe.py)、[锚点损失](../metrics/dynamic-degree/src/dynamic_degree/anchored_probe.py)、[均分损失](../metrics/dynamic-degree/src/dynamic_degree/aligned_probe.py)。
+
+### 反事实构造、结果与相关控制
+
+450组官方VBench 1.0原始MP4，每源两固定种子8px局部纹理坐标往返抖动，原始16帧/8 fps/2秒不变。不加RGB噪声、亮度闪烁或替换成静态片；另有450编码控制，共1800/1800评分、零失败。历史1200 qualified/600 rejected标记输入全部保留；先前30个GIF仍未评分。Origin沿用同批锁定结果，Repair重新推理；450编码控制和全部1800特征哈希验证一致。
+
+| 实验 | Origin（base → CF） | 当前Repair（base → CF） | 结论 |
+|---|---|---|---|
+| 450源、900条8px干预 | 0.680000 → 0.857778 | 0.629251 → 0.623035 | 批量虚增抑制；MAE分别0.177778/0.021731 |
+
+Repair有符号Δ=−0.006216，95% prompt聚类CI [−0.009879,−0.002862]；MAE区间[0.018178,0.025484]。先每源平均两CF再源等权，不以总体均分差替代MAE。人类171有序对原片/两CF各144正确，但逐对会变化，原片相对Origin改善CI跨零。
+
+冻结后单图静止/静止加抖动/8px平移/32px平移诊断得分0.007435/0.013868/0.351916/0.554858，单独报告，不充当450主实验或严格单因素消融。训练阶段DEV60自然偏好17/23未达≥19/23，严格尺度门槛仍失败。450组仍有28/900下降>0.1，最大下降0.377932；尚不能称逐片不变、物理强度标定或全新独立留出。旧模型对照保留在报告中，不混入本节当前Repair。
+
+权威入口：[当前450报告](counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-aligned450)、[冻结协议](../configs/dynamic-static-jitter/vjepa-aligned450-v1.json)、[原始统计](../output/dynamic-static-jitter/vjepa-aligned450-v1/analysis/summary.json)。论文位置：方法§2.2.2及Table 1第六行；[专项说明与版本](reproduction/paper-dynamic-degree-stability.md)。公开默认不变。
 
 ---
 
@@ -555,13 +586,13 @@ Repair 的 5 个 test bases 均五档严格单调；两个 dev bases 的中位�
 
 ---
 
-## 最终汇总表（Dynamic / Motion 暂空）
+## 汇总表（Dynamic已更新；Motion暂空；其余为旧初稿快照）
 
-Repair 列统一使用 base → 反事实；Dynamic Degree 和 Motion Smoothness 按当前要求留空。
+Repair列统一使用base → 反事实；Dynamic为2026-09-23当前450组，Motion继续留空，其余维度本轮未重核，不作为当前论文数值的替代。
 
 | 维度 | Origin | Repair（base → 反事实） | 敏感性 / 不变性实验 |
 | --- | --- | --- | --- |
-| Dynamic Degree | 暂空 | 暂空 | 待确认后补写 |
+| Dynamic Degree | 0.680000 → 0.857778 | 0.629251 → 0.623035 | 8px局部纹理抖动不变性；450源/900CF，MAE0.177778→0.021731；批量改善不等于逐片不变 |
 | Motion Smoothness | 暂空 | 暂空 | 待确认后补写 |
 | Subject Consistency | 0.936417 → 0.816382 | 0.951413 → 0.941724 | 背景 MAE 0.120035 → 0.010596；独立 Mask R-CNN + MobileSAM 支持平均稳定性改善，严格 ≤0.01 和单帧补充未完成 |
 | Scene | 0.30594 → 0.05406（strict synonym） | 0.69094 → 0.69469（strict synonym） | Origin synonym sensitivity；独立 Qwen3-8B Scene model 近似不变（Δ +0.00375，CI [−0.01188,+0.02188]），但 caption evidence 不是人工视觉金标 |
@@ -590,6 +621,6 @@ Repair 列统一使用 base → 反事实；Dynamic Degree 和 Motion Smoothness
 - 删除或归档旧方法实现，必须在本文件方法和版本边界确认后进行。
 - 更新 AGENTS.md、README.md、docs/EXPERIMENT_INDEX.md 和各维度 README 的入口与“当前方法”指向。
 - 将重复的旧方法说明改为历史链接，避免同一维度存在多个无版本标签的“Repair”。
-- Dynamic Degree、Motion Smoothness 章节补齐前，不把当前初稿作为最终总览提交。
+- Dynamic Degree已补齐当前方法和450证据，AGENTS/README/索引已同步；Motion仍留空，其他维度未重核前，不把本初稿作为最终总览或覆盖当前论文。
 
 本文件只是一版待确认初稿；原始报告、代码、冻结输出和旧方法在确认前全部保留。

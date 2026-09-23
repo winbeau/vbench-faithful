@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute the frozen eight-dimension table without private machine paths or GPUs."""
+"""Recompute the frozen nine-dimension table without private machine paths or GPUs."""
 from __future__ import annotations
 
 import argparse
@@ -12,7 +12,7 @@ import statistics
 import sys
 
 DIMENSIONS = ("scene", "human_action", "object_class", "subject_consistency",
-              "background_consistency", "spatial_relationship", "multiple_objects", "color")
+              "background_consistency", "dynamic_degree", "spatial_relationship", "multiple_objects", "color")
 TASKS = {"scene": "scene", "human_action": "action", "spatial_relationship": "spatial",
          "multiple_objects": "objects"}
 CELLS = ("origin_base", "origin_cf", "repair_base", "repair_cf")
@@ -133,6 +133,63 @@ def compare_rows(rows, expected):
     return checked
 
 
+def replay_dynamic(bundle):
+    """Join all 1,800 frozen inputs; average the two CF seeds within each source."""
+    folder = bundle / "dimensions/dynamic_degree"
+    inputs = unique(readl(folder / "inputs.jsonl"), "evaluation_id")
+    maps = {arm: unique([r for path in sorted((folder / arm).glob("shard-*/scores.jsonl"))
+                         for r in readl(path)], "evaluation_id") for arm in ("origin", "aligned")}
+    if len(inputs) != 1800 or any(scores.keys() != inputs.keys() for scores in maps.values()):
+        raise ValueError("Dynamic input/score coverage changed")
+    index = {}
+    for uid, item in inputs.items():
+        key = (item["base_id"], item["family"], item["seed"])
+        if key in index:
+            raise ValueError("Duplicate Dynamic source/view")
+        index[key] = uid
+        for arm, scores in maps.items():
+            row = scores[uid]
+            if row["status"] != "ok" or row["input_sha256"] != item["sha256"]:
+                raise ValueError("Dynamic failed score or input identity mismatch")
+            if arm == "origin":
+                info = row["diagnostics"]["official"]
+                moving = sum(flow > info["official_threshold"] for flow in info["raw_flow_top5_mean"])
+                if row["score"] != float(moving >= info["official_count_num"]):
+                    raise ValueError("Dynamic Origin flow decision differs")
+            else:
+                score = 1 / (1 + math.exp(-row["aligned"]["latent"]))
+                if not math.isclose(score, row["aligned"]["score"], rel_tol=0, abs_tol=1e-12):
+                    raise ValueError("Dynamic aligned sigmoid differs")
+    bases = sorted({item["base_id"] for item in inputs.values()})
+    views = [("original", 0), ("local_texture_alternating", 1701), ("local_texture_alternating", 2904)]
+    if len(bases) != 450 or set(index) != {(uid, family, seed) for uid in bases
+                                         for family, seed in views + [("encoding_control", 0)]}:
+        raise ValueError("Dynamic source/seed combinations changed")
+    expected = unique(readl(folder / "pairs.jsonl"), "base_id")
+    if expected.keys() != set(bases):
+        raise ValueError("Dynamic frozen pair coverage changed")
+    rows = []
+    for uid in bases:
+        row = {"sample_id": uid, "dimension": "dynamic_degree", "primary": True, "scores": {}}
+        for name, arm in [("origin", "origin"), ("repair", "aligned")]:
+            def value(family, seed):
+                result = maps[arm][index[uid, family, seed]]
+                return result["score"] if arm == "origin" else result["aligned"]["score"]
+            values = [value(family, seed) for family, seed in views]
+            if values != expected[uid][arm] or value("encoding_control", 0) != values[0]:
+                raise ValueError("Dynamic pair or encoding control differs")
+            for side, score in [("base", values[0]), ("cf", statistics.mean(values[1:]))]:
+                row["scores"][f"{name}_{side}"] = {"score": score, "status": "ok"}
+        rows.append(row)
+    frozen = json.loads((folder / "summary.json").read_text())["counterfactual"]["all450"]
+    summary = summarize(rows)
+    for name, arm in [("origin", "origin"), ("repair", "aligned")]:
+        for side in ("base", "cf"):
+            if not math.isclose(summary[f"{name}_{side}"], frozen[arm][f"{side}_mean"], rel_tol=0, abs_tol=1e-12):
+                raise ValueError("Dynamic table mean differs")
+    return rows
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bundle", type=Path, required=True)
@@ -143,6 +200,7 @@ def main():
     if args.output.resolve() == args.bundle.resolve() or args.bundle.resolve() in args.output.resolve().parents:
         raise ValueError("Write reproduction output outside the frozen input bundle")
     results = replay_semantic(args.bundle, args.model_code.resolve(), args.k400_labels)
+    results["dynamic_degree"] = replay_dynamic(args.bundle)
     for dimension in DIMENSIONS:
         if dimension not in results:
             results[dimension] = replay_visual_scores(args.bundle, dimension)
@@ -150,6 +208,10 @@ def main():
         expected_table = {row["dimension"]: row for row in csv.DictReader(f)}
     summaries, checked = [], {}
     for dimension in DIMENSIONS:
+        if dimension == "dynamic_degree":
+            checked[dimension] = 3600  # Two backends, including all 450 encoding controls.
+            summaries.append({"dimension": dimension, **summarize(results[dimension])})
+            continue
         suffix = "replay" if dimension in TASKS else "fresh" if dimension in {"object_class", "color"} else "verified"
         frozen = readl(args.bundle / "dimensions" / dimension / f"scores/paired-{suffix}.jsonl")
         checked[dimension] = compare_rows(results[dimension], frozen)

@@ -1,5 +1,9 @@
 # 失败、废弃、替代与暂停实验索引
 
+当前论文采用 **九维**，其中 Dynamic 是最新 aligned-v1；它不是本页列出的旧 joint / anchored。
+其 DEV17/23 和原严格尺度门槛失败仍保留，用户接受 0.6 档尺度后的 450 组评测与权重发布
+见 [Dynamic 当前版本](DYNAMIC_ALIGNED.md)。这不把旧版失败追溯改成通过。
+
 用户要求：已否掉、效果不佳的实验不要求作为当前成功方案重新跑，但必须有 Markdown 记录。
 本页只作导航和状态说明；原始结果、失败分母和审查意见仍在链接报告中，不改写历史数字。
 “暂停/部分完成/未做”与“实测失败”分开记录，也不把保留方法的局限说成整个方法已废弃。
@@ -11,9 +15,9 @@
 | Dynamic FPS v1 / v2 | v1 镜像了采样违约；v2 的聚合校正不能证明自然运动更好，P1 自然偏好退化 | 作为历史反例；[Dynamic 审计](../paper/dynamics_degree.md)、[P1](../counterfactual-reports/P1_NATURAL_AND_CONTROL_RUNS.md) |
 | Dynamic 早期合成噪声/闪烁 | 用户明确替换为官方原片上的局部空间纹理位移 | 标记 superseded，已归档但不混入当前实验；[替代决定](../plans/2026-09-22-dynamic-static-jitter-protocol-superseded.md) |
 | Dynamic CoTracker / NCC / SIFT / 支持区域候选 | 缺位移、身份错配、覆盖不足或未达到涨幅 ≤10% 的要求 | 不作为已完成修复；[完整开发记录](../counterfactual-reports/dynamic_static_jitter.md) |
-| Dynamic V-JEPA joint | 自然偏好 20/23 及不变性指标不能消除静止/运动排序反例 | 候选说明保留；按用户决定不上传权重；[记录](../counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-expansion450) |
-| Dynamic anchored | 静止约 0.008，但自然偏好 18/23，未达预定 ≥19/23 | 整体验收失败；不上传权重、不晋升默认；[验收](../counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-anchored) |
-| Motion 早期幅值聚合 / 方向修复 | 自然偏好不佳；旧反事实重评分只到 parity，新默认与旧报告版本不同 | 不算当前八维成功主表；[审计](../paper/motion_smoothness.md)、[P1](../counterfactual-reports/P1_NATURAL_AND_CONTROL_RUNS.md) |
+| Dynamic V-JEPA joint | 自然偏好 20/23 及不变性指标不能消除静止/运动排序反例 | 旧版说明保留；当前采用 aligned-v1；[记录](../counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-expansion450) |
+| Dynamic anchored | 静止约 0.008，但自然偏好 18/23，未达预定 ≥19/23 | 该旧版验收失败；当前采用 aligned-v1，旧版不晋升默认；[验收](../counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-anchored) |
+| Motion 早期幅值聚合 / 方向修复 | 自然偏好不佳；旧反事实重评分只到 parity，新默认与旧报告版本不同 | 不算当前九维主表；[审计](../paper/motion_smoothness.md)、[P1](../counterfactual-reports/P1_NATURAL_AND_CONTROL_RUNS.md) |
 | Subject 隔离裁剪与初期 CLS 候选 | 自然集退化或均值/最坏情况未过门槛；两条好例子不足以证明总体成功 | 保留诊断；[官方扩展](../counterfactual-reports/subject_official_extension_20260920.md)、[隔离开发](../counterfactual-reports/subject_isolation_development.md) |
 | Subject 旧 60 条单首帧方案 | 已被 720 候选的 v9 主实验替代，旧主体响应偏弱 | 只作历史；[主实验](../counterfactual-reports/subject_stability_20260920.md) |
 | Subject v9 单帧补充 | 用户要求收尾时停在 204/241；部分完成，不是模型失败 | 不当作全量验收；[停止记录](../counterfactual-reports/subject_stability_20260920.md) |

@@ -10,12 +10,14 @@
 数据覆盖 16 维不表示本仓库为 16 维都实现了 Repair。
 
 [复现入口与验收范围](docs/reproduction/README.md)提供固定 HF revision 的恢复命令、
-八维主表复算及六维训练输入；[失败/废弃实验索引](docs/reproduction/REJECTED_EXPERIMENTS.md)
-保留未采用方案的原因。上传完整性通过不代表全八维 GPU 重推理或从头训练已验收。
+九维主表复算、六个语义 LoRA 的训练输入及 Dynamic 训练记录；[失败/废弃实验索引](docs/reproduction/REJECTED_EXPERIMENTS.md)
+保留未采用方案的原因。上传完整性通过不代表全九维 GPU 重推理或从头训练已验收。
 
 H100 可用 `scripts/h100_python.sh -m dynamic_degree.cli --help` 调用新 checkout，
 复用既有 CUDA 依赖，固定上游及已有权重。Python 包和 CLI 名称保持兼容。
-原有审计范围、算法状态和历史证据如下。
+当前论文修复范围为 **9 维**，新增 Dynamic Degree 的 aligned-v1；其评分头与冻结
+V-JEPA backbone、复现命令见 [Dynamic 发布说明](docs/reproduction/DYNAMIC_ALIGNED.md)。
+原有研发审计范围仍为 11 维，算法状态和历史证据如下。
 
 VBench 1.0 的可复现审计工作区。本轮范围 **11 维** = 已实现的 7 维 + 4 个候选维度
 （范围决定见 [`docs/plans/2026-09-15-dimension-scope-11d.md`](docs/plans/2026-09-15-dimension-scope-11d.md)）。
@@ -214,9 +216,28 @@ Origin 的 **65.27%**，仍未通过 10% 目标。63/63 校准评分零失败，
 已完成300步；冻结编码器，DEV210/60、不用该单例或TEST450训练、不作分数平移/缩放。
 新头该单例静止/8px平移/32px平移为**0.008533/0.134990/0.293819**；DEV60三种
 位移排序各60/60，但自然偏好**20/23→18/23，未过预定≥19/23**，整体验收未通过。
-首次非有限loss失败保留，等价分块恢复完成；新头TEST450仍NOT RUN，旧450结果
-不得转记为新模型证据。默认不变。
+首次非有限loss失败保留，等价分块恢复完成。用户随后要求的新头
+[450组评分已完成](docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-anchored450)：
+1800/1800重新解码/推理，零失败，新Repair **0.171554→0.166466**（Δ−0.005088，
+MAE0.015694）；原片自然偏好143/171，旧头147/171，两种CF下新头145/146。
+平均涨幅数值检查通过，但MAE比旧头略大，原DEV60失败不改写；默认不变。
+Origin沿用同批锁定结果，并非本轮重跑RAFT；新旧模型结果分开保留。
+随后完成[一次模型内均分监督训练](docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-aligned)：
+新`aligned-v1`在DEV60为**0.657326→0.651620**；用户明确接受0.6档分数并要求收尾，
+不再追齐Origin或继续训练。静止/位移响应保持，但自然偏好17/23及原严格尺度门槛
+失败仍保留；该训练交接时尚未测450组，用户随后另行要求的
+[当前aligned模型450组复测](docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-aligned450)
+现已完成1800/1800、零失败：**0.629251→0.623035**，Δ−0.006216、MAE0.021731；
+自然偏好原片和两种CF均144/171。450编码控制/1800特征精确一致，独立核验通过。
+批量涨幅检查通过，但最大单条降分0.377932、900CF中28条降分>0.1仍保留；
+不等于逐片不变。Origin沿用同批锁定结果；无再训练、调映射或默认变更。
 构造、配置和命令见[复现入口](configs/dynamic-static-jitter/README.md)。
+
+2026-09-23论文同步：Dynamic Degree已补入相邻Overleaf稿件方法**§2.2.2
+Nuisance Entanglement**及Table 1第六行不变性结果；当前论文九维不等于研发十一维
+范围。[论文风格中文方法](docs/VBENCH_DIMENSION_METHODS_PAPER_STYLE.md#1-dynamic-degree)
+和[论文专项说明](docs/reproduction/paper-dynamic-degree-stability.md)同步冻结V-JEPA 2.1＋
+连续头数据流、450组协议/区间及逐片失败边界。仅整理已有证据，不重新训练或晋升默认。
 
 裸 `--gpu` 和不带值的默认选择是当前 CUDA 可见逻辑设备 0；显式列表拒绝重复或越界编号，不会静默切换 CPU。默认结果写入仓库根 `output/<metric>/<backend>/<run-id>/`，每次运行使用新 run-id；`--output DIR` 可替换输出基目录。输入 `data/`、`results/`、`splits/`、`runs/` 为冻结研究内容，不修改、不重算、不删除。
 

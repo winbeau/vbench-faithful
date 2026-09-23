@@ -4,23 +4,53 @@
 
 本文当前范围包括 Dynamic Degree、Motion Smoothness、Subject Consistency、Scene、Human Action、Spatial Relationship、Multiple Objects、Background Consistency、Object Class、Color Consistency 和 Temporal Style。Overall Consistency 属于旧的总体指标整理，不作为本稿的独立实验维度。
 
+2026-09-23补写范围仅为 Dynamic Degree：采用当前aligned-v1和450组冻结结果，已对应到论文方法§2.2.2及不变性表。Motion Smoothness仍留空，其他维度本轮未重新核验或改数；本稿十一维研发范围不等于当前论文的九维结果表。
+
 ## 1. Dynamic Degree
 
 ### Original Scoring
 
-本章节暂空。
+Dynamic Degree 维度旨在衡量视频中的运动程度。VBench以约8 fps采样视频，使用RAFT计算相邻采样帧的光流，并对每对帧中最大的5%光流幅值取均值。设采样帧数为 $T$，当超过阈值 $6\min(H,W)/256$ 的帧对数达到 $\operatorname{round}(4T/16)$ 时，该视频记为1，否则记为0，最终对视频取均值得到被判定为动态的视频比例。原版并非逐视频连续强度评分；本实验16帧/8 fps时，要求15个帧对中至少4个超过阈值。
+
+```text
+官方原视频 → 约8 fps采样 → 相邻帧RAFT
+  → 每帧对top-5%光流幅值均值 → 分辨率阈值 + 超阈值计数
+  → 视频0/1 → 数据集动态视频比例
+```
 
 ### Mechanism Analysis
 
-本稿暂不引用旧版本 Dynamic Degree 的实现或结论；当前默认实现、问题路径及其与正式实验的对应关系尚未完成最终核验。
+光流幅值本身不区分连贯的对象/相机运动与画面内部纹理的局部快速往返位移。因此即使没有新增连贯运动，8px局部抖动仍可能触发原版的动态判据，导致运动程度与无关像素变化耦合。本维度归入 **Nuisance Entanglement**；反事实要求对这种指定抖动保持稳定，同时对实际运动保有响应，不是对所有往返运动一律抑制，也不是亮度频闪过滤。
 
 ### Repair Strategy
 
-本章节暂空。当前状态为 `NOT RUN`，不将历史聚合消融或旧版实现写作当前 Repair。
+我们以学习得到的连续运动读出替代光流阈值判定。对16帧/8 fps RGB视频作全帧384×384缩放，经冻结的V-JEPA 2.1 ViT-B得到时空tokens，由51,393参数的投影、注意力池化及MLP头输出sigmoid连续分数。
+
+```text
+视频16帧/8 fps → 全帧384²归一化 → 冻结V-JEPA 2.1 ViT-B
+  → 4608×768 tokens → LayerNorm → Linear(768,64)+tanh
+  → learned attention/softmax → 加权池化 → MLP(64,32,1)
+  → sigmoid → 连续相对运动分数
+```
+
+训练联合使用人类运动偏好、原片与两种抖动视图的一致性、静止/静止加抖动低分锚点，以及平移和连贯往返运动的排序约束。最终阶段仅用训练集原片的Origin总体均分提供弱尺度监督，不逐视频复制Origin二值标签；从已有静止锚点头继续固定300步AdamW，取末步。训练210源/开发60源与450评估源按prompt分离，编码器不解冻。推理仅输入视频，不提供Origin、配对原片或干预身份，不作后处理平移/缩放。这里是连续**相对运动评分**，不是已标定的物理强度；公开CLI默认尚未替换。
 
 ### Experimental Evidence
 
-正式反事实结果、候选数、评分数、置信区间和人类偏好实验均待补齐。
+450组均为官方VBench 1.0原始MP4，三个生成器各150源、30 prompts。每源构造两种子1701/2904的8px局部坐标抖动；位移场边缘衰减、时间正负交替，每帧从对应原帧独立重采样，无累计漂移、不改原始运动或时间轴，不加RGB噪声/亮度闪烁。900CF＋450编码控制＋450原片共1800输入，全部完成、零失败。1200 qualified/600历史rejected标记全部保留评分；此前30个GIF仍NOT SCORED。
+
+| 450源冻结模型 | base → 8px反事实 | 有符号Δ，95% CI | MAE，95% CI |
+|---|---|---|---|
+| Origin | 0.680000 → 0.857778 | +0.177778 [0.133306,0.224444] | 0.177778 [0.133306,0.224444] |
+| aligned-v1 Repair | 0.629251 → 0.623035 | −0.006216 [−0.009879,−0.002862] | 0.021731 [0.018178,0.025484] |
+
+主表每源先平均两种子，再等权汇总；MAE按900条干预逐条计算，区间按30 prompt聚类bootstrap 20,000次。Origin为同批锁定既有评分及光流判据复核，不能称本轮重新跑RAFT。Repair的全部1800特征哈希和450编码控制分数均核对一致。
+
+人类偏好171有序对，原片与两CF均144对正确（84.21%）；279个人类平局单列。原片相对Origin改善CI跨零，不能称自然运动显著更好；两CF相对Origin各改善16.67pp，CI分别[5.94,26.92]/[7.35,25.36]pp。总正确数相同仍有单对变化。
+
+冻结后单图控制的静止/静止加抖动/8px平移/32px平移为0.007435/0.013868/0.351916/0.554858，是诊断而非450组主实验。原DEV60的17/23自然偏好（要求≥19/23）及严格尺度门槛仍失败。450源下仍有28/900条下降>0.1、最大下降0.377932，所以仅支持**批量抖动虚增被抑制**，不支持逐片完全不变。已暴露的测试prompt不是全新留出；绝对强度、运动类型人工审核和全新独立留出尚未完成。
+
+唯一原始报告：[当前aligned450结果](counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-aligned450)。[冻结协议](../configs/dynamic-static-jitter/vjepa-aligned450-v1.json)、[统计产物](../output/dynamic-static-jitter/vjepa-aligned450-v1/analysis/summary.json)、[复现入口](../configs/dynamic-static-jitter/README.md)；论文的[方法与证据说明](reproduction/paper-dynamic-degree-stability.md)保留数据流、完整版本及哈希。旧方法/旧头只在原始报告中保留，不作为本节当前Repair。
 
 ## 2. Motion Smoothness
 
@@ -385,7 +415,7 @@ scope/negation/word-boundary 判定 → 全帧聚合 → Color Repair score
 
 | 维度 | Origin | Repair | 敏感性 / 不变性实验与当前结论 |
 |---|---|---|---|
-| Dynamic Degree | 当前方法与正式协议待确认 | 暂空，`NOT RUN` | 暂无证据；不引用历史方案 |
+| Dynamic Degree | RAFT top-5%幅值 + 阈值计数；`0.680000 → 0.857778` | 冻结V-JEPA 2.1 + 连续注意力/MLP头；`0.629251 → 0.623035` | 450源/900CF，8px局部纹理抖动不变性；MAE `0.177778 → 0.021731`，批量虚增抑制，仍有逐片失败，非物理强度标定 |
 | Motion Smoothness | 当前方法与正式协议待确认 | 暂空，`NOT RUN` | 暂无证据；不引用历史 temporal aggregation |
 | Subject Consistency | 全帧 DINO；相邻帧 + 首帧锚定 | 独立 Mask R-CNN/MobileSAM 主体定位 → 主体裁剪 → DINO patch → all-pairs | 背景模糊：`0.936417 → 0.816382`，MAE `0.120035`；Repair `0.951413 → 0.941724`，MAE `0.010596`。背景不变性改善，但严格全量 gate 未通过；主体干预仍平均降分 `0.099319` |
 | Scene | Tag2Text caption + 场景词严格字符串匹配 | Qwen3-8B Scene Verifier(prompt, caption) → supported/contradicted/insufficient | 同义替换：Origin `0.30594 → 0.05406`；Repair `0.6909375 → 0.6946875`。Repair 抑制词面敏感性；caption 误差和独立视觉真值仍有限 |
@@ -399,6 +429,7 @@ scope/negation/word-boundary 判定 → 全帧聚合 → Color Repair score
 
 ## 证据与复现入口
 
+- Dynamic当前头SHA `6dcfbdce2e604cdd669e54015fee34e034c8004726d06c46611532f451ca8a53`；[原始报告](counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-aligned450)及其冻结配置/统计产物是权威来源，不混用旧FPS协议或DEV结果。Motion Smoothness继续留空。
 - Subject 的正式交接报告：`docs/counterfactual-reports/subject_stability_20260920.md`；对应已推送提交为 `6ae1ef5`。
 - 本地 Background、Object Class、Color 和 Temporal Style 的实现报告与配置位于 `metrics/` 下对应维度目录；本稿中的数值以冻结 holdout 或对应报告为准。
 - Scene、Human Action、Spatial Relationship 和 Multiple Objects 的当前 v2/v8/v9 实现、脚本和确定性报告位于相邻的 `vbench-prompts-compile` 工作区；其 working tree 中已有用户未提交的最新 v2 改动，不能用相邻仓库的旧 HEAD 文档替代当前源码。

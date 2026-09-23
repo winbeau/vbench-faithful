@@ -6,12 +6,15 @@
 
 用户后续确认：原始数据补齐 **全部 16 维**；模型另发到
 `xju-arlab/vbench-model`，**每维一个目录，只保留 best available model**。
-Dynamic 暂不发布权重，只记录候选及验证。镜像实测不可用时允许官方回退。
+Dynamic 已按用户最新授权追加 **aligned-v1 最佳使用版本及配套 V-JEPA 2.1 ViT-B backbone**；
+此前“暂不上传”决定被替代。固定末步 300，并明确并非 dev 选优。镜像不可用时允许官方回退。
 
 执行状态：代码已迁入私有仓库并通过 H100 真实 GPU smoke；全部 16 份原标注、
 27,720 个维度内原片条目和 27 个反事实版本已上传并通过远端完整性核验。
-六个维度权重已发布，其中 Object Class / Color 按用户要求采用论文 step 300，
+六个语义维度权重及 Dynamic 评分头/backbone 已发布，其中 Object Class / Color 按用户要求采用论文 step 300，
 明确注明未经 dev 选优。两份模型复现源码经用户明确确认可在 HF 公开。
+当前论文修复为九维，九维主表已从 HF 独立复算，Dynamic 新头的 H100 单片与 H200
+分数、latent、tokens 和输入哈希完全一致；全九维 GPU 重推理及全部重训尚未验收。
 完整版本与已知上游数据问题见[发布验收](../publication/README.md)。
 
 ## 1. 代码完整保存
@@ -85,7 +88,8 @@ dimensions/<canonical_dimension>/
   200/250/300 并列，因此发布 300，并在 `selection.json` 明确记录此限制。
 - 权重逐字节保留，提供 SHA-256、训练配置、tokenizer、来源代码 SHA。
   适配器配置的私有底座路径改为固定 revision 的 `Qwen/Qwen3-8B`，另保留原配置。
-- Dynamic 的 joint/anchored 选择记录保留，遵照用户明确决定不上传其权重。
+- Dynamic 的旧 joint/anchored 失败记录保留；当前发布 aligned-v1（固定 300 步）及配套冻结 backbone。
+  [发布与复现](../reproduction/DYNAMIC_ALIGNED.md) 单列选用依据、原失败门槛、权重和评测哈希。
 
 ## 已发现的上游数据问题
 
