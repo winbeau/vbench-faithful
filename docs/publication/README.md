@@ -78,3 +78,9 @@ spec，确保尚未提交 manifest 的实验也被判为缺失。
 最后使用 `scripts/finalize_publication.py` 更新公开数据卡与覆盖目录；它要求远端验收通过，
 并保留被验收的数据 revision。服务器磁盘不足时临时分片与上传缓存放在本次专用
 `/dev/shm/vbench-repair-*` 目录；完成后先保全续传状态与索引，再清理临时数据。
+# Dynamic 外部结果增补（2026-09-23）
+
+[LASIESTA／BMC 外部验证](../reproduction/DYNAMIC_GENERALIZATION.md)补充当前 aligned-v1
+的 127 片段／16 源结果；发布协议、逐条分数和审计，不上传外部源媒体、私有工程源码或新权重。
+固定发布 revision 与逐文件下载验收见 [外部发布记录](dynamic-generalization-release.json)。
+原有数据、权重与运行环境的固定 revision 不改写；下文保留首次迁移／发布记录。

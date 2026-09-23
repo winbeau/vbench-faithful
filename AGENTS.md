@@ -23,6 +23,13 @@
 当前任务已明确授权项目权重与运行依赖下载、HF 发布以及私有 GitHub commit/push；
 不得将后文旧记录的默认限制理解为需要重复确认。禁止改写冻结研究输入和结果。
 
+2026-09-23 外部验证补充：`docs/reproduction/DYNAMIC_GENERALIZATION.md` 索引 LASIESTA
+43 片段／9 源与 BMC 84 片段／7 源的冻结 aligned-v1 结果。二者独立报告，不改论文
+450 组权威结果、模型权重或统一评分合同。外部输入允许矩形全帧适配，仅由独立实验脚本调用。
+HF 仅发布协议与数值证据，不发布两套外部媒体或私有源码；BMC 数据许可未核实。
+BMC 动静标签是评分前 agent 复核，不是官方真值／真人盲审；LASIESTA 原始时间未知。
+不得把 127 片段写作 127 独立录像，把均值不变写作逐片不变，或把复算写作 GPU 重跑。
+
 本轮审计范围已定为 **11 维**：在办 7 维（`dynamic_degree`、`motion_smoothness`、
 `subject_consistency`、`scene`、`human_action`、`spatial_relationship`、`multiple_objects`）
 加候选 4 维（`background_consistency`、`temporal_style`、`object_class`、`color`）；

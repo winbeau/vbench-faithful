@@ -1,0 +1,22 @@
+{
+  "protocol": "dynamic-aligned-bmc-real-motion-v1",
+  "dataset": "BMC2012 real evaluation recordings",
+  "official_page": "https://backgroundmodelschallenge.eu/",
+  "sequences": ["Video_001", "Video_002", "Video_003", "Video_004", "Video_005", "Video_006", "Video_007", "Video_008", "Video_009"],
+  "selection": "All nine official real recordings, up to 12 nonoverlapping two-second windows per recording, uniformly spaced from start to end. If shorter than 24s, use floor(duration/2) windows. No score-based selection, replacement, or exclusion.",
+  "input_eligibility": "Source FPS must be at least 8 to provide 16 distinct frames in two seconds, and decoded best-effort PTS must be CFR. Lower-FPS or discontinuous-PTS recordings remain in the candidate ledger as NOT SCORED; no upsampling, slowed playback, duplicate frames, PTS repair, or replacements.",
+  "sampling": {"frames": 16, "output_fps": 8, "duration_seconds": 2, "max_windows_per_sequence": 12, "timestamp_tolerance": 0.0001, "timestamp_origin": "Use FFmpeg best-effort decoded presentation timestamps relative to first frame. Verify all decoded frames; count decoded frames, not AVI header packets. OpenCV AVI tail timestamps are diagnostic only.", "rounding": "nearest source frame, half up", "source_resize": false, "source_crop": false},
+  "labels": {"source": "score-blind agent visual review of sampled RGB frames; NOT official motion/static ground truth", "conditions": ["static", "motion", "ambiguous"], "static": "No visually evident object, camera, or natural background motion in the sampled clip; subtle motion uncertainty goes to ambiguous", "motion": "Visually evident coherent object, camera, or natural scene motion", "ambiguous": "Unclear or mixed evidence; retain in robustness summaries but do not use for static/motion discrimination", "camera_fixed_is_not_scene_static": true, "review_frozen_before_scores": true},
+  "intervention": {"amplitude_pixels": 8, "seeds": [1701, 2904], "spatial_scale_pixels": 32, "border_taper_pixels": 32, "min_warp_jacobian": 0.5, "max_global_translation_pixels": 0.05, "all_geometry_flags_retained": true, "brightness_flicker": false, "rgb_noise": false},
+  "views": ["original", "encoding_control", "jitter1701", "jitter2904"],
+  "head_sha256": "6dcfbdce2e604cdd669e54015fee34e034c8004726d06c46611532f451ca8a53",
+  "head_implementation_sha256": "e5688423b96362d0adcca7eb0b95dfeca90d140ce6f4caa0ae919c50d5987bcc",
+  "probe_config_sha256": "6c5e1464f903f6434cfa3a707ff2b6f93d10142a57fc0f586ac4cea82f3116af",
+  "probe_sources_sha256": "b2bbc3fd06d9bcb56ba4e11a3486184b2a32da13caa626001b7add394c6df15b",
+  "origin_upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "raft_sha256": "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1",
+  "repair_preprocessing": "Unchanged full-frame bilinear antialiased resize to 384 square, rectangular guard relaxation only; verify exact preprocessing, feature and head parity on prior square TRAIN reference.",
+  "analysis": {"bootstrap_seed": 20260923, "bootstrap_replicates": 20000, "cluster": "original recording, not short windows", "primary": "all selected windows, irrespective of visual label", "secondary": "static/motion/ambiguous separately; threshold-free AUROC only if both reviewed classes exist", "acceptance": "descriptive external validation; no new score calibration, threshold fitting, or checkpoint selection"},
+  "scope": {"training_updates": 0, "score_mapping_changed": false, "public_default_changed": false, "model_downloads": false, "head_training_used_bmc": false, "encoder_pretraining_overlap": "UNKNOWN"},
+  "limitations": ["Nine recordings, possibly sharing sites; windows are not independent sources", "Sparse official foreground masks cannot certify whole-clip stillness; reviewed labels are not benchmark motion-intensity ground truth", "Nearest-frame sampling has at most half a source-frame temporal rounding error; no invented or repeated still-image video", "Author page requests citation; no explicit standardized dataset license verified, so original videos are not redistributed", "This is not official BMC foreground segmentation evaluation or physical motion-strength calibration"]
+}

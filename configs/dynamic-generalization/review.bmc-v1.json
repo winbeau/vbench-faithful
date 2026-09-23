@@ -1,0 +1,348 @@
+{
+  "protocol": "dynamic-aligned-bmc-real-motion-v1",
+  "reviewer": "Codex visual review (agent, not an independent human rater)",
+  "scores_read": false,
+  "official_ground_truth": false,
+  "candidates_sha256": "305710f7b0bfbf50f69e808bda71950042995385f433578a1ed77e2c7d6ea032",
+  "inspection": "All84 clips inspected at sampled indices0/5/10/15. Additional all16-frame sheets inspected for all Video001/002/004 clips, Video006 windows0/1/2/9/10/11, Video007 windows3-11. All5 static windows were inspected across all16 sampled frames. Not full native-rate playback.",
+  "limitations": "Sparse BMC foreground masks are not used as motion/static labels; qualitative agent labels are auxiliary. Primary invariance analysis includes all84 clips including20 ambiguous ones. Static means visually quiescent, not mathematically zero motion.",
+  "clip_count": 84,
+  "clips": {
+    "Video_001:00": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:01": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:02": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:03": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:04": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:05": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:06": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:07": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:08": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:09": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:10": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_001:11": {
+      "condition": "motion",
+      "reason": "Visible wind-driven tree/branch movement; some windows also contain background road traffic. No parked-car-only static assumption."
+    },
+    "Video_002:00": {
+      "condition": "motion",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:01": {
+      "condition": "motion",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:02": {
+      "condition": "motion",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:03": {
+      "condition": "motion",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:04": {
+      "condition": "motion",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:05": {
+      "condition": "motion",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:06": {
+      "condition": "ambiguous",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:07": {
+      "condition": "ambiguous",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:08": {
+      "condition": "motion",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:09": {
+      "condition": "motion",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:10": {
+      "condition": "ambiguous",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_002:11": {
+      "condition": "motion",
+      "reason": "Coherent truck or loader displacement; empty-yard intervals retain uncertain fine debris/plume motion and are not static negatives."
+    },
+    "Video_004:00": {
+      "condition": "motion",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:01": {
+      "condition": "motion",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:02": {
+      "condition": "motion",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:03": {
+      "condition": "ambiguous",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:04": {
+      "condition": "ambiguous",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:05": {
+      "condition": "motion",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:06": {
+      "condition": "ambiguous",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:07": {
+      "condition": "motion",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:08": {
+      "condition": "motion",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:09": {
+      "condition": "motion",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:10": {
+      "condition": "motion",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_004:11": {
+      "condition": "motion",
+      "reason": "Person enters at window01, otherwise wind-blown paper visibly changes position; unclear small paper/shadow changes remain ambiguous."
+    },
+    "Video_006:00": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:01": {
+      "condition": "static",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:02": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:03": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:04": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:05": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:06": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:07": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:08": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:09": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:10": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_006:11": {
+      "condition": "motion",
+      "reason": "Pedestrians, approaching/passing train, or road traffic show displacement; window01 is visually quiescent in all 16 sampled frames."
+    },
+    "Video_007:00": {
+      "condition": "motion",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:01": {
+      "condition": "motion",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:02": {
+      "condition": "motion",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:03": {
+      "condition": "motion",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:04": {
+      "condition": "static",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:05": {
+      "condition": "motion",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:06": {
+      "condition": "static",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:07": {
+      "condition": "ambiguous",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:08": {
+      "condition": "static",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:09": {
+      "condition": "ambiguous",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:10": {
+      "condition": "motion",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_007:11": {
+      "condition": "static",
+      "reason": "Walking worker or passing train; empty rail windows04/06/08/11 visually quiescent across all16 frames; stationary-worker micro-motion uncertain at07/09."
+    },
+    "Video_008:00": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:01": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:02": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:03": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:04": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:05": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:06": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:07": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:08": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:09": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:10": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_008:11": {
+      "condition": "motion",
+      "reason": "Clear road-vehicle trajectories in all uniformly sampled windows; outdoor foliage also present."
+    },
+    "Video_009:00": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:01": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:02": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:03": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:04": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:05": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:06": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:07": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:08": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:09": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:10": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    },
+    "Video_009:11": {
+      "condition": "ambiguous",
+      "reason": "Wet outdoor parking with foliage/reflections and possible weather motion. No unambiguous coherent trajectory in overview; cannot certify whole-scene stillness."
+    }
+  }
+}

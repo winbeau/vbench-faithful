@@ -25,6 +25,11 @@
 V-JEPA backbone、复现命令见 [Dynamic 发布说明](docs/reproduction/DYNAMIC_ALIGNED.md)。
 原有研发审计范围仍为 11 维，算法状态和历史证据如下。
 
+新增 [Dynamic 外部泛化验证](docs/reproduction/DYNAMIC_GENERALIZATION.md)：冻结同一 aligned-v1，
+LASIESTA 43 片段／9 源，BMC 84 片段／7 源；两后端分别各 172/172、336/336 完成。
+逐条分数、配置、来源和审计另行同步 HF，不改 450 组主实验或模型权重。
+127 片段不等于 127 个独立场景；BMC 标签是评分前 agent 复核，逐片失败继续保留。
+
 VBench 1.0 的可复现审计工作区。本轮范围 **11 维** = 已实现的 7 维 + 4 个候选维度
 （范围决定见 [`docs/plans/2026-09-15-dimension-scope-11d.md`](docs/plans/2026-09-15-dimension-scope-11d.md)）。
 2026-09-20 已另接通 background consistency 的官方与候选修复后端，验证进展见下文；

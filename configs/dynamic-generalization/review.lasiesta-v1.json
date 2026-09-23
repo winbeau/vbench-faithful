@@ -1,0 +1,16 @@
+{
+  "protocol_config_sha256": "dcd83b8f54b8af7b5fed98928c7367c22417770eb34bcacacf9a0dd1e199ebd6",
+  "selection_sources_sha256": "e637d027c357bc0e42f8eec6f983cee7ae402ec4d510b522c892e554caa43196",
+  "reviewer": "assistant visual inspection, not independent human raters",
+  "evidence": "H200 /data/chenjiayu/dynamic-generalization-lasiesta-20260923/visual-review/{static-00,static-01,motion-00,motion-01,motion-02,motion-03}.jpg",
+  "coverage": {"clips": 43, "static": 16, "motion": 27, "frames_per_clip_seen": 3, "sample_positions_zero_based": [0,8,15], "full_video_playback": false},
+  "model_scores_seen_before_review": false,
+  "membership_changed": false,
+  "observations": [
+    "Static examples show empty corridors/rooms/stairs or a stationary bag/person; no obvious object displacement in sampled review frames.",
+    "Motion examples include walking, approaching/receding people, stairs, handling a bag, entry and exit, and partial occlusion.",
+    "I_BS_02:0001 shows only subtle body/arm changes before walking starts. Keep its official motion label and include it; do not exclude as an easy or difficult scoring case.",
+    "I_CA_01:0200 is a real stationary person, not a frozen image. Small physiological motion is possible.",
+    "Contact-sheet inspection is a limited semantic check, not certification of every frame or continuous motion intensity."
+  ]
+}

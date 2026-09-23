@@ -1,0 +1,20 @@
+{
+  "protocol": "dynamic-aligned-forcing128-generalization-v1",
+  "purpose": "Frozen cross-generator local-jitter evaluation, not training or calibrated motion ground truth",
+  "source_count_per_cohort": 128,
+  "source_selection": "All video_000.mp4 through video_127.mp4 with their existing prompts.csv, no score-based selection",
+  "duration_cohort": "30s-labelled existing generation runs; actual duration recorded",
+  "sampling": {"frames": 16, "fps": 8, "windows": ["start", "middle", "end"], "window_starts": "0, floor((sampled_count-16)/2), sampled_count-16 on the original VBench sampling grid", "source_resize": false, "source_crop": false, "require_exact_8fps_grid": true},
+  "intervention": {"amplitude_pixels": 8, "seeds": [1701, 2904], "spatial_scale_pixels": 32, "border_taper_pixels": 32, "min_warp_jacobian": 0.5, "max_global_translation_pixels": 0.05, "all_geometry_flags_retained": true, "brightness_flicker": false, "rgb_noise": false},
+  "views": ["original", "encoding_control", "jitter1701", "jitter2904"],
+  "head_sha256": "6dcfbdce2e604cdd669e54015fee34e034c8004726d06c46611532f451ca8a53",
+  "head_implementation_sha256": "e5688423b96362d0adcca7eb0b95dfeca90d140ce6f4caa0ae919c50d5987bcc",
+  "probe_config_sha256": "6c5e1464f903f6434cfa3a707ff2b6f93d10142a57fc0f586ac4cea82f3116af",
+  "probe_sources_sha256": "b2bbc3fd06d9bcb56ba4e11a3486184b2a32da13caa626001b7add394c6df15b",
+  "origin_upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "raft_sha256": "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1",
+  "repair_preprocessing": "The identical torch bilinear antialiased full-frame resize to 384 square; rectangular inputs accepted only by this experimental adapter. No crop or native resize before the 8px warp. Verify bit-exact parity on a prior square training example.",
+  "analysis": {"bootstrap_seed": 20260923, "bootstrap_replicates": 20000, "cluster": "normalized prompt", "primary": "per-source equal mean of three windows and two CF seeds, then equal-weight sources", "mae": "mean absolute paired changes across all source-window-seed triples, NOT abs(mean delta)", "windowed_origin": true, "whole_long_video_origin_score": false, "relative_scale_check": "delta_repair <= 0.1 * delta_origin only if Origin has positive inflation; diagnostic, not a shared physical unit"},
+  "scope": {"training_updates": 0, "score_mapping_changed": false, "public_default_changed": false, "model_downloads": false, "human_labels_available": false, "calibration45_media_opened": false, "freeze_before_scores": true, "new_generator_weights_not_used": true},
+  "limitations": ["Three two-second windows do not measure all long-video frames or long-term temporal quality", "An 8px displacement has a smaller relative size on a 480px frame than on prior 256px frames", "These two cohorts test generator/content shift with the SAME intervention family, not unseen-nuisance generalization", "No new human motion judgments: invariance is not proof of correct motion ranking", "Historical generation checkpoints are not inferred from folder names; preserve available metadata and flag unavailable identity"]
+}

@@ -1,0 +1,10 @@
+{
+  "status": "staged_pending_upload",
+  "repo_id": "xju-arlab/vbench-repair",
+  "path": "dimensions/dynamic_degree/generalization/external-v1-20260923",
+  "model_weights_changed": false,
+  "source_media_included": false,
+  "local_tests_passed": 60,
+  "local_arithmetic_replay": "PASS",
+  "note": "Publication receipt will replace this staging record after upload and fresh-download verification."
+}
