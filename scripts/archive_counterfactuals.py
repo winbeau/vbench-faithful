@@ -105,9 +105,11 @@ def run(args):
         job.mkdir(parents=True, exist_ok=True)
         state_file = job / "state.json"
         state = json.loads(state_file.read_text()) if state_file.exists() else {
-            "source_snapshot_sha256": identity, "archives": [], "members": []}
+            "source_snapshot_sha256": identity, "shard_mib": args.shard_mib, "archives": [], "members": []}
         if state["source_snapshot_sha256"] != identity:
             raise ValueError(f"Source changed during archive: {dimension}/{version}; freeze a new version")
+        if state.get("shard_mib", 512) != args.shard_mib:
+            raise ValueError("Shard size changed; resume with the original shard-mib setting")
         state.setdefault("pending_archives", [])
         state.setdefault("pending_members", [])
         if not deferred and state["pending_archives"]:
@@ -163,6 +165,7 @@ def run(args):
         dump(metadata / "manifest.json", {"schema": "vbench-repair-counterfactual/1",
              "dimension": dimension, "version": version, "source_root": str(root),
              "source_snapshot_sha256": identity, "source_files": len(files),
+             "shard_limit_mib": args.shard_mib,
              "source_bytes": sum(x["bytes"] for x in snapshot),
              "archives": state["archives"] + state["pending_archives"],
              "note": spec.get("note", "Frozen research artifacts; read source validation before reuse."),

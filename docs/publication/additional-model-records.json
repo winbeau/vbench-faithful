@@ -1,7 +1,7 @@
 [
   {
     "dimension": "object_class",
-    "weight_publication_status": "record_only_no_development_selection",
+    "weight_publication_status": "published_paper_final_step_300",
     "paper_final_step": 300,
     "checkpoints": [
       {
@@ -34,13 +34,14 @@
       },
       "trainable_parameters": 43646976
     },
-    "selection_note": "The original run used a fixed 300-step schedule without development evaluation. Retained checkpoints cannot be ranked as best by dev metrics. No weights are published in this directory.",
+    "selection_note": "The user explicitly selected the paper-final step 300 for publication. The fixed-step run has no development best-checkpoint comparison; no test score was used for selection.",
     "base_model": "Qwen/Qwen3-8B",
-    "base_revision": "b968826d9c46dd6066d109eabc6255188de91218"
+    "base_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "selected_step": 300
   },
   {
     "dimension": "color",
-    "weight_publication_status": "record_only_no_development_selection",
+    "weight_publication_status": "published_paper_final_step_300",
     "paper_final_step": 300,
     "checkpoints": [
       {
@@ -73,8 +74,9 @@
       },
       "trainable_parameters": 43646976
     },
-    "selection_note": "The original run used a fixed 300-step schedule without development evaluation. Retained checkpoints cannot be ranked as best by dev metrics. No weights are published in this directory.",
+    "selection_note": "The user explicitly selected the paper-final step 300 for publication. The fixed-step run has no development best-checkpoint comparison; no test score was used for selection.",
     "base_model": "Qwen/Qwen3-8B",
-    "base_revision": "b968826d9c46dd6066d109eabc6255188de91218"
+    "base_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "selected_step": 300
   }
 ]

@@ -91,7 +91,9 @@ CogVideo 被写作 MP4、LaVie 键指向 CogVideo 中文 GIF；不得猜测修�
 
 按维度布局共 27,720 个原片条目，跨维度去重为 19,400 个实际原文件。
 LFS 原片从固定 HF revision 服务端复制；Git 二进制原片校验源 Git blob 后
-重新上传，并补 SHA-256。反事实打为约 512 MiB 的 tar 分片，每个成员有哈希。
+重新上传，并补 SHA-256。服务器反事实打为约 512 MiB 的 tar 分片，每个成员有哈希。
+本机两个 dev5 版本使用 8 MiB 目标分片，避免低带宽下的大请求超时；大于目标值的
+单个文件独占一个分片，续传不能改动分片大小。
 
 ## 初始事实
 
@@ -110,12 +112,11 @@ HF 实际返回每仓库每小时 128 次提交上限。原片续传按已提交
 全部剩余分片与索引合成一个 commit。`--not-before` 可在限流窗口内先传文件内容，
 稍后再提交。未提交的分片在状态文件中明确记为 pending；重试会重建并校验相同哈希。
 
-补充本地两个 dev5 纹理位移版本和已废弃的合成开发集，来源清单见
-`configs/publication/local-counterfactuals.json`；废弃协议单独标识，不进入当前主实验。
+补充本地两个 dev5 纹理位移版本和已废弃的合成开发集；废弃协议单独标识，不进入当前主实验。
 
 本地废弃合成开发集在 H100 已有逐字节一致的副本，6,922 个文件 SHA-256 全部匹配。
 因此使用 `configs/publication/h100-supplementary.json` 从 H100 发布这一版本，
 `local-counterfactuals.json` 仅负责两个 dev5 纹理版本。
 
 Object Class / Color 保留 step 200/300，原训练没有 dev 评估和 best checkpoint 决策。
-已保存训练记录、两步权重哈希和论文采用 step 300 的事实；在 best-only 标准下先只发布记录。
+已保存训练记录、两步权重哈希和论文采用 step 300 的事实；用户后续明确要求发布论文采用的 step 300，并注明未经 dev 选优。

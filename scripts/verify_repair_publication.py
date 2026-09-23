@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Verify published original videos, counterfactual shards, labels and models."""
 import argparse
+from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path, PurePosixPath
@@ -22,6 +23,24 @@ def run(args):
     files = {x.path: x for x in api.list_repo_tree(args.repo_id, repo_type="dataset", revision=info.sha,
              recursive=True) if hasattr(x, "size")}
     errors, original_rows, summaries, experiments, archive_samples = [], [], [], [], []
+    metadata_checked = 0
+    for local in sorted(args.stage.rglob("*")):
+        if not local.is_file() or ".cache" in local.parts:
+            continue
+        name = local.relative_to(args.stage).as_posix()
+        item = files.get(name)
+        if item is None or item.size != local.stat().st_size:
+            errors.append({"path": name, "reason": "metadata_missing_or_size"})
+            continue
+        content = local.read_bytes()
+        if item.lfs:
+            identical = item.lfs.sha256 == hashlib.sha256(content).hexdigest()
+        else:
+            identical = item.blob_id == hashlib.sha1(
+                f"blob {len(content)}\0".encode() + content).hexdigest()
+        if not identical:
+            errors.append({"path": name, "reason": "metadata_content"})
+        metadata_checked += 1
     for manifest in sorted(args.stage.glob("dimensions/*/origin/manifest.jsonl")):
         rows = [json.loads(l) for l in manifest.read_text().splitlines() if l.strip()]
         original_rows.extend(rows)
@@ -127,6 +146,8 @@ def run(args):
         if not ok:
             errors.append({"path": shard["path"], "reason": "archive_download_members"})
     report = {"schema": "vbench-repair-verification/1", "repo_id": args.repo_id, "verified_revision": info.sha,
+              "verified_at": datetime.now(timezone.utc).isoformat(), "private": info.private,
+              "metadata_files_verified": metadata_checked,
               "status": "verified_with_documented_upstream_reference_issues" if not errors else "failed",
               "errors": errors, "dimensions": summaries, "original_entries": len(original_rows),
               "unique_original_paths": len({r["source_path"] for r in original_rows}),

@@ -1,6 +1,6 @@
 {
   "repo_id": "xju-arlab/vbench-model",
-  "revision": "dde2785fac592a972f5c916e575a41f8e1e9f569",
+  "revision": "249469f26000175cbf0f0ee7d06821bfbb7c25e0",
   "models": [
     {
       "dimension": "spatial_relationship",
@@ -77,7 +77,38 @@
       "base_model": "Qwen/Qwen3-8B",
       "base_revision": "b968826d9c46dd6066d109eabc6255188de91218",
       "source_code_sha": "ea9d500f21d800507ef220b6e95fee672d0e70f1"
+    },
+    {
+      "dimension": "object_class",
+      "version": "object-color-20260920",
+      "selected_step": 300,
+      "source_checkpoint": "/data1/wenbiao_zhao/vbench-audit-object-color-20260920/output/adapters/object_class/checkpoint-300/adapter_model.safetensors",
+      "selection": "user_selected_paper_final_fixed_step",
+      "development_selected": false,
+      "development_evaluation_records": 0,
+      "test_used_for_selection": false,
+      "sha256": "a459e0d273348433119aa41539d5abde7c0c9cc1d92ff491374a08886d1cdaf2",
+      "bytes": 174655536,
+      "base_model": "Qwen/Qwen3-8B",
+      "base_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "note": "The user selected the paper's fixed-step final model. No development best-checkpoint comparison was performed."
+    },
+    {
+      "dimension": "color",
+      "version": "object-color-20260920",
+      "selected_step": 300,
+      "source_checkpoint": "/data1/wenbiao_zhao/vbench-audit-object-color-20260920/output/adapters/color/checkpoint-300/adapter_model.safetensors",
+      "selection": "user_selected_paper_final_fixed_step",
+      "development_selected": false,
+      "development_evaluation_records": 0,
+      "test_used_for_selection": false,
+      "sha256": "3ce18cdc678946ceb195f32e3f99748fbf90cac86a7fa4531ffc020332c4fb29",
+      "bytes": 174655536,
+      "base_model": "Qwen/Qwen3-8B",
+      "base_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "note": "The user selected the paper's fixed-step final model. No development best-checkpoint comparison was performed."
     }
   ],
-  "dynamic_degree": "withheld_by_user"
+  "dynamic_degree": "withheld_by_user",
+  "selection_policy": "Four dimensions use best retained development exact match; Object Class and Color use the explicitly user-selected paper-final step 300 without dev selection."
 }

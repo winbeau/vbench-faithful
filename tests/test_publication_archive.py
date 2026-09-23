@@ -65,3 +65,6 @@ def test_deferred_commit_failure_resumes_without_losing_members(tmp_path, monkey
     archive.run(args)
     assert len(uploaded) == 2  # Already committed archives need no rebuild.
     assert len(json.loads(state_file.read_text())["members"]) == 1
+    args.shard_mib = 2
+    with pytest.raises(ValueError, match="Shard size changed"):
+        archive.run(args)
