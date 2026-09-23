@@ -1,6 +1,6 @@
 import pytest
 
-from scripts.publish_dimension_origins import normalize_pairs, safe_relative
+from scripts.publish_dimension_origins import normalize_pairs, safe_relative, pending_batches, record_batch
 
 
 def test_pair_orientation_and_ties_are_preserved():
@@ -42,3 +42,21 @@ def test_shared_videos_do_not_share_dimension_labels():
 def test_source_paths_cannot_escape_the_archive(path):
     with pytest.raises(ValueError):
         safe_relative(path)
+
+
+@pytest.mark.parametrize("batch_size", [1, 4, 100])
+def test_resuming_with_larger_batches_preserves_exact_coverage(batch_size):
+    records = [{"dimension": dimension, "sha256": "hash" if i < 6 else None, "id": (dimension, i)}
+               for dimension in ["scene", "human_action"] for i in range(9)]
+    receipts = {"scene/lfs/0": {"files": 2}, "scene/lfs/4": {"files": 1},
+                "human_action/git/0": {"files": 1}}
+    expected = {r["id"] for r in records} - {("scene", 0), ("scene", 1), ("scene", 4), ("human_action", 6)}
+    first = next(pending_batches(records, receipts, 2))
+    uploaded = [r[3]["id"] for r in first]
+    record_batch(receipts, first, {"sha": "first"})
+    for batch in pending_batches(records, receipts, batch_size):
+        uploaded.extend(r[3]["id"] for r in batch)
+        record_batch(receipts, batch, {"sha": "resumed"})
+    assert set(uploaded) == expected
+    assert len(uploaded) == len(expected)
+    assert list(pending_batches(records, receipts, 100)) == []

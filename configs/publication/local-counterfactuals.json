@@ -1,0 +1,46 @@
+{
+  "experiments": [
+    {
+      "dimension": "dynamic_degree",
+      "version": "local-texture-dev5-v1",
+      "root": "/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-audit/output/dynamic-static-jitter",
+      "include": [
+        "local-texture-dev5-v1",
+        "local-texture-dev5-v1-previews",
+        "official-dev5-native"
+      ],
+      "exclude_components": [
+        "code",
+        "features",
+        "__pycache__"
+      ],
+      "exclude_suffixes": [
+        ".pt",
+        ".pth",
+        ".safetensors"
+      ],
+      "note": "Frozen five-source pilot with multiple local texture displacement strengths and seeds. Includes encoding controls, displacement fields, original MP4 inputs and diagnostic previews. Some validity/repair gates failed; see the original completion and review records."
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "local-texture-dev5-8px-v1",
+      "root": "/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-audit/output/dynamic-static-jitter",
+      "include": [
+        "local-texture-dev5-8px-v1",
+        "local-texture-dev5-8px-v1-previews",
+        "official-dev5-native"
+      ],
+      "exclude_components": [
+        "code",
+        "features",
+        "__pycache__"
+      ],
+      "exclude_suffixes": [
+        ".pt",
+        ".pth",
+        ".safetensors"
+      ],
+      "note": "Frozen five-source 8-pixel local texture displacement pilot with two seeds. Includes encoding controls, displacement fields, original MP4 inputs and diagnostic previews. This is development data, not an independent held-out test."
+    }
+  ]
+}

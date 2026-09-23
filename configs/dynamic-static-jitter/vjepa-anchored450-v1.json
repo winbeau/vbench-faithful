@@ -1,0 +1,30 @@
+{
+  "protocol": "dynamic-vjepa-anchored-frozen-test450-v1",
+  "authorization": "2026-09-23 user explicitly requested scoring the existing 450 groups with the newly trained anchored head",
+  "inputs_sha256": "afe145e4dc0df238126201d9b55abecfba2ed095fb59f40556e1822f9b6e1380",
+  "expansion_config_sha256": "83fb066dfcd0e3334df47a216f4bb2469bcf63920efb0c3e4f3658a40466b72a",
+  "probe_config_sha256": "6c5e1464f903f6434cfa3a707ff2b6f93d10142a57fc0f586ac4cea82f3116af",
+  "training_config_sha256": "3dcb93cd365ac0b7023890e1200dbe13e4a09919fe6e7ee12ac0869cc7a38712",
+  "training_summary_sha256": "e5a6404f41b00e5efe335a640f43ee6af80c906e64a2fe42d23a985dabf4df8c",
+  "head_sha256": "8e10add01e050417baeccd191d80525afa3a7f6d60754de549703427823dd045",
+  "old_head_sha256": "2ec2a5d98e5555b6cab3c409c250e163181687626fafc1aee15aae45c4911b18",
+  "human_pairs_sha256": "788cd605d90a91c242da7a0642a6836e26ed06960798230ae0af7035cbd6d2ae",
+  "previous_scores_sha256": {
+    "origin": {
+      "shard-0": "ded1805748cdbc857c4bc66200da0e33e5962478f2f967bd8f6cf8f053e9560f",
+      "shard-1": "5f53e0994512e1b47929b10a4ab7a82da2ee796cbda56aade04fee31c241c4cb",
+      "shard-2": "3ee7e41017a0612fdea0fc83a0e694514cd7fb106cd2c710963a474da452435c",
+      "shard-3": "71587dde702c67ef30c37100679b7c7b0a97108038e43b04db2ed13c60f9607f"
+    },
+    "vjepa": {
+      "shard-0": "3a3ea1a0a6eb373e2bd9b623adcd6b4339c344defa78ee51250acdc605b7bcfa",
+      "shard-1": "0f254c19eacecda6ee9c22314f41bc11c504de6d706fea035f357d7051a0f237",
+      "shard-2": "c8f8fdb8be88ffcc72eb052ba09bf9f453e01ad3b50c901fdba9625c5fd62fa1",
+      "shard-3": "dca8c17d8c94bc1c13c63027af114dc4011d84fe4c2b4d642f5cd4e5381c4ef4"
+    }
+  },
+  "coverage": {"sources": 450, "prompts": 30, "counterfactuals": 900, "encoding_controls": 450, "inputs": 1800, "human_pairs": 450, "shards": 4},
+  "inference": {"fresh_decode_and_encode_every_input": true, "compare_all_features_to_prior_sha256": true, "replay_old_head_every_input": true, "mapping": "unchanged sigmoid learned latent", "head_tolerance": 0.000001, "training_updates": 0, "origin": "reuse exactly pinned previous Origin scores, not a new RAFT run"},
+  "analysis": {"bootstrap_seed": 20260926, "bootstrap_replicates": 20000, "cluster": "prompt", "primary": "source-weighted mean of two 8px seeds minus original", "secondary": ["MAE", "largest drops", "per-generator results", "human preference on base and both CF seeds", "new versus old head and Origin paired concordance difference"], "numerical_invariance": "delta_new <= 0.1 * delta_origin when Origin increases; descriptive relative-scale diagnostic, not shared physical units"},
+  "scope": {"no_retuning": true, "default_metric_changed": false, "new_downloads": false, "calibration45_opened": false, "previous_development_gate_failed": true, "test_prompts_already_exposed": true, "new_independent_holdout_claim": false, "all_quality_flags_scored": true}
+}

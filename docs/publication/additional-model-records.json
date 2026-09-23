@@ -1,0 +1,80 @@
+[
+  {
+    "dimension": "object_class",
+    "weight_publication_status": "record_only_no_development_selection",
+    "paper_final_step": 300,
+    "checkpoints": [
+      {
+        "step": 200,
+        "source": "/data1/wenbiao_zhao/vbench-audit-object-color-20260920/output/adapters/object_class/checkpoint-200/adapter_model.safetensors",
+        "sha256": "87b81a284d1d60de5d78e30939fc3c58325735ebd519f1bc228760ac225eedc8",
+        "bytes": 174655536,
+        "best_model_checkpoint": null,
+        "best_metric": null,
+        "eval_records": 0
+      },
+      {
+        "step": 300,
+        "source": "/data1/wenbiao_zhao/vbench-audit-object-color-20260920/output/adapters/object_class/checkpoint-300/adapter_model.safetensors",
+        "sha256": "a459e0d273348433119aa41539d5abde7c0c9cc1d92ff491374a08886d1cdaf2",
+        "bytes": 174655536,
+        "best_model_checkpoint": null,
+        "best_metric": null,
+        "eval_records": 0
+      }
+    ],
+    "training_result": {
+      "adapter_sha256": "a459e0d273348433119aa41539d5abde7c0c9cc1d92ff491374a08886d1cdaf2",
+      "metrics": {
+        "total_flos": 2.753145409892352e+16,
+        "train_loss": 0.07113841058181909,
+        "train_runtime": 393.8683,
+        "train_samples_per_second": 3.047,
+        "train_steps_per_second": 0.762
+      },
+      "trainable_parameters": 43646976
+    },
+    "selection_note": "The original run used a fixed 300-step schedule without development evaluation. Retained checkpoints cannot be ranked as best by dev metrics. No weights are published in this directory.",
+    "base_model": "Qwen/Qwen3-8B",
+    "base_revision": "b968826d9c46dd6066d109eabc6255188de91218"
+  },
+  {
+    "dimension": "color",
+    "weight_publication_status": "record_only_no_development_selection",
+    "paper_final_step": 300,
+    "checkpoints": [
+      {
+        "step": 200,
+        "source": "/data1/wenbiao_zhao/vbench-audit-object-color-20260920/output/adapters/color/checkpoint-200/adapter_model.safetensors",
+        "sha256": "05948c3b27122c2ae7a5b6c8b0af74a7c50112b3915797533fe04fb234e9f09a",
+        "bytes": 174655536,
+        "best_model_checkpoint": null,
+        "best_metric": null,
+        "eval_records": 0
+      },
+      {
+        "step": 300,
+        "source": "/data1/wenbiao_zhao/vbench-audit-object-color-20260920/output/adapters/color/checkpoint-300/adapter_model.safetensors",
+        "sha256": "3ce18cdc678946ceb195f32e3f99748fbf90cac86a7fa4531ffc020332c4fb29",
+        "bytes": 174655536,
+        "best_model_checkpoint": null,
+        "best_metric": null,
+        "eval_records": 0
+      }
+    ],
+    "training_result": {
+      "adapter_sha256": "3ce18cdc678946ceb195f32e3f99748fbf90cac86a7fa4531ffc020332c4fb29",
+      "metrics": {
+        "total_flos": 2.788829189508096e+16,
+        "train_loss": 0.0575475285644643,
+        "train_runtime": 388.995,
+        "train_samples_per_second": 3.085,
+        "train_steps_per_second": 0.771
+      },
+      "trainable_parameters": 43646976
+    },
+    "selection_note": "The original run used a fixed 300-step schedule without development evaluation. Retained checkpoints cannot be ranked as best by dev metrics. No weights are published in this directory.",
+    "base_model": "Qwen/Qwen3-8B",
+    "base_revision": "b968826d9c46dd6066d109eabc6255188de91218"
+  }
+]

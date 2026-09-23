@@ -3,7 +3,8 @@
 import argparse
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+import tarfile
 
 
 def sha(path):
@@ -20,7 +21,7 @@ def run(args):
     info = api.dataset_info(args.repo_id)
     files = {x.path: x for x in api.list_repo_tree(args.repo_id, repo_type="dataset", revision=info.sha,
              recursive=True) if hasattr(x, "size")}
-    errors, original_rows, summaries, experiments = [], [], [], []
+    errors, original_rows, summaries, experiments, archive_samples = [], [], [], [], []
     for manifest in sorted(args.stage.glob("dimensions/*/origin/manifest.jsonl")):
         rows = [json.loads(l) for l in manifest.read_text().splitlines() if l.strip()]
         original_rows.extend(rows)
@@ -70,6 +71,17 @@ def run(args):
         keys = {(m["archive"], m["member"]) for m in members}
         if len(keys) != len(members):
             errors.append({"path": index_name, "reason": "duplicate_members"})
+        archive_names = {s["path"] for s in record["archives"]}
+        for member in members:
+            path = PurePosixPath(member["member"])
+            if path.is_absolute() or ".." in path.parts or member["archive"] not in archive_names:
+                errors.append({"path": index_name, "reason": "unsafe_or_unassigned_member", "member": str(path)})
+        for shard in record["archives"]:
+            indexed = [m for m in members if m["archive"] == shard["path"]]
+            if len(indexed) != shard["files"]:
+                errors.append({"path": shard["path"], "reason": "per_shard_member_count"})
+            if any(Path(m["member"]).suffix.lower() in {".mp4", ".gif"} for m in indexed):
+                archive_samples.append((shard, indexed))
         experiments.append({"dimension": record["dimension"], "version": record["version"],
                             "manifest": name, "source_files": len(members), "source_bytes": record["source_bytes"],
                             "video_members": sum(Path(m["member"]).suffix.lower() in {".mp4", ".gif", ".webm"} for m in members),
@@ -92,6 +104,28 @@ def run(args):
         samples.append({"path": row["path"], "sha256_verified": ok})
         if not ok:
             errors.append({"path": row["path"], "reason": "download_hash"})
+    # Inspect every byte/member in one downloaded media-bearing shard.
+    if archive_samples:
+        shard, indexed = min(archive_samples, key=lambda pair: pair[0]["bytes"])
+        p = Path(hf_hub_download(args.repo_id, shard["path"], repo_type="dataset", revision=info.sha, endpoint=args.endpoint))
+        expected_members = {m["member"]: m for m in indexed}
+        actual_members, ok = set(), sha(p) == shard["sha256"]
+        with tarfile.open(p, "r") as tf:
+            for member in tf:
+                actual_members.add(member.name)
+                expected_member = expected_members.get(member.name)
+                if not member.isfile() or expected_member is None:
+                    ok = False
+                    continue
+                with tf.extractfile(member) as stream:
+                    h = hashlib.sha256()
+                    for block in iter(lambda: stream.read(4 * 1024 * 1024), b""):
+                        h.update(block)
+                ok &= member.size == expected_member["bytes"] and h.hexdigest() == expected_member["sha256"]
+        ok &= actual_members == set(expected_members)
+        samples.append({"path": shard["path"], "sha256_verified": bool(ok), "members_verified": len(actual_members)})
+        if not ok:
+            errors.append({"path": shard["path"], "reason": "archive_download_members"})
     report = {"schema": "vbench-repair-verification/1", "repo_id": args.repo_id, "verified_revision": info.sha,
               "status": "verified_with_documented_upstream_reference_issues" if not errors else "failed",
               "errors": errors, "dimensions": summaries, "original_entries": len(original_rows),

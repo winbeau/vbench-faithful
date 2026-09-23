@@ -205,10 +205,12 @@ Origin 的 **65.27%**，仍未通过 10% 目标。63/63 校准评分零失败，
 **0.518089→0.516319**；450个人类配对的两种CF均已覆盖，不变性数值结论保持。
 但[静态图片诊断](docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-static-frame)
 显示旧头静止0.456649、轻微平移8px反降至0.442835，不能称为合格运动强度评分。
-用户明确要求调整模型，现正执行[静止/位移锚点监督的小头重训练](docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-anchored)，
-仍冻结编码器，DEV210/60、不用该单例或TEST450训练、不作分数平移/缩放。
-首次大张量训练发生非有限loss，失败记录保留；以相同数据/目标/300步、等价分块
-执行恢复训练，尚不预先声明新模型通过。默认不变。
+用户要求的[静止/位移锚点小头重训练](docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-anchored)
+已完成300步；冻结编码器，DEV210/60、不用该单例或TEST450训练、不作分数平移/缩放。
+新头该单例静止/8px平移/32px平移为**0.008533/0.134990/0.293819**；DEV60三种
+位移排序各60/60，但自然偏好**20/23→18/23，未过预定≥19/23**，整体验收未通过。
+首次非有限loss失败保留，等价分块恢复完成；新头TEST450仍NOT RUN，旧450结果
+不得转记为新模型证据。默认不变。
 构造、配置和命令见[复现入口](configs/dynamic-static-jitter/README.md)。
 
 裸 `--gpu` 和不带值的默认选择是当前 CUDA 可见逻辑设备 0；显式列表拒绝重复或越界编号，不会静默切换 CPU。默认结果写入仓库根 `output/<metric>/<backend>/<run-id>/`，每次运行使用新 run-id；`--output DIR` 可替换输出基目录。输入 `data/`、`results/`、`splits/`、`runs/` 为冻结研究内容，不修改、不重算、不删除。

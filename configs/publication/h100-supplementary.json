@@ -1,0 +1,27 @@
+{
+  "experiments": [
+    {
+      "dimension": "dynamic_degree",
+      "version": "superseded-synthetic-dev-v2",
+      "root": "/root/wenbiao_zhao/tmp/dynamic-static-jitter-20260922/code/output",
+      "include": [
+        "dev-build-v2",
+        "dev-build-v2-full-s0",
+        "dev-build-v2-full-s1",
+        "dev-build-v2-full-s2",
+        "dev-build-v2-full-s3"
+      ],
+      "exclude_components": [
+        "code",
+        "features",
+        "__pycache__"
+      ],
+      "exclude_suffixes": [
+        ".pt",
+        ".pth",
+        ".safetensors"
+      ],
+      "note": "SUPERSEDED historical synthetic development data. The protocol was explicitly replaced by the official-video local spatial texture displacement protocol. Contains generated/static noise and flicker probes plus previews; do not pool into the current main experiment or describe these as official original videos. Repeated pilot/full-shard membership is preserved with its original paths. All 6,922 source files were SHA-256 matched against the local frozen copy before selecting this faster source host."
+    }
+  ]
+}

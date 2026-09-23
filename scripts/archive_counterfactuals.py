@@ -3,7 +3,8 @@
 
 No source is modified. Each archive preserves paths relative to the declared
 source root. The index records every member, its SHA-256 and its archive.
-Only temporary tar shards are removed after a successful hf upload.
+Only temporary tar shards are removed after a successful upload. Deferred mode
+preuploads shards and publishes the complete remaining batch in one commit.
 """
 from __future__ import annotations
 
@@ -88,6 +89,11 @@ def upload(args, source, destination, message):
 def run(args):
     specs = json.loads(args.spec.read_text())["experiments"]
     args.work.mkdir(parents=True, exist_ok=True)
+    deferred = getattr(args, "defer_commit", False)
+    operations, pending_states = [], []
+    if deferred:
+        from huggingface_hub import HfApi, CommitOperationAdd
+        api = HfApi(endpoint=args.endpoint)
     for spec in specs:
         dimension, version = spec["dimension"], spec["version"]
         root = Path(spec["root"])
@@ -102,6 +108,10 @@ def run(args):
             "source_snapshot_sha256": identity, "archives": [], "members": []}
         if state["source_snapshot_sha256"] != identity:
             raise ValueError(f"Source changed during archive: {dimension}/{version}; freeze a new version")
+        state.setdefault("pending_archives", [])
+        state.setdefault("pending_members", [])
+        if not deferred and state["pending_archives"]:
+            raise ValueError("Resume pending preuploads with --defer-commit")
         destination = f"dimensions/{dimension}/counterfactual/{version}"
         print(json.dumps({"event": "experiment", "dimension": dimension, "version": version,
                           "files": len(files), "bytes": sum(x['bytes'] for x in snapshot)}), flush=True)
@@ -129,22 +139,37 @@ def run(args):
                                     "archive": destination + "/" + name})
             entry = {"name": name, "path": destination + "/" + name, "bytes": archive.stat().st_size,
                      "sha256": digest(archive), "files": len(batch)}
-            upload(args, archive, entry["path"], f"data({dimension}): archive {version} shard {index}")
-            state["archives"].append(entry)
-            state["members"].extend(members)
+            if deferred:
+                previous = next((a for a in state["pending_archives"] if a["name"] == name), None)
+                if previous is not None and previous != entry:
+                    raise ValueError("Rebuilt pending archive identity changed: " + entry["path"])
+                operation = CommitOperationAdd(path_in_repo=entry["path"], path_or_fileobj=archive)
+                api.preupload_lfs_files(args.repo_id, additions=[operation], repo_type="dataset")
+                if operation._upload_mode != "lfs" or not operation._is_uploaded:
+                    raise RuntimeError("Archive was not confirmed in binary storage: " + entry["path"])
+                operations.append(operation)
+                if previous is None:
+                    state["pending_archives"].append(entry)
+                    state["pending_members"].extend(members)
+            else:
+                upload(args, archive, entry["path"], f"data({dimension}): archive {version} shard {index}")
+                state["archives"].append(entry)
+                state["members"].extend(members)
             dump(state_file, state)
             archive.unlink()
-            print(json.dumps({"event": "shard_uploaded", **entry}), flush=True)
+            print(json.dumps({"event": "shard_preuploaded" if deferred else "shard_uploaded", **entry}), flush=True)
         metadata = job / "metadata"
         metadata.mkdir(exist_ok=True)
         dump(metadata / "manifest.json", {"schema": "vbench-repair-counterfactual/1",
              "dimension": dimension, "version": version, "source_root": str(root),
              "source_snapshot_sha256": identity, "source_files": len(files),
-             "source_bytes": sum(x["bytes"] for x in snapshot), "archives": state["archives"],
+             "source_bytes": sum(x["bytes"] for x in snapshot),
+             "archives": state["archives"] + state["pending_archives"],
              "note": spec.get("note", "Frozen research artifacts; read source validation before reuse."),
              "excluded_components": spec.get("exclude_components", []),
              "excluded_suffixes": spec.get("exclude_suffixes", [])})
-        (metadata / "files.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in state["members"]))
+        (metadata / "files.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n"
+            for x in state["members"] + state["pending_members"]))
         if spec.get("records_file"):
             source_records = root / spec["records_file"]
             records = [json.loads(line) for line in source_records.read_text().splitlines() if line.strip()]
@@ -159,9 +184,32 @@ def run(args):
             "are provenance, not portable paths. `files.jsonl` resolves each member to its "
             "archive and SHA-256. Original inputs, encoding controls, derived videos, frames "
             "and construction parameters retain their original names and byte content.\n")
-        upload(args, metadata, destination, f"data({dimension}): publish {version} member hashes and provenance")
-        print(json.dumps({"event": "experiment_complete", "dimension": dimension, "version": version,
-                          "files": len(files), "shards": len(state['archives'])}), flush=True)
+        if deferred:
+            operations.extend(CommitOperationAdd(path_in_repo=destination + "/" + p.name,
+                              path_or_fileobj=p) for p in sorted(metadata.iterdir()) if p.is_file())
+            pending_states.append((state_file, state))
+            print(json.dumps({"event": "experiment_prepared", "dimension": dimension, "version": version,
+                              "files": len(files), "shards": len(state['archives']) + len(state['pending_archives'])}), flush=True)
+        else:
+            upload(args, metadata, destination, f"data({dimension}): publish {version} member hashes and provenance")
+            print(json.dumps({"event": "experiment_complete", "dimension": dimension, "version": version,
+                              "files": len(files), "shards": len(state['archives'])}), flush=True)
+    if deferred and operations:
+        api.preupload_lfs_files(args.repo_id, additions=operations, repo_type="dataset")
+        not_before = getattr(args, "not_before", 0) or 0
+        if time.time() < not_before:
+            print(json.dumps({"event": "waiting_for_commit_window", "not_before": not_before}), flush=True)
+        while time.time() < not_before:
+            time.sleep(min(30, not_before - time.time()))
+        result = api.create_commit(repo_id=args.repo_id, repo_type="dataset", operations=operations,
+            commit_message=f"data: publish {len(specs)} counterfactual experiment archives and verified indexes")
+        for state_file, state in pending_states:
+            state["archives"].extend(state.pop("pending_archives"))
+            state["members"].extend(state.pop("pending_members"))
+            state["commit_sha"] = result.oid
+            dump(state_file, state)
+        print(json.dumps({"event": "counterfactuals_published", "experiments": len(specs),
+                          "operations": len(operations), "sha": result.oid}), flush=True)
 
 
 def main():
@@ -172,6 +220,8 @@ def main():
     p.add_argument("--endpoint", default=os.environ.get("HF_ENDPOINT", "https://hf-mirror.com"))
     p.add_argument("--hf", default="hf")
     p.add_argument("--shard-mib", type=int, default=512)
+    p.add_argument("--defer-commit", action="store_true", help="Preupload all shards, then create one commit (requires huggingface_hub)")
+    p.add_argument("--not-before", type=float, default=0, help="Earliest commit time as Unix seconds; preupload can proceed first")
     args = p.parse_args()
     if args.shard_mib < 1:
         p.error("shard-mib must be positive")

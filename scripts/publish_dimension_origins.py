@@ -177,6 +177,39 @@ def endpoint_for(args):
     return endpoint
 
 
+def pending_batches(records, commits, batch_size):
+    """Coalesce uncommitted records while honoring ranges from older batch sizes."""
+    for kind in ["git", "lfs"]:
+        pending = []
+        for dimension in DIMENSIONS.values():
+            selected = [r for r in records if r["dimension"] == dimension
+                        and (r["sha256"] is not None) == (kind == "lfs")]
+            covered = set()
+            prefix = f"{dimension}/{kind}/"
+            for key, receipt in commits.items():
+                if key.startswith(prefix):
+                    start = int(key[len(prefix):])
+                    stop = start + receipt["files"]
+                    if start < 0 or stop > len(selected):
+                        raise ValueError("Invalid resume range: " + key)
+                    covered.update(range(start, stop))
+            pending.extend((dimension, kind, offset, row) for offset, row in enumerate(selected)
+                           if offset not in covered)
+        for start in range(0, len(pending), batch_size):
+            yield pending[start:start + batch_size]
+
+
+def record_batch(commits, batch, receipt):
+    start = 0
+    while start < len(batch):
+        dimension, kind, offset, _ = batch[start]
+        stop = start + 1
+        while stop < len(batch) and batch[stop][:2] == (dimension, kind) and batch[stop][2] == offset + stop - start:
+            stop += 1
+        commits[f"{dimension}/{kind}/{offset}"] = {**receipt, "files": stop - start}
+        start = stop
+
+
 def publish(args):
     import httpx
     from huggingface_hub import HfApi, CommitOperationAdd, CommitOperationCopy, get_token
@@ -226,34 +259,35 @@ def publish(args):
                     raise
                 time.sleep(min(2 ** attempt, 8))
 
+    for batch in pending_batches(records, state["commits"], args.batch_size):
+        kind = batch[0][1]
+        rows = [r[3] for r in batch]
+        if kind == "lfs":
+            ops = [CommitOperationCopy(src_path_in_repo=r["source_path"], path_in_repo=r["path"],
+                   src_revision=r["source_revision"], src_repo_id=r["source_repo"], src_repo_type="dataset") for r in rows]
+        else:
+            with ThreadPoolExecutor(max_workers=args.workers) as pool:
+                files = list(pool.map(acquire, rows))
+            ops = [CommitOperationAdd(path_in_repo=r["path"], path_or_fileobj=p) for r, p in zip(rows, files)]
+            api.preupload_lfs_files(args.repo_id, additions=ops, repo_type="dataset", num_threads=args.workers)
+        if time.time() < args.not_before:
+            print(json.dumps({"event": "waiting_for_commit_window", "not_before": args.not_before}), flush=True)
+        while time.time() < args.not_before:
+            time.sleep(min(30, args.not_before - time.time()))
+        for attempt in range(4):
+            try:
+                result = api.create_commit(repo_id=args.repo_id, repo_type="dataset", operations=ops,
+                    commit_message=f"data: archive {len(batch)} remaining original videos ({kind})", num_threads=args.workers)
+                break
+            except Exception as exc:
+                if attempt == 3 or getattr(getattr(exc, "response", None), "status_code", None) == 429:
+                    raise
+                time.sleep(5 * (attempt + 1))
+        record_batch(state["commits"], batch, {"sha": result.oid, "endpoint": endpoint})
+        write_json(args.state, state)
+        print(json.dumps({"event": "committed", "kind": kind, "files": len(batch), "sha": result.oid}), flush=True)
     for dimension in DIMENSIONS.values():
         subset = [r for r in records if r["dimension"] == dimension]
-        for kind in ["lfs", "git"]:
-            selected = [r for r in subset if (r["sha256"] is not None) == (kind == "lfs")]
-            for offset in range(0, len(selected), args.batch_size):
-                batch = selected[offset:offset + args.batch_size]
-                key = f"{dimension}/{kind}/{offset}"
-                if key in state["commits"]:
-                    continue
-                if kind == "lfs":
-                    ops = [CommitOperationCopy(src_path_in_repo=r["source_path"], path_in_repo=r["path"],
-                           src_revision=r["source_revision"], src_repo_id=r["source_repo"], src_repo_type="dataset") for r in batch]
-                else:
-                    with ThreadPoolExecutor(max_workers=args.workers) as pool:
-                        files = list(pool.map(acquire, batch))
-                    ops = [CommitOperationAdd(path_in_repo=r["path"], path_or_fileobj=p) for r, p in zip(batch, files)]
-                for attempt in range(4):
-                    try:
-                        result = api.create_commit(repo_id=args.repo_id, repo_type="dataset", operations=ops,
-                            commit_message=f"data({dimension}): archive original videos {kind} {offset}-{offset + len(batch)}", num_threads=args.workers)
-                        break
-                    except Exception:
-                        if attempt == 3:
-                            raise
-                        time.sleep(5 * (attempt + 1))
-                state["commits"][key] = {"sha": result.oid, "files": len(batch), "endpoint": endpoint}
-                write_json(args.state, state)
-                print(json.dumps({"event": "committed", "batch": key, "files": len(batch), "sha": result.oid}), flush=True)
         # Fill SHA-256 for the small Git-backed originals after exact blob verification.
         manifest = args.stage / "dimensions" / dimension / "origin" / "manifest.jsonl"
         complete_rows = []
@@ -264,11 +298,12 @@ def publish(args):
                 item["sha256"] = hashlib.sha256(p.read_bytes()).hexdigest()
             complete_rows.append(item)
         write_jsonl(manifest, complete_rows)
-        api.upload_folder(repo_id=args.repo_id, repo_type="dataset", folder_path=args.stage / "dimensions" / dimension,
-                          path_in_repo="dimensions/" + dimension,
-                          commit_message=f"data({dimension}): add original annotations and integrity manifests")
-    api.upload_folder(repo_id=args.repo_id, repo_type="dataset", folder_path=args.stage / "provenance",
-                      path_in_repo="provenance", commit_message="data: record official provenance and unresolved source references")
+    metadata = [CommitOperationAdd(path_in_repo=p.relative_to(args.stage).as_posix(), path_or_fileobj=p)
+                for p in sorted(args.stage.rglob("*")) if p.is_file() and ".cache" not in p.parts]
+    result = api.create_commit(repo_id=args.repo_id, repo_type="dataset", operations=metadata,
+                              commit_message="data: publish all sixteen original annotations and integrity manifests")
+    state["metadata_commit"] = result.oid
+    write_json(args.state, state)
     print(json.dumps({"event": "origins_published", "commits": len(state["commits"])}), flush=True)
 
 
@@ -287,6 +322,7 @@ def main():
     p.add_argument("--allow-official-fallback", action="store_true")
     p.add_argument("--batch-size", type=int, default=300)
     p.add_argument("--workers", type=int, default=12)
+    p.add_argument("--not-before", type=float, default=0, help="Earliest commit time as Unix seconds; binary preupload can proceed first")
     args = p.parse_args()
     if args.batch_size < 1 or args.workers < 1:
         p.error("batch-size and workers must be positive")

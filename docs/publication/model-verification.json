@@ -1,0 +1,43 @@
+{
+  "repo_id": "xju-arlab/vbench-model",
+  "revision": "fa82a9dbae02c9c209b9e28c5e52402223fffae9",
+  "private": false,
+  "verified_at": "2026-09-23T10:23:46.796674+00:00",
+  "adapters": [
+    {
+      "dimension": "spatial_relationship",
+      "path": "spatial_relationship/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "da961e816a16900e4a4f6c4aac51c19a4444c7bc1a3e72ab22094bbd4ae1b363",
+      "portable_base": true
+    },
+    {
+      "dimension": "scene",
+      "path": "scene/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "0b8c796aa7c2e39ccdbd0f2faf37bddfc729c7588f11d0928853637b8486d6eb",
+      "portable_base": true
+    },
+    {
+      "dimension": "human_action",
+      "path": "human_action/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "60ebb3afae588fb638bfeb3c9a75daf1c7e8e43455556a67e22cfd9b2574edc4",
+      "portable_base": true
+    },
+    {
+      "dimension": "multiple_objects",
+      "path": "multiple_objects/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "eb036c6e7b123a4243c3f22c03f87d4040bc51e9b875a7319346a6c16b03f771",
+      "portable_base": true
+    }
+  ],
+  "dynamic_files": [
+    "dynamic_degree/README.md",
+    "dynamic_degree/record.json"
+  ],
+  "dynamic_weights_published": false,
+  "code_snapshot_files": 139,
+  "total_files": 209
+}

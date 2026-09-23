@@ -16,7 +16,22 @@ the first ten-step progress message; no checkpoint was produced. Its provenance
 and failure are retained, not counted as a trained model. Recovery uses bounded
 24-view GPU tensors, concatenates predictions for the identical full-batch loss,
 and retains all data, weights and hyperparameters. Output/gradient equivalence
-has a unit test. The model still requires the frozen development gates to pass.
+has a unit test. Recovery **completed all 300 updates**, with no checkpoint
+selection. The new head fixes the user control (still/pan8/pan32:
+**0.008533/0.134990/0.293819**) and achieves 60/60 on each of three controlled
+motion orderings in DEV60. However, natural preference falls **20/23→18/23**,
+below the predeclared ≥19/23 gate: **overall acceptance failed (10/11 pass)**.
+The model is not promoted to default. New-head TEST450 inference is NOT RUN;
+the prior 450-source numbers belong only to the old frozen joint head.
+
+Actual checkpoint: `training-chunked/anchored.pt`, SHA-256
+`8e10add01e050417baeccd191d80525afa3a7f6d60754de549703427823dd045`.
+Training receipt, full scores and 300-step curves are in `training-chunked/`.
+`independent-audit.json` verifies 1350 new feature receipts, 4320 score values,
+all loss terms and gates; this verifies integrity, not scientific acceptance.
+`reload-verification/receipt.json` records an independent strict checkpoint
+reload: all 4320 DEV predictions and five controls repeat exactly (zero latent
+and score error); all seven parameter tensors changed. No training in the replay.
 
 Actual root: `/data/chenjiayu/dynamic-structural-motion-20260922/vjepa-anchored-v1/`.
 From its `code/` snapshot with the recorded H200 Python/PYTHONPATH/GPU mask:
@@ -40,6 +55,28 @@ Run all four extraction shards before training, use fresh outputs for any replay
 and keep the failed `training/` untouched. The optional diagnostic is evaluated
 only after the final head has been saved, never in training or model selection.
 [Authoritative report and limitations](../../docs/counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-anchored).
+
+Independent CPU statistics audit from the repository root (use a fresh output):
+
+```bash
+.venv/bin/python -m scripts.counterfactual.audit_vjepa_anchored \
+  --root output/dynamic-static-jitter/vjepa-anchored-v1 \
+  --probe-root output/dynamic-static-jitter/vjepa-probe-v1 \
+  --output output/dynamic-static-jitter/vjepa-anchored-v1/audit-reproduction.json
+```
+
+`verify_vjepa_anchored` independently reloads both heads on the model host and
+checks all 2160 cached views (4320 predictions), plus the five user controls.
+It does not train or re-encode video. Mask one free GPU and run from the `code/`
+snapshot with the same PYTHONPATH; use a fresh output directory:
+
+```bash
+python -m scripts.counterfactual.verify_vjepa_anchored \
+  --root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-anchored-v1 \
+  --probe-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-probe-v1 \
+  --diagnostic-root /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-static-frame-v1 \
+  --output /data/chenjiayu/dynamic-structural-motion-20260922/vjepa-anchored-v1/reload-reproduction
+```
 
 ## Completed expansion and still-frame diagnostic (old frozen head)
 

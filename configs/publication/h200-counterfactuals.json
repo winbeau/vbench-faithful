@@ -19,7 +19,7 @@
         ".pth",
         ".safetensors"
       ],
-      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; Dynamic trained weights are intentionally withheld at the user's request. Only four semantic adapters are published separately in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
     },
     {
       "dimension": "dynamic_degree",
@@ -40,7 +40,7 @@
         ".pth",
         ".safetensors"
       ],
-      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; Dynamic trained weights are intentionally withheld at the user's request. Only four semantic adapters are published separately in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
     },
     {
       "dimension": "dynamic_degree",
@@ -61,7 +61,7 @@
         ".pth",
         ".safetensors"
       ],
-      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; Dynamic trained weights are intentionally withheld at the user's request. Only four semantic adapters are published separately in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
     },
     {
       "dimension": "dynamic_degree",
@@ -82,7 +82,7 @@
         ".pth",
         ".safetensors"
       ],
-      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; Dynamic trained weights are intentionally withheld at the user's request. Only four semantic adapters are published separately in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
     },
     {
       "dimension": "dynamic_degree",
@@ -103,7 +103,7 @@
         ".pth",
         ".safetensors"
       ],
-      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; Dynamic trained weights are intentionally withheld at the user's request. Only four semantic adapters are published separately in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
     },
     {
       "dimension": "dynamic_degree",
@@ -124,7 +124,7 @@
         ".pth",
         ".safetensors"
       ],
-      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; selected trained weights are in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
+      "note": "Frozen Dynamic Degree experiment. Includes persisted original construction records and derived videos where produced. Training-time on-the-fly augmentations are represented by construction protocol/selection records, not invented serialized videos. Feature caches and trained/frozen model weights are excluded; Dynamic trained weights are intentionally withheld at the user's request. Only four semantic adapters are published separately in xju-arlab/vbench-model. Validity flags, excluded sources and historical negative results remain unchanged."
     }
   ]
 }

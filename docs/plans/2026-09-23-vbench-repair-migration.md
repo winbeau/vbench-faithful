@@ -42,8 +42,10 @@ dimensions/<canonical_dimension>/
     <original_official_name>.json
     pairs.jsonl
   counterfactual/<version>/
-    manifest.jsonl
-    ... original media / construction records ...
+    manifest.json
+    files.jsonl
+    data-00000.tar
+    records.jsonl  # when source comparison records exist
 ```
 
 - 维度规范名使用包名的下划线形式；显式映射 `dynamics_degree -> dynamic_degree`、
@@ -99,3 +101,21 @@ LFS 原片从固定 HF revision 服务端复制；Git 二进制原片校验源 G
 - 初始 H100 可用磁盘约 13 GB，不能复制整份视频/特征缓存。
 - HF 目标已存在且公开，初始仅 `.gitattributes`；不覆盖其他数据。
 - 镜像 `whoami` 失败，但 `repos create --exist-ok` 成功；以真实上传结果验收。
+
+## 限流后的提交策略
+
+HF 实际返回每仓库每小时 128 次提交上限。原片续传按已提交的文件范围去重，
+允许增大批次而不遗漏原先的小批次；剩余 Git/LFS 原片分别合并提交，16 维元数据
+一起提交。反事实使用官方 `preupload_lfs_files` 先传二进制，再将同一来源主机的
+全部剩余分片与索引合成一个 commit。`--not-before` 可在限流窗口内先传文件内容，
+稍后再提交。未提交的分片在状态文件中明确记为 pending；重试会重建并校验相同哈希。
+
+补充本地两个 dev5 纹理位移版本和已废弃的合成开发集，来源清单见
+`configs/publication/local-counterfactuals.json`；废弃协议单独标识，不进入当前主实验。
+
+本地废弃合成开发集在 H100 已有逐字节一致的副本，6,922 个文件 SHA-256 全部匹配。
+因此使用 `configs/publication/h100-supplementary.json` 从 H100 发布这一版本，
+`local-counterfactuals.json` 仅负责两个 dev5 纹理版本。
+
+Object Class / Color 保留 step 200/300，原训练没有 dev 评估和 best checkpoint 决策。
+已保存训练记录、两步权重哈希和论文采用 step 300 的事实；在 best-only 标准下先只发布记录。

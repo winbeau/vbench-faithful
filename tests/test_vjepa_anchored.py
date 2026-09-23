@@ -9,6 +9,7 @@ from dynamic_degree.anchored_probe import anchored_losses
 from dynamic_degree.learned_probe import MotionProbe
 from scripts.counterfactual.train_vjepa_anchored import anchor_views, statistics, acceptance
 from scripts.counterfactual.train_vjepa_anchored_chunked import forward_chunks
+from scripts.counterfactual.verify_vjepa_anchored import compare
 
 
 ROOT = Path(__file__).parents[1]
@@ -76,3 +77,13 @@ def test_chunked_execution_preserves_full_batch_outputs_and_gradients():
     torch.sigmoid(b).square().mean().backward()
     for left, right in zip(direct.parameters(), chunked.parameters()):
         torch.testing.assert_close(left.grad, right.grad, atol=1e-12, rtol=1e-12)
+
+
+def test_reload_verifier_rejects_nonfinite_mismatch_and_shape_changes():
+    assert compare([.1, .2], [.1, .2]) == 0
+    with pytest.raises(ValueError, match='disagrees'):
+        compare([.1], [.3])
+    with pytest.raises(ValueError, match='finite'):
+        compare([float('nan')], [.1])
+    with pytest.raises(ValueError, match='shape'):
+        compare([.1], [[.1]])
