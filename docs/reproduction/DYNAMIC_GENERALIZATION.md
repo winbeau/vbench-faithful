@@ -34,7 +34,7 @@
 ## 发布内容与复现
 
 HF 数据库新增目录：
-[`dimensions/dynamic_degree/generalization/external-v1-20260923/`](https://huggingface.co/datasets/xju-arlab/vbench-repair/tree/main/dimensions/dynamic_degree/generalization/external-v1-20260923)。
+[`dimensions/dynamic_degree/generalization/external-v1-20260923/`](https://huggingface.co/datasets/xju-arlab/vbench-repair/tree/e64af55bd59324fb3f5ce934776e091fd70843eb/dimensions/dynamic_degree/generalization/external-v1-20260923)。
 其中保存两轮原始逐条分数、配对、汇总、构造／选择清单、配置、复核记录、原审计和下载来源。
 原始数字与 JSON/JSONL 字节保持不变，`manifest.json` 提供全部发布成员的 SHA-256。
 代码仍在私有 GitHub；**不重新分发两套原始视频、截图、模型权重或训练缓存**。
@@ -43,10 +43,18 @@ BMC 数据许可尚未核实，源媒体只从作者渠道获取；LASIESTA 仍�
 发布脚本：`scripts/publish_dynamic_generalization.py`；只从明确白名单取轻量证据，
 以远端父 revision 保护提交，并逐文件重新下载核验，不用“上传成功”冒充内容验收。
 固定 revision 与上传验收记录见[发布记录](../publication/dynamic-generalization-release.json)。
-使用记录中的 `dataset_revision` 下载（`REVISION` 替换为完整值）：
+数据 revision：`e64af55bd59324fb3f5ce934776e091fd70843eb`；
+模型卡 revision：`368d8342efe1395cbd1e65c24501ed156392fdf5`（只更新 README）。
+两份权重与原固定 revision 的远端 SHA-256 完全相同。
+实际上传 65 个新成员并更新 2 份数据卡，**67/67 逐文件新下载验收通过**；
+新下载副本再次复算通过，最大算术误差 `1.1102230246251565e-16`。
+相关 **62 项测试通过**，17 份迁入评估脚本／配置／测试与研究源码逐字节一致；
+锁文件、冻结目录与模型实现未变。首次上传后的导入错误已修复并补 2 项测试；
+续验同一数据 revision，没有覆盖证据或重新评分。
 
 ```bash
-hf download xju-arlab/vbench-repair --repo-type dataset --revision REVISION \
+hf download xju-arlab/vbench-repair --repo-type dataset \
+  --revision e64af55bd59324fb3f5ce934776e091fd70843eb \
   --include 'dimensions/dynamic_degree/generalization/external-v1-20260923/**' \
   --local-dir output/hf-external
 .venv/bin/python scripts/verify_dynamic_generalization.py \

@@ -193,12 +193,18 @@ def publish(args):
                                          for p, b in sorted(additions.items())]}
     write(args.receipt, receipt)
     print(json.dumps({'dataset_revision': commit.oid, 'status': receipt['status']}), flush=True)
+    complete(args, receipt)
+
+
+def complete(args, receipt):
+    from huggingface_hub import CommitOperationAdd, HfApi, hf_hub_download
+    api = HfApi(endpoint=args.endpoint)
     verify_download(api, args, receipt)
     model = api.model_info(MODEL)
     original = Path(hf_hub_download(MODEL, 'README.md', revision=model.sha, endpoint=args.endpoint)).read_text()
     if MARKER in original:
         raise ValueError('Model card already updated; inspect before retry')
-    link = f'https://huggingface.co/datasets/{DATASET}/blob/{commit.oid}/{PREFIX}/README.md'
+    link = f'https://huggingface.co/datasets/{DATASET}/blob/{receipt["dataset_revision"]}/{PREFIX}/README.md'
     updated = (original.rstrip() + '\n\n' + MARKER + '\n\n'
         f'The unchanged aligned-v1 checkpoint was evaluated on two external real-video datasets; '
         f'[frozen results and limitations]({link}). LASIESTA contributes 43 clips/9 recordings and BMC '
@@ -222,6 +228,7 @@ def publish(args):
 
 
 def verify_download(api, args, receipt):
+    from huggingface_hub import hf_hub_download
     def fetch(item):
         p = Path(hf_hub_download(DATASET, item['path'], repo_type='dataset', revision=receipt['dataset_revision'],
             endpoint=args.endpoint, local_dir=args.downloads / 'dataset', force_download=True))
@@ -236,6 +243,15 @@ def verify_download(api, args, receipt):
     print(json.dumps({'fresh_download_files_verified': len(checked)}), flush=True)
 
 
+def resume(args):
+    receipt = read(args.receipt)
+    if (receipt['repo_id'] != DATASET or receipt['path'] != PREFIX
+            or receipt['status'] not in ('uploaded_pending_download_verification', 'dataset_verified_model_card_pending')
+            or not re.fullmatch('[0-9a-f]{40}', receipt['dataset_revision'])):
+        raise ValueError('Not an unfinished publication receipt for this release')
+    complete(args, receipt)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
@@ -243,6 +259,9 @@ def main():
     p.add_argument('--research-root', type=Path, required=True); p.add_argument('--extra', type=Path, required=True)
     p = sub.add_parser('publish'); p.add_argument('--stage', type=Path, required=True)
     p.add_argument('--replay', type=Path, required=True); p.add_argument('--receipt', type=Path, required=True)
+    p.add_argument('--downloads', type=Path, required=True)
+    p.add_argument('--endpoint', default='https://hf-mirror.com')
+    p = sub.add_parser('resume'); p.add_argument('--receipt', type=Path, required=True)
     p.add_argument('--downloads', type=Path, required=True)
     p.add_argument('--endpoint', default='https://hf-mirror.com')
     args = parser.parse_args(); globals()[args.command](args)

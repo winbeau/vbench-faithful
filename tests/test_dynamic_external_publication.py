@@ -33,3 +33,27 @@ def test_manifest_rejects_symbolic_links(tmp_path):
     link = tmp_path / 'link.json'; link.symlink_to(source)
     with pytest.raises(ValueError, match='Unsafe'):
         verify_files(tmp_path, [entry(link)])
+
+
+@pytest.mark.parametrize('corrupt', [False, True])
+def test_publication_fresh_download_checks_receipt_bytes(tmp_path, monkeypatch, corrupt):
+    import sys
+    from types import SimpleNamespace
+    from scripts.publish_dynamic_generalization import verify_download
+    path = tmp_path / 'download.json'; path.write_text('{}')
+    record = entry(path)
+    calls = []
+    def download(repo, name, **kwargs):
+        calls.append(kwargs)
+        return str(path)
+    monkeypatch.setitem(sys.modules, 'huggingface_hub', SimpleNamespace(hf_hub_download=download))
+    args = SimpleNamespace(endpoint='https://huggingface.co', downloads=tmp_path, receipt=tmp_path / 'receipt.json')
+    receipt = {'dataset_revision': 'a' * 40, 'dataset_files': [record]}
+    if corrupt:
+        path.write_text('changed')
+        with pytest.raises(ValueError, match='Download mismatch'):
+            verify_download(None, args, receipt)
+    else:
+        verify_download(None, args, receipt)
+        assert receipt['dataset_files_fresh_download_verified'] == 1
+    assert calls[0]['force_download'] and calls[0]['revision'] == 'a' * 40
