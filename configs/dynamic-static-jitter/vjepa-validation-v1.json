@@ -1,0 +1,41 @@
+{
+  "protocol": "dynamic-vjepa-frozen-official-validation-v1",
+  "authorization": "2026-09-23 user requested counterfactual construction and validation on actual VBench 1.0",
+  "probe_config_sha256": "6c5e1464f903f6434cfa3a707ff2b6f93d10142a57fc0f586ac4cea82f3116af",
+  "probe_sources_sha256": "b2bbc3fd06d9bcb56ba4e11a3486184b2a32da13caa626001b7add394c6df15b",
+  "pool_sha256": "1e08807b42045afc43a71397b115fe8045c6c88251762fea1aafa1fc8b203f47",
+  "human_pairs_sha256": "788cd605d90a91c242da7a0642a6836e26ed06960798230ae0af7035cbd6d2ae",
+  "reserved_sources_sha256": "ed46df1c5e7ca1a56dcf542b4d171fb8f6a4d4756fab0c7340ed3fafc434bd56",
+  "dev32_sources_sha256": "2be38ca256aadfcbd1d12a3e782dbb48ec3a933032ab8baa822129e1b5a301d6",
+  "dev32_inputs_sha256": "fcab78fbf9eb92956086290fc91406c17d53e219a2fb22c17abb5df12bbe7599",
+  "heads": {
+    "joint": "2ec2a5d98e5555b6cab3c409c250e163181687626fafc1aee15aae45c4911b18",
+    "natural_only": "8b77f37517861fc9fe10de17d5eeeaaa2f4b57598bcdac916d93672bd94a4914"
+  },
+  "implementation_sha256": {
+    "packages/audit-models/src/vbench_audit_models/vjepa.py": "4af73aa12a8f7c932ad782e1113d5f44ae780b431395a51f0e33da8e73751e00",
+    "metrics/dynamic-degree/src/dynamic_degree/learned_probe.py": "e5688423b96362d0adcca7eb0b95dfeca90d140ce6f4caa0ae919c50d5987bcc",
+    "scripts/counterfactual/local_texture_jitter.py": "d220a708e973f8c24318747a7b96052e123131c086e58e56d421e01f47524a7e",
+    "scripts/counterfactual/official_video_jitter.py": "87cfdb9ed982bbbe6d9a962d69c3e9a4df46e5df99b804793d57635c98e3ef48"
+  },
+  "origin_upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "raft_sha256": "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1",
+  "cohorts": {"dev32_repeat": 32, "reserved_candidates": 120, "holdout_native_mp4": 90, "gif_not_scored": 30, "holdout_prompts": 30, "natural_holdout_mp4": 450, "total_scoring_inputs": 848},
+  "selection": "Keep the 90 MP4s already in the reserved source list; no substitutions. Natural-response check includes all 450 official MP4s at exactly those 30 test prompts. Exclude all 21 probe and 8 main32 prompts from holdout. No human label values or scores used for selection.",
+  "construction": {
+    "protocol": "official-video-local-texture-jitter-v1",
+    "base": "unaltered_vbench_1_0_source_video",
+    "encoding": "libx264rgb_lossless_crf0",
+    "families": ["local_texture_alternating"], "seeds": [1701, 2904], "amplitudes": [8],
+    "amplitude_units": "native_pixels", "primary_amplitude": 8, "primary_seed": 1701,
+    "spatial_scale_pixels": 32, "border_taper_pixels": 32,
+    "min_warp_jacobian": 0.5, "max_global_translation_pixels": 0.00001,
+    "min_structure_correlation": 0.85, "max_clipped_fraction": 0,
+    "min_decoded_difference": 0.05, "timestamp_tolerance_seconds": 0.000001,
+    "selection_rule": "Exactly the 90 original MP4s from the pre-reserved 120-source/30-test-prompt manifest. The 30 GIFs are explicitly NOT SCORED under the fixed native-16-frame/8-FPS protocol; no replacement.",
+    "analysis_intent": "Frozen-model holdout validation; preserve and score all decodable native inputs including legacy quality flags. No semantic human approval inferred. Original/control/two jitter seeds per source, lossless pixel/timestamp checks."
+  },
+  "score": {"primary": "joint", "ablation": "natural_only", "display": "sigmoid(latent) unchanged from training", "calibration_fit": false, "absolute_motion_units": "NOT CALIBRATED", "origin": "unchanged official per-video boolean", "head_reload_tolerance": 0.000001},
+  "analysis": {"bootstrap_replicates": 20000, "bootstrap_seed": 20260926, "cluster": "prompt", "primary_change": "mean_source(mean_two_seeds(score_cf) - score_base)", "numerical_limit": "delta_joint <= 0.10 * delta_origin, only when delta_origin > 0; fixed-relative-scale diagnostic, not absolute-strength certification", "human_ordered": "strict wins and half-credit predicted ties; human ties reported separately as score gaps", "retune_after_results": false, "formal_test_labels_open_after_predictions_frozen": true},
+  "scope": {"train": false, "backbone_update": false, "head_update": false, "new_checkpoint_download": false, "default_metric_changed": false, "calibration45_opened": false, "holdout_media_authorized": true}
+}

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
 import json
+import platform
 import sys
 import time
 from pathlib import Path
@@ -68,7 +70,12 @@ def _interrupted_results(
 
 
 def build_parser() -> argparse.ArgumentParser:
-    return build_core_parser("dynamic-degree", "VBench Dynamic Degree evaluator")
+    parser = build_core_parser("dynamic-degree", "VBench Dynamic Degree evaluator")
+    parser.add_argument("--audit-variant", choices=["legacy", "trajectory", "local-trajectory"], default="legacy")
+    parser.add_argument("--trajectory-config", help="explicit JSON configuration for the opt-in trajectory candidate")
+    parser.add_argument("--tracker-root", help="local source root containing cotracker/predictor.py")
+    parser.add_argument("--tracker-weight", help="existing local CoTracker2 checkpoint; never downloaded")
+    return parser
 
 
 def execute(args: argparse.Namespace) -> int:
@@ -77,22 +84,39 @@ def execute(args: argparse.Namespace) -> int:
         from .prompt_target import parse_motion_target
 
         videos = enumerate_videos(args.video, args.video_dir)
-        metadata_path = find_metadata(args.video, args.video_dir, args.metadata)
+        trajectory_options = None
+        candidate = args.audit_variant in {"trajectory", "local-trajectory"} and (args.audit or args.both)
+        if candidate:
+            from .trajectory import TrajectoryConfig
+            if args.audit_variant == "local-trajectory":
+                from .local_trajectory import LocalTrajectoryConfig as TrajectoryConfig
+            if not all((args.trajectory_config, args.tracker_root, args.tracker_weight)):
+                raise InputError("trajectory requires --trajectory-config, --tracker-root and --tracker-weight")
+            if not (Path(args.tracker_root) / "cotracker/predictor.py").is_file() or not Path(args.tracker_weight).is_file():
+                raise InputError("local tracker source or checkpoint is missing")
+            trajectory_options = {"config": asdict(TrajectoryConfig.read(Path(args.trajectory_config))),
+                                  "source_root": str(Path(args.tracker_root).resolve()),
+                                  "checkpoint": str(Path(args.tracker_weight).resolve())}
+            if args.audit_variant == "local-trajectory":
+                trajectory_options["variant"] = args.audit_variant
+        # Neither official Dynamic nor the trajectory candidate needs text targets.
+        metadata_path = None if candidate else find_metadata(args.video, args.video_dir, args.metadata)
         loaded_metadata = load_metadata(metadata_path, videos)
         if metadata_path is not None and (args.audit or args.both):
             missing = [video.name for video in videos if video.name not in loaded_metadata]
             if missing:
                 raise InputError(f"metadata 缺少视频映射: {', '.join(missing)}")
         metadata = metadata_for_videos(videos, loaded_metadata)
-        if args.audit or args.both:
+        if (args.audit or args.both) and not candidate:
             for video in videos:
                 prompt, override = prompt_and_override(metadata[video.name])
                 parse_motion_target(prompt, override)
-        verify_upstream(upstream_path())
+        if not candidate or args.both:
+            verify_upstream(upstream_path())
         gpu_ids = parse_gpu(args.gpu)
         device_info = check_cuda(gpu_ids)
         set_seed(args.seed)
-        model_weight = weight_path()
+        model_weight = Path(args.tracker_weight) if candidate and not args.both else weight_path()
         if not model_weight.is_file():
             raise InputError(
                 f"RAFT Things 权重不存在: {model_weight}; 设置 VBENCH_AUDIT_RAFT_WEIGHT 指向已校验权重"
@@ -106,16 +130,38 @@ def execute(args: argparse.Namespace) -> int:
     output_root = output_base(args.output)
     current_run = run_id()
     started = time.monotonic()
-    base_environment = environment_record(videos, metadata_path, model_weight)
+    if candidate:
+        from vbench_audit_core.inputs import sha256_file
+        from vbench_audit_core.provenance import collect_provenance
+        import torch
+        workspace = Path(__file__).resolve().parents[4]
+        lock = workspace / "uv.lock"
+        base_environment = {
+            **collect_provenance(videos, None, Path(args.trajectory_config),
+                                 upstream_status="checked_for_official" if args.both else "not_used_by_trajectory"),
+            "python": platform.python_version(), "python_executable": sys.executable,
+            "platform": platform.platform(), "torch": torch.__version__, "torch_cuda": torch.version.cuda,
+            "uv_lock_sha256": sha256_file(lock) if lock.is_file() else None,
+            "trajectory_options": trajectory_options,
+            "tracker_weight_sha256": sha256_file(Path(args.tracker_weight)),
+            "tracker_source_sha256": {str(p.relative_to(args.tracker_root)): sha256_file(p)
+                                      for p in sorted(Path(args.tracker_root).glob("cotracker/**/*.py"))},
+            "trajectory_config_sha256": sha256_file(Path(args.trajectory_config)),
+            "metadata_used": False,
+        }
+        if args.both:
+            base_environment["official_environment"] = environment_record(videos, None, model_weight)
+    else:
+        base_environment = environment_record(videos, metadata_path, model_weight)
     overall_code = 0
 
     for backend in backends:
         backend_started = time.monotonic()
         interrupted = False
         try:
-            results = evaluate_backend_sharded(
-                backend, videos, metadata, gpu_ids, model_weight, level, args.seed
-            )
+            call_args = (backend, videos, metadata, gpu_ids, model_weight, level, args.seed)
+            results = (evaluate_backend_sharded(*call_args, trajectory_options=trajectory_options)
+                       if candidate and backend == "audit" else evaluate_backend_sharded(*call_args))
         except KeyboardInterrupt:
             results = _interrupted_results(backend, videos, metadata)
             interrupted = True
@@ -134,6 +180,10 @@ def execute(args: argparse.Namespace) -> int:
             if backend == "vbench"
             else "structured-intensity-and-temporal-coverage-no-default-scalarization"
         )
+        if candidate and backend == "audit":
+            formula = "trajectory-candidate-v1-short-side-lengths-per-second"
+            if args.audit_variant == "local-trajectory":
+                formula = "local-trajectory-reliability-v1-observed-motion-lower-bound"
         summary = RunSummary(
             metric="dynamic-degree",
             backend=backend,
@@ -148,7 +198,8 @@ def execute(args: argparse.Namespace) -> int:
         destination = output_root / "dynamic-degree" / backend / current_run
         run_info = {
             "experiment": "dynamic-degree evaluation",
-            "purpose": "official parity or source/time/persistence-aware audit",
+            "purpose": "verified video-only point trajectories" if candidate and backend == "audit"
+                       else "official parity or source/time/persistence-aware audit",
             "command": sys.argv,
             "parsed_args": vars(args),
             "seed": args.seed,

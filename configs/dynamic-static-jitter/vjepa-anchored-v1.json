@@ -1,0 +1,16 @@
+{
+  "protocol": "dynamic-vjepa-model-retraining-anchored-v1",
+  "authorization": "2026-09-23 user explicitly requested model adjustment/training, not an inference-score algorithm correction",
+  "probe_config_sha256": "6c5e1464f903f6434cfa3a707ff2b6f93d10142a57fc0f586ac4cea82f3116af",
+  "probe_sources_sha256": "b2bbc3fd06d9bcb56ba4e11a3486184b2a32da13caa626001b7add394c6df15b",
+  "probe_pairs_sha256": "79a04371644af1a8a1ef706acdb856c29f94867845866daadb9210d6797755bb",
+  "initial_joint_head_sha256": "2ec2a5d98e5555b6cab3c409c250e163181687626fafc1aee15aae45c4911b18",
+  "head_implementation_sha256": "e5688423b96362d0adcca7eb0b95dfeca90d140ce6f4caa0ae919c50d5987bcc",
+  "sources": {"train": 210, "validation": 60, "calibration_unopened": 45, "train_prompts": 14, "validation_prompts": 4},
+  "anchors": {"reference_frame_index": 7, "views": ["still", "pan8", "pan32", "reversal32", "still_jitter8"], "native_frames": 16, "fps": 8, "pan_first_to_last_pixels": [8, 32], "reversal_peak_pixels": 32, "border_mode": "BORDER_REFLECT_101", "still_jitter": "same source-UID-seeded 8px alternating coordinate warp as prior training", "extra_feature_count": 1350, "all_views_count": 2160},
+  "optimization": {"seed": 20260927, "steps": 300, "learning_rate": 0.001, "weight_decay": 0.01, "optimizer": "AdamW", "full_batch": true, "initialization": "previous joint head", "checkpoint_selection": "last fixed step only", "hyperparameter_sweep": false, "gauge_loss": false},
+  "loss": {"natural_margin": 0.2, "weak_pan_margin": 0.05, "strong_pan_margin": 0.1, "reversal_margin": 0.1, "invariance_weight": 1.0, "zero_weight": 1.0, "pan_weight": 1.0, "native_floor_weight": 0.1},
+  "acceptance": {"validation_still_mean_max": 0.05, "validation_still_p95_max": 0.1, "weak_pan_above_still_fraction_min": 0.9, "strong_pan_above_weak_fraction_min": 0.9, "reversal_above_still_fraction_min": 0.9, "validation_native_ordered_correct_min": 19, "max_cf_correct_loss_from_clean": 1, "native_jitter_mae_max": 0.02, "native_score_std_min": 0.05},
+  "scope": {"encoder_frozen": true, "train_head_weights": true, "new_downloads": false, "default_metric_changed": false, "train_on_main32_or_single_case": false, "train_on_exposed_test450": false, "calibration45_opened": false, "posthoc_score_offset_or_rescaling": false},
+  "limitations": ["Known zero-motion controls and ordinal pans are training supervision, not proof of absolute physical motion units", "Synthetic whole-frame pans include reflective borders and do not establish articulated/small-object generalization", "Four validation prompts already used for development, not a new independent holdout", "The previous 450 TEST sources and one requested static-frame case are excluded from training and checkpoint selection"]
+}

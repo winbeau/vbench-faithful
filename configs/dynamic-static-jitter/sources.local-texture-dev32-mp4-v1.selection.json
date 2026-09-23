@@ -1,0 +1,76 @@
+{
+  "protocol": "official-mp4-dev32-selection-v1",
+  "seed": 20260922,
+  "original_sha256": "ed46df1c5e7ca1a56dcf542b4d171fb8f6a4d4756fab0c7340ed3fafc434bd56",
+  "pool_sha256": "1e08807b42045afc43a71397b115fe8045c6c88251762fea1aafa1fc8b203f47",
+  "script_sha256": "99c6020e969584c7d56b650f0ced7ccc2f160fe069fe719d4d93d5e065555e2e",
+  "output_sha256": "2be38ca256aadfcbd1d12a3e782dbb48ec3a933032ab8baa822129e1b5a301d6",
+  "rule": "Replace untimed DEV GIFs with score-blind official DEV MP4 replicates.\n\nRetain all 24 previously selected MP4s. In the original eight-prompt order,\nreplace each GIF with a second replicate from round-robin sorted MP4 generators.\nRank eligible video UIDs by SHA256('20260922:<uid>'); never read scores/media.\n",
+  "sources": 32,
+  "prompts": 8,
+  "generator_counts": {
+    "lavie": 11,
+    "modelscope": 11,
+    "videocraft": 10
+  },
+  "replacements": [
+    {
+      "excluded_gif": "v_9c9692e9850245594de5",
+      "replacement_mp4": "v_6928a20fd1a448a75970",
+      "generator": "lavie",
+      "eligible_count": 4,
+      "reason": "missing native GIF frame delays; user authorized MP4 replacement"
+    },
+    {
+      "excluded_gif": "v_7e80eb0d3f9c5b153a78",
+      "replacement_mp4": "v_d763ec50c6af177e60ed",
+      "generator": "modelscope",
+      "eligible_count": 4,
+      "reason": "missing native GIF frame delays; user authorized MP4 replacement"
+    },
+    {
+      "excluded_gif": "v_9c23180cbd43047938b1",
+      "replacement_mp4": "v_3a6bfd750879c8638492",
+      "generator": "videocraft",
+      "eligible_count": 4,
+      "reason": "missing native GIF frame delays; user authorized MP4 replacement"
+    },
+    {
+      "excluded_gif": "v_c4bb7f3ac61272cb8fe4",
+      "replacement_mp4": "v_0bc30f02053a39df2334",
+      "generator": "lavie",
+      "eligible_count": 4,
+      "reason": "missing native GIF frame delays; user authorized MP4 replacement"
+    },
+    {
+      "excluded_gif": "v_2213af4094cb12ffa82e",
+      "replacement_mp4": "v_8405be833751e916e56a",
+      "generator": "modelscope",
+      "eligible_count": 4,
+      "reason": "missing native GIF frame delays; user authorized MP4 replacement"
+    },
+    {
+      "excluded_gif": "v_b36f5db6bd017b829172",
+      "replacement_mp4": "v_4acac16a69599ee0fbf1",
+      "generator": "videocraft",
+      "eligible_count": 4,
+      "reason": "missing native GIF frame delays; user authorized MP4 replacement"
+    },
+    {
+      "excluded_gif": "v_b74550ded79cf3b981f0",
+      "replacement_mp4": "v_c5efb2ed1a153332256c",
+      "generator": "lavie",
+      "eligible_count": 4,
+      "reason": "missing native GIF frame delays; user authorized MP4 replacement"
+    },
+    {
+      "excluded_gif": "v_e127f4ca8c90919c0c85",
+      "replacement_mp4": "v_f0a7a5c8b80f467121aa",
+      "generator": "modelscope",
+      "eligible_count": 4,
+      "reason": "missing native GIF frame delays; user authorized MP4 replacement"
+    }
+  ],
+  "scores_read": false,
+  "holdout_media_opened": false
+}

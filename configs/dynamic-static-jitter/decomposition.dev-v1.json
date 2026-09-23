@@ -1,0 +1,8 @@
+{
+  "temporal_scale_seconds": 0.2,
+  "spatial_radius_fraction": 0.25,
+  "color_scale": 0.15,
+  "minimum_neighbors": 6,
+  "coherence_error_scale": 0.25,
+  "minimum_reversal_fraction": 0.5
+}

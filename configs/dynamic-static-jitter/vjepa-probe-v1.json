@@ -1,0 +1,29 @@
+{
+  "protocol": "dynamic-vjepa-frozen-probe-v1",
+  "purpose": "Bounded development feasibility, not calibrated motion strength or formal acceptance",
+  "source_commit": "204698b45b3712590f06245fbfba32d3be539812",
+  "checkpoint_url": "https://dl.fbaipublicfiles.com/vjepa2/vjepa2_1_vitb_dist_vitG_384.pt",
+  "checkpoint_sha256": "848a77c33cc9e6649ed2119c9bea1e2c569bcdab9539ff3e7c02ccc2959ddf4d",
+  "checkpoint_size_bytes": 1664223428,
+  "checkpoint_hash_status": "observed HTTPS download hash, not publisher-signed digest",
+  "checkpoint_key": "ema_encoder",
+  "model_factory": "vjepa2_1_vit_base_384",
+  "pool_sha256": "1e08807b42045afc43a71397b115fe8045c6c88251762fea1aafa1fc8b203f47",
+  "pairs_sha256": "788cd605d90a91c242da7a0642a6836e26ed06960798230ae0af7035cbd6d2ae",
+  "exclude_sha256": [
+    "2be38ca256aadfcbd1d12a3e782dbb48ec3a933032ab8baa822129e1b5a301d6",
+    "ed46df1c5e7ca1a56dcf542b4d171fb8f6a4d4756fab0c7340ed3fafc434bd56"
+  ],
+  "selection_prefix": "vjepa-probe-v1:",
+  "prompt_split_counts": {"train": 14, "validation": 4, "calibration_reserved": 3},
+  "extract_roles": ["train", "validation"],
+  "expected_sources": 315,
+  "expected_extract_sources": 270,
+  "expected_features": 810,
+  "input": {"frames": 16, "fps": 8, "size": 384, "resize": "whole_square_bilinear_antialias", "mean": [0.485, 0.456, 0.406], "std": [0.229, 0.224, 0.225], "frame_skip": 0, "crop": false, "encoder_autocast": "bfloat16", "cache_dtype": "float16"},
+  "augmentation": {"amplitude_pixels": 8, "spatial_scale_pixels": 32, "border_taper_pixels": 32, "seed_prefix": "vjepa-probe-training-jitter-v1:", "views": ["alternating", "aperiodic"], "aperiodic_amplitude_range": [0.5, 1.0], "quality_exclusion": false},
+  "head": {"input_dim": 768, "hidden_dim": 64, "mlp_dim": 32, "readout": "LayerNorm(no affine), tanh projection, learned attention pooling, MLP", "input_metadata": false},
+  "optimization": {"seed": 20260924, "steps": 100, "full_batch": true, "optimizer": "AdamW", "learning_rate": 0.001, "weight_decay": 0.01, "pair_loss": "0.5*MSE(ordered differences,+/-1)+0.5*MSE(tie differences,0)", "gauge_weight": 0.01, "arms": {"natural_only": 0.0, "joint": 1.0}, "consistency_loss": "mean squared latent difference between natural and both jitter views", "checkpoint_selection": "last fixed step only", "display": "sigmoid(latent), uncalibrated relative score"},
+  "feasibility_gate": {"minimum_validation_ordered_correct": 16, "maximum_clean_correct_loss_vs_natural": 1, "maximum_jitter_correct_loss_vs_clean": 1, "maximum_mae_ratio_vs_natural": 0.8, "minimum_latent_std": 0.1, "minimum_std_ratio_vs_natural": 0.5, "minimum_mean_signed_ordered_margin": 0.2},
+  "scope": {"backbone_frozen": true, "formal_holdout_opened": false, "main32_used_for_training": false, "calibration_media_opened": false, "origin_supervision": false, "default_metric_changed": false, "hyperparameter_sweep": false, "absolute_strength_anchors_available": false}
+}

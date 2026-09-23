@@ -1,0 +1,14 @@
+{
+  "protocol": "native_rgb_region_crosscheck_dev_v2",
+  "lags": [1, 2, 3, 4],
+  "motion": {
+    "hypotheses": 3,
+    "min_overlap": 0.8,
+    "refinement_steps": 8,
+    "convergence_pixels": 0.001,
+    "sift_ratio": 0.75,
+    "target_visibility": "associated_sam"
+  },
+  "status": "diagnostic_only_not_validated_repair",
+  "note": "Candidate geometric correction: account for source AND target region visibility so newly occluding foreground is not treated as background photometric mismatch. Source-only peaks and unshifted overlap propose target mask identities; then each candidate mask gets a complete native RGB translation search, not a zero-motion prior. Same overlap, numerical precision, SIFT settings and full-phase protocol. Region identity, complex motion and final scoring remain unvalidated."
+}

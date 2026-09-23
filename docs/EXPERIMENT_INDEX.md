@@ -4,6 +4,34 @@
 结果表。每个数字的权威来源仍是对应报告、冻结配置和机器可读产物；本页把
 目的、分母、结果、版本和限制放在同一入口，避免把不同协议的分数混在一起。
 
+Dynamic局部纹理抖动新任务另更新至UTC2026-09-23；其余条目仍为上述旧快照。
+此前[联合目标与分区消融报告](counterfactual-reports/dynamic_static_jitter.md#dynamic-outer-support)
+覆盖固定32源/128输入及63自然原片，191/191重放、零失败。最大SAM区域支持
+候选为0.560659→0.678265，涨幅占Origin的62.72%，仍未达到10%；自然偏好仅
+覆盖4个有序对，不能宣称真实运动验证完成。该任务不改写下面历史FPS反事实表。
+
+随后按用户授权完成[冻结V-JEPA 2.1＋小连续头试验](counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-probe)：
+210训练/60开发验证官方MP4，810份特征完整；两个固定100步小头，无权重解冻或
+检查点选择。联合臂验证相对分数0.566153→0.564112，绝对分差较自然臂降33.31%；
+原片运动偏好20/23、两种干预各19/23。预定开发门槛通过，**不是最终修复**；
+在该开发阶段结束时，原32组新模型测试及正式留出尚未运行；45条校准预留仍未读取。
+
+最新[真实VBench 1.0冻结验证](counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-validation)
+已完成：固定已有32组、预留90个MP4的8px反事实及450条自然测试视频，两后端
+各848/848、零失败；30个GIF按固定协议NOT SCORED。90组Origin为
+0.700000→0.900000，联合Repair为0.517112→0.514804，冻结相对分数的10%涨幅
+数值检查通过；不重新训练或调整映射。自然171有序对的concordance为
+81.87%→85.96%，但配对改善CI跨零，未证明显著优于Origin。个体降分、120个新构造
+旧质量警示、CF偏好仅6有序对均在报告保留。绝对强度/运动类型人工审核NOT RUN，
+不改默认、不宣告完整goal完成，也不替换下面的历史FPS协议结果表。
+
+后续[450源扩展及静态诊断](counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-expansion450)：
+全部1800输入/后端、0失败，Origin0.680000→0.857778、旧联合Repair
+0.518089→0.516319；全部450人类配对现在两端都有CF。与此同时，单图静止
+0.456649、8px平移0.442835暴露了运动排序反例，不能只由不变性宣称成功。
+用户已明确授权[锚点监督模型重训练](counterfactual-reports/dynamic_static_jitter.md#dynamic-vjepa-anchored)，
+仅用独立于该单例/测试集的DEV210训练、DEV60验证；首次数值失败保留，新结果待验收。
+
 ## 读取规则
 
 - 反事实主表的唯一权威来源是
@@ -34,6 +62,10 @@ aesthetic_quality、imaging_quality 只完成源码定位，不在本轮范围�
 - 工作区规则、冻结边界和测试：[AGENTS.md](../AGENTS.md)；
 - 统一命名与包入口：[README.md](../README.md)、[架构](architecture.md)、
   [CLI](cli.md)；
+- 各维度 Origin/Repair 方法、反事实构造、逐维实验表和最终压缩表：
+  [DIMENSION_METHODS_AND_EXPERIMENTS.md](DIMENSION_METHODS_AND_EXPERIMENTS.md)；
+- 论文用 2-panel Scene / Spatial 案例图、排版脚本和证据 provenance：
+  [vbench_counterfactual_cases](figures/vbench_counterfactual_cases/README.md)；
 - 反事实数据集与七维主证据：[counterfactual-reports/README.md](counterfactual-reports/README.md)；
 - 自然集补充实验手册：[supplementary-experiments.md](supplementary-experiments.md)；
 - Object/Color 的独立实现与复现：[object-color-repair.md](object-color-repair.md)。

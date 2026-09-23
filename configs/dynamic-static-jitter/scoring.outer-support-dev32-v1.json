@@ -1,0 +1,19 @@
+{
+  "protocol": "outer-support-residual-reversal-dev32-v1",
+  "status": "development_ablation_not_default",
+  "declared_before_replay": true,
+  "estimator_change": "largest containing SAM proposal instead of smallest; unchanged residual-first temporal decomposition",
+  "hypothesis": "small nested masks make regional affine protection unidentifiable and retain texture jitter; broader structural support may separate nonaffine jitter without losing coherent motion",
+  "gates_changed": false,
+  "projection": "same instantaneous regional affine / per-point mean constraints on the new larger partition; no claim to preserve each original small part",
+  "score_head": "unchanged full-grid top5-percent continuous intensity and frozen I/(I+tau)",
+  "tau": 0.12684953311437752,
+  "calibration_artifact_sha256": "618eaf576a26ebd8e8366482e5353bf39361dfa1f89df0f5938bf157c7f8475f",
+  "evaluation_summary_sha256": "3ea288df89e56966871d977afcae34e8ab0236ba21d073f1efdcc3b11cf98f8f",
+  "counterfactual": "unchanged 32 official DEV MP4s, 8px, two seeds, all 128 inputs",
+  "natural_control": "all 63 separately scored natural DEV originals; quantify every decline, not only the mean; existing 95-original human-pair overlap is auxiliary and not sufficient validation",
+  "primary_statistic": "32 equal-weight sources; average CF seeds per source; signed mean(CF)-mean(base)",
+  "acceptance": "joint jitter invariance and genuine motion response; a lower CF mean alone does not pass",
+  "holdout": "NOT RUN",
+  "limitations": "posthoc development hypothesis, reference-frame masks may merge independently moving parts, same tracker may still miss physical train motion"
+}

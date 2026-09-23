@@ -1,0 +1,20 @@
+{
+  "protocol": "dev32-cotracker3-guarded-official-decision-v1",
+  "status": "predeclared_development_candidate_not_default_or_validated_repair",
+  "sources": "configs/dynamic-static-jitter/sources.local-texture-dev32-mp4-v1.jsonl",
+  "sources_sha256": "2be38ca256aadfcbd1d12a3e782dbb48ec3a933032ab8baa822129e1b5a301d6",
+  "seeds": [1701, 2904],
+  "amplitude_pixels": 8,
+  "selection": "all 32 sources and all 128 planned inputs; retain construction quality flags and failures",
+  "sampling": "all native frames, native resolution; this run requires 8 FPS CFR so Origin samples identically; other cadence is unsupported, never silently resampled",
+  "grid_size": 12,
+  "query_phases": "each native frame, full-video backwards completion, fixed cell centers",
+  "regions": "same-video SAM ViT-H AMG, native middle frame; no partner masks or prompts",
+  "decomposition": "unchanged regional_reversal_ablation; preserve each region affine projection and each point mean velocity; do not remove unknown pairs",
+  "decision": "both raw-grid ablation and guarded candidate use all 144 grid predictions; top floor(0.05*144)=7 displacement magnitudes; threshold 6*short_side/256; moving-pair count >= round(frame_count/4)",
+  "decision_scale_fit": "none; official threshold/count reused, no tuning after observing this batch",
+  "visibility": "reported separately, never discards coordinates from score denominator; learned proxy, not independent physical validation",
+  "primary_aggregation": "mean across 32 source groups of paired CF mean over seeds minus base; never MAE or mean positive-only differences",
+  "numerical_criterion": "Delta_guarded <= 0.10*Delta_origin only if Delta_origin > 0 and all 32 groups complete",
+  "limitations": "New binary head makes dynamic-proportion scales comparable but does not calibrate tracking accuracy. Previous five sources informed development. No validated physical correspondence or natural-motion noninferiority; no claim of overall Repair success from this batch alone. New CFs have not received human semantic review."
+}

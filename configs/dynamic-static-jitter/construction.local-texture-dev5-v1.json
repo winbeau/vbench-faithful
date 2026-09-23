@@ -1,0 +1,20 @@
+{
+  "protocol": "official-video-local-texture-jitter-v1",
+  "base": "unaltered_vbench_1_0_source_video",
+  "encoding": "libx264rgb_lossless_crf0",
+  "families": ["local_texture_alternating"],
+  "seeds": [1701, 2904],
+  "amplitudes": [1, 2, 4],
+  "amplitude_units": "native_pixels",
+  "primary_amplitude": 2,
+  "primary_seed": 1701,
+  "spatial_scale_pixels": 32,
+  "border_taper_pixels": 32,
+  "min_warp_jacobian": 0.5,
+  "max_global_translation_pixels": 0.00001,
+  "min_structure_correlation": 0.85,
+  "max_clipped_fraction": 0.0,
+  "min_decoded_difference": 0.05,
+  "timestamp_tolerance_seconds": 0.000001,
+  "selection_rule": "First five distinct dev prompts in sources.v1.jsonl order; generator rotation lavie, modelscope, videocraft, lavie, modelscope; native MP4 only; no score-based selection"
+}

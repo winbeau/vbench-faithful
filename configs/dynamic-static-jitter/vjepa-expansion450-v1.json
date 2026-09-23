@@ -1,0 +1,15 @@
+{
+  "protocol": "dynamic-vjepa-frozen-expansion450-v1",
+  "authorization": "2026-09-23 user requested more actual VBench counterfactual measurements after the initial 90-source result",
+  "parent_config": "configs/dynamic-static-jitter/vjepa-validation-v1.json",
+  "parent_config_sha256": "aef55f4fbb6d31a334de014b2528dc01e1a373a315006bd559f6c2c9dbd38c09",
+  "frozen_validation_script_sha256": "b2619965627e1ea554b11fe5acbd0e8713cc893ef5ac12019d9cf955b638b317",
+  "previous_inputs_sha256": "fecc98496ab1617ed98fbfeb4a9c21e5802d7b326a95fbcc0f76796f256ce5ff",
+  "previous_natural_sources_sha256": "f9d080a27bf56b5510506950fa207ef7d06c566fc6c06f6a507c5b62b1ca57d8",
+  "previous_cf_sources_sha256": "e1311f909691455c898dd1f9b6b3f64f1bc428acb6ab900532ff6a8f2fe51b5c",
+  "cohorts": {"sources": 450, "prompts": 30, "previous_cf_sources": 90, "additional_cf_sources": 360, "inputs_per_backend": 1800, "human_pairs": 450},
+  "selection_rule": "All 450 official native MP4s in the previously frozen 30-TEST-prompt natural source list; no score or label filtering. Reuse the first 90 sources' constructed bytes and construct the other 360 sources at the same 8px and seeds 1701/2904. Re-score all 1800 inputs with each backend.",
+  "construction_intent": "Coverage expansion on already exposed test prompts, not another independent unseen holdout. Preserve and score all legacy quality flags. Same lossless local coordinate warp; no RGB noise, staticization, crop, frame drop or speed change.",
+  "scope": {"training_updates": 0, "mapping_changes": false, "new_model_downloads": false, "calibration45_opened": false, "new_independent_prompts": 0, "default_metric_changed": false},
+  "analysis_intent": "Primary: all 450 source-weighted two-seed mean changes and MAE with the unchanged prompt-cluster bootstrap. Secondary: original90 and additional360 separately; all450 human pairs on base and both counterfactual seeds, predicted ties receive half credit and human ties remain separate. Report errors, largest drops, fixed-relative-scale limitations and no post-test retuning."
+}

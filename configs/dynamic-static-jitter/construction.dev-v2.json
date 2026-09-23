@@ -1,0 +1,20 @@
+{
+  "selection_seed": 20260922,
+  "dev_prompts": 8,
+  "test_prompts": 30,
+  "width": 256,
+  "height": 192,
+  "fps": 8,
+  "frames": 16,
+  "crf": 12,
+  "headroom": 48,
+  "noise_seeds": [1701, 2904],
+  "families": ["pixel_rgb", "correlated_rgb", "global_alternating", "global_random", "local_alternating", "local_random"],
+  "amplitudes": [8, 20, 40],
+  "motion_pixels_per_frame": [0, 2, 4, 8],
+  "min_structure_correlation": 0.85,
+  "max_clipped_fraction": 0.20,
+  "min_decoded_difference": 0.8,
+  "min_image_std": 12.0,
+  "max_source_clipped_fraction": 0.35
+}

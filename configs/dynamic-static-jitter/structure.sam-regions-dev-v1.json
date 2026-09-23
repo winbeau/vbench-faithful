@@ -1,0 +1,20 @@
+{
+  "protocol": "automatic_region_evidence_dev_v1",
+  "sample_fps": 8.0,
+  "decode_max_side": 512,
+  "sam_architecture": "vit_h",
+  "generator": {
+    "points_per_side": 32,
+    "points_per_batch": 32,
+    "pred_iou_thresh": 0.88,
+    "stability_score_thresh": 0.95,
+    "stability_score_offset": 1.0,
+    "box_nms_thresh": 0.7,
+    "crop_n_layers": 0,
+    "min_mask_region_area": 0,
+    "output_mode": "binary_mask"
+  },
+  "post_selection": "none",
+  "status": "diagnostic_only_not_validated_repair",
+  "note": "Upstream ViT-H AMG defaults except memory-bounded point batch 32. Independently propose regions on every sampled frame, no category/prompt/paired base/propagated clean mask. Grid density and filters are not fitted to intervention scores."
+}

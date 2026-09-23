@@ -1,0 +1,17 @@
+{
+  "sample_fps": 8.0,
+  "max_side": 256,
+  "grid_size": 12,
+  "patch_radius": 7,
+  "blur_sigma": 2.0,
+  "illumination_sigma": 6.0,
+  "contrast_floor": 8.0,
+  "match_error_max": 0.45,
+  "stationary_error_max": 0.30,
+  "improvement_ratio": 0.85,
+  "improvement_absolute": 0.015,
+  "cycle_error_max": 2.0,
+  "noise_floor_pixels": 0.35,
+  "min_coverage": 0.60,
+  "max_frames": 128
+}

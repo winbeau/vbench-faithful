@@ -1,0 +1,13 @@
+{
+  "temporal_scale_seconds": 0.2,
+  "minimum_reversal_fraction": 0.5,
+  "minimum_mode_energy_fraction": 0.1,
+  "minimum_participation_fraction": 0.1,
+  "minimum_evidence_fraction": 0.6,
+  "structure_retention_threshold": 0.8,
+  "local_supported_energy_threshold": 0.5,
+  "minimum_mode_separation": 0.05,
+  "spatial_radius_fraction": 0.2,
+  "minimum_neighbors": 4,
+  "coherence_error_scale": 0.25
+}

@@ -134,6 +134,24 @@ def evaluate_audit_batch(
     return results
 
 
+def evaluate_trajectory_batch(videos: list[Path], device: Any, options: dict[str, Any]) -> list[dict[str, Any]]:
+    from .trajectory import TrajectoryConfig, TrajectoryEvaluator
+
+    if options.get("variant") == "local-trajectory":
+        from .local_trajectory import LocalTrajectoryConfig as TrajectoryConfig, LocalTrajectoryEvaluator as TrajectoryEvaluator
+
+    evaluator = TrajectoryEvaluator(TrajectoryConfig(**options["config"]),
+                                    Path(options["source_root"]), Path(options["checkpoint"]), str(device))
+    results = []
+    for video in videos:
+        try:
+            results.append(evaluator.evaluate_video(video))
+        except Exception as exc:
+            results.append({"video": str(video), "backend": "audit", "score": None,
+                            "status": "failed", "error": f"{type(exc).__name__}: {exc}"})
+    return results
+
+
 def _failed_results(
     backend: str,
     videos: list[Path],
@@ -165,6 +183,7 @@ def _worker(
     model_weight: str,
     diagnostics_level: str,
     seed: int = 42,
+    trajectory_options: dict[str, Any] | None = None,
 ) -> None:
     paths = [Path(video) for video in videos]
     try:
@@ -174,6 +193,8 @@ def _worker(
         device = torch.device(f"cuda:{gpu_id}")
         if backend == "vbench":
             results = evaluate_vbench_batch(paths, metadata, device, Path(model_weight))
+        elif trajectory_options is not None:
+            results = evaluate_trajectory_batch(paths, device, trajectory_options)
         else:
             results = evaluate_audit_batch(
                 paths, metadata, device, Path(model_weight), DiagnosticsLevel(diagnostics_level)
@@ -191,13 +212,14 @@ def evaluate_backend_sharded(
     model_weight: Path,
     diagnostics_level: DiagnosticsLevel,
     seed: int = 42,
+    trajectory_options: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     metadata_dict = {key: dict(value) for key, value in metadata.items()}
     coordinated = run_spawn_coordinator(
         _worker,
         [str(video) for video in videos],
         gpu_ids,
-        worker_args=(backend, metadata_dict, str(model_weight), diagnostics_level.value, seed),
+        worker_args=(backend, metadata_dict, str(model_weight), diagnostics_level.value, seed, trajectory_options),
         backend=backend,
         label="dynamic-degree",
     )
