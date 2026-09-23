@@ -3,6 +3,7 @@
 本入口固定论文当前选定的九维修复，并提供原版 VBench 1.0 的全部十六维。
 配置见 [`paper-methods.json`](../../configs/reproduction/paper-methods.json)。九维以外不输出虚构的 Repair 分数。
 旧的分维度研发 CLI 保留历史默认值；论文评测使用下列统一入口。
+实际完成的检查与按用户要求停止的部分见 [容器重置交接记录](container-reset/README.md)。
 
 ## 从新环境恢复
 
@@ -58,7 +59,7 @@ Repair 允许误差为 `1e-6`。这是代表性端到端验收，不能称为全
 完整九维主表仍可独立复算：
 
 ```bash
-python3 scripts/reproduce_main_table.py \
+/absolute/path/vbench-runtime/semantic-env/bin/python scripts/reproduce_main_table.py \
   --bundle /absolute/path/vbench-runtime/selected/bundle \
   --model-code vendor/vbench_prompts_compile \
   --k400-labels configs/reproduction/k400-labels.json \
@@ -66,6 +67,8 @@ python3 scripts/reproduce_main_table.py \
 ```
 
 该复算使用全部冻结视觉证据与语义预测，核对 24,408 个分数单元；不把缓存复算冒充视觉模型重推理。
+逐项相等验收使用项目锁定的 Python 3.11.14；不要使用 Ubuntu 24.04 默认的 Python 3.12 bootstrap 解释器复算。
+一次额外的 H200/Python 3.12 重放触发了严格相等校验；未放宽校验或改写冻结结果。
 
 ## 评测自己的 VBench 视频
 

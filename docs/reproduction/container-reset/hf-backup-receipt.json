@@ -1,0 +1,103 @@
+{
+  "dataset": "xju-arlab/vbench-repair",
+  "model": "xju-arlab/vbench-model",
+  "public": true,
+  "mirror_attempted_first": true,
+  "official_upload_fallback_used": true,
+  "archives": [
+    {
+      "path": "reproduction/runtime/h100-20260923/visual-runtime.tar.gz",
+      "bytes": 3463904302,
+      "sha256": "2667d0092dc76777a39f213d65557b3598e40a6b18be3779d3d90c5dbd175a66",
+      "roots": [
+        "visual-env",
+        "python-3.10"
+      ],
+      "revision": "0623ea7ac8801781932784b4768c1b6000329c3b",
+      "parts_revision": "34af4a8ba30f3316e0a4bad6bd6c570f176e91ab"
+    },
+    {
+      "path": "reproduction/runtime/h100-20260923/semantic-runtime.tar.gz",
+      "bytes": 3255251505,
+      "sha256": "8dd55e62b8f56fb78efd26aeb9cd58422558690aa016aaa043b1a90cae59b06a",
+      "roots": [
+        "semantic-env",
+        "python-3.11"
+      ],
+      "revision": "0623ea7ac8801781932784b4768c1b6000329c3b",
+      "parts_revision": "4737fc5c01d6e6d32d0ecbb5777f76799917882f"
+    },
+    {
+      "path": "reproduction/runtime/h100-20260923/visual-assets.tar.gz",
+      "bytes": 6713840083,
+      "sha256": "0144698534531779856d0588eb689165add864569715c8500d27015caff8fbea",
+      "roots": [
+        "VBench",
+        "vbench-cache",
+        "clip",
+        "clip-large",
+        "raft",
+        "subject-repair"
+      ],
+      "revision": "48bf87ce6cf394374592ee7c6553ccfea1491832",
+      "parts_revision": "f4510551a1eaf573682e5a6ebe84ed739ddfa1e4"
+    },
+    {
+      "path": "reproduction/runtime/h100-20260923/bert-cache.tar.gz",
+      "bytes": 409903212,
+      "sha256": "955aa21fc2795ec3220e72b89a17bde87995cfbd0d6eae04a1d7e224a6bfa82a",
+      "roots": [
+        "hf-home/hub/models--bert-base-uncased",
+        "hf-home/hub/models--google-bert--bert-base-uncased"
+      ],
+      "revision": "757055eb93035a1310133b1f951d3acbcc096639",
+      "parts_revision": "1a56447f01cf70c3f0423390b5aedd4a8e608a69"
+    },
+    {
+      "path": "reproduction/runtime/h100-20260923/vjepa-source.tar.gz",
+      "bytes": 9348597,
+      "sha256": "c8535551c89ff018af622a77cdb92752246d87ba72f066b96e81feb245450dfb",
+      "roots": [
+        "vjepa-source"
+      ],
+      "revision": "9921f9f736ae744f752ccc8eeec54a34a99d01c6",
+      "parts_revision": "499c791a82fbf2cd677f48c56520ec44235dad24"
+    },
+    {
+      "path": "reproduction/runtime/h100-20260923/official-extras.tar.gz",
+      "bytes": 1589611708,
+      "sha256": "97b9156b514228427893d9a9a7f5d9e44ab3dd1ee57f32b91c08d5bdd727a431",
+      "roots": [
+        "vbench-cache/ViCLIP/ViClip-InternVid-10M-FLT.pth",
+        "vbench-cache/ViCLIP/bpe_simple_vocab_16e6.txt.gz",
+        "vbench-cache/pyiqa_model/musiq_spaq_ckpt-358bb6af.pth"
+      ],
+      "revision": "208e6e571029092bedede768e650d1aa4e5242fd",
+      "parts_revision": "3b0292d36439016d7bb8e8a3be0b37d77367a1fa"
+    },
+    {
+      "path": "reproduction/runtime/h100-20260923/install-fixture.tar.gz",
+      "bytes": 55869322,
+      "sha256": "96673fc99557d92123ed0f2b15ec445b9821785f7197310b5c6ff5b0cd3b0505",
+      "roots": [
+        "install-fixture"
+      ],
+      "revision": "d73331778902ec808629477b7ebe6478dde02506",
+      "parts_revision": "89867dd222c2f61a59a30202240717fec38a5839"
+    },
+    {
+      "path": "reproduction/runtime/h100-20260923/dynamic-cf-fixture.tar.gz",
+      "bytes": 2999310,
+      "sha256": "b508fb59a529fbec6dd79d01b60826dd14269c9a9ffdf332dd078fadb9117385",
+      "roots": [
+        "install-fixture/dynamic-cf"
+      ],
+      "revision": "12bb1a7508f7a5b78de023159a187532c71e8705"
+    }
+  ],
+  "archive_bytes": 15500728039,
+  "parts": 120,
+  "chunk_manifest_revision": "6be869333170d45e89ebc34772e7e2b431ee5cc4",
+  "contents": "allowlisted dependency runtimes, upstream sources and model assets, verification inputs; private project code stays on GitHub",
+  "selected_model_revision": "5fe53c4c7eb1a8a4fcd5b6e22f748da1d073a78e"
+}

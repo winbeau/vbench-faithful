@@ -1,0 +1,839 @@
+{
+  "verification": "metadata SHA256 and size; no further model/video inference or weight downloads",
+  "reports": [
+    {
+      "repo": "xju-arlab/vbench-repair",
+      "revision": "63d19428e9a561dec6c43fbd17aaf9866a72a4b9",
+      "endpoint": "https://hf-mirror.com",
+      "files_verified": 128,
+      "passed": true,
+      "files": [
+        {
+          "path": "reproduction/runtime/h100-20260923/visual-runtime.tar.gz",
+          "bytes": 3463904302,
+          "sha256": "2667d0092dc76777a39f213d65557b3598e40a6b18be3779d3d90c5dbd175a66",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/semantic-runtime.tar.gz",
+          "bytes": 3255251505,
+          "sha256": "8dd55e62b8f56fb78efd26aeb9cd58422558690aa016aaa043b1a90cae59b06a",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/visual-assets.tar.gz",
+          "bytes": 6713840083,
+          "sha256": "0144698534531779856d0588eb689165add864569715c8500d27015caff8fbea",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/bert-cache.tar.gz",
+          "bytes": 409903212,
+          "sha256": "955aa21fc2795ec3220e72b89a17bde87995cfbd0d6eae04a1d7e224a6bfa82a",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/vjepa-source.tar.gz",
+          "bytes": 9348597,
+          "sha256": "c8535551c89ff018af622a77cdb92752246d87ba72f066b96e81feb245450dfb",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/official-extras.tar.gz",
+          "bytes": 1589611708,
+          "sha256": "97b9156b514228427893d9a9a7f5d9e44ab3dd1ee57f32b91c08d5bdd727a431",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/install-fixture.tar.gz",
+          "bytes": 55869322,
+          "sha256": "96673fc99557d92123ed0f2b15ec445b9821785f7197310b5c6ff5b0cd3b0505",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/dynamic-cf-fixture.tar.gz",
+          "bytes": 2999310,
+          "sha256": "b508fb59a529fbec6dd79d01b60826dd14269c9a9ffdf332dd078fadb9117385",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-000",
+          "bytes": 134217728,
+          "sha256": "f1d56ada25bf8ae5d0525da5a06a2ed8329df06ec2105865e95de360bb41b106",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-001",
+          "bytes": 134217728,
+          "sha256": "dd24f879ed02622952e7f23dcd0725744a1db30c1fb180055a5c3ba474475c86",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-002",
+          "bytes": 134217728,
+          "sha256": "111c4c8bbfb04afdba050fc5aad53b1b8dcb15e26a457f13145f44d3b725e404",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-003",
+          "bytes": 134217728,
+          "sha256": "bbe7d1b3ed31043168670976149c77ca31ad32132a73474d9749dbee96f1435d",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-004",
+          "bytes": 134217728,
+          "sha256": "93d02c076c897ff3156148f72dce535751bff395ae767cab7266aa89cb5049fe",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-005",
+          "bytes": 134217728,
+          "sha256": "075bb274f5b116042382ab76ff6d4cf73429c3c476e0922abc8c7aa9e49dc872",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-006",
+          "bytes": 134217728,
+          "sha256": "f91f341da62120f42c6b5eb401307bcd18714016d66a53f4cce65bfde9c40bd4",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-007",
+          "bytes": 134217728,
+          "sha256": "d8dbb5baf66e49ba275d3d388554e40ae00cbed610431e627153526530610b92",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-008",
+          "bytes": 134217728,
+          "sha256": "fa9ec39a5f76f334d191f111afc1028058d080c95ca136dc55073a22b1c18900",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-009",
+          "bytes": 134217728,
+          "sha256": "5d215562ff2f7787117ad14d8a00d00c1a507bd8984afa711966f4a655b80684",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-010",
+          "bytes": 134217728,
+          "sha256": "9b87050cebba67d81860b2a611e16ba2c809873b862f278904a2e7fd646d5355",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-011",
+          "bytes": 134217728,
+          "sha256": "6c7d1a8c375dfed3c38a4325469f3d55e31f153a4855b76d5999a1435c1010b4",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-012",
+          "bytes": 134217728,
+          "sha256": "858288b457fd5e1448bab5a18edb4e878b8158a310f5d762989721683906fab5",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-013",
+          "bytes": 134217728,
+          "sha256": "ddc47aff174b2c4e0f6c77ef47e45e286b5367a2b5a934ef9d75c1a2dbdbd233",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-014",
+          "bytes": 134217728,
+          "sha256": "fd918ef66331b1d0534945cd5febd8d9e476ecc5e63997582ce9c47e2e63b902",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-015",
+          "bytes": 134217728,
+          "sha256": "6cd27c81d84dc70186d01c595e26134e26e9c4865716d7d70bf562492e64787c",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-016",
+          "bytes": 134217728,
+          "sha256": "c36adc3649bf37c5de311a26fe0d5aee2f37a4946709e5a9e8825b2fded62951",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-017",
+          "bytes": 134217728,
+          "sha256": "93007437d0be59556bd9e0447185a5e02b342ef76214ddfdb610a27ddf0e16ac",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-018",
+          "bytes": 134217728,
+          "sha256": "7779186e6a397138de1b87c0ea0ffbdc92542bd591a87042a1a45e417b01b790",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-019",
+          "bytes": 134217728,
+          "sha256": "11748928fc715abe1b030147078f44c973d455e3c0af6ff29ada00ddf19e50d9",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-020",
+          "bytes": 134217728,
+          "sha256": "9bb9bfcf200fcdc4fa9acda9b99f51d4d1c647557911a3a902254a4ca3211818",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-021",
+          "bytes": 134217728,
+          "sha256": "8581b9b2655ce3893249d4c65b27b6752be983f2a7a177207ce9d39d79bf22dc",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-022",
+          "bytes": 134217728,
+          "sha256": "bf9938c8772addb88e86d4de023b899a68715bc719913b791f9de092efa4dd22",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-023",
+          "bytes": 134217728,
+          "sha256": "e05c804479708bfddf11aedea5cd9a91260832168aa4b095c55076ade85b83c7",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-024",
+          "bytes": 134217728,
+          "sha256": "703635976a96ba7f6708e4a0782f90a573d38c12cdc9f21e067bc976afcf3718",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-runtime/part-025",
+          "bytes": 108461102,
+          "sha256": "86215f0ba15e25b8a637357b5457e99bba5451a5f2ea5fef6b1e4989adc30c54",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-000",
+          "bytes": 134217728,
+          "sha256": "e4eed3c863c7ab13986e4713abe65fe45f45baa4e31971bd63a83bfc6a7a834e",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-001",
+          "bytes": 134217728,
+          "sha256": "866665e66d983c76ad14b672bd2debfd0595bebda9929788d443dded7709b6f2",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-002",
+          "bytes": 134217728,
+          "sha256": "30708d665e130a4c04dee5fc78f9bf8a318bcc0fdaf612d56da4134b3369c993",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-003",
+          "bytes": 134217728,
+          "sha256": "b65b1ec771bc03e9d24ed82c16dd6a52d32b2d2671ae15f69e7352bab973d47c",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-004",
+          "bytes": 134217728,
+          "sha256": "5d731a01b34e8f03c0f194ae395d642b580dd3c1fd4791be0baa36b15d3e5581",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-005",
+          "bytes": 134217728,
+          "sha256": "96d3a71b0268f314dfba0e860e9657837e0ddbcdb5007c322db5b518f2918dc2",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-006",
+          "bytes": 134217728,
+          "sha256": "b20f26f2bed7e649bac7eb52726db80179ba5b7da6e909b6283d35b5d271538f",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-007",
+          "bytes": 134217728,
+          "sha256": "515586f5cd3b8d9bcacf5e1c117886edb2f6b3c03fe53932080064df1a56b85c",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-008",
+          "bytes": 134217728,
+          "sha256": "2f55f99ba100faadb544be73a3211f5863efea97bc6c2d1c3af42c9d5b702a3b",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-009",
+          "bytes": 134217728,
+          "sha256": "488ec037d89029e767f97e9298678c5eefc8a72e73f56f87727a03101fac9eff",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-010",
+          "bytes": 134217728,
+          "sha256": "02d67f10fe744a1544772a980cf6902f50ee66d5907c9a7c1f1511e7f998f3de",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-011",
+          "bytes": 134217728,
+          "sha256": "be96bc335cbd9aafbed9bf2361d9ccdcb0112a4aae58ce073c02369f4e0a222c",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-012",
+          "bytes": 134217728,
+          "sha256": "9015b1eae72731b7e8eecad0fa291fdad58971f9848d1533f5cef3093c616a17",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-013",
+          "bytes": 134217728,
+          "sha256": "be33a95d2dd8f8d53215691d8ecb4a457acaa7831d896a900329322513ae2f74",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-014",
+          "bytes": 134217728,
+          "sha256": "37c5aa5b8bc49f3026b57b3affaaf725a7ffef3b92838c135253039b25c16320",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-015",
+          "bytes": 134217728,
+          "sha256": "a2c4b475d4432ff906a030f409b993a1fc7879edfd04fb7a9636916b07ffdd58",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-016",
+          "bytes": 134217728,
+          "sha256": "f054980403c2e2b3e1078efa179cc8bcbe08acb90f0c5071524884db8f8ecb08",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-017",
+          "bytes": 134217728,
+          "sha256": "bda1ec8c043d668eba301f169fb1445b645609ddffc7ee183fbfcc0d6be85a48",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-018",
+          "bytes": 134217728,
+          "sha256": "48c6a6c00392e26f0847c60a116d960c0479b65b984d9fbe073a39a9c6eec475",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-019",
+          "bytes": 134217728,
+          "sha256": "7794c560b84ce9ca491085bfc6d2d30c1857eafaf6d3dfb51947fe93bf2b2b5c",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-020",
+          "bytes": 134217728,
+          "sha256": "4e3a32a7b0476be19995658522f489e0c524fb37bd8b94e2918dbb5643e8f0e5",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-021",
+          "bytes": 134217728,
+          "sha256": "8771a7fc606a6ced31f02e781a51906ee99b01da503a4fa33536babc0ae1761c",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-022",
+          "bytes": 134217728,
+          "sha256": "deca2f0e1d69498b54ab4e2847ababee015fb21d5061b7e6bedda5f5972a9cc3",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-023",
+          "bytes": 134217728,
+          "sha256": "bba2ef1126965689b3e701b507b96fc6d8b381b21fc43c2fdc8fbfeefdaa3960",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/semantic-runtime/part-024",
+          "bytes": 34026033,
+          "sha256": "ae5eb359a3d27c2a2de092977f123b1dd6667f5e669a62c7a0298de77b042202",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-000",
+          "bytes": 134217728,
+          "sha256": "3bfbd22594e5f07a41b6252de19657be1d1ff4fe39f70244a8c73928fdd5fd2f",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-001",
+          "bytes": 134217728,
+          "sha256": "ba15f74c4541957c27c8c72bf51ee1dea896d73b2467e2435b029dac5f367f2d",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-002",
+          "bytes": 134217728,
+          "sha256": "9da4ba4eb1e44d9a6f2493f4e9c7dbd6dbb50a7f1acaed3a2d5133bcca8fc7e7",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-003",
+          "bytes": 134217728,
+          "sha256": "293f2c1abbced76b4501fceb2e19fc3a6353047aaacc459d0ec3d9ed9318414d",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-004",
+          "bytes": 134217728,
+          "sha256": "f366f4d88031ce1c17483fcf2f3e5ca0ca79afd63ffb35ec69c9e37f26c9a169",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-005",
+          "bytes": 134217728,
+          "sha256": "7c7f48eaa4f31c4321e6e45cde483f652b817e016e52515d5034fd6cbf6cbac7",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-006",
+          "bytes": 134217728,
+          "sha256": "136d77ff60b64750688295d39bd7dc5303c70d4613307c5bf33d72160bfc8e29",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-007",
+          "bytes": 134217728,
+          "sha256": "dab5450e626c111b2518b10d5f4d843f2d297d502f21904ed31fd027462858df",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-008",
+          "bytes": 134217728,
+          "sha256": "0438ffb48ec94b566fe8670ab52291d17d43818b02be0525b37e715fd562fa57",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-009",
+          "bytes": 134217728,
+          "sha256": "9537f6693e0e02f91450563db7b33f86e8b295f221878a8fa5229a70887d1996",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-010",
+          "bytes": 134217728,
+          "sha256": "32128658202848b6854dd1d783a4ecc25d15ce121ee3b7a7bdc5ed9ea93fd891",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-011",
+          "bytes": 134217728,
+          "sha256": "c7575b97a16782695ae44971adcc83ec395fdc584e09c3312158f1945ec626d4",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-012",
+          "bytes": 134217728,
+          "sha256": "63b69bea22030c2aadd5363a0d8db0670de039b5df0789583f3f1af7f24f70e7",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-013",
+          "bytes": 134217728,
+          "sha256": "0272f704c7536978de09fe1b371ce07a51cfbfc73bb83b850deb2745841d5847",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-014",
+          "bytes": 134217728,
+          "sha256": "7d0b5223dea60acbea90f8fff27496cc0634f919d08171530325949ab2250505",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-015",
+          "bytes": 134217728,
+          "sha256": "ef401da2c4d98de3c445e8d676c59f953764792c02436c0852a397e59879c846",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-016",
+          "bytes": 134217728,
+          "sha256": "db085bf15c9b7ef33c9d80964e36442cd9f1b25e80de0187a4516355383aacdb",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-017",
+          "bytes": 134217728,
+          "sha256": "f14d73aef7da5b701636e313b6df027110a689f83a4c1202fb1900b6187b7357",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-018",
+          "bytes": 134217728,
+          "sha256": "897e7e734957c8147c93a3f0873fdc8ca720cc281a92cef7ab82cf0c5464ad5e",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-019",
+          "bytes": 134217728,
+          "sha256": "4f2673bec6240675442781e12a18c193fa625f81294cbc5921a91ba69d0eee66",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-020",
+          "bytes": 134217728,
+          "sha256": "6a44745b08de49fd1fa38c1ce0f5c77f2f06bbfef658c3dbdac4d541d04140f0",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-021",
+          "bytes": 134217728,
+          "sha256": "8f7f47e08f96b5bd1b741679ea73c774a90102840c6dc5dd83ab2348f90d44e1",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-022",
+          "bytes": 134217728,
+          "sha256": "6904ab3257d2fada5072bffa4edd675545f49d0df45537e84d8e48579cbc2338",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-023",
+          "bytes": 134217728,
+          "sha256": "a83f76d954b18a57dbb84812d72b2c20ce2e83c4aa66b5596542ca223afb4e77",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-024",
+          "bytes": 134217728,
+          "sha256": "0bdee8e20f831321e0413727e055b9558955763f35a3e2426e56cbccaf42f065",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-025",
+          "bytes": 134217728,
+          "sha256": "c21078bd98bda9a0e9bcfb28cb3d56d8e6bac989ba1d795369664b88439685bf",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-026",
+          "bytes": 134217728,
+          "sha256": "dc7b15a0988c79be753c4517b792b0a03786951592fb2cb6920e6a48aa1cd3f1",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-027",
+          "bytes": 134217728,
+          "sha256": "3709cdab138c70ae570181f19c8b13cd4ad37dcb114b5ec4b458b2e41750d593",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-028",
+          "bytes": 134217728,
+          "sha256": "2908c79327bd36a5191113f0adcb7d629dff4acd374c6116339c0ff1616a156a",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-029",
+          "bytes": 134217728,
+          "sha256": "74dc1b742baceb6412ee692aa8ac7a340909f0c24a588bf43d913e3d7375fe9a",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-030",
+          "bytes": 134217728,
+          "sha256": "6869c5e423625abe7f57a0f4fdd8197a75b4249acddc841cb0dce6caf8704424",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-031",
+          "bytes": 134217728,
+          "sha256": "94d7e4b9f3d194248ecacb9d1287eba5a74afad7018f3560754b03f1347537bb",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-032",
+          "bytes": 134217728,
+          "sha256": "843313369fff5975789064db1329af38aecef4b7a0a8e18aa69d85a745350c5c",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-033",
+          "bytes": 134217728,
+          "sha256": "07e6faf2a21cd2c125f820a4489a28001ec0d5cc2f6e3520238695689380507e",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-034",
+          "bytes": 134217728,
+          "sha256": "6caa2d21f789c5ecb35e829e17585c7512645fbca0d093f3b38450811f145188",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-035",
+          "bytes": 134217728,
+          "sha256": "589f6bc895924dfb8eb6fca381a55065768d2368f026975e657279125c72613b",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-036",
+          "bytes": 134217728,
+          "sha256": "0c6d15f702ecec6322b94c7c040caf2fe035e6858ce022d94f2c61a13f2c90f7",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-037",
+          "bytes": 134217728,
+          "sha256": "d0e89acac7afbe8d93cc9284707dbd873648bd6f5a5e31cca6868859e9779849",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-038",
+          "bytes": 134217728,
+          "sha256": "4b0eb39ceaafaaa5b0c9dc26986325358c2949f9ba980f96b15e7d0b4a6ad8c6",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-039",
+          "bytes": 134217728,
+          "sha256": "f1572c5fa2ba7ede76b7f39f96643670befbc8965ab7bbcd178ddcbc0a24a9bd",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-040",
+          "bytes": 134217728,
+          "sha256": "68c6a825240e68d38f6ca19f2645be18bb7e8af9cb3c589078fb86a50682f7f5",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-041",
+          "bytes": 134217728,
+          "sha256": "c567829a2aaf634e0ed12e739c066d92bba2540fb00780a781a46f0e5d5169d2",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-042",
+          "bytes": 134217728,
+          "sha256": "9958d2d8d4f249c200443b1a8a580fcefe407ee88079066f5cc81b5f187270a0",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-043",
+          "bytes": 134217728,
+          "sha256": "c20397a0d02278b3aff8f4721bc4067952b068f90deb27a9997d4bdbc1564f3c",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-044",
+          "bytes": 134217728,
+          "sha256": "ad9f67f751658bd47c5a18c50a9c4df9ba56fcb480a9cf611ce46963a6e38ae9",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-045",
+          "bytes": 134217728,
+          "sha256": "3650df2e9e3fd1a9e5e6a818ff681974a22314df4937bd618a3f2ae7396c9c5f",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-046",
+          "bytes": 134217728,
+          "sha256": "37b07502c168d9d94ab69bf2901b2b1081e131a10558400657659b36857de9e8",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-047",
+          "bytes": 134217728,
+          "sha256": "343676556b67439c31bf764461f2d65e3577b602fb650c87c9c598ad1a07bd7b",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-048",
+          "bytes": 134217728,
+          "sha256": "ffd48f4614f4b6c9e2ea755b1fb731786f1df6f84c036a8ec461e92dea8e24bf",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-049",
+          "bytes": 134217728,
+          "sha256": "26aeee047ddc096bd26d180447a13569b887711f7c7a61efee9707797c85cf7e",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/visual-assets/part-050",
+          "bytes": 2953683,
+          "sha256": "cccd7fafd05c8e394b2ca8e8a6ab3bfa2c5d224d06904014449b43fc5b7c20f7",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/bert-cache/part-000",
+          "bytes": 134217728,
+          "sha256": "495203b690e8a08a41c88456e422d19291282e2edf08e26782912e33e3e9059e",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/bert-cache/part-001",
+          "bytes": 134217728,
+          "sha256": "b9473a79badad3d774d70b55ff67afece32caa1f473c63b2f675ce01715a7653",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/bert-cache/part-002",
+          "bytes": 134217728,
+          "sha256": "914471396a408732ff4547de89c68b245419d288bc674b79d789a510d0f2ac65",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/bert-cache/part-003",
+          "bytes": 7250028,
+          "sha256": "73e4a6bcac1aa2fd9c4a6d01ab0bcde1ec04e02b1d8f3e5b7fd2791c3e412965",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/vjepa-source/part-000",
+          "bytes": 9348597,
+          "sha256": "c8535551c89ff018af622a77cdb92752246d87ba72f066b96e81feb245450dfb",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-000",
+          "bytes": 134217728,
+          "sha256": "d7297550ac21474fb7845726f54553d8c759fcabb2c248def82fac4aad317ea6",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-001",
+          "bytes": 134217728,
+          "sha256": "cbc437d0364d2c6b548cd42695f2e99a1cc2e690ab0dbc7abadc5ed51bd5cd93",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-002",
+          "bytes": 134217728,
+          "sha256": "41024277bf3a352b716ddd9595db154ea5d9212c8636174692355c59d6536a60",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-003",
+          "bytes": 134217728,
+          "sha256": "1e3f1e55deda8d416bed99b5d539281b66293e90779c967acc6c6f71ac11e923",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-004",
+          "bytes": 134217728,
+          "sha256": "6d681c844ddff1b052e39a7d1fa252facc0e6f222e36ba5ac7c400406fb6049e",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-005",
+          "bytes": 134217728,
+          "sha256": "e864ef18b312f9f9721ee6c9a3c31ee96034396608f42daa003130ad7c56c44b",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-006",
+          "bytes": 134217728,
+          "sha256": "235d1aaf600cf95705f91e14a1ddb98b0cc4c3da27c065b1d3dbe911e27b54df",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-007",
+          "bytes": 134217728,
+          "sha256": "99c946a7de55d4fda1908da8c42b1d7295153d17129181c67ffb20a6eb8625c9",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-008",
+          "bytes": 134217728,
+          "sha256": "31a043d261ae96c4636e8b5dd204204d0455538ca412d67131dca7e8406a8245",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-009",
+          "bytes": 134217728,
+          "sha256": "dbb9bf7923a77d85aa6fb635268debcfced086bd3b2cd969a419b9d1fa59aff2",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-010",
+          "bytes": 134217728,
+          "sha256": "1273b0b5914a04e24a76347dcc2d1360cef98c975789047e8c6db8bc933c279c",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/official-extras/part-011",
+          "bytes": 113216700,
+          "sha256": "ebab157004c7436681c1fdb35a2c5910e91f1d7f8022b7b26a4ba1c3863f1c65",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "reproduction/runtime/h100-20260923/parts/install-fixture/part-000",
+          "bytes": 55869322,
+          "sha256": "96673fc99557d92123ed0f2b15ec445b9821785f7197310b5c6ff5b0cd3b0505",
+          "method": "remote LFS SHA256 and byte size"
+        }
+      ]
+    },
+    {
+      "repo": "xju-arlab/vbench-model",
+      "revision": "5fe53c4c7eb1a8a4fcd5b6e22f748da1d073a78e",
+      "endpoint": "https://hf-mirror.com",
+      "files_verified": 8,
+      "passed": true,
+      "files": [
+        {
+          "path": "spatial_relationship/adapter_model.safetensors",
+          "bytes": 174655536,
+          "sha256": "da961e816a16900e4a4f6c4aac51c19a4444c7bc1a3e72ab22094bbd4ae1b363",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "scene/adapter_model.safetensors",
+          "bytes": 174655536,
+          "sha256": "0b8c796aa7c2e39ccdbd0f2faf37bddfc729c7588f11d0928853637b8486d6eb",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "human_action/adapter_model.safetensors",
+          "bytes": 174655536,
+          "sha256": "60ebb3afae588fb638bfeb3c9a75daf1c7e8e43455556a67e22cfd9b2574edc4",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "multiple_objects/adapter_model.safetensors",
+          "bytes": 174655536,
+          "sha256": "eb036c6e7b123a4243c3f22c03f87d4040bc51e9b875a7319346a6c16b03f771",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "object_class/adapter_model.safetensors",
+          "bytes": 174655536,
+          "sha256": "a459e0d273348433119aa41539d5abde7c0c9cc1d92ff491374a08886d1cdaf2",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "color/adapter_model.safetensors",
+          "bytes": 174655536,
+          "sha256": "3ce18cdc678946ceb195f32e3f99748fbf90cac86a7fa4531ffc020332c4fb29",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "dynamic_degree/aligned.pt",
+          "bytes": 207940,
+          "sha256": "6dcfbdce2e604cdd669e54015fee34e034c8004726d06c46611532f451ca8a53",
+          "method": "remote LFS SHA256 and byte size"
+        },
+        {
+          "path": "dynamic_degree/backbone/vjepa2_1_vitb_dist_vitG_384.pt",
+          "bytes": 1664223428,
+          "sha256": "848a77c33cc9e6649ed2119c9bea1e2c569bcdab9539ff3e7c02ccc2959ddf4d",
+          "method": "remote LFS SHA256 and byte size"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "date": "2026-09-23",
+  "implementation_commit": "1b5808e9a2b5d6db2161cf3986d92b05e990d8f9",
+  "project_code_private": true,
+  "hf_dataset_public": true,
+  "hf_model_public": true,
+  "scope": "project-specific reset preservation; representative video checks, not all paper cohorts or retraining",
+  "h100": {
+    "selected_repairs": 9,
+    "representative_inputs": 19,
+    "passed": true,
+    "max_absolute_error": 0.0,
+    "official_dimensions": 16,
+    "official_inputs_per_dimension": 1,
+    "official_passed": true,
+    "persistent_checkout_commit": "1b5808e9a2b5d6db2161cf3986d92b05e990d8f9",
+    "persistent_dynamic_score": 0.6755738467711915
+  },
+  "h200_independent_directory": {
+    "runtime_archives_restored_from_hf": 8,
+    "visual_environment": "Python 3.10.20 / torch 2.5.1+cu121",
+    "semantic_environment": "Python 3.11.14 / torch 2.7.1+cu126 / transformers 4.52.4 / peft 0.15.2; CUDA import passed",
+    "official_dimensions_passed": 16,
+    "official_inputs_per_dimension": 1,
+    "max_absolute_difference_from_h100": 9.260702982238911e-09,
+    "private_source_files_matched": 508,
+    "implementation_sha256": "719d9155d047554d501e4106caef3184069fbd9326422bd40a7a6dba334aa751",
+    "selected_adapters_and_dynamic_weights_restored": true,
+    "qwen_base_download_complete": false,
+    "nine_repair_install_check_complete": false,
+    "stopped_at_user_request": true,
+    "partial_downloads_preserved": true
+  },
+  "full_table_replay": {
+    "local_pinned_environment": "passed, 24408 cells",
+    "extra_h200_system_python_3_12_attempt": "failed strict score equality; not accepted, no frozen results changed",
+    "documented_interpreter": "restored Python 3.11.14"
+  },
+  "full_cohort_gpu_rerun": false,
+  "retraining_rerun": false
+}

@@ -1,0 +1,12 @@
+{
+  "repo_id": "xju-arlab/vbench-repair",
+  "revision": "63d19428e9a561dec6c43fbd17aaf9866a72a4b9",
+  "endpoint": "https://huggingface.co",
+  "files": [
+    "README.md",
+    "reproduction/runtime/h100-20260923/README.md",
+    "reproduction/runtime/h100-20260923/runtime-release.json",
+    "reproduction/runtime/h100-20260923/validation-status.json"
+  ],
+  "public": true
+}

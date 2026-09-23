@@ -1,0 +1,83 @@
+{
+  "python": "3.11.14",
+  "uv": "0.9.17",
+  "uv_lock_check": "passed",
+  "uv_sync_locked_test_group": "passed",
+  "cpu_torch_overlay": "2.14.0+cpu",
+  "pytest": {
+    "passed": 1289,
+    "skipped": 3,
+    "failed": 0,
+    "seconds": 51.47
+  },
+  "cli_help": [
+    {
+      "entry": "dynamic-degree",
+      "returncode": 0
+    },
+    {
+      "entry": "motion-smoothness",
+      "returncode": 0
+    },
+    {
+      "entry": "subject-consistency",
+      "returncode": 0
+    },
+    {
+      "entry": "scene",
+      "returncode": 0
+    },
+    {
+      "entry": "human-action",
+      "returncode": 0
+    },
+    {
+      "entry": "spatial-relationship",
+      "returncode": 0
+    },
+    {
+      "entry": "multiple-objects",
+      "returncode": 0
+    },
+    {
+      "entry": "overall-consistency",
+      "returncode": 0
+    },
+    {
+      "entry": "background-consistency",
+      "returncode": 0
+    },
+    {
+      "entry": "object-class",
+      "returncode": 0
+    },
+    {
+      "entry": "color",
+      "returncode": 0
+    },
+    {
+      "entry": "temporal-style",
+      "returncode": 0
+    },
+    {
+      "entry": "evaluate_vbench.py",
+      "returncode": 0
+    },
+    {
+      "entry": "prepare_vbench_inputs.py",
+      "returncode": 0
+    },
+    {
+      "entry": "restore_paper_runtime.py",
+      "returncode": 0
+    },
+    {
+      "entry": "verify_paper_install.py",
+      "returncode": 0
+    }
+  ],
+  "vendored_semantic_files_verified": 139,
+  "full_table_replay_score_cells": 24408,
+  "full_table_replay_fresh_gpu": false,
+  "full_training_rerun": false
+}
