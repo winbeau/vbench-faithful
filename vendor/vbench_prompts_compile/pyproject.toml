@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vbench-prompts-compile"
+version = "0.1.0"
+description = "Prompt compilation adapters and independent scene verification"
+readme = "README.md"
+requires-python = "==3.11.14"
+dependencies = []
+
+[project.optional-dependencies]
+train = [
+  "torch==2.7.1+cu126",
+  "transformers==4.52.4",
+  "trl==0.19.1",
+  "peft==0.15.2",
+  "accelerate==1.7.0",
+  "datasets==3.6.0",
+]
+
+[dependency-groups]
+dev = ["pytest==8.4.2"]
+
+[project.scripts]
+vbench-prompts = "vbench_prompts_compile.cli:main"
+
+[tool.uv]
+required-version = "==0.9.17"
+default-groups = ["dev"]
+build-constraint-dependencies = [
+  "hatchling==1.27.0",
+  "packaging==26.3",
+  "pathspec==0.12.1",
+  "pluggy==1.6.0",
+  "trove-classifiers==2025.9.11.17",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vbench_prompts_compile"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

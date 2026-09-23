@@ -102,7 +102,15 @@ def main():
         target = destination / entry["path"]
         if target.is_file() and digest(target) == entry["sha256"]:
             return
-        source = Path(hf_hub_download(repo, entry["path"], repo_type=kind, revision=revision, endpoint=endpoint))
+        try:
+            source = Path(hf_hub_download(repo, entry["path"], repo_type=kind, revision=revision, endpoint=endpoint))
+        except Exception as exc:
+            if not args.allow_official_fallback or endpoint == "https://huggingface.co":
+                raise
+            print(json.dumps({"event": "mirror_file_fallback", "path": entry["path"],
+                              "reason": type(exc).__name__}), flush=True)
+            source = Path(hf_hub_download(repo, entry["path"], repo_type=kind, revision=revision,
+                                          endpoint="https://huggingface.co"))
         if source.stat().st_size != entry["bytes"]:
             raise ValueError(f"Size differs: {entry['path']}")
         checked_copy(source, target, entry["sha256"])
@@ -133,9 +141,17 @@ def main():
     shared = root / "assets/provenance/training/object-color-20260920/records.json"
     checked_copy(shared, root / "object-color/semantics/records.json", digest(shared))
     if args.include_models:
-        snapshot_download(release["model_repo"], revision=release["model_revision"], endpoint=endpoint,
-                          allow_patterns=[dimension + "/*" for dimension in release["adapter_dimensions"]],
-                          local_dir=root / "adapters")
+        try:
+            snapshot_download(release["model_repo"], revision=release["model_revision"], endpoint=endpoint,
+                              allow_patterns=[dimension + "/*" for dimension in release["adapter_dimensions"]],
+                              local_dir=root / "adapters")
+        except Exception as exc:
+            if not args.allow_official_fallback or endpoint == "https://huggingface.co":
+                raise
+            print(json.dumps({"event": "mirror_model_fallback", "reason": type(exc).__name__}), flush=True)
+            snapshot_download(release["model_repo"], revision=release["model_revision"], endpoint="https://huggingface.co",
+                              allow_patterns=[dimension + "/*" for dimension in release["adapter_dimensions"]],
+                              local_dir=root / "adapters")
         for adapter in release["adapters"]:
             weight = root / "adapters" / adapter["path"]
             if weight.stat().st_size != adapter["bytes"] or digest(weight) != adapter["sha256"]:

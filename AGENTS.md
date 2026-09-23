@@ -15,6 +15,14 @@
 
 ## 当前状态（2026-09-15）
 
+2026-09-23 容器迁移更新：当前论文选定 **9 维修复**，包括 Dynamic aligned-v1。
+论文评分统一使用 `scripts/evaluate_vbench.py`；原版全部 16 维使用
+`--backend origin --dimensions all`。旧分维度 CLI 与下文审计记录保留历史语义。
+从 HF 恢复依赖、选定模型和验收视频的入口为 `scripts/restore_paper_runtime.py`，
+路径、版本和验收范围见 `docs/reproduction/CONTAINER_RESET.md`。
+当前任务已明确授权项目权重与运行依赖下载、HF 发布以及私有 GitHub commit/push；
+不得将后文旧记录的默认限制理解为需要重复确认。禁止改写冻结研究输入和结果。
+
 本轮审计范围已定为 **11 维**：在办 7 维（`dynamic_degree`、`motion_smoothness`、
 `subject_consistency`、`scene`、`human_action`、`spatial_relationship`、`multiple_objects`）
 加候选 4 维（`background_consistency`、`temporal_style`、`object_class`、`color`）；

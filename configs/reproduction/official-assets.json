@@ -1,0 +1,116 @@
+{
+  "upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "requirements": {
+    "scene": [
+      "caption_model/tag2text_swin_14m.pth"
+    ],
+    "human_action": [
+      "umt_model/l16_ptk710_ftk710_ftk400_f16_res224.pth"
+    ],
+    "subject_consistency": [
+      "dino_model/dino_vitbase16_pretrain.pth"
+    ],
+    "background_consistency": [
+      "clip_model/ViT-B-32.pt"
+    ],
+    "dynamic_degree": [
+      "raft_model/models/raft-things.pth"
+    ],
+    "motion_smoothness": [
+      "amt_model/amt-s.pth"
+    ],
+    "temporal_flickering": [],
+    "aesthetic_quality": [
+      "clip_model/ViT-L-14.pt",
+      "aesthetic_model/emb_reader/sa_0_4_vit_l_14_linear.pth"
+    ],
+    "imaging_quality": [
+      "pyiqa_model/musiq_spaq_ckpt-358bb6af.pth"
+    ],
+    "appearance_style": [
+      "clip_model/ViT-B-32.pt"
+    ],
+    "object_class": [
+      "grit_model/grit_b_densecap_objectdet.pth"
+    ],
+    "color": [
+      "grit_model/grit_b_densecap_objectdet.pth"
+    ],
+    "spatial_relationship": [
+      "grit_model/grit_b_densecap_objectdet.pth"
+    ],
+    "multiple_objects": [
+      "grit_model/grit_b_densecap_objectdet.pth"
+    ],
+    "overall_consistency": [
+      "ViCLIP/ViClip-InternVid-10M-FLT.pth",
+      "ViCLIP/bpe_simple_vocab_16e6.txt.gz"
+    ],
+    "temporal_style": [
+      "ViCLIP/ViClip-InternVid-10M-FLT.pth",
+      "ViCLIP/bpe_simple_vocab_16e6.txt.gz"
+    ]
+  },
+  "files": [
+    {
+      "path": "ViCLIP/ViClip-InternVid-10M-FLT.pth",
+      "bytes": 1710545812,
+      "sha256": "7a4d6ad6eac6632db3693f4b97f9f8f6445b65b1e139a6fc6686150522238c56"
+    },
+    {
+      "path": "ViCLIP/bpe_simple_vocab_16e6.txt.gz",
+      "bytes": 1356917,
+      "sha256": "924691ac288e54409236115652ad4aa250f48203de50a9e4722a6ecd48d6804a"
+    },
+    {
+      "path": "aesthetic_model/emb_reader/sa_0_4_vit_l_14_linear.pth",
+      "bytes": 4071,
+      "sha256": "2cd4e60f4f24ae3bcd57b847b13c1f3ba27edc28cc1a7f9ce74ee9f421243cba"
+    },
+    {
+      "path": "amt_model/amt-s.pth",
+      "bytes": 12038359,
+      "sha256": "07e7e03405c213fe4405678db9b42d05671e48c56faf6a441b99bb0047d3cf77"
+    },
+    {
+      "path": "caption_model/tag2text_swin_14m.pth",
+      "bytes": 4478705095,
+      "sha256": "4ce96f0ce98f940a6680d567f66a38ccc9ca8c4e638e5f5c5c2e881a0e3502ac"
+    },
+    {
+      "path": "clip_model/ViT-B-32.pt",
+      "bytes": 353976522,
+      "sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+    },
+    {
+      "path": "clip_model/ViT-L-14.pt",
+      "bytes": 932768134,
+      "sha256": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836"
+    },
+    {
+      "path": "dino_model/dino_vitbase16_pretrain.pth",
+      "bytes": 343242485,
+      "sha256": "bf34ad0f424b9029b593e8dc3ed553bf26e88bcba0d32bf3e62a6209cb64c85e"
+    },
+    {
+      "path": "grit_model/grit_b_densecap_objectdet.pth",
+      "bytes": 417381733,
+      "sha256": "53b6e9b3fd948eac55b574c9b6f94ad0743dff46ba449df7ac2d33009ee92ef1"
+    },
+    {
+      "path": "pyiqa_model/musiq_spaq_ckpt-358bb6af.pth",
+      "bytes": 108610983,
+      "sha256": "358bb6af275e28ea56821d44fb55c6cb83645db11f394d3ad65b2d149965ab50"
+    },
+    {
+      "path": "raft_model/models/raft-things.pth",
+      "bytes": 21108000,
+      "sha256": "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1"
+    },
+    {
+      "path": "umt_model/l16_ptk710_ftk710_ftk400_f16_res224.pth",
+      "bytes": 607024201,
+      "sha256": "bfee78a03bf806fbc0c216309e8f92792011b7db6556fa860e9d869c1e69fecd"
+    }
+  ]
+}

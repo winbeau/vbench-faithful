@@ -1,0 +1,187 @@
+{
+  "inputs": 19,
+  "dimensions": 9,
+  "max_absolute_error": 0.0,
+  "tolerance": 1e-06,
+  "passed": true,
+  "records": [
+    {
+      "id": "scene:base",
+      "dimension": "scene",
+      "expected": 0.8125,
+      "actual": 0.8125,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae"
+    },
+    {
+      "id": "scene:cf",
+      "dimension": "scene",
+      "expected": 0.8125,
+      "actual": 0.8125,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae"
+    },
+    {
+      "id": "human_action:base",
+      "dimension": "human_action",
+      "expected": 1.0,
+      "actual": 1.0,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b"
+    },
+    {
+      "id": "human_action:cf",
+      "dimension": "human_action",
+      "expected": 1.0,
+      "actual": 1.0,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b"
+    },
+    {
+      "id": "spatial_relationship:base",
+      "dimension": "spatial_relationship",
+      "expected": 0.5,
+      "actual": 0.5,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "4ab6cb1d502084d95aa2a0d75ffebd729549f197f6a5f7b481a42fa3662cc07a"
+    },
+    {
+      "id": "spatial_relationship:cf",
+      "dimension": "spatial_relationship",
+      "expected": 0.0,
+      "actual": 0.0,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "255b6bab921e7a1e84e177aa5c75c77caa8039851afe6935acdd1dec70426379"
+    },
+    {
+      "id": "multiple_objects:base",
+      "dimension": "multiple_objects",
+      "expected": 0.8125,
+      "actual": 0.8125,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "cfd541b1dae8f63e2a0b7402af437ad843bbb68c8632ef2bc7ead7f72ef6ae33"
+    },
+    {
+      "id": "multiple_objects:cf",
+      "dimension": "multiple_objects",
+      "expected": 0.0,
+      "actual": 0.0,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "ad30e583f6554a195b41ab02d9a282728eb4efd1ae21bbe8f25158a166500f39"
+    },
+    {
+      "id": "object_class:base",
+      "dimension": "object_class",
+      "expected": 1.0,
+      "actual": 1.0,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c"
+    },
+    {
+      "id": "object_class:cf",
+      "dimension": "object_class",
+      "expected": 1.0,
+      "actual": 1.0,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c"
+    },
+    {
+      "id": "color:base",
+      "dimension": "color",
+      "expected": 1.0,
+      "actual": 1.0,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "0f12bee1f0378ad3161ab34b8fcc54ea7ce40fbab6287e69e34b35a51af40ec5"
+    },
+    {
+      "id": "color:cf",
+      "dimension": "color",
+      "expected": 0.0,
+      "actual": 0.0,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "40f78c5bcf9d02dd651591770033bc978c3bd9928a8f2dd7cb23615fe9129683"
+    },
+    {
+      "id": "subject_consistency:base",
+      "dimension": "subject_consistency",
+      "expected": 0.9691315293312073,
+      "actual": 0.9691315293312073,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "6ea145d195999e9267bd3ae299a7deddbb9bb818279e6be6f0dca858becb4558"
+    },
+    {
+      "id": "subject_consistency:cf",
+      "dimension": "subject_consistency",
+      "expected": 0.966636061668396,
+      "actual": 0.966636061668396,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "8b5a36f945204fca63d4dd3cfa8dfdccb00388ebac1345fa92112af6bd61bccb"
+    },
+    {
+      "id": "background_consistency:base",
+      "dimension": "background_consistency",
+      "expected": 0.9649107961943655,
+      "actual": 0.9649107961943655,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "81b78a09d0e69eb5e130b93d743a57fb3691498578c1b0fe93a8e3fdadf8d4e6"
+    },
+    {
+      "id": "background_consistency:cf",
+      "dimension": "background_consistency",
+      "expected": 0.9646324388908618,
+      "actual": 0.9646324388908618,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "167f9b69f696eef994bc64978e4de732aad54c52c3bf734c9b018aa41fbd2243"
+    },
+    {
+      "id": "dynamic_degree:base",
+      "dimension": "dynamic_degree",
+      "expected": 0.6755738467711915,
+      "actual": 0.6755738467711915,
+      "absolute_error": 0.0,
+      "status": "succeeded",
+      "video_sha256": "d3b5b08406b3620fff62b6d2713a1dfd858ded796f28ad6f939ae512a31eb1f2"
+    },
+    {
+      "id": "dynamic_degree:cf-0",
+      "status": "succeeded",
+      "video_sha256": "ca4a263b227ac017e3874e0e9f2e4d4d580ac2011a23189cd5654549616af88e",
+      "dimension": "dynamic_degree",
+      "expected": 0.6646295186983838,
+      "actual": 0.6646295186983838,
+      "absolute_error": 0.0
+    },
+    {
+      "id": "dynamic_degree:cf-1",
+      "status": "succeeded",
+      "video_sha256": "3af8de88e387a1a9be469bcf7a8b76d8cc92b9bec5c0e4fc2dde268fec3a0a8f",
+      "dimension": "dynamic_degree",
+      "expected": 0.6533584910138379,
+      "actual": 0.6533584910138379,
+      "absolute_error": 0.0
+    }
+  ],
+  "scope": "19 representative inputs, fresh H100 GPU inference; not full paper cohorts",
+  "runs": [
+    "golden-repair-01",
+    "golden-subject-background-02",
+    "golden-dynamic-cf"
+  ],
+  "resolved_initial_failures": "Subject and Background initially lacked explicit MobileSAM source path; both rerun after asset configuration fix."
+}

@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "frozen_split_sha256": "831bed0aee880cb0c501ac89fe4cbe4e1e97422427619e24983a9e86a5d3c328",
+  "primary_split": "test",
+  "videos_per_prompt": "all manifest videos, no score-based selection",
+  "schemes": ["Origin", "Repair-rule", "Repair-model"],
+  "shared_visual_evidence": true,
+  "frames": 16,
+  "checkpoint_selection": "fixed-step final; no dev/test tuning",
+  "bootstrap": {"unit": "source prompt family; connected source components for cross-paired labels", "rounds": 2000, "seed": 20260919, "confidence": 0.95, "minimum_families_for_ci": 2},
+  "missing_outputs": "retain all frozen items; missing/invalid scores zero; report coverage and conditional scores separately",
+  "invariance_margin": 0.03,
+  "sensitivity_min_drop": 0.03,
+  "spatial": {
+    "transforms": ["axis-specific evidence mirror", "axis-specific video mirror", "direction-swapped prompt", "mirror plus direction swap", "identity"],
+    "expectation": "valid direction reverses on mirror and restores on joint prompt/video change",
+    "scoring": "exact upstream unsigned geometry and box pairing for every scheme; signed geometry only as separately named ablation",
+    "base_failures": "retain in full denominator and separately report conditional valid-base sensitivity"
+  },
+  "objects": {
+    "transforms": ["target occlusion", "equal-area background occlusion", "non-target occlusion", "identity"],
+    "linear_box_fractions": [0.0, 0.5, 0.8, 1.0],
+    "expectation": "verified invisible target must fail conjunction; partial occlusion is not assumed to imply proportional score loss",
+    "pixel_check": "outside recorded patch masks unchanged",
+    "visibility": "unverified endpoints reported as unverified, never counted as validated successes"
+  },
+  "scene": {
+    "transforms": ["strict contextual synonyms", "non-equivalent scene control", "identity"],
+    "expectation": "correct label and score unchanged under equivalent requirement",
+    "ocean_to_sea": "E0 dev diagnostic, explicitly separate from test",
+    "exclude_ambiguous_primary_synonyms": ["garden/yard", "street/road", "beach/seaside"],
+    "baselines": ["always-supported", "always-not-supported", "copy-original"],
+    "official_target": "auxiliary_info scene key; not full prompt",
+    "model_aggregation": "per-frame labels over the exact same 16 captions, insufficient reported as abstention"
+  },
+  "action": {
+    "transforms": ["within-class synonym", "different K400 class", "OOV other", "identity"],
+    "expectation": "synonyms preserve class/score; verified absent replacement class should fail; OOV abstains",
+    "threshold": 0.85,
+    "threshold_input": "top-5 sigmoid confidence rounded to 4 decimal places, as upstream",
+    "other": "outside scoring domain; never full credit; report known-class preservation for mixed outputs"
+  },
+  "tables": ["parsing/classification", "original videos by scheme and generator", "paired original/transformed scores, violations and family CIs"],
+  "provenance": ["code and dirty diff", "input/transform/cache hashes", "model and tokenizer hashes", "source split", "runtime and GPU", "annotation token/request ledger"],
+  "scope_note": "Small source counts, prior diagnostic exposure, annotation failures and invalid transformations must remain visible in the report. Model-annotated labels are not human gold."
+}

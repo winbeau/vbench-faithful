@@ -9,12 +9,18 @@
 实际发布范围、哈希校验和来源问题见[发布验收](docs/publication/README.md)。
 数据覆盖 16 维不表示本仓库为 16 维都实现了 Repair。
 
+**论文评测入口为 `scripts/evaluate_vbench.py`：默认固定当前选定的 9 维修复，
+也可用 `--backend origin --dimensions all` 评测原版 VBench 1.0 全部 16 维。**
+完整环境、必要第三方权重及验收视频已另存 HF；容器清空后的恢复命令、批量评分命令和方法边界见
+[容器恢复与统一评分](docs/reproduction/CONTAINER_RESET.md)。
+加载前会核对选定权重和源码的哈希；旧研发 CLI 的历史默认值不作为论文评测入口。
+
 [复现入口与验收范围](docs/reproduction/README.md)提供固定 HF revision 的恢复命令、
 九维主表复算、六个语义 LoRA 的训练输入及 Dynamic 训练记录；[失败/废弃实验索引](docs/reproduction/REJECTED_EXPERIMENTS.md)
 保留未采用方案的原因。上传完整性通过不代表全九维 GPU 重推理或从头训练已验收。
 
-H100 可用 `scripts/h100_python.sh -m dynamic_degree.cli --help` 调用新 checkout，
-复用既有 CUDA 依赖，固定上游及已有权重。Python 包和 CLI 名称保持兼容。
+旧 H100 尚未重置时可用 `scripts/h100_python.sh -m dynamic_degree.cli --help` 调用研发 CLI。
+容器重置后使用上方 HF 恢复入口。Python 包和 CLI 名称保持兼容。
 当前论文修复范围为 **9 维**，新增 Dynamic Degree 的 aligned-v1；其评分头与冻结
 V-JEPA backbone、复现命令见 [Dynamic 发布说明](docs/reproduction/DYNAMIC_ALIGNED.md)。
 原有研发审计范围仍为 11 维，算法状态和历史证据如下。

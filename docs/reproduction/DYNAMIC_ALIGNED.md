@@ -2,9 +2,11 @@
 
 当前选用 **aligned-v1**，不是早期 joint 或 anchored。用户接受 0.6 档尺度后冻结
 模型完成 450 组评测，并明确授权上传当前模型和配套 backbone。
-原始研究 HEAD 仍为 `fdf4890`；新增研究当时未提交，本次按逐文件哈希迁入私有库，
+首次迁入时原始研究 HEAD 为 `fdf4890`；新增研究当时未提交，按逐文件哈希迁入私有库，
 见 [源码快照](../publication/dynamic-source-snapshot.json)。论文修复范围为九维，
 研发审计的十一维范围不因这次发布而改变。
+后续 `0cd494d` 新增 [Dynamic 方法归档](../paper/dynamic-degree-current.md) 已同步，
+四份 Dynamic 核心源码与研究工作树逐字节相同，评分实现未发生变化。
 
 ## 模型与数据
 

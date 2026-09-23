@@ -1,0 +1,81 @@
+{
+  "schema": "paper-methods/1",
+  "selection": "current user-approved paper methods, no new training or test-set checkpoint selection",
+  "methods": {
+    "scene": {
+      "implementation": "vendor score_matrix + SceneVerifier",
+      "version": "v8",
+      "step": 300,
+      "visual": "Tag2Text,16 frames",
+      "interface": "prompt + caption; supported/contradicted/insufficient",
+      "batch_size": 8
+    },
+    "human_action": {
+      "implementation": "vendor score_matrix + AdapterRouter",
+      "version": "v9",
+      "step": 300,
+      "visual": "UMT top5,16 frames",
+      "interface": "repair-v2.1"
+    },
+    "spatial_relationship": {
+      "implementation": "vendor score_matrix + spatial_repair",
+      "version": "v8",
+      "step": 600,
+      "visual": "GRiT,16 frames",
+      "interface": "four directions; signed repair-v2 geometry"
+    },
+    "multiple_objects": {
+      "implementation": "vendor score_matrix + objects_repair",
+      "version": "v6",
+      "step": 900,
+      "visual": "GRiT,16 frames",
+      "interface": "repair-v2 adjacent-frame confirmation"
+    },
+    "object_class": {
+      "implementation": "object_class repair + QwenPromptRouter",
+      "version": "paper-final",
+      "step": 300,
+      "dev_selected": false,
+      "interface": "prompt-only LoRA, canonical label matching"
+    },
+    "color": {
+      "implementation": "color repair + QwenPromptRouter",
+      "version": "paper-final",
+      "step": 300,
+      "dev_selected": false,
+      "interface": "bound object/color; all-sampled-frame denominator"
+    },
+    "subject_consistency": {
+      "implementation": "subject_consistency hybrid",
+      "version": "frozen-v5/evaluated-v9",
+      "interface": "direct_anchor; preencode_crop; union; exclude; all_pairs",
+      "detector_threshold": 0.5,
+      "crop_margin": 0.1,
+      "crop_side": 224
+    },
+    "background_consistency": {
+      "implementation": "background_consistency patch_frame_calibrated",
+      "interface": "area-weighted background patches, all-pairs",
+      "gain": 1.75,
+      "detector_threshold": 0.8
+    },
+    "dynamic_degree": {
+      "implementation": "MotionProbe + FrozenVJEPA",
+      "version": "aligned-v1",
+      "step": 300,
+      "dev_selected": false,
+      "input": "native 16 square RGB frames at 8 FPS",
+      "mapping": "sigmoid, no posthoc rescale"
+    }
+  },
+  "unsupported_repair_dimensions": [
+    "motion_smoothness",
+    "temporal_flickering",
+    "aesthetic_quality",
+    "imaging_quality",
+    "temporal_style",
+    "overall_consistency",
+    "appearance_style"
+  ],
+  "scope_note": "The paper methods retain their validated input contracts. Official VBench supports 16 dimensions; no repaired score is invented for the seven unaudited dimensions or an unsupported Dynamic input."
+}

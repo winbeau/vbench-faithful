@@ -1,0 +1,48 @@
+{
+  "pilot_id": "pilot-01",
+  "description": "19-request teacher pilot: schema/length/boundary probes for the four tasks. Rules only; upstream prompt text is resolved from data/raw at run time and never committed.",
+  "model": "deepseek-flash",
+  "base_url": "https://api.deepseek.com",
+  "authorized_total_requests": 20,
+  "limits": {
+    "max_requests": 19,
+    "max_output_tokens": 2048,
+    "timeout_seconds": 180
+  },
+  "selection": {
+    "seed": 20260919,
+    "sort": ["word_count", "sha256"],
+    "dedupe": "prompt_sha256_across_all_items"
+  },
+  "pools": {
+    "moviegen": {"kind": "moviegen"},
+    "flickr_train": {"kind": "flickr", "split": "train"},
+    "scene_fixtures": {"kind": "scene_fixtures", "path": "tests/fixtures/scene_engineering.jsonl"}
+  },
+  "cue_regex": {
+    "spatial": "\\b(left|right|above|below|next to|beside|behind|in front of|between|on top of)\\b",
+    "action_cue": "\\b(man|woman|men|women|person|people|child|children|boy|girl|cat|dog|bird|penguin|panda|llama|monkey|bear|horse|astronaut|chef|dancer|player|group|robot|creature|figure|character)\\w*\\b[^.]{0,60}?\\b\\w+ing\\b",
+    "action_rare": "\\b(analy|assembl|calibrat|diagnos|negotiat|investigat|programm|present|explain)\\w*\\b"
+  },
+  "items": [
+    {"item_id": "parse-spatial-b1", "group": "parse", "task": "spatial", "bucket": "1-14", "pool": "moviegen", "require_regex_key": "spatial", "count": 1, "note": "short prompt with an explicit spatial cue"},
+    {"item_id": "parse-action-b1", "group": "parse", "task": "action", "bucket": "1-14", "pool": "moviegen", "require_regex_key": "action_cue", "count": 1, "note": "short prompt with a verb"},
+    {"item_id": "parse-objects-b1", "group": "parse", "task": "objects", "bucket": "1-14", "pool": "moviegen", "count": 1, "note": "short prompt, object extraction only"},
+    {"item_id": "parse-spatial-b2", "group": "parse", "task": "spatial", "bucket": "15-49", "pool": "moviegen", "require_regex_key": "spatial", "count": 1},
+    {"item_id": "parse-action-b2", "group": "parse", "task": "action", "bucket": "15-49", "pool": "moviegen", "require_regex_key": "action_cue", "count": 1},
+    {"item_id": "parse-objects-b2", "group": "parse", "task": "objects", "bucket": "15-49", "pool": "moviegen", "count": 1},
+    {"item_id": "parse-spatial-b3", "group": "parse", "task": "spatial", "bucket": "50-99", "pool": "moviegen", "require_regex_key": "spatial", "count": 1},
+    {"item_id": "parse-action-b3", "group": "parse", "task": "action", "bucket": "50-99", "pool": "moviegen", "require_regex_key": "action_cue", "count": 1},
+    {"item_id": "parse-objects-b3", "group": "parse", "task": "objects", "bucket": "50-99", "pool": "moviegen", "count": 1},
+    {"item_id": "parse-spatial-b4", "group": "parse", "task": "spatial", "bucket": "100-200", "pool": "moviegen", "require_regex_key": "spatial", "count": 1},
+    {"item_id": "parse-action-b4", "group": "parse", "task": "action", "bucket": "100-200", "pool": "moviegen", "require_regex_key": "action_cue", "count": 1},
+    {"item_id": "parse-objects-b4", "group": "parse", "task": "objects", "bucket": "100-200", "pool": "moviegen", "count": 1},
+    {"item_id": "scene-supported-1", "group": "scene", "task": "scene", "bucket": "any", "pool": "scene_fixtures", "label_filter": "supported", "count": 1, "note": "caption clearly matches the required scene"},
+    {"item_id": "scene-supported-2", "group": "scene", "task": "scene", "bucket": "any", "pool": "scene_fixtures", "label_filter": "supported", "count": 1, "note": "second family, different scene pair"},
+    {"item_id": "scene-contradicted-1", "group": "scene", "task": "scene", "bucket": "any", "pool": "scene_fixtures", "label_filter": "contradicted", "count": 1},
+    {"item_id": "scene-insufficient-1", "group": "scene", "task": "scene", "bucket": "any", "pool": "scene_fixtures", "label_filter": "insufficient", "count": 1},
+    {"item_id": "edge-spatial-none", "group": "edge", "task": "spatial", "bucket": "1-14", "pool": "moviegen", "exclude_regex_key": "spatial", "count": 1, "note": "expect an explicit empty relationship list"},
+    {"item_id": "edge-action-unknown", "group": "edge", "task": "action", "bucket": "15-49", "pool": "moviegen", "require_regex_key": "action_rare", "count": 1, "note": "action outside the K400 vocabulary; expect empty or a quarantine reason"},
+    {"item_id": "edge-scene-none", "group": "edge", "task": "scene", "bucket": "any", "pool": "scene_fixtures", "label_filter": "insufficient", "count": 1, "note": "prompt states no scene requirement"}
+  ]
+}

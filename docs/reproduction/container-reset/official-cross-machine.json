@@ -1,0 +1,103 @@
+{
+  "scope": "one real input per official dimension",
+  "dimensions": 16,
+  "max_absolute_error": 9.260702982238911e-09,
+  "records": [
+    {
+      "dimension": "scene/origin",
+      "h100": 0.625,
+      "h200": 0.625,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "human_action/origin",
+      "h100": 1.0,
+      "h200": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "object_class/origin",
+      "h100": 0.0,
+      "h200": 0.0,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "subject_consistency/origin",
+      "h100": 0.9200990736484528,
+      "h200": 0.9200990736484528,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "background_consistency/origin",
+      "h100": 0.9221354166666667,
+      "h200": 0.9221354166666667,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "dynamic_degree/origin",
+      "h100": 1.0,
+      "h200": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "spatial_relationship/origin",
+      "h100": 0.48523731465197206,
+      "h200": 0.48523731465197206,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "multiple_objects/origin",
+      "h100": 0.0,
+      "h200": 0.0,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "color/origin",
+      "h100": 1.0,
+      "h200": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "motion_smoothness/origin",
+      "h100": 0.9331857390986994,
+      "h200": 0.9331857298379964,
+      "absolute_error": 9.260702982238911e-09
+    },
+    {
+      "dimension": "temporal_flickering/origin",
+      "h100": 0.9442926481658337,
+      "h200": 0.9442926481658337,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "aesthetic_quality/origin",
+      "h100": 0.6092233657836914,
+      "h200": 0.6092233657836914,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "imaging_quality/origin",
+      "h100": 0.6053875541687012,
+      "h200": 0.6053875541687012,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "temporal_style/origin",
+      "h100": 0.2592332363128662,
+      "h200": 0.2592332363128662,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "overall_consistency/origin",
+      "h100": 0.3363248407840729,
+      "h200": 0.3363248407840729,
+      "absolute_error": 0.0
+    },
+    {
+      "dimension": "appearance_style/origin",
+      "h100": 0.30738281249999994,
+      "h200": 0.30738281249999994,
+      "absolute_error": 0.0
+    }
+  ]
+}

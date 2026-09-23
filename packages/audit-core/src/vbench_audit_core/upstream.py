@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib
+import json
 import os
 import subprocess
 import sys
@@ -54,6 +55,8 @@ class UpstreamState:
 
     @property
     def source_type(self) -> str:
+        if self.branch == "verified-source-export":
+            return "verified-export"
         return "github" if self.remote == UPSTREAM_URL else "unknown"
 
 
@@ -157,11 +160,32 @@ def inspect_upstream(path: Path | str | None = None) -> UpstreamState:
     config = load_config()
     if not selected.is_dir():
         raise FileNotFoundError(f"official VBench checkout does not exist: {selected}")
-    remote = _git(selected, "remote", "get-url", "origin")
-    branch = _git(selected, "branch", "--show-current")
-    sha = _git(selected, "rev-parse", "HEAD")
-    dirty = bool(_git(selected, "status", "--porcelain"))
-    submodule_text = _git(selected, "submodule", "status")
+    if (selected / ".git").exists():
+        remote = _git(selected, "remote", "get-url", "origin")
+        branch = _git(selected, "branch", "--show-current")
+        sha = _git(selected, "rev-parse", "HEAD")
+        dirty = bool(_git(selected, "status", "--porcelain"))
+        submodule_text = _git(selected, "submodule", "status")
+    else:
+        # A container recovery export has no Git history. Its entire file set,
+        # including third-party runtime code, is pinned by this repository.
+        manifest_path = _workspace_root() / "configs/reproduction/vbench-source.json"
+        if not manifest_path.is_file():
+            raise RuntimeError("VBench requires a Git checkout or a pinned source export")
+        manifest = json.loads(manifest_path.read_text())
+        if manifest["commit"] != config.sha or manifest["repository"] != config.url:
+            raise RuntimeError("VBench source export identity differs from the configured upstream")
+        expected = {entry["path"]: entry["sha256"] for entry in manifest["files"]}
+        actual = {str(p.relative_to(selected)) for p in selected.rglob("*")
+                  if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"}
+        if actual != set(expected):
+            raise RuntimeError("cannot inspect VBench git checkout or verified source export: file coverage differs")
+        for name, identity in expected.items():
+            source = selected / name
+            if source.is_symlink() or hashlib.sha256(source.read_bytes()).hexdigest() != identity:
+                raise RuntimeError("VBench source export hash mismatch: " + name)
+        remote, sha = manifest["repository"], manifest["commit"]
+        branch, dirty, submodule_text = "verified-source-export", False, ""
     hashes: dict[str, str] = {}
     for name, spec in config.dimensions.items():
         source = selected / spec.source

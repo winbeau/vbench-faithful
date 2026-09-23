@@ -1,0 +1,187 @@
+{
+  "scope": "representative fresh video inference; not all paper cohorts or retraining",
+  "passed": true,
+  "checks": {
+    "origin": {
+      "passed": true,
+      "dimensions": {
+        "scene/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.625,
+          "observed_subset_mean": 0.625,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.625
+        },
+        "human_action/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 1.0
+        },
+        "object_class/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.0,
+          "observed_subset_mean": 0.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.0
+        },
+        "subject_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9200990736484528,
+          "observed_subset_mean": 0.9200990736484528,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9200990736484528
+        },
+        "background_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9221354166666667,
+          "observed_subset_mean": 0.9221354166666667,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9221354166666667
+        },
+        "dynamic_degree/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 1.0
+        },
+        "spatial_relationship/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.48523731465197206,
+          "observed_subset_mean": 0.48523731465197206,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.48523731465197206
+        },
+        "multiple_objects/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.0,
+          "observed_subset_mean": 0.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.0
+        },
+        "color/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 1.0
+        },
+        "motion_smoothness/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9331857298379964,
+          "observed_subset_mean": 0.9331857298379964,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9331857298379964
+        },
+        "temporal_flickering/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9442926481658337,
+          "observed_subset_mean": 0.9442926481658337,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9442926481658337
+        },
+        "aesthetic_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6092233657836914,
+          "observed_subset_mean": 0.6092233657836914,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6092233657836914
+        },
+        "imaging_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6053875541687012,
+          "observed_subset_mean": 60.53875541687012,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6053875541687012
+        },
+        "temporal_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.2592332363128662,
+          "observed_subset_mean": 0.2592332363128662,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.2592332363128662
+        },
+        "overall_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.3363248407840729,
+          "observed_subset_mean": 0.3363248407840729,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.3363248407840729
+        },
+        "appearance_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.30738281249999994,
+          "observed_subset_mean": 0.3073828125,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.30738281249999994
+        }
+      }
+    }
+  }
+}

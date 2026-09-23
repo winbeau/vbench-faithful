@@ -1,8 +1,11 @@
 # 复现范围、入口与尚未验收的部分
 
+容器重置恢复与当前论文九维统一评分请先看 [恢复运行手册](CONTAINER_RESET.md)。
+已新增实际视频端到端验收和完整依赖归档；下文保留首次发布时的全量实验验收边界。
+
 2026-09-23 审计结论：**不能把“上传和哈希验收完成”表述为“全部实验从零复现完成”。**
 本次已从 HF 固定 revision 下载到新目录，恢复全部轻量输入并独立重算九维主表；
-六维训练输入、原配置、词表和来源也已补齐。全九维重新执行视觉/语言模型推理、
+六维训练输入、原配置、词表和来源也已补齐。全九维全量样本重新执行视觉/语言模型推理、
 从头训练和所有附表/消融的独立重跑，仍没有完成同等级验收。
 
 资产实际分布在三个地址：私有 [GitHub 代码库](https://github.com/winbeau/vbench-repair)、
@@ -20,6 +23,7 @@
 | Object/Color/Subject/Background | 从逐样本 GPU 记录重新组对、过滤和汇总 | 证明汇总可重现，不证明 GPU 数值跨环境一致 |
 | 六维训练数据 | 四维与原训练主机逐字节一致；两维 shared records 与训练 manifest 哈希一致；schema/来源组隔离通过 | 可以恢复原训练输入；本次未重训六个模型 |
 | H100 工程运行 | 最新 aligned-v1 的 H100 单片评分/latent/tokens/像素与 H200 冻结记录完全一致；旧原版/默认 smoke 另保留 | 证明该链路可运行，不是论文九维全部 GPU 复现认证 |
+| 容器恢复代表性验收 | H100 九维 19 条真实输入与冻结分数完全相同；原版 16 维各一条实际评分通过 | 统一入口覆盖当前九维修复和全部官方维度；不是全量样本重跑 |
 
 机器证据：[HF 九维恢复收据](restore-nine-dimension-receipt.json)、[九维主表复算](verified-nine-dimension-replay/verification.json)、
 [九维复算表](verified-nine-dimension-replay/main-table.csv)、[训练输入检查](training-input-verification.json)。
@@ -120,11 +124,14 @@ Object/Color 使用本仓库 `scripts.object_color_semantics train`，将 `--out
 
 需要官方 VBench `fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490`、GRiT/Detectron2、
 Tag2Text、UMT、DINO、CLIP，以及构造/定位用的 MobileSAM、Mask R-CNN、SegFormer。
-这些视觉后端预训练模型仍是外部依赖。Dynamic 的 V-JEPA 2.1 backbone 按用户最新要求
-额外归档在模型库；这不表示其他视觉依赖也都已包含。
+当前九维推理和官方十六维需要的视觉权重、必要源码及两套 Python/CUDA 环境，
+现已补充归档在 HF 的 `reproduction/runtime/h100-20260923/`，固定哈希见
+[`runtime-release.json`](../../configs/reproduction/runtime-release.json)。
+Dynamic 的 V-JEPA 2.1 backbone 在模型库。SegFormer 属于历史候选方案，当前固定方法不调用它。
 
 已有 H100 的实际包版本见 [h100-runtime.json](h100-runtime.json)，现有模型字节身份见
-[external-assets.json](external-assets.json)。这是现场记录，不是经过空白机器重建验证的容器。
+[external-assets.json](external-assets.json)。这些旧现场记录由新 [容器恢复手册](CONTAINER_RESET.md)
+补充；不要用旧容器绝对路径配置新安装。
 官方模型获取路径在固定 VBench 的 `vbench/utils.py`；其中部分硬编码 HF 官方域名，
 因此镜像下载应预先完成、校验权重后再以 offline 方式评分。
 SegFormer/MobileSAM 的 revision 与哈希见
@@ -133,8 +140,8 @@ SegFormer/MobileSAM 的 revision 与哈希见
 完整媒体来自每维 `counterfactual/main-table-8d-20260922/` 的全部 tar 分片；
 上述路径保留原八维快照名称；Dynamic 媒体使用 `vjepa-expansion450-v1/`。
 需要保持 `scoring_base`、采样帧序和对应 CF，不用原始视频替换重新编码的评分基准。
-九维的来源、冻结版本和构造入口都已保存，但从空环境恢复完整视觉依赖、重做语义预测、
-重新 GPU 打分并逐项对齐全部结果，**本次尚未验收**。
+九维的来源、冻结版本和构造入口都已保存。代表性输入已重新执行视觉/语义推理；
+对全论文样本重新 GPU 打分并逐项对齐全部结果，**本次尚未验收**。
 
 ## 其余实验与负结果
 
