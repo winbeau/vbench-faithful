@@ -62,5 +62,8 @@
   "metadata_files_verified_in_final_commit": 46,
   "total_files": 281,
   "object_color_development_selected": false,
-  "object_color_selection": "user_selected_paper_final_step_300"
+  "object_color_selection": "user_selected_paper_final_step_300",
+  "public_source_files_verified": 180,
+  "public_source_scope_explicitly_authorized": true,
+  "source_verified_at": "2026-09-23T11:07:55.664264+00:00"
 }

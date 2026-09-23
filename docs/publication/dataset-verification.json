@@ -1,0 +1,451 @@
+{
+  "schema": "vbench-repair-verification/1",
+  "repo_id": "xju-arlab/vbench-repair",
+  "verified_revision": "77da9f257cd6fbb314980aafd37a8114730edc2a",
+  "verified_at": "2026-09-23T11:04:21.937481+00:00",
+  "private": false,
+  "metadata_files_verified": 86,
+  "status": "verified_with_documented_upstream_reference_issues",
+  "errors": [],
+  "dimensions": [
+    {
+      "dimension": "aesthetic_quality",
+      "annotation_rows": 465,
+      "human_pairs": 2790,
+      "usable_exact_pairs": 2790,
+      "source_reference_issues": 0,
+      "origin_files": 1860,
+      "origin_bytes": 1567691469
+    },
+    {
+      "dimension": "appearance_style",
+      "annotation_rows": 450,
+      "human_pairs": 2700,
+      "usable_exact_pairs": 2700,
+      "source_reference_issues": 0,
+      "origin_files": 1800,
+      "origin_bytes": 1569879947
+    },
+    {
+      "dimension": "background_consistency",
+      "annotation_rows": 430,
+      "human_pairs": 2580,
+      "usable_exact_pairs": 5,
+      "source_reference_issues": 1710,
+      "origin_files": 1720,
+      "origin_bytes": 1610040136
+    },
+    {
+      "dimension": "color",
+      "annotation_rows": 425,
+      "human_pairs": 2550,
+      "usable_exact_pairs": 2550,
+      "source_reference_issues": 0,
+      "origin_files": 1700,
+      "origin_bytes": 1331620697
+    },
+    {
+      "dimension": "dynamic_degree",
+      "annotation_rows": 360,
+      "human_pairs": 2160,
+      "usable_exact_pairs": 2160,
+      "source_reference_issues": 0,
+      "origin_files": 1440,
+      "origin_bytes": 1333298829
+    },
+    {
+      "dimension": "human_action",
+      "annotation_rows": 500,
+      "human_pairs": 3000,
+      "usable_exact_pairs": 3000,
+      "source_reference_issues": 0,
+      "origin_files": 2000,
+      "origin_bytes": 1684512369
+    },
+    {
+      "dimension": "imaging_quality",
+      "annotation_rows": 465,
+      "human_pairs": 2790,
+      "usable_exact_pairs": 2790,
+      "source_reference_issues": 0,
+      "origin_files": 1860,
+      "origin_bytes": 1567691469
+    },
+    {
+      "dimension": "motion_smoothness",
+      "annotation_rows": 360,
+      "human_pairs": 2160,
+      "usable_exact_pairs": 2160,
+      "source_reference_issues": 0,
+      "origin_files": 1440,
+      "origin_bytes": 1333298829
+    },
+    {
+      "dimension": "multiple_objects",
+      "annotation_rows": 410,
+      "human_pairs": 2460,
+      "usable_exact_pairs": 2460,
+      "source_reference_issues": 0,
+      "origin_files": 1640,
+      "origin_bytes": 1394355458
+    },
+    {
+      "dimension": "object_class",
+      "annotation_rows": 395,
+      "human_pairs": 2370,
+      "usable_exact_pairs": 2370,
+      "source_reference_issues": 0,
+      "origin_files": 1580,
+      "origin_bytes": 1311004919
+    },
+    {
+      "dimension": "overall_consistency",
+      "annotation_rows": 465,
+      "human_pairs": 2790,
+      "usable_exact_pairs": 2790,
+      "source_reference_issues": 0,
+      "origin_files": 1860,
+      "origin_bytes": 1567691469
+    },
+    {
+      "dimension": "scene",
+      "annotation_rows": 430,
+      "human_pairs": 2580,
+      "usable_exact_pairs": 2580,
+      "source_reference_issues": 0,
+      "origin_files": 1720,
+      "origin_bytes": 1610040136
+    },
+    {
+      "dimension": "spatial_relationship",
+      "annotation_rows": 540,
+      "human_pairs": 3240,
+      "usable_exact_pairs": 3240,
+      "source_reference_issues": 0,
+      "origin_files": 2160,
+      "origin_bytes": 1791176454
+    },
+    {
+      "dimension": "subject_consistency",
+      "annotation_rows": 360,
+      "human_pairs": 2160,
+      "usable_exact_pairs": 2160,
+      "source_reference_issues": 0,
+      "origin_files": 1440,
+      "origin_bytes": 1333298829
+    },
+    {
+      "dimension": "temporal_flickering",
+      "annotation_rows": 375,
+      "human_pairs": 2250,
+      "usable_exact_pairs": 2250,
+      "source_reference_issues": 0,
+      "origin_files": 1500,
+      "origin_bytes": 1386258550
+    },
+    {
+      "dimension": "temporal_style",
+      "annotation_rows": 500,
+      "human_pairs": 3000,
+      "usable_exact_pairs": 3000,
+      "source_reference_issues": 0,
+      "origin_files": 2000,
+      "origin_bytes": 1697180793
+    }
+  ],
+  "original_entries": 27720,
+  "unique_original_paths": 19400,
+  "unique_original_sha256": 19385,
+  "annotation_rows": 6930,
+  "human_pairs": 41580,
+  "source_reference_issues": 1710,
+  "counterfactual_experiments": [
+    {
+      "dimension": "background_consistency",
+      "version": "main-table-8d-20260922",
+      "manifest": "dimensions/background_consistency/counterfactual/main-table-8d-20260922/manifest.json",
+      "source_files": 14462,
+      "source_bytes": 6197278933,
+      "video_members": 1392,
+      "shards": 12,
+      "archive_bytes": 6212433920
+    },
+    {
+      "dimension": "color",
+      "version": "main-table-8d-20260922",
+      "manifest": "dimensions/color/counterfactual/main-table-8d-20260922/manifest.json",
+      "source_files": 458,
+      "source_bytes": 304587574,
+      "video_members": 283,
+      "shards": 1,
+      "archive_bytes": 305008640
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "legacy-seven-dimension-v1",
+      "manifest": "dimensions/dynamic_degree/counterfactual/legacy-seven-dimension-v1/manifest.json",
+      "source_files": 202,
+      "source_bytes": 76144133,
+      "video_members": 200,
+      "shards": 1,
+      "archive_bytes": 76308480
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "local-texture-dev32-mp4-8px-v1",
+      "manifest": "dimensions/dynamic_degree/counterfactual/local-texture-dev32-mp4-8px-v1/manifest.json",
+      "source_files": 163,
+      "source_bytes": 337551294,
+      "video_members": 96,
+      "shards": 1,
+      "archive_bytes": 337684480
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "local-texture-dev5-8px-v1",
+      "manifest": "dimensions/dynamic_degree/counterfactual/local-texture-dev5-8px-v1/manifest.json",
+      "source_files": 45,
+      "source_bytes": 116484667,
+      "video_members": 25,
+      "shards": 15,
+      "archive_bytes": 116623360
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "local-texture-dev5-v1",
+      "manifest": "dimensions/dynamic_degree/counterfactual/local-texture-dev5-v1/manifest.json",
+      "source_files": 85,
+      "source_bytes": 216139480,
+      "video_members": 45,
+      "shards": 29,
+      "archive_bytes": 216360960
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "superseded-synthetic-dev-v2",
+      "manifest": "dimensions/dynamic_degree/counterfactual/superseded-synthetic-dev-v2/manifest.json",
+      "source_files": 6922,
+      "source_bytes": 882583093,
+      "video_members": 6876,
+      "shards": 2,
+      "archive_bytes": 887889920
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "validation_dynamic",
+      "manifest": "dimensions/dynamic_degree/counterfactual/validation_dynamic/manifest.json",
+      "source_files": 153,
+      "source_bytes": 67167389,
+      "video_members": 150,
+      "shards": 1,
+      "archive_bytes": 67287040
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-anchored-v1",
+      "manifest": "dimensions/dynamic_degree/counterfactual/vjepa-anchored-v1/manifest.json",
+      "source_files": 15,
+      "source_bytes": 996864,
+      "video_members": 0,
+      "shards": 1,
+      "archive_bytes": 1013760
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-expansion450-v1",
+      "manifest": "dimensions/dynamic_degree/counterfactual/vjepa-expansion450-v1/manifest.json",
+      "source_files": 1854,
+      "source_bytes": 3857686030,
+      "video_members": 1080,
+      "shards": 8,
+      "archive_bytes": 3859179520
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-probe-v1",
+      "manifest": "dimensions/dynamic_degree/counterfactual/vjepa-probe-v1/manifest.json",
+      "source_files": 9,
+      "source_bytes": 502132,
+      "video_members": 0,
+      "shards": 1,
+      "archive_bytes": 512000
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-static-frame-v1",
+      "manifest": "dimensions/dynamic_degree/counterfactual/vjepa-static-frame-v1/manifest.json",
+      "source_files": 16,
+      "source_bytes": 7840111,
+      "video_members": 4,
+      "shards": 1,
+      "archive_bytes": 7854080
+    },
+    {
+      "dimension": "dynamic_degree",
+      "version": "vjepa-validation-v1",
+      "manifest": "dimensions/dynamic_degree/counterfactual/vjepa-validation-v1/manifest.json",
+      "source_files": 497,
+      "source_bytes": 971383832,
+      "video_members": 270,
+      "shards": 2,
+      "archive_bytes": 971776000
+    },
+    {
+      "dimension": "human_action",
+      "version": "legacy-seven-dimension-v1",
+      "manifest": "dimensions/human_action/counterfactual/legacy-seven-dimension-v1/manifest.json",
+      "source_files": 77,
+      "source_bytes": 49129887,
+      "video_members": 75,
+      "shards": 1,
+      "archive_bytes": 49223680
+    },
+    {
+      "dimension": "human_action",
+      "version": "main-table-8d-20260922",
+      "manifest": "dimensions/human_action/counterfactual/main-table-8d-20260922/manifest.json",
+      "source_files": 1386,
+      "source_bytes": 1078663828,
+      "video_members": 1364,
+      "shards": 3,
+      "archive_bytes": 1079787520
+    },
+    {
+      "dimension": "motion_smoothness",
+      "version": "legacy-seven-dimension-v1",
+      "manifest": "dimensions/motion_smoothness/counterfactual/legacy-seven-dimension-v1/manifest.json",
+      "source_files": 152,
+      "source_bytes": 69401652,
+      "video_members": 150,
+      "shards": 1,
+      "archive_bytes": 69652480
+    },
+    {
+      "dimension": "multiple_objects",
+      "version": "legacy-seven-dimension-v1",
+      "manifest": "dimensions/multiple_objects/counterfactual/legacy-seven-dimension-v1/manifest.json",
+      "source_files": 177,
+      "source_bytes": 61618329,
+      "video_members": 175,
+      "shards": 1,
+      "archive_bytes": 61911040
+    },
+    {
+      "dimension": "multiple_objects",
+      "version": "main-table-8d-20260922",
+      "manifest": "dimensions/multiple_objects/counterfactual/main-table-8d-20260922/manifest.json",
+      "source_files": 11847,
+      "source_bytes": 2377634877,
+      "video_members": 1649,
+      "shards": 5,
+      "archive_bytes": 2386810880
+    },
+    {
+      "dimension": "object_class",
+      "version": "main-table-8d-20260922",
+      "manifest": "dimensions/object_class/counterfactual/main-table-8d-20260922/manifest.json",
+      "source_files": 425,
+      "source_bytes": 104673528,
+      "video_members": 243,
+      "shards": 1,
+      "archive_bytes": 105123840
+    },
+    {
+      "dimension": "scene",
+      "version": "legacy-seven-dimension-v1",
+      "manifest": "dimensions/scene/counterfactual/legacy-seven-dimension-v1/manifest.json",
+      "source_files": 152,
+      "source_bytes": 65243334,
+      "video_members": 150,
+      "shards": 1,
+      "archive_bytes": 65361920
+    },
+    {
+      "dimension": "scene",
+      "version": "main-table-8d-20260922",
+      "manifest": "dimensions/scene/counterfactual/main-table-8d-20260922/manifest.json",
+      "source_files": 386,
+      "source_bytes": 269440150,
+      "video_members": 364,
+      "shards": 1,
+      "archive_bytes": 269742080
+    },
+    {
+      "dimension": "spatial_relationship",
+      "version": "legacy-seven-dimension-v1",
+      "manifest": "dimensions/spatial_relationship/counterfactual/legacy-seven-dimension-v1/manifest.json",
+      "source_files": 122,
+      "source_bytes": 61012101,
+      "video_members": 120,
+      "shards": 1,
+      "archive_bytes": 61194240
+    },
+    {
+      "dimension": "spatial_relationship",
+      "version": "main-table-8d-20260922",
+      "manifest": "dimensions/spatial_relationship/counterfactual/main-table-8d-20260922/manifest.json",
+      "source_files": 2149,
+      "source_bytes": 3696477256,
+      "video_members": 2124,
+      "shards": 7,
+      "archive_bytes": 3699169280
+    },
+    {
+      "dimension": "subject_consistency",
+      "version": "legacy-seven-dimension-v1",
+      "manifest": "dimensions/subject_consistency/counterfactual/legacy-seven-dimension-v1/manifest.json",
+      "source_files": 127,
+      "source_bytes": 74490211,
+      "video_members": 125,
+      "shards": 1,
+      "archive_bytes": 74700800
+    },
+    {
+      "dimension": "subject_consistency",
+      "version": "main-table-8d-20260922",
+      "manifest": "dimensions/subject_consistency/counterfactual/main-table-8d-20260922/manifest.json",
+      "source_files": 48354,
+      "source_bytes": 9510974596,
+      "video_members": 884,
+      "shards": 18,
+      "archive_bytes": 9596651520
+    },
+    {
+      "dimension": "subject_consistency",
+      "version": "subject_confirmatory",
+      "manifest": "dimensions/subject_consistency/counterfactual/subject_confirmatory/manifest.json",
+      "source_files": 118,
+      "source_bytes": 51537237,
+      "video_members": 115,
+      "shards": 1,
+      "archive_bytes": 51722240
+    },
+    {
+      "dimension": "subject_consistency",
+      "version": "subject_tracked",
+      "manifest": "dimensions/subject_consistency/counterfactual/subject_tracked/manifest.json",
+      "source_files": 118,
+      "source_bytes": 51550711,
+      "video_members": 115,
+      "shards": 1,
+      "archive_bytes": 51742720
+    }
+  ],
+  "download_samples": [
+    {
+      "path": "dimensions/aesthetic_quality/origin/videos/modelscope/overall_consistency/A 3D model of a 1800s victorian house.-0.mp4",
+      "sha256_verified": true
+    },
+    {
+      "path": "dimensions/aesthetic_quality/origin/videos/cogvideo/overall_consistency/A 3D model of a 1800s victorian house.-0.gif",
+      "sha256_verified": true
+    },
+    {
+      "path": "dimensions/dynamic_degree/counterfactual/local-texture-dev5-v1/data-00019.tar",
+      "sha256_verified": true,
+      "members_verified": 1
+    }
+  ],
+  "remote_files": 28024,
+  "remote_logical_bytes": 54870403384
+}

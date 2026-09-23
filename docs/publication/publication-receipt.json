@@ -1,0 +1,88 @@
+{
+  "schema": "vbench-repair-publication-receipt/1",
+  "completed_at": "2026-09-23T11:06:57.922178+00:00",
+  "github": {
+    "url": "https://github.com/winbeau/vbench-repair",
+    "private": true,
+    "branch": "winbeau",
+    "publication_tools_revision": "1035e0be15e6520f6ca6cc376c8fa0a06e41f8d2",
+    "source_snapshot_frozen_at": "2026-09-23T10:05:52Z",
+    "source_snapshot_files": 1037,
+    "source_snapshot_manifest": "source-snapshot.json"
+  },
+  "dataset": {
+    "repo_id": "xju-arlab/vbench-repair",
+    "private": false,
+    "final_publication_revision": "e4ea257416d70187d8fd4683599c783fb543ed6b",
+    "verified_data_revision": "77da9f257cd6fbb314980aafd37a8114730edc2a",
+    "dimensions": 16,
+    "original_entries": 27720,
+    "distinct_source_paths": 19400,
+    "annotation_rows": 6930,
+    "normalized_human_pairs": 41580,
+    "counterfactual_experiments": 27,
+    "counterfactual_shards": 118,
+    "counterfactual_archive_members": 90471,
+    "source_reference_issues": 1710,
+    "integrity_errors": [],
+    "report": "dataset-verification.json",
+    "final_metadata_verified": [
+      {
+        "path": "README.md",
+        "bytes": 5331,
+        "sha256": "70bd9507af99083829c5b720ef50f9ded21d80100a3823db188f6cca3570074a"
+      },
+      {
+        "path": "catalog.json",
+        "bytes": 17971,
+        "sha256": "1d0623be7d1ae66e6c013dc8445b516f1f4360063055adacdb75a5b838921389"
+      },
+      {
+        "path": "provenance/dataset-verification.json",
+        "bytes": 14009,
+        "sha256": "0dc3c8e3fd11a483e76c7ae915850520a120b61a99846a458a6d250a78abb3c3"
+      }
+    ]
+  },
+  "models": {
+    "repo_id": "xju-arlab/vbench-model",
+    "private": false,
+    "revision": "249469f26000175cbf0f0ee7d06821bfbb7c25e0",
+    "adapters": 6,
+    "adapter_bytes": 1047933216,
+    "paper_step_300_without_dev_selection": [
+      "object_class",
+      "color"
+    ],
+    "dynamic_weights_published": false,
+    "public_source_directories_explicitly_authorized": [
+      "code/vbench_prompts_compile/",
+      "code/object_color/"
+    ],
+    "report": "model-verification.json",
+    "public_source_files_verified": 180
+  },
+  "h100": {
+    "checkout": "/root/wenbiao_zhao/vbench-repair",
+    "runtime_entrypoint": "scripts/h100_python.sh",
+    "gpu_smoke": "passed_dynamic_origin_and_repair_on_one_official_video",
+    "evidence": "h100-smoke/",
+    "all_dimension_gpu_parity_claimed": false
+  },
+  "endpoint": {
+    "preferred": "https://hf-mirror.com",
+    "used_fallback": "https://huggingface.co",
+    "fallback_explicitly_authorized": true,
+    "reason": "Mirror returned redirects/403 or rejected authenticated writes."
+  },
+  "verification": {
+    "initial_full_cpu_suite": {
+      "passed": 1236,
+      "skipped": 3
+    },
+    "publication_contract_tests_passed": 10,
+    "late_dynamic_affected_tests_passed": 11,
+    "local_and_h100_cli_help_entries": 12
+  },
+  "source_data_modified_by_publication": false
+}

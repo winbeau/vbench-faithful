@@ -8,6 +8,12 @@
 `xju-arlab/vbench-model`，**每维一个目录，只保留 best available model**。
 Dynamic 暂不发布权重，只记录候选及验证。镜像实测不可用时允许官方回退。
 
+执行状态：代码已迁入私有仓库并通过 H100 真实 GPU smoke；全部 16 份原标注、
+27,720 个维度内原片条目和 27 个反事实版本已上传并通过远端完整性核验。
+六个维度权重已发布，其中 Object Class / Color 按用户要求采用论文 step 300，
+明确注明未经 dev 选优。两份模型复现源码经用户明确确认可在 HF 公开。
+完整版本与已知上游数据问题见[发布验收](../publication/README.md)。
+
 ## 1. 代码完整保存
 
 - 从 `vbench-audit` 的 `winbeau@fdf4890` 保留 Git 历史。

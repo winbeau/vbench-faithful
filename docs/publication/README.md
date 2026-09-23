@@ -32,10 +32,16 @@
   [`model-verification.json`](model-verification.json)。
 - 用户明确允许模型库公开 `code/vbench_prompts_compile/` 与 `code/object_color/`
   两份复现源码，共 180 个文件（含说明与来源清单）；完整 GitHub 仓库保持私有。
-- 原始数据完整规划 16 份标注、27,720 个维度内条目、19,400 个独立源路径。
+- 原始数据已发布并核验：16 份标注、6,930 行原标注、41,580 个规范化无序比较，
+  27,720 个维度内视频条目、19,400 个独立源路径。
   Background 的 1,710 个上游错误引用显式保留，不能自动当成可用评测配对。
-- 完整上传及远端验收结果由 `dataset-verification.json` 记录；该文件尚未产生时，
-  不将上传任务描述为完成。
+- 反事实共 27 个实验版本、118 个 tar 分片、90,471 个成员（约 30.56 GB 源文件）。
+  成员包含原片、控制、派生视频、帧数组、预览与记录，不能当作独立反事实视频数。
+- [`dataset-verification.json`](dataset-verification.json) 对全部原片、86 个原始元数据文件、
+  16 份原标注、全部分片及成员索引完成远端核验，另下载两种源存储形式的原片和
+  一个完整媒体分片核对内容；无完整性错误。被验收的数据 revision 为
+  `77da9f257cd6fbb314980aafd37a8114730edc2a`，逻辑数据量约 54.87 GB。
+  数据卡与 catalog 的最终提交另记在 [`publication-receipt.json`](publication-receipt.json)。
 
 ## 复现发布
 

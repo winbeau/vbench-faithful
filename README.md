@@ -5,7 +5,8 @@
 16 维原始数据、独立人类偏好标注及版本化反事实归档发布到
 [xju-arlab/vbench-repair](https://huggingface.co/datasets/xju-arlab/vbench-repair)；
 选定训练模型按维度发布到 [xju-arlab/vbench-model](https://huggingface.co/xju-arlab/vbench-model)。
-整理协议、来源问题和验收见[迁移计划](docs/plans/2026-09-23-vbench-repair-migration.md)。
+整理协议见[迁移计划](docs/plans/2026-09-23-vbench-repair-migration.md)，
+实际发布范围、哈希校验和来源问题见[发布验收](docs/publication/README.md)。
 数据覆盖 16 维不表示本仓库为 16 维都实现了 Repair。
 
 H100 可用 `scripts/h100_python.sh -m dynamic_degree.cli --help` 调用新 checkout，
