@@ -5,18 +5,41 @@ import os
 from pathlib import Path
 
 
+def load_model(tokenizer, device, submodules):
+    """Skip overwritten random values only during strict native checkpoint load.
+
+    Called in an isolated model worker, before prefetch threads are started.
+    All patches are restored even when loading fails; deterministic buffers,
+    including the causal attention mask, retain their original initialization.
+    """
+    from contextlib import ExitStack
+    from unittest.mock import patch
+    import torch
+    from vbench.third_party.ViCLIP.viclip import ViCLIP
+
+    if not submodules.get("pretrain") or not Path(submodules["pretrain"]).is_file():
+        raise ValueError("ViCLIP requires the verified complete local checkpoint")
+    with ExitStack() as stack:
+        for name in ("uniform_", "normal_", "kaiming_uniform_", "xavier_uniform_"):
+            stack.enter_context(patch.object(torch.nn.init, name, lambda tensor, *a, **k: tensor))
+        model = ViCLIP(tokenizer=tokenizer, **submodules).to(device)
+    # Native checkpoint wrappers are for backward recomputation. In no_grad
+    # inference they execute the identical blocks with additional Python cost.
+    model.vision_encoder.transformer.checkpoint_num = 0
+    return model
+
+
 def embeddings(rows, device, submodules, *, batch_size=4):
     import torch
     from vbench.utils import CACHE_DIR, clip_transform, read_frames_decord_by_fps
     from vbench.third_party.ViCLIP.simple_tokenizer import SimpleTokenizer
-    from vbench.third_party.ViCLIP.viclip import ViCLIP
     from vbench_audit_core.video_batches import prefetch
     from vbench_audit_core.run_inference_cache import RunInferenceCache
 
     if type(batch_size) is not int or batch_size < 1:
         raise ValueError("batch_size must be a positive integer")
     tokenizer = SimpleTokenizer(str(Path(CACHE_DIR) / "ViCLIP/bpe_simple_vocab_16e6.txt.gz"))
-    model = ViCLIP(tokenizer=tokenizer, **submodules).to(device)
+    model = load_model(tokenizer, device, submodules)
     transform = clip_transform(224)
     root = os.environ.get("VBENCH_EVAL_RUN_INFERENCE_CACHE")
     context = os.environ.get("VBENCH_EVAL_RUN_INFERENCE_CONTEXT")

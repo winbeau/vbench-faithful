@@ -12,7 +12,7 @@ def test_batches_cache_only_identical_video_inputs_and_keep_new_queries(monkeypa
     class Model:
         embed_dim = 2
         def __init__(self, **kwargs):
-            pass
+            self.vision_encoder = SimpleNamespace(transformer=SimpleNamespace(checkpoint_num=24))
         def to(self, device):
             return self
         def encode_text(self, texts):
@@ -45,3 +45,19 @@ def test_batches_cache_only_identical_video_inputs_and_keep_new_queries(monkeypa
     changed_video, _ = embeddings(rows, "cpu", {"pretrain": checkpoint}, batch_size=2)
     assert calls == [2, 2, 1, 2]
     assert changed_video[0, 0] == 9
+
+
+def test_random_initializers_restored_after_failed_strict_load(monkeypatch, tmp_path):
+    import pytest
+    from vbench_audit_models.viclip import load_model
+    initializers = {name: getattr(torch.nn.init, name) for name in
+                    ("uniform_", "normal_", "kaiming_uniform_", "xavier_uniform_")}
+    def fail(**kwargs):
+        torch.nn.Linear(16, 16)
+        raise RuntimeError("strict checkpoint mismatch")
+    monkeypatch.setitem(sys.modules, "vbench.third_party.ViCLIP.viclip", SimpleNamespace(ViCLIP=fail))
+    checkpoint = tmp_path / "weights"
+    checkpoint.write_bytes(b"incomplete")
+    with pytest.raises(RuntimeError, match="strict checkpoint"):
+        load_model(None, "cpu", {"pretrain": checkpoint})
+    assert all(getattr(torch.nn.init, name) is fn for name, fn in initializers.items())
