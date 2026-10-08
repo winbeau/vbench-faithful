@@ -9,6 +9,48 @@ from vbench_audit_models.labels import LabelVocabulary
 from scripts.object_color_semantics import validate_silver
 
 
+def test_local_router_keeps_full_hash_provenance_and_model_settings(tmp_path, monkeypatch):
+    import hashlib
+    import json
+    import sys
+    from threading import Barrier
+    from vbench_audit_models import qwen
+
+    base = tmp_path / "base"
+    base.mkdir()
+    (base / "config.json").write_text(json.dumps({"model_type": "qwen3", "hidden_size": 4096}))
+    (base / "model.safetensors.index.json").write_text(json.dumps({"weight_map": {
+        "one": "one.safetensors", "two": "two.safetensors"
+    }}))
+    for name in ("one", "two"):
+        (base / (name + ".safetensors")).write_bytes(name.encode())
+    expected = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in base.iterdir()}
+    barrier = Barrier(4)
+    original_hash = qwen.sha256_file
+
+    def concurrent_hash(path):
+        barrier.wait(timeout=5)
+        return original_hash(path)
+
+    monkeypatch.setattr(qwen, "sha256_file", concurrent_hash)
+    calls = []
+    model = SimpleNamespace(eval=lambda: None)
+
+    def load(path, **kwargs):
+        calls.append((path, kwargs))
+        return model
+
+    monkeypatch.setitem(sys.modules, "transformers", SimpleNamespace(
+        AutoModelForCausalLM=SimpleNamespace(from_pretrained=load),
+        AutoTokenizer=SimpleNamespace(from_pretrained=lambda *a, **kw: "tokenizer")))
+    monkeypatch.setitem(sys.modules, "peft", SimpleNamespace(PeftModel=object))
+    router = QwenPromptRouter.from_local(base, {}, device="cpu")
+    assert router.provenance["base_file_sha256"] == expected
+    assert router.provenance["input_fields"] == ["prompt"]
+    assert calls == [(str(base), {"local_files_only": True, "torch_dtype": torch.bfloat16,
+                                 "device_map": {"": "cpu"}, "attn_implementation": "sdpa"})]
+
+
 def test_one_loaded_backbone_switches_one_head_and_restores_state():
     class Model:
         device = "cpu"

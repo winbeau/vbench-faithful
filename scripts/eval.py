@@ -8,6 +8,7 @@ import json
 import math
 import os
 from pathlib import Path
+from queue import Empty, Queue
 import signal
 import subprocess
 import threading
@@ -177,6 +178,7 @@ def evaluate(config, *, plan_only=False):
     started = time.monotonic()
     assets = load_assets(config.assets)
     inputs = load_inputs(config.input, config.video_root)
+    input_seconds = time.monotonic() - started
     jobs = routes(config.dimensions, config.backend)
     counts = {d: sum(d in row["dimensions"] for row in inputs) for d in config.dimensions}
     if any(n == 0 for n in counts.values()):
@@ -204,17 +206,30 @@ def evaluate(config, *, plan_only=False):
               "requested_backend": config.backend, "official_fallback": plan["official_fallback"]}
     with EvalLogger(output, len(jobs)) as logger:
         logger.event("verify", message="Checking selected source and model hashes")
+        setup = {"inputs": input_seconds}
+        tick = time.monotonic()
         checked = {}
         for backend in ("origin", "repair"):
             dims = [d for d, b in jobs if b == backend]
             if dims:
-                checked.update(verify_assets(assets, dims, backend))
+                checked.update(verify_assets(assets, dims, backend, workers=4))
+        setup["asset_verification"] = time.monotonic() - tick
+        logger.event("verified", message=f"Asset hashes: {setup['asset_verification']:.2f}s")
+        tick = time.monotonic()
         from vbench_audit_core.upstream import verify_upstream
         state = verify_upstream(assets["vbench"])
         fingerprint = source_identity(assets)
-        gpu_info = {gpu: probe_gpu(assets["visual_python"], gpu) for gpu in devices}
+        setup["source_verification"] = time.monotonic() - tick
+        tick = time.monotonic()
+        # Each probe is already a separate process with one visible GPU.
+        with ThreadPoolExecutor(max_workers=len(devices)) as probes:
+            gpu_info = dict(zip(devices, probes.map(lambda gpu: probe_gpu(assets["visual_python"], gpu), devices)))
+        setup["gpu_probes"] = time.monotonic() - tick
+        setup["total_before_dispatch"] = time.monotonic() - started
+        logger.event("ready", message=f"Preflight: {setup['total_before_dispatch']:.2f}s", timing_seconds=setup)
         plan.update(verified_assets=checked, source_sha256=fingerprint, gpu_info=gpu_info,
-                    upstream_sha=state.sha, lock_sha256=digest(ROOT / "uv.lock"))
+                    upstream_sha=state.sha, lock_sha256=digest(ROOT / "uv.lock"),
+                    timing_seconds=setup, scheduler="next dimension on next available GPU")
         plan["code_sha"] = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
         plan["git_dirty"] = bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True))
         write_json(output / "plan.json", plan)
@@ -231,9 +246,13 @@ def evaluate(config, *, plan_only=False):
             summaries = {}
 
             def stage(name, role, script, extra, final=False):
+                stage_started = time.monotonic()
+                environment_seconds = 0.0
+                worker_seconds = 0.0
                 if role not in runtimes:
                     logger.event("environment", dimension=dim, message=f"Preparing {role} environment", gpu=gpu)
                     runtimes[role] = prepare_environment(dim, role, Path(assets[role + "_python"]), config.env_dir)
+                    environment_seconds = time.monotonic() - stage_started
                 python = runtimes[role]
                 required = asset_requirements(assets, [dim], "origin" if name == "origin" else "repair")
                 selected_assets = {path: checked[path] for path in required}
@@ -244,13 +263,18 @@ def evaluate(config, *, plan_only=False):
                 logger.event("running", dimension=dim, backend=name, message=f"GPU {gpu}", gpu=gpu)
 
                 def compute(directory):
+                    nonlocal worker_seconds
                     destination = directory / "result.json"
                     arguments = ["--input", input_path, "--assets", output / "assets.json",
                                  "--dimension", dim, "--output", destination]
                     for key, value in extra.items():
                         arguments += ["--" + key, value]
-                    workers.run([python, ROOT / "scripts" / script, *arguments],
-                                worker_env(dim, gpu, assets), directory / "worker.log")
+                    tick = time.monotonic()
+                    try:
+                        workers.run([python, ROOT / "scripts" / script, *arguments],
+                                    worker_env(dim, gpu, assets), directory / "worker.log")
+                    finally:
+                        worker_seconds = time.monotonic() - tick
                     payload = json.loads(destination.read_text())
                     if final:
                         return validate_payload(payload, chosen, name)["complete"]
@@ -265,9 +289,15 @@ def evaluate(config, *, plan_only=False):
                     return all(r["status"] == "ok" for r in rows)
 
                 path, reused, key = cache.materialize(specification, folder / name, compute, reuse=config.reuse)
+                elapsed = time.monotonic() - stage_started
                 logger.event("cached" if reused else "computed", dimension=dim, backend=name,
-                             message=str(path / "worker.log"), gpu=gpu)
-                return path / "result.json", {"reused": reused, "key": key, "artifacts": str(path)}
+                             message=f"{elapsed:.2f}s · {path / 'worker.log'}", gpu=gpu,
+                             elapsed_seconds=elapsed, environment_seconds=environment_seconds,
+                             worker_seconds=worker_seconds)
+                return path / "result.json", {"reused": reused, "key": key, "artifacts": str(path),
+                                              "stage": name, "elapsed_seconds": elapsed,
+                                              "environment_seconds": environment_seconds,
+                                              "worker_seconds": worker_seconds}
 
             for _, backend in [job for job in jobs if job[0] == dim]:
                 then = time.monotonic()
@@ -306,16 +336,27 @@ def evaluate(config, *, plan_only=False):
                                    message=f"{summary['succeeded']}/{summary['input_count']} videos")
             return summaries
 
-        def lane(gpu, dimensions):
+        pending = Queue()
+        for dim in config.dimensions:
+            pending.put(dim)
+
+        def lane(gpu):
             completed = {}
-            for dim in dimensions:
-                if workers.stopped.is_set():
+            while not workers.stopped.is_set():
+                try:
+                    dim = pending.get_nowait()
+                except Empty:
                     break
-                completed.update(run_dimension(dim, gpu))
+                try:
+                    completed.update(run_dimension(dim, gpu))
+                except Exception as exc:
+                    logger.event("failed", dimension=dim, message=f"Scheduling failed: {exc}")
+                finally:
+                    pending.task_done()
             return completed
 
         pool = ThreadPoolExecutor(max_workers=len(devices))
-        futures = [pool.submit(lane, gpu, config.dimensions[i::len(devices)]) for i, gpu in enumerate(devices)]
+        futures = [pool.submit(lane, gpu) for gpu in devices]
         interrupted = False
         try:
             for future in as_completed(futures):
@@ -341,6 +382,7 @@ def evaluate(config, *, plan_only=False):
                 report["dimensions"][key] = {**validate_payload(json.loads(path.read_text()), chosen, backend),
                                              "dimension": dim, "backend": backend}
         report["complete"] = all(r["complete"] for r in report["dimensions"].values()) and not interrupted
+        report["timing_seconds"] = setup
         report["elapsed_seconds"] = time.monotonic() - started
         write_json(output / "summary.json", report)
         logger.summary(list(report["dimensions"].values()))

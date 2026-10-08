@@ -7,6 +7,7 @@ to the constructor so adding routes does not create another backbone.
 from __future__ import annotations
 
 from contextlib import nullcontext
+from concurrent.futures import ThreadPoolExecutor
 import json
 from pathlib import Path
 import threading
@@ -41,9 +42,14 @@ class QwenPromptRouter:
         config = json.loads((base / "config.json").read_text())
         if config.get("model_type") != "qwen3" or config.get("hidden_size") != 4096:
             raise ValueError("expected Qwen3-8B architecture")
+        files = [p for p in sorted(base.iterdir())
+                 if p.is_file() and p.suffix in {".json", ".safetensors"}]
+        # Hash independent shards concurrently; retain full byte verification
+        # and identical provenance, precision, attention and generation options.
+        with ThreadPoolExecutor(max_workers=4) as pool:
+            hashes = dict(zip((p.name for p in files), pool.map(sha256_file, files)))
         provenance = {"base": str(base), "declared_revision": REVISION,
-                      "base_file_sha256": {p.name: sha256_file(p) for p in sorted(base.iterdir())
-                                           if p.is_file() and p.suffix in {".json", ".safetensors"}},
+                      "base_file_sha256": hashes,
                       "input_fields": ["prompt"], "adapters": {}}
         model = AutoModelForCausalLM.from_pretrained(str(base), local_files_only=True,
                     torch_dtype=torch.bfloat16, device_map={"": device}, attn_implementation="sdpa")

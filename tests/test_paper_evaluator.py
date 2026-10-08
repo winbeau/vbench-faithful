@@ -105,6 +105,52 @@ def test_publication_semantic_source_is_byte_identical():
     assert len(checked) == 139
 
 
+def test_parallel_verification_reads_all_bytes_even_if_stat_is_unchanged(tmp_path, monkeypatch):
+    import os
+    from threading import Barrier
+    import paper_common
+
+    files = [tmp_path / str(i) for i in range(2)]
+    for path in files:
+        path.write_bytes(path.name.encode() * 100)
+    pins = [(str(p), paper_common.digest(p)) for p in files]
+    monkeypatch.setattr(paper_common, "_asset_requirements", lambda *a: iter(pins))
+    assert verify_assets({}, [], "repair") == dict(pins)
+    original_digest = paper_common.digest
+    barrier = Barrier(2)
+
+    def concurrent_digest(path):
+        barrier.wait(timeout=5)
+        return original_digest(path)
+
+    monkeypatch.setattr(paper_common, "digest", concurrent_digest)
+    assert verify_assets({}, [], "repair", workers=2) == dict(pins)
+    stat = files[0].stat()
+    files[0].write_bytes(b"x" * stat.st_size)
+    os.utime(files[0], ns=(stat.st_atime_ns, stat.st_mtime_ns))
+    with pytest.raises(ValueError, match="frozen paper selection"):
+        verify_assets({}, [], "repair", workers=2)
+
+
+@pytest.mark.parametrize("workers", [1, 4])
+def test_verification_preserves_first_pin_failure_before_later_config_error(tmp_path, monkeypatch, workers):
+    import paper_common
+    path = tmp_path / "weight"
+    path.write_bytes(b"wrong")
+    expected = paper_common.digest(path)
+
+    def requirements(*args):
+        yield str(path), expected
+        raise KeyError("missing later asset")
+
+    monkeypatch.setattr(paper_common, "_asset_requirements", requirements)
+    with pytest.raises(KeyError, match="missing later asset"):
+        verify_assets({}, [], "repair", workers=workers)
+    path.write_bytes(b"substituted")
+    with pytest.raises(ValueError, match="frozen paper selection"):
+        verify_assets({}, [], "repair", workers=workers)
+
+
 def test_recovery_archive_cannot_escape_destination(tmp_path):
     import io
     import tarfile

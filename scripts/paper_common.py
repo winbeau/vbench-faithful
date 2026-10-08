@@ -208,11 +208,28 @@ def asset_requirements(assets, dimensions, backend):
     return dict(_asset_requirements(assets, dimensions, backend))
 
 
-def verify_assets(assets, dimensions, backend):
+def verify_assets(assets, dimensions, backend, *, workers=1):
     """Bind selected weights and vendored algorithms before starting inference."""
-    checked = {}
-    for path, expected in _asset_requirements(assets, dimensions, backend):
+    def check(pin):
+        path, expected = pin
         if digest(path) != expected:
             raise ValueError(f"Asset differs from the frozen paper selection: {path}")
-        checked[path] = expected
+        return path, expected
+
+    if type(workers) is not int or workers < 1:
+        raise ValueError("workers must be a positive integer")
+    if workers == 1:
+        return dict(check(pin) for pin in _asset_requirements(assets, dimensions, backend))
+    # Preserve pin/error order even if a later requirement is malformed. Every
+    # selected file is still hashed in full on every invocation; no stat cache.
+    from concurrent.futures import ThreadPoolExecutor
+    pins, deferred = [], None
+    try:
+        pins.extend(_asset_requirements(assets, dimensions, backend))
+    except Exception as exc:
+        deferred = exc
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        checked = dict(pool.map(check, pins))
+    if deferred is not None:
+        raise deferred
     return checked

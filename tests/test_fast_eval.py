@@ -116,7 +116,7 @@ def test_controller_cache_hit_and_metadata_change(tmp_path, monkeypatch):
     yaml.write_text("input: input.json\nassets: assets.json\ndimensions: [imaging_quality]\n"
                     "backend: both\noutput: first\ncache_dir: cache\nenv_dir: envs\n")
     config = load_config(yaml)
-    pins = lambda assets, dimensions, backend: {dim: "pin-" + dim for dim in dimensions}
+    pins = lambda assets, dimensions, backend, **kwargs: {dim: "pin-" + dim for dim in dimensions}
     monkeypatch.setattr(runner, "verify_assets", pins)
     monkeypatch.setattr(runner, "asset_requirements", pins)
     monkeypatch.setattr(runner, "source_identity", lambda *a: "code")
@@ -142,6 +142,10 @@ def test_controller_cache_hit_and_metadata_change(tmp_path, monkeypatch):
     assert report["official_fallback"] == ["imaging_quality"]
     summary = report["dimensions"]["imaging_quality/origin"]
     assert summary["score"] == .7 and summary["cached"]
+    execution = json.loads((tmp_path / "second/imaging_quality/origin.json").read_text())["execution"]
+    assert execution["cache"][0]["worker_seconds"] == 0
+    assert execution["cache"][0]["elapsed_seconds"] >= execution["cache"][0]["environment_seconds"] >= 0
+    assert report["timing_seconds"]["total_before_dispatch"] >= report["timing_seconds"]["asset_verification"] >= 0
     # Adding another dimension changes the verified asset union, but must not
     # invalidate an identical existing task's independently bound cache entry.
     data = json.loads(manifest.read_text())

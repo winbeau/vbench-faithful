@@ -50,7 +50,7 @@ def test_origin_without_native_aggregate_cannot_succeed_or_cache(tmp_path, monke
                     "backend: origin\noutput: first\ncache_dir: cache\nenv_dir: envs\n")
     config = load_config(yaml)
     monkeypatch.delenv("CUDA_VISIBLE_DEVICES", raising=False)
-    monkeypatch.setattr(runner, "verify_assets", lambda *a: {})
+    monkeypatch.setattr(runner, "verify_assets", lambda *a, **kw: {})
     monkeypatch.setattr(runner, "asset_requirements", lambda *a: {})
     monkeypatch.setattr(runner, "source_identity", lambda *a: "review-fixture")
     monkeypatch.setattr(runner, "probe_gpu", lambda *a: {"name": "fake GPU"})
@@ -77,6 +77,78 @@ def test_origin_without_native_aggregate_cannot_succeed_or_cache(tmp_path, monke
     for report in reports:
         summary = report["dimensions"]["imaging_quality/origin"]
         assert not report["complete"] and summary["score"] is None
+
+
+@pytest.mark.parametrize("fail_first", [False, True])
+def test_idle_gpu_takes_next_dimension_without_waiting_for_busy_lane(tmp_path, monkeypatch, fail_first):
+    from vbench_audit_core import upstream
+
+    dimensions = ["imaging_quality", "temporal_flickering", "aesthetic_quality"]
+    (tmp_path / "video.mp4").write_bytes(b"fake worker does not decode")
+    (tmp_path / "input.json").write_text(json.dumps([
+        {"id": "one", "video": "video.mp4", "dimensions": dimensions}
+    ]))
+    (tmp_path / "assets.json").write_text(json.dumps({
+        "visual_python": sys.executable, "vbench": str(tmp_path), "vbench_cache": str(tmp_path)
+    }))
+    yaml = tmp_path / "eval.yaml"
+    yaml.write_text("input: input.json\nassets: assets.json\nbackend: origin\n"
+                    f"dimensions: {json.dumps(dimensions)}\ngpus: [0, 1]\n"
+                    "output: output\ncache_dir: cache\nenv_dir: envs\nreuse: false\n")
+    monkeypatch.delenv("CUDA_VISIBLE_DEVICES", raising=False)
+    monkeypatch.setattr(runner, "verify_assets", lambda *a, **kw: {})
+    monkeypatch.setattr(runner, "asset_requirements", lambda *a: {})
+    monkeypatch.setattr(runner, "source_identity", lambda *a: "scheduling-fixture")
+    monkeypatch.setattr(runner, "prepare_environment", lambda *a: Path(sys.executable))
+    monkeypatch.setattr(upstream, "verify_upstream", lambda *a: SimpleNamespace(sha="pinned"))
+    probes = threading.Barrier(2)
+
+    def probe(*args):
+        probes.wait(timeout=5)
+        return {"name": "fake GPU"}
+
+    monkeypatch.setattr(runner, "probe_gpu", probe)
+    busy_started, short_tasks_done = threading.Event(), threading.Event()
+    active, assignments = set(), {}
+    lock = threading.Lock()
+
+    def run(self, command, env, log):
+        args = list(map(str, command))
+        dimension = env["VBENCH_EVAL_DIMENSION"]
+        gpu = env["CUDA_VISIBLE_DEVICES"]
+        with lock:
+            assert gpu not in active, "more than one worker assigned to the same GPU"
+            active.add(gpu)
+            assignments[dimension] = gpu
+        try:
+            if dimension == dimensions[0]:
+                busy_started.set()
+                assert short_tasks_done.wait(5), "idle GPU did not take the third dimension"
+                if fail_first:
+                    raise RuntimeError("fixture worker failure")
+            else:
+                assert busy_started.wait(5)
+                if dimension == dimensions[-1]:
+                    short_tasks_done.set()
+            rows = json.loads(Path(args[args.index("--input") + 1]).read_text())
+            runner.write_json(Path(args[args.index("--output") + 1]), {
+                "rows": [runner.result(row, .7) for row in rows], "official_aggregate": .7
+            })
+            Path(log).write_text("fake worker\n")
+        finally:
+            with lock:
+                active.remove(gpu)
+
+    monkeypatch.setattr(runner.Workers, "run", run)
+    assert runner.evaluate(load_config(yaml)) == int(fail_first)
+    assert assignments[dimensions[0]] != assignments[dimensions[1]] == assignments[dimensions[2]]
+    report = json.loads((tmp_path / "output/summary.json").read_text())
+    assert len(report["dimensions"]) == 3
+    for dimension in dimensions:
+        entry = report["dimensions"][dimension + "/origin"]
+        failed = fail_first and dimension == dimensions[0]
+        assert entry["input_count"] == 1 and entry["complete"] == (not failed)
+        assert entry["score"] == (None if failed else .7)
 
 
 def _live_process(pid):
