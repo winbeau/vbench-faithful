@@ -1,0 +1,422 @@
+{
+  "code_sha": "d1c8b4acf4c2cfd207261515f9e47dd43e19811c",
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "gpu_info": {
+    "3": {
+      "torch": "2.5.1+cu121",
+      "cuda": "12.1",
+      "name": "NVIDIA H100 80GB HBM3",
+      "capability": [
+        9,
+        0
+      ]
+    }
+  },
+  "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+  "clock": {
+    "returncode": 1,
+    "wall_seconds": 27.272948601981625,
+    "command": [
+      "/root/.local/bin/uv",
+      "run",
+      "--no-sync",
+      "python",
+      "scripts/eval.py",
+      "--config",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/benchmark.yaml",
+      "--backend",
+      "repair",
+      "--dimensions",
+      "subject_consistency",
+      "--output",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/subject-batch16",
+      "--no-reuse"
+    ],
+    "finished_utc": "2026-10-08T06:45:15.540441+00:00"
+  },
+  "dimension": "subject_consistency",
+  "records": 32,
+  "succeeded": 23,
+  "statuses_equal": true,
+  "localizer_and_crop_diagnostics_exact": true,
+  "floating_differences": [
+    {
+      "path": "/0/score",
+      "reference": 0.9013111591339111,
+      "candidate": 0.9013110995292664,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/0/diagnostics/score",
+      "reference": 0.9013111591339111,
+      "candidate": 0.9013110995292664,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/0/diagnostics/adjacent_score",
+      "reference": 0.9660219550132751,
+      "candidate": 0.9660218954086304,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/0/diagnostics/pair_max",
+      "reference": 0.99013751745224,
+      "candidate": 0.9901376962661743,
+      "absolute_error": 1.7881393432617188e-07
+    },
+    {
+      "path": "/1/diagnostics/adjacent_score",
+      "reference": 0.9519720077514648,
+      "candidate": 0.9519719481468201,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/2/diagnostics/adjacent_score",
+      "reference": 0.93404221534729,
+      "candidate": 0.9340422749519348,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/2/diagnostics/pair_max",
+      "reference": 0.9637691974639893,
+      "candidate": 0.9637693762779236,
+      "absolute_error": 1.7881393432617188e-07
+    },
+    {
+      "path": "/4/diagnostics/adjacent_score",
+      "reference": 0.8625502586364746,
+      "candidate": 0.8625503182411194,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/4/diagnostics/pair_min",
+      "reference": 0.6967161297798157,
+      "candidate": 0.6967161893844604,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/5/diagnostics/pair_min",
+      "reference": 0.6481334567070007,
+      "candidate": 0.6481335759162903,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/5/diagnostics/pair_max",
+      "reference": 0.9807291030883789,
+      "candidate": 0.9807289838790894,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/6/score",
+      "reference": 0.8155255913734436,
+      "candidate": 0.8155256509780884,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/6/diagnostics/score",
+      "reference": 0.8155255913734436,
+      "candidate": 0.8155256509780884,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/6/diagnostics/adjacent_score",
+      "reference": 0.8796725869178772,
+      "candidate": 0.879672646522522,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/6/diagnostics/pair_min",
+      "reference": 0.6660162806510925,
+      "candidate": 0.666016161441803,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/6/diagnostics/pair_max",
+      "reference": 0.9881055951118469,
+      "candidate": 0.9881057143211365,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/7/diagnostics/pair_min",
+      "reference": 0.6084645986557007,
+      "candidate": 0.6084645390510559,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/7/diagnostics/pair_max",
+      "reference": 0.9954292178153992,
+      "candidate": 0.995429277420044,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/8/diagnostics/adjacent_score",
+      "reference": 0.9913620352745056,
+      "candidate": 0.9913620948791504,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/8/diagnostics/pair_max",
+      "reference": 0.996291995048523,
+      "candidate": 0.9962920546531677,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/10/diagnostics/pair_max",
+      "reference": 0.9569099545478821,
+      "candidate": 0.9569100141525269,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/12/score",
+      "reference": 0.9410563111305237,
+      "candidate": 0.9410563707351685,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/12/diagnostics/score",
+      "reference": 0.9410563111305237,
+      "candidate": 0.9410563707351685,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/13/score",
+      "reference": 0.9347202777862549,
+      "candidate": 0.9347203969955444,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/13/diagnostics/score",
+      "reference": 0.9347202777862549,
+      "candidate": 0.9347203969955444,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/13/diagnostics/adjacent_score",
+      "reference": 0.9428170323371887,
+      "candidate": 0.9428171515464783,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/13/diagnostics/pair_min",
+      "reference": 0.8830910325050354,
+      "candidate": 0.8830909729003906,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/13/diagnostics/pair_max",
+      "reference": 0.9781960844993591,
+      "candidate": 0.9781961441040039,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/14/diagnostics/adjacent_score",
+      "reference": 0.8801913261413574,
+      "candidate": 0.8801912665367126,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/14/diagnostics/pair_max",
+      "reference": 0.9327017664909363,
+      "candidate": 0.9327020645141602,
+      "absolute_error": 2.980232238769531e-07
+    },
+    {
+      "path": "/15/diagnostics/pair_min",
+      "reference": 0.8732851147651672,
+      "candidate": 0.8732850551605225,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/16/diagnostics/adjacent_score",
+      "reference": 0.907854437828064,
+      "candidate": 0.9078543782234192,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/16/diagnostics/pair_min",
+      "reference": 0.7391669750213623,
+      "candidate": 0.7391672730445862,
+      "absolute_error": 2.980232238769531e-07
+    },
+    {
+      "path": "/16/diagnostics/pair_max",
+      "reference": 0.9688483476638794,
+      "candidate": 0.9688485860824585,
+      "absolute_error": 2.384185791015625e-07
+    },
+    {
+      "path": "/18/diagnostics/adjacent_score",
+      "reference": 0.9356701374053955,
+      "candidate": 0.9356700778007507,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/18/diagnostics/pair_min",
+      "reference": 0.8148823380470276,
+      "candidate": 0.8148820996284485,
+      "absolute_error": 2.384185791015625e-07
+    },
+    {
+      "path": "/18/diagnostics/pair_max",
+      "reference": 0.9624601006507874,
+      "candidate": 0.9624600410461426,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/20/diagnostics/pair_min",
+      "reference": 0.8571848273277283,
+      "candidate": 0.8571850657463074,
+      "absolute_error": 2.384185791015625e-07
+    },
+    {
+      "path": "/20/diagnostics/pair_max",
+      "reference": 0.9733722805976868,
+      "candidate": 0.9733723998069763,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/22/diagnostics/adjacent_score",
+      "reference": 0.9608582854270935,
+      "candidate": 0.9608583450317383,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/22/diagnostics/pair_min",
+      "reference": 0.9351491332054138,
+      "candidate": 0.9351491928100586,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/22/diagnostics/pair_max",
+      "reference": 0.9999999403953552,
+      "candidate": 1.0000001192092896,
+      "absolute_error": 1.7881393432617188e-07
+    },
+    {
+      "path": "/23/score",
+      "reference": 0.989490807056427,
+      "candidate": 0.9894907474517822,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/23/diagnostics/score",
+      "reference": 0.989490807056427,
+      "candidate": 0.9894907474517822,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/23/diagnostics/adjacent_score",
+      "reference": 0.9934383630752563,
+      "candidate": 0.9934383034706116,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/23/diagnostics/pair_min",
+      "reference": 0.9784418940544128,
+      "candidate": 0.9784416556358337,
+      "absolute_error": 2.384185791015625e-07
+    },
+    {
+      "path": "/23/diagnostics/pair_max",
+      "reference": 0.9962158799171448,
+      "candidate": 0.9962158203125,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/24/score",
+      "reference": 0.8802587389945984,
+      "candidate": 0.8802586793899536,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/24/diagnostics/score",
+      "reference": 0.8802587389945984,
+      "candidate": 0.8802586793899536,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/24/diagnostics/pair_min",
+      "reference": 0.7281832695007324,
+      "candidate": 0.7281831502914429,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/24/diagnostics/pair_max",
+      "reference": 0.9627754092216492,
+      "candidate": 0.9627753496170044,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/25/diagnostics/adjacent_score",
+      "reference": 0.9293389916419983,
+      "candidate": 0.9293390512466431,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/25/diagnostics/pair_min",
+      "reference": 0.8824491500854492,
+      "candidate": 0.8824493288993835,
+      "absolute_error": 1.7881393432617188e-07
+    },
+    {
+      "path": "/25/diagnostics/pair_max",
+      "reference": 0.9509070515632629,
+      "candidate": 0.9509072303771973,
+      "absolute_error": 1.7881393432617188e-07
+    },
+    {
+      "path": "/26/diagnostics/pair_max",
+      "reference": 0.9982048869132996,
+      "candidate": 0.9982049465179443,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/30/score",
+      "reference": 0.9961511492729187,
+      "candidate": 0.9961510896682739,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/30/diagnostics/score",
+      "reference": 0.9961511492729187,
+      "candidate": 0.9961510896682739,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/30/diagnostics/adjacent_score",
+      "reference": 0.9971994757652283,
+      "candidate": 0.9971994161605835,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/30/diagnostics/pair_min",
+      "reference": 0.9883748888969421,
+      "candidate": 0.9883748292922974,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/30/diagnostics/pair_max",
+      "reference": 0.9985957741737366,
+      "candidate": 0.998595654964447,
+      "absolute_error": 1.1920928955078125e-07
+    },
+    {
+      "path": "/31/diagnostics/pair_min",
+      "reference": 0.7259716987609863,
+      "candidate": 0.7259716391563416,
+      "absolute_error": 5.960464477539063e-08
+    },
+    {
+      "path": "/31/diagnostics/pair_max",
+      "reference": 0.9972520470619202,
+      "candidate": 0.9972521066665649,
+      "absolute_error": 5.960464477539063e-08
+    }
+  ],
+  "max_diagnostic_absolute_error": 2.980232238769531e-07,
+  "max_score_absolute_error": 1.1920928955078125e-07,
+  "absolute_tolerance": 1e-06,
+  "previous_run_cache_hits": 0,
+  "old_seconds": 25.780385271064006,
+  "new_seconds": 24.742592588998377
+}

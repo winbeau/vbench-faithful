@@ -1,0 +1,32 @@
+{
+  "load_localizer": {
+    "calls": 1,
+    "seconds": 0.9768068899866194
+  },
+  "load_dino": {
+    "calls": 1,
+    "seconds": 1.0947515569860116
+  },
+  "boxes": {
+    "calls": 26,
+    "seconds": 3.7314153719926253
+  },
+  "sam_image": {
+    "calls": 368,
+    "seconds": 6.465906734811142
+  },
+  "sam_mask": {
+    "calls": 474,
+    "seconds": 3.892881492851302
+  },
+  "isolate": {
+    "calls": 26,
+    "seconds": 0.9456646196777001
+  },
+  "dino_tokens": {
+    "calls": 26,
+    "seconds": 3.6388342239661142
+  },
+  "worker_body_seconds": 22.488605885999277,
+  "outputs_equal": true
+}

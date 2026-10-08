@@ -53,9 +53,13 @@ Profile: model loading 6.21 s, 32 serial prompt generations 10.87 s. `a1ba5a2` b
 
 Profile: COCO boxes 4.63 s, 398 SAM image encodes 7.36 s, 461 SAM mask predictions 4.06 s, CLIP tokens 1.06 s. Candidate `fe5554c` captured the original SAM image-encoder CUDA kernels without precision/batch changes. All 32 scores and diagnostics match exactly. However, whole-dimension time was 26.40 s versus 26.03 s; a subsequent profile showed 398 graph replays and image-encoder time 6.52 s, only 0.84 s saved. The candidate is withdrawn because the end-to-end gain is unproven. Source/tests are archived in `/tmp/vbench-speed32/drafts-cuda-graph/` and remain recoverable from the commit. [Attempt receipt](../validation/h100-background-graph-20261008.json). Existing repair and thresholds remain unchanged.
 
-## Active item: Subject Consistency
+## Accepted: Subject Consistency
 
-Inspect its localizer and feature-extraction costs independently. Preserve the direct-anchor masks, crop-before-encoding, exclusion policy and diagnostics.
+Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s, DINO patch encoding 3.64 s. The 26 videos entering DINO called it 416 times. `d1c8b4a` batches each video's 16 frames, keeping float32, transforms, all frames and scoring formulas. Legacy callers retain batch size 1. CPU: 104 passed. H100: coverage and failure states remain 23/32; localization/crop diagnostics exact. Scores differ by at most 1.1921e-7; all differing floating diagnostic fields are within 2.9803e-7, checked against a tight 1e-6 absolute numerical tolerance. This is **not bitwise equivalence**. Dimension 25.78 → 24.74 s, standalone with setup 27.27 s. [Profile](../validation/h100-subject-profile-20261008.json), [acceptance](../validation/h100-subject-batch16-20261008.json).
+
+## Active item: GRiT semantic batching
+
+Use the generation batching mechanism validated for Human Action on Spatial and Multiple Objects, and equivalent prompt-only batching on Object Class and Color. Keep all frozen parsers/scorers, raw outputs, generation settings and evidence. Accept this four-dimensional group before starting the seven non-repair accelerators.
 
 ## Subsequent queue
 
