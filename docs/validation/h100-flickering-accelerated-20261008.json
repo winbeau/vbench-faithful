@@ -1,0 +1,295 @@
+{
+  "dimension": "temporal_flickering",
+  "code_sha": "3b72cefd2c987aad872b6f7ce2323e5b9c640446",
+  "git_dirty": false,
+  "source_sha256": "db58d9eb9165b1e856f4beb70ae8ea92af7f602a4d1aa11c2fc4c6426e7ff030",
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "gpu": "3",
+  "gpu_info": {
+    "torch": "2.5.1+cu121",
+    "cuda": "12.1",
+    "name": "NVIDIA H100 80GB HBM3",
+    "capability": [
+      9,
+      0
+    ]
+  },
+  "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+  "selected_inputs_sha256": "70253da4992fa257b4751e38a4b191047aa33a104ff15814c28f4d222f811293",
+  "reference": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/origin-baseline-v2/temporal_flickering/origin.json",
+  "reference_sha256": "1762bf438422e43c16a2dffcef564511a09506e02f090c875282ed986e8c62ad",
+  "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/flickering-accelerated",
+  "worker_seconds": 0.41525568591896445,
+  "wall_seconds": 3.229653239948675,
+  "previous_run_cache_hits": 0,
+  "reference_worker_seconds": 3.0023890630109236,
+  "comparison": {
+    "passed": true,
+    "count": 32,
+    "rtol": 0.01,
+    "atol": 1e-06,
+    "rule": "abs(candidate-reference) <= max(atol, rtol*abs(reference))",
+    "max_absolute_error": 0.0,
+    "rows": [
+      {
+        "id": "speed32:00:temporal_flickering",
+        "reference": 0.9521904964073031,
+        "candidate": 0.9521904964073031,
+        "absolute_error": 0.0,
+        "tolerance": 0.009521904964073031,
+        "passed": true
+      },
+      {
+        "id": "speed32:01:temporal_flickering",
+        "reference": 0.9236748265285118,
+        "candidate": 0.9236748265285118,
+        "absolute_error": 0.0,
+        "tolerance": 0.009236748265285118,
+        "passed": true
+      },
+      {
+        "id": "speed32:02:temporal_flickering",
+        "reference": 0.8869021471808939,
+        "candidate": 0.8869021471808939,
+        "absolute_error": 0.0,
+        "tolerance": 0.008869021471808939,
+        "passed": true
+      },
+      {
+        "id": "speed32:03:temporal_flickering",
+        "reference": 0.9829069829454609,
+        "candidate": 0.9829069829454609,
+        "absolute_error": 0.0,
+        "tolerance": 0.009829069829454608,
+        "passed": true
+      },
+      {
+        "id": "speed32:04:temporal_flickering",
+        "reference": 0.97795716640996,
+        "candidate": 0.97795716640996,
+        "absolute_error": 0.0,
+        "tolerance": 0.0097795716640996,
+        "passed": true
+      },
+      {
+        "id": "speed32:05:temporal_flickering",
+        "reference": 0.8709965425379136,
+        "candidate": 0.8709965425379136,
+        "absolute_error": 0.0,
+        "tolerance": 0.008709965425379136,
+        "passed": true
+      },
+      {
+        "id": "speed32:06:temporal_flickering",
+        "reference": 0.923016237745098,
+        "candidate": 0.923016237745098,
+        "absolute_error": 0.0,
+        "tolerance": 0.00923016237745098,
+        "passed": true
+      },
+      {
+        "id": "speed32:07:temporal_flickering",
+        "reference": 0.9539361542346431,
+        "candidate": 0.9539361542346431,
+        "absolute_error": 0.0,
+        "tolerance": 0.009539361542346431,
+        "passed": true
+      },
+      {
+        "id": "speed32:08:temporal_flickering",
+        "reference": 0.9686182171690698,
+        "candidate": 0.9686182171690698,
+        "absolute_error": 0.0,
+        "tolerance": 0.009686182171690698,
+        "passed": true
+      },
+      {
+        "id": "speed32:09:temporal_flickering",
+        "reference": 0.9799654380947935,
+        "candidate": 0.9799654380947935,
+        "absolute_error": 0.0,
+        "tolerance": 0.009799654380947936,
+        "passed": true
+      },
+      {
+        "id": "speed32:10:temporal_flickering",
+        "reference": 0.975631212720684,
+        "candidate": 0.975631212720684,
+        "absolute_error": 0.0,
+        "tolerance": 0.00975631212720684,
+        "passed": true
+      },
+      {
+        "id": "speed32:11:temporal_flickering",
+        "reference": 0.9685445598527497,
+        "candidate": 0.9685445598527497,
+        "absolute_error": 0.0,
+        "tolerance": 0.009685445598527498,
+        "passed": true
+      },
+      {
+        "id": "speed32:12:temporal_flickering",
+        "reference": 0.9507485258812998,
+        "candidate": 0.9507485258812998,
+        "absolute_error": 0.0,
+        "tolerance": 0.009507485258812998,
+        "passed": true
+      },
+      {
+        "id": "speed32:13:temporal_flickering",
+        "reference": 0.9448352215336818,
+        "candidate": 0.9448352215336818,
+        "absolute_error": 0.0,
+        "tolerance": 0.009448352215336818,
+        "passed": true
+      },
+      {
+        "id": "speed32:14:temporal_flickering",
+        "reference": 0.9604116813809264,
+        "candidate": 0.9604116813809264,
+        "absolute_error": 0.0,
+        "tolerance": 0.009604116813809264,
+        "passed": true
+      },
+      {
+        "id": "speed32:15:temporal_flickering",
+        "reference": 0.9638803145464729,
+        "candidate": 0.9638803145464729,
+        "absolute_error": 0.0,
+        "tolerance": 0.00963880314546473,
+        "passed": true
+      },
+      {
+        "id": "speed32:16:temporal_flickering",
+        "reference": 0.973744177350811,
+        "candidate": 0.973744177350811,
+        "absolute_error": 0.0,
+        "tolerance": 0.00973744177350811,
+        "passed": true
+      },
+      {
+        "id": "speed32:17:temporal_flickering",
+        "reference": 0.9349236058253868,
+        "candidate": 0.9349236058253868,
+        "absolute_error": 0.0,
+        "tolerance": 0.009349236058253869,
+        "passed": true
+      },
+      {
+        "id": "speed32:18:temporal_flickering",
+        "reference": 0.938394531549192,
+        "candidate": 0.938394531549192,
+        "absolute_error": 0.0,
+        "tolerance": 0.00938394531549192,
+        "passed": true
+      },
+      {
+        "id": "speed32:19:temporal_flickering",
+        "reference": 0.9750386425093108,
+        "candidate": 0.9750386425093108,
+        "absolute_error": 0.0,
+        "tolerance": 0.009750386425093108,
+        "passed": true
+      },
+      {
+        "id": "speed32:20:temporal_flickering",
+        "reference": 0.9752428410100001,
+        "candidate": 0.9752428410100001,
+        "absolute_error": 0.0,
+        "tolerance": 0.009752428410100001,
+        "passed": true
+      },
+      {
+        "id": "speed32:21:temporal_flickering",
+        "reference": 0.9566619386859968,
+        "candidate": 0.9566619386859968,
+        "absolute_error": 0.0,
+        "tolerance": 0.009566619386859968,
+        "passed": true
+      },
+      {
+        "id": "speed32:22:temporal_flickering",
+        "reference": 0.9325682621376187,
+        "candidate": 0.9325682621376187,
+        "absolute_error": 0.0,
+        "tolerance": 0.009325682621376187,
+        "passed": true
+      },
+      {
+        "id": "speed32:23:temporal_flickering",
+        "reference": 0.9617113337797277,
+        "candidate": 0.9617113337797277,
+        "absolute_error": 0.0,
+        "tolerance": 0.009617113337797278,
+        "passed": true
+      },
+      {
+        "id": "speed32:24:temporal_flickering",
+        "reference": 0.9462740692437864,
+        "candidate": 0.9462740692437864,
+        "absolute_error": 0.0,
+        "tolerance": 0.009462740692437865,
+        "passed": true
+      },
+      {
+        "id": "speed32:25:temporal_flickering",
+        "reference": 0.9453130460252949,
+        "candidate": 0.9453130460252949,
+        "absolute_error": 0.0,
+        "tolerance": 0.00945313046025295,
+        "passed": true
+      },
+      {
+        "id": "speed32:26:temporal_flickering",
+        "reference": 0.9759023348490398,
+        "candidate": 0.9759023348490398,
+        "absolute_error": 0.0,
+        "tolerance": 0.009759023348490398,
+        "passed": true
+      },
+      {
+        "id": "speed32:27:temporal_flickering",
+        "reference": 0.9610414654600854,
+        "candidate": 0.9610414654600854,
+        "absolute_error": 0.0,
+        "tolerance": 0.009610414654600854,
+        "passed": true
+      },
+      {
+        "id": "speed32:28:temporal_flickering",
+        "reference": 0.9661080790501014,
+        "candidate": 0.9661080790501014,
+        "absolute_error": 0.0,
+        "tolerance": 0.009661080790501014,
+        "passed": true
+      },
+      {
+        "id": "speed32:29:temporal_flickering",
+        "reference": 0.9923166705112831,
+        "candidate": 0.9923166705112831,
+        "absolute_error": 0.0,
+        "tolerance": 0.009923166705112832,
+        "passed": true
+      },
+      {
+        "id": "speed32:30:temporal_flickering",
+        "reference": 0.9642571542777267,
+        "candidate": 0.9642571542777267,
+        "absolute_error": 0.0,
+        "tolerance": 0.009642571542777268,
+        "passed": true
+      },
+      {
+        "id": "speed32:31:temporal_flickering",
+        "reference": 0.9804170197131588,
+        "candidate": 0.9804170197131588,
+        "absolute_error": 0.0,
+        "tolerance": 0.009804170197131588,
+        "passed": true
+      }
+    ]
+  },
+  "aggregate_error": 0.0,
+  "aggregate_tolerance": 0.009551290905358745,
+  "passed": true
+}

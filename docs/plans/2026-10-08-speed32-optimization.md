@@ -85,9 +85,13 @@ Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s
 
 `122c1fc` batches up to eight AMT interpolation pairs per video, retaining native RGB decode, FP32, resizing/padding, uint8 conversion and odd-frame errors. The native unpaired final odd frame is still excluded. Same-32: all pass; worker 6.31 → 5.30 s, standalone wall 9.93 s. CPU: 47 passed, including unequal lengths and unpaired-tail coverage. [Receipt](../validation/h100-motion-accelerated-20261008.json).
 
-## Active item: Temporal Flickering
+## Accepted: Temporal Flickering
 
-Verify the native all-frame pixel metric and implement bounded CPU decoding without unnecessary model/CUDA startup. Check all 32 scores before integrating the public modes.
+`3b72cef` streams every native BGR frame, retains FP32 adjacent-frame absolute errors and the native reducer, and avoids importing Torch or initializing CUDA. Two bounded CPU workers overlap video decoding. Same-32: zero per-video/aggregate error; worker 3.00 → 0.42 s, standalone wall 3.23 s. CPU: 38 passed. [Receipt](../validation/h100-flickering-accelerated-20261008.json).
+
+## Active item: Public modes and final same-32 comparison
+
+All seven accelerators have passed their individual numerical gates; Overall's measured benefit depends on current-run feature reuse. Integrate default nine repairs plus seven accelerators, original VBench mode with one native process per selected GPU, strict aggregate/coverage contracts, configuration and skill documentation. Then measure actual complete all-16 command wall times on H100, with no previous-run result-cache hits. Do not infer the final wall time from isolated dimension measurements.
 
 ## Subsequent queue
 
