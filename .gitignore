@@ -25,3 +25,7 @@ data/processed/audit/*.csv
 # Keep selected frozen audit summaries
 !data/processed/audit/global_consistency.csv
 !data/processed/audit/main_dimension_coverage.csv
+
+# AOCI agent host integration (machine-bound; do not commit)
+.codex/config.toml
+.codex/config.toml.backup.*

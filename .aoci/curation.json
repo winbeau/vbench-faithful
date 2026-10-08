@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "decisions": [
+    {
+      "path": "docs/counterfactual-reports/subject_stability_20260920/cow_dose4_preview.png",
+      "decision": "exclude",
+      "role": "主体构造单帧诊断预览",
+      "reason": "已查看奶牛原图与四倍背景模糊对照；粗主体边界和单帧观察范围由 dose4_input_observation.json 及 subject_stability_20260920.md 承载，图片本身没有额外可维护接口或独立协议。",
+      "confidence": 98,
+      "source_sha256": "f8a34d38250af683009f674d8ea116297d1760acfc215a67bfada5d9b235b3a2",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    },
+    {
+      "path": "docs/counterfactual-reports/subject_stability_20260920/official720_first_person_preview.png",
+      "decision": "exclude",
+      "role": "人物类别掩码单帧预览",
+      "reason": "已查看原图、绿色构造掩码和两倍背景模糊三联图；多人类别保留而非单一演讲者实例认证的约束已由 official720_first_person_observation.json 和对应报告说明，不重复为二进制预览创建条目。",
+      "confidence": 98,
+      "source_sha256": "ad0f6bddfaffef51126659ab4db82a5752ceb882ecd0c22f1f0b44c9b9e6f60c",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    },
+    {
+      "path": "docs/figures/vbench_counterfactual_cases/intermediate/scene_ocean_frame_crop.png",
+      "decision": "exclude",
+      "role": "场景案例排版中间裁图",
+      "reason": "已查看海底裁图并完整核对 make_figure.py；它由 source/scene-ocean-frame.png 按裁剪和适配规则再生，裁图没有独立评分语义，维护入口是绘图脚本。",
+      "confidence": 99,
+      "source_sha256": "94d0ef56172255e81faa7ebf89f7f66d7241664f7e0a685ffcbb36ea827d3b28",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    },
+    {
+      "path": "docs/figures/vbench_counterfactual_cases/intermediate/spatial_after_annotated.png",
+      "decision": "exclude",
+      "role": "镜像后空间案例标框图",
+      "reason": "已查看镜像后信号灯A和左侧公交B标框；make_figure.py 显式定义标签与框坐标，图像只是原始帧的可再生叠加展示。",
+      "confidence": 99,
+      "source_sha256": "675dc3b359c5104a897008e018f4c665edada9887c96a10c56e6c2fdf9e2dd8c",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    },
+    {
+      "path": "docs/figures/vbench_counterfactual_cases/intermediate/spatial_before_annotated.png",
+      "decision": "exclude",
+      "role": "镜像前空间案例标框图",
+      "reason": "已查看镜像前信号灯A和右侧公交B标框；对应坐标和标签来自 make_figure.py，维护应落在脚本与案例证据而非派生PNG条目。",
+      "confidence": 99,
+      "source_sha256": "871d74040e0ef712e0af6b97cfca416f68087099537d031d98e6b84078b42a79",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    },
+    {
+      "path": "docs/figures/vbench_counterfactual_cases/source/scene-ocean-frame.png",
+      "decision": "exclude",
+      "role": "场景同义案例原始展示帧",
+      "reason": "已查看带海底礁石与水印的方形帧；make_figure.py 已绑定 LaVie ocean-0 来源、帧图哈希和两提示冻结分数，此帧是文档素材而非运行输入合同，不独立承载分数或语义标注。",
+      "confidence": 96,
+      "source_sha256": "f32a106fc61ad7b27ed427bdfdc7afd4ba8641b2d920a0db50e4950b27fd884c",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    },
+    {
+      "path": "docs/figures/vbench_counterfactual_cases/source/spatial-after.png",
+      "decision": "exclude",
+      "role": "空间镜像案例后帧素材",
+      "reason": "已查看公交位于信号灯左侧的镜像后帧；与 before 帧配对的来源、语义重标和冻结分数由 make_figure.py 记录，图片本身不新增评分公式。",
+      "confidence": 97,
+      "source_sha256": "e61227e11659b2a9d8473b60a104620cb2c33619810eebe61dd3932fa249e0e7",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    },
+    {
+      "path": "docs/figures/vbench_counterfactual_cases/source/spatial-before.png",
+      "decision": "exclude",
+      "role": "空间镜像案例前帧素材",
+      "reason": "已查看公交位于信号灯右侧的原始案例帧；make_figure.py 固定该配对及A/B角色，正式认知由对应绘图和案例文档承载，素材无独立API或配置。",
+      "confidence": 97,
+      "source_sha256": "fb9ef11aebe2edec301ddf05939bb55b21ac7b288431a15cb7436c55816cb164",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    },
+    {
+      "path": "figures/supplementary_main_table.pdf",
+      "decision": "exclude",
+      "role": "历史补充主表编译产物",
+      "reason": "已读取PDF全部单页表格，并对照PNG与 metadata.json；内容由同名CSV和TeX提供，包含未运行缺项及分数下降，PDF是派生展示而非权威研究数据的新副本。",
+      "confidence": 99,
+      "source_sha256": "12da7a5fbadf6f7e7540ba01edc474f38343de78f353177268a6e98a909a85e8",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    },
+    {
+      "path": "figures/supplementary_main_table.png",
+      "decision": "exclude",
+      "role": "历史补充主表光栅预览",
+      "reason": "已查看整张八维表并对照PDF；数值、缺项和生成身份由同名CSV、TeX及metadata.json承载，图中向上箭头表示指标方向，不能当成修复提升。",
+      "confidence": 99,
+      "source_sha256": "70b687831855485711879332960ffe5209147632a67596fa7dcd11af70508b28",
+      "agent": "codex",
+      "updated_at": "2026-10-08T02:30:27Z"
+    }
+  ]
+}
