@@ -88,6 +88,6 @@ Successful records require finite scores; failures retain null and the original 
 
 `plan.json` and `summary.json` expose `timing_seconds` for inputs, asset verification, source verification, GPU probes and total time before dispatch. Each completed stage event and per-run execution receipt records `elapsed_seconds`, `environment_seconds` and `worker_seconds`. Worker time includes process startup, model loading and inference, rather than GPU kernels alone. Cached stages have zero worker time; overlapping GPU lanes must not be summed to claim wall time.
 
-See the [H100 performance report](validation/h100-performance-20261008.md) for the controlled nine-repair comparison, remaining startup costs and final sixteen-package GPU acceptance.
+The [final same-32 report](validation/h100-same32-final-20261008.md) records actual all-16 command wall times: ours 344.60 s, official 345.58 s and direct original 338.23 s. All 224 accelerated scores pass the per-video gate; nine-repair failure states are unchanged, and Subject's maximum score drift is 1.19e-7. Project coverage is 459/512 versus original 505/512, so these are completed task timings with explicit missing scores. Earlier package and nine-repair fixture checks remain in the [initial H100 performance report](validation/h100-performance-20261008.md).
 
 The existing `scripts/evaluate_vbench.py` remains the strict paper interface (`repair` restricted to nine). Legacy per-metric CLIs retain their research meanings. The seven accelerated implementations do not promote historical repair candidates into the paper.

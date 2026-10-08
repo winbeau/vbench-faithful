@@ -136,6 +136,8 @@ By default, `backend: ours` runs the **nine selected repairs plus seven accelera
 
 The seven accelerators passed same-32 per-video checks against official scores: absolute error must be at most `max(1e-6, 0.01 × abs(official_score))`. This measures numerical agreement on the tested cohort, not perceptual quality or a guarantee for arbitrary inputs. [Optimization records](docs/plans/2026-10-08-speed32-optimization.md).
 
+On the same 32 videos across all 16 dimensions, one H100 measured **344.60 s** for the default mode, **345.58 s** for official mode and **338.23 s** for the direct original single-process baseline. Our time decreased **37.82%** from 554.19 s and is within **1.88%** of the direct original. All 224 accelerated scores pass; existing partial coverage in three repairs remains explicit (459/512 project scores, 505/512 original). These single-run timings show near parity. [Full timing and numerical report](docs/validation/h100-same32-final-20261008.md).
+
 The output contains `plan.json`, `summary.json`, per-dimension `origin.json`, `repair.json` or `accelerated.json`, and worker logs. Cache receipts identify reused stages. Failed, unsupported, or omitted scores remain `null`; incomplete coverage does not produce a complete-population mean. Official dataset aggregation is preserved, including dimension-specific scales and weighting.
 
 ## Supported Dimensions

@@ -106,7 +106,7 @@ def summarize_final(root):
             entry = {"dimension": dim, "input_count": 32,
                 "succeeded": sum(r["status"] == "succeeded" for r in current["rows"]),
                 "identity_status_and_non_numeric_evidence_equal": True,
-                "bitwise_rows_equal": not differences, "changed_numeric_fields": len(differences),
+                "rows_exact_after_path_normalization": not differences, "changed_numeric_fields": len(differences),
                 "max_numeric_field_error": max((d["absolute_error"] for d in differences), default=0),
                 "max_score_error": max((abs(a["score"] - b["score"]) for a, b in zip(old["rows"], current["rows"])
                                         if a["score"] is not None), default=0)}

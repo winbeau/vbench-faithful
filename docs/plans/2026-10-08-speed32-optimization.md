@@ -10,9 +10,9 @@
 
 ## Fixed comparison
 
-Same 32 distinct native videos (64 seconds), 512 dimension–video records; physical H100 GPU 3. [Annotations](../../configs/benchmarks/same32-20261008.json), [full first-stage report](../validation/h100-same32-20261008.md). No media or frozen research results changed.
+Same 32 distinct native videos (64 seconds), 512 dimension–video records; physical H100 GPU 3. [Annotations](../../configs/benchmarks/same32-20261008.json), [full first-stage report](../validation/h100-same32-20261008.md). No media or frozen research results changed. The table below preserves the **first overview**, before sequential dimension optimization; the [final sixteen-dimension overview](../validation/h100-same32-final-20261008.md) is the current result.
 
-| Dimension | Original single process, s | Current project, s | Project coverage |
+| Dimension | Initial original single process, s | Initial optimized project, s | Project coverage |
 | --- | ---: | ---: | ---: |
 | `scene` | 29.69 | 54.19 | 32/32 |
 | `human_action` | 9.31 | 32.98 | 32/32 |
@@ -31,7 +31,7 @@ Same 32 distinct native videos (64 seconds), 512 dimension–video records; phys
 | `overall_consistency` | 5.97 | 10.70 | 32/32 |
 | `appearance_style` | 9.58 | 14.31 | 32/32 |
 
-Totals including setup: original 338.50 s; current project 429.78 s; project before this optimization 554.19 s. The seven non-repair dimensions in this snapshot still call original VBench. Per-dimension project times include isolated worker/environment overhead; original times share a process.
+First-stage totals including setup: original 338.50 s; project 429.78 s; project before optimization 554.19 s. The seven non-repair dimensions in this historical snapshot still call original VBench. Per-dimension project times include isolated worker/environment overhead; original times share a process.
 
 ## Accepted: GRiT group
 
@@ -89,15 +89,19 @@ Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s
 
 `3b72cef` streams every native BGR frame, retains FP32 adjacent-frame absolute errors and the native reducer, and avoids importing Torch or initializing CUDA. Two bounded CPU workers overlap video decoding. Same-32: zero per-video/aggregate error; worker 3.00 → 0.42 s, standalone wall 3.23 s. CPU: 38 passed. [Receipt](../validation/h100-flickering-accelerated-20261008.json).
 
-## Active item: Public modes and final same-32 comparison
+## Completed: Public modes and final same-32 comparison
 
-All seven accelerators have passed their individual numerical gates; Overall's measured benefit depends on current-run feature reuse. Integrate default nine repairs plus seven accelerators, original VBench mode with one native process per selected GPU, strict aggregate/coverage contracts, configuration and skill documentation. Then measure actual complete all-16 command wall times on H100, with no previous-run result-cache hits. Do not infer the final wall time from isolated dimension measurements.
+`a0031ac` integrates default nine repairs plus seven accelerators, original VBench with one native process per selected GPU, strict aggregate/coverage contracts, YAML configuration and the evaluation skill. Locked uv sync/check, CPU overlay, all sixteen CLI helps and 1,482 CPU tests passed (3 skipped). `dfba1b4` and `f93c8c5` add the final collector and strict evidence comparisons; 10 targeted tests pass.
 
-## Subsequent queue
+Final H100 wall clocks, with no previous-run inference hits: **ours 344.60 s**, **official 345.58 s**, **direct original 338.23 s**. Ours improves on 554.19 s by **37.82%** and is **1.88% slower** than direct original. These single measurements establish near parity; the controller-mode difference is too small for a speed-superiority claim. All sixteen dimension timings, coverage, provenance and exact commands are in the [final report](../validation/h100-same32-final-20261008.md) and [JSON receipt](../validation/h100-same32-final-20261008.json).
 
-Dynamic already outperforms its original reference; retain its native protocol. Nine-repair pass is now complete except further changes justified by the final timing comparison. Background retains its existing implementation; Subject's tiny float differences are explicitly recorded above.
+Seven accelerators pass **224/224** per-video gates; maximum relative error is **0.00041985%**. Nine repairs retain all 288 input identities and failure states, with eight exact normalized rows and Subject's maximum score difference **1.1921e-7**. Project coverage remains **459/512** (235/288 repairs); original is **505/512**. Both controller commands correctly exit 1 for partial coverage. The direct upstream loop exits 0 despite seven omitted Color inputs. No missing score is converted into a successful score.
 
-For the seven accelerated dimensions, proceed individually in this order: Appearance Style, Imaging Quality, Aesthetic Quality, Temporal Style, Overall Consistency, Motion Smoothness, Temporal Flickering. Shared encoder work may be prepared when working on its first consumer, with other dimensions remaining unchanged until their own acceptance. Mode routing and final 16-dimensional end-to-end acceptance follow the validated implementations.
+## Scope retained after acceptance
+
+Dynamic retains its native protocol. The nine-repair optimization pass is complete; Background retains its existing implementation, and Subject's tiny float differences are explicitly recorded above. The remaining largest stages are Color, Object Class, Scene and Background. Further optimizations require new isolated evidence and the same unchanged-logic gates.
+
+The seven accelerators were completed individually in the agreed order: Appearance Style, Imaging Quality, Aesthetic Quality, Temporal Style, Overall Consistency, Motion Smoothness, Temporal Flickering. Each consumer was validated before the next implementation; GRiT's four related dimensions were handled together. Overall's speed benefit depends on current-run feature reuse.
 
 Five unvalidated parallel drafts (batch helper and four accelerators) were archived byte-for-byte at `/tmp/vbench-speed32/drafts-seven/` with SHA-256 manifest. They are not active or validated code.
 
