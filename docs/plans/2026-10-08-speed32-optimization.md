@@ -37,7 +37,9 @@ Totals including setup: original 338.50 s; current project 429.78 s; project bef
 
 Completed: discard unused rendering; share byte-identical ObjectDet frame outputs within this run, separately from Color DenseCap; preserve all model settings and scoring. Exact GPU equivalence passed for all repaired input records, semantic outputs and evidence. The two spatial/object consumers avoid 1,024 repeated frame forwards.
 
-Next: profile backbone, proposal/ROI heads and text generation on representative fixed-cohort frames. Optimize only demonstrated redundant work; preserve both raw heads, binding evidence and scores. Re-run the same 32-video group and compare to the retained baseline before committing the next implementation.
+Profiled 64 frames per protocol on H100: ObjectDet takes 5.36 s, including 1.49 s for a redundant second ROI/text pass. Its two raw heads are identical on all 512 cohort frames. Color takes 6.79 s, including 2.62 s primary text generation; its raw heads differ on all 512 frames and must stay separate. Timers are nested; text is included in ROI time.
+
+Candidate: reuse an independently copied ObjectDet ROI output only within the same frame, when model identity, decoder settings and feature/proposal identities match. Both raw evidence heads remain present. CPU contracts: 109 passed, 1 skipped. Next: run the same 32-video GRiT group on H100, compare all raw evidence and scores, and record timing before accepting this optimization or starting another dimension.
 
 ## Subsequent queue
 

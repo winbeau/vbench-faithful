@@ -1,11 +1,13 @@
 """Read-only pinned GRiT adapters retaining both heads' instance evidence.
 
-No task predicates or scores are computed here. Hooking only records returned
-ROI instances; it neither changes proposals nor replaces the official return.
+No task predicates or scores are computed here. Both raw ROI heads are retained.
+Equivalent ObjectDet heads share one forward within a frame, with independent
+output objects; DenseCap keeps its two distinct forwards.
 """
 from __future__ import annotations
 
 from dataclasses import asdict
+from copy import deepcopy
 import hashlib
 import json
 import os
@@ -28,6 +30,49 @@ def predict_instances(model, image):
     run inside the original predictor, unchanged.
     """
     return model.demo.predictor(image)
+
+
+class SameFrameObjectDet:
+    """Elide the pinned model's duplicate ObjectDet ROI/text computation.
+
+    The caller resets this at each predictor boundary. Reuse requires the exact
+    feature/proposal objects, inference mode, identical decoder objects/settings,
+    and a primary call immediately followed by its ObjectDet call. The primary
+    result is copied before downstream heads can mutate it. This is deliberately
+    inapplicable to Color: DenseCap uses a different begin token.
+    """
+
+    def __init__(self, roi):
+        self.roi = roi
+        self.original = roi._forward_box
+        self.reuses = 0
+        self.reset()
+
+    def reset(self):
+        self.pending = None
+
+    def equivalent(self):
+        try:
+            a, b = self.roi.text_decoder, self.roi.text_decoder_det
+            return (not self.roi.training and not a.training and not b.training
+                    and self.roi.test_task == "ObjectDet" and self.roi.beam_size == 1
+                    and type(a) is type(b) and a.textual is b.textual
+                    and a.tokenizer is b.tokenizer and a.beamsearch_decode is b.beamsearch_decode
+                    and a.begin_token_id == b.begin_token_id and a.padding_idx == b.padding_idx)
+        except AttributeError:
+            return False
+
+    def __call__(self, features, proposals, targets=None, task="ObjectDet", det_box=False):
+        previous, self.pending = self.pending, None
+        eligible = targets is None and task == "ObjectDet" and self.equivalent()
+        if (eligible and det_box and previous is not None
+                and previous[0] is features and previous[1] is proposals):
+            self.reuses += 1
+            return previous[2]
+        value = self.original(features, proposals, targets, task=task, det_box=det_box)
+        if eligible and not det_box:
+            self.pending = (features, proposals, deepcopy(value))
+        return value
 
 
 def preflight(checkpoint: Path, upstream: Path | None = None) -> dict:
@@ -110,6 +155,7 @@ class GritEvidenceModel:
         self.device, self.checkpoint = device, checkpoint
         self.model = None
         self.head_outputs = []
+        self.head_reuse = None
         self.cache = None
         cache_root = os.environ.get("VBENCH_EVAL_RUN_INFERENCE_CACHE")
         context = os.environ.get("VBENCH_EVAL_RUN_INFERENCE_CONTEXT")
@@ -126,7 +172,8 @@ class GritEvidenceModel:
         initializer = self.model.initialize_model_det if self.dimension == "object_class" else self.model.initialize_model
         initializer(model_weight=str(self.checkpoint))
         roi = self.model.demo.predictor.model.roi_heads
-        original = roi._forward_box
+        self.head_reuse = SameFrameObjectDet(roi)
+        original = self.head_reuse
         recorder = self
 
         def observed(_roi, *args, **kwargs):
@@ -158,6 +205,7 @@ class GritEvidenceModel:
         self.head_outputs.clear()
         try:
             self._initialize()
+            self.head_reuse.reset()
             with self.torch.no_grad():
                 predictions = predict_instances(self.model, np.ascontiguousarray(image))
             if [r["head"] for r in self.head_outputs] != ["primary", "object"]:
@@ -180,6 +228,9 @@ class GritEvidenceModel:
             return {"evidence": {"status": "failed", "error": f"{type(exc).__name__}: {exc}",
                     "primary": [], "objects": [], "binding": None,
                     "partial_heads": self.head_outputs.copy()}, "captions": None}
+        finally:
+            if self.head_reuse is not None:
+                self.head_reuse.reset()
 
     def _frame(self, image):
         if self.cache is None:
@@ -204,5 +255,6 @@ class GritEvidenceModel:
         if self.cache is not None:
             print("GRiT run inference " + json.dumps({"task": self.dimension,
                 "hits": self.cache.hits, "misses": self.cache.misses,
+                "same_frame_object_head_reuses": self.head_reuse.reuses if self.head_reuse else 0,
                 "scope": "current evaluation only", "cache": str(self.cache.root)}), flush=True)
         return rows
