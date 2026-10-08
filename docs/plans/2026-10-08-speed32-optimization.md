@@ -45,13 +45,17 @@ Profiled 64 frames per protocol on H100: ObjectDet takes 5.36 s, including 1.49 
 
 Profile: 129 distinct semantic requests, 17 batches at size 8; model loading 6.68 s, inference 13.22 s. Representative visual profiling (64 frames) finds caption decoding dominant; tag encoding itself is only 0.14 s. `fed43db` changes only semantic batch size to 32, keeping order, all requests, greedy decoding, token limits and newline stopping. CPU: 41 passed. H100 same-32: scores, diagnostics, captions and raw semantic outputs exact; 32/32 scored. Semantic stage 21.19 → 13.53 s; whole dimension 54.19 → 48.88 s (visual stage varied 33.00 → 35.34 s). Standalone run including setup 56.66 s. [Receipt](../validation/h100-scene-batch32-20261008.json).
 
-## Active item: Human Action
+## Accepted: Human Action
 
-Profile serial prompt parsing, retaining the selected repair-v2.1 compiler and all raw outputs. Other dimensions remain unchanged until acceptance.
+Profile: model loading 6.21 s, 32 serial prompt generations 10.87 s. `a1ba5a2` batches generation, then invokes the original router's prediction, repair-v2.1 compiler and scorer on each original request. CPU: 41 passed, 1 skipped. Same-32 H100 acceptance: 32/32, exact raw text, evidence, diagnostics and scores. Semantic stage 19.28 → 10.51 s; whole dimension 32.98 → 24.85 s. Standalone including setup 31.44 s. [Receipt](../validation/h100-action-batch32-20261008.json).
+
+## Active item: Background Consistency
+
+Profile localization, image encoding and model loading before changing computation. Preserve masks, preprocessing and the selected patch-frame calibration.
 
 ## Subsequent queue
 
-After Human Action acceptance, handle Background Consistency and Subject Consistency individually, prioritizing shared model-load costs only when profiling justifies them. Dynamic already outperforms its original reference; retain its native protocol.
+After Background Consistency acceptance, handle Subject Consistency. Dynamic already outperforms its original reference; retain its native protocol. Revisit the GRiT group's semantic overhead with the validated generation helper before final acceptance if needed.
 
 For the seven accelerated dimensions, proceed individually in this order: Appearance Style, Imaging Quality, Aesthetic Quality, Temporal Style, Overall Consistency, Motion Smoothness, Temporal Flickering. Shared encoder work may be prepared when working on its first consumer, with other dimensions remaining unchanged until their own acceptance. Mode routing and final 16-dimensional end-to-end acceptance follow the validated implementations.
 
