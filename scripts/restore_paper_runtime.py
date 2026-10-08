@@ -124,6 +124,7 @@ def configure_assets(root, semantic):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--manifest", type=Path, default=ROOT / "configs/reproduction/runtime-release.json")
+    p.add_argument("--model-release", type=Path, default=ROOT / "configs/reproduction/model-release.json")
     p.add_argument("--output", type=Path, required=True, help="new directory on an executable Linux filesystem")
     p.add_argument("--downloads", type=Path, required=True, help="resumable download cache, separate from output")
     p.add_argument("--allow-official-fallback", action="store_true")
@@ -138,6 +139,8 @@ def main():
     state_path = root / "restore-state.json"
     identity = {"manifest_sha256": digest(args.manifest), "visual_only": args.visual_only,
                 "archives_only": args.archives_only}
+    if not args.archives_only:
+        identity["model_release_sha256"] = digest(args.model_release)
     state = {**identity, "extracted": []}
     if root.exists():
         if not args.resume or not state_path.is_file():
@@ -163,7 +166,8 @@ def main():
     assets = configure_assets(root, not args.visual_only)
     if not args.archives_only:
         command = [os.sys.executable, str(ROOT / "scripts/prepare_reproduction.py"), "--output", str(root / "selected"),
-                   "--include-models", "--base-model", str(root / "base/Qwen3-8B")]
+                   "--include-models", "--model-release", str(args.model_release.resolve()),
+                   "--base-model", str(root / "base/Qwen3-8B")]
         if args.allow_official_fallback:
             command.append("--allow-official-fallback")
         subprocess.run(command, check=True, env=dict(os.environ, HF_HUB_CACHE=str(args.downloads.resolve() / "hub-cache")))
@@ -174,7 +178,7 @@ def main():
                              allow_fallback=args.allow_official_fallback)
             with ThreadPoolExecutor(max_workers=4) as pool:
                 list(pool.map(base_file, base["files"]))
-    write_json(root / "restore-receipt.json", {"archives": selected, "manifest_sha256": digest(args.manifest),
+    write_json(root / "restore-receipt.json", {"archives": selected, **identity,
                "old_container_required": False, "assets": assets, "selected_models_restored": not args.archives_only})
     print(json.dumps({"restored": str(root), "assets": str(root / "assets.json")}), flush=True)
 

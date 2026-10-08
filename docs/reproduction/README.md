@@ -13,10 +13,12 @@ metadata Repair 方法身份不变。Multiple Objects 的旧遮挡行另见[适�
 六维训练输入、原配置、词表和来源也已补齐。全九维全量样本重新执行视觉/语言模型推理、
 从头训练和所有附表/消融的独立重跑，仍没有完成同等级验收。
 
-资产实际分布在三个地址：私有 [GitHub 代码库](https://github.com/winbeau/vbench-repair)、
-公开 [HF 数据库](https://huggingface.co/datasets/xju-arlab/vbench-repair) 和
-公开 [HF 模型库](https://huggingface.co/xju-arlab/vbench-model)。
-两个 HF 库提供数据、权重和两份获准公开的模型源码；完整工程、本文与执行入口仍在 GitHub。
+当前公开入口是 [GitHub 代码库](https://github.com/winbeau/vbench-faithful)、
+[HF 数据库](https://huggingface.co/datasets/xju-arlab/vbench-repair) 和
+[HF 模型库](https://huggingface.co/winbeau/vbench-faithful)。
+模型库按 `adapters/`、`heads/`、`configs/`、`provenance/` 组织，七份训练权重保持原哈希；
+目录、版本和下载方式见 [模型发布指南](MODELS.md)。早期模型库继续提供锁定的训练源码、
+Dynamic 原始记录和共享冻结 backbone；历史发布收据保留原地址。
 
 ## 已实际验收的层次
 
@@ -53,8 +55,9 @@ uv pip install --python .venv-reproduction/bin/python 'huggingface_hub==1.32.0'
 
 默认先请求 `hf-mirror.com`；`--allow-official-fallback` 显式启用镜像失败后的官方回退。
 恢复过程核对下载与解包哈希，拒绝路径越界、重复成员和覆盖内容不同的已有文件。
-它不启动训练、不调用在线标注服务。可加 `--include-models` 下载六维 adapter 与 tokenizer，
-以及 Dynamic aligned 头和配套 backbone，并核对全部权重。复算不需要模型权重或 GPU。
+它不启动训练、不调用在线标注服务。可加 `--include-models` 从新模型库下载六维 adapter 与配置，
+以及 Dynamic aligned 头和配套 backbone，并核对全部权重。tokenizer 从共享 Qwen 底座读取。
+复算不需要模型权重或 GPU。
 
 输出中的 9 行均值对应同一批四格有定义的样本，不能拿不同分母的单格均值替换：
 
@@ -89,7 +92,7 @@ Dynamic 另见 [选用版本、权重与复现命令](DYNAMIC_ALIGNED.md)。
 | Object Class | 424 条训练输入 | step 300 | 用户指定论文 final，未经 dev 选优 |
 | Color | 465 条训练输入 | step 300 | 用户指定论文 final，未经 dev 选优 |
 
-`--include-models` 同时下载六个 LoRA 及 Dynamic aligned 头/冻结 backbone（合计约 2.8 GB）。
+`--include-models` 同时下载六个 LoRA 及 Dynamic aligned 头/冻结 backbone（合计约 2.7 GB）。
 Dynamic 使用独立的 `models/dynamic_degree/`，不是 PEFT adapter。
 
 `prepare_reproduction.py` 恢复原始 train/dev、配置、K400 词表以及 Object/Color

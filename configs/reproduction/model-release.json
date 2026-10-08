@@ -1,0 +1,96 @@
+{
+  "schema": "vbench-selected-model-release/1",
+  "repo_id": "winbeau/vbench-faithful",
+  "revision": "91d6f98bbd30f9eec232e7820d3c65a449ad4801",
+  "manifest_sha256": "1eb1bc59333a48f8cb6288a888f45f9c77dcd4ebd7c8e738b7bd974bcfdf30e9",
+  "source_release": {
+    "repo_id": "xju-arlab/vbench-model",
+    "revision": "5fe53c4c7eb1a8a4fcd5b6e22f748da1d073a78e"
+  },
+  "files": [
+    {
+      "path": "adapters/color/adapter_config.json",
+      "local_path": "adapters/color/adapter_config.json",
+      "bytes": 885,
+      "sha256": "870cdf52641bfd0859953702be4937256a6faf01b4ce699f45fe1f7cac09ab9d"
+    },
+    {
+      "path": "adapters/color/adapter_model.safetensors",
+      "local_path": "adapters/color/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "3ce18cdc678946ceb195f32e3f99748fbf90cac86a7fa4531ffc020332c4fb29"
+    },
+    {
+      "path": "adapters/human_action/adapter_config.json",
+      "local_path": "adapters/human_action/adapter_config.json",
+      "bytes": 884,
+      "sha256": "180f38ea73791c3e3e2796f3522c38f1df239ce001b36dba3ab9df9d69d9e31d"
+    },
+    {
+      "path": "adapters/human_action/adapter_model.safetensors",
+      "local_path": "adapters/human_action/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "60ebb3afae588fb638bfeb3c9a75daf1c7e8e43455556a67e22cfd9b2574edc4"
+    },
+    {
+      "path": "adapters/multiple_objects/adapter_config.json",
+      "local_path": "adapters/multiple_objects/adapter_config.json",
+      "bytes": 884,
+      "sha256": "37e4a1a37daa2aae1cec35c18fc5fb8e32851845c1459fdbe863c7f89773c1f4"
+    },
+    {
+      "path": "adapters/multiple_objects/adapter_model.safetensors",
+      "local_path": "adapters/multiple_objects/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "eb036c6e7b123a4243c3f22c03f87d4040bc51e9b875a7319346a6c16b03f771"
+    },
+    {
+      "path": "adapters/object_class/adapter_config.json",
+      "local_path": "adapters/object_class/adapter_config.json",
+      "bytes": 885,
+      "sha256": "7625fb833a71c8720e529ca15906d539638cfb33bda9a782fe8f508e598ea24a"
+    },
+    {
+      "path": "adapters/object_class/adapter_model.safetensors",
+      "local_path": "adapters/object_class/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "a459e0d273348433119aa41539d5abde7c0c9cc1d92ff491374a08886d1cdaf2"
+    },
+    {
+      "path": "adapters/scene/adapter_config.json",
+      "local_path": "adapters/scene/adapter_config.json",
+      "bytes": 884,
+      "sha256": "cf5f7388c53b3f019b3569018f8c03480016841f8c539d3934a3d810237ff31c"
+    },
+    {
+      "path": "adapters/scene/adapter_model.safetensors",
+      "local_path": "adapters/scene/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "0b8c796aa7c2e39ccdbd0f2faf37bddfc729c7588f11d0928853637b8486d6eb"
+    },
+    {
+      "path": "adapters/spatial_relationship/adapter_config.json",
+      "local_path": "adapters/spatial_relationship/adapter_config.json",
+      "bytes": 884,
+      "sha256": "24fc06021a114def99315f6a0b01f9e80bc2ffda26a047df7d7f13ff4a47be0c"
+    },
+    {
+      "path": "adapters/spatial_relationship/adapter_model.safetensors",
+      "local_path": "adapters/spatial_relationship/adapter_model.safetensors",
+      "bytes": 174655536,
+      "sha256": "da961e816a16900e4a4f6c4aac51c19a4444c7bc1a3e72ab22094bbd4ae1b363"
+    },
+    {
+      "path": "configs/training/spatial_relationship.json",
+      "local_path": "adapters/spatial_relationship/training_config.json",
+      "bytes": 1156,
+      "sha256": "574f77048e46e7114f42d86e4385767f33df05802b274d4aec3daa2a3c088d1e"
+    },
+    {
+      "path": "heads/dynamic_degree/aligned.pt",
+      "local_path": "models/dynamic_degree/aligned.pt",
+      "bytes": 207940,
+      "sha256": "6dcfbdce2e604cdd669e54015fee34e034c8004726d06c46611532f451ca8a53"
+    }
+  ]
+}

@@ -7,19 +7,19 @@
 
 ## 从新环境恢复
 
-需要私有 GitHub 仓库权限、Linux amd64、Ubuntu 24.04 兼容系统库和可用 NVIDIA 驱动。
+需要 Linux amd64、Ubuntu 24.04 兼容系统库和可用 NVIDIA 驱动。
 CUDA 运行库、Detectron2 编译产物、Python 3.10.20 视觉环境、Python 3.11.14 语义环境均已归档。
 恢复目录必须在允许执行程序的文件系统上，不能放在挂载为 `noexec` 的 `/dev/shm`。
 建议为下载缓存、解包目录、Qwen 基座和测试产物预留 100 GB。
 
 ```bash
-git clone -b winbeau git@github.com:winbeau/vbench-repair.git
-cd vbench-repair
+git clone https://github.com/winbeau/vbench-faithful.git
+cd vbench-faithful
 # Ubuntu 24.04；已有这些系统依赖时可跳过。
 sudo apt-get update
 sudo apt-get install -y python3-venv git ffmpeg libgl1 libglib2.0-0 libsm6 libxext6 libgomp1
-python3 -m venv output/bootstrap
-output/bootstrap/bin/pip install 'huggingface_hub==1.32.0' requests
+uv venv output/bootstrap --python 3.11.14
+uv pip install --python output/bootstrap/bin/python 'huggingface_hub==1.32.0' requests
 output/bootstrap/bin/python scripts/restore_paper_runtime.py \
   --output /absolute/path/vbench-runtime \
   --downloads /absolute/path/vbench-downloads \
@@ -28,8 +28,10 @@ output/bootstrap/bin/python scripts/restore_paper_runtime.py \
 
 所有 HF 读取先尝试 `hf-mirror.com`；只有失败后才使用允许的官方回退。
 大归档按 128 MiB 分片下载，逐片及重组后均核对 SHA256；已下载且哈希正确的文件可复用。
-若解包后下载模型中断，在同一命令后加 `--resume` 续跑；仅接受本脚本创建且 manifest/模式相同的目录。
+若解包后下载模型中断，在同一命令后加 `--resume` 续跑；仅接受本脚本创建且运行环境清单、选定模型清单和模式相同的目录。
 [`runtime-release.json`](../../configs/reproduction/runtime-release.json) 固定每份归档及分片的 HF revision。
+[`model-release.json`](../../configs/reproduction/model-release.json) 固定新模型库的七份训练权重、六份 adapter 配置及 Spatial 的四方向配置，
+目录与共享底座说明见 [模型发布指南](MODELS.md)。
 恢复不会读取旧容器的 `/root/wenbiao_zhao`，也不需要旧的 Python 环境。
 
 脚本恢复所有评分依赖、六个选定 LoRA、Dynamic aligned-v1 评分头与 V-JEPA backbone，
@@ -37,7 +39,7 @@ output/bootstrap/bin/python scripts/restore_paper_runtime.py \
 Qwen 的十二个必需文件另有完整哈希清单。数据和模型的原发布 revision 保持固定，
 后续增加运行环境归档不改变原论文数据。
 
-公开运行环境只包含第三方依赖、其必要源码和模型资产；私有项目源码仍在 GitHub。
+运行环境归档只包含第三方依赖、其必要源码和模型资产；项目源码在公开 GitHub 仓库。
 归档已去掉旧项目的 editable import hook、本地安装来源 URL、Git remote 配置和 Python 字节码。
 VBench 1.0 源码采用 235 个原始文件的逐文件固定清单，不依赖 Git 历史；
 额外文件、缺失文件或源码修改都会拒绝加载。账户令牌、SSH 密钥及其他项目均不在恢复包中。

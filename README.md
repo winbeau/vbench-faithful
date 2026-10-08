@@ -9,7 +9,7 @@
 
 <sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Corresponding author
 
-[Data](https://huggingface.co/datasets/xju-arlab/vbench-repair) · [Models](https://huggingface.co/xju-arlab/vbench-model) · [Quick Start](#quick-start) · [Reproduction](docs/reproduction/README.md) · [Training & Data](docs/training.md)
+[Data](https://huggingface.co/datasets/xju-arlab/vbench-repair) · [Models](https://huggingface.co/winbeau/vbench-faithful) · [Quick Start](#quick-start) · [Reproduction](docs/reproduction/README.md) · [Training & Data](docs/training.md)
 
 </div>
 
@@ -46,6 +46,8 @@ output/bootstrap/bin/python scripts/restore_paper_runtime.py \
 ```
 
 The root uv environment uses Python **3.11.14**. The evaluator automatically prepares each dimension's environment and shares verified model assets and compatible dependencies. For system packages or interrupted downloads (`--resume`), see the [runtime recovery guide](docs/reproduction/CONTAINER_RESET.md).
+
+The trained models are published in [`winbeau/vbench-faithful`](https://huggingface.co/winbeau/vbench-faithful): six LoRA adapters under `adapters/` and the Dynamic head under `heads/`, with selected configurations and provenance. The recovery command downloads the pinned release and checks every weight and adapter configuration. Shared pretrained bases are downloaded once; see the [model layout and release guide](docs/reproduction/MODELS.md).
 
 ### 2. Prepare your videos
 
