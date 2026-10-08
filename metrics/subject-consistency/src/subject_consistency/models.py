@@ -219,6 +219,12 @@ class OfficialDinoPatchExtractor(OfficialDinoFeatureExtractor):
     backbone: it isolates "localised evidence" from "changed representation".
     """
 
+    def __init__(self, device, config, upstream, *, frame_batch_size=1):
+        if not isinstance(frame_batch_size, int) or frame_batch_size < 1:
+            raise ValueError("DINO frame batch size must be a positive integer")
+        super().__init__(device, config, upstream)
+        self.frame_batch_size = frame_batch_size
+
     def extract_patches(self, video: Path):
         frames = self.module.load_video(str(video))
         return self.patches_from_frames(frames)
@@ -230,18 +236,20 @@ class OfficialDinoPatchExtractor(OfficialDinoFeatureExtractor):
         tokens = []
         grid = None
         with self.module.torch.no_grad():
-            for image in images:
-                layers = self.model.get_intermediate_layers(image.unsqueeze(0).to(self.device), n=1)
+            batch_size = getattr(self, "frame_batch_size", 1)
+            for start in range(0, len(images), batch_size):
+                batch = images[start:start + batch_size]
+                layers = self.model.get_intermediate_layers(batch.to(self.device), n=1)
                 # Pool the backbone's patch tokens, then L2-normalize the
                 # frame subject vector in subject_evidence. No per-token norm.
                 patches = layers[0][:, 1:, :]
-                tokens.append(patches.squeeze(0))
+                tokens.append(patches)
                 if grid is None:
-                    height, width = int(image.shape[-2]), int(image.shape[-1])
+                    height, width = int(batch.shape[-2]), int(batch.shape[-1])
                     grid = (height // patch_size, width // patch_size)
         if not tokens:
             raise ValueError("video contains no decoded frames")
-        stacked = self.module.torch.stack(tokens, dim=0)
+        stacked = self.module.torch.cat(tokens, dim=0)
         if grid[0] * grid[1] != int(stacked.shape[1]):
             raise ValueError("patch grid does not match the token count")
         return stacked, grid

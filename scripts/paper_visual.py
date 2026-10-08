@@ -165,7 +165,7 @@ def repair(rows, dim, assets, output, compiled):
         set_seed(42)
         provider = load_hybrid_provider(Path(assets["maskrcnn"]), Path(assets["mobilesam"]), device)
         dino = build_dino_config(assets["dino_repo"], assets["dino"])
-        extractor = OfficialDinoPatchExtractor(device, dino, Path(assets["vbench"]))
+        extractor = OfficialDinoPatchExtractor(device, dino, Path(assets["vbench"]), frame_batch_size=16)
         results = []
         for row in rows:
             video = Path(row["video"])
