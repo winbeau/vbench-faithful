@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fafbf9">
+  <title>VBench Repair · Toward Faithful Video Evaluation</title>
+  <meta name="description" content="What does a video score actually measure? Explore three failure mechanisms, controlled LTX video counterfactuals, and targeted repairs across nine VBench dimensions.">
+  <meta property="og:title" content="Aligning VBench Scores with Their Intended Targets">
+  <meta property="og:description" content="Three failure mechanisms. Nine dimensions. An interactive counterfactual audit of video evaluation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://winbeau.github.io/vbench-repair-page/">
+  <meta property="og:image" content="https://winbeau.github.io/vbench-repair-page/assets/fig2.png">
+  <link rel="canonical" href="https://winbeau.github.io/vbench-repair-page/">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="VBench Repair home"><span class="mark" aria-hidden="true">v<span>↗</span></span> VBench <strong>Repair</strong></a>
+    <nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#examples">Explore the audit</a><a href="#results">Results</a><a href="#cite">Cite</a></nav>
+    <a class="header-link" href="https://github.com/winbeau/vbench-repair" title="Source repository; access required" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="main">
+    <section class="hero content" id="top" aria-labelledby="paper-title">
+      <p class="eyebrow"><span class="status-dot"></span> A counterfactual audit of video evaluation</p>
+      <h1 id="paper-title">Aligning <span>VBench</span> Scores<br class="desktop-break"> with Their Intended Targets</h1>
+      <p class="hero-subtitle">Toward Faithful Video Evaluation</p>
+      <p class="authors">Wenbiao Zhao<sup>1,*</sup><span> · </span>Zichao Nie<sup>2,*</sup><span> · </span>Shuyuan Meng<sup>1</sup><br> Meng Wang<sup>2</sup><span> · </span>Haiwei Xue<sup>3</sup><span> · </span>Panpan Zheng<sup>1,†</sup></p>
+      <p class="affiliations"><span><sup>1</sup> Xinjiang University</span><span><sup>2</sup> Tsinghua University</span><span><sup>3</sup> HKUST</span></p>
+      <p class="author-notes">* Equal contribution <span>† Corresponding author</span></p>
+      <div class="resource-links">
+        <a class="button primary" href="assets/paper.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z M14 3v5h4 M9 12h6 M9 16h6"/></svg> Read the paper</a>
+        <a class="button" href="https://github.com/winbeau/vbench-repair" title="Source repository; access required" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16"/></svg> Code</a>
+        <a class="button" href="https://huggingface.co/datasets/xju-arlab/vbench-repair" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></svg> Dataset</a>
+        <a class="button" href="https://huggingface.co/xju-arlab/vbench-model" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7zm-9 5 9 5 9-5m-9 5v10"/></svg> Models</a>
+      </div>
+      <p class="hero-hook">A good score should change for the <em>right reasons.</em><br>We test whether video evaluators actually do.</p>
+      <a class="explore-link" href="#examples">See the counterfactuals <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="overview content" id="overview" aria-labelledby="overview-title">
+      <div class="section-line"><p class="eyebrow" id="overview-title">The big picture</p><span>3 mechanisms <i> / </i> 9 audited dimensions</span></div>
+      <figure class="overview-figure">
+        <button class="figure-open" type="button" aria-label="Enlarge Figure 2" data-open-figure>
+          <img src="assets/fig2.png" width="2048" height="1141" alt="Figure 2. Nine video evaluation dimensions arranged around a seaside scene. Three repair branches address target substitution with semantic parsing, nuisance entanglement with region isolation and a motion readout, and evidence collapse with signed spatial geometry." fetchpriority="high">
+          <span class="figure-zoom" aria-hidden="true">↗ View full figure</span>
+        </button>
+        <figcaption><span>Figure 2.</span> Overview of target–evidence misalignment and repair strategies. <a href="assets/fig2.pdf" target="_blank" rel="noopener">Vector PDF ↗</a></figcaption>
+      </figure>
+      <div class="thesis"><h2>Same target.<br><em>Different score?</em></h2><p>Video benchmarks turn complex properties into numbers. But a proxy can replace the intended target, irrelevant evidence can leak into the score, and useful information can disappear along the way. We trace these failures to their source and repair the responsible stage.</p></div>
+    </section>
+
+    <section class="audit-intro content" id="examples" aria-labelledby="examples-title">
+      <p class="eyebrow">Watch the evidence</p>
+      <h2 id="examples-title">Three ways a score can lose the plot.</h2>
+      <p>One LTX-generated scene. Three controlled questions.<br>Play each pair, inspect the intervention, and compare VBench with Ours.</p>
+      <div class="reading-key"><span><i class="dot origin"></i> VBench 1.0</span><span><i class="dot repair"></i> Ours</span><span class="sample-label">LTX-2.3 · 5.04 s · 24 fps</span></div>
+    </section>
+
+    <nav class="chapter-nav" aria-label="Audit chapters">
+      <div class="content"><a href="#target-substitution"><span>01</span> Target Substitution</a><a href="#nuisance-entanglement"><span>02</span> Nuisance Entanglement</a><a href="#evidence-collapse"><span>03</span> Evidence Collapse</a></div>
+    </nav>
+
+    <section class="chapter content" id="target-substitution" aria-labelledby="target-title">
+      <div class="chapter-heading"><span class="chapter-number">01</span><div><p class="eyebrow">The wrong proxy</p><h2 id="target-title">Target Substitution</h2></div><span class="contract-label">Invariance test <span aria-hidden="true">≈</span></span></div>
+      <p class="chapter-lede">Change the wording. <em>Keep the meaning.</em></p>
+      <p class="chapter-description">“A street” and “a road” describe the same visible setting. A semantic evaluator should agree, even when its frame captions use a different word.</p>
+      <div class="demo" data-case="scene"><p class="loading">Loading the video comparison…</p></div>
+      <div class="mechanism-note"><div><span class="note-label">Where it goes wrong</span><p>Exact word matching substitutes a lexical proxy for scene agreement.</p></div><div><span class="note-label">What we repair</span><p>A semantic verifier judges the query against the same frame-caption evidence.</p></div></div>
+      <p class="dimension-strip">This mechanism also appears in <span>Human Action</span><span>Object Class</span><span>Multiple Objects</span><span>Color</span></p>
+    </section>
+
+    <section class="chapter-band">
+      <div class="chapter content" id="nuisance-entanglement" aria-labelledby="nuisance-title">
+        <div class="chapter-heading"><span class="chapter-number">02</span><div><p class="eyebrow">The wrong evidence</p><h2 id="nuisance-title">Nuisance Entanglement</h2></div><span class="contract-label">Invariance test <span aria-hidden="true">≈</span></span></div>
+        <p class="chapter-lede">Change the background. <em>Keep the car.</em></p>
+        <p class="chapter-description">We blur the upper background during the first 1.25 seconds. The car stays intact. Should its identity-consistency score move with the scenery?</p>
+        <div class="demo" data-case="subject"><p class="loading">Loading the video comparison…</p></div>
+        <div class="mechanism-note"><div><span class="note-label">Where it goes wrong</span><p>Whole-frame features entangle the subject with its surroundings.</p></div><div><span class="note-label">What we repair</span><p>Localize the subject independently, then compare isolated DINO patch evidence.</p></div></div>
+        <p class="dimension-strip">Related repairs <span>Background Consistency</span><span>Dynamic Degree</span></p>
+      </div>
+    </section>
+
+    <section class="chapter content" id="evidence-collapse" aria-labelledby="collapse-title">
+      <div class="chapter-heading"><span class="chapter-number">03</span><div><p class="eyebrow">The missing distinction</p><h2 id="collapse-title">Evidence Collapse</h2></div><span class="contract-label sensitivity">Sensitivity test <span aria-hidden="true">↘</span></span></div>
+      <p class="chapter-lede">Flip the scene. <em>The relation should flip, too.</em></p>
+      <p class="chapter-description">Keep the query “a car to the left of a bicycle,” then mirror the video. The objects remain, but the requested relation no longer holds.</p>
+      <div class="demo" data-case="spatial"><p class="loading">Loading the video comparison…</p></div>
+      <div class="mechanism-note"><div><span class="note-label">Where it goes wrong</span><p>Absolute displacement preserves separation and discards left versus right.</p></div><div><span class="note-label">What we repair</span><p>Preserve ordered object roles and the sign of their spatial displacement.</p></div></div>
+      <p class="geometry-line"><span>VBench <code>|x<sub>car</sub> − x<sub>bicycle</sub>|</code></span><svg viewBox="0 0 44 20" aria-hidden="true"><path d="M0 10h40m-8-7 8 7-8 7"/></svg><span>Ours <code>x<sub>car</sub> − x<sub>bicycle</sub> &lt; 0</code></span></p>
+    </section>
+
+    <section class="construction content" id="construction" aria-labelledby="construction-title">
+      <div><p class="eyebrow">Behind the counterfactual</p><h2 id="construction-title">Change one thing.<br><em>Know what should happen.</em></h2><p>Each comparison starts from the same LTX clip. The intervention specifies whether the score should remain stable or respond to a changed target.</p></div>
+      <ol class="construction-steps"><li><span>1</span><div><h3>Hold the target fixed—or change it deliberately</h3><p>Specify the query and the behavioral response that the intervention tests.</p></div></li><li><span>2</span><div><h3>Make a controlled intervention</h3><p>Substitute a synonym, blur a fixed background band, or reflect every frame horizontally.</p></div></li><li><span>3</span><div><h3>Score both versions independently</h3><p>The scoring models never receive the construction region or the paired reference.</p></div></li></ol>
+      <details class="provenance"><summary>Construction details &amp; score provenance <span aria-hidden="true">+</span></summary><div><p>The LTX demonstration is an illustrative three-pair experiment, separate from the paper populations below. Scores use full-resolution, lossless RGB masters; the web videos are compressed viewing copies. The first 30 of 121 frames receive the background intervention in rows 0–449; the lower 638 rows and all later frames are verified unchanged. Reflection and re-encoding are checked against decoded RGB frames.</p><p id="inference-provenance"></p><p><a href="data/demo-scores.json">Per-video scores &amp; inference receipt ↗</a> <a href="data/construction.json">Construction checks ↗</a> <a href="data/asset-manifest.json">Asset hashes ↗</a></p></div></details>
+    </section>
+
+    <section class="results-section" id="results" aria-labelledby="results-title">
+      <div class="content">
+        <div class="results-heading"><div><p class="eyebrow">Beyond the illustration</p><h2 id="results-title">Nine dimensions.<br>Explicit behavioral tests.</h2></div><p>Frozen results reported in the paper.<br>These are population means, separate from the LTX examples above.</p></div>
+        <div class="result-tabs" role="tablist" aria-label="Result contract"><button role="tab" type="button" id="tab-invariance" aria-selected="true" aria-controls="results-panel" data-results="invariance">Invariance <span>6 dimensions</span></button><button role="tab" type="button" id="tab-sensitivity" aria-selected="false" tabindex="-1" aria-controls="results-panel" data-results="sensitivity">Sensitivity <span>3 dimensions</span></button></div>
+        <div id="results-panel" role="tabpanel" aria-labelledby="tab-invariance" tabindex="0"><p id="result-explainer"></p><div class="table-scroll"><table class="results-table"><caption class="sr-only">Paper results: original to counterfactual mean score</caption><thead><tr><th scope="col">Dimension</th><th scope="col">VBench <span>Original → CF</span></th><th scope="col">Ours <span>Original → CF</span></th><th scope="col">Complete pairs</th></tr></thead><tbody id="result-rows"></tbody></table></div><p class="table-note" id="table-note"></p></div>
+        <p class="results-scope">Stability is a behavioral contract, not a claim of overall accuracy. Missing scores and construction eligibility affect the reported denominators. Dynamic Degree measures relative motion on a learned scale; batch stability does not imply per-video invariance. <a href="data/paper-results.json">Download table data ↗</a></p>
+      </div>
+    </section>
+
+    <section class="abstract-section content" aria-labelledby="abstract-title"><p class="eyebrow" id="abstract-title">Abstract</p><p>Fine-grained video benchmarks rely on scoring implementations that faithfully measure their stated properties. We audit nine VBench dimensions and identify three recurring forms of target–evidence misalignment: Target Substitution, Nuisance Entanglement, and Evidence Collapse. Controlled counterfactual tests examine whether scores respond to changes in the target property and remain stable under irrelevant variation. We develop targeted repairs through semantic target parsing, region isolation, a learned motion readout, and preservation of discriminative information. The audit exposes unintended responses to synonymous wording, object and attribute bindings, background variation, local texture jitter, and spatial direction. It also reveals the limits of text-side repair: recovering ordered relation triples cannot restore direction already discarded by an unsigned geometric backend. This framework connects implementation-level diagnoses to explicit behavioral tests and clarifies which stage of a scoring pipeline requires repair.</p></section>
+
+    <section class="citation content" id="cite" aria-labelledby="cite-title"><div class="citation-heading"><h2 id="cite-title">Citation</h2><button class="text-button" type="button" id="copy-citation">Copy BibTeX <span aria-hidden="true">⧉</span></button></div><pre><code id="bibtex">@misc{zhao2026aligningvbench,
+  title  = {Aligning {VBench} Scores with Their Intended Targets:
+            Toward Faithful Video Evaluation},
+  author = {Zhao, Wenbiao and Nie, Zichao and Meng, Shuyuan and
+            Wang, Meng and Xue, Haiwei and Zheng, Panpan},
+  year   = {2026},
+  note   = {Manuscript},
+  url    = {https://github.com/winbeau/vbench-repair}
+}</code></pre><span id="copy-status" class="sr-only" role="status"></span></section>
+  </main>
+
+  <footer class="content"><a class="wordmark" href="#top">VBench <strong>Repair</strong><span aria-hidden="true">↗</span></a><p>Measure the property. Preserve the meaning.</p><a href="https://if-lab-pku.github.io/Pyramid-Forcing/" target="_blank" rel="noopener">Design inspiration: Pyramid Forcing ↗</a></footer>
+  <dialog id="figure-dialog" aria-label="Figure 2 enlarged"><button type="button" class="dialog-close" aria-label="Close enlarged figure">×</button><img src="assets/fig2.png" width="2048" height="1141" alt="Enlarged method overview, Figure 2"><a href="assets/fig2.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></dialog>
+  <noscript><div class="noscript">JavaScript enables synchronized videos and score comparisons. You can still <a href="assets/paper.pdf">read the paper</a>, <a href="data/demo-scores.json">download the demonstration scores</a>, and <a href="assets/coast-base.mp4">watch the original LTX clip</a>.</div></noscript>
+</body>
+</html>

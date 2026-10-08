@@ -1,0 +1,134 @@
+{
+  "schema": "vbench-paper-results/1",
+  "scope": "Frozen manuscript population means; these are not scores for the LTX illustration.",
+  "sources": [
+    {
+      "file": "tables/invariance.tex",
+      "sha256": "544a4e92bd6480c97f9561be1b1ff495914d4bb7109ddd006de3a15047c0e7a8"
+    },
+    {
+      "file": "tables/sensitivity.tex",
+      "sha256": "b2ac398fa521f6ac10656211c6a0a3ea847f2732551fcd703b5d0219477ad057"
+    }
+  ],
+  "invariance": {
+    "description": "Keep the target unchanged: scores should remain stable under irrelevant variation. Original \u2192 counterfactual means.",
+    "note": "Dynamic: 450 sources, each averaged over two counterfactual seeds (900 interventions); these prompts were previously exposed. Object Class uses the metadata-based repair reported in the original table.",
+    "rows": [
+      {
+        "dimension": "Scene",
+        "origin": [
+          0.3059,
+          0.0541
+        ],
+        "repair": [
+          0.6909,
+          0.6947
+        ],
+        "pairs": "200"
+      },
+      {
+        "dimension": "Human Action",
+        "origin": [
+          0.8892,
+          0.0
+        ],
+        "repair": [
+          0.8892,
+          0.8892
+        ],
+        "pairs": "1,200"
+      },
+      {
+        "dimension": "Object Class",
+        "origin": [
+          0.9911,
+          0.0
+        ],
+        "repair": [
+          0.9911,
+          0.9911
+        ],
+        "pairs": "14"
+      },
+      {
+        "dimension": "Subject Consistency",
+        "origin": [
+          0.9364,
+          0.8164
+        ],
+        "repair": [
+          0.9514,
+          0.9417
+        ],
+        "pairs": "240"
+      },
+      {
+        "dimension": "Background Consistency",
+        "origin": [
+          0.9468,
+          0.9347
+        ],
+        "repair": [
+          0.963,
+          0.9596
+        ],
+        "pairs": "188"
+      },
+      {
+        "dimension": "Dynamic Degree",
+        "origin": [
+          0.68,
+          0.8578
+        ],
+        "repair": [
+          0.6293,
+          0.623
+        ],
+        "pairs": "450 sources \u00b7 2 seeds"
+      }
+    ]
+  },
+  "sensitivity": {
+    "description": "Change the target property: scores should respond to the intervention. Original \u2192 counterfactual means.",
+    "note": "Spatial uses video mirroring (106 complete pairs). Multiple Objects: 505/980 complete pairs. Color: 3/5 complete pairs; its paper row uses the metadata-based repair. Undefined scores are excluded; the small Color denominator limits interpretation.",
+    "rows": [
+      {
+        "dimension": "Spatial Relationship",
+        "origin": [
+          0.5597,
+          0.5322
+        ],
+        "repair": [
+          0.4442,
+          0.0094
+        ],
+        "pairs": "106"
+      },
+      {
+        "dimension": "Multiple Objects",
+        "origin": [
+          0.4142,
+          0.0277
+        ],
+        "repair": [
+          0.3983,
+          0.0178
+        ],
+        "pairs": "505 / 980"
+      },
+      {
+        "dimension": "Color Consistency",
+        "origin": [
+          1.0,
+          0.7167
+        ],
+        "repair": [
+          0.9583,
+          0.1875
+        ],
+        "pairs": "3 / 5"
+      }
+    ]
+  }
+}
