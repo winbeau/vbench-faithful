@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run all 16 VBench dimensions with official or nine selected paper repairs."""
+"""Run original VBench or nine selected repairs plus seven accelerated dimensions."""
 from __future__ import annotations
 
 import argparse
@@ -11,6 +11,7 @@ from pathlib import Path
 from queue import Empty, Queue
 import signal
 import subprocess
+import tempfile
 import threading
 import time
 
@@ -20,12 +21,16 @@ from vbench_audit_core.eval_cache import ArtifactCache, identity
 from vbench_audit_core.eval_config import load_config
 from vbench_audit_core.eval_logging import EvalLogger
 from vbench_audit_core.environments import prepare_environment
+from vbench_audit_core.worker_rpc import JsonWorker
 
 
 def routes(dimensions, backend):
+    backend = {"ours": "repair", "official": "origin"}.get(backend, backend)
+    if backend not in {"origin", "repair", "both"}:
+        raise ValueError(f"Unknown evaluation backend: {backend}")
     return [(d, b) for d in dimensions for b in
-            (("origin", "repair") if backend == "both" and d in PAPER else
-             ("repair",) if backend == "repair" and d in PAPER else ("origin",))]
+            (("origin", "repair" if d in PAPER else "accelerated") if backend == "both" else
+             ("repair" if d in PAPER else "accelerated",) if backend == "repair" else ("origin",))]
 
 
 def writable_path(path):
@@ -90,6 +95,15 @@ def validate_payload(payload, chosen, backend=None):
             raise ValueError("Official aggregate must be finite")
         summary.update(official_aggregate=value, score=value if summary["complete"] else None,
                        aggregation="official_upstream")
+    if backend == "accelerated":
+        if summary["complete"] and ("aggregate" not in payload or payload.get("aggregation") != "vbench_native_reducer"):
+            raise ValueError("Successful accelerated worker must return its native reducer aggregate")
+        if "aggregate" in payload:
+            value = payload["aggregate"]
+            if not isinstance(value, (int, float)) or not math.isfinite(value):
+                raise ValueError("Accelerated aggregate must be finite")
+            summary.update(aggregate=value, score=value if summary["complete"] else None,
+                           aggregation="vbench_native_reducer")
     return summary
 
 
@@ -101,8 +115,8 @@ class Workers:
         self.processes = set()
         self.stopped = threading.Event()
 
-    def run(self, command, env, log):
-        with Path(log).open("w") as stream:
+    def start(self, command, env, log):
+        with Path(log).open("a") as stream:
             with self.lock:
                 if self.stopped.is_set():
                     raise RuntimeError("Evaluation interrupted")
@@ -110,18 +124,26 @@ class Workers:
                                          stdout=stream, stderr=subprocess.STDOUT,
                                          start_new_session=True)
                 self.processes.add(child)
-            try:
-                code = child.wait()
-                if code:
-                    raise RuntimeError(f"Worker exited {code}; see {log}")
-            finally:
-                # A failed/finished leader may leave descendants in its group.
-                try:
-                    os.killpg(child.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-                with self.lock:
-                    self.processes.discard(child)
+        return child
+
+    def finish(self, child):
+        # A failed/finished leader may leave descendants in its group.
+        try:
+            os.killpg(child.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        child.wait()
+        with self.lock:
+            self.processes.discard(child)
+
+    def run(self, command, env, log):
+        child = self.start(command, env, log)
+        try:
+            code = child.wait()
+            if code:
+                raise RuntimeError(f"Worker exited {code}; see {log}")
+        finally:
+            self.finish(child)
 
     def stop(self):
         self.stopped.set()
@@ -147,6 +169,8 @@ class Workers:
                     os.killpg(child.pid, signal.SIGKILL)
                 except ProcessLookupError:
                     pass
+                with self.lock:
+                    self.processes.discard(child)
 
 
 def worker_env(dim, gpu, assets):
@@ -155,6 +179,7 @@ def worker_env(dim, gpu, assets):
                CUDA_VISIBLE_DEVICES=gpu, HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1",
                VBENCH_AUDIT_UPSTREAM=assets["vbench"], VBENCH_CACHE_DIR=assets["vbench_cache"])
     env.pop("PYTHONHOME", None)
+    env.pop("VBENCH_EVAL_UPSTREAM_ONLY", None)
     if assets.get("hf_home"):
         env["HF_HOME"] = assets["hf_home"]
     return env
@@ -185,13 +210,17 @@ def evaluate(config, *, plan_only=False):
         raise ValueError("No input for requested dimensions: " + str([d for d, n in counts.items() if not n]))
     profile = json.loads((ROOT / "configs/reproduction/paper-methods.json").read_text())
     methods = {f"{d}/{b}": profile["methods"][d] if b == "repair" else
+               {"implementation": "project accelerated", "reference_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+                "numerical_acceptance": {"relative": .01, "absolute_floor": 1e-6,
+                                         "validated_cohort": "same32-20261008"}} if b == "accelerated" else
                {"implementation": "official VBench 1.0", "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"}
                for d, b in jobs}
     devices = gpu_tokens(config.gpus, os.environ.get("CUDA_VISIBLE_DEVICES"))
     plan = {"schema": "vbench-eval/1", "config": config.as_dict(), "input_count": counts,
             "input_sha256": digest(config.input), "assets_sha256": digest(config.assets),
             "methods": methods, "gpu_tokens": devices,
-            "official_fallback": [d for d in config.dimensions if d not in PAPER and config.backend != "origin"]}
+            "official_fallback": [], "accelerated_dimensions": [d for d, b in jobs if b == "accelerated"],
+            "official_execution": "original compute APIs, one persistent process per selected GPU"}
     if plan_only:
         print(json.dumps(plan, ensure_ascii=False, indent=2))
         return 0
@@ -203,16 +232,17 @@ def evaluate(config, *, plan_only=False):
     output.mkdir(parents=True, exist_ok=False)
     workers = Workers()
     report = {"schema": "vbench-eval/1", "complete": False, "dimensions": {},
-              "requested_backend": config.backend, "official_fallback": plan["official_fallback"]}
+              "requested_backend": config.backend, "official_fallback": [],
+              "accelerated_dimensions": plan["accelerated_dimensions"]}
     with EvalLogger(output, len(jobs)) as logger:
         logger.event("verify", message="Checking selected source and model hashes")
         setup = {"inputs": input_seconds}
         tick = time.monotonic()
         checked = {}
-        for backend in ("origin", "repair"):
+        for backend in ("origin", "repair", "accelerated"):
             dims = [d for d, b in jobs if b == backend]
             if dims:
-                checked.update(verify_assets(assets, dims, backend, workers=4))
+                checked.update(verify_assets(assets, dims, "origin" if backend == "accelerated" else backend, workers=4))
         setup["asset_verification"] = time.monotonic() - tick
         logger.event("verified", message=f"Asset hashes: {setup['asset_verification']:.2f}s")
         tick = time.monotonic()
@@ -235,6 +265,8 @@ def evaluate(config, *, plan_only=False):
         write_json(output / "plan.json", plan)
         write_json(output / "assets.json", assets)
         cache = ArtifactCache(config.cache_dir)
+        official_runtimes, official_workers = {}, {}
+        socket_folder = tempfile.TemporaryDirectory(prefix="vbench-origin-")
 
         def run_dimension(dim, gpu):
             chosen = [row for row in inputs if dim in row["dimensions"]]
@@ -249,12 +281,15 @@ def evaluate(config, *, plan_only=False):
                 stage_started = time.monotonic()
                 environment_seconds = 0.0
                 worker_seconds = 0.0
-                if role not in runtimes:
+                selected_runtimes = official_runtimes if name == "origin" else runtimes
+                runtime_key = gpu if name == "origin" else role
+                if runtime_key not in selected_runtimes:
                     logger.event("environment", dimension=dim, message=f"Preparing {role} environment", gpu=gpu)
-                    runtimes[role] = prepare_environment(dim, role, Path(assets[role + "_python"]), config.env_dir)
+                    selected_runtimes[runtime_key] = prepare_environment("official" if name == "origin" else dim,
+                        role, Path(assets[role + "_python"]), config.env_dir)
                     environment_seconds = time.monotonic() - stage_started
-                python = runtimes[role]
-                required = asset_requirements(assets, [dim], "origin" if name == "origin" else "repair")
+                python = selected_runtimes[runtime_key]
+                required = asset_requirements(assets, [dim], "origin" if name in {"origin", "accelerated"} else "repair")
                 selected_assets = {path: checked[path] for path in required}
                 specification = {"schema": 1, "dimension": dim, "stage": name, "inputs": chosen,
                                  "assets": assets, "verified_assets": selected_assets, "source": fingerprint,
@@ -283,9 +318,24 @@ def evaluate(config, *, plan_only=False):
                             env["VBENCH_EVAL_RUN_INFERENCE_CONTEXT"] = json.dumps({
                                 "source": fingerprint, "runtime": gpu_info[gpu], "gpu": gpu,
                                 "python": assets["visual_python"], "assets": checked,
-                                "precision": "fp32-tf32-disabled", "cpu_threads": 3})
-                        workers.run([python, ROOT / "scripts" / script, *arguments],
-                                    env, directory / "worker.log")
+                                "precision": "source-bound-model-dtypes-tf32-disabled", "cpu_threads": 3})
+                        if name == "origin":
+                            if gpu not in official_workers:
+                                socket_path = Path(socket_folder.name) / (identity(gpu)[:16] + ".sock")
+                                log = output / ("official-" + identity(gpu)[:16] + ".log")
+                                env.update(VBENCH_EVAL_UPSTREAM_ONLY="1",
+                                           PYTHONPATH=os.pathsep.join(map(str, python_paths(upstream_only=True))))
+                                command = [python, ROOT / "scripts/paper_official_server.py",
+                                           "--assets", output / "assets.json", "--socket", socket_path]
+                                official_workers[gpu] = JsonWorker(workers, command, env, log, socket_path)
+                            server = official_workers[gpu]
+                            (directory / "worker.log").write_text(f"Original VBench process log: {server.log}\n")
+                            reply = server.request({"dimension": dim, "input": str(input_path), "output": str(destination)})
+                            with (directory / "worker.log").open("a") as stream:
+                                stream.write(json.dumps(reply) + "\n")
+                        else:
+                            workers.run([python, ROOT / "scripts" / script, *arguments],
+                                        env, directory / "worker.log")
                     finally:
                         worker_seconds = time.monotonic() - tick
                     payload = json.loads(destination.read_text())
@@ -384,6 +434,8 @@ def evaluate(config, *, plan_only=False):
             logger.event("interrupted", message="Stopped this evaluation's workers; completed artifacts retained")
         finally:
             pool.shutdown(wait=True, cancel_futures=True)
+            workers.stop()
+            socket_folder.cleanup()
         # Recover already-written tasks even if interruption prevented lane return.
         for dim, backend in jobs:
             path = output / dim / (backend + ".json")
@@ -409,7 +461,7 @@ def main(argv=None, *, dimension=None):
     parser.add_argument("--config", type=Path, default=ROOT / "configs/eval.yaml")
     for key in ("input", "assets", "output", "video-root", "cache-dir", "env-dir"):
         parser.add_argument("--" + key, type=Path)
-    parser.add_argument("--backend", choices=("origin", "repair", "both"))
+    parser.add_argument("--backend", choices=("ours", "official", "origin", "repair", "both"))
     if dimension is None:
         parser.add_argument("--dimensions", nargs="+")
     else:

@@ -48,6 +48,12 @@ def test_dimensions_match_the_existing_paper_routes():
     assert len(OFFICIAL_DIMENSIONS) == 16 and len(PAPER_DIMENSIONS) == 9
 
 
+@pytest.mark.parametrize("name,canonical", [("ours", "repair"), ("official", "origin"),
+                                          ("repair", "repair"), ("origin", "origin")])
+def test_backend_aliases_preserve_legacy_names(tmp_path, name, canonical):
+    assert load_config(config_file(tmp_path, BASE + f"backend: {name}\n")).backend == canonical
+
+
 def test_explicit_dimensions_keep_order_and_normalize_historical_names(tmp_path):
     path = config_file(tmp_path, BASE + "dimensions: [dynamics-degree, multiplt_object, color-consistency, scene]\n")
     assert load_config(path).dimensions == ("dynamic_degree", "multiple_objects", "color", "scene")

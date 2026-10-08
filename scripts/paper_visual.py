@@ -104,14 +104,14 @@ def official_submodules(dim):
     return modules[dim]
 
 
-def official(rows, dim, assets, output):
+def official(rows, dim, assets, output, *, upstream_only=False):
     import torch
     submodules = official_submodules(dim)
     full_info = [{"prompt_en": row["prompt"], "dimension": [dim], "video_list": [row["video"]],
                   "auxiliary_info": row["auxiliary_info"]} for row in rows]
     path = output.with_name("official-input.json")
     write_json(path, full_info)
-    if dim in {"aesthetic_quality", "imaging_quality", "temporal_flickering", "appearance_style"}:
+    if not upstream_only and dim in {"aesthetic_quality", "imaging_quality", "temporal_flickering", "appearance_style"}:
         adapter = importlib.import_module(dim + ".official")
         aggregate, returned = adapter.compute(str(path), torch.device("cuda:0"), submodules)
     else:

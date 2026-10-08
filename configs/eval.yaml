@@ -8,10 +8,10 @@ assets: ../output/runtime/assets.json
 # output: ../output/eval/my-run
 # video_root: ${VBENCH_VIDEO_ROOT}
 
-# repair selects the paper repair for nine dimensions. Other dimensions use
-# origin, and results explicitly record that origin was the effective backend.
-# Use origin for official scoring throughout, or both to compare the routes.
-backend: repair
+# ours runs nine selected repairs plus seven accelerated dimensions.
+# official runs pinned original VBench; both compares all sixteen dimensions.
+# Legacy aliases repair and origin remain accepted.
+backend: ours
 dimensions: all
 gpus: [0]
 cache_dir: ~/.cache/vbench-repair

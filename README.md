@@ -91,7 +91,7 @@ version: 1
 input: ../output/inputs.json
 assets: ../output/runtime/assets.json
 output: ../output/eval/my-run
-backend: repair
+backend: ours
 dimensions: all
 gpus: [0]
 cache_dir: ~/.cache/vbench-repair
@@ -121,7 +121,7 @@ Useful overrides:
 ```bash
 # All 16 official dimensions.
 ./scripts/eval.sh --config configs/eval.yaml \
-  --backend origin --dimensions all --output output/eval/origin
+  --backend official --dimensions all --output output/eval/origin
 
 # Compare Origin and Repair on the nine paper dimensions.
 ./scripts/eval.sh --config configs/eval.yaml \
@@ -132,15 +132,17 @@ Useful overrides:
   --dimensions color --no-reuse --output output/eval/color-fresh
 ```
 
-By default, `backend: repair` with `dimensions: all` runs the nine selected repairs and keeps the other seven dimensions on **Origin**, explicitly recorded in the plan and results. With `backend: both`, those seven official-only dimensions are computed once and retain only an Origin result.
+By default, `backend: ours` runs the **nine selected repairs plus seven accelerated dimensions**. `backend: official` runs pinned original VBench in one process per selected GPU. `backend: both` compares all 16 dimensions (32 tasks). Legacy names `repair` and `origin` remain aliases for `ours` and `official`. Each result records its actual `repair`, `accelerated` or `origin` implementation.
 
-The output contains `plan.json`, `summary.json`, per-dimension `origin.json` / `repair.json`, and worker logs. Cache receipts identify reused stages. Failed, unsupported, or omitted scores remain `null`; incomplete coverage does not produce a complete-population mean. Official dataset aggregation is preserved, including dimension-specific scales and weighting.
+The seven accelerators passed same-32 per-video checks against official scores: absolute error must be at most `max(1e-6, 0.01 × abs(official_score))`. This measures numerical agreement on the tested cohort, not perceptual quality or a guarantee for arbitrary inputs. [Optimization records](docs/plans/2026-10-08-speed32-optimization.md).
+
+The output contains `plan.json`, `summary.json`, per-dimension `origin.json`, `repair.json` or `accelerated.json`, and worker logs. Cache receipts identify reused stages. Failed, unsupported, or omitted scores remain `null`; incomplete coverage does not produce a complete-population mean. Official dataset aggregation is preserved, including dimension-specific scales and weighting.
 
 ## Supported Dimensions
 
-`--backend origin` selects the official VBench implementation for every row. The table describes the effective route under `--backend repair`; `--dimensions paper` selects the nine repaired rows.
+`--backend official` selects the original VBench implementation for every row. The table describes the default route under `--backend ours`; `--dimensions paper` selects the nine repaired rows.
 
-All **16 dimensions have independent packages under `metrics/`**. The four official-only packages added to complete the workspace are [Aesthetic Quality](metrics/aesthetic-quality/), [Imaging Quality](metrics/imaging-quality/), [Temporal Flickering](metrics/temporal-flickering/), and [Appearance Style](metrics/appearance-style/). Their package CLIs use the same YAML, cache and isolated workers as the unified evaluator:
+All **16 dimensions have independent packages under `metrics/`**. The four packages added to complete the workspace are [Aesthetic Quality](metrics/aesthetic-quality/), [Imaging Quality](metrics/imaging-quality/), [Temporal Flickering](metrics/temporal-flickering/), and [Appearance Style](metrics/appearance-style/). Their package CLIs use the same YAML, cache and isolated workers as the unified evaluator:
 
 ```bash
 uv run aesthetic-quality --config configs/eval.yaml --backend origin
@@ -151,7 +153,7 @@ uv run appearance-style --config configs/eval.yaml --backend origin
 
 Each command fixes its own dimension; YAML `dimensions: all` does not expand a dimension-specific command. Use `scripts/eval.py` for a multi-dimension run. The other twelve package CLIs retain their documented research interfaces.
 
-| Dimension | CLI key | Route under `repair` |
+| Dimension | CLI key | Default route (`ours`) |
 |---|---|---|
 | Scene | `scene` | **Repair:** Qwen3-8B verifier over fixed Tag2Text caption evidence |
 | Human Action | `human_action` | **Repair:** action parsing, canonical K400 targets, and declared synonym interface over UMT evidence |
@@ -162,13 +164,13 @@ Each command fixes its own dimension; YAML `dimensions: all` does not expand a d
 | Spatial Relationship | `spatial_relationship` | **Repair:** ordered relation targets and direction-aware signed geometry |
 | Multiple Objects | `multiple_objects` | **Repair:** variable-length entity parsing and adjacent-frame detection confirmation |
 | Color | `color` | **Repair:** target-instance color binding with all sampled frames in the denominator |
-| Motion Smoothness | `motion_smoothness` | Origin |
-| Temporal Flickering | `temporal_flickering` | Origin |
-| Aesthetic Quality | `aesthetic_quality` | Origin |
-| Imaging Quality | `imaging_quality` | Origin |
-| Temporal Style | `temporal_style` | Origin |
-| Overall Consistency | `overall_consistency` | Origin |
-| Appearance Style | `appearance_style` | Origin |
+| Motion Smoothness | `motion_smoothness` | **Accelerated:** Batched AMT interpolation |
+| Temporal Flickering | `temporal_flickering` | **Accelerated:** Streaming CPU frame differences |
+| Aesthetic Quality | `aesthetic_quality` | **Accelerated:** Batched CLIP visual tower and native aesthetic head |
+| Imaging Quality | `imaging_quality` | **Accelerated:** Batched FP32 MUSIQ |
+| Temporal Style | `temporal_style` | **Accelerated:** Batched ViCLIP |
+| Overall Consistency | `overall_consistency` | **Accelerated:** Batched ViCLIP with current-run video feature reuse |
+| Appearance Style | `appearance_style` | **Accelerated:** Batched CLIP and cached text embeddings |
 
 The selected methods and asset identities are fixed in [`paper-methods.json`](configs/reproduction/paper-methods.json). Subject uses `hybrid / exclude / preencode_crop`; Background uses `patch_frame_calibrated` with the frozen gain of 1.75. Legacy per-dimension research CLIs and the historical eleven-dimension development scope remain documented separately; their defaults are not the paper method selection.
 

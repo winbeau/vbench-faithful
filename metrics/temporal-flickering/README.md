@@ -1,7 +1,9 @@
 # Temporal Flickering
 
-This package runs the pinned VBench 1.0 implementation. It has no selected paper repair.
-The dimension adapter preserves upstream inputs, per-video results and the native aggregate.
+This package offers the pinned original VBench 1.0 implementation (`--backend official`)
+and the default accelerated implementation (`--backend ours`). Both retain the native
+aggregation contract. This dimension has no selected paper repair; numerical acceptance
+of its accelerator is documented in the [optimization record](../../docs/plans/2026-10-08-speed32-optimization.md).
 
 From the workspace root:
 

@@ -23,9 +23,13 @@ def test_all_dimensions_have_explicit_methods_without_fake_repairs():
     assert len(repaired) == 16
     assert {d for d, b in repaired if b == "repair"} == set(runner.PAPER)
     both = runner.routes(runner.OFFICIAL, "both")
-    assert len(both) == 25 and len(set(both)) == 25
+    assert len(both) == 32 and len(set(both)) == 32
     assert ("motion_smoothness", "origin") in both
+    assert ("motion_smoothness", "accelerated") in both
     assert ("motion_smoothness", "repair") not in both
+    assert runner.routes(runner.OFFICIAL, "ours") == repaired
+    assert runner.routes(runner.OFFICIAL, "official") == runner.routes(runner.OFFICIAL, "origin")
+    assert {d for d, b in repaired if b == "accelerated"} == set(runner.OFFICIAL) - set(runner.PAPER)
 
 
 def test_gpu_selection_respects_inherited_visibility_and_unique_devices():
@@ -43,6 +47,7 @@ def test_worker_import_paths_only_include_selected_metric():
     paths = runner.python_paths("dynamic_degree")
     assert ROOT / "metrics/dynamic-degree/src" in paths
     assert ROOT / "metrics/scene/src" not in paths
+    assert not any("metrics" in p.parts for p in runner.python_paths(upstream_only=True))
 
 
 def test_relative_runtime_launcher_preserves_virtual_environment(tmp_path):
@@ -103,7 +108,8 @@ def test_native_official_aggregate_is_preserved_and_invalid_rows_rejected():
         runner.validate_payload(payload, [original])
 
 
-def test_controller_cache_hit_and_metadata_change(tmp_path, monkeypatch):
+def test_controller_cache_hit_and_metadata_change(tmp_path, monkeypatch, fake_official_transport):
+    fake_official_transport(runner)
     from vbench_audit_core import upstream
     (tmp_path / "video.mp4").write_bytes(b"identity fixture; fake worker does not decode")
     manifest = tmp_path / "input.json"
@@ -129,17 +135,20 @@ def test_controller_cache_hit_and_metadata_change(tmp_path, monkeypatch):
         args = list(map(str, command))
         rows = json.loads(Path(args[args.index("--input") + 1]).read_text())
         destination = Path(args[args.index("--output") + 1])
-        runner.write_json(destination, {"rows": [runner.result(row, 70.0) for row in rows],
-                                       "official_aggregate": .7})
+        aggregate = ({"aggregate": .7, "aggregation": "vbench_native_reducer"}
+                     if args[args.index("--mode") + 1] == "accelerated" else {"official_aggregate": .7})
+        runner.write_json(destination, {"rows": [runner.result(row, 70.0) for row in rows], **aggregate})
         Path(log).write_text("fake worker\n")
         assert env["CUDA_VISIBLE_DEVICES"] == "0"
         assert env["VBENCH_EVAL_DIMENSION"] in {"imaging_quality", "temporal_flickering"}
     monkeypatch.setattr(runner.Workers, "run", run)
     assert runner.evaluate(config) == 0
     assert runner.evaluate(replace(config, output=tmp_path / "second")) == 0
-    assert len(calls) == 1
+    assert len(calls) == 2
     report = json.loads((tmp_path / "second/summary.json").read_text())
-    assert report["official_fallback"] == ["imaging_quality"]
+    assert report["official_fallback"] == []
+    assert report["accelerated_dimensions"] == ["imaging_quality"]
+    assert report["dimensions"]["imaging_quality/accelerated"]["score"] == .7
     summary = report["dimensions"]["imaging_quality/origin"]
     assert summary["score"] == .7 and summary["cached"]
     execution = json.loads((tmp_path / "second/imaging_quality/origin.json").read_text())["execution"]
@@ -153,14 +162,25 @@ def test_controller_cache_hit_and_metadata_change(tmp_path, monkeypatch):
     manifest.write_text(json.dumps(data))
     assert runner.evaluate(replace(config, output=tmp_path / "expanded",
                                    dimensions=("imaging_quality", "temporal_flickering"))) == 0
-    assert len(calls) == 2
+    assert len(calls) == 4
     expanded = json.loads((tmp_path / "expanded/summary.json").read_text())["dimensions"]
     assert expanded["imaging_quality/origin"]["cached"]
     assert not expanded["temporal_flickering/origin"]["cached"]
     data = json.loads(manifest.read_text()); data[0]["prompt"] = "blue car"
     manifest.write_text(json.dumps(data))
     assert runner.evaluate(replace(config, output=tmp_path / "third")) == 0
-    assert len(calls) == 3
+    assert len(calls) == 6
+
+
+def test_accelerated_native_scale_required_and_partial_mean_not_reported():
+    original = {"id": "one", "video": "one.mp4", "video_sha256": "hash", "prompt": "p"}
+    payload = {"rows": [runner.result(original, 70.)]}
+    with pytest.raises(ValueError, match="native reducer"):
+        runner.validate_payload(payload, [original], "accelerated")
+    payload.update(aggregate=.7, aggregation="vbench_native_reducer")
+    assert runner.validate_payload(payload, [original], "accelerated")["score"] == .7
+    payload["rows"][0].update(score=None, status="failed")
+    assert runner.validate_payload(payload, [original], "accelerated")["score"] is None
 
 
 def test_interrupted_worker_group_is_reaped(tmp_path):

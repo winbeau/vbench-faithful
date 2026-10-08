@@ -35,7 +35,8 @@ def test_relative_model_python_preserves_venv_symlink(tmp_path):
     assert loaded["semantic_python"] == str(python)
 
 
-def test_origin_without_native_aggregate_cannot_succeed_or_cache(tmp_path, monkeypatch):
+def test_origin_without_native_aggregate_cannot_succeed_or_cache(tmp_path, monkeypatch, fake_official_transport):
+    fake_official_transport(runner)
     from vbench_audit_core import upstream
 
     (tmp_path / "video.mp4").write_bytes(b"fake worker does not decode")
@@ -80,7 +81,8 @@ def test_origin_without_native_aggregate_cannot_succeed_or_cache(tmp_path, monke
 
 
 @pytest.mark.parametrize("fail_first", [False, True])
-def test_idle_gpu_takes_next_dimension_without_waiting_for_busy_lane(tmp_path, monkeypatch, fail_first):
+def test_idle_gpu_takes_next_dimension_without_waiting_for_busy_lane(tmp_path, monkeypatch, fail_first, fake_official_transport):
+    fake_official_transport(runner)
     from vbench_audit_core import upstream
 
     dimensions = ["imaging_quality", "temporal_flickering", "aesthetic_quality"]

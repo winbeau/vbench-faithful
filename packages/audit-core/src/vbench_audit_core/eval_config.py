@@ -208,9 +208,10 @@ def load_config(path: Path, overrides: dict | None = None) -> EvalConfig:
     version = values.get("version", 1)
     if type(version) is not int or version != 1:
         raise ValueError("version: expected integer 1")
-    backend = values.get("backend", "repair")
-    if not isinstance(backend, str) or backend not in {"origin", "repair", "both"}:
-        raise ValueError("backend: expected 'origin', 'repair', or 'both'")
+    backend = values.get("backend", "ours")
+    if not isinstance(backend, str) or backend not in {"ours", "official", "origin", "repair", "both"}:
+        raise ValueError("backend: expected 'ours', 'official', 'repair', 'origin', or 'both'")
+    backend = {"ours": "repair", "official": "origin"}.get(backend, backend)
     reuse = values.get("reuse", True)
     if type(reuse) is not bool:
         raise ValueError("reuse: expected a boolean (true or false)")

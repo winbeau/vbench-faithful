@@ -16,8 +16,9 @@ def test_yaml_entry_selects_only_its_dimension(tmp_path, capsys):
     config.write_text("input: inputs.json\nassets: assets.json\ndimensions: all\nbackend: repair\n")
     assert main(["--config", str(config), "--plan"]) == 0
     plan = json.loads(capsys.readouterr().out)
-    assert list(plan["methods"]) == ["imaging_quality/origin"]
-    assert plan["official_fallback"] == ["imaging_quality"]
+    assert list(plan["methods"]) == ["imaging_quality/accelerated"]
+    assert plan["official_fallback"] == []
+    assert plan["accelerated_dimensions"] == ["imaging_quality"]
     assert not (tmp_path / "output").exists()
 
 

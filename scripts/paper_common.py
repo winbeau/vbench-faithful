@@ -46,16 +46,16 @@ def write_json(path, data):
     temp.replace(path)
 
 
-def python_paths(selected_dimension=None):
+def python_paths(selected_dimension=None, *, upstream_only=False):
     selected_dimension = selected_dimension or os.environ.get("VBENCH_EVAL_DIMENSION")
     metrics = ([ROOT / "metrics" / dimension(selected_dimension).replace("_", "-") / "src"]
                if selected_dimension else sorted(ROOT.glob("metrics/*/src")))
     return [ROOT, SEMANTIC_ROOT / "src", SEMANTIC_ROOT / "scripts",
-            *sorted(ROOT.glob("packages/*/src")), *[p for p in metrics if p.is_dir()]]
+            *sorted(ROOT.glob("packages/*/src")), *([] if upstream_only else [p for p in metrics if p.is_dir()])]
 
 
 def configure_imports(assets):
-    sys.path[:0] = [str(p) for p in python_paths()]
+    sys.path[:0] = [str(p) for p in python_paths(upstream_only=os.environ.get("VBENCH_EVAL_UPSTREAM_ONLY") == "1")]
     if assets.get("mobilesam_source"):
         sys.path.insert(0, assets["mobilesam_source"])
     os.environ["VBENCH_AUDIT_UPSTREAM"] = assets["vbench"]
