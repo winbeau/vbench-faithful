@@ -1,0 +1,295 @@
+{
+  "dimension": "aesthetic_quality",
+  "code_sha": "43616966ade02eb7c53f12106cfba90c7fa7469f",
+  "git_dirty": false,
+  "source_sha256": "f9b6b5383c5b0d68b6165a0358de08b656be670191bdd89aeffa2ca4eafc39e4",
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "gpu": "3",
+  "gpu_info": {
+    "torch": "2.5.1+cu121",
+    "cuda": "12.1",
+    "name": "NVIDIA H100 80GB HBM3",
+    "capability": [
+      9,
+      0
+    ]
+  },
+  "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+  "selected_inputs_sha256": "5a2058d684ccd75e46489c1a00dc7d0b85415c56a074872a9a8509883a256f90",
+  "reference": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/origin-baseline-v2/aesthetic_quality/origin.json",
+  "reference_sha256": "34b8538b8d38c63f3cc6c83967aca69900ee9e8f0d96cdfa1c433fc32d03285c",
+  "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/aesthetic-vision",
+  "worker_seconds": 5.378821750055067,
+  "wall_seconds": 9.016460494953208,
+  "previous_run_cache_hits": 0,
+  "reference_worker_seconds": 10.547223804984242,
+  "comparison": {
+    "passed": true,
+    "count": 32,
+    "rtol": 0.01,
+    "atol": 1e-06,
+    "rule": "abs(candidate-reference) <= max(atol, rtol*abs(reference))",
+    "max_absolute_error": 0.0,
+    "rows": [
+      {
+        "id": "speed32:00:aesthetic_quality",
+        "reference": 0.5059557557106018,
+        "candidate": 0.5059557557106018,
+        "absolute_error": 0.0,
+        "tolerance": 0.0050595575571060186,
+        "passed": true
+      },
+      {
+        "id": "speed32:01:aesthetic_quality",
+        "reference": 0.47217702865600586,
+        "candidate": 0.47217702865600586,
+        "absolute_error": 0.0,
+        "tolerance": 0.004721770286560059,
+        "passed": true
+      },
+      {
+        "id": "speed32:02:aesthetic_quality",
+        "reference": 0.4910484850406647,
+        "candidate": 0.4910484850406647,
+        "absolute_error": 0.0,
+        "tolerance": 0.004910484850406647,
+        "passed": true
+      },
+      {
+        "id": "speed32:03:aesthetic_quality",
+        "reference": 0.22041752934455872,
+        "candidate": 0.22041752934455872,
+        "absolute_error": 0.0,
+        "tolerance": 0.0022041752934455873,
+        "passed": true
+      },
+      {
+        "id": "speed32:04:aesthetic_quality",
+        "reference": 0.5041691064834595,
+        "candidate": 0.5041691064834595,
+        "absolute_error": 0.0,
+        "tolerance": 0.005041691064834595,
+        "passed": true
+      },
+      {
+        "id": "speed32:05:aesthetic_quality",
+        "reference": 0.29134172201156616,
+        "candidate": 0.29134172201156616,
+        "absolute_error": 0.0,
+        "tolerance": 0.0029134172201156616,
+        "passed": true
+      },
+      {
+        "id": "speed32:06:aesthetic_quality",
+        "reference": 0.37055718898773193,
+        "candidate": 0.37055718898773193,
+        "absolute_error": 0.0,
+        "tolerance": 0.0037055718898773194,
+        "passed": true
+      },
+      {
+        "id": "speed32:07:aesthetic_quality",
+        "reference": 0.3894449472427368,
+        "candidate": 0.3894449472427368,
+        "absolute_error": 0.0,
+        "tolerance": 0.0038944494724273684,
+        "passed": true
+      },
+      {
+        "id": "speed32:08:aesthetic_quality",
+        "reference": 0.6248313188552856,
+        "candidate": 0.6248313188552856,
+        "absolute_error": 0.0,
+        "tolerance": 0.006248313188552857,
+        "passed": true
+      },
+      {
+        "id": "speed32:09:aesthetic_quality",
+        "reference": 0.39816728234291077,
+        "candidate": 0.39816728234291077,
+        "absolute_error": 0.0,
+        "tolerance": 0.003981672823429107,
+        "passed": true
+      },
+      {
+        "id": "speed32:10:aesthetic_quality",
+        "reference": 0.4833544194698334,
+        "candidate": 0.4833544194698334,
+        "absolute_error": 0.0,
+        "tolerance": 0.004833544194698334,
+        "passed": true
+      },
+      {
+        "id": "speed32:11:aesthetic_quality",
+        "reference": 0.29080769419670105,
+        "candidate": 0.29080769419670105,
+        "absolute_error": 0.0,
+        "tolerance": 0.0029080769419670104,
+        "passed": true
+      },
+      {
+        "id": "speed32:12:aesthetic_quality",
+        "reference": 0.40026307106018066,
+        "candidate": 0.40026307106018066,
+        "absolute_error": 0.0,
+        "tolerance": 0.004002630710601807,
+        "passed": true
+      },
+      {
+        "id": "speed32:13:aesthetic_quality",
+        "reference": 0.6251757144927979,
+        "candidate": 0.6251757144927979,
+        "absolute_error": 0.0,
+        "tolerance": 0.006251757144927979,
+        "passed": true
+      },
+      {
+        "id": "speed32:14:aesthetic_quality",
+        "reference": 0.519140362739563,
+        "candidate": 0.519140362739563,
+        "absolute_error": 0.0,
+        "tolerance": 0.00519140362739563,
+        "passed": true
+      },
+      {
+        "id": "speed32:15:aesthetic_quality",
+        "reference": 0.4258861243724823,
+        "candidate": 0.4258861243724823,
+        "absolute_error": 0.0,
+        "tolerance": 0.004258861243724823,
+        "passed": true
+      },
+      {
+        "id": "speed32:16:aesthetic_quality",
+        "reference": 0.38565295934677124,
+        "candidate": 0.38565295934677124,
+        "absolute_error": 0.0,
+        "tolerance": 0.0038565295934677125,
+        "passed": true
+      },
+      {
+        "id": "speed32:17:aesthetic_quality",
+        "reference": 0.5219359397888184,
+        "candidate": 0.5219359397888184,
+        "absolute_error": 0.0,
+        "tolerance": 0.005219359397888184,
+        "passed": true
+      },
+      {
+        "id": "speed32:18:aesthetic_quality",
+        "reference": 0.4813210666179657,
+        "candidate": 0.4813210666179657,
+        "absolute_error": 0.0,
+        "tolerance": 0.0048132106661796575,
+        "passed": true
+      },
+      {
+        "id": "speed32:19:aesthetic_quality",
+        "reference": 0.408083975315094,
+        "candidate": 0.408083975315094,
+        "absolute_error": 0.0,
+        "tolerance": 0.00408083975315094,
+        "passed": true
+      },
+      {
+        "id": "speed32:20:aesthetic_quality",
+        "reference": 0.5804517269134521,
+        "candidate": 0.5804517269134521,
+        "absolute_error": 0.0,
+        "tolerance": 0.0058045172691345214,
+        "passed": true
+      },
+      {
+        "id": "speed32:21:aesthetic_quality",
+        "reference": 0.4352988600730896,
+        "candidate": 0.4352988600730896,
+        "absolute_error": 0.0,
+        "tolerance": 0.004352988600730896,
+        "passed": true
+      },
+      {
+        "id": "speed32:22:aesthetic_quality",
+        "reference": 0.5513840913772583,
+        "candidate": 0.5513840913772583,
+        "absolute_error": 0.0,
+        "tolerance": 0.0055138409137725835,
+        "passed": true
+      },
+      {
+        "id": "speed32:23:aesthetic_quality",
+        "reference": 0.4744493067264557,
+        "candidate": 0.4744493067264557,
+        "absolute_error": 0.0,
+        "tolerance": 0.004744493067264557,
+        "passed": true
+      },
+      {
+        "id": "speed32:24:aesthetic_quality",
+        "reference": 0.38163238763809204,
+        "candidate": 0.38163238763809204,
+        "absolute_error": 0.0,
+        "tolerance": 0.0038163238763809205,
+        "passed": true
+      },
+      {
+        "id": "speed32:25:aesthetic_quality",
+        "reference": 0.4293830990791321,
+        "candidate": 0.4293830990791321,
+        "absolute_error": 0.0,
+        "tolerance": 0.004293830990791321,
+        "passed": true
+      },
+      {
+        "id": "speed32:26:aesthetic_quality",
+        "reference": 0.4258230924606323,
+        "candidate": 0.4258230924606323,
+        "absolute_error": 0.0,
+        "tolerance": 0.004258230924606323,
+        "passed": true
+      },
+      {
+        "id": "speed32:27:aesthetic_quality",
+        "reference": 0.5638753175735474,
+        "candidate": 0.5638753175735474,
+        "absolute_error": 0.0,
+        "tolerance": 0.005638753175735474,
+        "passed": true
+      },
+      {
+        "id": "speed32:28:aesthetic_quality",
+        "reference": 0.47554755210876465,
+        "candidate": 0.47554755210876465,
+        "absolute_error": 0.0,
+        "tolerance": 0.0047554755210876464,
+        "passed": true
+      },
+      {
+        "id": "speed32:29:aesthetic_quality",
+        "reference": 0.006491587497293949,
+        "candidate": 0.006491587497293949,
+        "absolute_error": 0.0,
+        "tolerance": 6.491587497293949e-05,
+        "passed": true
+      },
+      {
+        "id": "speed32:30:aesthetic_quality",
+        "reference": 0.42647117376327515,
+        "candidate": 0.42647117376327515,
+        "absolute_error": 0.0,
+        "tolerance": 0.004264711737632752,
+        "passed": true
+      },
+      {
+        "id": "speed32:31:aesthetic_quality",
+        "reference": 0.45339536666870117,
+        "candidate": 0.45339536666870117,
+        "absolute_error": 0.0,
+        "tolerance": 0.0045339536666870114,
+        "passed": true
+      }
+    ]
+  },
+  "aggregate_error": 0.0,
+  "aggregate_tolerance": 0.00437935476686107,
+  "passed": true
+}

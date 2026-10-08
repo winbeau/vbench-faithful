@@ -69,9 +69,13 @@ Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s
 
 `0d7de51`: batch MUSIQ frames in groups of 32 and disable unnecessary autograd. Preserve native FP32, longer-side preprocessing, all frames, child-module modes, per-video 0–100 scores and the /100 aggregate. Same-32: all pass; maximum absolute score error 2.0266e-5 (0–100 scale), maximum relative error 3.4568e-7; worker 14.94 → 6.83 s, standalone wall 9.93 s. CPU: 33 passed. [Receipt](../validation/h100-imaging-accelerated-20261008.json).
 
-## Active item: Aesthetic Quality
+## Accepted: Aesthetic Quality
 
-Pack CLIP-L/14 frames across videos while preserving the original transform, normalization and aesthetic head. Apply the per-video and aggregate numerical gates before advancing.
+`da6e21c` packs original CLIP-L/14 frames across videos. Profiling then found loading took 5.65 s and all 512 frame encodes only 0.70 s. `4361696` constructs the original CLIP visual tower on meta, copies every original visual weight strictly, preserves mixed parameter dtypes, and omits unused text weights/random initialization. Original transforms, normalized features and aesthetic head remain unchanged. Same-32 H100: 32/32, **zero per-video and aggregate error**; worker 10.55 → 5.38 s, standalone wall 9.02 s. [Profile](../validation/h100-aesthetic-profile-20261008.json), [acceptance](../validation/h100-aesthetic-accelerated-20261008.json).
+
+## Active item: Temporal Style
+
+Inspect the native ViCLIP sampling, video/text encoders and reducer. Accelerate this dimension first, preserving the official protocol, then check all 32 scores before enabling any other consumer.
 
 ## Subsequent queue
 

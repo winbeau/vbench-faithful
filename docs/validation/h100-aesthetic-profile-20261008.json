@@ -1,0 +1,12 @@
+{
+  "load_seconds": 5.645417375024408,
+  "checkpoint": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/vbench-cache/clip_model/ViT-L-14.pt",
+  "visual_dtype": "torch.float16",
+  "encode": {
+    "calls": 16,
+    "frames": 512,
+    "seconds": 0.696809264132753
+  },
+  "worker_body_seconds": 6.965716753038578,
+  "outputs_equal": true
+}
