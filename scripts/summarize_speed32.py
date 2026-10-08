@@ -48,7 +48,8 @@ def numerical_differences(reference, candidate, *, tolerance=1e-6, path=""):
         assert isinstance(candidate, list) and len(reference) == len(candidate), path
         return [item for i, (a, b) in enumerate(zip(reference, candidate)) for item in
                 numerical_differences(a, b, tolerance=tolerance, path=f"{path}/{i}")]
-    if reference == candidate:
+    if reference == candidate and (type(reference) is type(candidate) or
+                                  type(reference) in {int, float} and type(candidate) in {int, float}):
         return []
     assert type(reference) in {int, float} and type(candidate) in {int, float}, (path, reference, candidate)
     error = abs(reference - candidate)

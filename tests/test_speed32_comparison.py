@@ -20,3 +20,5 @@ def test_numeric_roundoff_is_recorded_but_evidence_and_structure_remain_strict()
             numerical_differences(old, bad)
     with pytest.raises(AssertionError):
         numerical_differences(old, new, tolerance=0)
+    with pytest.raises(AssertionError):
+        numerical_differences({"eligible": True}, {"eligible": 1})
