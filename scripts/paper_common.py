@@ -193,6 +193,14 @@ def _asset_requirements(assets, dimensions, backend):
             if entry["dimension"] in dimensions:
                 yield pin(Path(assets["adapters"]) / entry["path"], entry["sha256"])
         if semantic.intersection(dimensions):
+            published = json.loads((ROOT / "configs/reproduction/model-release.json").read_text())
+            for entry in published["files"]:
+                relative = Path(entry["local_path"])
+                if (relative.parts[0] == "adapters" and relative.parts[1] in dimensions
+                        and relative.suffix == ".json"):
+                    # Spatial's training config changes its prompt/schema. Bind
+                    # it and PEFT configs to both preflight and artifact cache keys.
+                    yield pin(Path(assets["adapters"]) / relative.relative_to("adapters"), entry["sha256"])
             base = json.loads((ROOT / "configs/reproduction/qwen-base.json").read_text())
             for entry in base["files"]:
                 yield pin(Path(assets["base_model"]) / entry["path"], entry["sha256"])

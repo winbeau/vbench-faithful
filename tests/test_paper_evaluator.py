@@ -107,6 +107,36 @@ def test_publication_semantic_source_is_byte_identical():
     assert len(checked) == 16
 
 
+def test_spatial_schema_and_peft_config_are_part_of_verified_cache_identity(tmp_path):
+    from paper_common import asset_requirements
+
+    assets = {"grit": tmp_path / "grit", "adapters": tmp_path / "adapters", "base_model": tmp_path / "base"}
+    pins = asset_requirements(assets, ["spatial_relationship"], "repair")
+    release = json.loads((ROOT / "configs/reproduction/model-release.json").read_text())
+    configs = [e for e in release["files"] if e["local_path"].startswith("adapters/spatial_relationship/")
+               and e["local_path"].endswith(".json")]
+    assert len(configs) == 2
+    for entry in configs:
+        assert pins[str(tmp_path / entry["local_path"])] == entry["sha256"]
+
+
+@pytest.mark.parametrize("missing", [True, False])
+def test_legacy_or_modified_spatial_schema_is_rejected_before_inference(tmp_path, monkeypatch, missing):
+    import paper_common
+
+    assets = {"grit": tmp_path / "grit", "adapters": tmp_path / "adapters", "base_model": tmp_path / "base"}
+    pins = paper_common.asset_requirements(assets, ["spatial_relationship"], "repair")
+    config = tmp_path / "adapters/spatial_relationship/training_config.json"
+    if not missing:
+        config.parent.mkdir(parents=True)
+        config.write_text('{"spatial_relation_space": "legacy"}')
+    original_digest = paper_common.digest
+    # Other large model payloads have passed their independent weight checks.
+    monkeypatch.setattr(paper_common, "digest", lambda p: original_digest(p) if Path(p) == config else pins[str(p)])
+    with pytest.raises(FileNotFoundError if missing else ValueError):
+        verify_assets(assets, ["spatial_relationship"], "repair")
+
+
 def test_parallel_verification_reads_all_bytes_even_if_stat_is_unchanged(tmp_path, monkeypatch):
     import os
     from threading import Barrier

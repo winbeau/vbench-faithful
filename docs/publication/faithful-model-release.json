@@ -1,0 +1,114 @@
+{
+  "schema": "vbench-faithful-model-publication/1",
+  "publication": {
+    "repo_id": "winbeau/vbench-faithful",
+    "repo_type": "model",
+    "revision": "91d6f98bbd30f9eec232e7820d3c65a449ad4801",
+    "commit_url": "https://huggingface.co/winbeau/vbench-faithful/commit/91d6f98bbd30f9eec232e7820d3c65a449ad4801",
+    "files_uploaded": 46,
+    "trained_weight_count": 7,
+    "trained_weight_bytes": 1048141156
+  },
+  "source_release": {
+    "repo_id": "xju-arlab/vbench-model",
+    "revision": "5fe53c4c7eb1a8a4fcd5b6e22f748da1d073a78e"
+  },
+  "code_integration_commit": "f7b298da24c91df944e42f822a7aa2d192d4507e",
+  "remote_checks": {
+    "public": true,
+    "file_listing_size_and_content_identity": true,
+    "files_including_hub_gitattributes": 47
+  },
+  "download": {
+    "repo_id": "winbeau/vbench-faithful",
+    "revision": "91d6f98bbd30f9eec232e7820d3c65a449ad4801",
+    "public_anonymous_access": true,
+    "remote_manifest_sha256": "1eb1bc59333a48f8cb6288a888f45f9c77dcd4ebd7c8e738b7bd974bcfdf30e9",
+    "fresh_cache": true,
+    "downloaded_files_verified": 14,
+    "trained_weights_verified": 7,
+    "spatial_relation_space": "four_directions",
+    "restored_paths": [
+      "adapters/color/adapter_config.json",
+      "adapters/color/adapter_model.safetensors",
+      "adapters/human_action/adapter_config.json",
+      "adapters/human_action/adapter_model.safetensors",
+      "adapters/multiple_objects/adapter_config.json",
+      "adapters/multiple_objects/adapter_model.safetensors",
+      "adapters/object_class/adapter_config.json",
+      "adapters/object_class/adapter_model.safetensors",
+      "adapters/scene/adapter_config.json",
+      "adapters/scene/adapter_model.safetensors",
+      "adapters/spatial_relationship/adapter_config.json",
+      "adapters/spatial_relationship/adapter_model.safetensors",
+      "adapters/spatial_relationship/training_config.json",
+      "models/dynamic_degree/aligned.pt"
+    ],
+    "retrained": false,
+    "gpu_rerun": false
+  },
+  "tensor_validation": {
+    "lora_parameters_each": 43646976,
+    "lora_tensors_each": 504,
+    "lora_dtype": "F32",
+    "dynamic_parameters": 51393,
+    "dynamic_tensors": 7,
+    "dynamic_strict_cpu_load": true
+  },
+  "cpu_validation": {
+    "passed": 1146,
+    "skipped": 3,
+    "dimension_cli_help": 16,
+    "uv_lock_check": true,
+    "uv_sync_locked_test": true,
+    "cpu_torch_overlay": "2.14.0+cpu"
+  },
+  "h100": {
+    "model_repo": "winbeau/vbench-faithful",
+    "model_revision": "91d6f98bbd30f9eec232e7820d3c65a449ad4801",
+    "code_snapshot_sha": "4588e816eab58eae61dc8b0e32fbc7f69aa110e0",
+    "code_tree": "13d9e82670ed9b09627b5777ad8448715c00d43b",
+    "snapshot_status": "?? .venv\n",
+    "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+    "gpu": "3, NVIDIA H100 80GB HBM3, GPU-c0af33a9-498c-ff7c-bb56-e9992ccded30",
+    "cohort": {
+      "unique_videos": 32,
+      "frames_each": 16,
+      "fps": 8,
+      "seconds_each": 2,
+      "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65"
+    },
+    "dimensions_rerun": [
+      "spatial_relationship"
+    ],
+    "cache": "new cache and environment directories; no-reuse; fresh visual and semantic inference",
+    "old_defined": 11,
+    "new_defined": 32,
+    "common_defined_score_exact": 11,
+    "common_max_absolute_difference": 0.0,
+    "previously_missing_now_defined": 21,
+    "new_summary": {
+      "input_count": 32,
+      "succeeded": 32,
+      "missing": 0,
+      "coverage": 1.0,
+      "complete": true,
+      "score": 0.11677368474221925,
+      "observed_subset_mean": 0.11677368474221925,
+      "aggregation": "equal_video",
+      "dimension": "spatial_relationship",
+      "backend": "repair",
+      "gpu": "3",
+      "cached": false,
+      "elapsed_seconds": 51.32160903897602
+    },
+    "wall_seconds": 57.30612127203494,
+    "result": "/root/wenbiao_zhao/vbench-repair-eval-20261008/faithful-model-release-20261008/eval/spatial_relationship/repair.json",
+    "result_sha256": "f20269a2aa562a73b73a67ce8bb0d88ad2ec09f86b96d31ff89b46e0e3a14d8a",
+    "reference": "/root/wenbiao_zhao/vbench-repair-eval-20261008/selected-cleanup-result/spatial_relationship/repair.json",
+    "explanation": "The former H100 adapter directory omitted training_config.json and selected legacy parsing. The published recovery installs the byte-preserved four-direction config. Selected weights and scoring formulas are unchanged.",
+    "full_16_rerun": false,
+    "retrained": false
+  },
+  "scope": "Seven unchanged trained weights; new normalized model repository and restore/cache metadata validation. One fresh Spatial GPU check; no retraining or new all-16 timing."
+}

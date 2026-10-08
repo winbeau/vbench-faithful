@@ -72,7 +72,9 @@ each adapter's configuration and weights, and places Spatial's training
 configuration beside its adapter to retain the four-direction parsing contract.
 Tokenizers come from the shared Qwen base. Files with different existing contents
 are preserved and reported as an error. The restoration receipt records the selected model repository and commit;
-runtime `--resume` also checks the selected model manifest identity.
+runtime `--resume` also checks the selected model manifest identity. Evaluation
+preflight and cache keys include PEFT configurations and Spatial's four-direction
+configuration. Missing or changed metadata is rejected before model inference.
 
 Frozen research inputs still come from `xju-arlab/vbench-repair`. Original training
 source archives, Dynamic metadata, and the unmodified frozen V-JEPA checkpoint
@@ -85,3 +87,34 @@ To fetch only this Hub repository, use `hf download winbeau/vbench-faithful
 full commit from `model-release.json`. This command alone does not install shared
 base models, video backends, or runtimes. The Hub model card includes a PEFT loading
 example; complete scoring uses the project's schemas, visual evidence, and formulas.
+
+## Release verification
+
+Published model commit: [`91d6f98`](https://huggingface.co/winbeau/vbench-faithful/commit/91d6f98bbd30f9eec232e7820d3c65a449ad4801).
+GitHub integration: [`f7b298d`](https://github.com/winbeau/vbench-faithful/commit/f7b298da24c91df944e42f822a7aa2d192d4507e).
+The [publication receipt](../publication/faithful-model-release.json) records:
+
+- All 46 uploaded files passed remote size/content-identity checks. Anonymous
+  access works; all 14 runtime files were downloaded with an empty Hub file cache,
+  installed through the recovery mapper, and SHA-256 verified.
+- Six safetensors files each contain 504 FP32 tensors / 43,646,976 parameters.
+  The seven-tensor, 51,393-parameter Dynamic head passed strict CPU loading.
+- CPU validation: 1,146 passed, 3 skipped; locked uv checks and all 16 package
+  help entries passed.
+- On H100 GPU 3, a fresh Spatial run used the same 32 two-second videos
+  (16 frames at 8 FPS), the selected checkpoint, and the restored configuration.
+  It completed in 57.31 seconds including setup, with 32/32 defined scores and
+  mean 0.11677368474221925. All 11 previously defined scores matched exactly;
+  the other 21 were newly scored by the selected parser, without score imputation.
+
+The earlier H100 installation lacked `training_config.json`, which silently
+selected the legacy Spatial prompt/schema. Its historical 11/32 coverage and
+all-16 timings remain historical evidence. This release restores the original
+selected four-direction configuration and verifies it before execution. The
+published weight bytes and scoring formulas are unchanged. This validation ran
+one GPU dimension; it did not retrain models or establish new all-16 timings.
+
+The H100 test tree was `13d9e82670ed9b09627b5777ad8448715c00d43b`, using VBench
+`fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490`. Its temporary snapshot is identified in
+the receipt; the only untracked entry was the launcher `.venv` symlink. Results
+are under `/root/wenbiao_zhao/vbench-repair-eval-20261008/faithful-model-release-20261008/eval/`.

@@ -94,6 +94,8 @@ The seven accelerators passed same-32 per-video checks against official scores: 
 
 On the same 32 videos across all 16 dimensions, one H100 measured **344.60 s** for the default mode, **345.58 s** for official mode and **338.23 s** for the direct original single-process baseline. Our time decreased **37.82%** from 554.19 s and is within **1.88%** of the direct original. All 224 accelerated scores pass; existing partial coverage in three repairs remains explicit (459/512 project scores, 505/512 original). These single-run timings show near parity. [Full timing and numerical report](docs/validation/h100-same32-final-20261008.md).
 
+The latest [model release](docs/reproduction/MODELS.md#release-verification) restores Spatial's required four-direction configuration. A fresh H100 check scored **32/32** videos, up from 11/32, with all 11 previously defined scores unchanged. The all-16 timing and coverage figures above describe the earlier installation; this publication check reran Spatial only.
+
 The output contains `plan.json`, `summary.json`, per-dimension `origin.json`, `repair.json` or `accelerated.json`, and worker logs. Cache receipts identify reused stages. Failed, unsupported, or omitted scores remain `null`; incomplete coverage does not produce a complete-population mean. Official dataset aggregation is preserved, including dimension-specific scales and weighting.
 
 ## Supported Dimensions
