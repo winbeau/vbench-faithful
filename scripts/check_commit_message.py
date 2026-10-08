@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Check one Conventional Commit title for the repository's allowed types."""
+"""Check a Conventional Commit title and reject Chinese text in the full message."""
 from __future__ import annotations
 
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 ALLOWED_TYPES = "feat|fix|refactor|test|docs|build|ci|chore"
@@ -16,6 +17,14 @@ def validate(message: str) -> tuple[bool, str]:
     title = message.splitlines()[0].strip() if message.splitlines() else ""
     if not title:
         return False, "commit title is empty"
+    if any(
+        char == "\u3007"
+        or unicodedata.name(char, "").startswith(
+            ("CJK UNIFIED IDEOGRAPH", "CJK COMPATIBILITY IDEOGRAPH")
+        )
+        for char in message
+    ):
+        return False, "commit messages must be written in English; Chinese text is not allowed"
     if not TITLE.fullmatch(title):
         return False, "expected type(scope): description with an allowed type"
     if len(title) > 100:

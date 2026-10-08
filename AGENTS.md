@@ -104,7 +104,23 @@ H200 正式实验使用物理 4–7 卡时，一个维度完成、校验并合�
 
 CLI 新维度可复制对应 metric 目录，保持 `src/` 布局、独立 `pyproject.toml`、直接依赖声明和 `tests/`。模板入口应先实现 `--vbench/--audit/--both`、`--video/--video-dir`、元数据和默认输出，再接入算法，不将另一个 metric 作为运行时依赖。
 
-不自动 commit 或 push；普通修复按用户授权执行。commit 标题使用 Conventional Commits（中文描述可以）：`type(scope): 描述`，重大变更用 `type(scope)!: 描述`，type 为 `feat/fix/refactor/test/docs/build/ci/chore`。提交前可运行 `./scripts/check_commit_message.py "$(git log -1 --pretty=%s)"`，或安装 `.githooks/commit-msg` 到本地 hooks；CI 只检查 PR 标题或新提交范围，不回溯检查旧历史。
+不自动 commit 或 push；普通修复按用户授权执行。
+
+**Commit messages must be written entirely in English.** This applies to the
+subject, body, and trailers, including copied descriptions and logs. Chinese
+text is forbidden. This rule supersedes Chinese commit examples in historical
+plans and reports; it does not require translating source comments or research
+documents.
+
+Use Conventional Commits: `type(scope): description`, or
+`type(scope)!: description` for breaking changes. Allowed types are
+`feat/fix/refactor/test/docs/build/ci/chore`; keep the subject within 100
+characters. Validate the complete proposed message with
+`python3 scripts/check_commit_message.py /path/to/commit-message.txt` before
+committing. Install `.githooks/commit-msg` in the repository's local hooks
+directory to enforce the same check for `git commit`. Never use `--no-verify`
+to bypass this language rule. Rewriting published history requires explicit
+user authorization.
 
 <!-- aoci:begin -->
 ## AOCI 仓库认知

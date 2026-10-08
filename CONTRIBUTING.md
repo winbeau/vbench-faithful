@@ -25,7 +25,25 @@ uv run motion-smoothness --help
 
 ## 提交与检查
 
-标题格式为 `type(scope): 描述`，例如 `fix(core): 修正视频排序`、`docs(workspace): 更新锁定环境`。允许类型为 `feat`、`fix`、`refactor`、`test`、`docs`、`build`、`ci`、`chore`；重大协议变化可写 `type(scope)!: 描述` 或在正文写 `BREAKING CHANGE:`。正文建议说明动机、行为变化、验证命令和外部限制，论文数据改动不要混入代码提交。
+Commit messages must be entirely in English, including the subject, body,
+trailers, and copied logs. Chinese text is not allowed. Use
+`type(scope): description`, for example `fix(core): correct video ordering`
+or `docs(workspace): document the locked environment`. Allowed types are
+`feat`, `fix`, `refactor`, `test`, `docs`, `build`, `ci`, and `chore`; mark
+breaking changes with `type(scope)!: description` or a `BREAKING CHANGE:`
+trailer. Keep subjects within 100 characters. Describe the reason, behavior,
+validation, and limitations in the body when needed; keep research data
+changes separate from code changes. Historical Chinese commit examples do
+not override this policy.
+
+Validate the entire message before committing:
+
+```bash
+python3 scripts/check_commit_message.py /path/to/commit-message.txt
+```
+
+The checker rejects Chinese text anywhere in the message. Do not bypass the
+check with `--no-verify`.
 
 本地可选安装 commit-msg hook（不修改全局 Git 配置）：
 
