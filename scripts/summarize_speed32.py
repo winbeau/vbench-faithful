@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 import subprocess
 
@@ -35,6 +36,107 @@ def normalized_rows(run, dimension, backend):
         return value
 
     return normalize(payload["rows"])
+
+
+def numerical_differences(reference, candidate, *, tolerance=1e-6, path=""):
+    """Require identical structure/non-numerical evidence; bound every changed number."""
+    if isinstance(reference, dict):
+        assert isinstance(candidate, dict) and reference.keys() == candidate.keys(), path
+        return [item for key in reference for item in numerical_differences(
+            reference[key], candidate[key], tolerance=tolerance, path=f"{path}/{key}")]
+    if isinstance(reference, list):
+        assert isinstance(candidate, list) and len(reference) == len(candidate), path
+        return [item for i, (a, b) in enumerate(zip(reference, candidate)) for item in
+                numerical_differences(a, b, tolerance=tolerance, path=f"{path}/{i}")]
+    if reference == candidate:
+        return []
+    assert type(reference) in {int, float} and type(candidate) in {int, float}, (path, reference, candidate)
+    error = abs(reference - candidate)
+    assert math.isfinite(error) and error <= tolerance, (path, reference, candidate)
+    return [{"path": path, "absolute_error": error}]
+
+
+def summarize_final(root):
+    from vbench_audit_core.score_agreement import compare_scores
+
+    inputs = read(root / "inputs-v2.json")
+    assert len(inputs) == 512 and len({r["video_sha256"] for r in inputs}) == 32
+    report = {"schema": "same32-final-performance/1", "input_sha256": digest(root / "inputs-v2.json"),
+        "input_records": 512, "unique_media": 32, "media_seconds": 64, "host": "h100-server",
+        "scope": "agent-annotated timing queries with negative probes; not human preference truth",
+        "runs": {}, "repairs": [], "accelerated": [], "original_parity": [], "shared_inference": {}}
+    for name in ("origin-final", "ours-final"):
+        run = root / name
+        plan, summary, clock = read(run / "plan.json"), read(run / "summary.json"), read(root / (name + ".timing.json"))
+        assert plan["input_sha256"] == report["input_sha256"] and not plan["git_dirty"]
+        assert len(summary["dimensions"]) == 16 and not plan["official_fallback"]
+        assert all(s["input_count"] == 32 and not s["cached"] for s in summary["dimensions"].values())
+        report["runs"][name] = {**clock, "output": str(run), "plan_sha256": digest(run / "plan.json"),
+            "summary_sha256": digest(run / "summary.json"), "source_sha256": plan["source_sha256"],
+            "upstream_sha": plan["upstream_sha"], "gpu_info": plan["gpu_info"], "lock_sha256": plan["lock_sha256"],
+            "dimensions": summary["dimensions"], "preflight_seconds": summary["timing_seconds"],
+            "complete": summary["complete"], "previous_run_cache_hits": 0}
+    native = read(root / "native-final/timing.json")
+    native_clock = read(root / "native-final.timing.json")
+    assert native_clock["returncode"] == 0 and native["input_sha256"] == report["input_sha256"]
+    report["runs"]["native-final"] = {**native, **native_clock, "output": str(root / "native-final")}
+    native_pids = set()
+    for dim in OFFICIAL:
+        official = read(root / "origin-final" / dim / "origin.json")
+        old_official = read(root / "origin-baseline-v2" / dim / "origin.json")
+        native_pids.add(official["worker_pid"])
+        differences = numerical_differences(old_official["rows"], official["rows"])
+        native_rows = {r["video_path"]: r["video_results"] for r in read(root / "native-final" / (dim + ".json"))}
+        succeeded = [r for r in official["rows"] if r["status"] == "succeeded"]
+        assert native_rows.keys() == {r["video"] for r in succeeded}, dim
+        native_error = max(abs(r["score"] - native_rows[r["video"]]) for r in succeeded)
+        aggregate_error = abs(official["official_aggregate"] - native["dimensions"][dim]["official_aggregate"])
+        assert max(native_error, aggregate_error) <= 1e-6, dim
+        report["original_parity"].append({"dimension": dim, "input_count": 32, "succeeded": len(succeeded),
+            "max_changed_field_error_vs_isolated": max((d["absolute_error"] for d in differences), default=0),
+            "max_score_error_vs_native": native_error, "aggregate_error_vs_native": aggregate_error})
+        backend = "repair" if dim in PAPER else "accelerated"
+        current = read(root / "ours-final" / dim / (backend + ".json"))
+        assert all(not s["reused"] for s in current["execution"]["cache"]), dim
+        if dim in PAPER:
+            old = read(root / "repair-baseline-v2" / dim / "repair.json")
+            differences = numerical_differences(normalized_rows(root / "repair-baseline-v2", dim, "repair"),
+                normalized_rows(root / "ours-final", dim, "repair"), tolerance=1e-6 if dim == "subject_consistency" else 0)
+            entry = {"dimension": dim, "input_count": 32,
+                "succeeded": sum(r["status"] == "succeeded" for r in current["rows"]),
+                "identity_status_and_non_numeric_evidence_equal": True,
+                "bitwise_rows_equal": not differences, "changed_numeric_fields": len(differences),
+                "max_numeric_field_error": max((d["absolute_error"] for d in differences), default=0),
+                "max_score_error": max((abs(a["score"] - b["score"]) for a, b in zip(old["rows"], current["rows"])
+                                        if a["score"] is not None), default=0)}
+            if dim in TASKS:
+                assert old["predictions"] == current["predictions"], dim
+                assert read(root / "repair-baseline-v2" / dim / "evidence/result.json")["rows"] == read(root / "ours-final" / dim / "evidence/result.json")["rows"], dim
+                entry.update(raw_predictions_equal=True, visual_evidence_equal=True)
+            if dim in {"object_class", "color"}:
+                assert read(root / "repair-baseline-v2" / dim / "compile/result.json") == read(root / "ours-final" / dim / "compile/result.json"), dim
+                entry["compiled_targets_equal"] = True
+            report["repairs"].append(entry)
+        else:
+            comparison = compare_scores(official["rows"], current["rows"])
+            assert comparison["passed"], dim
+            aggregate_error = abs(current["aggregate"] - official["official_aggregate"])
+            assert aggregate_error <= max(1e-6, .01 * abs(official["official_aggregate"])), dim
+            report["accelerated"].append({"dimension": dim, **{k: v for k, v in comparison.items() if k != "rows"},
+                "max_relative_error": max(r["absolute_error"] / abs(r["reference"]) for r in comparison["rows"] if r["reference"]),
+                "aggregate_error": aggregate_error})
+        if "run_shared_inference" in current:
+            report["shared_inference"][dim] = current["run_shared_inference"]
+    assert len(native_pids) == 1, native_pids  # This fixture selects one GPU.
+    report["official_process_ids"] = sorted(native_pids)
+    report["media"] = read(ROOT / "configs/benchmarks/same32-20261008.json")["videos"]
+    project_seconds = report["runs"]["ours-final"]["wall_seconds"]
+    references = {name: report["runs"][name]["wall_seconds"] for name in ("origin-final", "native-final")}
+    references["repair-baseline-v2"] = read(root / "repair-baseline-v2.timing.json")["wall_seconds"]
+    report["comparisons"] = {name: {"reference_seconds": seconds, "project_seconds": project_seconds,
+        "speedup": seconds / project_seconds, "reduction_percent": 100 * (1 - project_seconds / seconds)}
+        for name, seconds in references.items()}
+    return report
 
 
 def summarize(root):
@@ -131,11 +233,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--experiment", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--final", action="store_true", help="Validate the final nine-repair/seven-accelerator comparison")
     args = parser.parse_args()
     output = args.output.resolve()
     if output.exists() or any(output.is_relative_to(ROOT / p) for p in ("data", "results", "splits", "runs")):
         raise ValueError("Use a new report outside frozen research directories")
-    report = summarize(args.experiment.resolve())
+    report = (summarize_final if args.final else summarize)(args.experiment.resolve())
     write_json(output, report)
     print(json.dumps(report["comparisons"], indent=2))
 
