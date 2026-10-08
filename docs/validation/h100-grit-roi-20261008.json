@@ -1,0 +1,176 @@
+{
+  "code_sha": "69980247dcc4c44f1bf4f3c2de637fd2e9f1b0aa",
+  "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+  "clock": {
+    "returncode": 1,
+    "wall_seconds": 198.60450278106146,
+    "command": [
+      "/root/.local/bin/uv",
+      "run",
+      "--no-sync",
+      "python",
+      "scripts/eval.py",
+      "--config",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/benchmark.yaml",
+      "--backend",
+      "repair",
+      "--dimensions",
+      "object_class",
+      "spatial_relationship",
+      "multiple_objects",
+      "color",
+      "--output",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-roi-optimized",
+      "--no-reuse"
+    ],
+    "finished_utc": "2026-10-08T06:04:12.155991+00:00"
+  },
+  "dimensions": {
+    "object_class": {
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0,
+      "raw_evidence_equal": true,
+      "semantic_predictions_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 66.07904447009787,
+      "new_seconds": 54.6135044710245,
+      "inference": {
+        "task": "object_class",
+        "hits": 2,
+        "misses": 510,
+        "same_frame_object_head_reuses": 510,
+        "scope": "current evaluation only",
+        "cache": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-roi-optimized/model-inference/dcef29d557e397aa5ef7b076530d44a01e5fa5ac5d99c477e301f4dc99bd6077"
+      }
+    },
+    "spatial_relationship": {
+      "records": 32,
+      "succeeded": 11,
+      "max_score_error": 0,
+      "raw_evidence_equal": true,
+      "semantic_predictions_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 29.980722730979323,
+      "new_seconds": 31.055284963920712
+    },
+    "multiple_objects": {
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0,
+      "raw_evidence_equal": true,
+      "semantic_predictions_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 20.446415444021113,
+      "new_seconds": 21.18264791101683
+    },
+    "color": {
+      "records": 32,
+      "succeeded": 9,
+      "max_score_error": 0,
+      "raw_evidence_equal": true,
+      "semantic_predictions_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 84.01532299607061,
+      "new_seconds": 85.02956840302795,
+      "inference": {
+        "task": "color",
+        "hits": 2,
+        "misses": 510,
+        "same_frame_object_head_reuses": 0,
+        "scope": "current evaluation only",
+        "cache": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-roi-optimized/model-inference/22d710921374bcb657ba75d723ffff539d0276d344843f9fe70eecbd2b6c192b"
+      }
+    }
+  },
+  "gpu_info": {
+    "3": {
+      "torch": "2.5.1+cu121",
+      "cuda": "12.1",
+      "name": "NVIDIA H100 80GB HBM3",
+      "capability": [
+        9,
+        0
+      ]
+    }
+  },
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "profile": {
+    "object_class": {
+      "frames": 64,
+      "load_seconds": 5.816448903991841,
+      "profile_wall_seconds": 5.355923303053714,
+      "timers": {
+        "backbone": {
+          "calls": 64,
+          "cuda_ms": 1063.5562839508057,
+          "cpu_seconds": 1.0423267150763422
+        },
+        "proposals": {
+          "calls": 64,
+          "cuda_ms": 524.6165771484375,
+          "cpu_seconds": 0.544521628995426
+        },
+        "text_primary": {
+          "calls": 64,
+          "cuda_ms": 1045.8532810211182,
+          "cpu_seconds": 1.0458887248532847
+        },
+        "roi_primary": {
+          "calls": 64,
+          "cuda_ms": 1506.1299495697021,
+          "cpu_seconds": 1.5062036598101258
+        },
+        "text_object": {
+          "calls": 64,
+          "cuda_ms": 1036.0084199905396,
+          "cpu_seconds": 1.0360443121753633
+        },
+        "roi_object": {
+          "calls": 64,
+          "cuda_ms": 1489.4194240570068,
+          "cpu_seconds": 1.5417060701875016
+        }
+      },
+      "note": "inclusive parent/child regions; do not sum nested ROI and text times"
+    },
+    "color": {
+      "frames": 64,
+      "load_seconds": 2.959125678986311,
+      "profile_wall_seconds": 6.79185228003189,
+      "timers": {
+        "backbone": {
+          "calls": 64,
+          "cuda_ms": 1048.1311321258545,
+          "cpu_seconds": 1.0254037724807858
+        },
+        "proposals": {
+          "calls": 64,
+          "cuda_ms": 520.7437772750854,
+          "cpu_seconds": 0.5421800464391708
+        },
+        "text_primary": {
+          "calls": 64,
+          "cuda_ms": 2621.2137031555176,
+          "cpu_seconds": 2.621278886916116
+        },
+        "roi_primary": {
+          "calls": 64,
+          "cuda_ms": 3083.1489028930664,
+          "cpu_seconds": 3.083246383816004
+        },
+        "text_object": {
+          "calls": 64,
+          "cuda_ms": 1022.0735378265381,
+          "cpu_seconds": 1.022113490733318
+        },
+        "roi_object": {
+          "calls": 64,
+          "cuda_ms": 1463.5903663635254,
+          "cpu_seconds": 1.5209706799359992
+        }
+      },
+      "note": "inclusive parent/child regions; do not sum nested ROI and text times"
+    }
+  }
+}

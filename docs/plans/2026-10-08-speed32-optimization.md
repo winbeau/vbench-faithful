@@ -33,17 +33,21 @@ Same 32 distinct native videos (64 seconds), 512 dimension–video records; phys
 
 Totals including setup: original 338.50 s; current project 429.78 s; project before this optimization 554.19 s. The seven non-repair dimensions in this snapshot still call original VBench. Per-dimension project times include isolated worker/environment overhead; original times share a process.
 
-## Active item: GRiT group
+## Accepted: GRiT group
 
 Completed: discard unused rendering; share byte-identical ObjectDet frame outputs within this run, separately from Color DenseCap; preserve all model settings and scoring. Exact GPU equivalence passed for all repaired input records, semantic outputs and evidence. The two spatial/object consumers avoid 1,024 repeated frame forwards.
 
 Profiled 64 frames per protocol on H100: ObjectDet takes 5.36 s, including 1.49 s for a redundant second ROI/text pass. Its two raw heads are identical on all 512 cohort frames. Color takes 6.79 s, including 2.62 s primary text generation; its raw heads differ on all 512 frames and must stay separate. Timers are nested; text is included in ROI time.
 
-Candidate: reuse an independently copied ObjectDet ROI output only within the same frame, when model identity, decoder settings and feature/proposal identities match. Both raw evidence heads remain present. CPU contracts: 109 passed, 1 skipped. Next: run the same 32-video GRiT group on H100, compare all raw evidence and scores, and record timing before accepting this optimization or starting another dimension.
+`6998024`: reuse an independently copied ObjectDet ROI output only within the same frame, when model identity, decoder settings and feature/proposal identities match. Both raw evidence heads remain present. CPU contracts: 109 passed, 1 skipped. Same-32 H100 acceptance passed: all 128 input records retain exact scores, statuses, semantic outputs and raw visual evidence. Object Class falls from 66.08 to 54.61 s (visual stage 50.95 to 39.11 s); the four sequential stages total 200.52 to 191.88 s. Standalone group wall time including setup is 198.60 s. No previous-run inference hits; 510 duplicate ROI/text forwards removed. Color retains both original heads. Coverage stays 32/11/32/9 in Object/Spatial/Multiple/Color order. [Receipt](../validation/h100-grit-roi-20261008.json).
+
+## Active item: Scene
+
+Profile visual captioning and semantic verification separately, distinguishing imports/model loading from inference. Preserve the original captions, semantic generation settings and paper scoring. Other dimensions remain unchanged until this item is accepted.
 
 ## Subsequent queue
 
-After GRiT acceptance, handle Scene, Human Action, Background Consistency and Subject Consistency individually, prioritizing shared model-load costs only when profiling justifies them. Dynamic already outperforms its original reference; retain its native protocol.
+After Scene acceptance, handle Human Action, Background Consistency and Subject Consistency individually, prioritizing shared model-load costs only when profiling justifies them. Dynamic already outperforms its original reference; retain its native protocol.
 
 For the seven accelerated dimensions, proceed individually in this order: Appearance Style, Imaging Quality, Aesthetic Quality, Temporal Style, Overall Consistency, Motion Smoothness, Temporal Flickering. Shared encoder work may be prepared when working on its first consumer, with other dimensions remaining unchanged until their own acceptance. Mode routing and final 16-dimensional end-to-end acceptance follow the validated implementations.
 
