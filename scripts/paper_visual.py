@@ -138,14 +138,18 @@ def score_rows(rows, returned, implementation):
 
 
 def accelerated(rows, dim, assets):
-    import torch
     # Dimensions are enabled individually after their implementation/validation.
-    if dim not in {"appearance_style", "imaging_quality", "aesthetic_quality", "temporal_style", "overall_consistency", "motion_smoothness"}:
+    if dim not in {"appearance_style", "imaging_quality", "aesthetic_quality", "temporal_style", "overall_consistency", "motion_smoothness", "temporal_flickering"}:
         raise ValueError(f"No accelerated implementation for {dim}")
+    if dim == "temporal_flickering":
+        device, submodules = "cpu", {}
+    else:
+        import torch
+        device, submodules = torch.device("cuda:0"), official_submodules(dim)
     adapter = importlib.import_module(dim + ".accelerated")
     diagnostics = {}
     extra = {"diagnostics": diagnostics} if dim in {"temporal_style", "overall_consistency"} else {}
-    aggregate, returned = adapter.compute(rows, torch.device("cuda:0"), official_submodules(dim), **extra)
+    aggregate, returned = adapter.compute(rows, device, submodules, **extra)
     return {"rows": score_rows(rows, returned, "accelerated"), "aggregate": float(aggregate),
             "implementation": "project accelerated", "aggregation": "vbench_native_reducer",
             "reference_upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490", **diagnostics}
@@ -250,13 +254,18 @@ def main():
     verify_upstream(assets["vbench"])
     sys.path.insert(0, assets["vbench"])
     os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
-    import torch
     import cv2
-    torch.set_num_threads(3); cv2.setNumThreads(1)
-    torch.backends.cuda.matmul.allow_tf32 = False
-    torch.backends.cudnn.allow_tf32 = False
-    if not torch.cuda.is_available():
-        raise RuntimeError("An explicit CUDA runtime is required")
+    cv2.setNumThreads(1)
+    cpu_only = args.mode == "accelerated" and args.dimension == "temporal_flickering"
+    torch_version = None
+    if not cpu_only:
+        import torch
+        torch.set_num_threads(3)
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        if not torch.cuda.is_available():
+            raise RuntimeError("An explicit CUDA runtime is required")
+        torch_version = torch.__version__
     if args.mode == "evidence":
         payload = evidence(rows, args.dimension, assets)
     elif args.mode == "origin":
@@ -265,7 +274,8 @@ def main():
         payload = accelerated(rows, args.dimension, assets)
     else:
         payload = repair(rows, args.dimension, assets, args.output, args.compiled)
-    payload.update(dimension=args.dimension, mode=args.mode, torch=torch.__version__,
+    payload.update(dimension=args.dimension, mode=args.mode, torch=torch_version,
+                   device="cpu" if cpu_only else "cuda:0",
                    worker_sha256=digest(__file__), input_manifest_sha256=digest(args.input))
     write_json(args.output, payload)
 
