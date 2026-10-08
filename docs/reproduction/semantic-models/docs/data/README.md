@@ -53,7 +53,7 @@ uv run --no-sync python scripts/inspect_vg_snli.py --source visual_genome
 ## 本轮新增：小批量加工与 teacher 试标
 
 - `scripts/prepare_data.py` 已产出忽略构建 `data/processed/local-0001/`：spatial 400（左右上下各100，另21条多关系）、objects 400（Flickr，许可待核）、action 400（K400模板弱监督）、MovieGen 1,525条无标签清单；`data/smoke/local-0001/` 另存工程fixture（12/12/12/90）。计数闭合，重复运行同输入同哈希。
-- teacher 试标按[试标报告](../teacher-pilot-report.md)执行：19次请求、15候选、4条因 `action_not_in_k400` 被拒；空间5/5、Objects 4/4、Scene 5/5 合法，Action 仅1/5。
+- teacher 试标按[试标报告](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/reproduction/semantic-models/docs/teacher-pilot-report.md)执行：19次请求、15候选、4条因 `action_not_in_k400` 被拒；空间5/5、Objects 4/4、Scene 5/5 合法，Action 仅1/5。
 - 结论：Action 需要"K400受限提示+人工确认别名"，不能直接把 teacher 自然动作当标签；Objects 需要摄影/后期词汇排除表；Spatial 自然 prompt 的正则线索不等于显式关系，弱监督仍以 VG 结构化边为主。
 
 ## 下一步（未执行）

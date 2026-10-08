@@ -10,7 +10,7 @@ from scripts.counterfactual.score_static_jitter import select_candidates
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG = json.loads((ROOT / "configs/dynamic-static-jitter/construction.local-texture-dev5-8px-v1.json").read_text())
+CONFIG = json.loads((ROOT / "tests/fixtures/construction/construction.local-texture-dev5-8px-v1.json").read_text())
 
 
 def records():
@@ -41,7 +41,7 @@ def test_stress_cannot_bypass_test_freeze_or_media_integrity(key, value):
 
 
 def test_eight_pixel_extension_retains_strict_gates_and_same_spatial_field():
-    previous = json.loads((ROOT / "configs/dynamic-static-jitter/construction.local-texture-dev5-v1.json").read_text())
+    previous = json.loads((ROOT / "tests/fixtures/construction/construction.local-texture-dev5-v1.json").read_text())
     for key in ["min_warp_jacobian", "min_structure_correlation", "spatial_scale_pixels", "border_taper_pixels", "seeds"]:
         assert CONFIG[key] == previous[key]
     frames = np.zeros((4, 256, 256, 3), np.uint8)

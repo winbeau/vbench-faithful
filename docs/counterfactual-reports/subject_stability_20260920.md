@@ -1,6 +1,6 @@
 # Subject repair：背景干预稳定性与定位补漏
 
-2026-09-20 发起，2026-09-21 收尾。用户要求以“主体不变、背景变化时 repair 稳定，而 origin 明显变化”为主要目标；人类排序保留为辅助诊断，见[执行计划](../plans/2026-09-20-subject-stability-goal.md)。**官方 720 候选的四分之一时窗主实验已完成：241 条数值构造全部评分，预定 240 条主分析的 Origin/repair 平均绝对变化为 0.120035/0.010596，主体干预平均降分 0.099319。用户看到本轮结果后明确接受“0.01 左右”，因此该均值表现符合最新实用要求；原预注册 ≤0.01 的严格统计仍保留为未通过。**用户随后要求快速收尾，剩余补充单帧评分已停止，部分记录留存，不作为完整单帧结果。本轮按最新验收与交付范围结束。旧 34 条开发和 60 条后续实验完整保留，不能用它们或更容易通过的时间条件替代本轮结果。
+2026-09-20 发起，2026-09-21 收尾。用户要求以“主体不变、背景变化时 repair 稳定，而 origin 明显变化”为主要目标；人类排序保留为辅助诊断，见[执行计划](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/plans/2026-09-20-subject-stability-goal.md)。**官方 720 候选的四分之一时窗主实验已完成：241 条数值构造全部评分，预定 240 条主分析的 Origin/repair 平均绝对变化为 0.120035/0.010596，主体干预平均降分 0.099319。用户看到本轮结果后明确接受“0.01 左右”，因此该均值表现符合最新实用要求；原预注册 ≤0.01 的严格统计仍保留为未通过。**用户随后要求快速收尾，剩余补充单帧评分已停止，部分记录留存，不作为完整单帧结果。本轮按最新验收与交付范围结束。旧 34 条开发和 60 条后续实验完整保留，不能用它们或更容易通过的时间条件替代本轮结果。
 
 ## 主条件与分母
 
@@ -60,7 +60,7 @@ v5 的 clean、所有背景版本及 start/middle 主体版本均无空帧。zer
 
 ## 后续分组验证
 
-新的 [160 条候选清单](../../configs/subject-repair/stability_followup160_manifest.jsonl)在构造与新分数产生前冻结：排除已明确用于主体干预开发的 62 个 prompt 后，剩余 10 组、4 个生成器、seed 1–4。现有 ADE20K 的 animal 与 minibike 类接入同一 SegFormer + GrabCut 管线；不下载新模型。animal 是泛动物标签，不能声称模型逐物种验证；train 仍不支持，16 条相关拒收留在分母。
+新的 [160 条候选清单](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/subject-repair/stability_followup160_manifest.jsonl)在构造与新分数产生前冻结：排除已明确用于主体干预开发的 62 个 prompt 后，剩余 10 组、4 个生成器、seed 1–4。现有 ADE20K 的 animal 与 minibike 类接入同一 SegFormer + GrabCut 管线；不下载新模型。animal 是泛动物标签，不能声称模型逐物种验证；train 仍不支持，16 条相关拒收留在分母。
 
 这些自然视频此前参与过自然偏好评分，所有 prompt 的 seed 0 也曾尝试构造。所以称为“分组后续验证”，不称作完全未见的独立自然测试集。构造保留原 1%–50% 门槛、全部时窗及失败；不按 Origin/repair 分数选材。CPU 8 worker 用时 389 秒，60/160 通过数值门槛（大象 14、斑马 29、奶牛 5、卡车 9、摩托车 3），100 条拒收保留。
 
@@ -91,9 +91,9 @@ clean、所有背景版本及三个局部主体版本均有 1,181/1,181 非空�
 
 此外，旧固定原生像素 sigma 带来分辨率强度差异：非人物视频在 256/480/512 短边上，经 224 短边评分变换后的名义 sigma 分别为 10.5/5.6/5.25。新后续集的分辨率构成为 20/13/27 条，start Origin 均值分别为 0.110168/0.066483/0.063866。这里也混有生成器和内容差异，不能据分组相关性直接归因。
 
-新的[尺寸归一化构造协议](../../configs/subject-repair/protocol_resolution_normalized_v3.json)明确设定 `sigma = (person ? 18 : 12) × min(H,W)/256`，保留原 256 像素强度，所有基底使用同一规则。配合 recovery v3 在同样 160 输入上构造，全部四时窗、主体对照和失败仍保留，禁止按分数选视频。这是查看旧后续统计之后的机制诊断，不能重新包装成未暴露的确认集；原 fixed-pixel 结果保持不变。构造区域和相对强度同时改变，因此不能把新旧差异单独归因于其中一项。
+新的[尺寸归一化构造协议](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/subject-repair/protocol_resolution_normalized_v3.json)明确设定 `sigma = (person ? 18 : 12) × min(H,W)/256`，保留原 256 像素强度，所有基底使用同一规则。配合 recovery v3 在同样 160 输入上构造，全部四时窗、主体对照和失败仍保留，禁止按分数选视频。这是查看旧后续统计之后的机制诊断，不能重新包装成未暴露的确认集；原 fixed-pixel 结果保持不变。构造区域和相对强度同时改变，因此不能把新旧差异单独归因于其中一项。
 
-recovery v3 数值合格 61 条、拒收 99 条，原 60 条全部保留。唯一新增的卡车 `v_4f8abc7bb931501fb862` 在最小掩码帧 26 上目视明显错误：只保留驾驶室一小条，却糊掉大部分主体。这个输入问题已在新评分前写入[冻结评分协议](../../configs/subject-repair/stability_followup160_normalized_scoring_v5.json)和[观察记录](subject_stability_20260920/normalized_input_observations.json)。61 条全部评分，数值队列完整报告；主分析为原来同样 60 条，新增卡车保留为已知构造失败，不能按新分数再改变名单。
+recovery v3 数值合格 61 条、拒收 99 条，原 60 条全部保留。唯一新增的卡车 `v_4f8abc7bb931501fb862` 在最小掩码帧 26 上目视明显错误：只保留驾驶室一小条，却糊掉大部分主体。这个输入问题已在新评分前写入[冻结评分协议](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/subject-repair/stability_followup160_normalized_scoring_v5.json)和[观察记录](subject_stability_20260920/normalized_input_observations.json)。61 条全部评分，数值队列完整报告；主分析为原来同样 60 条，新增卡车保留为已知构造失败，不能按新分数再改变名单。
 
 奶牛新的实际糊化预览已确认补回主躯干和大部分头部/下半身，仍没有把单帧检查写成人工轮廓真值。一次显示一例的本地查看页为 `output/subject-repair/subject-stability-followup160-review-20260920/review.html`；新图在 `subject-stability-followup160-normalized-review-20260920/`。按用户要求低频、逐例查看。
 
@@ -118,7 +118,7 @@ start 主体干预 60/60 降分，平均降分 **0.090884**，CI [0.081044, 0.09
 
 ### 固定 Gaussian 剂量梯度
 
-新像素与分数产生前提交的[剂量协议](../../configs/subject-repair/stability_followup160_dose_ladder_v6.json)固定 1×、2×、4×，4× 为本轮新主剂量、2× 为中间对照。输入、recovery v3 构造掩码、四个时窗和 v5 方法均保持不变；只把 sigma 乘以统一系数。以下仍是同一 60 条主分析，不能挑选其中某一剂量替代原 1× 负结果。
+新像素与分数产生前提交的[剂量协议](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/subject-repair/stability_followup160_dose_ladder_v6.json)固定 1×、2×、4×，4× 为本轮新主剂量、2× 为中间对照。输入、recovery v3 构造掩码、四个时窗和 v5 方法均保持不变；只把 sigma 乘以统一系数。以下仍是同一 60 条主分析，不能挑选其中某一剂量替代原 1× 负结果。
 
 | start 剂量 | Origin 平均绝对分差 | repair 平均绝对分差 | 逐例联合成功 | 主体平均降分 |
 | --- | ---: | ---: | ---: | ---: |
@@ -142,7 +142,7 @@ start 主体干预 60/60 降分，平均降分 **0.090884**，CI [0.081044, 0.09
 
 ### 单首帧机制对照：固定同一 60 条
 
-[协议](../../configs/subject-repair/stability_single_frame_construction_v7.json)在查看 4× 汇总前冻结，复用已登记的 2× 中间剂量与同一构造掩码。首帧、中间一帧、末帧各只修改一帧，整段对照保留；每个实际版本重新独立运行 SAM 和 v5。全部 61 个数值构造、549 个版本完成，0 运行失败，两卡墙钟 637.23 秒，Origin parity 最大误差 `1.397e-7`。
+[协议](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/subject-repair/stability_single_frame_construction_v7.json)在查看 4× 汇总前冻结，复用已登记的 2× 中间剂量与同一构造掩码。首帧、中间一帧、末帧各只修改一帧，整段对照保留；每个实际版本重新独立运行 SAM 和 v5。全部 61 个数值构造、549 个版本完成，0 运行失败，两卡墙钟 637.23 秒，Origin parity 最大误差 `1.397e-7`。
 
 | 背景干预位置 | Origin 平均绝对分差 | repair 平均绝对分差 | 逐例联合成功 | 主体对照降分 |
 | --- | ---: | ---: | ---: | ---: |

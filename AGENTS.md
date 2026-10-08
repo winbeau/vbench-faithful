@@ -2,8 +2,7 @@
 
 Read `README.md` and `docs/architecture.md` before changing the project.
 The workspace uses Python 3.11.14 (`.python-version`) and the root `uv.lock`.
-The September workspace plans are historical; the current layout is documented
-in `docs/reproduction/REPOSITORY_CLEANUP.md`.
+The current layout is documented in `docs/reproduction/REPOSITORY_CLEANUP.md`.
 
 ## Scope and boundaries
 
@@ -26,6 +25,11 @@ in `docs/reproduction/REPOSITORY_CLEANUP.md`.
   Retired E0 data/results/splits and obsolete root figures were removed with user
   authorization. Restore historical experiments from their commit, not by silently
   rebuilding old inputs with new selection rules.
+- Training and data construction are paper deliverables. Keep the selected
+  versions in `docs/training.md` and the dependencies needed to produce them.
+  Dynamic's probe -> anchored -> aligned initialization chain must remain.
+  Do not remove training code as evaluation clutter or restore retired
+  candidate pipelines into the active tree.
 - AOCI (`.aoci/`, `aoci.txt`, `.codex/config.toml`) is optional local tooling and
   is not published. A local index can become stale after source changes; verify
   its current coverage before claiming that it represents the working tree.
@@ -37,7 +41,7 @@ in `docs/reproduction/REPOSITORY_CLEANUP.md`.
 
 Run affected algorithm and contract tests after source changes. For workspace
 or interface changes run `uv lock --check`, `uv sync --locked --group test`,
-the CPU torch overlay documented in `CONTRIBUTING.md`,
+the CPU torch overlay documented in `docs/development.md`,
 `uv run --no-sync --group test pytest tests metrics`, and CLI help checks.
 Do not label numerical replay or CPU tests as a CUDA rerun. GPU reports must
 record the code and upstream SHA, devices, cohort and media duration, wall time,

@@ -1,6 +1,6 @@
 # Spatial 方向修复 v2：已实现并完成缓存复算
 
-上一轮只修文本接口，Repair 仍调用忽略方向符号的官方几何，确实没有完成方向修复。本版将 **Repair-rule / Repair-model 接入有符号主体—客体评分**，Origin 保留官方公式。复用 Spatial v8 固定 final、原始预测和同一 GRiT 缓存；没有重新训练、修改标签或按实验结果调阈值。协议见[实施计划](../../plans/13-spatial-direction-repair.md)。
+上一轮只修文本接口，Repair 仍调用忽略方向符号的官方几何，确实没有完成方向修复。本版将 **Repair-rule / Repair-model 接入有符号主体—客体评分**，Origin 保留官方公式。复用 Spatial v8 固定 final、原始预测和同一 GRiT 缓存；没有重新训练、修改标签或按实验结果调阈值。协议见[实施计划](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/reproduction/semantic-models/docs/plans/13-spatial-direction-repair.md)。
 
 ## 实现
 

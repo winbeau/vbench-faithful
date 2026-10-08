@@ -22,7 +22,7 @@
 Backbone SHA-256：`848a77c33cc9e6649ed2119c9bea1e2c569bcdab9539ff3e7c02ccc2959ddf4d`。
 模型固定 revision：`5fe53c4c7eb1a8a4fcd5b6e22f748da1d073a78e`。
 Backbone 是配套预训练编码器，不把它称为第二个训练好的 Dynamic Repair 评分头。
-第三方来源及版权声明随权重保留；Dynamic 工程源码仍在私有 GitHub。
+第三方来源及版权声明随权重保留；Dynamic 工程源码已集成本仓库，选定训练与构造入口见 [训练指南](../training.md)。
 
 数据固定 revision：`8f0ae5b29480695dcf07a0474f2dce21da1ec339`。
 新增 26 个文件（约 2.05 MB），包括 `dimensions/dynamic_degree/training/aligned-v1/`

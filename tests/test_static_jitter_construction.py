@@ -8,7 +8,7 @@ import pytest
 from scripts.counterfactual.static_jitter import build, export_prepared, merge_builds, motion_ladder, perturb, variants
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG = json.loads((ROOT / "configs/dynamic-static-jitter/construction.dev-v1.json").read_text())
+CONFIG = json.loads((ROOT / "tests/fixtures/construction/construction.dev-v1.json").read_text())
 
 
 @pytest.mark.parametrize("family", CONFIG["families"])

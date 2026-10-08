@@ -48,9 +48,9 @@ HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 .venv/bin/python scripts/check_training_
 - 新增实现：`records.py`（契约/门禁）、`sources.py`（只读原料加载）、`teacher.py`（DeepSeek 客户端+预算账本）、`pilot.py`（试标解析）、`metrics.py`、`training.py`、`inference.py`、`provenance.py` 与 `scripts/{prepare_data,build_smoke_mix,run_teacher_pilot,make_tiny_model,train_adapter,train_scene,evaluate_smoke}.py`。
 - 测试：本地 87 passed（含训练栈测试）；远端 75 passed / 12 skipped（跳过项为依赖本地 VG raw 快照的数据测试，远端未搬运该 75MB ZIP）。
 - 清洗构建：`data/processed/local-0001`（spatial 379+21、objects 400、action 400、MovieGen 1,525 无标签、SNLI 本地缺 pyarrow 记为 unavailable）；工程 fixture `data/smoke/local-0001`（12/12/12/90）。
-- teacher：19 次 `deepseek-flash` 请求用满授权（累计 20/20），15 候选 + 4 quarantine，详见[试标报告](teacher-pilot-report.md)。
+- teacher：19 次 `deepseek-flash` 请求用满授权（累计 20/20），15 候选 + 4 quarantine，详见[试标报告](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/reproduction/semantic-models/docs/teacher-pilot-report.md)。
 - 训练冒烟：Qwen3-0.6B（revision `c1899de289a04d12100db370d81485cdf75e47ca`）四任务各 100 步，远端 4090 物理卡 2 与本地 4060 各跑一遍；底座冻结、adapter 更新、completion mask 正确，耗时 67–108 s/任务，峰值显存约 3.9–4.9 GB。
-- 评测冒烟：解析任务 held-out 切片 F1 0.91–1.00（对照未微调底座 0.00–0.87）；Scene 严格单标签 5/12 可解析，加"标签后即停"约束 12/12。详见[冒烟报告](smoke-report.md)与[运行手册](runbook.md)。
+- 评测冒烟：解析任务 held-out 切片 F1 0.91–1.00（对照未微调底座 0.00–0.87）；Scene 严格单标签 5/12 可解析，加"标签后即停"约束 12/12。详见[冒烟报告](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/reproduction/semantic-models/docs/smoke-report.md)与[运行手册](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/reproduction/semantic-models/docs/runbook.md)。
 - 未改依赖锁；未 commit/push；未改动相邻 audit 仓库冻结文件。
 
 ## 未验证/未执行

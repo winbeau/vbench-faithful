@@ -11,7 +11,7 @@ from scripts.counterfactual.static_jitter import SourceRejected, decode
 
 
 CONFIG = json.loads((Path(__file__).resolve().parents[1] /
-                     "configs/dynamic-static-jitter/construction.official-dev-v1.json").read_text())
+                     "tests/fixtures/construction/construction.official-dev-v1.json").read_text())
 
 
 def sequence():
@@ -93,7 +93,7 @@ def test_local_builder_records_displacement_evidence_and_exact_pixels(tmp_path):
     if ffmpeg is None:
         pytest.skip("existing local ffmpeg unavailable")
     config = json.loads((Path(__file__).resolve().parents[1] /
-                       "configs/dynamic-static-jitter/construction.local-texture-dev5-v1.json").read_text())
+                       "tests/fixtures/construction/construction.local-texture-dev5-v1.json").read_text())
     config.update(amplitudes=[2], seeds=[1701])
     source = tmp_path / "original.mp4"
     native.encode_lossless(source, sequence(), 10, ffmpeg)

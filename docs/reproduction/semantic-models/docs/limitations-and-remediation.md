@@ -3,7 +3,7 @@
 本文件把当前四维模型的五条已知边界拆成：**现状证据 → 影响 → 可执行弥补路径 → 验收标准 → 成本与依赖**，
 并给出建议顺序。原则不变：不把弱监督数字包装成研究结论，不用"看起来更好"的修补掩盖失败。
 
-当前证据来源：[正式训练报告](formal-training-report.md)、[模型卡](model-cards.md)、[冒烟报告](smoke-report.md)。
+当前证据来源：[正式训练报告](formal-training-report.md)、[模型卡](model-cards.md)、[冒烟报告](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/reproduction/semantic-models/docs/smoke-report.md)。
 
 | 边界 | 类型 | 最快可做的动作 | 研究级动作 | 外部依赖 |
 | --- | --- | --- | --- | --- |

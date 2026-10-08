@@ -23,7 +23,7 @@
 
 - [CDnet](https://www.changedetection.net/)有运动区域标注，但官网访问／证书与原始帧时间信息仍需核查；本轮**NOT RUN**。
 - [CameraBench官方任务](https://github.com/linzhiqiu/t2v_metrics/tree/6ecb74f92028f42c7e64546d3a71e98c8c73068f/camerabench/data)的`is_scene_static_or_not`有80对。逐项与`Static.jsonl`交叉后，80个“静态场景”正例全部被标为相机不完全静止；不能用作全画面静态负例。本轮不评分、不将其场景静态标签误用为视频静态。此发现不等于该数据集本身有错。
-- 用户不再优先的长生成视频已暂停，[Deep/Causal保留状态](dynamic_generalization_forcing128_20260923.md)另列；其部分结果不混入本报告。
+- 用户不再优先的长生成视频已暂停，[Deep/Causal保留状态](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/counterfactual-reports/dynamic_generalization_forcing128_20260923.md)另列；其部分结果不混入本报告。
 
 ## 3. 数据与评分前冻结协议
 

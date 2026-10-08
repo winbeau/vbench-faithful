@@ -73,21 +73,3 @@ def test_resized_inference_returns_vectors_in_original_pixels(tmp_path, scale):
 def test_invalid_scale_rejected(tmp_path, scale):
     with pytest.raises(ValueError):
         make(tmp_path, scale)
-
-
-@pytest.mark.parametrize("extra", [
-    ["--repair-flow-backend", "torchvision"],
-    ["--repair-flow-weight", "local.pth"],
-    ["--repair-flow-scale", "2"],
-    ["--repair-flow-scale", "nan"],
-    ["--repair-variant", "dense-correspondence", "--repair-flow-backend", "torchvision"],
-])
-def test_runner_rejects_misrouted_repair_weights_before_loading_models(extra):
-    from scripts.counterfactual.score_static_jitter import main
-
-    required = []
-    for flag in ("manifest", "output", "config", "tracker-root", "tracker-weight", "raft-weight", "upstream"):
-        required += ["--" + flag, "not-loaded"]
-    with pytest.raises(SystemExit) as exc:
-        main(required + extra)
-    assert exc.value.code == 2

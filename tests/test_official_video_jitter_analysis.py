@@ -9,7 +9,7 @@ from scripts.counterfactual.official_video_jitter import interventions
 
 
 CONFIG = json.loads((Path(__file__).resolve().parents[1] /
-                     "configs/dynamic-static-jitter/construction.official-dev-v1.json").read_text())
+                     "tests/fixtures/construction/construction.official-dev-v1.json").read_text())
 
 
 def candidates():

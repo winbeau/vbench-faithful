@@ -72,7 +72,7 @@ uv pip install --python .venv-reproduction/bin/python 'huggingface_hub==1.32.0'
 
 复算通过不改变语义掩码、同义词声明域、模型标注与泛化方面的限制。
 详细原协议和统计差别见轻量包中的 `reports/summary.json` 与
-[方法总览](../DIMENSION_METHODS_AND_EXPERIMENTS.md)。
+[方法总览](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/DIMENSION_METHODS_AND_EXPERIMENTS.md)。
 
 Dynamic 另见 [选用版本、权重与复现命令](DYNAMIC_ALIGNED.md)。
 新九维重放记录见 [verified-nine-dimension-replay/verification.json](verified-nine-dimension-replay/verification.json)；
@@ -103,14 +103,14 @@ uv 0.9.17、torch 2.7.1+cu126、Transformers 4.52.4、TRL 0.19.1、PEFT 0.15.2�
 
 已有底座后重新运行准备命令时加 `--base-model /absolute/path/to/Qwen3-8B`。
 生成的 `training-configs/*.json` 只改输入、底座、输出路径，不改实验超参。
-在下载的 `model-code` 中安装锁定训练环境，然后调用其脚本，例如：
+在下载的 `model-code` 中安装锁定训练环境，然后执行本仓库集成的训练源码，例如（完整入口见 [训练与构造指南](../training.md)）：
 
 ```bash
 repro_work="$PWD/output/reproduction"
 uv sync --project "$repro_work/model-code" --locked --extra train
-"$repro_work/model-code/.venv/bin/python" "$repro_work/model-code/scripts/train_scene.py" \
+"$repro_work/model-code/.venv/bin/python" scripts/semantic/train_scene.py \
   --config "$repro_work/training-configs/scene.json"
-"$repro_work/model-code/.venv/bin/python" "$repro_work/model-code/scripts/train_adapter.py" \
+"$repro_work/model-code/.venv/bin/python" scripts/semantic/train_adapter.py \
   --config "$repro_work/training-configs/spatial_relationship.json"
 ```
 

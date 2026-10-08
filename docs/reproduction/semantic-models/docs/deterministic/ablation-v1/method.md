@@ -1,6 +1,6 @@
 # 小模型与组件消融方法
 
-主协议见[预先固定的计划](../../plans/16-ablation-generalization.md)。数据、参数与实现冻结之后才运行本轮预测；原有回归结果与新挑战分表。
+主协议见[预先固定的计划](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/reproduction/semantic-models/docs/plans/16-ablation-generalization.md)。数据、参数与实现冻结之后才运行本轮预测；原有回归结果与新挑战分表。
 
 ## 架构与训练控制
 

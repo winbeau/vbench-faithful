@@ -104,7 +104,7 @@ def test_verification_rejects_subject_source_even_when_mask_geometry_matches(tmp
     from scripts.counterfactual.subject_artifacts import write_json, write_npz
     from scripts.counterfactual.verify_background_interventions import verify_one
 
-    protocol = json.loads((ROOT/'configs/background-repair/construction_refined_dev_v2.json').read_text())
+    protocol = json.loads((ROOT/'configs/background-repair/construction_refined_dev_v3.json').read_text())
     labels_map = {int(k): v for k, v in json.loads((ROOT/'configs/subject-repair/ade20k_labels.json').read_text())['id2label'].items()}
     person = next(k for k, v in labels_map.items() if v == 'person')
     sky = next(k for k, v in labels_map.items() if v == 'sky')

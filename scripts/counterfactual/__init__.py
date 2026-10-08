@@ -1,9 +1,4 @@
-"""VBench-CF counterfactual dataset construction.
+"""Selected paper construction, Dynamic training and protocol verification.
 
-Modules:
-    common      video IO, hashing and determinism helpers
-    transforms  the seven deterministic counterfactual families
-    select_bases  metadata-only base selection from the frozen E0 split
-    build       orchestrator that materialises derived clips and the manifest
-    validate    independent re-checks of the generated dataset
+See docs/training.md for the selected versions and required parent stages.
 """

@@ -11,7 +11,7 @@ from scripts.counterfactual.official_video_jitter import interventions, validate
 
 
 CONFIG = json.loads((Path(__file__).resolve().parents[1] /
-                     "configs/dynamic-static-jitter/construction.local-texture-dev5-v1.json").read_text())
+                     "tests/fixtures/construction/construction.local-texture-dev5-v1.json").read_text())
 
 
 def frames():
@@ -62,14 +62,6 @@ def test_odd_frame_count_still_has_zero_temporal_mean():
         local_texture_jitter(frames(), -1, 1701, CONFIG)
 
 
-def test_five_sources_and_fixed_primary_case_not_score_selected():
-    root = Path(__file__).resolve().parents[1]
-    sources = [json.loads(line) for line in (root /
-               "configs/dynamic-static-jitter/sources.local-texture-dev5-v1.jsonl").read_text().splitlines()]
-    assert len(sources) == len({s["prompt_id"] for s in sources}) == 5
-    assert all(s["split"] == "dev" and s["relative_video_path"].endswith(".mp4") for s in sources)
-    assert len(list(interventions(CONFIG))) == 8
-    assert CONFIG["primary_amplitude"] == 2 and CONFIG["primary_seed"] == 1701
 
 
 def test_native_quality_cannot_accept_invalid_geometry():

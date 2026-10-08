@@ -9,7 +9,7 @@ from scripts.counterfactual.static_jitter import variants
 
 
 CONFIG = json.loads((Path(__file__).resolve().parents[1] /
-                     "configs/dynamic-static-jitter/construction.dev-v2.json").read_text())
+                     "tests/fixtures/construction/construction.dev-v2.json").read_text())
 
 
 def ledger():

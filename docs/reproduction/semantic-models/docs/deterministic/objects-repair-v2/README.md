@@ -2,7 +2,7 @@
 
 本轮实现了 **同名检测框的相邻帧确认**，抑制孤立检测产生的正分。在 275 个模型复核为目标全帧不可见的视频中，仍有正分的视频从 **29 降至 15**，减少 14 个（48.3%）。原始视频分数及可见帧检出也有损失；持续误报仍然存在。该结果支持保守过滤孤立检测，不支持“视觉识别已全面修好”。
 
-Origin 保留原有单帧标签合取。Repair-rule 与 Repair-model 都使用同一新后端，因此二者本轮完全相同；模型仍为固定 Objects v6 final，未重训。已有检测缓存、输入目标和可见性标签未改。本轮为看过错误后的工程修复，不是独立盲测；固定方案见[计划](../../plans/15-objects-temporal-repair.md)。
+Origin 保留原有单帧标签合取。Repair-rule 与 Repair-model 都使用同一新后端，因此二者本轮完全相同；模型仍为固定 Objects v6 final，未重训。已有检测缓存、输入目标和可见性标签未改。本轮为看过错误后的工程修复，不是独立盲测；固定方案见[计划](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/reproduction/semantic-models/docs/plans/15-objects-temporal-repair.md)。
 
 ## 方法与接口
 

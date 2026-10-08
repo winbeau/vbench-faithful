@@ -29,7 +29,7 @@
 - LASIESTA 静态／运动组平均涨幅分别为 Origin 的 4.25%／5.22%，但 10% 条件的区间均跨零。BMC 总体为 1.30%，总体配对区间在零以下，运动子组仍跨零。
 - BMC 37/168 条反事实绝对变分超过 0.1；LASIESTA 静态组 5/32 条增分超过 0.1。不能称为逐片不变。
 - 更大规模独立静止集、真实相机运动专门验证、独立真人标签和物理运动强度标定未完成；编码器预训练重叠未知。此前 DEV 失败继续保留。
-- [Deep/Causal 长视频试验](../counterfactual-reports/dynamic_generalization_forcing128_20260923.md)保持暂停，不计入完成量。
+- [Deep/Causal 长视频试验](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/counterfactual-reports/dynamic_generalization_forcing128_20260923.md)保持暂停，不计入完成量。
 
 ## 发布内容与复现
 

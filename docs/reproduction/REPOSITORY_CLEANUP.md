@@ -64,3 +64,35 @@ The [machine-readable validation receipt](../validation/layout-cleanup-20261008.
 records the GPU, original upstream SHA, source identity, input hashes, per-video
 media durations, coverage and per-dimension comparison. Selected paper release
 manifests and existing numerical tables were not regenerated.
+
+## Selected training and construction retained
+
+The subsequent root cleanup starts at `8939690`. The user explicitly retained
+training and data construction for the versions used in the paper. Current
+scope is **16-dimension evaluation + selected training + selected construction**;
+training is not classified as disposable research clutter.
+
+- Integrate selected semantic training and construction entries into
+  `scripts/semantic/`, with four selected configurations under `configs/training/`
+  and source identities in `configs/reproduction/training-source.json`.
+- Keep Object/Color frozen-record training, Dynamic's required probe → anchored
+  → aligned chain, Subject official720 v9 construction, Background heldout
+  construction, their shared operators and validation contracts.
+- Remove unselected Dynamic motion candidates, optional Subject semantic trials,
+  caption-localizer pilot configurations, obsolete launchers and their tests.
+  Small former construction recipes used to exercise retained operators move
+  to test fixtures; they are not active evaluation or training configurations.
+- Remove the website and Pages workflow, duplicate old root plans, superseded
+  workspace plans and eight-dimension replay. The selected nine-dimension replay,
+  model hashes, protocols and actual inference implementations are retained.
+- Move development instructions to `docs/development.md`. Local root backups
+  are under ignored `output/cleanup-final/local-state/`; AOCI and machine-bound
+  tool configuration remain ignored local state.
+
+The [training guide](../training.md) identifies the retained versions and commands.
+Old material is recoverable verbatim at
+[`8939690`](https://github.com/winbeau/vbench-faithful/tree/8939690), without
+restoring it into the active tree or rewriting published numerical evidence.
+This cleanup does not itself retrain models or regenerate frozen datasets.
+
+Validation: [selected workflows and all-16 H100 inference](../validation/selected-workflows-20261008.md).

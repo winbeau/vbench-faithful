@@ -1,9 +1,0 @@
-{
-  "stage": "parser_only_development_probe",
-  "base_policy": "configs/background-repair/scoring_coco80_caption_dev_v2.json",
-  "base_policy_sha256": "94151a66657ae2c62bc28ac15beac99e7b3815d4784604e4485d7768bc83f17b",
-  "source_sha256": {
-    "packages/audit-models/src/vbench_audit_models/caption_relations.py": "a5594eda503e4b64d6df30ff76541e46ca8c46ca6bd6e8c18604714318bafbdf"
-  },
-  "scope": "Fix relation-clause head extraction on existing independent GRiT descriptions; no new scoring provider, no default promotion, no mask propagation. No threshold or vocabulary change."
-}

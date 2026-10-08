@@ -9,7 +9,7 @@
 
 <sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Corresponding author
 
-[Data](https://huggingface.co/datasets/xju-arlab/vbench-repair) · [Models](https://huggingface.co/xju-arlab/vbench-model) · [Quick Start](#quick-start) · [Reproduction](docs/reproduction/README.md) · [Experiment Index](docs/EXPERIMENT_INDEX.md)
+[Data](https://huggingface.co/datasets/xju-arlab/vbench-repair) · [Models](https://huggingface.co/xju-arlab/vbench-model) · [Quick Start](#quick-start) · [Reproduction](docs/reproduction/README.md) · [Training & Data](docs/training.md)
 
 </div>
 
@@ -132,6 +132,10 @@ The selected methods and asset identities are fixed in [`paper-methods.json`](co
 
 **Dynamic input contract:** aligned-v1 accepts the paper protocol of **16 native square RGB frames at 8 FPS**. It does not silently crop, duplicate frames, resample an incompatible clip, or recalibrate the score. The continuous output measures relative motion on the learned scale, not calibrated physical motion intensity. Rectangular full-frame adaptation belongs to the separately documented [external validation](docs/reproduction/DYNAMIC_GENERALIZATION.md).
 
+## Training and Data Construction
+
+Training and data construction are retained for the paper-selected versions: six semantic adapters, Dynamic aligned-v1 with its required probe → anchored initialization, Subject official720 v9, and the frozen Background heldout protocol. The [training guide](docs/training.md) lists exact versions, construction entries and commands. Selected semantic training code lives in `scripts/semantic/`; selected configurations live in `configs/training/`. Superseded candidate pipelines are archived in Git history. The [cleanup validation](docs/validation/selected-workflows-20261008.md) checks the retained training entries and a fresh same-32, all-16 H100 run.
+
 ## Reproduction and Interpretation
 
 The [reproduction guide](docs/reproduction/README.md) distinguishes frozen evidence replay, representative model inference, full-dataset GPU reruns, and training. It links the selected weights, training inputs, initialization chain, exact configurations, and verification receipts.
@@ -147,7 +151,7 @@ Historical negative results, rejected constructions, and paused experiments rema
 
 ## Development
 
-See the [evaluation configuration and cache guide](docs/evaluation.md), the [evaluation skill](skills/vbench-eval/SKILL.md), [CONTRIBUTING.md](CONTRIBUTING.md), the [workspace plan](docs/plans/2026-09-14-workspace-refactor.md), and the [architecture notes](docs/architecture.md). Each metric owns its scoring implementation; shared input, scheduling, output, and provenance infrastructure lives in `packages/audit-core/`, and shared model adapters live in `packages/audit-models/`.
+See the [evaluation guide](docs/evaluation.md), [evaluation skill](skills/vbench-eval/SKILL.md), [development guide](docs/development.md), and [architecture notes](docs/architecture.md). Each metric owns its scoring implementation; shared input, scheduling, output, and provenance infrastructure lives in `packages/audit-core/`, and shared model adapters live in `packages/audit-models/`.
 
 The working tree contains the evaluator and its paper reproduction evidence:
 
@@ -155,8 +159,8 @@ The working tree contains the evaluator and its paper reproduction evidence:
 |---|---|
 | `metrics/` | All 16 independent dimension packages |
 | `packages/` | Shared infrastructure, model adapters, and the integrated paper semantic compiler |
-| `scripts/` | Evaluation, reproduction, validation, and Git hooks |
-| `configs/` | YAML examples, selected paper methods, and pinned asset manifests |
+| `scripts/` | Evaluation, selected training and data construction, reproduction, validation, and Git hooks |
+| `configs/` | Evaluation YAML, selected training/construction protocols, and pinned assets |
 | `docs/` | Paper figures, reproduction protocols, and measured results |
 | `tests/`, `skills/` | Contract tests and the evaluation skill |
 | `output/` | Local downloads, environments, caches, and new results (ignored by Git) |

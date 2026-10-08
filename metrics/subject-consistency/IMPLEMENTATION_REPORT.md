@@ -115,7 +115,7 @@ test that a background-only change is invisible to the masked score and visible
 to the whole-frame score when the synthetic subject features themselves are
 unchanged. This does not establish background-invariant real DINO tokens.
 
-The [2026-09-20 pilot](../../docs/counterfactual-reports/subject_region_discrimination_v2.md)
+The [2026-09-20 pilot](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/counterfactual-reports/subject_region_discrimination_v2.md)
 ran real DINO and independent MobileSAM on H100, with seven human-confirmed
 scoring boxes. Full-background blur preserves subject pixels and edits their
 entire complement; there is no equal-area claim. Median absolute background
@@ -137,7 +137,7 @@ projection are recorded in diagnostics. The localizer still sees the original
 frame. For a fixed mask, outside-mask pixels cannot affect encoder input;
 localization drift is not covered by that conditional guarantee.
 
-The [development ablation](../../docs/counterfactual-reports/subject_isolation_development.md)
+The [development ablation](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/counterfactual-reports/subject_isolation_development.md)
 replayed all seven pilot clips. Background absolute-change medians were 0.0294
 (old masked), 0.0189 (isolation with full framing), and 0.0072 (isolated crop).
 The mean and worst case did not improve for the crop variant, and the paired CI
@@ -146,7 +146,7 @@ superiority. Uniform full-video blur remains a quality control; temporal subject
 change is evaluated separately with the partial-window interventions. Old v2
 results and its failed criterion remain intact.
 
-The subsequent [two-candidate run](../../docs/counterfactual-reports/subject_isolation_quality2.md)
+The subsequent [two-candidate run](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/counterfactual-reports/subject_isolation_quality2.md)
 froze new human image confirmations and scoring boxes before inference. The crop
 method reduced mean background absolute change from Official's 0.014485 to
 0.005910; six of six partial-window subject interventions reduced its score.

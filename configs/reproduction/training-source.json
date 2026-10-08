@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "origin": "Published model code snapshot pinned by configs/reproduction/release.json",
+  "files": [
+    {
+      "source": "scripts/train_adapter.py",
+      "path": "scripts/semantic/train_adapter.py",
+      "source_sha256": "6a5089fc1747d0c31623a4a65e2941d1640c9c9199b83b473b8313646ae2b3bb",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/train_scene.py",
+      "path": "scripts/semantic/train_scene.py",
+      "source_sha256": "cb3340d30d119bd9f8acd024a2a8a402ecd83870af2c3c84067ce716d5aab929",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/prepare_data.py",
+      "path": "scripts/semantic/prepare_data.py",
+      "source_sha256": "d3e2b71c2f1e7b0a4b8fd7d8d8db211648ab6b6d6c95af38f427fc9e86246121",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/build_families.py",
+      "path": "scripts/semantic/build_families.py",
+      "source_sha256": "e47f173aa9541613eb9cc4e9343ed714e69ee660c774869c3286eff42fb11e83",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/annotate_gold.py",
+      "path": "scripts/semantic/annotate_gold.py",
+      "source_sha256": "33492637291a85ed70ad13662fce43ef061a6c7a756474031056f364ed3a8c6f",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/build_deterministic_sets.py",
+      "path": "scripts/semantic/build_deterministic_sets.py",
+      "source_sha256": "23debd0d0bd018473417642dcb708936b7efd57d5e0b09c403d354cce4aa7354",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/build_formal_sets.py",
+      "path": "scripts/semantic/build_formal_sets.py",
+      "source_sha256": "3d5c2f13254e5c956216753bd80781f3479c3d4be904b4474fee3149599aeb4a",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/caption_frames.py",
+      "path": "scripts/semantic/caption_frames.py",
+      "source_sha256": "e154d87e20bb00cafa986587c2345954a06f4005d150439f633b5f3a1e11329a",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/annotate_scene_vision.py",
+      "path": "scripts/semantic/annotate_scene_vision.py",
+      "source_sha256": "df3d8d32ca2990d4e350bc84af0ab709b99f33bf31ac030b9803c27782222d3d",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/relabel_scene_evidence.py",
+      "path": "scripts/semantic/relabel_scene_evidence.py",
+      "source_sha256": "a12275b31bed7bbe77b22edd90fbf6f79b9fa97f30da840fd30625ac407ba7de",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/build_scene_inputs.py",
+      "path": "scripts/semantic/build_scene_inputs.py",
+      "source_sha256": "5b6003dff3f38fd96915235c9c807cd0c0cfc7f96ae066933a3603c1519c1f22",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/build_matrix_plan.py",
+      "path": "scripts/semantic/build_matrix_plan.py",
+      "source_sha256": "c3825a825f412c430869093b9502086ea7260634c2c7741999719eb0c80a4b52",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/cache_matrix_transforms.py",
+      "path": "scripts/semantic/cache_matrix_transforms.py",
+      "source_sha256": "32401443bda3c6396ebbf64ff1834f0130d21849b295af030121e7004b473bf2",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/prepare_repair_training.py",
+      "path": "scripts/semantic/prepare_repair_training.py",
+      "source_sha256": "32d2eec1f29fdecccfbaf976637d86a0e398772c75b1fb6b5454031a95b4be08",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/audit_scene_sources.py",
+      "path": "scripts/semantic/audit_scene_sources.py",
+      "source_sha256": "32f9ef72a281626b1f688387175191b64561a2975e47a06dfcd12787e7ee6a91",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "scripts/prepare_action_isolation.py",
+      "path": "scripts/semantic/prepare_action_isolation.py",
+      "source_sha256": "a407c43644dd77b96c3a1a169b614a96aedba6380cbf4af7e27303cea4bc5785",
+      "adaptation": "workspace bootstrap, sibling imports, input/output/provenance paths and help examples; selection/training/scoring logic retained"
+    },
+    {
+      "source": "src/vbench_prompts_compile/annotation_jobs.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/annotation_jobs.py",
+      "source_sha256": "a5d38370ec51ea52ee4f0a5294931c90026ec024e3af3a2d5dd935daeae36ad2",
+      "adaptation": "byte-identical"
+    },
+    {
+      "source": "src/vbench_prompts_compile/annotate.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/annotate.py",
+      "source_sha256": "823f8a4044fdafac8df4467c7585b45e2cb23af26dcc464f410e8aff0ba9e782",
+      "adaptation": "byte-identical"
+    },
+    {
+      "source": "src/vbench_prompts_compile/provenance.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/provenance.py",
+      "source_sha256": "602d8346cde9be06687b60d66004e41498510f0c1f690a96f2bd403d04e2d3fe",
+      "adaptation": "byte-identical"
+    },
+    {
+      "source": "src/vbench_prompts_compile/visual_transforms.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/visual_transforms.py",
+      "source_sha256": "87952aade796a791e8bd5d2617a3ea1d8b3916da5af13ced5372124bdad94583",
+      "adaptation": "byte-identical"
+    },
+    {
+      "source": "configs/formal/v8/spatial-qwen3-8b.json",
+      "path": "configs/training/spatial.json",
+      "source_sha256": "17769871680257a27df76f266fbc7a9ffb9ae9fab431e8f0646d0bbf2e67f31f",
+      "adaptation": "byte-identical; prepare_reproduction relocates data/model/output paths"
+    },
+    {
+      "source": "configs/formal/v8/scene-qwen3-8b.json",
+      "path": "configs/training/scene.json",
+      "source_sha256": "ec6ad8f27166392a6b1943fe5893c89bb03c7ad2efe652eacc7b7e7d0cfea895",
+      "adaptation": "byte-identical; prepare_reproduction relocates data/model/output paths"
+    },
+    {
+      "source": "configs/formal/v9/action-qwen3-8b.json",
+      "path": "configs/training/action.json",
+      "source_sha256": "ed87b336ee73f596510703eab7e6a27f4b195cbd7e59d73ca4a14bfc49f95b99",
+      "adaptation": "byte-identical; prepare_reproduction relocates data/model/output paths"
+    },
+    {
+      "source": "configs/formal/v6/objects-qwen3-8b.json",
+      "path": "configs/training/objects.json",
+      "source_sha256": "e005e8d1643f43849d93c772e8515a575505f01f670dc39e41a9d97a23634093",
+      "adaptation": "byte-identical; prepare_reproduction relocates data/model/output paths"
+    }
+  ],
+  "extracted_helpers": {
+    "scripts/semantic/construction.py": {
+      "scripts/cache_backend_outputs.py": [
+        "DIMENSIONS",
+        "sha",
+        "rows_from_manifest"
+      ],
+      "scripts/score_scene_metamorphic.py": [
+        "normalize_record",
+        "build_conditions"
+      ]
+    }
+  },
+  "input_locations": {
+    "data": "VBENCH_TRAINING_DATA (default output/reproduction/model-code/data)",
+    "raw": "VBENCH_TRAINING_RAW (default data/raw)",
+    "engineering_fixtures": "VBENCH_TRAINING_FIXTURES (default restored model-code/tests/fixtures)"
+  }
+}

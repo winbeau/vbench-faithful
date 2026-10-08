@@ -10,7 +10,7 @@ Repair平均变化−0.006216、MAE0.021731，自然偏好原片/两CF均144/171
 
 2026-09-23写作同步：当前aligned450已进入相邻Overleaf论文**方法§2.2.2
 Nuisance Entanglement**及Table 1不变性结果；[论文专项说明](../reproduction/paper-dynamic-degree-stability.md)
-与[中文方法稿](../VBENCH_DIMENSION_METHODS_PAPER_STYLE.md#1-dynamic-degree)引用本页，
+与[中文方法稿](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/VBENCH_DIMENSION_METHODS_PAPER_STYLE.md#1-dynamic-degree)引用本页，
 不是另一轮实验。评分产物、门槛状态和公开默认均不改变。
 
 上一阶段：按用户追加要求，**当时的锚点头已完成450组正式
@@ -322,9 +322,9 @@ Origin使用同批已固定哈希的1800条原始评分，本轮**没有重新�
 
 ### 版本、计时与复核证据
 
-- [冻结协议](../../configs/dynamic-static-jitter/vjepa-anchored450-v1.json)，SHA
+- [冻结协议](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/vjepa-anchored450-v1.json)，SHA
   `1927050c645c07a20b17e16c38a3ccef3517e387d92cf447228c02fe017aa60d`；
-  [评分入口](../../scripts/counterfactual/score_vjepa_anchored450.py)，SHA
+  [评分入口](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/score_vjepa_anchored450.py)，SHA
   `3f4979eb6852f3ce1fd52f68b2c3aeb014da44ebd8a2ac4472bb388b77f9531a`；
   新头SHA `8e10add01e050417baeccd191d80525afa3a7f6d60754de549703427823dd045`。
   代码基准HEAD仍`fdf4890c67bee5881e53fc43926d555a63f9cef8`且含未提交代码，
@@ -467,7 +467,7 @@ CI分别[−21.43,−7.47]、[−21.02,−7.72]。原片联合头比Origin高4.0
 
 用户明确要求调整模型，不再靠评分后处理。已固定
 [训练配置](../../configs/dynamic-static-jitter/vjepa-anchored-v1.json)和
-[goal §0.4](../plans/2026-09-22-dynamic-structural-motion-repair-goal.md#vjepa-anchored-model-plan)。
+[goal §0.4](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/plans/2026-09-22-dynamic-structural-motion-repair-goal.md#vjepa-anchored-model-plan)。
 相同冻结编码器，重新训练51,393参数小头，推理仍是视频→模型→连续分数，
 没有新增光流门槛、输出偏置或缩放。训练在旧DEV210/60分组，排除刚才单例和TEST450。
 
@@ -605,7 +605,7 @@ CI分别[−21.43,−7.47]、[−21.02,−7.72]。原片联合头比Origin高4.0
 联合头（自然偏好＋抖动一致性）作为 Repair，另保留仅自然偏好头作消融。
 编码器、两个头、预处理及输出映射全部冻结，不再训练、不按测试分数挑样本。
 协议：[vjepa-validation-v1.json](../../configs/dynamic-static-jitter/vjepa-validation-v1.json)；
-事先记录：[goal §0.2](../plans/2026-09-22-dynamic-structural-motion-repair-goal.md#vjepa-validation-plan)。
+事先记录：[goal §0.2](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/plans/2026-09-22-dynamic-structural-motion-repair-goal.md#vjepa-validation-plan)。
 
 ```text
 官方完整原片 / 同片的8px局部坐标干预（原生16帧、8FPS、2秒）
@@ -761,7 +761,7 @@ Origin两个种子的队列均分均相同。
 UTC 2026-09-23：用户明确授权下载官方 V-JEPA 2.1 ViT-B 权重，且仅做冻结
 编码器＋小评分头的有限开发试验。协议在特征提取和训练前写入
 [`vjepa-probe-v1.json`](../../configs/dynamic-static-jitter/vjepa-probe-v1.json)，
-方法、预定开发门槛及边界见[goal §0.1](../plans/2026-09-22-dynamic-structural-motion-repair-goal.md#vjepa-probe-plan)。
+方法、预定开发门槛及边界见[goal §0.1](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/plans/2026-09-22-dynamic-structural-motion-repair-goal.md#vjepa-probe-plan)。
 本节保留开发阶段记录；后续主32组及留出已在[新冻结验证](#dynamic-vjepa-validation)
 中完成，不改写本节当时分母、输出和限制。这不是默认评分变更。
 
@@ -908,8 +908,8 @@ UTC 2026-09-23，本轮按“抖动不敏感、真实运动敏感”联合目标
   → 完整网格连续运动强度 → 相同冻结尺度
 ```
 
-代码：[outer_support.py](../../metrics/dynamic-degree/src/dynamic_degree/outer_support.py)；
-重放前固定的[配置](../../configs/dynamic-static-jitter/scoring.outer-support-dev32-v1.json)。
+代码：[outer_support.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/outer_support.py)；
+重放前固定的[配置](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/scoring.outer-support-dev32-v1.json)。
 分区改变意味着只保护**新大区域**的瞬时仿射，不能沿用“每个原小部件均受保护”的
 说法，尤其要核验关节、周期与小目标运动。
 
@@ -938,7 +938,7 @@ CF均值忽略这一负结果**。
 
 ### 人类偏好与可见运动：有辅助证据，但覆盖严重不足
 
-新增[自然响应审计](../../scripts/counterfactual/audit_natural_motion_response.py)仅读取
+新增[自然响应审计](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/audit_natural_motion_response.py)仅读取
 `dynamics_degree/dev`标注；不使用Subject标签、不读取test标签、不调整平局容差。
 95条原片在全部870个DEV对中仅覆盖23对/20 prompt（2.64%），其中19对人类平局，
 仅4对有序。较大分区与残余候选原片分数相同，得到相同结果：
@@ -961,7 +961,7 @@ CF均值忽略这一负结果**。
 
 95个MP4已按原评分输入SHA逐条核对，全部原生1520帧渲染为隐藏提示词、生成器和
 分数的检查图；**渲染完成不等于全部审核完成**。本轮实际查看四个有序对的8条原片
-加已知列车共9条、每条全部16帧，保留[代理核验记录](../../configs/dynamic-static-jitter/natural-motion-proxy-review.focus9-v1.json)。
+加已知列车共9条、每条全部16帧，保留[代理核验记录](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/natural-motion-proxy-review.focus9-v1.json)。
 检查者已看过分数/配对和部分旧帧，标记`blinded=false`，不冒充独立人类盲审。
 旧32条代理检查中有24个MP4身份与当前批次相同；8个新替换MP4不能继承旧GIF审核。
 
@@ -1026,8 +1026,8 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python \
 门槛没有放宽；未知点不删除，较小区域的保护不变。不读取配对原片、文件身份、
 构造种子、位移场或预知的抖动频率。这是基于已看过的开发诊断设计、重放前固定
 的一次候选比较，不是预注册的独立验证；同步的真实非仿射运动仍可能被误认为干扰。
-实现见 [residual_reversal.py](../../metrics/dynamic-degree/src/dynamic_degree/residual_reversal.py)，
-配置见 [scoring.residual-reversal-dev32-v1.json](../../configs/dynamic-static-jitter/scoring.residual-reversal-dev32-v1.json)。
+实现见 [residual_reversal.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/residual_reversal.py)，
+配置见 [scoring.residual-reversal-dev32-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/scoring.residual-reversal-dev32-v1.json)。
 
 | 方法 | 32 组 Base 均值 | 32 组 CF 均值 | 有符号涨幅 | 相对 Origin 涨幅 |
 |---|---:|---:|---:|---:|
@@ -1104,9 +1104,9 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python \
 bootstrap，`τ` 的 95% CI 为 **[0.081846, 0.190399]**。冻结点估计后，将同一映射
 用于当前 32 组的原片、编码控制、两个 CF 种子及无抑制消融；应用阶段不再拟合。
 
-实现：[intensity_scale.py](../../metrics/dynamic-degree/src/dynamic_degree/intensity_scale.py)；
-预定协议：[scoring.natural63-calibration-v1.json](../../configs/dynamic-static-jitter/scoring.natural63-calibration-v1.json)；
-冻结参数：[calibration.natural63-intensity-v1.json](../../configs/dynamic-static-jitter/calibration.natural63-intensity-v1.json)。
+实现：[intensity_scale.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/intensity_scale.py)；
+预定协议：[scoring.natural63-calibration-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/scoring.natural63-calibration-v1.json)；
+冻结参数：[calibration.natural63-intensity-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/calibration.natural63-intensity-v1.json)。
 
 ### 当前 32 组结果
 
@@ -1133,8 +1133,8 @@ Repair 两种子 CF 均值为 0.680808/0.685262。Base 的 Repair−Origin 为
 
 ### 证据、运行和检查
 
-- [校准源清单](../../configs/dynamic-static-jitter/sources.natural63-calibration-v1.jsonl)、
-  [选择记录](../../configs/dynamic-static-jitter/sources.natural63-calibration-v1.selection.json)；
+- [校准源清单](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/sources.natural63-calibration-v1.jsonl)、
+  [选择记录](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/sources.natural63-calibration-v1.selection.json)；
   [63 条完整拟合/核验记录](../../output/dynamic-static-jitter/natural63-calibration-fit-v1/calibration.json)。
 - [32 组总表与逐源表](../../output/dynamic-static-jitter/dev32-cotracker3-calibrated-intensity-v1/SUMMARY.md)、
   [summary.json](../../output/dynamic-static-jitter/dev32-cotracker3-calibrated-intensity-v1/summary.json)、
@@ -1199,8 +1199,8 @@ VideoCrafter 各 11/11/10 源，并非四生成器平衡数据。
   → 连续运动强度，单位：short-side lengths / second
 ```
 
-实现：[motion_intensity.py](../../metrics/dynamic-degree/src/dynamic_degree/motion_intensity.py)，
-配置：[scoring.dev32-cotracker3-intensity-v1.json](../../configs/dynamic-static-jitter/scoring.dev32-cotracker3-intensity-v1.json)。
+实现：[motion_intensity.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/motion_intensity.py)，
+配置：[scoring.dev32-cotracker3-intensity-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/scoring.dev32-cotracker3-intensity-v1.json)。
 公式为 `I = Σ_t top5mean(||d_t||) / [min(H,W) × Σ_t Δt_t]`。
 16 帧间有 15 个区间，观测运动时长为 1.875 秒，不把容器时长 2 秒错作运动
 积分分母。不设运动阈值、不做 sigmoid、不裁剪到 [0,1]、不按本批 base/CF
@@ -1249,7 +1249,7 @@ Repair 两种子 CF 均值分别为 0.362890/0.367109。分解相对**同估计�
   `code-dev32-scoring-v1`，本地同名快照位于 `output/dynamic-static-jitter/`。
   HEAD 为 `fdf4890c` 加未提交研究代码；完整执行文件 SHA 在各分片 provenance，
   不把 HEAD 单独当作运行身份。权重/上游保持前述固定版本。
-- [连续重放脚本](../../scripts/counterfactual/replay_mp4_dev32_intensity.py)再次核验所有
+- [连续重放脚本](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/replay_mp4_dev32_intensity.py)再次核验所有
   缓存/输入/来源 SHA，重放区域分解和原评分证据，再只更换 Repair 的数值汇总。
   **无新增模型推理、无新视频构造、无阈值调参；Origin 128 条记录原样保留。**
 - 本轮完整测试 **1182 passed / 3 skipped**，`uv lock --check` 通过；未改依赖或
@@ -1302,7 +1302,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python \
 
 ### 轨迹诊断定义与全部五源结果
 
-实现：[analyze_flow_mechanism.py](../../scripts/counterfactual/analyze_flow_mechanism.py)。
+实现：[analyze_flow_mechanism.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/analyze_flow_mechanism.py)。
 同前轮的局部随动轨迹，不重新跑光流。每个 lag 的每个起始时刻只取一个固定
 最大内部裕量窗口，保留全部时间相位；1/2/3/4 帧间隔对应 125/250/375/500 ms。
 
@@ -1437,8 +1437,8 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python \
 ### 实际实现与预设配置
 
 模型适配：[dino_dense.py](../../packages/audit-models/src/vbench_audit_models/dino_dense.py)；
-对应诊断：[structure_correspondence.py](../../metrics/dynamic-degree/src/dynamic_degree/structure_correspondence.py)；
-运行入口：[probe_structure_correspondence.py](../../scripts/counterfactual/probe_structure_correspondence.py)。
+对应诊断：[structure_correspondence.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/structure_correspondence.py)；
+运行入口：[probe_structure_correspondence.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_structure_correspondence.py)。
 
 ```text
 单视频全部 16 个原生时间采样帧
@@ -1457,7 +1457,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python \
 512，坐标还原到相应输入像素。两类官方分辨率对应不同原生网格步距，均记录。
 描述子推理 float32、L2 归一化后以 float16 缓存；匹配时恢复 float32 再归一化。
 
-初始配置为 [structure.dino-dev-v1.json](../../configs/dynamic-static-jitter/structure.dino-dev-v1.json)。
+初始配置为 [structure.dino-dev-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/structure.dino-dev-v1.json)。
 [Dense ViT descriptors 原论文/项目](https://dino-vit-features.github.io/)为 DINO 的部件/对应
 特征提供研究依据，但本轮使用既有 **ViT-B/16**，不声称复现其 ViT-S/8、binning
 或全部对应算法，更不以该论文证明本反事实鲁棒。CLS attention 不是语义掩码，
@@ -1471,7 +1471,7 @@ PCA 颜色不是物体分割；当前并未实现区域运动模型。
 明确记为未细化。精确相同的描述子产生零位移，时间反转对应相反位移，均有测试。
 不删除粗量化为零的记录，也不把“可细化”或“互为最近邻”当成真实运动真值。
 
-修正配置为 [structure.dino-reciprocal-dev-v2.json](../../configs/dynamic-static-jitter/structure.dino-reciprocal-dev-v2.json)。
+修正配置为 [structure.dino-reciprocal-dev-v2.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/structure.dino-reciprocal-dev-v2.json)。
 **复用同二十份模型特征，不追加模型推理**。首次 CPU 重放因 SSH 连接异常中断，
 PID 389305 随后只读检查确认已不存在；仅完成 3/20，原目录和记录完整保留。
 其 `runtime.json` 末值仍为 running，不能据此宣称进程仍在运行或重放已完成。
@@ -1535,7 +1535,7 @@ GPU 初次匹配与 CPU 重放在极近相似度峰的末位浮点可能有少�
   两份执行源码各 60 项 SHA 与各自快照匹配；v2b 另与当前本地代码核对一致。
   五组原片/编码控制的全部描述子匹配诊断完全相同。
 - [对应图与 attention/PCA 显示](../../output/dynamic-static-jitter/dino-structure-dev5-8px-display-v1/)
-  由[绘图脚本](../../scripts/counterfactual/render_structure_correspondence.py)读取绑定
+  由[绘图脚本](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/render_structure_correspondence.py)读取绑定
   原视频/特征/匹配缓存生成，不是新评分输入；固定规则取展示点，不按效果挑点。
   没有任何正式新 Repair 分数、自然偏好/周期保留或留出通过结论。
 
@@ -1566,9 +1566,9 @@ GPU 初次匹配与 CPU 重放在极近相似度峰的末位浮点可能有少�
 ```
 
 模型适配：[sam_regions.py](../../packages/audit-models/src/vbench_audit_models/sam_regions.py)；
-区域提取：[probe_motion_regions.py](../../scripts/counterfactual/probe_motion_regions.py)；
-联合平移：[regional_motion.py](../../metrics/dynamic-degree/src/dynamic_degree/regional_motion.py)；
-重放：[probe_regional_motion.py](../../scripts/counterfactual/probe_regional_motion.py)。
+区域提取：[probe_motion_regions.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_motion_regions.py)；
+联合平移：[regional_motion.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/regional_motion.py)；
+重放：[probe_regional_motion.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_regional_motion.py)。
 
 SAM 权重在 H200 已存在，本轮未下载/训练权重。为加载它，在本任务独立 `deps/`
 下取得 [SAM 官方源码](https://github.com/facebookresearch/segment-anything)，固定 revision
@@ -1577,7 +1577,7 @@ checkpoint 为 `sam_vit_h_4b8939.pth`，SHA256
 `a7bf3b02f3ebf1267aba913ff637d9a2d5c33d3173bb679e46d9f338c26f262e`。
 显式本地加载、严格 state dict；各 SAM 源文件哈希写入运行身份。
 
-[区域配置](../../configs/dynamic-static-jitter/structure.sam-regions-dev-v1.json)使用官方
+[区域配置](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/structure.sam-regions-dev-v1.json)使用官方
 ViT-H AMG 默认质量/去重设置：32×32 点、predicted-IoU 0.88、stability 0.95、
 box-NMS 0.7、无多层裁剪；仅点批量改为 32 限制显存。不使用类别、建库掩码、
 原片掩码传播、最大面积筛选或强制选一个主体，返回后的全部候选均保留。
@@ -1626,7 +1626,7 @@ JSONL SHA256 `c456f464d54fa8a7d7f3f5c83951c2196f26249792dabd76f1a5a67c3f8684b5`�
 和不可变 `code-regional-motion-v1/`：2/20 完整记录，144/1080 帧对已计算，第三条
 未完成。末次 runtime 的 running 是中断遗留值，不是活进程证据。
 
-当前 [v2 配置](../../configs/dynamic-static-jitter/structure.regional-motion-visible-dev-v2.json)
+当前 [v2 配置](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/structure.regional-motion-visible-dev-v2.json)
 改为显式可见支持上的条件对齐损失，仍要求至少 80% 源区域支持在界内；全出画
 为 null，不填零。不再为出界直接添加大常数。新增全画面 0.15/−0.2 描述子格
 平移测试验证微小镜头运动可恢复；这个数学测试不等于自然镜头/周期运动验证。
@@ -1642,7 +1642,7 @@ v2 在独立 `code-regional-motion-v2/` 中以四个 CPU 分片完成计算，�
 五组原片/编码控制的全部区域诊断逐项相同。共 37,653 条区域—帧对记录，包含
 嵌套候选与全画面对照；其中 12,588 条完整区域位移为 null，全部保留，不填零。
 这些记录不是独立样本数，也不是有效视频评分率；二十条最终 `score` 均为 null。
-同步期间网络超时只影响复制；[合并脚本](../../scripts/counterfactual/merge_regional_motion.py)
+同步期间网络超时只影响复制；[合并脚本](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/merge_regional_motion.py)
 曾拒绝一次未更新完整的本地分片，完整复制后才成功合并，没有因此重启评分。
 最终分数、跨帧
 共同轨迹、自然周期/镜头/细小运动响应及联合验收仍未完成，旧默认 Repair 不变。
@@ -1683,9 +1683,9 @@ v2 在独立 `code-regional-motion-v2/` 中以四个 CPU 分片完成计算，�
        → 诊断记录；没有以模板匹配/掩码 IoU/SIFT 数量直接定义运动分数
 ```
 
-[算法](../../metrics/dynamic-degree/src/dynamic_degree/native_region_motion.py)、
-[运行入口](../../scripts/counterfactual/probe_native_region_motion.py)、
-[固定开发配置](../../configs/dynamic-static-jitter/structure.native-regions-dev-v1.json)。
+[算法](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/native_region_motion.py)、
+[运行入口](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_native_region_motion.py)、
+[固定开发配置](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/structure.native-regions-dev-v1.json)。
 RGB 不模糊、不降采样、不归一化局部运动幅度；除以 255 只是颜色量纲变换。
 FFT 加速完整的有限域模板平方误差求和，使用显式可见像素分母，非环绕相关或
 补零边界惩罚；数学定义可对照 [SciPy correlate](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.correlate.html)
@@ -1736,7 +1736,7 @@ PID 821404/821465/821477/821501，18:28:34–18:28:38 UTC 启动，每个 OpenBL
 对首帧→第 2 帧，背景横向误位移为 −20.500 px，而区域内独立 SIFT 横移中位数
 约 −0.013 px。
 
-[v2 配置](../../configs/dynamic-static-jitter/structure.native-regions-visible-dev-v2.json)
+[v2 配置](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/structure.native-regions-visible-dev-v2.json)
 用源、目标两个区域的共同可见像素计算光度误差：先由旧候选位移和未移位重叠
 提出目标区域身份，再对每个身份重新搜索**完整平移域**，连续细化也使用目标
 可见权重。未移位只提出区域身份，不是强制零运动或零位移优先规则；没有目标
@@ -1795,11 +1795,11 @@ AMG 提案没有对应整段车体，仅有若干车窗/车端小片段；目标
 绑定和缓存时间轴。它们仍不是自然周期保留、运动敏感性或正式留出验证。
 
 已准备预定 32 条/8 prompt 的自然开发原片全帧检查，入口为
-[inspect_natural_motion.py](../../scripts/counterfactual/inspect_natural_motion.py)。
+[inspect_natural_motion.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/inspect_natural_motion.py)。
 只读取 `sources.v1.jsonl` 中 `split=dev` 的视频，预留 120 条不打开；输出只作
 运动机制审核辅助，不产生评分、自然锚点或自动语义标签。32 条本地媒体与远端
 逐文件 SHA 完全一致，32 条的全部帧均已作代理目视复核（24 MP4＋8 GIF），记录见
-[开发机制复核](../../configs/dynamic-static-jitter/natural-motion-proxy-review.dev32-v1.json)。
+[开发机制复核](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/natural-motion-proxy-review.dev32-v1.json)。
 它不是盲审、人类偏好或运动真值标注；马/长颈鹿仍有小幅关节运动，小鸟有翼部
 周期，飞机有中心位置变化不大但尺寸明显增长的案例。仅平移/质心不能覆盖这些
 运动，不能按 prompt 或 Origin=0 把它们改写成静态锚点。
@@ -1815,8 +1815,8 @@ AMG 提案没有对应整段车体，仅有若干车窗/车端小片段；目标
 
 ### 同视频提示重定位与共同几何证据：车体可恢复，运动仍未修好
 
-[提示几何](../../metrics/dynamic-degree/src/dynamic_degree/prompted_regions.py)从同视频
-源掩码与各位移候选生成可见框、内部点；[运行入口](../../scripts/counterfactual/probe_prompted_regions.py)
+[提示几何](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/prompted_regions.py)从同视频
+源掩码与各位移候选生成可见框、内部点；[运行入口](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_prompted_regions.py)
 绑定媒体、原生帧像素、SAM 缓存/源码/权重。列车原片 frame 2 / region 0 → frame 3
 是已诊断的事后 DEV 案例，不是预先选定的总体测试。六个提示保留 RGB 三个候选、
 两条 SIFT 位移及未移位候选；每个提示的 box / box+point × single / multimask
@@ -1869,7 +1869,7 @@ PID 947829 已结束；20:25:17–20:25:46 UTC，记录单调钟 32.30 秒。输
 [AKAZE](../../output/dynamic-static-jitter/prompted-train-frame2-3-akaze-v1/diagnostic.json)。
 RootSIFT 是相同 SIFT 描述子的重新归一化，不是独立检测器。
 
-随后[三种空间见证与三帧身份检查](../../scripts/counterfactual/probe_sparse_identity.py)
+随后[三种空间见证与三帧身份检查](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_sparse_identity.py)
 已完成全二十条：每种 1080 帧对，共 **3240 方法×帧对、0 运行失败**。原生 RGB、
 原 AMG 区域及 RGB 候选均不变；SIFT、RootSIFT、默认 AKAZE 使用同一 0.75 ratio
 门槛，保留所有检测点。每条新 SIFT 对应均与已绑定的 native v2 逐项完全一致。
@@ -1916,7 +1916,7 @@ SHA256 `4da6d8e8bf2b3c98dab539739eb28678790a3bfe03131b22ee115d38b8d9d503`。
 
 ### 自动特征点连续跟踪与区域放大：两轮实测仍未恢复列车位移
 
-[运行入口](../../scripts/counterfactual/probe_feature_tracks.py)绑定原片、编码对照、
+[运行入口](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_feature_tracks.py)绑定原片、编码对照、
 两个 8px 干预的四条媒体 SHA、全部解码像素、时间轴和旧 CoTracker2 源码/权重。
 每条独立检测 frame 2 的全部 SIFT 点，只合并完全同位置的多个方向，不要求先
 有跨帧匹配，也不手选连接处。自动查询数分别为 **482 / 482 / 486 / 486**。
@@ -1937,7 +1937,7 @@ blur，因此不是只改点选取的单因素消融。其[完整输出](../../o
 384×512 输入。窗口对该视频所有帧保持同一矩阵，不能随目标运动而将其稳定掉。
 输入窗口内的全部自动查询；预测再用精确逆矩阵还原原生坐标，不按窗口像素
 直接计运动，不裁切出界预测。各视频区域独立，未从 clean 传播掩码；小区域、
-空查询和失败均保留。[区域映射与运行实现](../../metrics/dynamic-degree/src/dynamic_degree/region_tracks.py)
+空查询和失败均保留。[区域映射与运行实现](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/region_tracks.py)
 的尺度、往返路径及空证据行为有纯数学测试，但尚非自然敏感性验证。
 
 [第二轮模型输出](../../output/dynamic-static-jitter/region-tracks-train-v1/provenance.json)
@@ -1984,7 +1984,7 @@ goal 保持 active，公共默认 Repair 不变。
 
 进一步检验同一列车 **frame 2→3**，不把此事后 DEV 帧对当整段评分。四版本仍为
 原片、编码控制、两条已确认 8px；所有输入字节/原生时间轴、SAM 缓存身份不变。
-[局部外观实现](../../metrics/dynamic-degree/src/dynamic_degree/local_appearance.py)
+[局部外观实现](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/local_appearance.py)
 独立检测每视频的全部 SIFT 点，仅合并同坐标、同尺度的多个方向。每点保留所有
 包含它的源 SAM 区域和全画面对照，支持半径为特征尺度的 1/2/4 倍；在完整位移
 域做逐通道去均值的 RGB 归一化相关，保留三个正向候选和每候选三个独立反向
@@ -2016,7 +2016,7 @@ goal 保持 active，公共默认 Repair 不变。
 [全点图](../../output/dynamic-static-jitter/local-appearance-train-frame2-3-v1-analysis/all_points.png)
 已查看：局部刚性外观在干预中出现大量远距离错配；不能仅挑正确连接处宣称成功。
 
-随后[局部形变对照](../../scripts/counterfactual/probe_local_deformation.py)固定支持
+随后[局部形变对照](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_local_deformation.py)固定支持
 尺度 4，保留各视频全部点/包含区域/全画面对照及全部三个原候选，分别细化平移
 和正行列式仿射（旋转、缩放、剪切）。每次拟合固定初始可见源像素集合，不能
 靠将困难像素移出画面降低误差；采用双线性采样的解析导数，不读取反事实参数。
@@ -2051,7 +2051,7 @@ goal 保持 active，公共默认 Repair 不变。
 这是补充旧报告中“未复制到本地”的后续状态，不是新的模型推理。视频、8px、
 种子及原有有效评分状态均不变；预留测试媒体未读取。
 
-[新实现](../../metrics/dynamic-degree/src/dynamic_degree/image_plane_modes.py)先检查
+[新实现](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/image_plane_modes.py)先检查
 整段 Eulerian 光流的时变分量：32×32 固定查询网格，全部 15 个相邻帧间隔参与，
 按实际时间加权并单独分析偏离常量速度的变化。每点要求至少 60% 时间具有原有
 几何/循环/外观证据；这不是物理真值认证，也不降低旧视频覆盖门槛。中间原生帧
@@ -2130,8 +2130,8 @@ goal 保持 active，代码测试通过不替代完整评分和联合验收。
 
 本轮继续使用上述同二十条缓存、32×32 查询网格和全部十五个时间间隔，未修改
 视频、8px、Origin、对应核验阈值或有效评分分母。新增实现仍在
-[image_plane_modes.py](../../metrics/dynamic-degree/src/dynamic_degree/image_plane_modes.py)，
-[运行入口](../../scripts/counterfactual/probe_motion_boundaries.py)提供两个显式开发变体。
+[image_plane_modes.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/image_plane_modes.py)，
+[运行入口](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_motion_boundaries.py)提供两个显式开发变体。
 
 **边界假设实测。** 对前三个时间模态分别用已观测的点×间隔拟合幅度；常量速度
 单独保留，缺证据的点保持 NaN。四个等间隔点的中央差分减去两侧差分的均值，
@@ -2240,7 +2240,7 @@ CLI 与两个新诊断入口的 `--help`、`git diff --check` 通过。冻结目
 各自的全部十六个原生帧与十五个相邻间隔都参与。它是五源目标中的对应关系
 子实验，不是用四个列车版本代替五源/十条 CF 验收。
 
-[local_appearance.py](../../metrics/dynamic-degree/src/dynamic_degree/local_appearance.py)
+[local_appearance.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/local_appearance.py)
 新增两个互补检查，所有输入均来自当前视频，不接受配对 clean、seed 或构造场：
 
 ```text
@@ -2417,9 +2417,9 @@ B 按唯一支持计路径，**两者原始数量不能直接解释为覆盖提�
 
 实现与证据：
 
-- [路径算法](../../metrics/dynamic-degree/src/dynamic_degree/appearance_paths.py)、
-  [运行入口](../../scripts/counterfactual/probe_appearance_paths.py)、
-  [独立路径核验](../../scripts/counterfactual/audit_appearance_paths.py)。
+- [路径算法](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/appearance_paths.py)、
+  [运行入口](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_appearance_paths.py)、
+  [独立路径核验](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/audit_appearance_paths.py)。
 - [A 四分片](../../output/dynamic-static-jitter/appearance-paths-train-allphase-v1/)，
   执行快照 `code-appearance-paths-train-v1/`。PID 1155980/81/82/83 均已结束，
   UTC 分别为 23:39:10–23:40:20、23:39:10–23:40:20、23:39:11–23:40:32、
@@ -2519,9 +2519,9 @@ control 另保留。候选是原窗口提出的全部 12 个离散峰，零位�
 并回到五源/十 CF、雪地、真实周期/镜头/小运动与自然偏好完整验收。本轮所有
 视频 `score=null`，旧 G1 最多 8/10 不变，五源完整 Repair 仍未通过。
 
-实现：[核心算法](../../metrics/dynamic-degree/src/dynamic_degree/appearance_context.py)、
-[运行器](../../scripts/counterfactual/probe_appearance_context.py)、
-[独立核验](../../scripts/counterfactual/audit_appearance_context.py)。
+实现：[核心算法](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/appearance_context.py)、
+[运行器](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_appearance_context.py)、
+[独立核验](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/audit_appearance_context.py)。
 [四分片产物](../../output/dynamic-static-jitter/appearance-context-train-allphase-v1/)，
 执行快照 `code-appearance-context-train-v1/`，版本仍为 `fdf4890` 加任务工作树。
 四 PID 1195612/1195614/1195615/1195617 均已结束；UTC 从
@@ -2544,9 +2544,9 @@ SHA256 `50c1c5f4844f46d71312207c2fc49ef0468176f7c30c2a44a227c3dabd02cec0`。
 不改 8px，不读取配对 clean、构造场、种子或人工指定的连接处坐标。
 相邻及 2/3/4 帧间隔的所有起点均参与，共 **20 视频、320 帧、1080 帧对**。
 
-实现为 [line_structure.py](../../metrics/dynamic-degree/src/dynamic_degree/line_structure.py)，
-[运行入口](../../scripts/counterfactual/probe_line_structure.py)与
-[独立核验入口](../../scripts/counterfactual/audit_line_structure.py)。数据流：
+实现为 [line_structure.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/line_structure.py)，
+[运行入口](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_line_structure.py)与
+[独立核验入口](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/audit_line_structure.py)。数据流：
 
 ```text
 当前视频原生 RGB / 时间戳
@@ -2651,7 +2651,7 @@ H200 的以下目录已只读检查：`/data/chenjiayu/wenbiao_zhao/models/`、
 已有 `facebookresearch_co-tracker_main` 源码确实支持
 `CoTrackerPredictor(v2=False, offline=True, window_len=60)`，无需改写共享上游。
 
-[准备配置](../../configs/dynamic-static-jitter/tracker.cotracker3-preparation-v1.json)
+[准备配置](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/tracker.cotracker3-preparation-v1.json)
 记录权重元数据与检查过的接口源码 SHA。官方模型仓库 revision
 `bf55ea50d4390e1820a267f131cd6587240fb2c5` 的 `scaled_offline.pth` 为
 101,890,938 bytes（约 102 MB），LFS SHA256
@@ -2680,13 +2680,13 @@ H200 的以下目录已只读检查：`/data/chenjiayu/wenbiao_zhao/models/`、
 帧、任意合法查询时刻和预测出画坐标，拒绝非有限轨迹及非布尔可见性。
 `backward_tracking` 仍是补齐查询之前的时间段，**不是独立反向端点核验**；
 上游在查询帧强制坐标/可见性，因此该位置也不能作为准确性证据。
-新接口只接到研究脚本 [probe_feature_tracks](../../scripts/counterfactual/probe_feature_tracks.py)
+新接口只接到研究脚本 [probe_feature_tracks](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_feature_tracks.py)
 的显式 `prepare --tracker-kind cotracker3-offline`；旧请求缺该字段时继续使用
 CoTracker2，公开评分 CLI 的默认值没有改变。
 
 H200 在 **2026-09-23 01:15:38 UTC** 再次只读核验：官方缓存位置及计划独立
 目录仍没有 `scaled_offline.pth`。完整的 **31 个 Python 文件**哈希保存于
-[源码清单](../../configs/dynamic-static-jitter/tracker.cotracker3-source-v1.json)，
+[源码清单](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/tracker.cotracker3-source-v1.json)，
 SHA256 `6884483a8f3639d20ce81b604f5e9f33bf323e069b52a85b4ce20e7ad31bceb0`。
 这是 `cotracker` 命名空间的源码身份，不是所有第三方依赖的源码证明；该环境
 元数据为 Python 3.10.20、PyTorch 2.6.0+cu124、NumPy 1.26.4。真实权重加载、
@@ -2816,7 +2816,7 @@ SIFT 的 4 个父进程 PID 为 925750–925753，网格为 933525–933528，�
 ### 几何模型对照：保留旋转/缩放，不用质心代替部件路径
 
 仅联合平移还无法表达轮子旋转、拍翼部件和接近镜头时的尺寸变化。本轮新增
-[区域几何拟合](../../metrics/dynamic-degree/src/dynamic_degree/regional_geometry.py)，
+[区域几何拟合](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/regional_geometry.py)，
 比较平移、相似（旋转＋等比缩放＋平移）、仿射三个模型，各含普通最小二乘和
 Huber IRLS 两种估计器。稳健残差尺度来自当前拟合，迭代 20 次、乘数 1.345，
 不读取构造幅度、相位、seed 或配对；它是开发候选，不是已冻结可靠性阈值。
@@ -2826,7 +2826,7 @@ Huber IRLS 两种估计器。稳健残差尺度来自当前拟合，迭代 20 �
 不被记为零，真实返回的两段路径也不相消。欠秩/无对应保持缺失，不选一个满秩
 模型就自动声称可靠。
 
-[重放入口](../../scripts/counterfactual/probe_regional_geometry.py)读取已核验的
+[重放入口](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_regional_geometry.py)读取已核验的
 native v1 全部稀疏对应，在独立快照 `code-regional-geometry-v1/` 上完成
 **20/20 视频、1080 帧对、37,653 区域帧对、0 运行失败**；五组编码对照逐项
 完全相同。输出为 [regional-geometry-dev5-8px-v1](../../output/dynamic-static-jitter/regional-geometry-dev5-8px-v1/provenance.json)，
@@ -2927,7 +2927,7 @@ patch 通过率 53.38%/51.99%；并非取消其中一个核验就已经解决。
 
 ### G2：将两种分解应用于新 2× 稠密对应（开发诊断，不是有效评分）
 
-新增 [dense_paths.py](../../metrics/dynamic-degree/src/dynamic_degree/dense_paths.py)：
+新增 [dense_paths.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/dense_paths.py)：
 从每个固定短窗的网格点出发，双线性采样已存前向场并逐帧推进；在实际轨迹
 位置重新做逐像素形变 patch 和局部正反循环核验。可见性仍只是几何代理，不
 冒充 learned visibility。重叠时间仍按原固定所有权统计一次，不按结果选窗。
@@ -2996,7 +2996,7 @@ CoTracker 的 31–42% 那样无法核验；共同模态候选确实抑制了非
 静止。覆盖率门槛仍为 60%，不靠调低门槛通过。旧方法与旧结果不改写。
 
 源码：[dense_correspondence.py](../../metrics/dynamic-degree/src/dynamic_degree/dense_correspondence.py)；
-配置：[trajectory.dense-dev-v1.json](../../configs/dynamic-static-jitter/trajectory.dense-dev-v1.json)。
+配置：[trajectory.dense-dev-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/trajectory.dense-dev-v1.json)。
 当前仅接研究入口 `score_static_jitter --repair-variant dense-correspondence`，
 尚非公共 CLI 的默认或最终 Repair。与旧候选相比，同时改变了对应关系估计器、
 形变匹配与冲突处理，且 RAFT 输入不额外做 1.2px 模糊，不能将差异归因于单一因素。
@@ -3033,15 +3033,15 @@ patch 通过率约 64.1%。因此“改成逐像素形变核验”也不足以�
 
 ### G2 首轮：时间趋势与区域支持残差
 
-实现 [structural_decomposition.py](../../metrics/dynamic-degree/src/dynamic_degree/structural_decomposition.py)：
+实现 [structural_decomposition.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/structural_decomposition.py)：
 按真实时间的二阶导惩罚分解轨迹 `q=b+r`，全部帧参与；只有观察到重复反向且
 留一点法局部仿射预测不支持残差时才衰减 `Δr`。邻域由空间距离及视频 RGB 外观
 加权，不是语义分割。邻居不足/跟踪不可靠时保留残差，不自动认定为干扰。
 输出 raw、仅时间、仅结构、完整组合四个消融，并记录 1/2/3/4 帧间隔诊断。
 
-配置 [decomposition.dev-v1.json](../../configs/dynamic-static-jitter/decomposition.dev-v1.json)
+配置 [decomposition.dev-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/decomposition.dev-v1.json)
 在本次 probe 前写入。复用的是**前一轮 CoTracker2 短窗缓存**，不是上节 RAFT 场，
-不混充同一方法或新的模型推理。[probe 脚本](../../scripts/counterfactual/probe_structural_decomposition.py)
+不混充同一方法或新的模型推理。[probe 脚本](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/scripts/counterfactual/probe_structural_decomposition.py)
 重新读取同一原始视频获取外观特征，校验媒体/缓存、窗口所有权及原始弧长重放 parity。
 
 **下表是十对全轨迹开发诊断，不是已验证的 Repair 分数。** 其中含不可靠轨迹，
@@ -3091,8 +3091,8 @@ CLI 与研究入口 help、diff 检查通过，冻结目录 blob 摘要仍为
 
 ### G2 第二候选：共同时间成分＋空间保护（负结果，不晋升）
 
-实现 [common_mode.py](../../metrics/dynamic-degree/src/dynamic_degree/common_mode.py)，
-配置 [decomposition.common-mode-dev-v1.json](../../configs/dynamic-static-jitter/decomposition.common-mode-dev-v1.json)。
+实现 [common_mode.py](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/metrics/dynamic-degree/src/dynamic_degree/common_mode.py)，
+配置 [decomposition.common-mode-dev-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/decomposition.common-mode-dev-v1.json)。
 数据流为：单视频轨迹 → 物理时间趋势与残差 → 对残差速度做时间积分加权 SVD
 → 检验模态及原运动是否重复反向 → 检查局部/全局结构及证据支持 → 仅抑制
 满足全部条件的非仿射分量。全部帧参与，不固定频率或相位，不读取 8px/seed/配对。
@@ -3218,7 +3218,7 @@ Origin 二十条均与先前 8px 运行完全一致；CF 动态比例仍为 40%�
 并指定后续反事实沿用此方案。本批五源 × 两种子的十条干预均纳入新开发目标，
 不减弱幅度，不再将旧 `min_warp_jacobian=0.5` 自动筛查当作语义有效性的否决。
 身份、哈希、用户原话与确认范围见
-[人工复核清单](../../configs/dynamic-static-jitter/review.local-texture-dev5-8px-v1.json)。
+[人工复核清单](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/review.local-texture-dev5-8px-v1.json)。
 
 该确认是**结果展示后的开发集审核**，不是评分前盲审，也不自动涵盖未展示的新
 视频。它不改变既有分数：同五源 Origin 为 **40%→80%**，两种子共四次 0→1；
@@ -3232,7 +3232,7 @@ prompt-cluster 95% CI 为 [0.00, 0.80]，仅五组，不外推为正式总体结
 人工确认当时 scorer/分析脚本尚不读取新复核清单；上述 G1 已新增 `--review`。
 历史 `--stress-test` 仍是获取全部十条旧结果的选择入口，不是当前人工语义判定。
 
-下一阶段见[新 Repair 目标与数据流](../plans/2026-09-22-dynamic-structural-motion-repair-goal.md)：
+下一阶段见[新 Repair 目标与数据流](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/plans/2026-09-22-dynamic-structural-motion-repair-goal.md)：
 同时解决轨迹证据覆盖与往返抖动计入运动的问题；禁止以全零、弃权或压低真实运动
 通过验收。最初确认轮只改文档和复核记录；后续 G1 的模型运行单列于上节。
 
@@ -3288,7 +3288,7 @@ Repair 的 null 均是证据不足，不是零或成功保持不变。列车覆�
 Repair **12/20 有效、8/20 证据不足、0 运行失败**。终态 finished / completed=20；
 非零退出码来自证据不足，没有遗漏、替换样本或放宽 Repair 门槛。
 
-- 配置：[construction.local-texture-dev5-8px-v1.json](../../configs/dynamic-static-jitter/construction.local-texture-dev5-8px-v1.json)。
+- 配置：[construction.local-texture-dev5-8px-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/construction.local-texture-dev5-8px-v1.json)。
   本地 `output/dynamic-static-jitter/local-texture-dev5-8px-v1{,-scores,-analysis,-previews}/`；
   H200 同隔离 code 根下 `output/local-texture-dev5-8px-v1{,-scores}/`。
 - [完整逐条 CSV](../../output/dynamic-static-jitter/local-texture-dev5-8px-v1-analysis/cases.csv)、
@@ -3328,7 +3328,7 @@ Repair **12/20 有效、8/20 证据不足、0 运行失败**。终态 finished /
   两个相位之间最大跳动可达 2/4/8 px。种子固定为 1701、2904。
 - 官方源按既有 dev metadata 顺序取五个不同 prompt，生成器预定轮换；不是按
   Origin/Repair 分数选择。清单固定于
-  [sources.local-texture-dev5-v1.jsonl](../../configs/dynamic-static-jitter/sources.local-texture-dev5-v1.jsonl)。
+  [sources.local-texture-dev5-v1.jsonl](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/sources.local-texture-dev5-v1.jsonl)。
 - 5 条均为 16 帧、8 FPS、2 秒；LaVie 两条为 512×512，其余三条为 256×256。
   全部源帧及时间戳原样保留。30 条干预最小 warp Jacobian 为 **0.704081**，
   最低低频结构相关为 **0.979719**，所有边界位移为零，无越界采样或折叠。
@@ -3336,7 +3336,7 @@ Repair **12/20 有效、8/20 证据不足、0 运行失败**。终态 finished /
   不存在因隔帧抽样而漏掉抖动的混叠。Repair 内部仍沿用 max-side 256，因此
   512 与 256 原生分辨率下的同档原生像素扰动，在模型输入上并非同一像素幅度。
 - 构造代码：[local_texture_jitter.py](../../scripts/counterfactual/local_texture_jitter.py)；
-  [协议配置](../../configs/dynamic-static-jitter/construction.local-texture-dev5-v1.json)。
+  [协议配置](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/construction.local-texture-dev5-v1.json)。
   评分端沿用 CoTracker2 **dev-v4-tracker-denoise** 候选，未对这五条调参。
 
 线性插值会改变高频纹理对比度；局部位移也可能轻微弯曲物体边缘，不能声称逐像素
@@ -3453,7 +3453,7 @@ H200 隔离代码根：`/data/chenjiayu/dynamic-static-jitter-20260922/code/`。
 合计 **2,303 / 5,368** 条部分记录。没有删除产物、终止他人进程或将其称为完成。
 
 新入口为 [official_video_jitter.py](../../scripts/counterfactual/official_video_jitter.py)，
-配置为 [construction.official-dev-v1.json](../../configs/dynamic-static-jitter/construction.official-dev-v1.json)。
+配置为 [construction.official-dev-v1.json](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/configs/dynamic-static-jitter/construction.official-dev-v1.json)。
 直接读取 H200 `/data/chenjiayu/wenbiao_zhao/vbench-official-v1/`：保留完整源帧、
 原分辨率、原 FPS/时间轴，禁止静态化、裁剪、缩放和亮度归一化。
 以 RGB lossless 编码逐帧验证 intended→decoded 像素完全一致，另列零编辑编码控制。
@@ -3481,9 +3481,9 @@ OpenCV 的 10 FPS 不能当作文件声明的时间轴；初次新构造明确�
 
 新协议完整开发、标定和独立验证仍待完成。旧合成运动锚点 R/ε 不能沿用于原生视频
 不变性验收；当前要求是绝对变化小，而非把原本有运动的视频压低分就算成功。
-有效目标见 [修订协议](../plans/2026-09-22-dynamic-static-jitter-goal-prompt.md)。
+有效目标见 [修订协议](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/plans/2026-09-22-dynamic-static-jitter-goal-prompt.md)。
 
-执行目标见[goal](../plans/2026-09-22-dynamic-static-jitter-goal-prompt.md)，
+执行目标见[goal](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/plans/2026-09-22-dynamic-static-jitter-goal-prompt.md)，
 构造口径和命令见[配置说明](../../configs/dynamic-static-jitter/README.md)。
 
 ## 方法数据流

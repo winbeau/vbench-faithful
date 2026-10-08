@@ -101,7 +101,7 @@ CPU torch 2.14.0 overlay 完成，完整 `pytest tests metrics -q` 为 **694 pas
 以及新的联合目标与定位候选的可靠自然验证。旧测试集已暴露，后续再跑只能称为复测。
 旧协议的测试结果保留为历史证据，不替代修订后构造的正确性验证。
 
-详细记录：[构造与空掩码](background_empty_masks_20260920.md)、
-[定位修复及全部逐批结果](background_caption_localizer_20260920.md)、
-[表示与定位消融](background_localizer_attribution_20260920.md)。
+详细记录：[构造与空掩码](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/counterfactual-reports/background_empty_masks_20260920.md)、
+[定位修复及全部逐批结果](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/counterfactual-reports/background_caption_localizer_20260920.md)、
+[表示与定位消融](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/counterfactual-reports/background_localizer_attribution_20260920.md)。
 Subject 的相关代码与结果保留在[Subject 扩展报告](subject_official_extension_20260920.md)，不与本表混合。

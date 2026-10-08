@@ -33,3 +33,10 @@ aoci.txt
 # Local editor and AOCI snapshots
 *.backup.*
 *.bak
+
+# Local annotation credentials and root-level process logs.
+/token.txt
+/.env
+/.env.*
+!/.env.example
+/*.log

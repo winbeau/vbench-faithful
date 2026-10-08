@@ -16,7 +16,7 @@ The active source of truth is the official Vchitect checkout described by
   Local CPU tests alone do not verify CUDA or an independent frozen E0 baseline.
 - The current audit scope is eleven dimensions (seven in flight plus four
   candidates) with `overall_consistency` retired; see
-  [`plans/2026-09-15-dimension-scope-11d.md`](plans/2026-09-15-dimension-scope-11d.md).
+  [`plans/2026-09-15-dimension-scope-11d.md`](https://github.com/winbeau/vbench-faithful/blob/89396909927e22ee00291ed562ae344a7a2a3ad1/docs/plans/2026-09-15-dimension-scope-11d.md).
 
 ## Current dimension entry points
 
