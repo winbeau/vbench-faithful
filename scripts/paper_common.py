@@ -46,9 +46,12 @@ def write_json(path, data):
     temp.replace(path)
 
 
-def python_paths():
-    return [ROOT, SEMANTIC_ROOT / "src", SEMANTIC_ROOT / "scripts", *sorted(ROOT.glob("packages/*/src")),
-            *sorted(ROOT.glob("metrics/*/src"))]
+def python_paths(selected_dimension=None):
+    selected_dimension = selected_dimension or os.environ.get("VBENCH_EVAL_DIMENSION")
+    metrics = ([ROOT / "metrics" / dimension(selected_dimension).replace("_", "-") / "src"]
+               if selected_dimension else sorted(ROOT.glob("metrics/*/src")))
+    return [ROOT, SEMANTIC_ROOT / "src", SEMANTIC_ROOT / "scripts",
+            *sorted(ROOT.glob("packages/*/src")), *[p for p in metrics if p.is_dir()]]
 
 
 def configure_imports(assets):
