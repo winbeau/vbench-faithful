@@ -271,8 +271,21 @@ def evaluate(config, *, plan_only=False):
                         arguments += ["--" + key, value]
                     tick = time.monotonic()
                     try:
+                        env = worker_env(dim, gpu, assets)
+                        # Never reuse these intermediates from a previous run,
+                        # even when final-stage caching is disabled. Bind source,
+                        # weights, runtime and physical GPU; frames are keyed by
+                        # actual model-input bytes inside the model adapter.
+                        env.pop("VBENCH_EVAL_RUN_INFERENCE_CACHE", None)
+                        env.pop("VBENCH_EVAL_RUN_INFERENCE_CONTEXT", None)
+                        if role == "visual" and name != "origin":
+                            env["VBENCH_EVAL_RUN_INFERENCE_CACHE"] = str(output / "model-inference")
+                            env["VBENCH_EVAL_RUN_INFERENCE_CONTEXT"] = json.dumps({
+                                "source": fingerprint, "runtime": gpu_info[gpu], "gpu": gpu,
+                                "python": assets["visual_python"], "assets": checked,
+                                "precision": "fp32-tf32-disabled", "cpu_threads": 3})
                         workers.run([python, ROOT / "scripts" / script, *arguments],
-                                    worker_env(dim, gpu, assets), directory / "worker.log")
+                                    env, directory / "worker.log")
                     finally:
                         worker_seconds = time.monotonic() - tick
                     payload = json.loads(destination.read_text())

@@ -6,6 +6,8 @@ ROI instances; it neither changes proposals nor replaces the official return.
 from __future__ import annotations
 
 from dataclasses import asdict
+import hashlib
+import json
 import os
 import sys
 from pathlib import Path
@@ -15,6 +17,17 @@ import numpy as np
 
 from vbench_audit_core.inputs import sha256_file
 from vbench_audit_core.upstream import import_official_module, verify_upstream
+
+
+def predict_instances(model, image):
+    """Call the pinned predictor without drawing its discarded visualization.
+
+    VisualizationDemo.run_on_image returns this exact prediction object before
+    copying instances to CPU and drawing boxes/text with Matplotlib. Evaluators
+    only consume the prediction; image preprocessing and both ROI heads still
+    run inside the original predictor, unchanged.
+    """
+    return model.demo.predictor(image)
 
 
 def preflight(checkpoint: Path, upstream: Path | None = None) -> dict:
@@ -94,10 +107,24 @@ class GritEvidenceModel:
         self.module, state = import_official_module(dimension, upstream)
         import torch
         self.torch = torch
-        self.model = self.module.DenseCaptioning(torch.device(device))
-        initializer = self.model.initialize_model_det if dimension == "object_class" else self.model.initialize_model
-        initializer(model_weight=str(checkpoint))
+        self.device, self.checkpoint = device, checkpoint
+        self.model = None
         self.head_outputs = []
+        self.cache = None
+        cache_root = os.environ.get("VBENCH_EVAL_RUN_INFERENCE_CACHE")
+        context = os.environ.get("VBENCH_EVAL_RUN_INFERENCE_CONTEXT")
+        if cache_root and context:
+            from vbench_audit_core.run_inference_cache import RunInferenceCache
+            namespace = {"runtime": json.loads(context), "checkpoint": self.provenance["checkpoint_sha256"],
+                         "protocol": "grit-two-head-v1", "task": dimension, "threshold": .5}
+            self.cache = RunInferenceCache(cache_root, namespace)
+
+    def _initialize(self):
+        if self.model is not None:
+            return
+        self.model = self.module.DenseCaptioning(self.torch.device(self.device))
+        initializer = self.model.initialize_model_det if self.dimension == "object_class" else self.model.initialize_model
+        initializer(model_weight=str(self.checkpoint))
         roi = self.model.demo.predictor.model.roi_heads
         original = roi._forward_box
         recorder = self
@@ -127,11 +154,12 @@ class GritEvidenceModel:
             video = np.stack([cv2.resize(f, (int(w*scale), int(h*scale)), interpolation=cv2.INTER_LINEAR) for f in video])
         return video
 
-    def detect(self, image) -> dict:
+    def _predict(self, image) -> dict:
         self.head_outputs.clear()
         try:
+            self._initialize()
             with self.torch.no_grad():
-                predictions, _ = self.model.run_det_tensor(np.ascontiguousarray(image))
+                predictions = predict_instances(self.model, np.ascontiguousarray(image))
             if [r["head"] for r in self.head_outputs] != ["primary", "object"]:
                 raise ValueError("unexpected GRiT two-head call sequence")
             primary, objects = (r["instances"] for r in self.head_outputs)
@@ -141,14 +169,40 @@ class GritEvidenceModel:
                 raise ValueError("upstream det_obj differs from captured ObjectDet output")
             # Both raw heads use identical pre-postprocess coordinates. Keep
             # postprocessed boxes separately for visualization and trace audit.
-            return {"status": "succeeded", "primary": primary, "objects": objects,
+            evidence = {"status": "succeeded", "primary": primary, "objects": objects,
                     "binding": bind_heads(primary, objects),
                     "postprocessed": serialize_instances(instances), "legacy_labels": labels,
                     "image_shape": list(image.shape), "coordinate_space": "raw_roi_image"}
+            from vbench.third_party.grit_src.image_dense_captions import dense_pred_to_caption_tuple
+            captions = dense_pred_to_caption_tuple(predictions)
+            return {"evidence": evidence, "captions": captions}
         except Exception as exc:
-            return {"status": "failed", "error": f"{type(exc).__name__}: {exc}",
+            return {"evidence": {"status": "failed", "error": f"{type(exc).__name__}: {exc}",
                     "primary": [], "objects": [], "binding": None,
-                    "partial_heads": self.head_outputs.copy()}
+                    "partial_heads": self.head_outputs.copy()}, "captions": None}
+
+    def _frame(self, image):
+        if self.cache is None:
+            return self._predict(image)
+        frame = np.ascontiguousarray(image)
+        key = {"sha256": hashlib.sha256(frame.tobytes()).hexdigest(),
+               "shape": list(frame.shape), "dtype": str(frame.dtype)}
+        return self.cache.get_or_compute(key, lambda: self._predict(frame),
+            valid=lambda payload: payload["evidence"]["status"] == "succeeded")
+
+    def detect(self, image) -> dict:
+        return self._frame(image)["evidence"]
+
+    def caption(self, image):
+        payload = self._frame(image)
+        if payload["evidence"]["status"] != "succeeded":
+            raise RuntimeError(payload["evidence"]["error"])
+        return payload["captions"]
 
     def detect_video(self, path: Path) -> list[dict]:
-        return [{"frame_index": i, **self.detect(frame)} for i, frame in enumerate(self.frames(path))]
+        rows = [{"frame_index": i, **self.detect(frame)} for i, frame in enumerate(self.frames(path))]
+        if self.cache is not None:
+            print("GRiT run inference " + json.dumps({"task": self.dimension,
+                "hits": self.cache.hits, "misses": self.cache.misses,
+                "scope": "current evaluation only", "cache": str(self.cache.root)}), flush=True)
+        return rows

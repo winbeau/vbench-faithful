@@ -18,6 +18,10 @@ def main():
     args = parser.parse_args()
     assets = load_assets(args.assets)
     configure_imports(assets)
+    # Small sequential decode steps otherwise oversubscribe the host's cores.
+    # This changes CPU scheduling only, not GPU precision or generation options.
+    import torch
+    torch.set_num_threads(3)
     rows = json.loads(args.input.read_text())
     adapter = Path(assets["adapters"]) / args.dimension
     expected = next(row for row in json.loads((ROOT / "configs/reproduction/release.json").read_text())["adapters"]

@@ -30,9 +30,12 @@ def evidence(rows, dim, assets):
     elif task == "action":
         model, transform, classes = initialize_umt(argparse.Namespace(umt_weights=assets["umt"]), device)
     else:
-        from vbench.third_party.grit_model import DenseCaptioning
-        model = DenseCaptioning(device)
-        model.initialize_model_det(model_weight=assets["grit"])
+        from vbench_audit_models.grit import GritEvidenceModel
+        # These two dimensions use the same ObjectDet predictor, native frames
+        # and tuple conversion as object_class. Prompt-dependent scoring stays
+        # in each dimension; Color retains its separate DenseCap namespace.
+        model = GritEvidenceModel("object_class", Path(assets["grit"]),
+                                  device=str(device), upstream=Path(assets["vbench"]))
     completed, cache = [], {}
     for row in rows:
         if row["video"] in cache:
@@ -65,9 +68,9 @@ def evidence(rows, dim, assets):
                 detections, labels = [], []
                 with torch.no_grad():
                     for frame in frames:
-                        ret = model.run_caption_tensor(frame)
-                        detections.append([{"label": x[0], "box": [float(v) for v in x[1][:4]]} for x in ret[0]])
-                        labels.append(sorted(set(str(v) for v in ret[0][0][2])) if ret[0] else [])
+                        captions = model.caption(frame)
+                        detections.append([{"label": x[0], "box": [float(v) for v in x[1][:4]]} for x in captions])
+                        labels.append(sorted(set(str(v) for v in captions[0][2])) if captions else [])
                 item.update(frame_detections=detections, frame_labels=labels)
             if task != "action":
                 item["frame_sha256"] = [hashlib.sha256(f.tobytes()).hexdigest() for f in frames]
@@ -76,7 +79,12 @@ def evidence(rows, dim, assets):
             item.update(status="failed", error=f"{type(exc).__name__}: {exc}")
         completed.append(item)
         cache[row["video"]] = item
-    return {"rows": completed, "source": "pinned cache_backend_outputs.py visual protocol", "fresh_visual_inference": True}
+    payload = {"rows": completed, "source": "pinned cache_backend_outputs.py visual protocol", "fresh_visual_inference": True}
+    if task in {"spatial", "objects"} and model.cache is not None:
+        payload["run_shared_inference"] = {"hits": model.cache.hits, "misses": model.cache.misses,
+                                          "scope": "current evaluation only", "cache": str(model.cache.root)}
+        payload["fresh_visual_inference"] = model.cache.misses > 0
+    return payload
 
 
 def official(rows, dim, assets, output):
