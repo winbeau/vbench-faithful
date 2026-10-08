@@ -87,8 +87,7 @@ def evidence(rows, dim, assets):
     return payload
 
 
-def official(rows, dim, assets, output):
-    import torch
+def official_submodules(dim):
     from vbench.utils import init_submodules
     # Missing assets must be prepared explicitly through the mirror-aware setup.
     # Prevent upstream's hard-coded wget/git calls from silently downloading.
@@ -102,16 +101,27 @@ def official(rows, dim, assets, output):
         modules = init_submodules([dim], local=True, read_frame=False)
     finally:
         subprocess.run = original_run
+    return modules[dim]
+
+
+def official(rows, dim, assets, output):
+    import torch
+    submodules = official_submodules(dim)
     full_info = [{"prompt_en": row["prompt"], "dimension": [dim], "video_list": [row["video"]],
                   "auxiliary_info": row["auxiliary_info"]} for row in rows]
     path = output.with_name("official-input.json")
     write_json(path, full_info)
     if dim in {"aesthetic_quality", "imaging_quality", "temporal_flickering", "appearance_style"}:
         adapter = importlib.import_module(dim + ".official")
-        aggregate, returned = adapter.compute(str(path), torch.device("cuda:0"), modules[dim])
+        aggregate, returned = adapter.compute(str(path), torch.device("cuda:0"), submodules)
     else:
         module = importlib.import_module("vbench." + dim)
-        aggregate, returned = getattr(module, "compute_" + dim)(str(path), torch.device("cuda:0"), modules[dim])
+        aggregate, returned = getattr(module, "compute_" + dim)(str(path), torch.device("cuda:0"), submodules)
+    return {"rows": score_rows(rows, returned, "official"), "official_aggregate": float(aggregate),
+            "upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"}
+
+
+def score_rows(rows, returned, implementation):
     by_video = defaultdict(list)
     for item in returned:
         by_video[str(Path(item["video_path"]).resolve())].append(item)
@@ -119,11 +129,24 @@ def official(rows, dim, assets, output):
     for row in rows:
         candidates = by_video[row["video"]]
         if not candidates:
-            results.append(result(row, None, "dropped_by_official", reason="upstream omitted input"))
+            results.append(result(row, None, "dropped_by_" + implementation,
+                                  reason="upstream omitted input" if implementation == "official" else "implementation omitted input"))
         else:
             item = candidates.pop(0)
-            results.append(result(row, float(item["video_results"]), official=item))
-    return {"rows": results, "official_aggregate": float(aggregate), "upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"}
+            results.append(result(row, float(item["video_results"]), **{implementation: item}))
+    return results
+
+
+def accelerated(rows, dim, assets):
+    import torch
+    # Dimensions are enabled individually after their implementation/validation.
+    if dim not in {"appearance_style"}:
+        raise ValueError(f"No accelerated implementation for {dim}")
+    adapter = importlib.import_module(dim + ".accelerated")
+    aggregate, returned = adapter.compute(rows, torch.device("cuda:0"), official_submodules(dim))
+    return {"rows": score_rows(rows, returned, "accelerated"), "aggregate": float(aggregate),
+            "implementation": "project accelerated", "aggregation": "vbench_native_reducer",
+            "reference_upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"}
 
 
 def repair(rows, dim, assets, output, compiled):
@@ -212,7 +235,7 @@ def main():
     for name in ("input", "assets", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--dimension", required=True)
-    parser.add_argument("--mode", choices=["origin", "repair", "evidence"], required=True)
+    parser.add_argument("--mode", choices=["origin", "repair", "evidence", "accelerated"], required=True)
     parser.add_argument("--compiled", type=Path)
     args = parser.parse_args()
     assets = load_assets(args.assets)
@@ -236,6 +259,8 @@ def main():
         payload = evidence(rows, args.dimension, assets)
     elif args.mode == "origin":
         payload = official(rows, args.dimension, assets, args.output)
+    elif args.mode == "accelerated":
+        payload = accelerated(rows, args.dimension, assets)
     else:
         payload = repair(rows, args.dimension, assets, args.output, args.compiled)
     payload.update(dimension=args.dimension, mode=args.mode, torch=torch.__version__,
