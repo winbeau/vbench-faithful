@@ -143,10 +143,12 @@ def accelerated(rows, dim, assets):
     if dim not in {"appearance_style", "imaging_quality", "aesthetic_quality", "temporal_style"}:
         raise ValueError(f"No accelerated implementation for {dim}")
     adapter = importlib.import_module(dim + ".accelerated")
-    aggregate, returned = adapter.compute(rows, torch.device("cuda:0"), official_submodules(dim))
+    diagnostics = {}
+    extra = {"diagnostics": diagnostics} if dim == "temporal_style" else {}
+    aggregate, returned = adapter.compute(rows, torch.device("cuda:0"), official_submodules(dim), **extra)
     return {"rows": score_rows(rows, returned, "accelerated"), "aggregate": float(aggregate),
             "implementation": "project accelerated", "aggregation": "vbench_native_reducer",
-            "reference_upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"}
+            "reference_upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490", **diagnostics}
 
 
 def repair(rows, dim, assets, output, compiled):

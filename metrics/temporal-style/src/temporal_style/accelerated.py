@@ -1,13 +1,13 @@
 """Batch original eight-frame ViCLIP inputs; retain the native cosine reducer."""
 
 
-def compute(rows, device, submodules):
+def compute(rows, device, submodules, *, diagnostics=None):
     import numpy as np
     import torch
     from vbench_audit_models.viclip import embeddings
 
     with torch.no_grad():
-        video, text = embeddings(rows, device, submodules)
+        video, text = embeddings(rows, device, submodules, diagnostics=diagnostics)
         video = video / video.norm(dim=-1, keepdim=True)
         text = text / text.norm(dim=-1, keepdim=True)
         # Retain each original dot product; no cross-video score weighting.

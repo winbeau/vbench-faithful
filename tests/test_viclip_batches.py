@@ -37,9 +37,12 @@ def test_batches_cache_only_identical_video_inputs_and_keep_new_queries(monkeypa
     assert calls == [2, 2, 1]
     assert video[:, 0].tolist() == list(range(5))
     changed = [{**r, "prompt": "different"} for r in rows]
-    again, new_text = embeddings(changed, "cpu", {"pretrain": checkpoint}, batch_size=2)
+    diagnostics = {}
+    again, new_text = embeddings(changed, "cpu", {"pretrain": checkpoint}, batch_size=2, diagnostics=diagnostics)
     assert calls == [2, 2, 1]
     assert torch.equal(again, video) and not torch.equal(new_text, text)
+    assert diagnostics["run_shared_inference"]["hits"] == 3
+    assert diagnostics["fresh_visual_inference"] is False
     assert all(s == {"num_frames": 8, "sample": "middle"} for s in samples)
     rows[0]["video"] = "9"
     changed_video, _ = embeddings(rows, "cpu", {"pretrain": checkpoint}, batch_size=2)

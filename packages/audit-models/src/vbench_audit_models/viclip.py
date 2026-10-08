@@ -29,7 +29,7 @@ def load_model(tokenizer, device, submodules):
     return model
 
 
-def embeddings(rows, device, submodules, *, batch_size=4):
+def embeddings(rows, device, submodules, *, batch_size=4, diagnostics=None):
     import torch
     from vbench.utils import CACHE_DIR, clip_transform, read_frames_decord_by_fps
     from vbench.third_party.ViCLIP.simple_tokenizer import SimpleTokenizer
@@ -45,11 +45,16 @@ def embeddings(rows, device, submodules, *, batch_size=4):
     context = os.environ.get("VBENCH_EVAL_RUN_INFERENCE_CONTEXT")
     cache = None
     if root and context:
-        h = hashlib.sha256()
-        with Path(submodules["pretrain"]).open("rb") as stream:
-            for block in iter(lambda: stream.read(1048576), b""):
-                h.update(block)
-        cache = RunInferenceCache(root, {"runtime": json.loads(context), "checkpoint": h.hexdigest(),
+        runtime = json.loads(context)
+        checkpoint = str(Path(submodules["pretrain"]).resolve())
+        # The controller hashes every selected asset on every invocation.
+        # Reuse that current-run digest under the immutable-runtime contract;
+        # standalone callers without a verified context still hash the file.
+        checksum = runtime.get("assets", {}).get(checkpoint)
+        if not isinstance(checksum, str) or len(checksum) != 64:
+            from vbench_audit_core.eval_cache import file_digest
+            checksum = file_digest(checkpoint)
+        cache = RunInferenceCache(root, {"runtime": runtime, "checkpoint": checksum,
             "protocol": "viclip-native-eight-middle-fp32-v1", "batch_size": batch_size})
     video_features = []
     text_features = {}
@@ -85,4 +90,10 @@ def embeddings(rows, device, submodules, *, batch_size=4):
                 pending = []
         if pending:
             video_features.extend(encode(pending))
+    if diagnostics is not None:
+        diagnostics.update(video_count=len(rows), frames_per_video=8, video_batch_size=batch_size,
+                           fresh_visual_inference=cache is None or cache.misses > 0)
+        if cache is not None:
+            diagnostics["run_shared_inference"] = {"hits": cache.hits, "misses": cache.misses,
+                "unit": "video feature batch", "scope": "current evaluation only", "cache": str(cache.root)}
     return torch.stack(video_features), torch.stack([text_features[r["prompt"]] for r in rows])
