@@ -1,0 +1,3214 @@
+{
+  "schema": "vbench-eval-performance/1",
+  "utc": "2026-10-08T04:29:07.796291+00:00",
+  "host": "h100-server",
+  "scope": "representative fixtures; one paired measurement, not a throughput study",
+  "runs": {
+    "perf-baseline-cold": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold",
+      "code_sha": "01c7da57742f12c061554f593a544411eca9d1ac",
+      "git_dirty": false,
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_sha256": "8555b6376efb5764843c728de022fe85b67d38ce79fada9897c44e24aebbc9b2",
+      "lock_sha256": "152566923323a4510d85c46faf9021fb3c379ac4889102126dd6750504af07d7",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "elapsed_seconds": 220.38133651192766,
+      "timing_seconds": null,
+      "dimensions": {
+        "scene/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.8125,
+          "observed_subset_mean": 0.8125,
+          "aggregation": "equal_video",
+          "dimension": "scene",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 27.908373547019437
+        },
+        "human_action/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "equal_video",
+          "dimension": "human_action",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 21.111740023014136
+        },
+        "object_class/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "equal_video",
+          "dimension": "object_class",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 37.10721050493885
+        },
+        "subject_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9678837954998016,
+          "observed_subset_mean": 0.9678837954998016,
+          "aggregation": "equal_video",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 9.227487516007386
+        },
+        "background_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9647716175426136,
+          "observed_subset_mean": 0.9647716175426136,
+          "aggregation": "equal_video",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.819079673965462
+        },
+        "dynamic_degree/repair": {
+          "input_count": 3,
+          "succeeded": 3,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6645206188278044,
+          "observed_subset_mean": 0.6645206188278044,
+          "aggregation": "equal_video",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 8.688092343974859
+        },
+        "spatial_relationship/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.25,
+          "observed_subset_mean": 0.25,
+          "aggregation": "equal_video",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 23.0272383550182
+        },
+        "multiple_objects/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.40625,
+          "observed_subset_mean": 0.40625,
+          "aggregation": "equal_video",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 23.220846783951856
+        },
+        "color/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.5,
+          "observed_subset_mean": 0.5,
+          "aggregation": "equal_video",
+          "dimension": "color",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 34.88929775101133
+        }
+      },
+      "complete": true,
+      "tasks": 9,
+      "cached_tasks": 0,
+      "input_records": 19,
+      "unique_media_sha256": 16,
+      "media": [
+        {
+          "id": "scene:base",
+          "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/base/carrousel-0.gif"
+        },
+        {
+          "id": "scene:cf",
+          "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/cf/carrousel-0.gif"
+        },
+        {
+          "id": "human_action:base",
+          "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/base/A person is roller skating-0.gif"
+        },
+        {
+          "id": "human_action:cf",
+          "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/cf/A person is roller skating-0.gif"
+        },
+        {
+          "id": "spatial_relationship:base",
+          "sha256": "4ab6cb1d502084d95aa2a0d75ffebd729549f197f6a5f7b481a42fa3662cc07a",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/base/a parking meter on the right of a bench, front view-0.gif"
+        },
+        {
+          "id": "spatial_relationship:cf",
+          "sha256": "255b6bab921e7a1e84e177aa5c75c77caa8039851afe6935acdd1dec70426379",
+          "duration_seconds": 3.3,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/cf/6088d07a1fe33bc0bdbbb773-hflip.mp4"
+        },
+        {
+          "id": "multiple_objects:base",
+          "sha256": "cfd541b1dae8f63e2a0b7402af437ad843bbb68c8632ef2bc7ead7f72ef6ae33",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/base/a cat and a dog-0.gif"
+        },
+        {
+          "id": "multiple_objects:cf",
+          "sha256": "ad30e583f6554a195b41ab02d9a282728eb4efd1ae21bbe8f25158a166500f39",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/cf/bc333ac5d30cc8c41cc40a3f.mp4"
+        },
+        {
+          "id": "object_class:base",
+          "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/base/video_00000.mp4"
+        },
+        {
+          "id": "object_class:cf",
+          "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/cf/video_00001.mp4"
+        },
+        {
+          "id": "color:base",
+          "sha256": "0f12bee1f0378ad3161ab34b8fcc54ea7ce40fbab6287e69e34b35a51af40ec5",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/base/video_00006.mp4"
+        },
+        {
+          "id": "color:cf",
+          "sha256": "40f78c5bcf9d02dd651591770033bc978c3bd9928a8f2dd7cb23615fe9129683",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/cf/video_00010.mp4"
+        },
+        {
+          "id": "subject_consistency:base",
+          "sha256": "6ea145d195999e9267bd3ae299a7deddbb9bb818279e6be6f0dca858becb4558",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/base/subject_consistency-base.mp4"
+        },
+        {
+          "id": "subject_consistency:cf",
+          "sha256": "8b5a36f945204fca63d4dd3cfa8dfdccb00388ebac1345fa92112af6bd61bccb",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/cf/subject_consistency-cf.mp4"
+        },
+        {
+          "id": "background_consistency:base",
+          "sha256": "81b78a09d0e69eb5e130b93d743a57fb3691498578c1b0fe93a8e3fdadf8d4e6",
+          "duration_seconds": 4.125,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/base/background_consistency-base.mp4"
+        },
+        {
+          "id": "background_consistency:cf",
+          "sha256": "167f9b69f696eef994bc64978e4de732aad54c52c3bf734c9b018aa41fbd2243",
+          "duration_seconds": 4.125,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/cf/background_consistency-cf.mp4"
+        },
+        {
+          "id": "dynamic_degree:base",
+          "sha256": "d3b5b08406b3620fff62b6d2713a1dfd858ded796f28ad6f939ae512a31eb1f2",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/dynamic_degree/base/a car accelerating to gain speed-1.mp4"
+        },
+        {
+          "id": "dynamic_degree:cf-0",
+          "sha256": "ca4a263b227ac017e3874e0e9f2e4d4d580ac2011a23189cd5654549616af88e",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-0.mp4"
+        },
+        {
+          "id": "dynamic_degree:cf-1",
+          "sha256": "3af8de88e387a1a9be469bcf7a8b76d8cc92b9bec5c0e4fc2dde268fec3a0a8f",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-1.mp4"
+        }
+      ],
+      "stages": [
+        {
+          "timestamp": "2026-10-08T04:06:11.805382Z",
+          "stage": "computed",
+          "dimension": "scene",
+          "backend": "evidence",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/scene/evidence/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:06:26.178078Z",
+          "stage": "computed",
+          "dimension": "scene",
+          "backend": "repair",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/scene/repair/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:06:35.777593Z",
+          "stage": "computed",
+          "dimension": "human_action",
+          "backend": "evidence",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/human_action/evidence/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:06:47.290024Z",
+          "stage": "computed",
+          "dimension": "human_action",
+          "backend": "repair",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/human_action/repair/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:07:12.789649Z",
+          "stage": "computed",
+          "dimension": "object_class",
+          "backend": "compile",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/object_class/compile/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:07:24.398884Z",
+          "stage": "computed",
+          "dimension": "object_class",
+          "backend": "repair",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/object_class/repair/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:07:33.624682Z",
+          "stage": "computed",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/subject_consistency/repair/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:07:44.443356Z",
+          "stage": "computed",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/background_consistency/repair/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:07:53.133911Z",
+          "stage": "computed",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/dynamic_degree/repair/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:08:04.367030Z",
+          "stage": "computed",
+          "dimension": "spatial_relationship",
+          "backend": "evidence",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/spatial_relationship/evidence/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:08:16.162242Z",
+          "stage": "computed",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/spatial_relationship/repair/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:08:26.676413Z",
+          "stage": "computed",
+          "dimension": "multiple_objects",
+          "backend": "evidence",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/multiple_objects/evidence/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:08:39.383541Z",
+          "stage": "computed",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/multiple_objects/repair/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:09:02.410380Z",
+          "stage": "computed",
+          "dimension": "color",
+          "backend": "compile",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/color/compile/worker.log",
+          "gpu": "3"
+        },
+        {
+          "timestamp": "2026-10-08T04:09:14.271757Z",
+          "stage": "computed",
+          "dimension": "color",
+          "backend": "repair",
+          "message": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-baseline-cold/color/repair/worker.log",
+          "gpu": "3"
+        }
+      ]
+    },
+    "perf-optimized-cold": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold",
+      "code_sha": "d4651fbb4c09b345d7f61e2eeb7bb9daca9d0949",
+      "git_dirty": false,
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_sha256": "b9d90045a60e8ee48a3b0b98a5e9c87fad6b29d153f7a5eef20c2020a52b07a1",
+      "lock_sha256": "152566923323a4510d85c46faf9021fb3c379ac4889102126dd6750504af07d7",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "elapsed_seconds": 181.6261978240218,
+      "timing_seconds": {
+        "inputs": 0.05178508604876697,
+        "asset_verification": 6.074507265002467,
+        "source_verification": 0.30209099396597594,
+        "gpu_probes": 1.9307003930443898,
+        "total_before_dispatch": 8.3632997199893
+      },
+      "dimensions": {
+        "scene/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.8125,
+          "observed_subset_mean": 0.8125,
+          "aggregation": "equal_video",
+          "dimension": "scene",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 25.614499088027515
+        },
+        "human_action/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "equal_video",
+          "dimension": "human_action",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 21.38277950999327
+        },
+        "object_class/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "equal_video",
+          "dimension": "object_class",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 24.95188133197371
+        },
+        "subject_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9678837954998016,
+          "observed_subset_mean": 0.9678837954998016,
+          "aggregation": "equal_video",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 9.372494520037435
+        },
+        "background_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9647716175426136,
+          "observed_subset_mean": 0.9647716175426136,
+          "aggregation": "equal_video",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.063986958935857
+        },
+        "dynamic_degree/repair": {
+          "input_count": 3,
+          "succeeded": 3,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6645206188278044,
+          "observed_subset_mean": 0.6645206188278044,
+          "aggregation": "equal_video",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 8.998364286031574
+        },
+        "spatial_relationship/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.25,
+          "observed_subset_mean": 0.25,
+          "aggregation": "equal_video",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 23.387788870953955
+        },
+        "multiple_objects/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.40625,
+          "observed_subset_mean": 0.40625,
+          "aggregation": "equal_video",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 23.19018092995975
+        },
+        "color/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.5,
+          "observed_subset_mean": 0.5,
+          "aggregation": "equal_video",
+          "dimension": "color",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 26.27208282193169
+        }
+      },
+      "complete": true,
+      "tasks": 9,
+      "cached_tasks": 0,
+      "input_records": 19,
+      "unique_media_sha256": 16,
+      "media": [
+        {
+          "id": "scene:base",
+          "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/base/carrousel-0.gif"
+        },
+        {
+          "id": "scene:cf",
+          "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/cf/carrousel-0.gif"
+        },
+        {
+          "id": "human_action:base",
+          "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/base/A person is roller skating-0.gif"
+        },
+        {
+          "id": "human_action:cf",
+          "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/cf/A person is roller skating-0.gif"
+        },
+        {
+          "id": "spatial_relationship:base",
+          "sha256": "4ab6cb1d502084d95aa2a0d75ffebd729549f197f6a5f7b481a42fa3662cc07a",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/base/a parking meter on the right of a bench, front view-0.gif"
+        },
+        {
+          "id": "spatial_relationship:cf",
+          "sha256": "255b6bab921e7a1e84e177aa5c75c77caa8039851afe6935acdd1dec70426379",
+          "duration_seconds": 3.3,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/cf/6088d07a1fe33bc0bdbbb773-hflip.mp4"
+        },
+        {
+          "id": "multiple_objects:base",
+          "sha256": "cfd541b1dae8f63e2a0b7402af437ad843bbb68c8632ef2bc7ead7f72ef6ae33",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/base/a cat and a dog-0.gif"
+        },
+        {
+          "id": "multiple_objects:cf",
+          "sha256": "ad30e583f6554a195b41ab02d9a282728eb4efd1ae21bbe8f25158a166500f39",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/cf/bc333ac5d30cc8c41cc40a3f.mp4"
+        },
+        {
+          "id": "object_class:base",
+          "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/base/video_00000.mp4"
+        },
+        {
+          "id": "object_class:cf",
+          "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/cf/video_00001.mp4"
+        },
+        {
+          "id": "color:base",
+          "sha256": "0f12bee1f0378ad3161ab34b8fcc54ea7ce40fbab6287e69e34b35a51af40ec5",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/base/video_00006.mp4"
+        },
+        {
+          "id": "color:cf",
+          "sha256": "40f78c5bcf9d02dd651591770033bc978c3bd9928a8f2dd7cb23615fe9129683",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/cf/video_00010.mp4"
+        },
+        {
+          "id": "subject_consistency:base",
+          "sha256": "6ea145d195999e9267bd3ae299a7deddbb9bb818279e6be6f0dca858becb4558",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/base/subject_consistency-base.mp4"
+        },
+        {
+          "id": "subject_consistency:cf",
+          "sha256": "8b5a36f945204fca63d4dd3cfa8dfdccb00388ebac1345fa92112af6bd61bccb",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/cf/subject_consistency-cf.mp4"
+        },
+        {
+          "id": "background_consistency:base",
+          "sha256": "81b78a09d0e69eb5e130b93d743a57fb3691498578c1b0fe93a8e3fdadf8d4e6",
+          "duration_seconds": 4.125,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/base/background_consistency-base.mp4"
+        },
+        {
+          "id": "background_consistency:cf",
+          "sha256": "167f9b69f696eef994bc64978e4de732aad54c52c3bf734c9b018aa41fbd2243",
+          "duration_seconds": 4.125,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/cf/background_consistency-cf.mp4"
+        },
+        {
+          "id": "dynamic_degree:base",
+          "sha256": "d3b5b08406b3620fff62b6d2713a1dfd858ded796f28ad6f939ae512a31eb1f2",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/dynamic_degree/base/a car accelerating to gain speed-1.mp4"
+        },
+        {
+          "id": "dynamic_degree:cf-0",
+          "sha256": "ca4a263b227ac017e3874e0e9f2e4d4d580ac2011a23189cd5654549616af88e",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-0.mp4"
+        },
+        {
+          "id": "dynamic_degree:cf-1",
+          "sha256": "3af8de88e387a1a9be469bcf7a8b76d8cc92b9bec5c0e4fc2dde268fec3a0a8f",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-1.mp4"
+        }
+      ],
+      "stages": [
+        {
+          "timestamp": "2026-10-08T04:15:51.174250Z",
+          "stage": "computed",
+          "dimension": "scene",
+          "backend": "evidence",
+          "message": "13.57s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/scene/evidence/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 13.569966515991837,
+          "environment_seconds": 0.4052475600037724,
+          "worker_seconds": 13.159837979008444
+        },
+        {
+          "timestamp": "2026-10-08T04:16:03.216263Z",
+          "stage": "computed",
+          "dimension": "scene",
+          "backend": "repair",
+          "message": "12.04s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/scene/repair/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 12.040687529952265,
+          "environment_seconds": 0.26868469396140426,
+          "worker_seconds": 11.766481747035868
+        },
+        {
+          "timestamp": "2026-10-08T04:16:12.654707Z",
+          "stage": "computed",
+          "dimension": "human_action",
+          "backend": "evidence",
+          "message": "9.44s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/human_action/evidence/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 9.435039328993298,
+          "environment_seconds": 0.39740804804023355,
+          "worker_seconds": 9.032746372045949
+        },
+        {
+          "timestamp": "2026-10-08T04:16:24.599843Z",
+          "stage": "computed",
+          "dimension": "human_action",
+          "backend": "repair",
+          "message": "11.94s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/human_action/repair/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 11.94397653802298,
+          "environment_seconds": 0.26950468006543815,
+          "worker_seconds": 11.669364241999574
+        },
+        {
+          "timestamp": "2026-10-08T04:16:38.253164Z",
+          "stage": "computed",
+          "dimension": "object_class",
+          "backend": "compile",
+          "message": "13.65s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/object_class/compile/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 13.649358564056456,
+          "environment_seconds": 0.268107881071046,
+          "worker_seconds": 13.377394487033598
+        },
+        {
+          "timestamp": "2026-10-08T04:16:49.552157Z",
+          "stage": "computed",
+          "dimension": "object_class",
+          "backend": "repair",
+          "message": "11.30s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/object_class/repair/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 11.297836066922173,
+          "environment_seconds": 0.4005877199815586,
+          "worker_seconds": 10.893235623952933
+        },
+        {
+          "timestamp": "2026-10-08T04:16:58.925333Z",
+          "stage": "computed",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "message": "9.37s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/subject_consistency/repair/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 9.368631841964088,
+          "environment_seconds": 0.39757446793373674,
+          "worker_seconds": 8.966120296972804
+        },
+        {
+          "timestamp": "2026-10-08T04:17:08.990468Z",
+          "stage": "computed",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "message": "10.06s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/background_consistency/repair/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 10.060785523965023,
+          "environment_seconds": 0.3976782870013267,
+          "worker_seconds": 9.659163106931373
+        },
+        {
+          "timestamp": "2026-10-08T04:17:17.990667Z",
+          "stage": "computed",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "message": "9.00s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/dynamic_degree/repair/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 8.996592745999806,
+          "environment_seconds": 0.3975124800344929,
+          "worker_seconds": 8.594290534034371
+        },
+        {
+          "timestamp": "2026-10-08T04:17:29.285043Z",
+          "stage": "computed",
+          "dimension": "spatial_relationship",
+          "backend": "evidence",
+          "message": "11.29s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/spatial_relationship/evidence/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 11.291606844053604,
+          "environment_seconds": 0.3994952270295471,
+          "worker_seconds": 10.886784228961915
+        },
+        {
+          "timestamp": "2026-10-08T04:17:41.378888Z",
+          "stage": "computed",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "message": "12.09s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/spatial_relationship/repair/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 12.092667758930475,
+          "environment_seconds": 0.2750702939229086,
+          "worker_seconds": 11.812188563984819
+        },
+        {
+          "timestamp": "2026-10-08T04:17:51.990325Z",
+          "stage": "computed",
+          "dimension": "multiple_objects",
+          "backend": "evidence",
+          "message": "10.61s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/multiple_objects/evidence/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 10.607783138053492,
+          "environment_seconds": 0.4058592460351065,
+          "worker_seconds": 10.198345456039533
+        },
+        {
+          "timestamp": "2026-10-08T04:18:04.570272Z",
+          "stage": "computed",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "message": "12.58s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/multiple_objects/repair/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 12.578747679945081,
+          "environment_seconds": 0.2896687389584258,
+          "worker_seconds": 12.284995023044758
+        },
+        {
+          "timestamp": "2026-10-08T04:18:18.574650Z",
+          "stage": "computed",
+          "dimension": "color",
+          "backend": "compile",
+          "message": "14.00s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/color/compile/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 14.001508467947133,
+          "environment_seconds": 0.269199495902285,
+          "worker_seconds": 13.727269120980054
+        },
+        {
+          "timestamp": "2026-10-08T04:18:30.841823Z",
+          "stage": "computed",
+          "dimension": "color",
+          "backend": "repair",
+          "message": "12.27s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/perf-optimized-cold/color/repair/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 12.266017588088289,
+          "environment_seconds": 0.4039298790739849,
+          "worker_seconds": 11.857792195049115
+        }
+      ]
+    },
+    "perf-origin16": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-origin16",
+      "code_sha": "13ce34ca53890a7b74b330ea3f433747408fad6e",
+      "git_dirty": false,
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_sha256": "36e09f9e46bbfb3b2aed919701afe7b0b82921e9e164fb76a20b245c457ecacb",
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "elapsed_seconds": 130.7892909310758,
+      "timing_seconds": {
+        "inputs": 0.00647909299004823,
+        "asset_verification": 3.80403383995872,
+        "source_verification": 0.22374155698344111,
+        "gpu_probes": 1.9314415799453855,
+        "total_before_dispatch": 5.968808667967096
+      },
+      "dimensions": {
+        "scene/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.625,
+          "observed_subset_mean": 0.625,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.625,
+          "dimension": "scene",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 12.983632955001667
+        },
+        "human_action/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 1.0,
+          "dimension": "human_action",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.778715041931719
+        },
+        "object_class/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.0,
+          "observed_subset_mean": 0.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.0,
+          "dimension": "object_class",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 9.194316696957685
+        },
+        "subject_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9200990736484528,
+          "observed_subset_mean": 0.9200990736484528,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9200990736484528,
+          "dimension": "subject_consistency",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 5.435049918945879
+        },
+        "background_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9221354166666667,
+          "observed_subset_mean": 0.9221354166666667,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9221354166666667,
+          "dimension": "background_consistency",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 6.247325964970514
+        },
+        "dynamic_degree/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 1.0,
+          "dimension": "dynamic_degree",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 5.041484027984552
+        },
+        "spatial_relationship/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.48523731465197206,
+          "observed_subset_mean": 0.48523731465197206,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.48523731465197206,
+          "dimension": "spatial_relationship",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 9.118157348944806
+        },
+        "multiple_objects/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.0,
+          "observed_subset_mean": 0.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.0,
+          "dimension": "multiple_objects",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 9.38413813302759
+        },
+        "color/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "official_upstream",
+          "official_aggregate": 1.0,
+          "dimension": "color",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 9.513129528029822
+        },
+        "motion_smoothness/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9331857362492523,
+          "observed_subset_mean": 0.9331857362492523,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9331857362492523,
+          "dimension": "motion_smoothness",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 4.4569674510275945
+        },
+        "temporal_flickering/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9442926481658337,
+          "observed_subset_mean": 0.9442926481658337,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9442926481658337,
+          "dimension": "temporal_flickering",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 3.3548205440165475
+        },
+        "aesthetic_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6092233657836914,
+          "observed_subset_mean": 0.6092233657836914,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6092233657836914,
+          "dimension": "aesthetic_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 9.755435960949399
+        },
+        "imaging_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6053875541687012,
+          "observed_subset_mean": 60.53875541687012,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6053875541687012,
+          "dimension": "imaging_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 5.985460857977159
+        },
+        "temporal_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.2592332363128662,
+          "observed_subset_mean": 0.2592332363128662,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.2592332363128662,
+          "dimension": "temporal_style",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 8.373729274026118
+        },
+        "overall_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.3363248407840729,
+          "observed_subset_mean": 0.3363248407840729,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.3363248407840729,
+          "dimension": "overall_consistency",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 8.337100074044429
+        },
+        "appearance_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.30738281249999994,
+          "observed_subset_mean": 0.3073828125,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.30738281249999994,
+          "dimension": "appearance_style",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 6.823738659033552
+        }
+      },
+      "complete": true,
+      "tasks": 16,
+      "cached_tasks": 0,
+      "input_records": 16,
+      "unique_media_sha256": 11,
+      "media": [
+        {
+          "id": "scene:official",
+          "sha256": "562672847853e838deb96829a74d18d51409c12213e09691e29d208967379493",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/scene/official/alley-0.mp4"
+        },
+        {
+          "id": "human_action:official",
+          "sha256": "3d7f85b1b70699575bcc03df10322ebc9db418dbac0afe8c93bb6710900a2cbe",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/human_action/official/A person is air drumming-0.mp4"
+        },
+        {
+          "id": "spatial_relationship:official",
+          "sha256": "acd764c8bec38a2d69d07458e30fb3889331d8f31b02972dc817f39b4465a8be",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/spatial_relationship/official/a banana on the bottom of an apple, front view-0.mp4"
+        },
+        {
+          "id": "multiple_objects:official",
+          "sha256": "d775f704c0665c5c6eb12a737c5551fe93f355850acbc4e3370575780bb31538",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/multiple_objects/official/a backpack and an umbrella-0.mp4"
+        },
+        {
+          "id": "object_class:official",
+          "sha256": "9a653b0ea3e7287e6eb36d0857dff3f3872b2fbe99df868293748dc0f5a09553",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/object_class/official/a backpack-0.mp4"
+        },
+        {
+          "id": "color:official",
+          "sha256": "8318d054cedce8fb8e1eb56291e2a5e917e9583238d51fabe7cd8246dedee0d6",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/color/official/a black bicycle-0.mp4"
+        },
+        {
+          "id": "subject_consistency:official",
+          "sha256": "5b6b0254b1975937428cb6ca6e63feaaaaa5784467e9a85a4c5125c748a7f0d3",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/subject_consistency/official/a bear catching a salmon in its powerful jaws-0.mp4"
+        },
+        {
+          "id": "background_consistency:official",
+          "sha256": "562672847853e838deb96829a74d18d51409c12213e09691e29d208967379493",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/background_consistency/official/alley-0.mp4"
+        },
+        {
+          "id": "dynamic_degree:official",
+          "sha256": "5b6b0254b1975937428cb6ca6e63feaaaaa5784467e9a85a4c5125c748a7f0d3",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/dynamic_degree/official/a bear catching a salmon in its powerful jaws-0.mp4"
+        },
+        {
+          "id": "motion_smoothness:official",
+          "sha256": "5b6b0254b1975937428cb6ca6e63feaaaaa5784467e9a85a4c5125c748a7f0d3",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/motion_smoothness/official/a bear catching a salmon in its powerful jaws-0.mp4"
+        },
+        {
+          "id": "temporal_flickering:official",
+          "sha256": "75631e606f9df7e0d64cf2efbcf63308e377e304af58cd2ffeab177ea27aa48e",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/temporal_flickering/official/A tranquil tableau of a beautiful wrought-iron bench surrounded by blooming flowers-0.mp4"
+        },
+        {
+          "id": "aesthetic_quality:official",
+          "sha256": "3f45951f84d6dc43972abd1119b010be09bca58ec794f42ee70950e2f51407ca",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/aesthetic_quality/official/A 3D model of a 1800s victorian house.-0.mp4"
+        },
+        {
+          "id": "imaging_quality:official",
+          "sha256": "3f45951f84d6dc43972abd1119b010be09bca58ec794f42ee70950e2f51407ca",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/imaging_quality/official/A 3D model of a 1800s victorian house.-0.mp4"
+        },
+        {
+          "id": "temporal_style:official",
+          "sha256": "2abcd296dee0a1d12ef0f0e97a3ba213e9619ad1280c9885303bd51f8855fb3c",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/temporal_style/official/A beautiful coastal beach in spring, waves lapping on sand, featuring a steady and smooth perspective-0.mp4"
+        },
+        {
+          "id": "overall_consistency:official",
+          "sha256": "3f45951f84d6dc43972abd1119b010be09bca58ec794f42ee70950e2f51407ca",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/overall_consistency/official/A 3D model of a 1800s victorian house.-0.mp4"
+        },
+        {
+          "id": "appearance_style:official",
+          "sha256": "e06a3d3d814548065e2f9e28b3d1510423a32662a1ccaf06be9fe761e0920d36",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/appearance_style/official/A beautiful coastal beach in spring, waves lapping on sand by Hokusai, in the style of Ukiyo-0.mp4"
+        }
+      ],
+      "stages": [
+        {
+          "timestamp": "2026-10-08T04:21:42.694444Z",
+          "stage": "computed",
+          "dimension": "scene",
+          "backend": "origin",
+          "message": "12.98s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/bf41bab09dfbbdfd44b09d2ff178928382f373346f958a8b68ea74a3d190aff2/69c130501fbf4720b1ea1477f11680e6/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 12.981548976968043,
+          "environment_seconds": 0.4483086710097268,
+          "worker_seconds": 12.52819855301641
+        },
+        {
+          "timestamp": "2026-10-08T04:21:53.473688Z",
+          "stage": "computed",
+          "dimension": "human_action",
+          "backend": "origin",
+          "message": "10.78s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/7cde5a1f2d968563eb9861132a72fc284e8a76e8b788066089ec9f2b9846a09e/f3cde7f4e2c543d09cf94ac7993ca846/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 10.776670339051634,
+          "environment_seconds": 0.4551401110365987,
+          "worker_seconds": 10.31489031703677
+        },
+        {
+          "timestamp": "2026-10-08T04:22:02.669204Z",
+          "stage": "computed",
+          "dimension": "object_class",
+          "backend": "origin",
+          "message": "9.19s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/20536402b75a5699c33f7d6ee6aec8888571c5e06226d862b0924a8c5d0506f4/a9e41290c5784824b0f4db6cc4206e92/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 9.192577496054582,
+          "environment_seconds": 0.4476815980160609,
+          "worker_seconds": 8.740135073079728
+        },
+        {
+          "timestamp": "2026-10-08T04:22:08.105057Z",
+          "stage": "computed",
+          "dimension": "subject_consistency",
+          "backend": "origin",
+          "message": "5.43s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/1cdc32d520850e1e334c90fa2ead3b01d4fc89dcdfa2b5047d2bf8b088981380/29f808ade42a4b6aaf0c1bd9c467cf88/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 5.433781084022485,
+          "environment_seconds": 0.4385090200230479,
+          "worker_seconds": 4.9889976979466155
+        },
+        {
+          "timestamp": "2026-10-08T04:22:14.353317Z",
+          "stage": "computed",
+          "dimension": "background_consistency",
+          "backend": "origin",
+          "message": "6.25s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/3a83eb06b94464a15c3b6776f08a75637f477103f05df0f6f8b964d5740c8d70/d064c1cadd954866b7cdac4f64d88124/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 6.246126324054785,
+          "environment_seconds": 0.45117810904048383,
+          "worker_seconds": 5.788355830940418
+        },
+        {
+          "timestamp": "2026-10-08T04:22:19.395216Z",
+          "stage": "computed",
+          "dimension": "dynamic_degree",
+          "backend": "origin",
+          "message": "5.04s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/c8b3a56296153e62edf62ae6af8b9f8fd6a695dac18dc6e1000d3d1aba6c341b/765e7762279d4893a1d41d55ee622fab/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 5.039916489040479,
+          "environment_seconds": 0.4634612511144951,
+          "worker_seconds": 4.571485456079245
+        },
+        {
+          "timestamp": "2026-10-08T04:22:28.513379Z",
+          "stage": "computed",
+          "dimension": "spatial_relationship",
+          "backend": "origin",
+          "message": "9.12s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/7422d2b7839c37a95d0ec5be076eb527b503742978009eaa707dd53060310a61/178ad85dadc247acb067654da5eda0ee/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 9.116175103001297,
+          "environment_seconds": 0.4564896710216999,
+          "worker_seconds": 8.653369444073178
+        },
+        {
+          "timestamp": "2026-10-08T04:22:37.899429Z",
+          "stage": "computed",
+          "dimension": "multiple_objects",
+          "backend": "origin",
+          "message": "9.38s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/89f60a13d9e668c82c809f0d86a93af85d135e77254bbef80d1a150fb829dbdb/7641ed9b09004ae4b9072cb339f01213/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 9.382922725984827,
+          "environment_seconds": 0.4565869109937921,
+          "worker_seconds": 8.91996123897843
+        },
+        {
+          "timestamp": "2026-10-08T04:22:47.412507Z",
+          "stage": "computed",
+          "dimension": "color",
+          "backend": "origin",
+          "message": "9.51s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/b2dde6382658007c76c3e06a034bca6dcfb3914e7c790ce67b353327d34221ff/8b86dc9d8a8e4795b44b5ee7f3516872/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 9.511481102905236,
+          "environment_seconds": 0.4514673659577966,
+          "worker_seconds": 9.054269639076665
+        },
+        {
+          "timestamp": "2026-10-08T04:22:51.871016Z",
+          "stage": "computed",
+          "dimension": "motion_smoothness",
+          "backend": "origin",
+          "message": "4.46s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/a467d6587ec24ba5adb07ec3bfa52e66e60cfae7dc3a61d403f64b932abed203/bab08a0e002642a3ab791706756a7980/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 4.45576376398094,
+          "environment_seconds": 0.4558309599524364,
+          "worker_seconds": 3.991466854000464
+        },
+        {
+          "timestamp": "2026-10-08T04:22:55.226579Z",
+          "stage": "computed",
+          "dimension": "temporal_flickering",
+          "backend": "origin",
+          "message": "3.35s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/c733970b3a32c533e9f4c17ef0088a823690d3905fb1cdf8008e551f8fefef59/0f2781e60d654cabaea4a033ead1981c/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 3.3539789160713553,
+          "environment_seconds": 0.4477387440856546,
+          "worker_seconds": 2.899519147002138
+        },
+        {
+          "timestamp": "2026-10-08T04:23:04.981598Z",
+          "stage": "computed",
+          "dimension": "aesthetic_quality",
+          "backend": "origin",
+          "message": "9.75s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/59f43ff60e22f9147ca600a316702ac0f4cf84e9b96369296189554f5ad40d52/dc3e823dd2bb469ca3ed857044035954/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 9.75370263401419,
+          "environment_seconds": 0.434048464987427,
+          "worker_seconds": 9.314940490061417
+        },
+        {
+          "timestamp": "2026-10-08T04:23:10.968301Z",
+          "stage": "computed",
+          "dimension": "imaging_quality",
+          "backend": "origin",
+          "message": "5.98s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/a57ddb7e80d4e2d4a4df3faaa38aaa01747edacba1c8201ea69c9775215c1de7/0a18a1593149437c8b285b74a3dab82a/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 5.984595832997002,
+          "environment_seconds": 0.44949723000172526,
+          "worker_seconds": 5.531045289011672
+        },
+        {
+          "timestamp": "2026-10-08T04:23:19.342231Z",
+          "stage": "computed",
+          "dimension": "temporal_style",
+          "backend": "origin",
+          "message": "8.37s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/aac288336e010efce222159a78132e31a64d64841d28dc1c684c3c53b6142dc8/010f608c878148a992a478d657f87a0d/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 8.37253925006371,
+          "environment_seconds": 0.45288798108231276,
+          "worker_seconds": 7.913636951008812
+        },
+        {
+          "timestamp": "2026-10-08T04:23:27.678931Z",
+          "stage": "computed",
+          "dimension": "overall_consistency",
+          "backend": "origin",
+          "message": "8.34s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/9ddf8448155dbd12a62c8fea397f7ebb7cf792615e732b4f60175ef352cc58b3/6933bb3639184c78a91fff7ab5d28cc9/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 8.335124283912592,
+          "environment_seconds": 0.450012814020738,
+          "worker_seconds": 7.878865278093144
+        },
+        {
+          "timestamp": "2026-10-08T04:23:34.503443Z",
+          "stage": "computed",
+          "dimension": "appearance_style",
+          "backend": "origin",
+          "message": "6.82s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/2d67c28adb2e498365898433478194973d05c60d76e75293e8defe8b3e5b186e/a558d9e7589f4bafa1e0d76cfec50cef/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 6.821837631054223,
+          "environment_seconds": 0.447925389977172,
+          "worker_seconds": 6.369428100995719
+        }
+      ]
+    },
+    "perf-repair-cache-cold": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-repair-cache-cold",
+      "code_sha": "13ce34ca53890a7b74b330ea3f433747408fad6e",
+      "git_dirty": false,
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_sha256": "36e09f9e46bbfb3b2aed919701afe7b0b82921e9e164fb76a20b245c457ecacb",
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "elapsed_seconds": 176.5169766700128,
+      "timing_seconds": {
+        "inputs": 0.05691652710083872,
+        "asset_verification": 6.168476643972099,
+        "source_verification": 0.22195431403815746,
+        "gpu_probes": 1.8161501860013232,
+        "total_before_dispatch": 8.266095836064778
+      },
+      "dimensions": {
+        "scene/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.8125,
+          "observed_subset_mean": 0.8125,
+          "aggregation": "equal_video",
+          "dimension": "scene",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 25.163033514050767
+        },
+        "human_action/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "equal_video",
+          "dimension": "human_action",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 20.917213427950628
+        },
+        "object_class/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "equal_video",
+          "dimension": "object_class",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 25.33261837705504
+        },
+        "subject_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9678837954998016,
+          "observed_subset_mean": 0.9678837954998016,
+          "aggregation": "equal_video",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 9.095547999953851
+        },
+        "background_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9647716175426136,
+          "observed_subset_mean": 0.9647716175426136,
+          "aggregation": "equal_video",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.181564782978967
+        },
+        "dynamic_degree/repair": {
+          "input_count": 3,
+          "succeeded": 3,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6645206188278044,
+          "observed_subset_mean": 0.6645206188278044,
+          "aggregation": "equal_video",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 8.74498118890915
+        },
+        "spatial_relationship/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.25,
+          "observed_subset_mean": 0.25,
+          "aggregation": "equal_video",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 21.894630357972346
+        },
+        "multiple_objects/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.40625,
+          "observed_subset_mean": 0.40625,
+          "aggregation": "equal_video",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 21.335279745049775
+        },
+        "color/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.5,
+          "observed_subset_mean": 0.5,
+          "aggregation": "equal_video",
+          "dimension": "color",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 25.558472099946812
+        }
+      },
+      "complete": true,
+      "tasks": 9,
+      "cached_tasks": 0,
+      "input_records": 19,
+      "unique_media_sha256": 16,
+      "media": [
+        {
+          "id": "scene:base",
+          "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/base/carrousel-0.gif"
+        },
+        {
+          "id": "scene:cf",
+          "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/cf/carrousel-0.gif"
+        },
+        {
+          "id": "human_action:base",
+          "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/base/A person is roller skating-0.gif"
+        },
+        {
+          "id": "human_action:cf",
+          "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/cf/A person is roller skating-0.gif"
+        },
+        {
+          "id": "spatial_relationship:base",
+          "sha256": "4ab6cb1d502084d95aa2a0d75ffebd729549f197f6a5f7b481a42fa3662cc07a",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/base/a parking meter on the right of a bench, front view-0.gif"
+        },
+        {
+          "id": "spatial_relationship:cf",
+          "sha256": "255b6bab921e7a1e84e177aa5c75c77caa8039851afe6935acdd1dec70426379",
+          "duration_seconds": 3.3,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/cf/6088d07a1fe33bc0bdbbb773-hflip.mp4"
+        },
+        {
+          "id": "multiple_objects:base",
+          "sha256": "cfd541b1dae8f63e2a0b7402af437ad843bbb68c8632ef2bc7ead7f72ef6ae33",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/base/a cat and a dog-0.gif"
+        },
+        {
+          "id": "multiple_objects:cf",
+          "sha256": "ad30e583f6554a195b41ab02d9a282728eb4efd1ae21bbe8f25158a166500f39",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/cf/bc333ac5d30cc8c41cc40a3f.mp4"
+        },
+        {
+          "id": "object_class:base",
+          "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/base/video_00000.mp4"
+        },
+        {
+          "id": "object_class:cf",
+          "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/cf/video_00001.mp4"
+        },
+        {
+          "id": "color:base",
+          "sha256": "0f12bee1f0378ad3161ab34b8fcc54ea7ce40fbab6287e69e34b35a51af40ec5",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/base/video_00006.mp4"
+        },
+        {
+          "id": "color:cf",
+          "sha256": "40f78c5bcf9d02dd651591770033bc978c3bd9928a8f2dd7cb23615fe9129683",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/cf/video_00010.mp4"
+        },
+        {
+          "id": "subject_consistency:base",
+          "sha256": "6ea145d195999e9267bd3ae299a7deddbb9bb818279e6be6f0dca858becb4558",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/base/subject_consistency-base.mp4"
+        },
+        {
+          "id": "subject_consistency:cf",
+          "sha256": "8b5a36f945204fca63d4dd3cfa8dfdccb00388ebac1345fa92112af6bd61bccb",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/cf/subject_consistency-cf.mp4"
+        },
+        {
+          "id": "background_consistency:base",
+          "sha256": "81b78a09d0e69eb5e130b93d743a57fb3691498578c1b0fe93a8e3fdadf8d4e6",
+          "duration_seconds": 4.125,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/base/background_consistency-base.mp4"
+        },
+        {
+          "id": "background_consistency:cf",
+          "sha256": "167f9b69f696eef994bc64978e4de732aad54c52c3bf734c9b018aa41fbd2243",
+          "duration_seconds": 4.125,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/cf/background_consistency-cf.mp4"
+        },
+        {
+          "id": "dynamic_degree:base",
+          "sha256": "d3b5b08406b3620fff62b6d2713a1dfd858ded796f28ad6f939ae512a31eb1f2",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/dynamic_degree/base/a car accelerating to gain speed-1.mp4"
+        },
+        {
+          "id": "dynamic_degree:cf-0",
+          "sha256": "ca4a263b227ac017e3874e0e9f2e4d4d580ac2011a23189cd5654549616af88e",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-0.mp4"
+        },
+        {
+          "id": "dynamic_degree:cf-1",
+          "sha256": "3af8de88e387a1a9be469bcf7a8b76d8cc92b9bec5c0e4fc2dde268fec3a0a8f",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-1.mp4"
+        }
+      ],
+      "stages": [
+        {
+          "timestamp": "2026-10-08T04:23:56.287923Z",
+          "stage": "computed",
+          "dimension": "scene",
+          "backend": "evidence",
+          "message": "13.25s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/e0e5ddaae539954ae5735304dd4bde01e337413620a6a1d7a08440059c65502b/5279f287265443dd85c2807f73ec806e/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 13.25084130500909,
+          "environment_seconds": 0.39898319100029767,
+          "worker_seconds": 12.846516054938547
+        },
+        {
+          "timestamp": "2026-10-08T04:24:08.197657Z",
+          "stage": "computed",
+          "dimension": "scene",
+          "backend": "repair",
+          "message": "11.91s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/963bd0d5dcd1caae06ea5c7aaa2e3551fb3fde96a7fd5a5850c4737a641f8af2/8af84acfa92e4a9d8e425eb278d3b4e4/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 11.908448930014856,
+          "environment_seconds": 0.26931180397514254,
+          "worker_seconds": 11.632886781007983
+        },
+        {
+          "timestamp": "2026-10-08T04:24:17.638905Z",
+          "stage": "computed",
+          "dimension": "human_action",
+          "backend": "evidence",
+          "message": "9.44s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/008c415d13c876c772400b4469efb0389143020813afa9362900f3bd9192fbdc/240febc58bd94e439a6abb1c6651b806/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 9.438099927036092,
+          "environment_seconds": 0.40267517196480185,
+          "worker_seconds": 9.029002567986026
+        },
+        {
+          "timestamp": "2026-10-08T04:24:29.116246Z",
+          "stage": "computed",
+          "dimension": "human_action",
+          "backend": "repair",
+          "message": "11.48s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/3ecce034cc183cd49b79bbff2a7e102132517111e32c432300aedc33ae0bf5aa/36627dcb13dd4badb1f13face1e66d34/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 11.476688805036247,
+          "environment_seconds": 0.26691877096891403,
+          "worker_seconds": 11.203529500053264
+        },
+        {
+          "timestamp": "2026-10-08T04:24:43.110501Z",
+          "stage": "computed",
+          "dimension": "object_class",
+          "backend": "compile",
+          "message": "13.99s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/c565eea6564878879fa40a7152470d9ef313ffff948725adeeaf1ccdc3276235/15196937c9d94457a031f2cf2048b3b1/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 13.99159977096133,
+          "environment_seconds": 0.26807014795485884,
+          "worker_seconds": 13.71794151503127
+        },
+        {
+          "timestamp": "2026-10-08T04:24:54.449860Z",
+          "stage": "computed",
+          "dimension": "object_class",
+          "backend": "repair",
+          "message": "11.34s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/c7b63ebea795d7996bb8b4cccd6f336f002f0b3d61d641b5e2b6add4f946ad84/487918ee634048cba7924e8d9a5e837b/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 11.338327600969933,
+          "environment_seconds": 0.3974808979546651,
+          "worker_seconds": 10.934888800024055
+        },
+        {
+          "timestamp": "2026-10-08T04:25:03.544949Z",
+          "stage": "computed",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "message": "9.09s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/b02dbec22a192a2b5cddae3cc68146e585c43d2d0664b44c8638d00648986b0b/5f56f3d3117442dea042ad21b9eec84c/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 9.093050624011084,
+          "environment_seconds": 0.4034953409573063,
+          "worker_seconds": 8.684415146009997
+        },
+        {
+          "timestamp": "2026-10-08T04:25:13.727813Z",
+          "stage": "computed",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "message": "10.18s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/78fc04d49b122a3d9dda34527443db5246f4887dbd95eef43ba436c9ce8d3686/4594be477c0a47eea43f881a4b4a5034/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 10.17978604696691,
+          "environment_seconds": 0.3969969330355525,
+          "worker_seconds": 9.777798454044387
+        },
+        {
+          "timestamp": "2026-10-08T04:25:22.472879Z",
+          "stage": "computed",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "message": "8.74s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/d4ba5db2a86e6869222e58556cb5ba7f1b711262a8c1ae266cd145b3fe7aef1f/768add17589e4e5287dc074c031e114e/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 8.742878183955327,
+          "environment_seconds": 0.3990458180196583,
+          "worker_seconds": 8.339058757992461
+        },
+        {
+          "timestamp": "2026-10-08T04:25:33.636969Z",
+          "stage": "computed",
+          "dimension": "spatial_relationship",
+          "backend": "evidence",
+          "message": "11.16s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/c1444f2f380ca67967bed4e53441b786d7ce8f7f9ca11f148ce8b5c64e9f6142/7d28b6259ee646a8af8bff8a24d3a269/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 11.160976077080704,
+          "environment_seconds": 0.3962500370107591,
+          "worker_seconds": 10.759168163058348
+        },
+        {
+          "timestamp": "2026-10-08T04:25:44.368708Z",
+          "stage": "computed",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "message": "10.73s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/d2ee836801ac19c87967fa8f0a0f87be0eef83ad0d9f6f7a132440fa0221b352/b3e39376e231431187f75ebf73a67b88/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 10.730586635996588,
+          "environment_seconds": 0.2733333809301257,
+          "worker_seconds": 10.452208778006025
+        },
+        {
+          "timestamp": "2026-10-08T04:25:54.723758Z",
+          "stage": "computed",
+          "dimension": "multiple_objects",
+          "backend": "evidence",
+          "message": "10.35s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/6b7e50c2a39609f6eff152a159695757cf7edafbdf331ec1ca435067f381a4ad/415c9d6ec0c249128a884abe3a23e527/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 10.352772548911162,
+          "environment_seconds": 0.3990134699270129,
+          "worker_seconds": 9.94878606707789
+        },
+        {
+          "timestamp": "2026-10-08T04:26:05.703426Z",
+          "stage": "computed",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "message": "10.98s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/810a1505ff49cb52d4a1fd025880f9d3b9479162a9df09001d6926f8d2843b62/81b25509bb6b4e6e9b9f038d3f08ee27/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 10.979041507933289,
+          "environment_seconds": 0.27486339292954654,
+          "worker_seconds": 10.697952562943101
+        },
+        {
+          "timestamp": "2026-10-08T04:26:19.440991Z",
+          "stage": "computed",
+          "dimension": "color",
+          "backend": "compile",
+          "message": "13.73s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/a0962283f113ee6235e23c838eae983b69b833260582b0c7ecd54fdca6c0eb6c/38708f01c19b4620b8c5c5f9f8124a9d/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 13.73408876301255,
+          "environment_seconds": 0.2699582860805094,
+          "worker_seconds": 13.45917217002716
+        },
+        {
+          "timestamp": "2026-10-08T04:26:31.263875Z",
+          "stage": "computed",
+          "dimension": "color",
+          "backend": "repair",
+          "message": "11.82s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/9a5148843ecd5f701752f31f4a58e635fc7adda1221b6101095e65654534964c/8ad5b42d7034459383526b0a0d61f741/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 11.821738778962754,
+          "environment_seconds": 0.39938453503418714,
+          "worker_seconds": 11.415080026956275
+        }
+      ]
+    },
+    "perf-repair-cache-warm": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-repair-cache-warm",
+      "code_sha": "13ce34ca53890a7b74b330ea3f433747408fad6e",
+      "git_dirty": false,
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_sha256": "36e09f9e46bbfb3b2aed919701afe7b0b82921e9e164fb76a20b245c457ecacb",
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "elapsed_seconds": 13.218517835019156,
+      "timing_seconds": {
+        "inputs": 0.05011308495886624,
+        "asset_verification": 5.945776895969175,
+        "source_verification": 0.20074624207336456,
+        "gpu_probes": 1.7943877240177244,
+        "total_before_dispatch": 7.993403689004481
+      },
+      "dimensions": {
+        "scene/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.8125,
+          "observed_subset_mean": 0.8125,
+          "aggregation": "equal_video",
+          "dimension": "scene",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.684072189964354
+        },
+        "human_action/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "equal_video",
+          "dimension": "human_action",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.6742030050372705
+        },
+        "object_class/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 1.0,
+          "observed_subset_mean": 1.0,
+          "aggregation": "equal_video",
+          "dimension": "object_class",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.669654633034952
+        },
+        "subject_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9678837954998016,
+          "observed_subset_mean": 0.9678837954998016,
+          "aggregation": "equal_video",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.3915925270412117
+        },
+        "background_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9647716175426136,
+          "observed_subset_mean": 0.9647716175426136,
+          "aggregation": "equal_video",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.39453710289672017
+        },
+        "dynamic_degree/repair": {
+          "input_count": 3,
+          "succeeded": 3,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6645206188278044,
+          "observed_subset_mean": 0.6645206188278044,
+          "aggregation": "equal_video",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.396415445022285
+        },
+        "spatial_relationship/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.25,
+          "observed_subset_mean": 0.25,
+          "aggregation": "equal_video",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.6599078150466084
+        },
+        "multiple_objects/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.40625,
+          "observed_subset_mean": 0.40625,
+          "aggregation": "equal_video",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.6632845920976251
+        },
+        "color/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.5,
+          "observed_subset_mean": 0.5,
+          "aggregation": "equal_video",
+          "dimension": "color",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.6702999320114031
+        }
+      },
+      "complete": true,
+      "tasks": 9,
+      "cached_tasks": 9,
+      "input_records": 19,
+      "unique_media_sha256": 16,
+      "media": [
+        {
+          "id": "scene:base",
+          "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/base/carrousel-0.gif"
+        },
+        {
+          "id": "scene:cf",
+          "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/cf/carrousel-0.gif"
+        },
+        {
+          "id": "human_action:base",
+          "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/base/A person is roller skating-0.gif"
+        },
+        {
+          "id": "human_action:cf",
+          "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/cf/A person is roller skating-0.gif"
+        },
+        {
+          "id": "spatial_relationship:base",
+          "sha256": "4ab6cb1d502084d95aa2a0d75ffebd729549f197f6a5f7b481a42fa3662cc07a",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/base/a parking meter on the right of a bench, front view-0.gif"
+        },
+        {
+          "id": "spatial_relationship:cf",
+          "sha256": "255b6bab921e7a1e84e177aa5c75c77caa8039851afe6935acdd1dec70426379",
+          "duration_seconds": 3.3,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/cf/6088d07a1fe33bc0bdbbb773-hflip.mp4"
+        },
+        {
+          "id": "multiple_objects:base",
+          "sha256": "cfd541b1dae8f63e2a0b7402af437ad843bbb68c8632ef2bc7ead7f72ef6ae33",
+          "duration_seconds": null,
+          "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/base/a cat and a dog-0.gif"
+        },
+        {
+          "id": "multiple_objects:cf",
+          "sha256": "ad30e583f6554a195b41ab02d9a282728eb4efd1ae21bbe8f25158a166500f39",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/cf/bc333ac5d30cc8c41cc40a3f.mp4"
+        },
+        {
+          "id": "object_class:base",
+          "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/base/video_00000.mp4"
+        },
+        {
+          "id": "object_class:cf",
+          "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/cf/video_00001.mp4"
+        },
+        {
+          "id": "color:base",
+          "sha256": "0f12bee1f0378ad3161ab34b8fcc54ea7ce40fbab6287e69e34b35a51af40ec5",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/base/video_00006.mp4"
+        },
+        {
+          "id": "color:cf",
+          "sha256": "40f78c5bcf9d02dd651591770033bc978c3bd9928a8f2dd7cb23615fe9129683",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/cf/video_00010.mp4"
+        },
+        {
+          "id": "subject_consistency:base",
+          "sha256": "6ea145d195999e9267bd3ae299a7deddbb9bb818279e6be6f0dca858becb4558",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/base/subject_consistency-base.mp4"
+        },
+        {
+          "id": "subject_consistency:cf",
+          "sha256": "8b5a36f945204fca63d4dd3cfa8dfdccb00388ebac1345fa92112af6bd61bccb",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/cf/subject_consistency-cf.mp4"
+        },
+        {
+          "id": "background_consistency:base",
+          "sha256": "81b78a09d0e69eb5e130b93d743a57fb3691498578c1b0fe93a8e3fdadf8d4e6",
+          "duration_seconds": 4.125,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/base/background_consistency-base.mp4"
+        },
+        {
+          "id": "background_consistency:cf",
+          "sha256": "167f9b69f696eef994bc64978e4de732aad54c52c3bf734c9b018aa41fbd2243",
+          "duration_seconds": 4.125,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/cf/background_consistency-cf.mp4"
+        },
+        {
+          "id": "dynamic_degree:base",
+          "sha256": "d3b5b08406b3620fff62b6d2713a1dfd858ded796f28ad6f939ae512a31eb1f2",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/dynamic_degree/base/a car accelerating to gain speed-1.mp4"
+        },
+        {
+          "id": "dynamic_degree:cf-0",
+          "sha256": "ca4a263b227ac017e3874e0e9f2e4d4d580ac2011a23189cd5654549616af88e",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-0.mp4"
+        },
+        {
+          "id": "dynamic_degree:cf-1",
+          "sha256": "3af8de88e387a1a9be469bcf7a8b76d8cc92b9bec5c0e4fc2dde268fec3a0a8f",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-1.mp4"
+        }
+      ],
+      "stages": [
+        {
+          "timestamp": "2026-10-08T04:26:39.830303Z",
+          "stage": "cached",
+          "dimension": "scene",
+          "backend": "evidence",
+          "message": "0.41s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/e0e5ddaae539954ae5735304dd4bde01e337413620a6a1d7a08440059c65502b/5279f287265443dd85c2807f73ec806e/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.40624965995084494,
+          "environment_seconds": 0.40233644598629326,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:40.107523Z",
+          "stage": "cached",
+          "dimension": "scene",
+          "backend": "repair",
+          "message": "0.28s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/963bd0d5dcd1caae06ea5c7aaa2e3551fb3fde96a7fd5a5850c4737a641f8af2/8af84acfa92e4a9d8e425eb278d3b4e4/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.2769084930187091,
+          "environment_seconds": 0.272351187071763,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:40.514341Z",
+          "stage": "cached",
+          "dimension": "human_action",
+          "backend": "evidence",
+          "message": "0.41s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/008c415d13c876c772400b4469efb0389143020813afa9362900f3bd9192fbdc/240febc58bd94e439a6abb1c6651b806/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.405879940954037,
+          "environment_seconds": 0.40121173800434917,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:40.782045Z",
+          "stage": "cached",
+          "dimension": "human_action",
+          "backend": "repair",
+          "message": "0.27s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/3ecce034cc183cd49b79bbff2a7e102132517111e32c432300aedc33ae0bf5aa/36627dcb13dd4badb1f13face1e66d34/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.2674512800294906,
+          "environment_seconds": 0.26306028407998383,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:41.052755Z",
+          "stage": "cached",
+          "dimension": "object_class",
+          "backend": "compile",
+          "message": "0.27s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/c565eea6564878879fa40a7152470d9ef313ffff948725adeeaf1ccdc3276235/15196937c9d94457a031f2cf2048b3b1/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.2697575769852847,
+          "environment_seconds": 0.26603686495218426,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:41.451633Z",
+          "stage": "cached",
+          "dimension": "object_class",
+          "backend": "repair",
+          "message": "0.40s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/c7b63ebea795d7996bb8b4cccd6f336f002f0b3d61d641b5e2b6add4f946ad84/487918ee634048cba7924e8d9a5e837b/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.39863157004583627,
+          "environment_seconds": 0.39534617809113115,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:41.842628Z",
+          "stage": "cached",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "message": "0.39s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/b02dbec22a192a2b5cddae3cc68146e585c43d2d0664b44c8638d00648986b0b/5f56f3d3117442dea042ad21b9eec84c/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.3896236320724711,
+          "environment_seconds": 0.3861138590145856,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:42.238353Z",
+          "stage": "cached",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "message": "0.39s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/78fc04d49b122a3d9dda34527443db5246f4887dbd95eef43ba436c9ce8d3686/4594be477c0a47eea43f881a4b4a5034/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.3933362920070067,
+          "environment_seconds": 0.38887989800423384,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:42.635839Z",
+          "stage": "cached",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "message": "0.40s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/d4ba5db2a86e6869222e58556cb5ba7f1b711262a8c1ae266cd145b3fe7aef1f/768add17589e4e5287dc074c031e114e/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.3959132779855281,
+          "environment_seconds": 0.3917002188973129,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:43.030561Z",
+          "stage": "cached",
+          "dimension": "spatial_relationship",
+          "backend": "evidence",
+          "message": "0.39s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/c1444f2f380ca67967bed4e53441b786d7ce8f7f9ca11f148ce8b5c64e9f6142/7d28b6259ee646a8af8bff8a24d3a269/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.39387531799729913,
+          "environment_seconds": 0.39065903809387237,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:43.296014Z",
+          "stage": "cached",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "message": "0.27s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/d2ee836801ac19c87967fa8f0a0f87be0eef83ad0d9f6f7a132440fa0221b352/b3e39376e231431187f75ebf73a67b88/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.2651948219863698,
+          "environment_seconds": 0.2616078230785206,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:43.687939Z",
+          "stage": "cached",
+          "dimension": "multiple_objects",
+          "backend": "evidence",
+          "message": "0.39s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/6b7e50c2a39609f6eff152a159695757cf7edafbdf331ec1ca435067f381a4ad/415c9d6ec0c249128a884abe3a23e527/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.39099496603012085,
+          "environment_seconds": 0.3876339449780062,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:43.959560Z",
+          "stage": "cached",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "message": "0.27s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/810a1505ff49cb52d4a1fd025880f9d3b9479162a9df09001d6926f8d2843b62/81b25509bb6b4e6e9b9f038d3f08ee27/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.27136923104990274,
+          "environment_seconds": 0.26675829594023526,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:44.225206Z",
+          "stage": "cached",
+          "dimension": "color",
+          "backend": "compile",
+          "message": "0.26s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/a0962283f113ee6235e23c838eae983b69b833260582b0c7ecd54fdca6c0eb6c/38708f01c19b4620b8c5c5f9f8124a9d/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.2646243899362162,
+          "environment_seconds": 0.26044882799033076,
+          "worker_seconds": 0.0
+        },
+        {
+          "timestamp": "2026-10-08T04:26:44.629897Z",
+          "stage": "cached",
+          "dimension": "color",
+          "backend": "repair",
+          "message": "0.40s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/9a5148843ecd5f701752f31f4a58e635fc7adda1221b6101095e65654534964c/8ad5b42d7034459383526b0a0d61f741/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.404445769963786,
+          "environment_seconds": 0.4002297290135175,
+          "worker_seconds": 0.0
+        }
+      ]
+    },
+    "perf-cli-aesthetic_quality": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-cli-aesthetic_quality",
+      "code_sha": "13ce34ca53890a7b74b330ea3f433747408fad6e",
+      "git_dirty": false,
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_sha256": "36e09f9e46bbfb3b2aed919701afe7b0b82921e9e164fb76a20b245c457ecacb",
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "elapsed_seconds": 3.3523625429952517,
+      "timing_seconds": {
+        "inputs": 0.006475355941802263,
+        "asset_verification": 0.8171612030128017,
+        "source_verification": 0.20520934206433594,
+        "gpu_probes": 1.8465209680143744,
+        "total_before_dispatch": 2.8770687009673566
+      },
+      "dimensions": {
+        "aesthetic_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6092233657836914,
+          "observed_subset_mean": 0.6092233657836914,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6092233657836914,
+          "dimension": "aesthetic_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.4532152650645003
+        }
+      },
+      "complete": true,
+      "tasks": 1,
+      "cached_tasks": 1,
+      "input_records": 1,
+      "unique_media_sha256": 1,
+      "media": [
+        {
+          "id": "aesthetic_quality:official",
+          "sha256": "3f45951f84d6dc43972abd1119b010be09bca58ec794f42ee70950e2f51407ca",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/aesthetic_quality/official/A 3D model of a 1800s victorian house.-0.mp4"
+        }
+      ],
+      "stages": [
+        {
+          "timestamp": "2026-10-08T04:27:23.850652Z",
+          "stage": "cached",
+          "dimension": "aesthetic_quality",
+          "backend": "origin",
+          "message": "0.45s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/59f43ff60e22f9147ca600a316702ac0f4cf84e9b96369296189554f5ad40d52/dc3e823dd2bb469ca3ed857044035954/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.4526417209999636,
+          "environment_seconds": 0.4481836640043184,
+          "worker_seconds": 0.0
+        }
+      ]
+    },
+    "perf-cli-imaging_quality": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-cli-imaging_quality",
+      "code_sha": "13ce34ca53890a7b74b330ea3f433747408fad6e",
+      "git_dirty": false,
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_sha256": "36e09f9e46bbfb3b2aed919701afe7b0b82921e9e164fb76a20b245c457ecacb",
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "elapsed_seconds": 2.658469077083282,
+      "timing_seconds": {
+        "inputs": 0.007335892063565552,
+        "asset_verification": 0.11358274996746331,
+        "source_verification": 0.22351105604320765,
+        "gpu_probes": 1.8316482909722254,
+        "total_before_dispatch": 2.1778452950529754
+      },
+      "dimensions": {
+        "imaging_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6053875541687012,
+          "observed_subset_mean": 60.53875541687012,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6053875541687012,
+          "dimension": "imaging_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.4612538809888065
+        }
+      },
+      "complete": true,
+      "tasks": 1,
+      "cached_tasks": 1,
+      "input_records": 1,
+      "unique_media_sha256": 1,
+      "media": [
+        {
+          "id": "imaging_quality:official",
+          "sha256": "3f45951f84d6dc43972abd1119b010be09bca58ec794f42ee70950e2f51407ca",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/imaging_quality/official/A 3D model of a 1800s victorian house.-0.mp4"
+        }
+      ],
+      "stages": [
+        {
+          "timestamp": "2026-10-08T04:27:26.676487Z",
+          "stage": "cached",
+          "dimension": "imaging_quality",
+          "backend": "origin",
+          "message": "0.46s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/a57ddb7e80d4e2d4a4df3faaa38aaa01747edacba1c8201ea69c9775215c1de7/0a18a1593149437c8b285b74a3dab82a/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.4607090059434995,
+          "environment_seconds": 0.45804705494083464,
+          "worker_seconds": 0.0
+        }
+      ]
+    },
+    "perf-cli-temporal_flickering": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-cli-temporal_flickering",
+      "code_sha": "13ce34ca53890a7b74b330ea3f433747408fad6e",
+      "git_dirty": false,
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_sha256": "36e09f9e46bbfb3b2aed919701afe7b0b82921e9e164fb76a20b245c457ecacb",
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "elapsed_seconds": 2.5383946469519287,
+      "timing_seconds": {
+        "inputs": 0.007082771975547075,
+        "asset_verification": 0.017790651065297425,
+        "source_verification": 0.21093117201235145,
+        "gpu_probes": 1.8484968240372837,
+        "total_before_dispatch": 2.085445323958993
+      },
+      "dimensions": {
+        "temporal_flickering/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9442926481658337,
+          "observed_subset_mean": 0.9442926481658337,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9442926481658337,
+          "dimension": "temporal_flickering",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.43526926601771265
+        }
+      },
+      "complete": true,
+      "tasks": 1,
+      "cached_tasks": 1,
+      "input_records": 1,
+      "unique_media_sha256": 1,
+      "media": [
+        {
+          "id": "temporal_flickering:official",
+          "sha256": "75631e606f9df7e0d64cf2efbcf63308e377e304af58cd2ffeab177ea27aa48e",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/temporal_flickering/official/A tranquil tableau of a beautiful wrought-iron bench surrounded by blooming flowers-0.mp4"
+        }
+      ],
+      "stages": [
+        {
+          "timestamp": "2026-10-08T04:27:29.369988Z",
+          "stage": "cached",
+          "dimension": "temporal_flickering",
+          "backend": "origin",
+          "message": "0.43s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/c733970b3a32c533e9f4c17ef0088a823690d3905fb1cdf8008e551f8fefef59/0f2781e60d654cabaea4a033ead1981c/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.4347039540298283,
+          "environment_seconds": 0.4312250600196421,
+          "worker_seconds": 0.0
+        }
+      ]
+    },
+    "perf-cli-appearance_style": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/perf-cli-appearance_style",
+      "code_sha": "13ce34ca53890a7b74b330ea3f433747408fad6e",
+      "git_dirty": false,
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "source_sha256": "36e09f9e46bbfb3b2aed919701afe7b0b82921e9e164fb76a20b245c457ecacb",
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "elapsed_seconds": 2.8128246050328016,
+      "timing_seconds": {
+        "inputs": 0.00713751302100718,
+        "asset_verification": 0.28967169602401555,
+        "source_verification": 0.22279734699986875,
+        "gpu_probes": 1.8331540880026296,
+        "total_before_dispatch": 2.354569904971868
+      },
+      "dimensions": {
+        "appearance_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.30738281249999994,
+          "observed_subset_mean": 0.3073828125,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.30738281249999994,
+          "dimension": "appearance_style",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": true,
+          "elapsed_seconds": 0.43487690098118037
+        }
+      },
+      "complete": true,
+      "tasks": 1,
+      "cached_tasks": 1,
+      "input_records": 1,
+      "unique_media_sha256": 1,
+      "media": [
+        {
+          "id": "appearance_style:official",
+          "sha256": "e06a3d3d814548065e2f9e28b3d1510423a32662a1ccaf06be9fe761e0920d36",
+          "duration_seconds": 2.0,
+          "duration_source": "ffprobe format.duration",
+          "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/appearance_style/official/A beautiful coastal beach in spring, waves lapping on sand by Hokusai, in the style of Ukiyo-0.mp4"
+        }
+      ],
+      "stages": [
+        {
+          "timestamp": "2026-10-08T04:27:32.344392Z",
+          "stage": "cached",
+          "dimension": "appearance_style",
+          "backend": "origin",
+          "message": "0.43s \u00b7 /root/wenbiao_zhao/vbench-repair-eval-20261008/cache/artifacts-v1/2d67c28adb2e498365898433478194973d05c60d76e75293e8defe8b3e5b186e/a558d9e7589f4bafa1e0d76cfec50cef/worker.log",
+          "gpu": "3",
+          "elapsed_seconds": 0.43426974199246615,
+          "environment_seconds": 0.42954722000285983,
+          "worker_seconds": 0.0
+        }
+      ]
+    }
+  },
+  "score_comparisons": [
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "scene",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "scene",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "human_action",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "human_action",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "object_class",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "object_class",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "subject_consistency",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "subject_consistency",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "background_consistency",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "background_consistency",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "dynamic_degree",
+      "rows": 3,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "dynamic_degree",
+      "rows": 3,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "spatial_relationship",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "spatial_relationship",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "multiple_objects",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "multiple_objects",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "color",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "color",
+      "rows": 2,
+      "max_absolute_error": 0.0
+    }
+  ],
+  "diagnostic_comparisons": [
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "scene",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "scene",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "human_action",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "human_action",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "object_class",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "object_class",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "subject_consistency",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "subject_consistency",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "background_consistency",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "background_consistency",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "dynamic_degree",
+      "rows": 3,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "dynamic_degree",
+      "rows": 3,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "spatial_relationship",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "spatial_relationship",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "multiple_objects",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "multiple_objects",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-optimized-cold",
+      "dimension": "color",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    },
+    {
+      "run": "perf-repair-cache-cold",
+      "dimension": "color",
+      "rows": 2,
+      "equal": true,
+      "normalization": "stage/output paths; dereferenced hash-verified JSON; independently validated four new upstream inventory pins"
+    }
+  ],
+  "cache_comparisons": [
+    {
+      "run": "perf-repair-cache-warm",
+      "dimension": "scene",
+      "backend": "repair",
+      "equal": true
+    },
+    {
+      "run": "perf-repair-cache-warm",
+      "dimension": "human_action",
+      "backend": "repair",
+      "equal": true
+    },
+    {
+      "run": "perf-repair-cache-warm",
+      "dimension": "object_class",
+      "backend": "repair",
+      "equal": true
+    },
+    {
+      "run": "perf-repair-cache-warm",
+      "dimension": "subject_consistency",
+      "backend": "repair",
+      "equal": true
+    },
+    {
+      "run": "perf-repair-cache-warm",
+      "dimension": "background_consistency",
+      "backend": "repair",
+      "equal": true
+    },
+    {
+      "run": "perf-repair-cache-warm",
+      "dimension": "dynamic_degree",
+      "backend": "repair",
+      "equal": true
+    },
+    {
+      "run": "perf-repair-cache-warm",
+      "dimension": "spatial_relationship",
+      "backend": "repair",
+      "equal": true
+    },
+    {
+      "run": "perf-repair-cache-warm",
+      "dimension": "multiple_objects",
+      "backend": "repair",
+      "equal": true
+    },
+    {
+      "run": "perf-repair-cache-warm",
+      "dimension": "color",
+      "backend": "repair",
+      "equal": true
+    },
+    {
+      "run": "perf-cli-aesthetic_quality",
+      "dimension": "aesthetic_quality",
+      "backend": "origin",
+      "equal": true
+    },
+    {
+      "run": "perf-cli-imaging_quality",
+      "dimension": "imaging_quality",
+      "backend": "origin",
+      "equal": true
+    },
+    {
+      "run": "perf-cli-temporal_flickering",
+      "dimension": "temporal_flickering",
+      "backend": "origin",
+      "equal": true
+    },
+    {
+      "run": "perf-cli-appearance_style",
+      "dimension": "appearance_style",
+      "backend": "origin",
+      "equal": true
+    }
+  ],
+  "duration_source": "previous acceptance FFprobe/GIF measurements, joined on id and verified media SHA-256",
+  "controlled_pair": {
+    "baseline_seconds": 220.38133651192766,
+    "optimized_seconds": 181.6261978240218,
+    "saved_seconds": 38.755138687905855,
+    "reduction_percent": 17.585490360164105,
+    "speedup": 1.2133785717711045,
+    "baseline_asset_verification_seconds": 22.045613556000003,
+    "profiling": "same python -m cProfile controller wrapper for both; worker subprocesses not profiled",
+    "reuse": false,
+    "gpu": "3",
+    "caches": "existing OS page cache, dependencies and weights; no stage artifact reuse"
+  },
+  "profile_sha256": {
+    "perf-baseline-controller.prof": "15948a288d822d46f87fc43c2a554c5d33dace2f0aa83a3dbb38e08dc75b4a51",
+    "perf-optimized-controller.prof": "04dc7862302c6d14fa575d386db90da556f7e330a4cc655e79b7e212aec39f40"
+  },
+  "official_parity": [
+    {
+      "dimension": "scene",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "human_action",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "object_class",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "subject_consistency",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "background_consistency",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "dynamic_degree",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "spatial_relationship",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "multiple_objects",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "color",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "motion_smoothness",
+      "rows": 1,
+      "exact": false,
+      "max_row_error": 3.561808847862835e-09,
+      "aggregate_error": 3.561808847862835e-09,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "temporal_flickering",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "aesthetic_quality",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "imaging_quality",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "temporal_style",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "overall_consistency",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    },
+    {
+      "dimension": "appearance_style",
+      "rows": 1,
+      "exact": true,
+      "max_row_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06,
+      "passed": true,
+      "reference": "earlier four-GPU origin-final-cold; not the historical E0 cohort"
+    }
+  ],
+  "gpu_inventory": [
+    "0, GPU-7f893bc3-9a65-24c1-47dd-1e4428cec01f, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB",
+    "1, GPU-6ff18a65-da11-8cd4-2dcf-1dc48fe45de9, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB",
+    "2, GPU-c8fff9e2-03b2-c88c-8b8c-568c7f6dde14, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB",
+    "3, GPU-c0af33a9-498c-ff7c-bb56-e9992ccded30, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB"
+  ]
+}

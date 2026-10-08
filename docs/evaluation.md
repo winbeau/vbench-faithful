@@ -79,4 +79,6 @@ Successful records require finite scores; failures retain null and the original 
 
 `plan.json` and `summary.json` expose `timing_seconds` for inputs, asset verification, source verification, GPU probes and total time before dispatch. Each completed stage event and per-run execution receipt records `elapsed_seconds`, `environment_seconds` and `worker_seconds`. Worker time includes process startup, model loading and inference, rather than GPU kernels alone. Cached stages have zero worker time; overlapping GPU lanes must not be summed to claim wall time.
 
+See the [H100 performance report](validation/h100-performance-20261008.md) for the controlled nine-repair comparison, remaining startup costs and final sixteen-package GPU acceptance.
+
 The existing `scripts/evaluate_vbench.py` remains the strict paper interface (`repair` restricted to nine). Legacy per-metric CLIs retain their research meanings. This controller's official fallback does not promote historical repair candidates into the paper.
