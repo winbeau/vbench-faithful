@@ -1,0 +1,2971 @@
+{
+  "schema": "same32-performance/1",
+  "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+  "input_records": 512,
+  "unique_media": 32,
+  "media_seconds": 64,
+  "host": "h100-server",
+  "runs": {
+    "origin-baseline-v2": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/origin-baseline-v2",
+      "wall_seconds": 516.336979746935,
+      "returncode": 1,
+      "command": [
+        "/root/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "scripts/eval.py",
+        "--config",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/benchmark.yaml",
+        "--backend",
+        "origin",
+        "--output",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/origin-baseline-v2",
+        "--no-reuse"
+      ],
+      "code_sha": "1aa01e2b7d16700451c9e5f98b201272f677a87e",
+      "source_sha256": "36e09f9e46bbfb3b2aed919701afe7b0b82921e9e164fb76a20b245c457ecacb",
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+      "complete": false,
+      "dimensions": {
+        "scene/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.115234375,
+          "observed_subset_mean": 0.115234375,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.115234375,
+          "dimension": "scene",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 39.888405528035946
+        },
+        "human_action/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.8125,
+          "observed_subset_mean": 0.8125,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.8125,
+          "dimension": "human_action",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 18.429630838916637
+        },
+        "object_class/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.833984375,
+          "observed_subset_mean": 0.833984375,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.833984375,
+          "dimension": "object_class",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 81.60451183700934
+        },
+        "subject_consistency/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9187125692454478,
+          "observed_subset_mean": 0.9187125692454479,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9187125692454478,
+          "dimension": "subject_consistency",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.890369949047454
+        },
+        "background_consistency/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9409164428710938,
+          "observed_subset_mean": 0.9409164428710934,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9409164428710938,
+          "dimension": "background_consistency",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 8.021014582016505
+        },
+        "dynamic_degree/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.625,
+          "observed_subset_mean": 0.625,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.625,
+          "dimension": "dynamic_degree",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 38.91306066000834
+        },
+        "spatial_relationship/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.27895460932627597,
+          "observed_subset_mean": 0.2789546093262759,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.27895460932627597,
+          "dimension": "spatial_relationship",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 77.67913657904137
+        },
+        "multiple_objects/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.251953125,
+          "observed_subset_mean": 0.251953125,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.251953125,
+          "dimension": "multiple_objects",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 80.6294555150671
+        },
+        "color/origin": {
+          "input_count": 32,
+          "succeeded": 25,
+          "missing": 7,
+          "coverage": 0.78125,
+          "complete": false,
+          "score": null,
+          "observed_subset_mean": 0.6008877788877789,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6008877788877789,
+          "dimension": "color",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 81.19244094798341
+        },
+        "motion_smoothness/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9685049654500268,
+          "observed_subset_mean": 0.968504965450027,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9685049654500268,
+          "dimension": "motion_smoothness",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 6.744777319021523
+        },
+        "temporal_flickering/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9551290905358745,
+          "observed_subset_mean": 0.9551290905358744,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9551290905358745,
+          "dimension": "temporal_flickering",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 3.43758562207222
+        },
+        "aesthetic_quality/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.437935476686107,
+          "observed_subset_mean": 0.437935476686107,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.437935476686107,
+          "dimension": "aesthetic_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 11.001404976006597
+        },
+        "imaging_quality/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6191944732889533,
+          "observed_subset_mean": 61.91944732889533,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6191944732889533,
+          "dimension": "imaging_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 15.379132363013923
+        },
+        "temporal_style/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.19024083379190415,
+          "observed_subset_mean": 0.19024083379190415,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.19024083379190415,
+          "dimension": "temporal_style",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 11.471793708973564
+        },
+        "overall_consistency/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.19847273081541061,
+          "observed_subset_mean": 0.19847273081541061,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.19847273081541061,
+          "dimension": "overall_consistency",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.763975709094666
+        },
+        "appearance_style/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.21485717773437515,
+          "observed_subset_mean": 0.21485717773437496,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.21485717773437515,
+          "dimension": "appearance_style",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 14.401755269034766
+        }
+      },
+      "preflight_seconds": {
+        "inputs": 0.09940502198878676,
+        "asset_verification": 3.68085353996139,
+        "source_verification": 0.22877858101855963,
+        "gpu_probes": 1.6756371969822794,
+        "total_before_dispatch": 5.6879369060043246
+      },
+      "previous_run_cache_hits": 0
+    },
+    "repair-baseline-v2": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/repair-baseline-v2",
+      "wall_seconds": 554.1867794750724,
+      "returncode": 1,
+      "command": [
+        "/root/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "scripts/eval.py",
+        "--config",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/benchmark.yaml",
+        "--backend",
+        "repair",
+        "--output",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/repair-baseline-v2",
+        "--no-reuse"
+      ],
+      "code_sha": "1aa01e2b7d16700451c9e5f98b201272f677a87e",
+      "source_sha256": "36e09f9e46bbfb3b2aed919701afe7b0b82921e9e164fb76a20b245c457ecacb",
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+      "complete": false,
+      "dimensions": {
+        "scene/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.546875,
+          "observed_subset_mean": 0.546875,
+          "aggregation": "equal_video",
+          "dimension": "scene",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 53.599321068963036
+        },
+        "human_action/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.8125,
+          "observed_subset_mean": 0.8125,
+          "aggregation": "equal_video",
+          "dimension": "human_action",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 34.09865640394855
+        },
+        "object_class/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.833984375,
+          "observed_subset_mean": 0.833984375,
+          "aggregation": "equal_video",
+          "dimension": "object_class",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 71.80955041502602
+        },
+        "subject_consistency/repair": {
+          "input_count": 32,
+          "succeeded": 23,
+          "missing": 9,
+          "coverage": 0.71875,
+          "complete": false,
+          "score": null,
+          "observed_subset_mean": 0.906688532103663,
+          "aggregation": "equal_video",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 26.08968995907344
+        },
+        "background_consistency/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.976898225148519,
+          "observed_subset_mean": 0.976898225148519,
+          "aggregation": "equal_video",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 26.65931830392219
+        },
+        "dynamic_degree/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6259046081941458,
+          "observed_subset_mean": 0.6259046081941458,
+          "aggregation": "equal_video",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.105602190014906
+        },
+        "spatial_relationship/repair": {
+          "input_count": 32,
+          "succeeded": 11,
+          "missing": 21,
+          "coverage": 0.34375,
+          "complete": false,
+          "score": null,
+          "observed_subset_mean": 0.002042352808481841,
+          "aggregation": "equal_video",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 83.94489118107595
+        },
+        "multiple_objects/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.189453125,
+          "observed_subset_mean": 0.189453125,
+          "aggregation": "equal_video",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 73.33311353903264
+        },
+        "color/repair": {
+          "input_count": 32,
+          "succeeded": 9,
+          "missing": 23,
+          "coverage": 0.28125,
+          "complete": false,
+          "score": null,
+          "observed_subset_mean": 0.3333333333333333,
+          "aggregation": "equal_video",
+          "dimension": "color",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 91.78067672497127
+        },
+        "motion_smoothness/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9685049651828912,
+          "observed_subset_mean": 0.9685049651828914,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9685049651828912,
+          "dimension": "motion_smoothness",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 6.694542592973448
+        },
+        "temporal_flickering/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9551290905358745,
+          "observed_subset_mean": 0.9551290905358744,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9551290905358745,
+          "dimension": "temporal_flickering",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 3.460158151923679
+        },
+        "aesthetic_quality/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.437935476686107,
+          "observed_subset_mean": 0.437935476686107,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.437935476686107,
+          "dimension": "aesthetic_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 11.333017776021734
+        },
+        "imaging_quality/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6191944732889533,
+          "observed_subset_mean": 61.91944732889533,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6191944732889533,
+          "dimension": "imaging_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 14.82295347598847
+        },
+        "temporal_style/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.19024083379190415,
+          "observed_subset_mean": 0.19024083379190415,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.19024083379190415,
+          "dimension": "temporal_style",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.863972787978128
+        },
+        "overall_consistency/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.19847273081541061,
+          "observed_subset_mean": 0.19847273081541061,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.19847273081541061,
+          "dimension": "overall_consistency",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 11.13034113496542
+        },
+        "appearance_style/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.21485717773437515,
+          "observed_subset_mean": 0.21485717773437496,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.21485717773437515,
+          "dimension": "appearance_style",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 14.110225995071232
+        }
+      },
+      "preflight_seconds": {
+        "inputs": 0.09968394110910594,
+        "asset_verification": 7.829114808002487,
+        "source_verification": 0.23256300191860646,
+        "gpu_probes": 1.9892342569073662,
+        "total_before_dispatch": 10.154084737063386
+      },
+      "previous_run_cache_hits": 0
+    },
+    "repair-optimized": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/repair-optimized",
+      "wall_seconds": 429.77778898202814,
+      "returncode": 1,
+      "command": [
+        "/root/.local/bin/uv",
+        "run",
+        "--no-sync",
+        "python",
+        "scripts/eval.py",
+        "--config",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/benchmark.yaml",
+        "--backend",
+        "repair",
+        "--output",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/repair-optimized",
+        "--no-reuse"
+      ],
+      "code_sha": "b2d272703f2f298e203d46d47aed01532c7456d2",
+      "source_sha256": "c354192c654a70d3b87a479194ceba755d5759d9cc24a86699765114c409dd73",
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "gpu_info": {
+        "3": {
+          "torch": "2.5.1+cu121",
+          "cuda": "12.1",
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ]
+        }
+      },
+      "lock_sha256": "08a98298bb374189441905a6797a82468d16df44399d7e280721f23d19e00377",
+      "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+      "complete": false,
+      "dimensions": {
+        "scene/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.546875,
+          "observed_subset_mean": 0.546875,
+          "aggregation": "equal_video",
+          "dimension": "scene",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 54.193396235932596
+        },
+        "human_action/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.8125,
+          "observed_subset_mean": 0.8125,
+          "aggregation": "equal_video",
+          "dimension": "human_action",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 32.97851659893058
+        },
+        "object_class/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.833984375,
+          "observed_subset_mean": 0.833984375,
+          "aggregation": "equal_video",
+          "dimension": "object_class",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 66.07904447009787
+        },
+        "subject_consistency/repair": {
+          "input_count": 32,
+          "succeeded": 23,
+          "missing": 9,
+          "coverage": 0.71875,
+          "complete": false,
+          "score": null,
+          "observed_subset_mean": 0.906688532103663,
+          "aggregation": "equal_video",
+          "dimension": "subject_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 25.780385271064006
+        },
+        "background_consistency/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.976898225148519,
+          "observed_subset_mean": 0.976898225148519,
+          "aggregation": "equal_video",
+          "dimension": "background_consistency",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 26.031581184943207
+        },
+        "dynamic_degree/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6259046081941458,
+          "observed_subset_mean": 0.6259046081941458,
+          "aggregation": "equal_video",
+          "dimension": "dynamic_degree",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 9.827617306029424
+        },
+        "spatial_relationship/repair": {
+          "input_count": 32,
+          "succeeded": 11,
+          "missing": 21,
+          "coverage": 0.34375,
+          "complete": false,
+          "score": null,
+          "observed_subset_mean": 0.002042352808481841,
+          "aggregation": "equal_video",
+          "dimension": "spatial_relationship",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 29.980722730979323
+        },
+        "multiple_objects/repair": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.189453125,
+          "observed_subset_mean": 0.189453125,
+          "aggregation": "equal_video",
+          "dimension": "multiple_objects",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 20.446415444021113
+        },
+        "color/repair": {
+          "input_count": 32,
+          "succeeded": 9,
+          "missing": 23,
+          "coverage": 0.28125,
+          "complete": false,
+          "score": null,
+          "observed_subset_mean": 0.3333333333333333,
+          "aggregation": "equal_video",
+          "dimension": "color",
+          "backend": "repair",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 84.01532299607061
+        },
+        "motion_smoothness/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9685049642033938,
+          "observed_subset_mean": 0.968504964203394,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9685049642033938,
+          "dimension": "motion_smoothness",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 6.443793141981587
+        },
+        "temporal_flickering/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.9551290905358745,
+          "observed_subset_mean": 0.9551290905358744,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.9551290905358745,
+          "dimension": "temporal_flickering",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 3.626106304000132
+        },
+        "aesthetic_quality/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.437935476686107,
+          "observed_subset_mean": 0.437935476686107,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.437935476686107,
+          "dimension": "aesthetic_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 11.219721936970018
+        },
+        "imaging_quality/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.6191944732889533,
+          "observed_subset_mean": 61.91944732889533,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.6191944732889533,
+          "dimension": "imaging_quality",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 13.67760655505117
+        },
+        "temporal_style/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.19024083379190415,
+          "observed_subset_mean": 0.19024083379190415,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.19024083379190415,
+          "dimension": "temporal_style",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.476795202936046
+        },
+        "overall_consistency/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.19847273081541061,
+          "observed_subset_mean": 0.19847273081541061,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.19847273081541061,
+          "dimension": "overall_consistency",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 10.697013980010524
+        },
+        "appearance_style/origin": {
+          "input_count": 32,
+          "succeeded": 32,
+          "missing": 0,
+          "coverage": 1.0,
+          "complete": true,
+          "score": 0.21485717773437515,
+          "observed_subset_mean": 0.21485717773437496,
+          "aggregation": "official_upstream",
+          "official_aggregate": 0.21485717773437515,
+          "dimension": "appearance_style",
+          "backend": "origin",
+          "gpu": "3",
+          "cached": false,
+          "elapsed_seconds": 14.310103234020062
+        }
+      },
+      "preflight_seconds": {
+        "inputs": 0.1002988750115037,
+        "asset_verification": 7.597466962994076,
+        "source_verification": 0.22964590706396848,
+        "gpu_probes": 1.870682431035675,
+        "total_before_dispatch": 9.802859313902445
+      },
+      "previous_run_cache_hits": 0
+    },
+    "origin-native": {
+      "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+      "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "gpu": "3",
+      "torch": "2.5.1+cu121",
+      "dimensions": {
+        "scene": {
+          "elapsed_seconds": 29.689806411974132,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.115234375
+        },
+        "human_action": {
+          "elapsed_seconds": 9.310814596014097,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.8125
+        },
+        "object_class": {
+          "elapsed_seconds": 50.608852504054084,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.833984375
+        },
+        "subject_consistency": {
+          "elapsed_seconds": 5.954299837001599,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.9187125692454478
+        },
+        "background_consistency": {
+          "elapsed_seconds": 2.8358136989409104,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.9409164428710938
+        },
+        "dynamic_degree": {
+          "elapsed_seconds": 27.153465976007283,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.625
+        },
+        "spatial_relationship": {
+          "elapsed_seconds": 50.83194202196319,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.27895460932627597
+        },
+        "multiple_objects": {
+          "elapsed_seconds": 50.68509398994502,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.251953125
+        },
+        "color": {
+          "elapsed_seconds": 64.90408624603879,
+          "input_count": 32,
+          "returned_count": 25,
+          "official_aggregate": 0.6008877788877789
+        },
+        "motion_smoothness": {
+          "elapsed_seconds": 2.8588295249501243,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.9685049666076146
+        },
+        "temporal_flickering": {
+          "elapsed_seconds": 0.24966301501262933,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.9551290905358745
+        },
+        "aesthetic_quality": {
+          "elapsed_seconds": 5.711948919924907,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.437935476686107
+        },
+        "imaging_quality": {
+          "elapsed_seconds": 9.530059857992455,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.6191944732889533
+        },
+        "temporal_style": {
+          "elapsed_seconds": 6.129842530936003,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.19024083379190415
+        },
+        "overall_consistency": {
+          "elapsed_seconds": 5.972784296958707,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.19847273081541061
+        },
+        "appearance_style": {
+          "elapsed_seconds": 9.575723260990344,
+          "input_count": 32,
+          "returned_count": 32,
+          "official_aggregate": 0.21485717773437515
+        }
+      },
+      "preflight_seconds": 5.5455299890600145,
+      "execution": "pinned upstream compute APIs; one process; no result reuse",
+      "wall_seconds": 338.4955472720321,
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/origin-native",
+      "command": [
+        "/root/wenbiao_zhao/venvs/vbench/bin/python",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/benchmark_vbench_native.py",
+        "--input",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/inputs-v2.json",
+        "--assets",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/assets.json",
+        "--output",
+        "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/origin-native",
+        "--gpu",
+        "3"
+      ],
+      "driver_sha256": "a736c188e5549c7914a8d7e5654eddf288853809507737dc6eee8aae70a7d46d"
+    }
+  },
+  "repair_parity": [
+    {
+      "dimension": "scene",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "diagnostics_equal": true,
+      "predictions_equal": true,
+      "visual_evidence_equal": true
+    },
+    {
+      "dimension": "human_action",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "diagnostics_equal": true,
+      "predictions_equal": true,
+      "visual_evidence_equal": true
+    },
+    {
+      "dimension": "object_class",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "diagnostics_equal": true,
+      "compilation_equal": true
+    },
+    {
+      "dimension": "subject_consistency",
+      "records": 32,
+      "succeeded": 23,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "diagnostics_equal": true
+    },
+    {
+      "dimension": "background_consistency",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "diagnostics_equal": true
+    },
+    {
+      "dimension": "dynamic_degree",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "diagnostics_equal": true
+    },
+    {
+      "dimension": "spatial_relationship",
+      "records": 32,
+      "succeeded": 11,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "diagnostics_equal": true,
+      "predictions_equal": true,
+      "visual_evidence_equal": true
+    },
+    {
+      "dimension": "multiple_objects",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "diagnostics_equal": true,
+      "predictions_equal": true,
+      "visual_evidence_equal": true
+    },
+    {
+      "dimension": "color",
+      "records": 32,
+      "succeeded": 9,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "diagnostics_equal": true,
+      "compilation_equal": true
+    }
+  ],
+  "fallback_parity": [
+    {
+      "dimension": "motion_smoothness",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 2.2795576537504303e-08,
+      "statuses_equal": true,
+      "aggregate_error": 9.794973721000133e-10,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "temporal_flickering",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "aesthetic_quality",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "imaging_quality",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "temporal_style",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "overall_consistency",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "appearance_style",
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0.0,
+      "statuses_equal": true,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    }
+  ],
+  "native_parity": [
+    {
+      "dimension": "scene",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "human_action",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "object_class",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "subject_consistency",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "background_consistency",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "dynamic_degree",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "spatial_relationship",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "multiple_objects",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "color",
+      "returned": 25,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "motion_smoothness",
+      "returned": 32,
+      "max_score_error": 1.9946129525827416e-08,
+      "aggregate_error": 1.1575878033909248e-09,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "temporal_flickering",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "aesthetic_quality",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "imaging_quality",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "temporal_style",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "overall_consistency",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    },
+    {
+      "dimension": "appearance_style",
+      "returned": 32,
+      "max_score_error": 0.0,
+      "aggregate_error": 0.0,
+      "tolerance": 1e-06
+    }
+  ],
+  "shared_inference": {
+    "spatial_relationship": {
+      "hits": 512,
+      "misses": 0,
+      "scope": "current evaluation only",
+      "cache": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/repair-optimized/model-inference/a2749993b523e2345e33830db41bd3e2e07bd9c23d46a85cd14963d445e8f01e"
+    },
+    "multiple_objects": {
+      "hits": 512,
+      "misses": 0,
+      "scope": "current evaluation only",
+      "cache": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/repair-optimized/model-inference/a2749993b523e2345e33830db41bd3e2e07bd9c23d46a85cd14963d445e8f01e"
+    },
+    "object_class": {
+      "task": "object_class",
+      "hits": 2,
+      "misses": 510,
+      "scope": "current evaluation only",
+      "cache": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/repair-optimized/model-inference/a2749993b523e2345e33830db41bd3e2e07bd9c23d46a85cd14963d445e8f01e"
+    },
+    "color": {
+      "task": "color",
+      "hits": 2,
+      "misses": 510,
+      "scope": "current evaluation only",
+      "cache": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/repair-optimized/model-inference/484d55bfa49bf9f01203108dfb971f76b4aa99c5e6706b1df89b035b9c8dbd27"
+    }
+  },
+  "scope": "agent-annotated timing queries, including negative probes; not official preference evaluation",
+  "comparisons": {
+    "origin-baseline-v2": {
+      "reference_seconds": 516.336979746935,
+      "optimized_seconds": 429.77778898202814,
+      "speedup": 1.2014045234164636,
+      "reduction_percent": 16.76408898842203
+    },
+    "repair-baseline-v2": {
+      "reference_seconds": 554.1867794750724,
+      "optimized_seconds": 429.77778898202814,
+      "speedup": 1.2894728245210612,
+      "reduction_percent": 22.448927888695735
+    },
+    "origin-native": {
+      "reference_seconds": 338.4955472720321,
+      "optimized_seconds": 429.77778898202814,
+      "speedup": 0.7876059581249949,
+      "reduction_percent": -26.967043568415683
+    }
+  },
+  "gpu_inventory": [
+    "0, GPU-7f893bc3-9a65-24c1-47dd-1e4428cec01f, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB",
+    "1, GPU-6ff18a65-da11-8cd4-2dcf-1dc48fe45de9, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB",
+    "2, GPU-c8fff9e2-03b2-c88c-8b8c-568c7f6dde14, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB",
+    "3, GPU-c0af33a9-498c-ff7c-bb56-e9992ccded30, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB"
+  ],
+  "media": [
+    {
+      "index": 0,
+      "video": "modelscope/human_action/A person is driving car-0.mp4",
+      "filename": "A person is driving car-0.mp4",
+      "source_prompt": "A person is driving car",
+      "video_sha256": "315d35c362c549ff07a6229e90d185b4d3e0bd389a1653f0b22592c1c76c2d9a",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a road",
+        "human_action": "A person is driving car",
+        "object_class": "car",
+        "multiple_objects": "a car and a truck",
+        "spatial_relationship": "a car on the left of a truck, front view",
+        "color": "a silver car",
+        "temporal_style": "A person is driving car, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "road"
+          }
+        },
+        "object_class": {
+          "object": "car"
+        },
+        "multiple_objects": {
+          "object": "car and truck"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "car",
+            "object_b": "truck",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "silver"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "car",
+      "annotation_note": "visible car; truck is a negative query"
+    },
+    {
+      "index": 1,
+      "video": "modelscope/human_action/A person is riding or walking with horse-0.mp4",
+      "filename": "A person is riding or walking with horse-0.mp4",
+      "source_prompt": "A person is riding or walking with horse",
+      "video_sha256": "595a0cff6fbaf79f377a750b50296ab26f04b4675d371acfa9c1bcedc74d0d7d",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a outdoor field",
+        "human_action": "A person is riding or walking with horse",
+        "object_class": "horse",
+        "multiple_objects": "a horse and a person",
+        "spatial_relationship": "a horse on the bottom of a person, front view",
+        "color": "a brown horse",
+        "temporal_style": "A person is riding or walking with horse, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "outdoor field"
+          }
+        },
+        "object_class": {
+          "object": "horse"
+        },
+        "multiple_objects": {
+          "object": "horse and person"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "horse",
+            "object_b": "person",
+            "relationship": "on the bottom of"
+          }
+        },
+        "color": {
+          "color": "brown"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "horse",
+      "annotation_note": "horse below rider"
+    },
+    {
+      "index": 2,
+      "video": "modelscope/human_action/A person is ice skating-0.mp4",
+      "filename": "A person is ice skating-0.mp4",
+      "source_prompt": "A person is ice skating",
+      "video_sha256": "9b9efb498505f2e9d14f0d9e7035ed244ec2141da0f3197cff7a1cd065d6decd",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a ice rink",
+        "human_action": "A person is ice skating",
+        "object_class": "person",
+        "multiple_objects": "a person and a bench",
+        "spatial_relationship": "a person on the right of a bench, front view",
+        "color": "a red person",
+        "temporal_style": "A person is ice skating, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "ice rink"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bench"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bench",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "red"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "bench is a negative query"
+    },
+    {
+      "index": 3,
+      "video": "modelscope/human_action/A person is clapping-0.mp4",
+      "filename": "A person is clapping-0.mp4",
+      "source_prompt": "A person is clapping",
+      "video_sha256": "1e0fa20191afaa112b586444f10809ef5a4f09b5714d22a7feb58aeb14202c5c",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a brick wall",
+        "human_action": "A person is clapping",
+        "object_class": "person",
+        "multiple_objects": "a person and a chair",
+        "spatial_relationship": "a person on the left of a chair, front view",
+        "color": "a gray person",
+        "temporal_style": "A person is clapping, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "brick wall"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and chair"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "chair",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "gray"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "generated wall lacks intended person; negative queries retained"
+    },
+    {
+      "index": 4,
+      "video": "modelscope/human_action/A person is playing trumpet-0.mp4",
+      "filename": "A person is playing trumpet-0.mp4",
+      "source_prompt": "A person is playing trumpet",
+      "video_sha256": "5a519089a4148dc5a28f9bba70d11c117094e4573fba368df2c2f5d90eeb0c28",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a indoor room",
+        "human_action": "A person is playing trumpet",
+        "object_class": "person",
+        "multiple_objects": "a person and a chair",
+        "spatial_relationship": "a person on the right of a chair, front view",
+        "color": "a black person",
+        "temporal_style": "A person is playing trumpet, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "indoor room"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and chair"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "chair",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "black"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "chair is a negative query"
+    },
+    {
+      "index": 5,
+      "video": "modelscope/human_action/A person is sweeping floor-0.mp4",
+      "filename": "A person is sweeping floor-0.mp4",
+      "source_prompt": "A person is sweeping floor",
+      "video_sha256": "a69b2cd0ee314066b3939f2a0aada0c41fb09aa9309b4e1d9a4185a7dcffa86a",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a indoor room",
+        "human_action": "A person is sweeping floor",
+        "object_class": "person",
+        "multiple_objects": "a person and a chair",
+        "spatial_relationship": "a person on the left of a chair, front view",
+        "color": "a black person",
+        "temporal_style": "A person is sweeping floor, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "indoor room"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and chair"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "chair",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "black"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "broom close-up; person and chair are negative queries"
+    },
+    {
+      "index": 6,
+      "video": "modelscope/human_action/A person is shuffling cards-0.mp4",
+      "filename": "A person is shuffling cards-0.mp4",
+      "source_prompt": "A person is shuffling cards",
+      "video_sha256": "c455f8e2213f2cd4715107e5cc0e7f3b509920c7e77256c0e57f6d5c42a8ca82",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a table",
+        "human_action": "A person is shuffling cards",
+        "object_class": "person",
+        "multiple_objects": "a person and a dining table",
+        "spatial_relationship": "a person on the top of a dining table, front view",
+        "color": "a black person",
+        "temporal_style": "A person is shuffling cards, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "table"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and dining table"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "dining table",
+            "relationship": "on the top of"
+          }
+        },
+        "color": {
+          "color": "black"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "hands and cards on table"
+    },
+    {
+      "index": 7,
+      "video": "modelscope/human_action/A person is rock climbing-0.mp4",
+      "filename": "A person is rock climbing-0.mp4",
+      "source_prompt": "A person is rock climbing",
+      "video_sha256": "52be8c627b2d4c3eea39389be430123cd3cacfcc792f04be41d876ff6329fb68",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a rock cliff",
+        "human_action": "A person is rock climbing",
+        "object_class": "person",
+        "multiple_objects": "a person and a backpack",
+        "spatial_relationship": "a person on the left of a backpack, front view",
+        "color": "a blue person",
+        "temporal_style": "A person is rock climbing, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "rock cliff"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and backpack"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "backpack",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "blue"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "backpack is a negative query"
+    },
+    {
+      "index": 8,
+      "video": "modelscope/human_action/A person is eating watermelon-0.mp4",
+      "filename": "A person is eating watermelon-0.mp4",
+      "source_prompt": "A person is eating watermelon",
+      "video_sha256": "23abd17a0fca5e8c368fb5216a238c3ee684684cb3f77faf7c83fc6df559b02a",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a garden",
+        "human_action": "A person is eating watermelon",
+        "object_class": "person",
+        "multiple_objects": "a person and a bowl",
+        "spatial_relationship": "a person on the top of a bowl, front view",
+        "color": "a white person",
+        "temporal_style": "A person is eating watermelon, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "garden"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bowl"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bowl",
+            "relationship": "on the top of"
+          }
+        },
+        "color": {
+          "color": "white"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "bowl is a negative query; watermelon and hat visible"
+    },
+    {
+      "index": 9,
+      "video": "modelscope/human_action/A person is brushing teeth-0.mp4",
+      "filename": "A person is brushing teeth-0.mp4",
+      "source_prompt": "A person is brushing teeth",
+      "video_sha256": "299a8804ab3c157c2c59d0caa12eef33cbfd07b4f51ac9f72b2f7fc18acdfb3e",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a bathroom",
+        "human_action": "A person is brushing teeth",
+        "object_class": "toothbrush",
+        "multiple_objects": "a toothbrush and a person",
+        "spatial_relationship": "a toothbrush on the right of a person, front view",
+        "color": "a blue toothbrush",
+        "temporal_style": "A person is brushing teeth, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "bathroom"
+          }
+        },
+        "object_class": {
+          "object": "toothbrush"
+        },
+        "multiple_objects": {
+          "object": "toothbrush and person"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "toothbrush",
+            "object_b": "person",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "blue"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "toothbrush",
+      "annotation_note": "toothbrush near person"
+    },
+    {
+      "index": 10,
+      "video": "modelscope/human_action/A person is jogging-0.mp4",
+      "filename": "A person is jogging-0.mp4",
+      "source_prompt": "A person is jogging",
+      "video_sha256": "28adba13a35fe19c096fdb277de50444925e006b7bfdec16a232dc4e38b1a3fc",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a park",
+        "human_action": "A person is jogging",
+        "object_class": "person",
+        "multiple_objects": "a person and a bench",
+        "spatial_relationship": "a person on the left of a bench, front view",
+        "color": "a black person",
+        "temporal_style": "A person is jogging, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "park"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bench"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bench",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "black"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "bench is a negative query"
+    },
+    {
+      "index": 11,
+      "video": "modelscope/human_action/A person is sticking tongue out-0.mp4",
+      "filename": "A person is sticking tongue out-0.mp4",
+      "source_prompt": "A person is sticking tongue out",
+      "video_sha256": "c81fd702525d64cc660673b1a0b2e7dbfa180a7ac5ee64a61ce86d4bf98e5b31",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a gray background",
+        "human_action": "A person is sticking tongue out",
+        "object_class": "person",
+        "multiple_objects": "a person and a chair",
+        "spatial_relationship": "a person on the left of a chair, front view",
+        "color": "a pink person",
+        "temporal_style": "A person is sticking tongue out, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "gray background"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and chair"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "chair",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "pink"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "generated animated mouth lacks intended person; negative queries retained"
+    },
+    {
+      "index": 12,
+      "video": "modelscope/human_action/A person is bending back-0.mp4",
+      "filename": "A person is bending back-0.mp4",
+      "source_prompt": "A person is bending back",
+      "video_sha256": "94f0d4b2b93e93b76e9d147a338047819c75a72694114734c16860397e8997ff",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a outdoor road",
+        "human_action": "A person is bending back",
+        "object_class": "person",
+        "multiple_objects": "a person and a bench",
+        "spatial_relationship": "a person on the right of a bench, front view",
+        "color": "a gray person",
+        "temporal_style": "A person is bending back, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "outdoor road"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bench"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bench",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "gray"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "bench is a negative query"
+    },
+    {
+      "index": 13,
+      "video": "modelscope/human_action/A person is running on treadmill-0.mp4",
+      "filename": "A person is running on treadmill-0.mp4",
+      "source_prompt": "A person is running on treadmill",
+      "video_sha256": "a75628f8cb28518a481da584ca0d17d8587334793ad0f3c25cbe6ce13e7b86e6",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a park",
+        "human_action": "A person is running on treadmill",
+        "object_class": "person",
+        "multiple_objects": "a person and a bench",
+        "spatial_relationship": "a person on the right of a bench, front view",
+        "color": "a pink person",
+        "temporal_style": "A person is running on treadmill, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "park"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bench"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bench",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "pink"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "treadmill visible; bench is a negative query"
+    },
+    {
+      "index": 14,
+      "video": "modelscope/human_action/A person is digging-0.mp4",
+      "filename": "A person is digging-0.mp4",
+      "source_prompt": "A person is digging",
+      "video_sha256": "28c7c6d582171b92e854e2c414e79442b49e8b36ac8ca7d1e13f082cfc068f4b",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a garden",
+        "human_action": "A person is digging",
+        "object_class": "person",
+        "multiple_objects": "a person and a potted plant",
+        "spatial_relationship": "a person on the right of a potted plant, front view",
+        "color": "a blue person",
+        "temporal_style": "A person is digging, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "garden"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and potted plant"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "potted plant",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "blue"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "partial body at right; potted plant is a negative query"
+    },
+    {
+      "index": 15,
+      "video": "modelscope/human_action/A person is massaging legs-0.mp4",
+      "filename": "A person is massaging legs-0.mp4",
+      "source_prompt": "A person is massaging legs",
+      "video_sha256": "a34b885ac71d17655c0f6677681932e89a0e61d8435363879a939159bf856988",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a bedroom",
+        "human_action": "A person is massaging legs",
+        "object_class": "person",
+        "multiple_objects": "a person and a bed",
+        "spatial_relationship": "a person on the top of a bed, front view",
+        "color": "a gray person",
+        "temporal_style": "A person is massaging legs, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "bedroom"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bed"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bed",
+            "relationship": "on the top of"
+          }
+        },
+        "color": {
+          "color": "gray"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "close-up massage on bed"
+    },
+    {
+      "index": 16,
+      "video": "modelscope/human_action/A person is cleaning windows-0.mp4",
+      "filename": "A person is cleaning windows-0.mp4",
+      "source_prompt": "A person is cleaning windows",
+      "video_sha256": "a650c2283e1fb9bcfcb3de9278cfc7ebb976a1f2500fe8497a3b5e8a7d31e627",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a building facade",
+        "human_action": "A person is cleaning windows",
+        "object_class": "person",
+        "multiple_objects": "a person and a chair",
+        "spatial_relationship": "a person on the right of a chair, front view",
+        "color": "a blue person",
+        "temporal_style": "A person is cleaning windows, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "building facade"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and chair"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "chair",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "blue"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "partial worker at right; chair is a negative query"
+    },
+    {
+      "index": 17,
+      "video": "modelscope/human_action/A person is catching or throwing frisbee-0.mp4",
+      "filename": "A person is catching or throwing frisbee-0.mp4",
+      "source_prompt": "A person is catching or throwing frisbee",
+      "video_sha256": "505979ef32e5d106b41dcd8b0aaa3ea4310da9f6b2f2fa7050c35efda079af39",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a park",
+        "human_action": "A person is catching or throwing frisbee",
+        "object_class": "frisbee",
+        "multiple_objects": "a frisbee and a person",
+        "spatial_relationship": "a frisbee on the top of a person, front view",
+        "color": "a red frisbee",
+        "temporal_style": "A person is catching or throwing frisbee, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "park"
+          }
+        },
+        "object_class": {
+          "object": "frisbee"
+        },
+        "multiple_objects": {
+          "object": "frisbee and person"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "frisbee",
+            "object_b": "person",
+            "relationship": "on the top of"
+          }
+        },
+        "color": {
+          "color": "red"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "frisbee",
+      "annotation_note": "frisbee over person; relation can change with time"
+    },
+    {
+      "index": 18,
+      "video": "modelscope/human_action/A person is climbing a rope-0.mp4",
+      "filename": "A person is climbing a rope-0.mp4",
+      "source_prompt": "A person is climbing a rope",
+      "video_sha256": "9e97169ef366574082645957f9a943e21547dbd1203263a8308baca70901612e",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a rock cliff",
+        "human_action": "A person is climbing a rope",
+        "object_class": "person",
+        "multiple_objects": "a person and a backpack",
+        "spatial_relationship": "a person on the left of a backpack, front view",
+        "color": "a black person",
+        "temporal_style": "A person is climbing a rope, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "rock cliff"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and backpack"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "backpack",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "black"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "backpack is a negative query"
+    },
+    {
+      "index": 19,
+      "video": "modelscope/human_action/A person is using computer-0.mp4",
+      "filename": "A person is using computer-0.mp4",
+      "source_prompt": "A person is using computer",
+      "video_sha256": "f93a2c3980e8fa9be3debe222beed01731a3a0fea932eb22b962cd1bfd5d0e10",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a office",
+        "human_action": "A person is using computer",
+        "object_class": "keyboard",
+        "multiple_objects": "a keyboard and a tv",
+        "spatial_relationship": "a keyboard on the bottom of a tv, front view",
+        "color": "a black keyboard",
+        "temporal_style": "A person is using computer, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "office"
+          }
+        },
+        "object_class": {
+          "object": "keyboard"
+        },
+        "multiple_objects": {
+          "object": "keyboard and tv"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "keyboard",
+            "object_b": "tv",
+            "relationship": "on the bottom of"
+          }
+        },
+        "color": {
+          "color": "black"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "keyboard",
+      "annotation_note": "keyboard below monitor; hands visible"
+    },
+    {
+      "index": 20,
+      "video": "modelscope/human_action/A person is riding scooter-0.mp4",
+      "filename": "A person is riding scooter-0.mp4",
+      "source_prompt": "A person is riding scooter",
+      "video_sha256": "34cb7fba7abdd04404ab7af3b4d41078ce3153b97e44ab6cf72dbf928a55618a",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a road",
+        "human_action": "A person is riding scooter",
+        "object_class": "motorcycle",
+        "multiple_objects": "a motorcycle and a person",
+        "spatial_relationship": "a motorcycle on the bottom of a person, front view",
+        "color": "a black motorcycle",
+        "temporal_style": "A person is riding scooter, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "road"
+          }
+        },
+        "object_class": {
+          "object": "motorcycle"
+        },
+        "multiple_objects": {
+          "object": "motorcycle and person"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "motorcycle",
+            "object_b": "person",
+            "relationship": "on the bottom of"
+          }
+        },
+        "color": {
+          "color": "black"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "motorcycle",
+      "annotation_note": "scooter below rider"
+    },
+    {
+      "index": 21,
+      "video": "modelscope/human_action/A person is sword fighting-0.mp4",
+      "filename": "A person is sword fighting-0.mp4",
+      "source_prompt": "A person is sword fighting",
+      "video_sha256": "13913751235cb957c946b4ce388208fb47ef9056996cbb3fba80d7ba904709d2",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a outdoor field",
+        "human_action": "A person is sword fighting",
+        "object_class": "knife",
+        "multiple_objects": "a knife and a person",
+        "spatial_relationship": "a knife on the top of a person, front view",
+        "color": "a silver knife",
+        "temporal_style": "A person is sword fighting, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "outdoor field"
+          }
+        },
+        "object_class": {
+          "object": "knife"
+        },
+        "multiple_objects": {
+          "object": "knife and person"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "knife",
+            "object_b": "person",
+            "relationship": "on the top of"
+          }
+        },
+        "color": {
+          "color": "silver"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "knife",
+      "annotation_note": "large blades and partial arms"
+    },
+    {
+      "index": 22,
+      "video": "modelscope/human_action/A person is air drumming-0.mp4",
+      "filename": "A person is air drumming-0.mp4",
+      "source_prompt": "A person is air drumming",
+      "video_sha256": "26259af67eb17464bd0460f18145fa84ea6f64bc6e2d9ee39a263f0244950d4f",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a outdoor courtyard",
+        "human_action": "A person is air drumming",
+        "object_class": "person",
+        "multiple_objects": "a person and a bench",
+        "spatial_relationship": "a person on the right of a bench, front view",
+        "color": "a gray person",
+        "temporal_style": "A person is air drumming, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "outdoor courtyard"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bench"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bench",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "gray"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "bench is a negative query"
+    },
+    {
+      "index": 23,
+      "video": "modelscope/human_action/A person is playing flute-0.mp4",
+      "filename": "A person is playing flute-0.mp4",
+      "source_prompt": "A person is playing flute",
+      "video_sha256": "a3539eb5ffbae211874ae1243bb2b55c424e7ee0c3e57005778cbb8eb9ba46e9",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a park",
+        "human_action": "A person is playing flute",
+        "object_class": "person",
+        "multiple_objects": "a person and a bench",
+        "spatial_relationship": "a person on the right of a bench, front view",
+        "color": "a black person",
+        "temporal_style": "A person is playing flute, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "park"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bench"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bench",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "black"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "bench is a negative query"
+    },
+    {
+      "index": 24,
+      "video": "modelscope/human_action/A person is doing aerobics-0.mp4",
+      "filename": "A person is doing aerobics-0.mp4",
+      "source_prompt": "A person is doing aerobics",
+      "video_sha256": "61638e71feace65e403dd384d8df0ed8a9f37c3900b4e534d4ea5a5ca48974a5",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a indoor room",
+        "human_action": "A person is doing aerobics",
+        "object_class": "person",
+        "multiple_objects": "a person and a chair",
+        "spatial_relationship": "a person on the left of a chair, front view",
+        "color": "a blue person",
+        "temporal_style": "A person is doing aerobics, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "indoor room"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and chair"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "chair",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "blue"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "chair is a negative query"
+    },
+    {
+      "index": 25,
+      "video": "modelscope/human_action/A person is dancing ballet-0.mp4",
+      "filename": "A person is dancing ballet-0.mp4",
+      "source_prompt": "A person is dancing ballet",
+      "video_sha256": "a4ed01f1242cc0509f8e5eee3ae205ed8d1d48b9c215d31a2ec5cd6df942ba74",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a outdoor square",
+        "human_action": "A person is dancing ballet",
+        "object_class": "person",
+        "multiple_objects": "a person and a bench",
+        "spatial_relationship": "a person on the right of a bench, front view",
+        "color": "a black person",
+        "temporal_style": "A person is dancing ballet, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "outdoor square"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bench"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bench",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "black"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "bench is a negative query"
+    },
+    {
+      "index": 26,
+      "video": "modelscope/human_action/A person is hugging-0.mp4",
+      "filename": "A person is hugging-0.mp4",
+      "source_prompt": "A person is hugging",
+      "video_sha256": "a35d9ab6b7fc3cbfcbb3fde7fa6c14e8d49980b7096a6a9106abf92949b7a9a5",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a outdoor field",
+        "human_action": "A person is hugging",
+        "object_class": "person",
+        "multiple_objects": "a person and a bench",
+        "spatial_relationship": "a person on the left of a bench, front view",
+        "color": "a blue person",
+        "temporal_style": "A person is hugging, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "outdoor field"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bench"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bench",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "blue"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "two people hugging; bench is a negative query"
+    },
+    {
+      "index": 27,
+      "video": "modelscope/human_action/A person is flying kite-0.mp4",
+      "filename": "A person is flying kite-0.mp4",
+      "source_prompt": "A person is flying kite",
+      "video_sha256": "b78a0c69fb37dc9a5a72e8c58102145e17d59446866039e5720d26b1fbf95152",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a park",
+        "human_action": "A person is flying kite",
+        "object_class": "kite",
+        "multiple_objects": "a kite and a person",
+        "spatial_relationship": "a kite on the top of a person, front view",
+        "color": "a yellow kite",
+        "temporal_style": "A person is flying kite, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "park"
+          }
+        },
+        "object_class": {
+          "object": "kite"
+        },
+        "multiple_objects": {
+          "object": "kite and person"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "kite",
+            "object_b": "person",
+            "relationship": "on the top of"
+          }
+        },
+        "color": {
+          "color": "yellow"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "kite",
+      "annotation_note": "kite above person; person enters late"
+    },
+    {
+      "index": 28,
+      "video": "modelscope/human_action/A person is peeling apples-0.mp4",
+      "filename": "A person is peeling apples-0.mp4",
+      "source_prompt": "A person is peeling apples",
+      "video_sha256": "c4393c7042ed28394ebe73f797e2c8b29fe1c118113c3b420a2d3c862947acff",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a table",
+        "human_action": "A person is peeling apples",
+        "object_class": "apple",
+        "multiple_objects": "a apple and a bowl",
+        "spatial_relationship": "a apple on the top of a bowl, front view",
+        "color": "a green apple",
+        "temporal_style": "A person is peeling apples, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "table"
+          }
+        },
+        "object_class": {
+          "object": "apple"
+        },
+        "multiple_objects": {
+          "object": "apple and bowl"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "apple",
+            "object_b": "bowl",
+            "relationship": "on the top of"
+          }
+        },
+        "color": {
+          "color": "green"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "apple",
+      "annotation_note": "apple in bowl"
+    },
+    {
+      "index": 29,
+      "video": "modelscope/human_action/A person is giving or receiving award-0.mp4",
+      "filename": "A person is giving or receiving award-0.mp4",
+      "source_prompt": "A person is giving or receiving award",
+      "video_sha256": "d98d942be8ec23fd2a5483318e3a810418d36769544d3f50a37b00cfe10c87ee",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a indoor room",
+        "human_action": "A person is giving or receiving award",
+        "object_class": "person",
+        "multiple_objects": "a person and a book",
+        "spatial_relationship": "a person on the left of a book, front view",
+        "color": "a white person",
+        "temporal_style": "A person is giving or receiving award, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "indoor room"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and book"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "book",
+            "relationship": "on the left of"
+          }
+        },
+        "color": {
+          "color": "white"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "generated text lacks intended person; negative queries retained"
+    },
+    {
+      "index": 30,
+      "video": "modelscope/human_action/A person is laughing-0.mp4",
+      "filename": "A person is laughing-0.mp4",
+      "source_prompt": "A person is laughing",
+      "video_sha256": "be7f107ae7c7883b573bdb066111f22dc2e19263fb36213db7ea4f3f33fc964f",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a indoor room",
+        "human_action": "A person is laughing",
+        "object_class": "person",
+        "multiple_objects": "a person and a chair",
+        "spatial_relationship": "a person on the right of a chair, front view",
+        "color": "a white person",
+        "temporal_style": "A person is laughing, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "indoor room"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and chair"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "chair",
+            "relationship": "on the right of"
+          }
+        },
+        "color": {
+          "color": "white"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "chair is a negative query"
+    },
+    {
+      "index": 31,
+      "video": "modelscope/human_action/A person is baby waking up-0.mp4",
+      "filename": "A person is baby waking up-0.mp4",
+      "source_prompt": "A person is baby waking up",
+      "video_sha256": "03ea253e719c7b3ad83439f0d042d5d97ae314ca9df2ba6ea7fc7b2bc15e0623",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      },
+      "queries": {
+        "scene": "a bedroom",
+        "human_action": "A person is baby waking up",
+        "object_class": "person",
+        "multiple_objects": "a person and a bed",
+        "spatial_relationship": "a person on the top of a bed, front view",
+        "color": "a white person",
+        "temporal_style": "A person is baby waking up, filmed in a realistic style"
+      },
+      "auxiliary_info": {
+        "scene": {
+          "scene": {
+            "scene": "bedroom"
+          }
+        },
+        "object_class": {
+          "object": "person"
+        },
+        "multiple_objects": {
+          "object": "person and bed"
+        },
+        "spatial_relationship": {
+          "spatial_relationship": {
+            "object_a": "person",
+            "object_b": "bed",
+            "relationship": "on the top of"
+          }
+        },
+        "color": {
+          "color": "white"
+        },
+        "appearance_style": {
+          "appearance_style": "realistic"
+        }
+      },
+      "subject_en": "person",
+      "annotation_note": "baby on bed"
+    }
+  ]
+}
