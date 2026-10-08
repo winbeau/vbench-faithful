@@ -17,6 +17,10 @@ dependencies = [
   "temporal-style",
   "object-class",
   "color",
+  "aesthetic-quality",
+  "imaging-quality",
+  "temporal-flickering",
+  "appearance-style",
 ]
 
 [dependency-groups]
@@ -66,6 +70,10 @@ background-consistency = { workspace = true }
 temporal-style = { workspace = true }
 object-class = { workspace = true }
 color = { workspace = true }
+aesthetic-quality = { workspace = true }
+imaging-quality = { workspace = true }
+temporal-flickering = { workspace = true }
+appearance-style = { workspace = true }
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "metrics"]

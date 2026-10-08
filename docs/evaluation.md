@@ -12,6 +12,17 @@ uv run python scripts/eval.py --config configs/eval.yaml
 
 First restore the pinned model runtimes and assets using [the recovery guide](reproduction/CONTAINER_RESET.md). Change `input` and `assets` in the example YAML to your manifest and recovered `assets.json`. `--plan` validates input media identity and routing without loading models or creating environments; it does not certify runtime assets or CUDA.
 
+All sixteen dimensions are registered uv workspace packages under `metrics/`. The four official-only packages completing the workspace expose YAML-based commands:
+
+```bash
+uv run aesthetic-quality --config configs/eval.yaml --backend origin
+uv run imaging-quality --config configs/eval.yaml --backend origin
+uv run temporal-flickering --config configs/eval.yaml --backend origin
+uv run appearance-style --config configs/eval.yaml --backend origin
+```
+
+These commands fix their own dimension regardless of the YAML dimension selection, and accept the controller's other options, including `--plan`, `--gpus`, and `--no-reuse`. With `backend: repair` they explicitly fall back to Origin; they have no paper repair. Their adapters call the pinned upstream function with unchanged inputs and preserve its native aggregate. Existing twelve package CLIs keep their legacy research interfaces; use the unified controller for the selected nine paper repairs.
+
 ## Configuration
 
 One flat YAML mapping is sufficient. No inheritance, executable resolvers, anchors, aliases, or nested configuration objects are supported. Unknown and duplicate keys are errors.
@@ -50,7 +61,9 @@ Stage caching covers official scoring, visual evidence, prompt compilation and r
 
 Outputs link to immutable cache generations so absolute diagnostic references remain valid. Keep the cache while these runs are needed. `--no-reuse` writes independent stage directories directly into the new output. Cache reuse is recorded separately from original artifact provenance and never reported as fresh inference.
 
-Multiple selected GPUs run independent dimensions concurrently. Each worker sees a single device as logical `cuda:0`; backends and stages within a dimension run serially. Integer IDs are interpreted under the inherited `CUDA_VISIBLE_DEVICES` mask. The controller rejects multi-rank launches, probes CUDA allocation, and stops only its own worker process groups on interruption.
+Multiple selected GPUs run independent dimensions concurrently. Each available GPU takes the next dimension from the configured order when its current dimension finishes. Each worker sees a single device as logical `cuda:0`; backends and stages within a dimension run serially. Integer IDs are interpreted under the inherited `CUDA_VISIBLE_DEVICES` mask. The controller rejects multi-rank launches, probes CUDA allocation, and stops only its own worker process groups on interruption.
+
+Asset verification reads and hashes every selected file on every invocation, including cache hits. Four CPU threads hash independent files concurrently; Qwen prompt compilation also hashes independent base-model files concurrently. GPU probes run in parallel in separate processes. These changes retain full content verification, model precision, frame sampling, generation parameters and scoring formulas. Independent dimensions still load their own models in isolated processes.
 
 ## Results and logs
 
@@ -58,10 +71,12 @@ The terminal displays stage events, progress and a final dimension/backend table
 
 - `plan.json`: resolved config, routes, media/config/source/model identities and GPU runtime.
 - `summary.json`: actual backend, full input denominator, coverage, score, timing and cache status.
-- `events.jsonl`: timestamped controller events.
+- `events.jsonl`: timestamped controller events, preflight breakdown and stage durations.
 - `<dimension>/<backend>.json`: per-video results and this run's execution provenance.
 - `<dimension>/<stage>/worker.log`: complete model output and tracebacks, with stage artifacts alongside.
 
 Successful records require finite scores; failures retain null and the original input identity. An incomplete task has `score: null`; `observed_subset_mean` is only a diagnostic. Official scores use the upstream aggregate, including MUSIQ's aggregate scale. Exit codes are 0 for complete success, 1 for incomplete scoring, 2 for setup/configuration errors, and 130 for interruption.
+
+`plan.json` and `summary.json` expose `timing_seconds` for inputs, asset verification, source verification, GPU probes and total time before dispatch. Each completed stage event and per-run execution receipt records `elapsed_seconds`, `environment_seconds` and `worker_seconds`. Worker time includes process startup, model loading and inference, rather than GPU kernels alone. Cached stages have zero worker time; overlapping GPU lanes must not be summed to claim wall time.
 
 The existing `scripts/evaluate_vbench.py` remains the strict paper interface (`repair` restricted to nine). Legacy per-metric CLIs retain their research meanings. This controller's official fallback does not promote historical repair candidates into the paper.

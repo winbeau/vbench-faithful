@@ -15,12 +15,15 @@ resolution-markers = [
 
 [manifest]
 members = [
+    "aesthetic-quality",
+    "appearance-style",
     "audit-core",
     "audit-models",
     "background-consistency",
     "color",
     "dynamic-degree",
     "human-action",
+    "imaging-quality",
     "motion-smoothness",
     "multiple-objects",
     "object-class",
@@ -28,15 +31,38 @@ members = [
     "scene",
     "spatial-relationship",
     "subject-consistency",
+    "temporal-flickering",
     "temporal-style",
     "vbench-audit",
 ]
+
+[[package]]
+name = "aesthetic-quality"
+version = "0.1.0"
+source = { editable = "metrics/aesthetic-quality" }
+dependencies = [
+    { name = "audit-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "audit-core", editable = "packages/audit-core" }]
 
 [[package]]
 name = "antlr4-python3-runtime"
 version = "4.9.3"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/3e/38/7859ff46355f76f8d19459005ca000b6e7012f2f1ca597746cbcd1fbfe5e/antlr4-python3-runtime-4.9.3.tar.gz", hash = "sha256:f224469b4168294902bb1efa80a8bf7855f24c99aef99cbefc1bcd3cce77881b", size = 117034, upload-time = "2021-11-06T17:52:23.524Z" }
+
+[[package]]
+name = "appearance-style"
+version = "0.1.0"
+source = { editable = "metrics/appearance-style" }
+dependencies = [
+    { name = "audit-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "audit-core", editable = "packages/audit-core" }]
 
 [[package]]
 name = "audit-core"
@@ -783,6 +809,17 @@ sdist = { url = "https://files.pythonhosted.org/packages/48/62/aa770a9307508d2a2
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3e/2d/ca050652104bab2cf55e569db2a178b1b61cb041fef28307f2db383f6d9f/imageio-2.37.4-py3-none-any.whl", hash = "sha256:1ab2e22c8debf700f24c3ac43e8f95f3b3a8110c83b93411e97b4b0b2cd1c7e6", size = 318000, upload-time = "2026-07-20T05:26:09.874Z" },
 ]
+
+[[package]]
+name = "imaging-quality"
+version = "0.1.0"
+source = { editable = "metrics/imaging-quality" }
+dependencies = [
+    { name = "audit-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "audit-core", editable = "packages/audit-core" }]
 
 [[package]]
 name = "iniconfig"
@@ -2041,6 +2078,17 @@ wheels = [
 ]
 
 [[package]]
+name = "temporal-flickering"
+version = "0.1.0"
+source = { editable = "metrics/temporal-flickering" }
+dependencies = [
+    { name = "audit-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "audit-core", editable = "packages/audit-core" }]
+
+[[package]]
 name = "temporal-style"
 version = "0.1.0"
 source = { editable = "metrics/temporal-style" }
@@ -2287,12 +2335,15 @@ name = "vbench-audit"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "aesthetic-quality" },
+    { name = "appearance-style" },
     { name = "audit-core" },
     { name = "audit-models" },
     { name = "background-consistency" },
     { name = "color" },
     { name = "dynamic-degree" },
     { name = "human-action" },
+    { name = "imaging-quality" },
     { name = "motion-smoothness" },
     { name = "multiple-objects" },
     { name = "object-class" },
@@ -2300,6 +2351,7 @@ dependencies = [
     { name = "scene" },
     { name = "spatial-relationship" },
     { name = "subject-consistency" },
+    { name = "temporal-flickering" },
     { name = "temporal-style" },
 ]
 
@@ -2334,6 +2386,8 @@ test = [
 
 [package.metadata]
 requires-dist = [
+    { name = "aesthetic-quality", editable = "metrics/aesthetic-quality" },
+    { name = "appearance-style", editable = "metrics/appearance-style" },
     { name = "audit-core", editable = "packages/audit-core" },
     { name = "audit-models", editable = "packages/audit-models" },
     { name = "audit-models", extras = ["models"], marker = "extra == 'models'", editable = "packages/audit-models" },
@@ -2345,6 +2399,7 @@ requires-dist = [
     { name = "dynamic-degree", extras = ["models"], marker = "extra == 'models'", editable = "metrics/dynamic-degree" },
     { name = "human-action", editable = "metrics/human-action" },
     { name = "human-action", extras = ["models"], marker = "extra == 'models'", editable = "metrics/human-action" },
+    { name = "imaging-quality", editable = "metrics/imaging-quality" },
     { name = "motion-smoothness", editable = "metrics/motion-smoothness" },
     { name = "motion-smoothness", extras = ["models"], marker = "extra == 'models'", editable = "metrics/motion-smoothness" },
     { name = "multiple-objects", editable = "metrics/multiple-objects" },
@@ -2359,6 +2414,7 @@ requires-dist = [
     { name = "spatial-relationship", extras = ["models"], marker = "extra == 'models'", editable = "metrics/spatial-relationship" },
     { name = "subject-consistency", editable = "metrics/subject-consistency" },
     { name = "subject-consistency", extras = ["models"], marker = "extra == 'models'", editable = "metrics/subject-consistency" },
+    { name = "temporal-flickering", editable = "metrics/temporal-flickering" },
     { name = "temporal-style", editable = "metrics/temporal-style" },
     { name = "temporal-style", extras = ["models"], marker = "extra == 'models'", editable = "metrics/temporal-style" },
 ]

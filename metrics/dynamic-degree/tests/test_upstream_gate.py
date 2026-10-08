@@ -28,6 +28,10 @@ def test_locked_config_lists_all_dimensions_and_single_identity():
         "temporal_style",
         "object_class",
         "color",
+        "aesthetic_quality",
+        "imaging_quality",
+        "temporal_flickering",
+        "appearance_style",
     }
 
 

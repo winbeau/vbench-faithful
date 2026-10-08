@@ -140,6 +140,17 @@ The output contains `plan.json`, `summary.json`, per-dimension `origin.json` / `
 
 `--backend origin` selects the official VBench implementation for every row. The table describes the effective route under `--backend repair`; `--dimensions paper` selects the nine repaired rows.
 
+All **16 dimensions have independent packages under `metrics/`**. The four official-only packages added to complete the workspace are [Aesthetic Quality](metrics/aesthetic-quality/), [Imaging Quality](metrics/imaging-quality/), [Temporal Flickering](metrics/temporal-flickering/), and [Appearance Style](metrics/appearance-style/). Their package CLIs use the same YAML, cache and isolated workers as the unified evaluator:
+
+```bash
+uv run aesthetic-quality --config configs/eval.yaml --backend origin
+uv run imaging-quality --config configs/eval.yaml --backend origin
+uv run temporal-flickering --config configs/eval.yaml --backend origin
+uv run appearance-style --config configs/eval.yaml --backend origin
+```
+
+Each command fixes its own dimension; YAML `dimensions: all` does not expand a dimension-specific command. Use `scripts/eval.py` for a multi-dimension run. The other twelve package CLIs retain their documented research interfaces.
+
 | Dimension | CLI key | Route under `repair` |
 |---|---|---|
 | Scene | `scene` | **Repair:** Qwen3-8B verifier over fixed Tag2Text caption evidence |

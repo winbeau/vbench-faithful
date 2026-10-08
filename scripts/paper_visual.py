@@ -98,8 +98,12 @@ def official(rows, dim, assets, output):
                   "auxiliary_info": row["auxiliary_info"]} for row in rows]
     path = output.with_name("official-input.json")
     write_json(path, full_info)
-    module = importlib.import_module("vbench." + dim)
-    aggregate, returned = getattr(module, "compute_" + dim)(str(path), torch.device("cuda:0"), modules[dim])
+    if dim in {"aesthetic_quality", "imaging_quality", "temporal_flickering", "appearance_style"}:
+        adapter = importlib.import_module(dim + ".official")
+        aggregate, returned = adapter.compute(str(path), torch.device("cuda:0"), modules[dim])
+    else:
+        module = importlib.import_module("vbench." + dim)
+        aggregate, returned = getattr(module, "compute_" + dim)(str(path), torch.device("cuda:0"), modules[dim])
     by_video = defaultdict(list)
     for item in returned:
         by_video[str(Path(item["video_path"]).resolve())].append(item)

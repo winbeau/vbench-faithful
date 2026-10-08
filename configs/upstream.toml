@@ -52,7 +52,7 @@ source_sha256 = "fa5047aa560158f017e46dea3ae763ed083df08ece63e47f61a7ea4fc55be67
 
 # Candidate dimensions added to the 2026-09-15 eleven-dimension scope
 # (docs/plans/2026-09-15-dimension-scope-11d.md).  They are pinned here so
-# upstream verification covers them; no metric package or adapter exists yet.
+# upstream verification covers their independent metric packages and adapters.
 # overall_consistency stays above but is retired from this round's scope.
 
 [dimensions.background_consistency]
@@ -78,3 +78,28 @@ module = "vbench.color"
 entrypoint = "compute_color"
 source = "vbench/color.py"
 source_sha256 = "03baffc12508fd7ce6c70a227d6794bbc7152c24ba2d2c447a816974466db3d7"
+
+# Remaining official-only VBench 1.0 dimensions complete the sixteen packages.
+[dimensions.aesthetic_quality]
+module = "vbench.aesthetic_quality"
+entrypoint = "compute_aesthetic_quality"
+source = "vbench/aesthetic_quality.py"
+source_sha256 = "baa1894c2543483901a444af9aabe0701b1f937bf304141c53019a45b27abc57"
+
+[dimensions.imaging_quality]
+module = "vbench.imaging_quality"
+entrypoint = "compute_imaging_quality"
+source = "vbench/imaging_quality.py"
+source_sha256 = "ac6c648cb4d5e82cd29c63be04977e9288c3540558cf12f979e66bef3e1f9e3a"
+
+[dimensions.temporal_flickering]
+module = "vbench.temporal_flickering"
+entrypoint = "compute_temporal_flickering"
+source = "vbench/temporal_flickering.py"
+source_sha256 = "c2c892034d1652c9390f213308c18b77ae20a87bd52fc50a125294ce83af4e83"
+
+[dimensions.appearance_style]
+module = "vbench.appearance_style"
+entrypoint = "compute_appearance_style"
+source = "vbench/appearance_style.py"
+source_sha256 = "166b291abe55b0ac28ff4c937469e42cc2aa135c308ab06665518837956deb2a"

@@ -389,13 +389,18 @@ def evaluate(config, *, plan_only=False):
         return 130 if interrupted else 0 if report["complete"] else 1
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+def main(argv=None, *, dimension=None):
+    parser = argparse.ArgumentParser(
+        prog=dimension.replace("_", "-") if dimension else None,
+        description=f"Evaluate {dimension} through the VBench YAML controller." if dimension else __doc__)
     parser.add_argument("--config", type=Path, default=ROOT / "configs/eval.yaml")
     for key in ("input", "assets", "output", "video-root", "cache-dir", "env-dir"):
         parser.add_argument("--" + key, type=Path)
     parser.add_argument("--backend", choices=("origin", "repair", "both"))
-    parser.add_argument("--dimensions", nargs="+")
+    if dimension is None:
+        parser.add_argument("--dimensions", nargs="+")
+    else:
+        parser.set_defaults(dimensions=[dimension])
     parser.add_argument("--gpus", nargs="+", help="Visible GPU indices or GPU/MIG UUIDs")
     parser.add_argument("--reuse", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--plan", action="store_true", help="Validate media and show routes without creating environments or loading models")
