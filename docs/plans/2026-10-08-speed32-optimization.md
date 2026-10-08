@@ -65,9 +65,13 @@ Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s
 
 `8744f4c`: cache each distinct style's CLIP text embedding within this invocation; batch all original PIL-transformed frames in groups of 32. Keep native logit scaling and frame-weighted aggregation. Same-32 H100: 32/32, **zero per-video score error**, aggregate error 1.94e-16; worker 14.00 → 6.80 s, standalone validation wall 9.77 s. No previous-run inference reuse. [Receipt](../validation/h100-appearance-accelerated-20261008.json). Full CPU suite 1,461 passed, 3 skipped; locked uv sync, CPU overlay and all 16 CLI helps passed. Internal worker `--mode accelerated` and `scripts/benchmark_accelerated_dimension.py` are available; public mode routing is intentionally deferred until the seven implementations pass.
 
-## Active item: Imaging Quality
+## Accepted: Imaging Quality
 
-Batch native MUSIQ frame inference without changing preprocessing, frame coverage or its original output scale. Validate every video and the native aggregate against the fixed official reference before enabling the next accelerator.
+`0d7de51`: batch MUSIQ frames in groups of 32 and disable unnecessary autograd. Preserve native FP32, longer-side preprocessing, all frames, child-module modes, per-video 0–100 scores and the /100 aggregate. Same-32: all pass; maximum absolute score error 2.0266e-5 (0–100 scale), maximum relative error 3.4568e-7; worker 14.94 → 6.83 s, standalone wall 9.93 s. CPU: 33 passed. [Receipt](../validation/h100-imaging-accelerated-20261008.json).
+
+## Active item: Aesthetic Quality
+
+Pack CLIP-L/14 frames across videos while preserving the original transform, normalization and aesthetic head. Apply the per-video and aggregate numerical gates before advancing.
 
 ## Subsequent queue
 
