@@ -1,0 +1,67 @@
+# Unified VBench evaluation
+
+The fast controller runs the existing paper workers. It supports all 16 VBench 1.0 dimensions, with the nine selected repairs in `configs/reproduction/paper-methods.json`. It does not alter their scoring formulas.
+
+```bash
+uv sync --locked
+uv run python scripts/eval.py --config configs/eval.yaml --plan
+uv run python scripts/eval.py --config configs/eval.yaml
+./scripts/eval.sh --config configs/eval.yaml --backend origin --dimensions all
+./scripts/eval.sh --config configs/eval.yaml --backend both --dimensions paper --gpus 0 1
+```
+
+First restore the pinned model runtimes and assets using [the recovery guide](reproduction/CONTAINER_RESET.md). Change `input` and `assets` in the example YAML to your manifest and recovered `assets.json`. `--plan` validates input media identity and routing without loading models or creating environments; it does not certify runtime assets or CUDA.
+
+## Configuration
+
+One flat YAML mapping is sufficient. No inheritance, executable resolvers, anchors, aliases, or nested configuration objects are supported. Unknown and duplicate keys are errors.
+
+| Key | Default / meaning |
+| --- | --- |
+| `version` | `1` |
+| `input` | Required JSON/JSONL manifest or VBench full-info list with `video_list` |
+| `assets` | Required fixed-runtime `assets.json` |
+| `output` | New `../output/eval/<UTC timestamp>` directory |
+| `video_root` | Optional override for relative media paths |
+| `backend` | `repair`; also `origin` or `both` |
+| `dimensions` | `all`; also `paper` or a list of canonical dimension names |
+| `gpus` | `[0]`; nonnegative visible indices or complete GPU/MIG UUIDs |
+| `cache_dir` | `~/.cache/vbench-repair` |
+| `env_dir` | Repository `.venvs/metrics` |
+| `reuse` | `true`; `--no-reuse` forces inference |
+
+YAML paths resolve relative to the configuration file. CLI path overrides resolve relative to the current working directory. `~` and `${ENV_NAME}` expand in paths; an undefined environment variable is an error. Media paths inside the JSON/JSONL resolve relative to that manifest unless `video_root` is set. A minimal custom record is:
+
+```json
+[{"id":"clip-1","video":"videos/clip.mp4","prompt":"a beach","dimensions":["scene"],"auxiliary_info":{"scene":{"scene":{"scene":"beach"}}}}]
+```
+
+Use the original metadata schema for official prompt-conditioned dimensions. For standard suites, `scripts/prepare_vbench_inputs.py` preserves the bundled official metadata. Input dimensions default to the paper nine when omitted; to evaluate all 16, provide dimension membership explicitly. Requested dimensions with zero matching inputs are errors. Subject Repair requires `subject_en`. Dynamic aligned-v1 accepts native square videos with 16 frames at 8 FPS; it returns a failure for unsupported videos instead of silently changing the protocol.
+
+`origin + all` runs 16 official tasks. `repair + all` runs nine paper repairs and seven official fallbacks. `both + all` runs 25 tasks: nine comparisons and seven official tasks computed once. The seven fallbacks are Motion Smoothness, Temporal Flickering, Aesthetic Quality, Imaging Quality, Temporal Style, Overall Consistency, and Appearance Style. Output keys always name the actual backend.
+
+## Environments and reuse
+
+Root uv manages the lightweight controller, shared infrastructure, configuration and logging. Each dimension gets its own uv-created environment at `.venvs/metrics/<dimension>/<visual|semantic>/<fingerprint>`. Model dependencies are shared read-only from the existing pinned visual Python 3.10 and semantic Python 3.11 runtimes. Mixing these ABIs in the root environment would break compiled dependencies. The thin environments have distinct prefixes and do not inherit other metric source paths; this is dependency/process isolation, not a filesystem security sandbox.
+
+Environment fingerprints bind the source interpreter, ABI, package metadata and startup paths. Preparation is locked and atomic. Do not mutate the shared runtimes while evaluation is running. Weight files are shared through the asset paths; uv's own package cache remains available for development installs.
+
+Stage caching covers official scoring, visual evidence, prompt compilation and repaired scoring. Keys bind the ordered inputs (including filenames, prompts, metadata and media SHA-256), selected asset hashes, code, environment and GPU runtime. Every cached artifact is hashed on reuse. Failed or incomplete stages are not published as hits. Identical tasks can reuse work when the selected dimensions or backend mode change, as long as that task's inputs and dependencies stay the same. This version does not combine partially overlapping batches or share detector evidence across different preprocessing protocols.
+
+Outputs link to immutable cache generations so absolute diagnostic references remain valid. Keep the cache while these runs are needed. `--no-reuse` writes independent stage directories directly into the new output. Cache reuse is recorded separately from original artifact provenance and never reported as fresh inference.
+
+Multiple selected GPUs run independent dimensions concurrently. Each worker sees a single device as logical `cuda:0`; backends and stages within a dimension run serially. Integer IDs are interpreted under the inherited `CUDA_VISIBLE_DEVICES` mask. The controller rejects multi-rank launches, probes CUDA allocation, and stops only its own worker process groups on interruption.
+
+## Results and logs
+
+The terminal displays stage events, progress and a final dimension/backend table. Non-interactive logs contain plain events without terminal animation. Each run contains:
+
+- `plan.json`: resolved config, routes, media/config/source/model identities and GPU runtime.
+- `summary.json`: actual backend, full input denominator, coverage, score, timing and cache status.
+- `events.jsonl`: timestamped controller events.
+- `<dimension>/<backend>.json`: per-video results and this run's execution provenance.
+- `<dimension>/<stage>/worker.log`: complete model output and tracebacks, with stage artifacts alongside.
+
+Successful records require finite scores; failures retain null and the original input identity. An incomplete task has `score: null`; `observed_subset_mean` is only a diagnostic. Official scores use the upstream aggregate, including MUSIQ's aggregate scale. Exit codes are 0 for complete success, 1 for incomplete scoring, 2 for setup/configuration errors, and 130 for interruption.
+
+The existing `scripts/evaluate_vbench.py` remains the strict paper interface (`repair` restricted to nine). Legacy per-metric CLIs retain their research meanings. This controller's official fallback does not promote historical repair candidates into the paper.

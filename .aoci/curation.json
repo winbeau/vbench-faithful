@@ -2,6 +2,26 @@
   "version": 1,
   "decisions": [
     {
+      "path": "docs/assets/fig2.pdf",
+      "decision": "exclude",
+      "role": "论文九维失配机制与修复流程的原版单页概览图",
+      "reason": "已查看该PDF的完整页面渲染，并验证与Overleaf源文件字节一致；三类机制、九维方法和Object/Color标签疑点由README及docs/assets/README.md承载。该图是上述论文说明的发布资产，没有额外可维护运行接口或独立协议。",
+      "confidence": 99,
+      "source_sha256": "ff007a6b586921a763914c0302c02c9dd5caf5eb68466d612a8fc1375d5cf195",
+      "agent": "codex",
+      "updated_at": "2026-10-08T03:25:47Z"
+    },
+    {
+      "path": "docs/assets/fig2.png",
+      "decision": "exclude",
+      "role": "README使用的论文概览图栅格预览",
+      "reason": "已完整查看九维标注与三联修复流程；该PNG由同目录fig2.pdf按docs/assets/README.md记录的Poppler命令渲染，没有独立于PDF和来源说明的评分、构建或协议语义，保留字节资产而不重复文本条目。",
+      "confidence": 99,
+      "source_sha256": "5021a4b620daef69bd8ba822d14da0db7573d590140c762f61c0153c30bee09f",
+      "agent": "codex",
+      "updated_at": "2026-10-08T03:25:47Z"
+    },
+    {
       "path": "docs/counterfactual-reports/subject_stability_20260920/cow_dose4_preview.png",
       "decision": "exclude",
       "role": "主体构造单帧诊断预览",

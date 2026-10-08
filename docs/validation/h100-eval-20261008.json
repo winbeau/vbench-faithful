@@ -1,0 +1,1247 @@
+{
+  "schema": "vbench-fast-eval-acceptance/1",
+  "utc": "2026-10-08T03:15:40.429587+00:00",
+  "host": "h100-server",
+  "scope": "representative inference and exact artifact reuse; not full research cohorts or retraining",
+  "gpu_inventory": [
+    "0, GPU-7f893bc3-9a65-24c1-47dd-1e4428cec01f, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB",
+    "1, GPU-6ff18a65-da11-8cd4-2dcf-1dc48fe45de9, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB",
+    "2, GPU-c8fff9e2-03b2-c88c-8b8c-568c7f6dde14, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB",
+    "3, GPU-c0af33a9-498c-ff7c-bb56-e9992ccded30, NVIDIA H100 80GB HBM3, 590.48.01, 81559 MiB"
+  ],
+  "thin_environments": {
+    "count": 22,
+    "allocated_disk": "4.0M"
+  },
+  "identity": {
+    "code_sha": "46187245ef7ba1509243e7f5bdcf708bb9e176bf",
+    "git_dirty": false,
+    "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+    "source_sha256": "8555b6376efb5764843c728de022fe85b67d38ce79fada9897c44e24aebbc9b2",
+    "lock_sha256": "152566923323a4510d85c46faf9021fb3c379ac4889102126dd6750504af07d7",
+    "gpu_info": {
+      "0": {
+        "torch": "2.5.1+cu121",
+        "cuda": "12.1",
+        "name": "NVIDIA H100 80GB HBM3",
+        "capability": [
+          9,
+          0
+        ]
+      },
+      "1": {
+        "torch": "2.5.1+cu121",
+        "cuda": "12.1",
+        "name": "NVIDIA H100 80GB HBM3",
+        "capability": [
+          9,
+          0
+        ]
+      },
+      "2": {
+        "torch": "2.5.1+cu121",
+        "cuda": "12.1",
+        "name": "NVIDIA H100 80GB HBM3",
+        "capability": [
+          9,
+          0
+        ]
+      },
+      "3": {
+        "torch": "2.5.1+cu121",
+        "cuda": "12.1",
+        "name": "NVIDIA H100 80GB HBM3",
+        "capability": [
+          9,
+          0
+        ]
+      }
+    }
+  },
+  "runs": {
+    "origin-final-cold": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/origin-final-cold",
+      "elapsed_seconds": 52.28726709703915,
+      "complete": true,
+      "tasks": 16,
+      "cached_tasks": 0,
+      "input_records": 16,
+      "unique_media_sha256": 11,
+      "input_ids": [
+        "scene:official",
+        "human_action:official",
+        "spatial_relationship:official",
+        "multiple_objects:official",
+        "object_class:official",
+        "color:official",
+        "subject_consistency:official",
+        "background_consistency:official",
+        "dynamic_degree:official",
+        "motion_smoothness:official",
+        "temporal_flickering:official",
+        "aesthetic_quality:official",
+        "imaging_quality:official",
+        "temporal_style:official",
+        "overall_consistency:official",
+        "appearance_style:official"
+      ],
+      "dimensions": {
+        "human_action/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "dynamic_degree/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "motion_smoothness/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9331857398110611,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "temporal_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.2592332363128662,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "object_class/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.0,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "spatial_relationship/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.48523731465197206,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "temporal_flickering/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9442926481658337,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "overall_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.3363248407840729,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "subject_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9200990736484528,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "multiple_objects/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.0,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "aesthetic_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.6092233657836914,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "appearance_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.30738281249999994,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "scene/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.625,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "background_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9221354166666667,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "color/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "official_upstream",
+          "cached": false
+        },
+        "imaging_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.6053875541687012,
+          "aggregation": "official_upstream",
+          "cached": false
+        }
+      }
+    },
+    "repair-final-cold": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/repair-final-cold",
+      "elapsed_seconds": 105.07365087594371,
+      "complete": true,
+      "tasks": 9,
+      "cached_tasks": 0,
+      "input_records": 19,
+      "unique_media_sha256": 16,
+      "input_ids": [
+        "scene:base",
+        "scene:cf",
+        "human_action:base",
+        "human_action:cf",
+        "spatial_relationship:base",
+        "spatial_relationship:cf",
+        "multiple_objects:base",
+        "multiple_objects:cf",
+        "object_class:base",
+        "object_class:cf",
+        "color:base",
+        "color:cf",
+        "subject_consistency:base",
+        "subject_consistency:cf",
+        "background_consistency:base",
+        "background_consistency:cf",
+        "dynamic_degree:base",
+        "dynamic_degree:cf-0",
+        "dynamic_degree:cf-1"
+      ],
+      "dimensions": {
+        "human_action/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "equal_video",
+          "cached": false
+        },
+        "dynamic_degree/repair": {
+          "input_count": 3,
+          "succeeded": 3,
+          "coverage": 1.0,
+          "score": 0.6645206188278044,
+          "aggregation": "equal_video",
+          "cached": false
+        },
+        "subject_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.9678837954998016,
+          "aggregation": "equal_video",
+          "cached": false
+        },
+        "multiple_objects/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.40625,
+          "aggregation": "equal_video",
+          "cached": false
+        },
+        "object_class/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "equal_video",
+          "cached": false
+        },
+        "spatial_relationship/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.25,
+          "aggregation": "equal_video",
+          "cached": false
+        },
+        "scene/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.8125,
+          "aggregation": "equal_video",
+          "cached": false
+        },
+        "background_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.9647716175426136,
+          "aggregation": "equal_video",
+          "cached": false
+        },
+        "color/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.5,
+          "aggregation": "equal_video",
+          "cached": false
+        }
+      }
+    },
+    "origin-final-warm": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/origin-final-warm",
+      "elapsed_seconds": 17.409560977015644,
+      "complete": true,
+      "tasks": 16,
+      "cached_tasks": 16,
+      "input_records": 16,
+      "unique_media_sha256": 11,
+      "input_ids": [
+        "scene:official",
+        "human_action:official",
+        "spatial_relationship:official",
+        "multiple_objects:official",
+        "object_class:official",
+        "color:official",
+        "subject_consistency:official",
+        "background_consistency:official",
+        "dynamic_degree:official",
+        "motion_smoothness:official",
+        "temporal_flickering:official",
+        "aesthetic_quality:official",
+        "imaging_quality:official",
+        "temporal_style:official",
+        "overall_consistency:official",
+        "appearance_style:official"
+      ],
+      "dimensions": {
+        "subject_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9200990736484528,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "multiple_objects/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.0,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "aesthetic_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.6092233657836914,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "appearance_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.30738281249999994,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "scene/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.625,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "background_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9221354166666667,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "color/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "imaging_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.6053875541687012,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "human_action/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "dynamic_degree/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "motion_smoothness/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9331857398110611,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "temporal_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.2592332363128662,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "object_class/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.0,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "spatial_relationship/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.48523731465197206,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "temporal_flickering/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9442926481658337,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "overall_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.3363248407840729,
+          "aggregation": "official_upstream",
+          "cached": true
+        }
+      }
+    },
+    "mixed-final-warm": {
+      "output": "/root/wenbiao_zhao/vbench-repair-eval-20261008/mixed-final-warm",
+      "elapsed_seconds": 33.602970716077834,
+      "complete": true,
+      "tasks": 16,
+      "cached_tasks": 16,
+      "input_records": 26,
+      "unique_media_sha256": 21,
+      "input_ids": [
+        "scene:base",
+        "scene:cf",
+        "human_action:base",
+        "human_action:cf",
+        "spatial_relationship:base",
+        "spatial_relationship:cf",
+        "multiple_objects:base",
+        "multiple_objects:cf",
+        "object_class:base",
+        "object_class:cf",
+        "color:base",
+        "color:cf",
+        "subject_consistency:base",
+        "subject_consistency:cf",
+        "background_consistency:base",
+        "background_consistency:cf",
+        "dynamic_degree:base",
+        "dynamic_degree:cf-0",
+        "dynamic_degree:cf-1",
+        "motion_smoothness:official",
+        "temporal_flickering:official",
+        "aesthetic_quality:official",
+        "imaging_quality:official",
+        "temporal_style:official",
+        "overall_consistency:official",
+        "appearance_style:official"
+      ],
+      "dimensions": {
+        "human_action/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "equal_video",
+          "cached": true
+        },
+        "dynamic_degree/repair": {
+          "input_count": 3,
+          "succeeded": 3,
+          "coverage": 1.0,
+          "score": 0.6645206188278044,
+          "aggregation": "equal_video",
+          "cached": true
+        },
+        "motion_smoothness/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9331857398110611,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "temporal_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.2592332363128662,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "subject_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.9678837954998016,
+          "aggregation": "equal_video",
+          "cached": true
+        },
+        "multiple_objects/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.40625,
+          "aggregation": "equal_video",
+          "cached": true
+        },
+        "aesthetic_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.6092233657836914,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "appearance_style/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.30738281249999994,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "scene/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.8125,
+          "aggregation": "equal_video",
+          "cached": true
+        },
+        "background_consistency/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.9647716175426136,
+          "aggregation": "equal_video",
+          "cached": true
+        },
+        "color/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.5,
+          "aggregation": "equal_video",
+          "cached": true
+        },
+        "imaging_quality/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.6053875541687012,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "object_class/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 1.0,
+          "aggregation": "equal_video",
+          "cached": true
+        },
+        "spatial_relationship/repair": {
+          "input_count": 2,
+          "succeeded": 2,
+          "coverage": 1.0,
+          "score": 0.25,
+          "aggregation": "equal_video",
+          "cached": true
+        },
+        "temporal_flickering/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.9442926481658337,
+          "aggregation": "official_upstream",
+          "cached": true
+        },
+        "overall_consistency/origin": {
+          "input_count": 1,
+          "succeeded": 1,
+          "coverage": 1.0,
+          "score": 0.3363248407840729,
+          "aggregation": "official_upstream",
+          "cached": true
+        }
+      }
+    }
+  },
+  "media": [
+    {
+      "id": "scene:official",
+      "sha256": "562672847853e838deb96829a74d18d51409c12213e09691e29d208967379493",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/scene/official/alley-0.mp4"
+    },
+    {
+      "id": "human_action:official",
+      "sha256": "3d7f85b1b70699575bcc03df10322ebc9db418dbac0afe8c93bb6710900a2cbe",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/human_action/official/A person is air drumming-0.mp4"
+    },
+    {
+      "id": "spatial_relationship:official",
+      "sha256": "acd764c8bec38a2d69d07458e30fb3889331d8f31b02972dc817f39b4465a8be",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/spatial_relationship/official/a banana on the bottom of an apple, front view-0.mp4"
+    },
+    {
+      "id": "multiple_objects:official",
+      "sha256": "d775f704c0665c5c6eb12a737c5551fe93f355850acbc4e3370575780bb31538",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/multiple_objects/official/a backpack and an umbrella-0.mp4"
+    },
+    {
+      "id": "object_class:official",
+      "sha256": "9a653b0ea3e7287e6eb36d0857dff3f3872b2fbe99df868293748dc0f5a09553",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/object_class/official/a backpack-0.mp4"
+    },
+    {
+      "id": "color:official",
+      "sha256": "8318d054cedce8fb8e1eb56291e2a5e917e9583238d51fabe7cd8246dedee0d6",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/color/official/a black bicycle-0.mp4"
+    },
+    {
+      "id": "subject_consistency:official",
+      "sha256": "5b6b0254b1975937428cb6ca6e63feaaaaa5784467e9a85a4c5125c748a7f0d3",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/subject_consistency/official/a bear catching a salmon in its powerful jaws-0.mp4"
+    },
+    {
+      "id": "background_consistency:official",
+      "sha256": "562672847853e838deb96829a74d18d51409c12213e09691e29d208967379493",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/background_consistency/official/alley-0.mp4"
+    },
+    {
+      "id": "dynamic_degree:official",
+      "sha256": "5b6b0254b1975937428cb6ca6e63feaaaaa5784467e9a85a4c5125c748a7f0d3",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/dynamic_degree/official/a bear catching a salmon in its powerful jaws-0.mp4"
+    },
+    {
+      "id": "motion_smoothness:official",
+      "sha256": "5b6b0254b1975937428cb6ca6e63feaaaaa5784467e9a85a4c5125c748a7f0d3",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/motion_smoothness/official/a bear catching a salmon in its powerful jaws-0.mp4"
+    },
+    {
+      "id": "temporal_flickering:official",
+      "sha256": "75631e606f9df7e0d64cf2efbcf63308e377e304af58cd2ffeab177ea27aa48e",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/temporal_flickering/official/A tranquil tableau of a beautiful wrought-iron bench surrounded by blooming flowers-0.mp4"
+    },
+    {
+      "id": "aesthetic_quality:official",
+      "sha256": "3f45951f84d6dc43972abd1119b010be09bca58ec794f42ee70950e2f51407ca",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/aesthetic_quality/official/A 3D model of a 1800s victorian house.-0.mp4"
+    },
+    {
+      "id": "imaging_quality:official",
+      "sha256": "3f45951f84d6dc43972abd1119b010be09bca58ec794f42ee70950e2f51407ca",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/imaging_quality/official/A 3D model of a 1800s victorian house.-0.mp4"
+    },
+    {
+      "id": "temporal_style:official",
+      "sha256": "2abcd296dee0a1d12ef0f0e97a3ba213e9619ad1280c9885303bd51f8855fb3c",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/temporal_style/official/A beautiful coastal beach in spring, waves lapping on sand, featuring a steady and smooth perspective-0.mp4"
+    },
+    {
+      "id": "overall_consistency:official",
+      "sha256": "3f45951f84d6dc43972abd1119b010be09bca58ec794f42ee70950e2f51407ca",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/overall_consistency/official/A 3D model of a 1800s victorian house.-0.mp4"
+    },
+    {
+      "id": "appearance_style:official",
+      "sha256": "e06a3d3d814548065e2f9e28b3d1510423a32662a1ccaf06be9fe761e0920d36",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/origin/appearance_style/official/A beautiful coastal beach in spring, waves lapping on sand by Hokusai, in the style of Ukiyo-0.mp4"
+    },
+    {
+      "id": "scene:base",
+      "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+      "duration_seconds": null,
+      "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/base/carrousel-0.gif"
+    },
+    {
+      "id": "scene:cf",
+      "sha256": "6867d3be0b4d172c5b34f951810d5758b99b4fc05902102f82c19675b2662eae",
+      "duration_seconds": null,
+      "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/scene/cf/carrousel-0.gif"
+    },
+    {
+      "id": "human_action:base",
+      "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+      "duration_seconds": null,
+      "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/base/A person is roller skating-0.gif"
+    },
+    {
+      "id": "human_action:cf",
+      "sha256": "face42af4f45798c37c7c5d7582c0c7012ab79d7d6593e333bb48e08a9506f7b",
+      "duration_seconds": null,
+      "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/human_action/cf/A person is roller skating-0.gif"
+    },
+    {
+      "id": "spatial_relationship:base",
+      "sha256": "4ab6cb1d502084d95aa2a0d75ffebd729549f197f6a5f7b481a42fa3662cc07a",
+      "duration_seconds": null,
+      "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/base/a parking meter on the right of a bench, front view-0.gif"
+    },
+    {
+      "id": "spatial_relationship:cf",
+      "sha256": "255b6bab921e7a1e84e177aa5c75c77caa8039851afe6935acdd1dec70426379",
+      "duration_seconds": 3.3,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/spatial_relationship/cf/6088d07a1fe33bc0bdbbb773-hflip.mp4"
+    },
+    {
+      "id": "multiple_objects:base",
+      "sha256": "cfd541b1dae8f63e2a0b7402af437ad843bbb68c8632ef2bc7ead7f72ef6ae33",
+      "duration_seconds": null,
+      "duration_source": "unknown: GIF frame lacks a positive explicit duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/base/a cat and a dog-0.gif"
+    },
+    {
+      "id": "multiple_objects:cf",
+      "sha256": "ad30e583f6554a195b41ab02d9a282728eb4efd1ae21bbe8f25158a166500f39",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/multiple_objects/cf/bc333ac5d30cc8c41cc40a3f.mp4"
+    },
+    {
+      "id": "object_class:base",
+      "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/base/video_00000.mp4"
+    },
+    {
+      "id": "object_class:cf",
+      "sha256": "f6c0ccd137f75382802924c5e9865f3c1a8d437cebd43146b6b45f8b1ef0aa4c",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/object_class/cf/video_00001.mp4"
+    },
+    {
+      "id": "color:base",
+      "sha256": "0f12bee1f0378ad3161ab34b8fcc54ea7ce40fbab6287e69e34b35a51af40ec5",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/base/video_00006.mp4"
+    },
+    {
+      "id": "color:cf",
+      "sha256": "40f78c5bcf9d02dd651591770033bc978c3bd9928a8f2dd7cb23615fe9129683",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/color/cf/video_00010.mp4"
+    },
+    {
+      "id": "subject_consistency:base",
+      "sha256": "6ea145d195999e9267bd3ae299a7deddbb9bb818279e6be6f0dca858becb4558",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/base/subject_consistency-base.mp4"
+    },
+    {
+      "id": "subject_consistency:cf",
+      "sha256": "8b5a36f945204fca63d4dd3cfa8dfdccb00388ebac1345fa92112af6bd61bccb",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/subject_consistency/cf/subject_consistency-cf.mp4"
+    },
+    {
+      "id": "background_consistency:base",
+      "sha256": "81b78a09d0e69eb5e130b93d743a57fb3691498578c1b0fe93a8e3fdadf8d4e6",
+      "duration_seconds": 4.125,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/base/background_consistency-base.mp4"
+    },
+    {
+      "id": "background_consistency:cf",
+      "sha256": "167f9b69f696eef994bc64978e4de732aad54c52c3bf734c9b018aa41fbd2243",
+      "duration_seconds": 4.125,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/background_consistency/cf/background_consistency-cf.mp4"
+    },
+    {
+      "id": "dynamic_degree:base",
+      "sha256": "d3b5b08406b3620fff62b6d2713a1dfd858ded796f28ad6f939ae512a31eb1f2",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/videos/repair/dynamic_degree/base/a car accelerating to gain speed-1.mp4"
+    },
+    {
+      "id": "dynamic_degree:cf-0",
+      "sha256": "ca4a263b227ac017e3874e0e9f2e4d4d580ac2011a23189cd5654549616af88e",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-0.mp4"
+    },
+    {
+      "id": "dynamic_degree:cf-1",
+      "sha256": "3af8de88e387a1a9be469bcf7a8b76d8cc92b9bec5c0e4fc2dde268fec3a0a8f",
+      "duration_seconds": 2.0,
+      "duration_source": "ffprobe format.duration",
+      "video": "/root/wenbiao_zhao/vbench-repair-eval-20261008/runtime/install-fixture/dynamic-cf/cf-1.mp4"
+    }
+  ],
+  "cache_parity": [
+    {
+      "run": "origin-final-warm",
+      "dimension": "subject_consistency",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "multiple_objects",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "aesthetic_quality",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "appearance_style",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "scene",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "background_consistency",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "color",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "imaging_quality",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "human_action",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "dynamic_degree",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "motion_smoothness",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "temporal_style",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "object_class",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "spatial_relationship",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "temporal_flickering",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "origin-final-warm",
+      "dimension": "overall_consistency",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "human_action",
+      "backend": "repair",
+      "rows": 2,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "dynamic_degree",
+      "backend": "repair",
+      "rows": 3,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "motion_smoothness",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "temporal_style",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "subject_consistency",
+      "backend": "repair",
+      "rows": 2,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "multiple_objects",
+      "backend": "repair",
+      "rows": 2,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "aesthetic_quality",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "appearance_style",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "scene",
+      "backend": "repair",
+      "rows": 2,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "background_consistency",
+      "backend": "repair",
+      "rows": 2,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "color",
+      "backend": "repair",
+      "rows": 2,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "imaging_quality",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "object_class",
+      "backend": "repair",
+      "rows": 2,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "spatial_relationship",
+      "backend": "repair",
+      "rows": 2,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "temporal_flickering",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    },
+    {
+      "run": "mixed-final-warm",
+      "dimension": "overall_consistency",
+      "backend": "origin",
+      "rows": 1,
+      "equal": true
+    }
+  ],
+  "repair_frozen_parity": {
+    "count": 19,
+    "max_absolute_error": 0.0,
+    "tolerance": 1e-06,
+    "passed": true,
+    "records": [
+      {
+        "id": "scene:base",
+        "expected": 0.8125,
+        "actual": 0.8125,
+        "error": 0.0
+      },
+      {
+        "id": "scene:cf",
+        "expected": 0.8125,
+        "actual": 0.8125,
+        "error": 0.0
+      },
+      {
+        "id": "human_action:base",
+        "expected": 1.0,
+        "actual": 1.0,
+        "error": 0.0
+      },
+      {
+        "id": "human_action:cf",
+        "expected": 1.0,
+        "actual": 1.0,
+        "error": 0.0
+      },
+      {
+        "id": "spatial_relationship:base",
+        "expected": 0.5,
+        "actual": 0.5,
+        "error": 0.0
+      },
+      {
+        "id": "spatial_relationship:cf",
+        "expected": 0.0,
+        "actual": 0.0,
+        "error": 0.0
+      },
+      {
+        "id": "multiple_objects:base",
+        "expected": 0.8125,
+        "actual": 0.8125,
+        "error": 0.0
+      },
+      {
+        "id": "multiple_objects:cf",
+        "expected": 0.0,
+        "actual": 0.0,
+        "error": 0.0
+      },
+      {
+        "id": "object_class:base",
+        "expected": 1.0,
+        "actual": 1.0,
+        "error": 0.0
+      },
+      {
+        "id": "object_class:cf",
+        "expected": 1.0,
+        "actual": 1.0,
+        "error": 0.0
+      },
+      {
+        "id": "color:base",
+        "expected": 1.0,
+        "actual": 1.0,
+        "error": 0.0
+      },
+      {
+        "id": "color:cf",
+        "expected": 0.0,
+        "actual": 0.0,
+        "error": 0.0
+      },
+      {
+        "id": "subject_consistency:base",
+        "expected": 0.9691315293312073,
+        "actual": 0.9691315293312073,
+        "error": 0.0
+      },
+      {
+        "id": "subject_consistency:cf",
+        "expected": 0.966636061668396,
+        "actual": 0.966636061668396,
+        "error": 0.0
+      },
+      {
+        "id": "background_consistency:base",
+        "expected": 0.9649107961943655,
+        "actual": 0.9649107961943655,
+        "error": 0.0
+      },
+      {
+        "id": "background_consistency:cf",
+        "expected": 0.9646324388908618,
+        "actual": 0.9646324388908618,
+        "error": 0.0
+      },
+      {
+        "id": "dynamic_degree:base",
+        "expected": 0.6755738467711915,
+        "actual": 0.6755738467711915,
+        "error": 0.0
+      },
+      {
+        "id": "dynamic_degree:cf-0",
+        "expected": 0.6646295186983838,
+        "actual": 0.6646295186983838,
+        "error": 0.0
+      },
+      {
+        "id": "dynamic_degree:cf-1",
+        "expected": 0.6533584910138379,
+        "actual": 0.6533584910138379,
+        "error": 0.0
+      }
+    ]
+  },
+  "full_remote_receipt": {
+    "path": "/root/wenbiao_zhao/vbench-repair-eval-20261008/acceptance-final.json",
+    "sha256": "b78c1756d2913151a02839982e85d0119c15506542642c12737d211742c75754"
+  }
+}
