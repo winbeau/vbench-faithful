@@ -1,0 +1,564 @@
+{
+  "schema": "object-color-lora-cf-completion/1",
+  "summaries": {
+    "object_class": {
+      "planned_primary": 14,
+      "complete_pairs": 14,
+      "origin_base": 0.9910714285714286,
+      "origin_cf": 0.0,
+      "repair_base": 0.9910714285714286,
+      "repair_cf": 0.9910714285714286,
+      "status_counts": {
+        "official": {
+          "succeeded": 28
+        },
+        "repair-lora": {
+          "succeeded": 28
+        }
+      },
+      "repair_all_available_pairs": 14,
+      "repair_all_base": 0.9910714285714286,
+      "repair_all_cf": 0.9910714285714286,
+      "common_repair_exactly_unchanged": 14,
+      "canonical_parity_max_abs_error": 0.0,
+      "raw_evidence_replayed": 28,
+      "raw_evidence_max_abs_error": 0.0,
+      "origin_historical_parity_rows": 28,
+      "origin_historical_parity_exact": true
+    },
+    "color": {
+      "planned_primary": 5,
+      "complete_pairs": 3,
+      "origin_base": 1.0,
+      "origin_cf": 0.7166666666666667,
+      "repair_base": 0.9583333333333334,
+      "repair_cf": 0.1875,
+      "status_counts": {
+        "official": {
+          "succeeded": 8,
+          "dropped_by_official": 2
+        },
+        "repair-lora": {
+          "succeeded": 10
+        }
+      },
+      "repair_all_available_pairs": 5,
+      "repair_all_base": 0.975,
+      "repair_all_cf": 0.1125,
+      "common_repair_exactly_unchanged": 0,
+      "canonical_parity_max_abs_error": 0.0,
+      "raw_evidence_replayed": 10,
+      "raw_evidence_max_abs_error": 0.0,
+      "origin_historical_parity_rows": 10,
+      "origin_historical_parity_exact": true
+    }
+  },
+  "semantic_execution": "frozen selected LoRA compiled outputs; NOT fresh Qwen inference",
+  "visual_execution": "fresh GRiT GPU inference for base and CF, both backends",
+  "artifacts_sha256": {
+    "output/object-color-lora-cf-20260923/scores/object_class/official/results.json": "09e1b302b20cad1482229c2808c67e28cb674ec7c02ef485294422846052dae7",
+    "output/object-color-lora-cf-20260923/scores/object_class/repair-lora/results.json": "e1380f17ae6f44d2fd9a4533d25e423a9997615ab04a2a3e9d01fe0af3c023d3",
+    "output/object-color-lora-cf-20260923/scores/color/official/results.json": "5c430de2aa791904f18538b4ec03fc362d385248588a4ccaaedc487dc741cf40",
+    "output/object-color-lora-cf-20260923/scores/color/repair-lora/results.json": "b3e1c8f4f6a1bbf0056a473b2b9354dca3aaf1779bac0f03655dfbc33aa1be49"
+  },
+  "paired": {
+    "object_class": [
+      {
+        "base_id": "067d83642a45da492b3e",
+        "base_query_uid": "067d83642a45da492b3e:canonical",
+        "cf_query_uid": "067d83642a45da492b3e:uppercase",
+        "sample_id": "067d83642a45da492b3e",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "15f2ee65eccc7813c5a8",
+        "base_query_uid": "15f2ee65eccc7813c5a8:canonical",
+        "cf_query_uid": "15f2ee65eccc7813c5a8:uppercase",
+        "sample_id": "15f2ee65eccc7813c5a8",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "1736abb91ae7667952ff",
+        "base_query_uid": "1736abb91ae7667952ff:canonical",
+        "cf_query_uid": "1736abb91ae7667952ff:uppercase",
+        "sample_id": "1736abb91ae7667952ff",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "1bd29565e4d7646286c6",
+        "base_query_uid": "1bd29565e4d7646286c6:canonical",
+        "cf_query_uid": "1bd29565e4d7646286c6:uppercase",
+        "sample_id": "1bd29565e4d7646286c6",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "1c3e4841315ea957362f",
+        "base_query_uid": "1c3e4841315ea957362f:canonical",
+        "cf_query_uid": "1c3e4841315ea957362f:uppercase",
+        "sample_id": "1c3e4841315ea957362f",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "1cb78dba07d74a7bd099",
+        "base_query_uid": "1cb78dba07d74a7bd099:canonical",
+        "cf_query_uid": "1cb78dba07d74a7bd099:uppercase",
+        "sample_id": "1cb78dba07d74a7bd099",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "1fe740b56828f4cc402f",
+        "base_query_uid": "1fe740b56828f4cc402f:canonical",
+        "cf_query_uid": "1fe740b56828f4cc402f:uppercase",
+        "sample_id": "1fe740b56828f4cc402f",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "22c8586101346a587f22",
+        "base_query_uid": "22c8586101346a587f22:canonical",
+        "cf_query_uid": "22c8586101346a587f22:uppercase",
+        "sample_id": "22c8586101346a587f22",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "33afb0cd686b57fec7d2",
+        "base_query_uid": "33afb0cd686b57fec7d2:canonical",
+        "cf_query_uid": "33afb0cd686b57fec7d2:uppercase",
+        "sample_id": "33afb0cd686b57fec7d2",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "45aa82a214b52f19d081",
+        "base_query_uid": "45aa82a214b52f19d081:canonical",
+        "cf_query_uid": "45aa82a214b52f19d081:uppercase",
+        "sample_id": "45aa82a214b52f19d081",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 0.875,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 0.875,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 0.875,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "47bb0eabb030fb9ba48c",
+        "base_query_uid": "47bb0eabb030fb9ba48c:canonical",
+        "cf_query_uid": "47bb0eabb030fb9ba48c:uppercase",
+        "sample_id": "47bb0eabb030fb9ba48c",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "4c84e8e13cdfc1571a3e",
+        "base_query_uid": "4c84e8e13cdfc1571a3e:canonical",
+        "cf_query_uid": "4c84e8e13cdfc1571a3e:uppercase",
+        "sample_id": "4c84e8e13cdfc1571a3e",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "4f3b6efe3dd1ec84c486",
+        "base_query_uid": "4f3b6efe3dd1ec84c486:canonical",
+        "cf_query_uid": "4f3b6efe3dd1ec84c486:uppercase",
+        "sample_id": "4f3b6efe3dd1ec84c486",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "50982fe25d73be528fd0",
+        "base_query_uid": "50982fe25d73be528fd0:canonical",
+        "cf_query_uid": "50982fe25d73be528fd0:uppercase",
+        "sample_id": "50982fe25d73be528fd0",
+        "dimension": "object_class",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          }
+        }
+      }
+    ],
+    "color": [
+      {
+        "base_id": "008cf1d73ad9d83fb48f",
+        "base_query_uid": "008cf1d73ad9d83fb48f:visibility:1.0",
+        "cf_query_uid": "008cf1d73ad9d83fb48f:visibility:0.0",
+        "sample_id": "008cf1d73ad9d83fb48f",
+        "dimension": "color",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": null,
+            "status": "dropped_by_official"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "013a582e290cf7b6109c",
+        "base_query_uid": "013a582e290cf7b6109c:visibility:1.0",
+        "cf_query_uid": "013a582e290cf7b6109c:visibility:0.0",
+        "sample_id": "013a582e290cf7b6109c",
+        "dimension": "color",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.4,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "1191409152a26c2e3a7b",
+        "base_query_uid": "1191409152a26c2e3a7b:visibility:1.0",
+        "cf_query_uid": "1191409152a26c2e3a7b:visibility:0.0",
+        "sample_id": "1191409152a26c2e3a7b",
+        "dimension": "color",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 0.75,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 0.875,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 0.1875,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "2483a015995b733ff350",
+        "base_query_uid": "2483a015995b733ff350:visibility:1.0",
+        "cf_query_uid": "2483a015995b733ff350:visibility:0.0",
+        "sample_id": "2483a015995b733ff350",
+        "dimension": "color",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 0.375,
+            "status": "succeeded"
+          }
+        }
+      },
+      {
+        "base_id": "357738f0c9ffc6b001b9",
+        "base_query_uid": "357738f0c9ffc6b001b9:visibility:1.0",
+        "cf_query_uid": "357738f0c9ffc6b001b9:visibility:0.0",
+        "sample_id": "357738f0c9ffc6b001b9",
+        "dimension": "color",
+        "primary": true,
+        "scores": {
+          "origin_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "origin_cf": {
+            "score": null,
+            "status": "dropped_by_official"
+          },
+          "repair_base": {
+            "score": 1.0,
+            "status": "succeeded"
+          },
+          "repair_cf": {
+            "score": 0.0,
+            "status": "succeeded"
+          }
+        }
+      }
+    ]
+  }
+}

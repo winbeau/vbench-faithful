@@ -2,6 +2,10 @@
 
 容器重置恢复与当前论文九维统一评分请先看 [恢复运行手册](CONTAINER_RESET.md)。
 新增 [Dynamic 外部泛化验证与数值复算](DYNAMIC_GENERALIZATION.md)，与原九维主表分开发布，权重不变。
+Object Class / Color 的[选定 LoRA 反事实缺项补测](OBJECT_COLOR_LORA_CF.md)已完成，
+两行分别为 0.9911→0.9911、0.9583→0.1875（Color 共同有效 3 对）；旧九维快照中的
+metadata Repair 方法身份不变。Multiple Objects 的旧遮挡行另见[适用条件审计](MULTIPLE_OBJECTS_CF_AUDIT.md)，
+不能将其直接用作 LoRA 文本解析修复证据。
 已新增实际视频端到端验收和完整依赖归档；下文保留首次发布时的全量实验验收边界。
 
 2026-09-23 审计结论：**不能把“上传和哈希验收完成”表述为“全部实验从零复现完成”。**
