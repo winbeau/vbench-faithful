@@ -1527,6 +1527,7 @@ version = "0.1.0"
 source = { editable = "metrics/overall-consistency" }
 dependencies = [
     { name = "audit-core" },
+    { name = "audit-models" },
     { name = "numpy" },
 ]
 
@@ -1549,6 +1550,7 @@ models = [
 [package.metadata]
 requires-dist = [
     { name = "audit-core", editable = "packages/audit-core" },
+    { name = "audit-models", editable = "packages/audit-models" },
     { name = "decord", marker = "extra == 'models'" },
     { name = "einops", marker = "extra == 'models'" },
     { name = "ftfy", marker = "extra == 'models'" },

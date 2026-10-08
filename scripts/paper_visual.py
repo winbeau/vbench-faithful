@@ -140,11 +140,11 @@ def score_rows(rows, returned, implementation):
 def accelerated(rows, dim, assets):
     import torch
     # Dimensions are enabled individually after their implementation/validation.
-    if dim not in {"appearance_style", "imaging_quality", "aesthetic_quality", "temporal_style"}:
+    if dim not in {"appearance_style", "imaging_quality", "aesthetic_quality", "temporal_style", "overall_consistency"}:
         raise ValueError(f"No accelerated implementation for {dim}")
     adapter = importlib.import_module(dim + ".accelerated")
     diagnostics = {}
-    extra = {"diagnostics": diagnostics} if dim == "temporal_style" else {}
+    extra = {"diagnostics": diagnostics} if dim in {"temporal_style", "overall_consistency"} else {}
     aggregate, returned = adapter.compute(rows, torch.device("cuda:0"), official_submodules(dim), **extra)
     return {"rows": score_rows(rows, returned, "accelerated"), "aggregate": float(aggregate),
             "implementation": "project accelerated", "aggregation": "vbench_native_reducer",
