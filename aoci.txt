@@ -1,10 +1,11 @@
 #====VBench Repair 仓库认知索引====
 #Locale: zh-CN
 #===头部索引===
-#【部署】Python 3.11.14、uv workspace；uv sync --locked 建立开发环境；科学测试使用 test group 与 CPU torch overlay。十六 metric 独立包共享 audit-core/audit-models；快捷入口 scripts/eval.py 使用 YAML、逐维薄环境、共享外置权重及固定视觉/语义ABI运行时。严格论文入口 scripts/evaluate_vbench.py；容器恢复 scripts/restore_paper_runtime.py。
+#【部署】Python 3.11.14、uv workspace；uv sync --locked 建立开发环境；科学测试使用 test group 与 CPU torch overlay。十六 metric 独立包共享 audit-core/audit-models；scripts/eval.py 使用平铺 YAML、逐维薄环境和共享外置资产，视觉/语义模型依赖保持固定ABI隔离。严格论文入口 scripts/evaluate_vbench.py；运行时恢复 scripts/restore_paper_runtime.py。
 #【系统】视频生成评测的审计、反事实实验与修复工作区。metrics 下各维独立包拥有评分公式；audit-core 管输入、元数据、设备、调度、结果与 provenance；audit-models 仅封装共用模型。metric 不互相导入。冻结研究输入及结果不可改写；模型权重、驱动、外部 checkout 不入库。不得把 CPU 合约通过、缓存复算、上传完整性称作真实 GPU 推理或模型 parity。
-#【入口合同】论文 repair 固定 scene、human_action、object_class、subject_consistency、background_consistency、dynamic_degree、spatial_relationship、multiple_objects、color 九维；origin --dimensions all 覆盖官方十六维，快捷入口 repair/all 对其余七维显式回退官方。原有十二分维研究CLI使用 --vbench/--audit/--both 和 --video/--video-dir；aesthetic-quality、imaging-quality、temporal-flickering、appearance-style 四个包CLI沿用YAML并固定本维。研发十一维及 legacy 包不代表论文修复范围。
-#【执行合同】论文输入先验证媒体哈希和唯一 id，执行前核对选定源码及模型哈希；语义与视觉环境由独立子进程连接。输出须为冻结目录以外的新目录；失败分数为 null，不完整覆盖只报告 observed_subset_mean，不冒充完整均值。官方聚合保留上游 reducer；多卡逻辑设备及完整覆盖必须核验。
+#【入口合同】论文修复固定 scene、human_action、object_class、subject_consistency、background_consistency、dynamic_degree、spatial_relationship、multiple_objects、color 九维。快捷入口默认 ours 为九修复加七 accelerated，official 调用固定原版十六维，both 全维32任务；repair/origin 是其兼容别名，无官方回退。严格论文入口仍只允许九维 repair。原有十二分维研究CLI保留历史接口；新增 aesthetic-quality、imaging-quality、temporal-flickering、appearance-style 四包CLI使用YAML且固定本维。研发十一维不代表论文修复范围。
+#【执行合同】先验媒体哈希和唯一 id，再完整核对选定源码及模型哈希；项目逐维独立进程，原版每GPU一个常驻进程直调上游compute并保留原生reducer。输出必须为冻结目录外的新目录；失败分数为 null，不完整主均值为null且返回1，observed_subset_mean不冒充完整均值。MUSIQ单片与总体量纲不同。多卡逻辑设备及完整覆盖必须核验，停止时仅回收本次进程组；阶段时长相加不能代替端到端墙钟。
+#【缓存与验收】跨次阶段缓存绑定有序媒体、prompt/标注、模型/源码/环境/GPU身份并复核内容哈希。no-reuse禁前次推理复用，允许当前运行的GRiT相同帧或ViCLIP视频特征共享；ObjectDet与Color DenseCap协议分离，文本与分数不跨维共享。七维加速逐视频误差须≤max(1e-6,1%×原版绝对值)且身份覆盖完整；九维对照选定修复并保留失败，Subject批处理仅数值容差一致。单次同组计时与数值一致不证明任意媒体的速度或感知质量。
 #【研究约束】Dynamic/Motion 与 Subject 只共享 sampled videos，不共享标注或公式；Dynamic aligned-v1 保留原生方形帧协议，外部矩形全帧适配仅用于独立实验。实验报告区分构造合格分母、均值与逐片表现、自然偏好与反事实契约；历史负结果和未验证项必须保留。
 #【整体规范】
 #三分法: #开头是说明；===描述/绝对目录/===开启目录段；段内非空非注释行为独立条目。
@@ -37,11 +38,11 @@
 AGENTS.md[GWS9M]: F:研发行为约束 | R:README.md,docs/plans/2026-09-14-workspace-refactor.md | A:仓库 Agent 工作规则 | S:冻结 data/results/splits/runs 不改写；视频共享不等于公式或标注共享；论文九维与研发十一维分别解释；AOCI 原始仓库约定保留在托管区外
 CONTRIBUTING.md[DWS7T]: F:开发贡献规范 | R:pyproject.toml,.githooks/commit-msg | A:环境安装、测试和提交约定 | S:CPU torch overlay 与模型环境分开；纯算法测试不能证明真实模型 parity
 IMPLEMENTATION_PLAN.md[DWS5S]: F:初始架构规划 | R:docs/plans/2026-09-14-workspace-refactor.md | A:八维工程设计草案 | S:中文目录、未实现入口与旧 fork 路径是归档设计上下文，实际行为须查当前 README 和源码
-README.md[DWS9M]: F:项目使用导航 | R:scripts/eval.py;configs/eval.yaml;docs/evaluation.md;docs/reproduction/README.md;docs/assets/README.md;docs/validation/h100-performance-20261008.md | A:安装、输入准备、十六维包入口、论文方法与引用 | S:repair九维修复加七维官方回退,both全维25任务；新增四维CLI沿用YAML且固定本维,其余十二保留历史接口；根环境不混合视觉语义ABI；Dynamic限原生方形16帧8FPS；代表推理、缓存复用与完整研究复现分别解释
+README.md[DWS9M]: F:项目使用导航 | R:scripts/eval.py;configs/eval.yaml;docs/evaluation.md;docs/reproduction/README.md;docs/assets/README.md;docs/validation/h100-same32-final-20261008.md | A:安装、输入准备、十六维包入口、论文方法与引用 | S:默认ours为九维修复加七维加速，official运行固定原版且both全维32任务；新增四维CLI沿用YAML且固定本维，其余十二保留研究接口；根环境不混合视觉语义ABI；Dynamic限原生方形16帧8FPS；同组计时保留缺失分母，数值接近不证明感知质量；代表推理、缓存复用与完整研究复现分别解释
 SCENE_AUDIT_PLAN.md[DSC5T]: F:场景机制审计 | R:metrics/scene/src/scene/backends/vbench.py,metrics/scene/src/scene/backends/audit.py | A:官方词汇匹配与区域聚合方案 | S:描述的是旧 fork 上的审计；Tag2Text 逐帧词汇匹配不等于环境语义认证，不能替代论文当前语义路线
 aoci.txt[GWS9T]: F:仓库认知地图 | R:AGENTS.md,.aoci/config.json | A:AOCI Header 与 FRAS 索引 | S:正式语义只经绑定源码证据的受治理写入更新；覆盖和认知可靠性由实时工具分别报告
 pyproject.toml[GWS9T]: F:工作区依赖聚合 | R:uv.lock;.python-version;packages/audit-core/pyproject.toml;packages/audit-models/pyproject.toml | A:十六metric及共用包workspace、models extra、test组与pytest规则 | S:根包package=false；包兼容范围宽于工作区固定Python补丁版；test不自动安装torch；新增官方薄包的模型依赖由恢复运行时共享,不复制到根开发环境；pytest使用importlib避免同名测试冲突
-uv.lock[PWS8HL]: F:工作区依赖锁定 | R:pyproject.toml;packages/audit-core/pyproject.toml;.python-version | A:十九workspace成员、平台条件、依赖组、extras及分发哈希 | S:十六metric加两个共用包及根项目共享锁；锁文件本身不提供运行时模型隔离；test不安装torch,CPU overlay和论文固定ABI运行时另有合同；包兼容范围不替代工作区固定Python
+uv.lock[PWS8HL]: F:工作区依赖锁定 | R:pyproject.toml;packages/audit-core/pyproject.toml;packages/audit-models/pyproject.toml;.python-version | A:workspace成员、editable来源、extras、依赖组、平台分支与分发hash | S:十九成员为十六metric、两个共用包与virtual根项目；dev仅pytest,test另含科学库且不安装torch；models扩展引入PyPI Torch及Linux CUDA依赖,锁不提供论文固定ABI或运行时模型隔离；registry分发绑定hash,editable仍依赖实际源码；Python条件分支不替代工作区固定解释器,CPU overlay另行安装
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/.githooks/===
 commit-msg[GWS5T]: F:提交标题钩子 | R:scripts/check_commit_message.py | A:commit-msg 消息文件参数 | S:校验器路径从 Git 仓库根解析
@@ -107,9 +108,13 @@ schemas.py[CIO8T]: F:评分记录结构 | R:packages/audit-core/src/vbench_audit
 upstream.py[CPV9M]: F:官方来源受控导入 | R:configs/upstream.toml,configs/reproduction/vbench-source.json,packages/audit-core/src/vbench_audit_core/paths.py | A:load_config、resolve_upstream_path、inspect_upstream、verify_upstream、import_official_module | S:固定 remote、SHA、clean 及源文件哈希；无 Git 导出须全文件集合和哈希相等且无软链；拒绝进程中缓存的其他 VBench 来源，环境路径运行时解析
 environments.py[CRT8M]: F:逐维环境构建 | R:scripts/eval.py;tests/test_eval_environments.py | A:prepare_environment(dimension,role,base_python,env_root) | S:uv离线创建同ABI薄venv,通过pth只读共享基础依赖且清理其他metric的路径和editable映射；保留启动器软链接语义；文件锁与临时目录原子发布；身份绑定解释器和包元数据而非全部包载荷；共享基础环境运行中必须不可变,损坏缓存拒绝覆盖
 eval_cache.py[CRT8HT]: F:评分产物复用 | R:scripts/eval.py;tests/test_fast_eval.py | A:identity;file_digest;exclusive_lock;ArtifactCache.materialize | S:整批身份按JSON哈希,每键进程锁；compute返回真才发布,调用者负责完整性；命中前逐文件验hash,损坏则生成新代次且不覆盖旧证据；运行目录软链指向永久代次以保留诊断绝对路径；no-reuse在运行目录独立写出
-eval_config.py[CPP8M]: F:评测参数解析 | R:configs/eval.yaml;scripts/eval.py;tests/test_eval_config.py | A:EvalConfig.as_dict;load_config;PAPER_DIMENSIONS;OFFICIAL_DIMENSIONS | S:只接受平铺安全YAML,拒绝重复未知键及anchor/alias,布尔仅true/false；文件路径相对配置,覆盖路径相对cwd；环境变量必须存在；只解析合同不读取媒体或创建目录；维度规范化去重,GPU接受可见索引或完整UUID
+eval_config.py[CPP8M]: F:评测参数解析 | R:configs/eval.yaml;scripts/eval.py;tests/test_eval_config.py | A:EvalConfig.as_dict;load_config;PAPER_DIMENSIONS;OFFICIAL_DIMENSIONS | S:默认ours归一为repair，official归一为origin；只接受平铺安全YAML，拒绝重复未知键、嵌套集合和anchor/alias，布尔仅true/false；配置路径相对YAML，覆盖路径相对cwd，环境变量须存在且output必须未占用；不加载输入媒体或创建目录；维度别名规范化后拒绝重复，GPU可用可见索引或完整UUID
 eval_logging.py[CIO7S]: F:评测进度记录 | R:scripts/eval.py;tests/test_eval_config.py | A:EvalLogger上下文,event,finish_task,summary | S:多线程事件持锁追加UTC JSONL；仅交互终端展示动态进度,模型原始输出由worker日志保存；异常保留抛出且记录,缺失分数不显示为零
 eval_cli.py[CRT8T]: F:单维命令桥接 | R:packages/audit-core/src/vbench_audit_core/paths.py;scripts/eval.py | A:metric_main(dimension,argv) | S:定位workspace后临时引入scripts加载控制器并恢复sys.path；固定维度由控制器main参数绑定,无需另起模型环境或复制评分公式
+run_inference_cache.py[CPV8HT]: F:运行内推理缓存 | R:packages/audit-core/src/vbench_audit_core/eval_cache.py;packages/audit-models/src/vbench_audit_models/grit.py;packages/audit-models/src/vbench_audit_models/viclip.py | A:RunInferenceCache.get_or_compute及hits/misses计数 | S:调用者以新运行目录和模型/源码/协议/运行时命名空间限制共享范围；命中须同时通过键、payload内容哈希和valid回调，坏缓存重算，无效推理不落盘；同键在锁内计算并经临时文件原子替换；这里只承载中间推理，不能把命中记为新模型推理或跨运行分数复用
+score_agreement.py[CPV8T]: F:逐视频数值验收 | R:scripts/benchmark_accelerated_dimension.py;scripts/summarize_speed32.py;tests/test_score_agreement.py | A:compare_scores(reference,candidate,rtol,atol)与逐行验收报告 | S:要求非空唯一且完全相同ID集合，媒体路径、哈希和prompt逐项相等，两边均成功且分数有限；逐视频误差须不超过max(atol,rtol×abs(reference))，所有行通过才通过；容差不能为负或非有限，零分使用绝对下限，数值一致不代表感知质量提升
+video_batches.py[CRT8BT]: F:保序解码批处理 | R:metrics/aesthetic-quality/src/aesthetic_quality/accelerated.py;metrics/imaging-quality/src/imaging_quality/accelerated.py;tests/test_video_batches.py | A:prefetch;frame_batches | S:解码最多预取workers个输入且按源顺序交付，异常传播并关闭线程池；跨视频只合并shape、dtype和device一致的帧，随批返回owner，遇边界或尾部保留短批；空视频和非法批大小拒绝，不在共享层更改采样或评分公式
+worker_rpc.py[CRT8PT]: F:持久进程通信 | R:scripts/eval.py;scripts/paper_official_server.py;tests/test_worker_rpc.py | A:JsonWorker.request;serve | S:私有Unix套接字使用单行JSON和单调用方顺序请求，子进程生命周期由外部Workers管理；存活进程复用，死亡后下次请求清理并重启；只有启动连接设60秒期限，推理等待由外部取消终止；处理器异常返回失败并保留服务循环，断连或失败回包抛出含日志路径的错误
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/packages/audit-models/===
 pyproject.toml[GMD5T]: F:共享模型包声明 | R:packages/audit-core/pyproject.toml,pyproject.toml | A:audit-models 包与 models extra | S:科学数组库为直接依赖，torch 等模型运行依赖放可选组
@@ -127,16 +132,19 @@ construction.py[MMD7T]: F:独立构造掩码 | R:packages/audit-models/src/vbenc
 cotracker3.py[MMD8S]: F:轨迹模型安全加载 | R:packages/audit-models/src/vbench_audit_models/point_tracker.py | A:verify_local_assets、source_identity、CoTracker3OfflineModel.track_queries | S:加载前后核对完整本地源码及权重大小和哈希，weights_only 严格装载；查询帧强制可见不构成独立轨迹认证
 dino_dense.py[MMD7S]: F:稠密描述子提取 | R:- | A:local_vit_base、model_geometry、DinoDenseModel.extract | S:区分块九 keys、末块 patch tokens 和 CLS 注意力；像素中心几何明确，注意力不是语义掩码；临时 utils 注入仅适合隔离进程
 foreground.py[MMD8S]: F:独立前景定位封装 | R:packages/audit-core/src/vbench_audit_core/inputs.py | A:CocoSubjectBoxDetector、load_mobile_sam_predictor、MobileSamForegroundProvider | S:固定 torchvision 及权重哈希，禁止默认下载；SAM 网格用等价位置编码适配；缺检测输出空掩码，不代表物理前景不存在
-grit.py[MMD8S]: F:双头实例证据保留 | R:packages/audit-core/src/vbench_audit_core/upstream.py | A:GritEvidenceModel、preflight、serialize_instances、bind_heads | S:两头长度相等不足以认证身份，需框索引精确匹配或唯一双向 IoU；保留歧义与未匹配项，hook 只记录不改变官方返回
+grit.py[MMD8HM]: F:双头实例证据 | R:packages/audit-core/src/vbench_audit_core/upstream.py;packages/audit-core/src/vbench_audit_core/run_inference_cache.py;tests/test_grit_prediction_path.py | A:predict_instances;SameFrameObjectDet;preflight;serialize_instances;box_iou;bind_heads;GritEvidenceModel | S:原predictor免绘图；同帧同feature/proposal对象、等价解码器且紧邻ObjectDet才复用深拷贝，DenseCap仍双头；身份须框索引认证或唯一双向IoU并留歧义；成功证据按模型/任务/运行时/帧字节仅运行内缓存，命中仍预检；不评分
 labels.py[MMD8S]: F:提示词目标编译 | R:packages/audit-core/src/vbench_audit_core/inputs.py | A:LabelVocabulary、compile_prompt、validate_compilation、compilation_request | S:词表精确别名闭包拒绝循环，多义或否定目标保留 null；颜色仅绑定目标，不以近邻类别或视觉证据补答
 point_tracker.py[MMD7T]: F:本地点轨迹推理 | R:- | A:CoTracker2Model.track、CoTracker2Model.track_queries | S:任意时间查询的 backward_tracking 不等于独立反向端点检查；track_queries 保留出画预测，track 的反向查询端点先截到画面内
 prompt_compiler.py[MMD8T]: F:离线语义编译接入 | R:packages/audit-models/src/vbench_audit_models/labels.py | A:PromptCompiler | S:只用原始 prompt 查表，验证维度、模式、词表哈希与 prompt-only 输入声明；缺记录或无效输出不回退伪造标签
-qwen.py[MMD8HS]: F:单底座适配器路由 | R:packages/audit-models/src/vbench_audit_models/labels.py;packages/audit-core/src/vbench_audit_core/inputs.py | A:QwenPromptRouter.from_local;generate;compile | S:本地底座分片须匹配架构和索引；四线程完整哈希保持provenance；bfloat16/SDPA与贪心生成固定；每维独立命名LoRA,锁保护激活并恢复先前状态；超上下文拒绝而不截断,无跨头回退
+qwen.py[MMD8HS]: F:单底座适配器路由 | R:packages/audit-models/src/vbench_audit_models/labels.py;packages/audit-core/src/vbench_audit_core/inputs.py;scripts/paper_semantic.py | A:QwenPromptRouter.from_local;generate;generate_many;compile;compile_many | S:本地底座须通过分片索引及架构检查并完整哈希，固定bfloat16/SDPA和无thinking贪心生成；每维独立命名LoRA，锁保护激活并恢复原路由，无跨头回退；批量生成使用左填充并按填充宽度裁掉输入，结束或异常恢复tokenizer状态；超过上下文上界拒绝而不截断，编译失败保留原始输出和逐请求状态
 raft.py[MMD8T]: F:官方稠密光流封装 | R:packages/audit-core/src/vbench_audit_core/upstream.py | A:RaftFlowModel.compute_flow | S:沿用上游二十次 test_mode 迭代并去除 InputPadder 填充；仅返回光流，不包含 Dynamic 或 Motion 评分公式
 sam_regions.py[MMD7S]: F:区域提案证据导出 | R:packages/audit-core/src/vbench_audit_core/inputs.py | A:SamRegionModel、SamPromptRegionModel、pack_proposals、unpack_masks | S:保留全部自动及提示假设，不按面积、类别或置信度晋升目标；二进制掩码无损打包，区域不是轨迹或运动证书
 semantic_foreground.py[MMD7T]: F:提案语义资格判定 | R:packages/audit-models/src/vbench_audit_models/automatic_foreground.py | A:proposal_views、ClipProposalClassifier、select_semantic_mask | S:物体与场景词表须非空互斥，组合原图与中性背景视图；几何及语义裕量同时合格后选最大面积，缺失保持空
 torchvision_flow.py[MMD7T]: F:本地 RAFT 光流适配 | R:- | A:TorchvisionRaftFlowModel.compute_flow、source_identity | S:显式 uint8 RGB，放大倍率限 1–4；填充到至少 128 且八的倍数，输出向量还原到原图像素单位
 vjepa.py[MMD9T]: F:冻结视频特征提取 | R:- | A:FrozenVJEPA.preprocess、FrozenVJEPA.encode | S:必须 clean 的固定上游及本地权重大小/哈希；原生方形 RGB 帧按配置采样，编码器禁梯度；特征形状和有限值校验，模型内不含评分头
+batched_text.py[MMD8BT]: F:文本批量预生成 | R:scripts/paper_semantic.py;vendor/vbench_prompts_compile/src/vbench_prompts_compile/inference.py;tests/test_batched_text.py | A:prepared_router_generation上下文管理器 | S:仅相同完整user文本去重，保持冻结路由器的chat模板与贪心生成参数；左填充后按统一输入宽度截取新token，移除token_type_ids；上下文内仅允许当前task、文本和token预算完全匹配的generate回放，原predict与解析继续执行；正常或异常退出均恢复原generate和padding_side，不回滚活动task，调用方须串行使用同一路由器
+clip_vision.py[MMD8GT]: F:CLIP视觉塔装载 | R:metrics/aesthetic-quality/src/aesthetic_quality/accelerated.py;tests/test_clip_vision.py;clip.model | A:CLIPImageEncoder.encode_image;load_clip_vision | S:仅接受本地JIT ViT且位置网格必须方形，检查点身份由调用方验证；meta构造跳过随机初始化，严格复制全部视觉权重而不继承检查点dtype，保持CLIP混合精度及FP32归一层/位置嵌入；CPU转全float32，图像输入随卷积权重dtype转换，不构造文本塔
+viclip.py[MMD8HT]: F:ViCLIP批量特征 | R:metrics/temporal-style/src/temporal_style/accelerated.py;metrics/overall-consistency/src/overall_consistency/accelerated.py;packages/audit-core/src/vbench_audit_core/run_inference_cache.py | A:load_model;embeddings及diagnostics | S:八帧middle与224变换，保序留尾批；独立worker预取前临时跳过严格装载将覆盖的随机初始化，异常亦恢复；仅运行内缓存FP32视觉批次，绑定输入字节/形状/dtype/批大小和模型/运行时；命中须形状正确且有限，当前prompt另编码，diagnostics区分新推理
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/configs/dynamic-static-jitter/===
 calibration.natural63-intensity-v1.json[PDY7T]: F:强度尺度冻结 | R:configs/dynamic-static-jitter/scoring.natural63-calibration-v1.json,configs/dynamic-static-jitter/sources.natural63-calibration-v1.jsonl | A:I/(I+scale) 校准参数与来源哈希 | S:仅独立63开发原片对齐Origin均值，非修复有效性验证，未晋升公共默认
@@ -260,9 +268,9 @@ object_color_natural_prepare.py[EOC8HS]: F:自然集队列冻结 | R:scripts/obj
 object_color_natural_report.py[EST8HM]: F:自然物色联合统计 | R:scripts/object_color_natural.py;scripts/evaluate_pairwise_statistics.py;object_class.algorithms;color.algorithms | A:paper_win_ratios;population;replay;analyze;CLI | S:Base/LoRA从冻结文本与同份GRiT证据复算非新视觉推理;null及官方可用性须一致;缺失在全偏好分母计失败,共同有效对另报;dev校准tie、prompt簇配对bootstrap;LoRA全体含训练prompt仅描述,独立test交集单列
 object_color_report.py[EST8HM]: F:物色基底配对统计 | R:scripts/object_color_experiments.py;scripts/object_color_delivery.py;object_class.algorithms;color.algorithms | A:paired;gate;load_run;object_report;color_report;replay_color_ablations;CLI | S:按base统计中位效应与bootstrap,不以pooled CPA作结论;Color Repair用完整端点且加排序门槛,其他后端用已定义级别最大偏离;同义控制缺对不能全局通过;缺失留null,自动缺目标非人工真值;消融仅缓存重放
 object_color_semantics.py[EOC8GM]: F:物色语义训练 | R:scripts/object_color.py;vbench_audit_models.labels;vbench_audit_models.qwen;configs/four_dimension/object_color_teacher.json | A:silver_request;validate_silver;CLI silver/train/compile | S:八类银标逐源冻结,API model+fingerprint漂移隔离且预算预扣;跨源重复prompt不入训练,人工审核保持待办;每维全新独立LoRA只读prompt,固定步数不dev选优,超长拒绝截断;编译离线复用同底座不同头
-paper_common.py[CPP9HM]: F:论文输入执行合同 | R:scripts/evaluate_vbench.py;scripts/eval.py;scripts/paper_visual.py;scripts/paper_semantic.py;configs/reproduction/release.json | A:PAPER/OFFICIAL/TASKS;dimension;load_assets;load_inputs;python_paths;configure_imports;summarize;result;process;asset_requirements;verify_assets | S:输入先验唯一id与媒体hash,相对路径基于清单；Python启动器保留venv软链接；选维路径隔离其他metric；成功须有限分数,失败null且不完整主均值null；验证默认串行,可并行完整读文件；并发返回按pin顺序,较早损坏先于后续配置错误
-paper_semantic.py[MPP9GT]: F:论文语义评分工人 | R:scripts/paper_common.py;vendor/vbench_prompts_compile/scripts/score_matrix.py;vbench_audit_models.qwen | A:CLI --input --assets --output --dimension --evidence | S:选定adapter hash先验证;Object/Color只从唯一prompt产LoRA编译结果,四语义维使用固定论文score_one;Scene可读帧caption而其他任务仅读prompt;K400词表固定;证据覆盖须精确,缺证据或缺评分保留null
-paper_visual.py[MPP9GM]: F:论文视觉评分工人 | R:scripts/paper_common.py;scripts/paper_semantic.py;packages/audit-core/src/vbench_audit_core/upstream.py;metrics/aesthetic-quality/src/aesthetic_quality/official.py;metrics/imaging-quality/src/imaging_quality/official.py;metrics/temporal-flickering/src/temporal_flickering/official.py;metrics/appearance-style/src/appearance_style/official.py | A:evidence;official;repair;--input;--assets;--output;--dimension;--mode;--compiled | S:复核媒体hash且必须CUDA；新增四维官方调用各自包适配器,其他官方保留直调；缺失行留dropped/null且保留原生aggregate；四语义维沿用固定视觉证据；Dynamic原生16帧8FPS；Subject固定hybrid排缺失,Background固定patch校准；重名媒体拆批防metadata覆盖
+paper_common.py[CPP9HM]: F:论文输入执行合同 | R:scripts/evaluate_vbench.py;scripts/eval.py;scripts/paper_visual.py;scripts/paper_semantic.py;configs/reproduction/release.json | A:PAPER/OFFICIAL/TASKS;dimension;load_assets;load_inputs;python_paths;configure_imports;summarize;result;process;asset_requirements;verify_assets | S:输入先验唯一id与媒体hash,相对路径基于清单；Python启动器保留venv软链；选维路径隔离其他metric,upstream_only不注入metric；成功须有限分数,失败null且不完整主均值null；可并行完整读资产但不凭stat复用校验,返回与错误按pin顺序
+paper_semantic.py[MPP9GS]: F:论文语义评分工人 | R:scripts/paper_common.py;vendor/vbench_prompts_compile/scripts/score_matrix.py;packages/audit-models/src/vbench_audit_models/qwen.py;packages/audit-models/src/vbench_audit_models/batched_text.py | A:CLI --input --assets --output --dimension --evidence | S:先验选定adapter哈希；Object/Color唯一prompt批量编译,四语义维仍用固定score_one及K400；Scene可读帧caption,其他目标仅读prompt；批量32保留请求顺序与逐项解析,CPU线程限三；证据身份须精确覆盖,无效证据或缺失评分保持failed/null
+paper_visual.py[MPP9GM]: F:视觉后端执行 | R:scripts/paper_common.py;scripts/paper_official_server.py;packages/audit-models/src/vbench_audit_models/grit.py;subject_consistency.models;dynamic_degree.learned_probe | A:evidence;official_submodules;official;score_rows;accelerated;repair;CLI --input --assets --output --dimension --mode --compiled | S:复核媒体hash和上游,禁隐式下载；原版upstream_only直调compute,四包适配仅用于普通official路径；七维加速保留原生reducer,仅Flickering加速无需CUDA；Spatial/Objects使用ObjectDet并显式报告当前运行缓存命中；Dynamic限原生16帧8FPS,Subject固定hybrid/exclude/preencode_crop并批量16帧；重名媒体拆批防metadata覆盖,缺失返回null
 prepare_human_action_execution.py[EHA5T]: F:动作执行输入占位 | R:scripts/run_human_action_paper_experiments.sh | A:main;expected_manifest.jsonl | S:固定历史绝对目录与五动作三状态共15条,只按媒体存在标ready/missing并覆盖manifest和README;不是动作内容验证或推理结果
 prepare_reproduction.py[ERP8HS]: F:九维复现资产恢复 | R:configs/reproduction/release.json;scripts/reproduce_main_table.py | A:checked_copy;extract_verified;select_endpoint;CLI --release --output --include-models --base-model | S:固定revision逐字节校验,tar仅允许清单内唯一普通相对成员并拒穿越;不同既有文件拒覆盖;显式选项才下载六adapter与Dynamic权重,只生成训练配置而不训练或调用教师;官方站回退须显式开启
 prepare_vbench_inputs.py[EIO8T]: F:标准套件输入整理 | R:scripts/evaluate_vbench.py;scripts/paper_common.py;configs/reproduction/VBench_full_info.json;configs/subject-repair/stability_official1440_manifest_v8.jsonl | A:CLI --video-dir --metadata --output --allow-missing | S:每prompt匹配五seed原生MP4/GIF且双格式歧义拒绝;默认缺任一视频失败,显式部分运行仍列全部缺项;subject只取冻结注释不猜prompt,输出拒绝覆盖
@@ -292,8 +300,13 @@ validate_supplementary_outputs.py[TPP5T]: F:补充产物结构校验 | R:scripts
 verify_dynamic_generalization.py[EPV8HS]: F:外部动态证据复算 | R:scripts/publish_dynamic_generalization.py;configs/dynamic-generalization;docs/reproduction/DYNAMIC_GENERALIZATION.md | A:verify_files;replay;verify;CLI --bundle --output | S:验证安全成员、全输入哈希、冻结模型、Origin阈值及Repair sigmoid,按原sequence簇重放均值/MAE/CI/AUROC;LASIESTA和BMC分开,片段不当独立录像;容差1e-12,未重新解码媒体或GPU推理,不提升标签真实性
 verify_paper_install.py[TRP8GT]: F:真实视频安装验收 | R:scripts/evaluate_vbench.py;scripts/paper_common.py;scripts/restore_paper_runtime.py | A:CLI --assets --fixture --output --backend;verification.json | S:repair必须包含动态反事实fixture并按精确ID集合与冻结分数1e-6比较;origin只验官方16维执行完整性,不是逐分数parity;新输出目录不可存在,范围仅代表性输入而非全队列或重训
 verify_repair_publication.py[EPV8HS]: F:远端发布完整性验收 | R:scripts/publish_dimension_origins.py;scripts/archive_counterfactuals.py;docs/publication/README.md | A:run;CLI --stage --spec --output --repo-id --endpoint;vbench-repair-verification/1 | S:固定远端revision核对全部元数据/原视频/归档身份及16维覆盖;保留上游引用错误;仅下载两种原始存储样本及最小媒体分片逐成员复核,不是全部媒体下载或GPU推理,也未核验独立模型仓库
-eval.py[XPP9PL]: F:统一评测调度 | R:scripts/paper_common.py;scripts/paper_visual.py;scripts/paper_semantic.py;packages/audit-core/src/vbench_audit_core/eval_config.py;packages/audit-core/src/vbench_audit_core/environments.py;packages/audit-core/src/vbench_audit_core/eval_cache.py;packages/audit-core/src/vbench_audit_core/eval_cli.py | A:evaluate;main;--config;--backend;--dimensions;--gpus;--plan;--reuse/--no-reuse | S:九维修复加七维官方,both全维25任务；完整并行验hash后调度,CUDA探测独立并发；空闲卡从队列取下一维,单维阶段串行；缓存绑定输入、资产、源、环境和GPU；固定维度入口不接受全维覆盖；官方成功须原生聚合,失败全分母null；中断仅清自身进程组；阶段计时不进缓存键,命中worker耗时零
+eval.py[XPP9PL]: F:统一评测调度 | R:scripts/paper_common.py;scripts/paper_visual.py;scripts/paper_semantic.py;scripts/paper_official_server.py;packages/audit-core/src/vbench_audit_core/eval_cache.py;packages/audit-core/src/vbench_audit_core/worker_rpc.py | A:routes;evaluate;main;--config;--backend;--dimensions;--gpus;--plan;--reuse/--no-reuse | S:ours/repair为九维修复加七维accelerated,official/origin逐GPU常驻原版进程,both全维32任务；空闲卡取下一维且维内阶段串行；缓存绑定有序输入/元数据、选定资产、源码、环境及GPU,当前运行中间证据另设隔离缓存；完整原版和加速输出必须保留原生聚合；失败全分母null,中断仅清自身进程组；计时不进缓存键,命中worker耗时零
 eval.sh[XPP7T]: F:评测脚本入口 | R:scripts/eval.py;uv.lock | A:原样转发统一评测CLI参数 | S:以脚本位置定位仓库,uv --project及--locked绑定根工程；不改变调用者cwd,CLI相对路径仍按调用位置解释
+benchmark_accelerated_dimension.py[EPP8GT]: F:单维加速验收 | R:scripts/eval.py;scripts/paper_visual.py;packages/audit-core/src/vbench_audit_core/score_agreement.py | A:CLI --config --dimension --reference --output;acceptance.json | S:恰好单卡且独占新输出,重新推理并仅允当前运行中间证据共享；逐视频身份和分数对照完整原版参考,视频及聚合误差均限max(1e-6,1%参考绝对值)；worker与全墙钟分别记录,不能替代全十六维计时
+benchmark_vbench_native.py[EPP7GT]: F:原版串行计时 | R:scripts/paper_common.py;scripts/summarize_speed32.py | A:CLI --input --assets --output --gpu;timing.json及逐维原始结果 | S:单进程调用固定十六维compute且无结果复用；显式元数据绕开文件名建库但不改上游公式；计时包含预检,逐维原生聚合和返回数量单列,脚本自身不判覆盖成功；新目录必须避开冻结树
+paper_official_server.py[MPP8GT]: F:常驻原版工人 | R:scripts/paper_visual.py;packages/audit-core/src/vbench_audit_core/worker_rpc.py;scripts/eval.py | A:CLI --assets --socket;dimension/input/output JSON请求 | S:固定上游且恰好一张可见CUDA卡；逐请求重验媒体后强制upstream_only直调原版compute,保留原生聚合与PID；每次请求后回收Python和CUDA缓存,进程常驻不等于跨维共享模型；请求字段必须精确匹配
+prepare_speed32_inputs.py[EPP8HT]: F:同源计时输入展开 | R:configs/benchmarks/same32-20261008.json;scripts/paper_common.py;scripts/summarize_speed32.py | A:prepare;CLI --annotations --video-root --output | S:必须32个唯一媒体hash且逐片ffprobe字段精确匹配冻结协议,不转码；每源展开十六维共512查询,显式维度prompt/auxiliary_info/subject_en分别保留；重复index拒绝,输出须新建且避开冻结研究树
+summarize_speed32.py[EPP8HM]: F:同源加速核验 | R:scripts/benchmark_vbench_native.py;scripts/benchmark_accelerated_dimension.py;configs/benchmarks/same32-20261008.json;packages/audit-core/src/vbench_audit_core/score_agreement.py | A:normalized_rows;numerical_differences;summarize;summarize_final;CLI --experiment --output --final | S:只验512查询/32媒体产物；路径归一并验引用JSON后比整行：九维仅Subject容1e-6,七维逐片/聚合限max(1e-6,1%原版绝对值),原版对单进程限1e-6；保留缺失/本次共享证据,历史fallback另报；Agent查询非人类偏好,计时比墙钟
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/scripts/counterfactual/===
 __init__.py[ECF3T]: F:反事实包导览 | R:scripts/counterfactual/common.py;scripts/counterfactual/transforms.py;scripts/counterfactual/build.py;scripts/counterfactual/validate.py | A:- | S:-
@@ -519,7 +532,7 @@ object-color-repair.md[DPP8S]: F:对象颜色修复交付 | R:docs/counterfactua
 semantic-adapter-constraints.md[DMD8S]: F:六维语义边界 | R:docs/object-color-repair.md;docs/plans/2026-09-15-dimension-scope-11d.md;docs/plans/2026-09-20-four-dimension-kickoff-plan.md;docs/paper/unaudited-dimensions-triage.md | A:Scene三分类与五维prompt编译最小schema、外部硬路由、别名和分组评估合同 | S:前置adapter只见原prompt且不叠加,Scene只判场景证据;文本修复不能替代视觉真值或评分公式消融;nullable结果状态在模型外记录,未知不强配近邻;Object/Color已实现但人工审核为零,其余待定项不能被两维结果自动补齐
 subject-repair.md[DSU8L]: F:主体表示修复说明 | R:docs/plans/2026-09-20-subject-stability-goal.md;docs/counterfactual-reports/subject_stability_20260920.md;configs/subject-repair/protocol.json;docs/counterfactual-reports/subject_official_extension_20260920.md | A:subject_hybrid运行、独立掩码/编码与像素合同、统计口径和复现/语义银标接口 | S:whole-background v2无等面积要求;晚池化不保证背景不变,编码前隔离仍依赖实际定位;240主分析的用户实用接受保留严格失败,单帧204/241停工不冒充全量;自然偏好候选曾退化,粗80%标准不是IoU测量;施工掩码不得供评分,合法缺证据与运行失败/NOT RUN分开
 supplementary-experiments.md[DRP7S]: F:补充实验操作 | R:scripts/generate_supplementary_tables.py;scripts/run_supplementary_orchestrator.py;scripts/combine_partial_repair_shards.py | A:清单构造、base宏统计、分维多卡运行、分片恢复和CSV/TeX生成命令 | S:旧自然集checkpoint不代表当前模型;多卡按video_uid去重验全覆盖,维度串行且不终止既有进程;共享官方视频不共享标注或公式,未知GIF时长保留未知
-evaluation.md[DPP8T]: F:评测运行指南 | R:scripts/eval.py;configs/eval.yaml;packages/audit-core/src/vbench_audit_core/environments.py;packages/audit-core/src/vbench_audit_core/eval_cache.py;docs/validation/h100-performance-20261008.md | A:YAML字段、单维入口、调度缓存、计时与退出码 | S:CLI与YAML路径基准不同；新增四维CLI固定维度,repair回退官方；输入缺dimensions默认九维；缓存仍完整校验资产,零worker时间不代表新推理；每卡串行领取下一维,重叠阶段不能相加当墙钟；worker时间包含加载与启动
+evaluation.md[DPP8T]: F:评测运行指南 | R:scripts/eval.py;configs/eval.yaml;packages/audit-core/src/vbench_audit_core/environments.py;packages/audit-core/src/vbench_audit_core/eval_cache.py;docs/validation/h100-same32-final-20261008.md | A:YAML字段、十六维路由、隔离环境、调度缓存、计时与退出码 | S:输入缺dimensions仍默认论文九维；ours含九修复七加速且both32任务，无官方回退；CLI与YAML路径基准不同；每卡原版常驻但项目分维进程隔离，视觉语义ABI不得混合；完整校验资产后方可复用，no-reuse允许运行内GRiT及ViCLIP共享；不完整主均值null且返回1，worker计时含加载启动，各维耗时相加不是命令墙钟
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/docs/plans/===
 2026-09-14-workspace-refactor.md[DWS8M]: F:工作区重构方案 | R:AGENTS.md,docs/plans/2026-09-14-workspace-refactor-verification.md,configs/upstream.toml | A:目录迁移、CLI、spawn调度、聚合与验收计划 | S:冻结研究目录只读;不平均分片均值;Subject官方汇总固定transition加权;计划要求不代表已验收,实际Python偏差在实施记录说明
@@ -538,6 +551,7 @@ evaluation.md[DPP8T]: F:评测运行指南 | R:scripts/eval.py;configs/eval.yaml
 2026-09-22-dynamic-static-jitter-protocol-superseded.md[DDY5S]: F:撤销静态构造协议 | R:docs/plans/2026-09-22-dynamic-static-jitter-goal-prompt.md;docs/counterfactual-reports/dynamic_static_jitter.md | A:单帧重复静态基底、外观噪声族、合成运动阶梯与旧工程验收提案 | S:用户已撤销其主实验身份,产物只能作历史开发诊断;单侧不抬分不等于严格不变性,预定阈值不代表已实测通过,不能恢复为当前任务约束
 2026-09-22-dynamic-structural-motion-repair-goal.md[DDY8L]: F:动态联合修复目标账 | R:docs/counterfactual-reports/dynamic_static_jitter.md;configs/dynamic-static-jitter/vjepa-aligned-v1.json;configs/dynamic-static-jitter/vjepa-aligned450-v1.json;docs/plans/2026-09-22-dynamic-static-jitter-goal-prompt.md | A:固定8px不变性与真实运动联合合同、跟踪负例链及冻结VJEPA各训练/450组验证阶段 | S:最新§0优先于历史G表;完整goal仍未通过,用户接受0.6尺度不改DEV自然偏好17/23失败;aligned450为已暴露测试上的数值检查,均分稳定不等于逐片不变或物理标定;300步为续训且编码器冻结,首次非有限loss失败保留;45校准媒体未读,Origin复用RAFT证据不称新GPU评分
 2026-09-23-vbench-repair-migration.md[DRP7S]: F:仓库迁移发布计划 | R:docs/publication/README.md;docs/reproduction/DYNAMIC_ALIGNED.md;configs/publication/h100-supplementary.json | A:私有代码迁移、十六维数据布局、模型选择与分片续传验收 | S:Background原标注1710条路径问题不得猜修;Dynamic/Object/Color固定末步不称dev选优;九维HF复算和单片GPU对齐不等于全量重推理或重训,媒体共享不等于标注共享
+2026-10-08-speed32-optimization.md[DRT8S]: F:加速实施记录 | R:configs/benchmarks/same32-20261008.json;docs/validation/h100-same32-final-20261008.md;scripts/benchmark_accelerated_dimension.py | A:固定队列、首轮十六维概览、逐维剖析验收与提交索引 | S:先全维概览再逐维修复，GRiT四维可成组；七维逐片误差限max(1e-6,1%原版绝对值)，九维对照选定修复并保留失败；Background图捕获因全程收益未证而撤回，Overall依赖同次特征共享；旧草稿归档不代表可用实现，初轮表不是最终耗时；最终接近原版但只单次计时且存在部分覆盖，不外推研究质量
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/docs/publication/===
 README.md[DRP8T]: F:发布验收入口 | R:docs/publication/publication-receipt.json,docs/publication/dataset-verification.json,docs/publication/model-selections.json,docs/reproduction/README.md | A:私有代码、公开数据模型、归档和验收范围 | S:上传完整性不等于全维GPU推理或重训;归档成员不等于独立视频;保留上游错误引用;Object/Color固定步数非dev选优;外部媒体与私有源码不公开
@@ -576,7 +590,7 @@ object_color_vocabulary.json[POC8L]: F:物色输出闭包词表 | R:packages/aud
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/configs/===
 models.example.toml[PMD5T]: F:外置权重示例 | R:- | A:RAFT路径、哈希与来源占位字段 | S:权重不入Git或uv.lock；空字段不是可运行配置
 upstream.toml[PPV9HS]: F:官方源码身份锁定 | R:packages/audit-core/src/vbench_audit_core/upstream.py;configs/reproduction/vbench-source.json | A:上游URL、commit及十六维module/entrypoint/source哈希 | S:所有官方维度受同一源码门禁约束；Overall保留legacy包不等于论文修复；源码身份匹配本身不证明权重或GPU数值parity
-eval.yaml[PPP8T]: F:统一评测配置 | R:scripts/eval.py;packages/audit-core/src/vbench_audit_core/eval_config.py;docs/evaluation.md | A:version,input,assets,backend,dimensions,gpus,cache_dir,reuse | S:默认repair覆盖九维修复和七维官方；YAML相对路径从配置目录解析；省略output每次新建时间戳目录,显式目录必须不存在
+eval.yaml[PPP8T]: F:统一评测配置 | R:scripts/eval.py;packages/audit-core/src/vbench_audit_core/eval_config.py;docs/evaluation.md | A:version,input,assets,backend,dimensions,gpus,cache_dir,env_dir,reuse | S:默认ours覆盖九维修复和七维加速，official全原版，repair/origin为兼容别名；YAML相对路径从配置目录解析；省略output新建时间戳目录，显式目录必须不存在；no-reuse仍允许本次运行内中间特征共享
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/configs/reproduction/===
 official-assets.json[PRP8HS]: F:官方模型资产清单 | R:configs/reproduction/paper-methods.json | A:十六维资产映射、字节数与SHA256 | S:多个维度共享GRiT、CLIP或ViCLIP资产；temporal_flickering无需列出权重，清单只绑定文件不代表运行验收
@@ -1234,6 +1248,7 @@ diagnostics.py[CMO3T]: F:平滑诊断展开 | R:motion_smoothness.schemas | A:se
 metric.py[FMO9L]: F:方向连续性评分 | R:motion_smoothness.schemas;motion_smoothness.backends.audit;motion_smoothness.backends.vbench;vbench_audit_core.coordinator | A:analyze_motion_fields;align_motion_field;compute_velocity;compute_acceleration;compute_jerk;aggregate_temporal_discontinuity;discontinuity_to_score;evaluate_backend_sharded | S:幅值项用沿前流双线性对齐的速度向量归一差,默认方向用未对齐像素角度但仍受对齐有效域限制;最终分数为exp(-D_video),默认D_video取最多三项最大值的均值,物理加速度和jerk仅诊断;无流或少于三状态返回1并标状态,无有效像素亦贡献零不连续;出界不夹回有效域,非零插值权重点均须有效
 models.py[MMO7T]: F:平滑光流输入适配 | R:vbench_audit_models.raft;motion_smoothness.schemas | A:MotionFieldEstimator;RaftFlowEstimator;decode_timed_frames | S:按原序解码全部帧不做8FPS抽样;无效时标先用index/FPS,无FPS时可退为index秒并据此估FPS,不能当可靠物理时间;RAFT输出转float64
 schemas.py[CMO7T]: F:平滑参数合同 | R:motion_smoothness.metric;motion_smoothness.cli | A:TimedFrame;MotionField;MotionSmoothnessConfig;MotionSmoothnessResult | S:默认top3、未对齐方向和等权幅值/方向;权重仅要求非负且不同时零,不强制和为1;top_k拒绝bool,图像流不参与值比较
+accelerated.py[FMO7BT]: F:插帧批量评分 | R:vbench.motion_smoothness;packages/audit-core/src/vbench_audit_core/video_batches.py | A:score_frames;compute | S:偶索引帧间重建奇帧，无右邻的尾奇帧排除；沿用原生缩放/pad与转字节后误差，分数(255-均差)/255；仅mp4/帧目录且至少两张偶帧
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/motion-smoothness/src/motion_smoothness/backends/===
 __init__.py[FMO3T]: F:平滑后端导出 | R:motion_smoothness.backends.audit | A:evaluate_timed_frames | S:-
@@ -1246,6 +1261,7 @@ test_motion_mechanics.py[TMO7S]: F:平滑机制合约 | R:motion_smoothness.metr
 test_official_parity.py[TMO5T]: F:官方插帧源码校验 | R:motion_smoothness.backends.vbench;vbench_audit_core.upstream | A:- | S:锁定官方偶帧输入/奇帧RGB误差与中点,明确无FPS重采样;仅源码合同检查,不运行AMT
 test_shared_raft_wrapper.py[TMO5T]: F:RAFT封装接线校验 | R:packages/audit-models/src/vbench_audit_models/raft.py | A:- | S:假张量确认20次test_mode迭代及pad/unpad顺序,不校验真实光流数值
 test_temporal_jerk_ladder.py[TMO7S]: F:时序破坏阶梯合约 | R:motion_smoothness.metric;motion_smoothness.schemas | A:ladder_indices;ladder_scores | S:直接构造帧索引阶梯避免依赖构造脚本自证;固定三运动轮廓与三速度下严格排序,幅值消融不能分离停顿与反转;只验证合成机制
+test_accelerated.py[TMO7T]: F:插帧覆盖合约 | R:metrics/motion-smoothness/src/motion_smoothness/accelerated.py | A:- | S:以奇偶不同长度视频检查所有有效插帧对和短尾批；偶数长度最后一帧故意置为极值仍须排除；假AMT验证embt批量扩展、原生字节转换及无梯度调用
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/multiple-objects/===
 IMPLEMENTATION_REPORT.md[DOB7S]: F:多目标软合取验收 | R:multiple_objects.backends.vbench;multiple_objects.metric;multiple_objects.schemas | A:- | S:ROI阈值前分数与描述重评分不同;降低候选阈值不能恢复所有被上游淘汰提案;双通路模型实际CUDA parity及开销未验收,模型无关测试不证明经验改善
@@ -1300,7 +1316,7 @@ test_runtime_parity.py[TOC3T]: F:物类批量签名测试 | R:object_class.metri
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/overall-consistency/===
 IMPLEMENTATION_REPORT.md[DOV7T]: F:语义条件历史验收 | R:overall_consistency.backends.audit;overall_consistency.conditions;overall_consistency.cli | A:- | S:真实ViCLIP parity未运行,显式条件注释质量和混合参数未校准;旧--mode及单进程顺序分片描述应以当前CLI为准;保留为legacy而非当前论文修复维度
-pyproject.toml[POV5T]: F:整体一致包依赖 | R:overall_consistency.cli;packages/audit-core/pyproject.toml | A:overall-consistency命令;models extra | S:setuptools小于81保留上游pkg_resources兼容;模型依赖可选且不包含权重
+pyproject.toml[POV5T]: F:整体一致包依赖 | R:metrics/overall-consistency/src/overall_consistency/cli.py;packages/audit-core/pyproject.toml;packages/audit-models/pyproject.toml | A:overall-consistency命令与models extra | S:audit-models是基础依赖；上游CLIP及其打包兼容约束放在models extra，权重仍由外部运行时提供
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/overall-consistency/src/overall_consistency/===
 __init__.py[FOV3T]: F:条件聚合导出 | R:overall_consistency.conditions;overall_consistency.metric | A:normalize_conditions;aggregate_condition_scores;combine_global_and_condition_scores;cosine_similarity;__version__ | S:-
@@ -1310,6 +1326,7 @@ diagnostics.py[COV5T]: F:条件评分诊断 | R:overall_consistency.schemas | A:
 metric.py[FOV8T]: F:均值最弱项混合 | R:overall_consistency.schemas;overall_consistency.backends.audit | A:normalize_feature;cosine_similarity;score_conditions;aggregate_condition_scores;combine_global_and_condition_scores;dataset_mean | S:保留负余弦,拒绝空/非有限/零范数证据;全等和alpha/lambda端点直接返回原操作数防一ULP漂移;最弱并列取首次,视频等权平均
 models.py[MOV8T]: F:锁定ViCLIP编码 | R:overall_consistency.backends.vbench | A:VideoTextEncoder;LockedViCLIPEncoder | S:8帧middle和224官方变换不变;本地权重与cache词表必须存在;输出转float32归一化后存Python元组,文本按完整字符串缓存,沿用原生上下文行为
 schemas.py[COV5T]: F:语义条件结果结构 | R:overall_consistency.conditions;overall_consistency.backends.audit;overall_consistency.diagnostics | A:SemanticCondition;ConditionSet;ConditionAggregation;RepairResult | S:条件类型和来源为诊断字段,回退原因与公式alpha/lambda显式保存
+accelerated.py[FOV7BT]: F:整体一致批评分 | R:packages/audit-models/src/vbench_audit_models/viclip.py | A:compute(rows,device,submodules,diagnostics) | S:视频与当前prompt特征各自L2归一后逐对点积，保留负余弦并等权平均视频；共享层只复用视觉特征，不复用其他prompt的文本或分数
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/overall-consistency/src/overall_consistency/backends/===
 __init__.py[FOV3T]: F:整体后端导出 | R:overall_consistency.backends.audit;overall_consistency.backends.vbench | A:OfficialEvaluator;RepairEvaluator | S:-
@@ -1322,6 +1339,7 @@ test_condition_scoring.py[TOV7M]: F:条件来源不变量测试 | R:overall_cons
 test_counterfactual_contracts.py[TOV5T]: F:条件违约单调测试 | R:overall_consistency.metric | A:- | S:只验证合成条件分数与诊断元数据无关,不构成实际反事实测量
 test_official_parity.py[TOV7S]: F:ViCLIP适配合同校验 | R:overall_consistency.backends.vbench;overall_consistency.metric;vbench_audit_core.upstream | A:- | S:对照锁定采样和归一助手及假模型接线;精确保留完整prompt与负余弦,不运行真实ViCLIP检查点
 test_violation_aggregation.py[TOV5T]: F:违约聚合边界测试 | R:overall_consistency.metric | A:- | S:全等分数和混合端点须位级相等,降低单条件不能提高总分,最弱项并列稳定取首次
+test_accelerated.py[TOV7T]: F:整体批评分合约 | R:metrics/overall-consistency/src/overall_consistency/accelerated.py | A:- | S:假特征核对每行自己的prompt、独立归一和负余弦保留；逐视频-1与0.6必须等权聚合为-0.2
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/scene/===
 IMPLEMENTATION_REPORT.md[DSC7T]: F:场景区域机制说明 | R:scene.backends.audit;scene.backends.vbench;scene.models | A:- | S:固定2x2区域不是语义分割,场景物体也可能是有效环境证据;不修复时序持久性,该研发候选不等于论文当前语义模型路线
@@ -1387,7 +1405,7 @@ hybrid.py[MSU8HT]: F:冻结定位器构造 | R:subject_consistency.temporal_loca
 isolation.py[FSU8T]: F:编码前主体隔离 | R:subject_consistency.models;subject_consistency.metric | A:IsolatedInputs;isolate_subject_inputs | S:只接受独立评分掩码;阈值化并集外填128,裁剪和填充只由掩码决定;固定掩码下背景编辑被隔离不代表实际定位正确或不漂移;空主体保留填充值画面
 localizer.py[MSU8HS]: F:固定提示独立分割 | R:subject_consistency.models;vbench_audit_models.foreground | A:prompt_sha256;validate_prompt;load_prompts;MobileSamSubjectMaskProvider | S:提示必须是人工确认干净帧且哈希绑定,跨变体固定提示但每实际帧重新运行SAM;拒绝phrase或尺寸不符及非原生二值掩码;构造掩码与DINO证据不得参与定位
 metric.py[FSU9M]: F:主体批量评分 | R:subject_consistency.models;subject_consistency.subject_evidence;subject_consistency.isolation;subject_consistency.backends.vbench;vbench_audit_core.coordinator | A:subject_consistency_diagnostics;subject_consistency_score;local_consistency;global_pairwise_consistency;evaluate_batch;evaluate_backend_sharded;evaluate_masked_batch;evaluate_masked_sharded;subject_phrase;build_dino_config;environment_record;repaired_dataset_score | S:全帧修复以局部相邻和全部无序帧对各半计分;定位与特征共享同一解码且采样在全帧定位编码后;phrase只能取显式元数据而不解析prompt;hybrid逐worker核DINO哈希,失败保留逐片null;masked证据可在原图池化或编码前隔离,不能混称同一表示
-models.py[MSU8M]: F:主体表示与掩码适配 | R:subject_consistency.backends.vbench;subject_consistency.subject_evidence;subject_consistency.metric | A:native_rgb_uint8;SubjectMasks;SubjectMaskProvider;NpzSubjectMaskProvider;Sam3SubjectMaskProvider;OfficialDinoFeatureExtractor;OfficialDinoPatchExtractor | S:原生RGB必须为精确字节值,DINO Resize前转float32;官方短边缩放不裁剪,patch网格可为矩形且池化前不逐token归一;离线掩码需解码帧数相等并记录哈希;SAM3逐帧独立且真实模型parity未验证
+models.py[MSU8BM]: F:主体特征与掩码 | R:subject_consistency.backends.vbench;subject_consistency.subject_evidence;metrics/subject-consistency/tests/test_dino_batches.py | A:native_rgb_uint8;SubjectMasks;SubjectMaskProvider;NpzSubjectMaskProvider;Sam3SubjectMaskProvider;OfficialDinoFeatureExtractor;OfficialDinoPatchExtractor | S:原生RGB必须是精确字节值，DINO Resize前转float32；官方短边缩放不裁剪，patch批处理保持帧序和矩形网格，池化前不逐token归一；离线掩码须与同次解码帧数相等并记录文件哈希；可选Sam3SubjectMaskProvider逐帧独立定位，该SAM3适配的真实模型parity未验证
 subject_evidence.py[FSU9M]: F:掩码主体帧对评分 | R:subject_consistency.metric;subject_consistency.models | A:SubjectEvidenceDiagnostics;sample_frame_indices;resample_masks_to_grid;subject_vectors;subject_consistency_from_vectors;masked_subject_consistency;MISSING_POLICIES;INSTANCE_MODES | S:默认zero使缺证据配对为零且保留C(T,2)分母;exclude仅条件分数且不足两帧报错,carry显式邻帧填补;实例并集与逐实例均值含义不同;DINO掩码投影丢弃未被stride16编码的尾边;该表示变体仅全帧对,不混相邻项
 temporal_localizer.py[MSU8S]: F:片内提示连续化 | R:subject_consistency.models;subject_consistency.hybrid | A:box_iou;temporal_box_prompts;clip_anchor_prompts;direct_anchor_prompts;TemporalMobileSamSubjectMaskProvider | S:只用当前实际片段检测,不跨变体保留状态;有限缺口插值的是框而非掩码,每帧SAM必须重新供证;锚帧按置信度选且保留其全部实例;direct_anchor仅无检测帧回退锚框,空片段仍为空
 
@@ -1408,10 +1426,11 @@ test_mobile_localizer.py[TSU7T]: F:固定提示分割合约 | R:subject_consiste
 test_official_parity.py[TSU7S]: F:主体官方公式合约 | R:subject_consistency.backends.vbench;subject_consistency.cli;subject_consistency.models;subject_consistency.metric;vbench_audit_core.upstream | A:- | S:检验相邻加首锚公式、负余弦截零、全部帧预处理及多卡同转移权重;权重加载被mock,不证明真实模型parity;错误SHA与脏上游拒绝
 test_subject_evidence.py[TSU7S]: F:主体证据归约合约 | R:subject_consistency.subject_evidence | A:- | S:受控token测试背景隔离及主体敏感;明确zero保留分母、exclude条件化与carry填补的不同分数,缺失不能混称一致性成功
 test_temporal_aggregation.py[TSU5T]: F:主体时间聚合测试 | R:subject_consistency.metric | A:- | S:全帧对置换对称不代表混合局部项也置换不变;少于两帧和非二维输入失败
+test_dino_batches.py[TSU7T]: F:DINO批量等价合约 | R:metrics/subject-consistency/src/subject_consistency/models.py | A:- | S:十九帧矩形字节输入对比单帧与16+3批量路径；必须先转float32、去除CLS且保留帧序、2×3网格与变换尺寸，使用假骨干不证明真实模型parity
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/temporal-style/===
 IMPLEMENTATION_REPORT.md[DTS5T]: F:时序风格骨架验收 | R:temporal_style.metric;temporal_style.cli | A:- | S:只交付包和批量合同,两后端均not_implemented/null;未导入ViCLIP或验证CUDA数值parity
-pyproject.toml[PTS5T]: F:风格包依赖 | R:temporal_style.cli;packages/audit-core/pyproject.toml;packages/audit-models/pyproject.toml | A:temporal-style命令;models extra | S:重型视觉依赖仅可选安装,声明依赖不等于实现模型评分
+pyproject.toml[PTS5T]: F:时序风格包依赖 | R:metrics/temporal-style/src/temporal_style/cli.py;packages/audit-core/pyproject.toml;packages/audit-models/pyproject.toml | A:temporal-style命令与models extra | S:基础安装直接包含共享模型适配包；重型视觉推理闭包仍为可选extra，依赖声明不携带模型权重
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/temporal-style/src/temporal_style/===
 __init__.py[FTS3T]: F:风格包导出 | R:temporal_style.metric | A:evaluate_batch;__version__ | S:-
@@ -1419,6 +1438,7 @@ cli.py[XTS5T]: F:风格评分入口 | R:temporal_style.metric;vbench_audit_core.
 diagnostics.py[FTS3T]: F:风格状态汇总 | R:- | A:status_counts;skeleton_diagnostic | S:-
 metric.py[FTS5T]: F:风格占位分派 | R:temporal_style.backends.audit;temporal_style.backends.repair;temporal_style.backends.vbench | A:evaluate_batch;METRIC | S:requires_cuda为false;未知后端也保留逐视频not_implemented结果,没有ViCLIP或风格排序实现
 models.py[MTS5T]: F:风格资产接口占位 | R:temporal_style.metric | A:required_assets;build_model;MODEL_ASSETS | S:列出checkpoint和BPE需求但构造器直接抛NotImplementedError
+accelerated.py[FTS7BT]: F:时序风格批评分 | R:packages/audit-models/src/vbench_audit_models/viclip.py | A:compute(rows,device,submodules,diagnostics) | S:共享ViCLIP提供原生八帧输入特征，本维独立L2归一并计算对应文本点积；保留负值和等视频均值，不引入跨视频权重或分数复用
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/temporal-style/src/temporal_style/backends/===
 __init__.py[FTS1T]: F:风格后端命名空间 | R:temporal_style.metric | A:- | S:-
@@ -1432,6 +1452,7 @@ test_counterfactual_contracts.py[TTS5T]: F:风格占位覆盖测试 | R:temporal
 test_official_adapter.py[TTS5T]: F:风格官方占位测试 | R:temporal_style.backends.vbench | A:- | S:错误说明必须保留待实现compute_temporal_style事实
 test_repair.py[TTS5T]: F:风格修复占位测试 | R:temporal_style.backends.repair | A:- | S:repair身份不允许伪造非空分数
 test_runtime_parity.py[TTS3T]: F:风格批量签名测试 | R:temporal_style.metric | A:- | S:只检验五参数接口,不代表数值parity
+test_accelerated.py[TTS7T]: F:风格余弦合约 | R:metrics/temporal-style/src/temporal_style/accelerated.py | A:- | S:非单位假特征验证归一与负号保留，0.8和-1须按视频等权平均为-0.1；不以均值掩盖逐视频值变化
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/scripts/e0/===
 run_e0_analysis.py[EST8L]: F:E0基线复算 | R:data/processed/e0_scoring_manifest.csv;data/processed/pairwise_master_split.csv;splits/e0_prompt_split.csv;results/e0/raw_official_scores | A:prediction;accuracy;pearson;kendall_tau_b;main | S:固定四维7040视频及10560偏好对,Spatial仅2520支持对并强验480条inside-of缺元数据;dev冻结最小最佳tie阈值,test按prompt簇bootstrap;四模型Pearson仅描述;运行会覆盖data/results冻结产物,不可直接用于当前只读复核
@@ -1500,7 +1521,7 @@ test_object_color_construction.py[TCF7T]: F:物色遮挡重放合约 | R:scripts
 test_object_color_lora_completion.py[TOC7T]: F:LoRA端点补测合约 | R:scripts/complete_object_color_lora_cf.py;scripts/reproduce_main_table.py | A:- | S:只取冻结test主端点,拒绝改prompt/目标/媒体或重复缺失对;Color官方失败端点仍保留;四格主表按共同完整分母且不补零
 test_object_color_models.py[TMD8T]: F:物色语义证据合约 | R:vbench_audit_models.labels;vbench_audit_models.grit;vbench_audit_models.prompt_compiler | A:- | S:真同义归一不扩为上位类或相近颜色;否定/多义保留null;双头先验证框身份,置换可唯一IoU匹配而重复框弃权;离线输出仅精确原prompt键且路由/模式绑定
 test_object_color_natural.py[TOC8S]: F:物色自然评估合约 | R:scripts/object_color_natural.py;scripts/object_color_natural_report.py | A:- | S:缓存官方漏行避免重复推理且context变化拒绝;重复UID不得落checkpoint;保留GIF与原UID;全分母缺失计错和共同有效配对分别报,四生成器赢率平局半胜且缺覆盖不造相关系数
-test_object_color_qwen.py[TMD7S]: F:单基座路由合约 | R:packages/audit-models/src/vbench_audit_models/qwen.py;packages/audit-models/src/vbench_audit_models/labels.py;scripts/object_color_semantics.py | A:- | S:假底座验证并行完整hash和原有模型加载参数；适配器单头切换并恢复,base禁用头且不截断prompt；silver保留源组、分割及未审核身份
+test_object_color_qwen.py[TMD7S]: F:文本批量路由测试 | R:packages/audit-models/src/vbench_audit_models/qwen.py;packages/audit-models/src/vbench_audit_models/labels.py;scripts/object_color_semantics.py | A:pytest单底座、批量生成及银标合同测试 | S:假模型验证完整并行hash和加载精度,单头切换/禁用后恢复；左填充、尾批和解码顺序固定,超长拒截断；无效JSON及词外目标保留原输出,银标不升级为已审核真值
 test_object_color_report.py[TOC7T]: F:物色配对判据合约 | R:scripts/object_color_report.py | A:- | S:零效应保留在bootstrap分母;有序下降检查符号,空集门槛未定义而NaN直接拒绝
 test_official_video_jitter.py[TDY7S]: F:原生视频干预合约 | R:scripts/counterfactual/official_video_jitter.py;scripts/counterfactual/local_texture_jitter.py | A:- | S:原片直接评分且源字节不改,编码控制单列;全部帧/分辨率/时间轴保持,非均匀时标拒绝而不重采样;局部位移证据与解码像素必须精确重放
 test_official_video_jitter_analysis.py[TDY7T]: F:原片干预统计合约 | R:scripts/counterfactual/analyze_official_video_jitter.py;scripts/counterfactual/official_video_jitter.py | A:- | S:基底不能被重编码替代或静态构造冒充,未冻结test拒绝;Origin二值和Repair强度分量纲,缺失不补零/不造单源CI;采样相位改变次数须显式统计
@@ -1551,11 +1572,22 @@ test_vjepa_motion_probe.py[TDY8S]: F:学习运动探针合约 | R:scripts/counte
 test_vjepa_static_frame.py[TDY5T]: F:静帧平移锚测试 | R:scripts/counterfactual/probe_vjepa_static_frame.py | A:- | S:零位移精确复制原帧,整数终点位移精确且保持uint8;非字节图像或少于两帧拒绝
 test_vjepa_validation.py[TDY8T]: F:冻结运动头验证合约 | R:scripts/counterfactual/validate_vjepa_motion.py;configs/dynamic-static-jitter/vjepa-validation-v1.json | A:- | S:90干预/450自然/30GIF未评分分开,提示泄漏与队列不全拒绝;每源等权且负漂移保留,Origin不升时比值未定义;人类平局独立报告,数值门槛不等于整体完成
 test_workspace_layout.py[TWS7T]: F:工作区包结构合约 | R:pyproject.toml;packages/audit-core/pyproject.toml;metrics | A:- | S:八legacy维度保持英文src布局且tests无__init__;metric不能互依赖,已知官方视频/模型导入闭包须在各models extra直接声明
-test_eval_config.py[TWS7M]: F:配置日志契约测试 | R:packages/audit-core/src/vbench_audit_core/eval_config.py;packages/audit-core/src/vbench_audit_core/eval_logging.py;scripts/paper_common.py | A:pytest配置解析与事件测试 | S:验证YAML无执行、副作用或隐式类型转换,两种相对路径基准、别名去重、UUID及新输出约束；非TTY无动画转义,失败分数仍缺失且异常不吞掉
+test_eval_config.py[TWS7M]: F:配置日志契约测试 | R:packages/audit-core/src/vbench_audit_core/eval_config.py;packages/audit-core/src/vbench_audit_core/eval_logging.py;scripts/paper_common.py | A:pytest配置、路径与事件边界测试 | S:核对ours/official别名及16/9维常量一致；拒YAML执行、隐式转换、嵌套/重复/别名,路径按YAML或CLI来源解析；新输出含悬空软链均拒复用；非TTY无动画且异常和null评分保留,不初始化模型
 test_eval_environments.py[TRT8M]: F:环境共享契约测试 | R:packages/audit-core/src/vbench_audit_core/environments.py | A:pytest真实解释器、uv环境与并发构建测试 | S:临时模型依赖验证共享且无metric泄漏,检查基础环境字节和mtime未变；四进程只构建一次,旧代次保留及坏收据拒写；Python3.10不可用时仅跨ABI项跳过,不下载解释器
-test_fast_eval.py[TPP8S]: F:调度缓存契约测试 | R:scripts/eval.py;packages/audit-core/src/vbench_audit_core/eval_cache.py;packages/audit-core/src/vbench_audit_core/eval_config.py | A:pytest路由、设备、覆盖、缓存与中断测试 | S:假worker保留真实媒体身份；核验16/9/25路由、官方原生聚合、跨维选择复用与元数据失效；缓存命中worker耗时必须零；实际子进程验证组清理,不代表模型验收
-test_fast_eval_review.py[TPP8M]: F:执行边界回归 | R:scripts/eval.py;scripts/paper_common.py | A:pytest运行时、原生聚合、并发调度与进程树测试 | S:两个假GPU用屏障验证并发探测和空闲卡接续第三维,不靠耗时阈值判断加速；失败保留完整分母；缺官方聚合不能缓存；真实Linux拒绝SIGTERM后代也须被回收
+test_fast_eval.py[TPP8M]: F:调度缓存契约测试 | R:scripts/eval.py;packages/audit-core/src/vbench_audit_core/eval_cache.py;tests/conftest.py | A:pytest路由、身份、缓存、聚合与中断测试 | S:核验16维原版、九修复加七加速及both32任务；假worker保留媒体身份,跨选择增维仍复用原任务缓存而改prompt失效；原版及加速聚合保留原生尺度,失败不报完整均值,命中worker耗时零；真实子进程验证回收,不代表模型数值验收
+test_fast_eval_review.py[TPP8M]: F:执行边界回归 | R:scripts/eval.py;scripts/paper_common.py;tests/conftest.py | A:pytest虚拟环境、原生聚合、并发调度与进程树测试 | S:相对Python路径必须保留venv启动器；缺官方aggregate两次均失败且不缓存；两个假GPU用屏障证明并发探测及空闲卡接第三维,一维失败不丢其余分母；真实Linux测试必须清除拒绝SIGTERM的后代,不靠耗时阈值证明加速
 test_sixteen_dimension_workspace.py[TWS8T]: F:十六包完整性门禁 | R:pyproject.toml;configs/upstream.toml;packages/audit-core/src/vbench_audit_core/eval_config.py;packages/audit-core/src/vbench_audit_core/eval_cli.py | A:- | S:目录集合、安装入口、根依赖和上游pin必须完整；AST检查metric无跨维导入；新四CLI从外部cwd显示help且不导入torch、transformers或vbench
+conftest.py[TPP5T]: F:原版传输替身 | R:tests/test_fast_eval.py;tests/test_fast_eval_review.py;scripts/eval.py | A:fake_official_transport pytest fixture | S:把常驻请求改接测试Workers.run并恢复维度环境,不启动socket或真实模型；只供调度/覆盖测试,不能证明常驻进程身份或吞吐
+test_batched_text.py[TMD7T]: F:语义批量回放测试 | R:packages/audit-models/src/vbench_audit_models/batched_text.py | A:pytest批量文本生成与恢复测试 | S:假tokenizer/model核验左填充、掩码、贪心参数、去重及补齐后输出切片；未知请求/任务或预算变更拒回放,生成及解析异常均恢复原generate和填充方向
+test_clip_vision.py[TMD7T]: F:视觉权重精度测试 | R:packages/audit-models/src/vbench_audit_models/clip_vision.py | A:pytest视觉权重装载合约 | S:微型假CLIP验证norm和位置编码保持模型初始化dtype,卷积按官方半精度转换后复制checkpoint数值；CPU最终float化且无meta参数,缺视觉权重必须拒绝,不证明真实图像分数parity
+test_grit_prediction_path.py[TMD8S]: F:检测复用边界测试 | R:packages/audit-models/src/vbench_audit_models/grit.py;packages/audit-core/src/vbench_audit_core/run_inference_cache.py | A:pytest原始预测、双头复用与跨消费者证据测试 | S:等价ObjectDet同帧第二头只复用一次且深拷贝,特征/提案/任务/权重/解码器/训练/目标任变即重推；评分调用原predictor不绘制图像；已缓存同帧实例和caption可跨消费者读取而不重载模型,全部为替身合同
+test_run_inference_cache.py[TPV7T]: F:运行内缓存隔离测试 | R:packages/audit-core/src/vbench_audit_core/run_inference_cache.py | A:pytest键隔离、损坏和并发缓存测试 | S:模型/任务/源码/环境及像素hash/dtype/shape任变须重算,换run目录不命中；内容破坏和失败结果不复用；并发消费者在同一缓存只计算一次,不运行真实模型
+test_score_agreement.py[TPP7T]: F:逐片容差测试 | R:packages/audit-core/src/vbench_audit_core/score_agreement.py | A:pytest分数一致性与人口边界测试 | S:均值相等不能掩盖单片越界,近零使用绝对容差且不依赖输入顺序；重复/缺失身份、媒体或prompt变动、失败/null/NaN均拒通过
+test_speed32_comparison.py[TPP7T]: F:数值容差隔离测试 | R:scripts/summarize_speed32.py | A:pytest嵌套证据差异检查 | S:仅数值微差可按容差放行并记录路径；文本、状态、覆盖、字段集、bool与整数类型互换均不能被数值容差掩盖；严格零容差和NaN分别拒绝
+test_speed_benchmark_inputs.py[TPP7T]: F:同源队列合同测试 | R:scripts/prepare_speed32_inputs.py;configs/benchmarks/same32-20261008.json | A:pytest十六维同媒体输入测试 | S:mock媒体hash和ffprobe只检验512唯一查询的展开及各维同32源,不替代真实媒体验收；保留原文件名、显式prompt及Scene嵌套metadata,重复源或媒体hash变化拒绝
+test_viclip_batches.py[TMD7T]: F:视频特征批量测试 | R:packages/audit-models/src/vbench_audit_models/viclip.py | A:pytest采样、尾批、特征复用与异常恢复 | S:假ViCLIP保持8帧middle采样及2/2/1尾批,相同视频新prompt仅复用视觉特征而重算文本；换视频重新编码对应批；缓存命中不能标新视觉推理,严格装载失败后恢复torch初始化函数
+test_video_batches.py[TRT7T]: F:解码组批合约测试 | R:packages/audit-core/src/vbench_audit_core/video_batches.py | A:pytest有序预取与帧装箱测试 | S:异步完成仍按原顺序交付,跨视频满批保留逐帧owner和尾批；不同形状强制分批,解码错误和空视频必须传播而不能静默跳过
+test_worker_rpc.py[TRT8PT]: F:常驻工人合约测试 | R:packages/audit-core/src/vbench_audit_core/worker_rpc.py;scripts/eval.py | A:pytest真实socket子进程生命周期测试 | S:真实无模型进程验证连续请求共PID,处理异常后仍接后续请求,崩溃断连报错且下一请求重启；取消必须解除等待并清空自身工人集合,不能当真实GPU吞吐或评分parity证据
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/docs/assets/===
 README.md[DPP5T]: F:论文配图溯源 | R:README.md;docs/assets/fig2.pdf;docs/assets/fig2.png | A:源PDF身份、PNG渲染命令与哈希 | S:图原样保留；面板a中Object/Color编译器标签疑似互换,实际方法以论文方法合同为准；不同Poppler渲染可能改变PNG字节
@@ -1565,56 +1597,111 @@ h100-eval-20261008.json[DRP7L]: F:运行验收证据 | R:docs/validation/h100-ev
 h100-eval-20261008.md[DRP7T]: F:评测验收说明 | R:docs/validation/h100-eval-20261008.json;scripts/eval.py;README.md | A:H100运行命令、计时口径、验证范围与提交记录 | S:冷运行已恢复依赖权重且不代表OS冷缓存；暖运行不是模型推理；官方只验证执行覆盖及原生聚合,未重跑E0；未知GIF时长不得假设FPS补齐
 h100-performance-20261008.json[DRP8HL]: F:性能验收收据 | R:docs/validation/h100-performance-20261008.md;scripts/eval.py;docs/validation/h100-eval-20261008.json | A:controlled_pair、runs、score_comparisons、diagnostic_comparisons、cache_comparisons、official_parity | S:记录GPU、源权重身份、媒体时长、阶段计时与覆盖；修复十九记录逐条相同；诊断比较校验引用hash再规范路径并核验新增源码pin；官方一维有极小非零差值；warm是缓存复用,单次小样本不能推为全队列吞吐
 h100-performance-20261008.md[DRP8T]: F:性能瓶颈验收 | R:docs/validation/h100-performance-20261008.json;scripts/eval.py;packages/audit-models/src/vbench_audit_models/qwen.py | A:九维修复对照、十六包验收、复现命令与提交记录 | S:两次受控比较均单卡且同cProfile包装,禁止跨四卡旧测量宣称加速；完整hash并行而评分设置不变；warm与新推理分别计时；六次Qwen独立加载仍存在；保留官方微小数值差及未知GIF时长
+h100-action-batch32-20261008.json[DHA7HT]: F:动作批处理验收 | R:scripts/eval.py;docs/validation/h100-same32-20261008.md | A:固定输入与源码哈希、H100时钟、阶段耗时及32记录等价性凭据 | S:repair独立运行且无前次缓存命中,分数/原始证据/诊断逐项相等；维度阶段耗时与包含启动的wall_seconds分开,只验证此计时队列而非自然偏好质量
+h100-aesthetic-accelerated-20261008.json[DPP7HM]: F:美学加速验收 | R:scripts/benchmark_accelerated_dimension.py;docs/validation/h100-aesthetic-profile-20261008.json;configs/benchmarks/same32-20261008.json | A:32条官方参考/候选分数、容差、聚合误差、哈希及H100时钟 | S:本队列逐视频和聚合误差均零,判据仍为max(1e-6,1%参考绝对值)；禁前次缓存复用,worker时间与全命令wall分列；单维计时不能相加冒充完整流水线墙钟
+h100-aesthetic-profile-20261008.json[DPP5T]: F:美学耗时剖析 | R:docs/plans/2026-10-08-speed32-optimization.md | A:模型加载、编码调用/帧数、worker_body_seconds与outputs_equal | S:记录CLIP视觉float16与本地权重路径；仅worker内部剖析,缺输入和源码身份,不能单独证明端到端加速或完整队列覆盖
+h100-appearance-accelerated-20261008.json[DPP7HM]: F:外观加速验收 | R:scripts/benchmark_accelerated_dimension.py;configs/benchmarks/same32-20261008.json;docs/validation/h100-same32-20261008.md | A:32条逐视频参考对照、聚合误差、来源哈希与单卡计时 | S:逐视频分数精确一致但聚合仍有浮点微差,不能统称逐位等价；通过1%相对或1e-6绝对上限,无前次缓存；worker收益与端到端计时分开且只覆盖此队列
+h100-background-graph-20261008.json[DBG7HT]: F:背景图捕获验收 | R:scripts/eval.py;docs/validation/h100-same32-20261008.md | A:输入/源码身份、32条覆盖与等价性、GPU及阶段时钟 | S:无前次缓存且分数证据诊断相等,但新维度耗时高于旧值；该CUDA graph尝试被撤回,不能作为最终加速收益
+h100-flickering-accelerated-20261008.json[DPP7HM]: F:闪烁加速验收 | R:scripts/benchmark_accelerated_dimension.py;configs/benchmarks/same32-20261008.json | A:逐记录与聚合容差检验、参考/输入/源码哈希、worker及wall时钟 | S:32条与官方参考及聚合均零误差,未复用前次评分；H100设备记录不意味着每个算法阶段都在GPU执行；本单维收据不证明十六维整体速度或研究质量
+h100-grit-roi-20261008.json[DMD7HS]: F:检测头复用验收 | R:docs/validation/h100-same32-20261008.md;scripts/eval.py | A:四维128记录覆盖、证据/语义等价性、帧复用计数与ROI剖析 | S:同次ObjectDet二次头消除不扩展到Color双协议；Spatial仅11/32、Color9/32且命令非零,不称全覆盖；parent/child计时区域包含关系禁止相加；零前次缓存与同次帧复用分开
+h100-grit-text-batch32-20261008.json[DMD7HS]: F:语义批处理验收 | R:docs/validation/h100-same32-20261008.md;scripts/eval.py | A:四维覆盖及精确对照、compile/evidence/repair阶段时钟、来源哈希 | S:128输入分数及证据诊断等价不等于全部成功,Spatial11/32和Color9/32保留且命令返回1；全部阶段非复用；分维耗时总和与含启动组墙钟分开
+h100-imaging-accelerated-20261008.json[DPP7HM]: F:成像加速验收 | R:scripts/benchmark_accelerated_dimension.py;configs/benchmarks/same32-20261008.json | A:32条MUSIQ参考/候选值、绝对误差与容差、聚合及运行身份 | S:逐视频原始分数与official_aggregate尺度分别校验,不能混用两处误差；非零浮点差通过max(1e-6,1%参考绝对值),非逐位一致；禁前次缓存,单worker提速不是全流程提速证明
+h100-motion-accelerated-20261008.json[DMO7HM]: F:平滑加速验收 | R:scripts/benchmark_accelerated_dimension.py;configs/benchmarks/same32-20261008.json | A:32视频官方分数容差对照、聚合误差、源码身份与H100时钟 | S:这里验证官方平滑估计器加速,不代表历史方向感知Repair；每片误差非零但均通过1%或1e-6门槛,不可声称逐位相同；fresh worker与含启动墙钟分开
+h100-overall-standalone-20261008.json[DOV7HM]: F:整体独立验收 | R:scripts/benchmark_accelerated_dimension.py;docs/validation/h100-viclip-pair-20261008.json | A:32视频逐项/聚合误差、参考与源码哈希、单维worker和wall耗时 | S:分数在1%或1e-6容差内但候选独立worker慢于参考；不能把passed解释为加速成功,与双维共享ViCLIP组计时必须区分；无前次缓存且非逐位等价
+h100-same32-20261008.json[DRT8HL]: F:首轮计时凭据 | R:scripts/summarize_speed32.py;configs/benchmarks/same32-20261008.json;docs/validation/h100-same32-20261008.md | A:same32-performance/1、四运行身份与时钟、逐维覆盖、三类parity和同次推理复用 | S:首轮9修复加7官方,32源展开512记录；缺失主分null,Origin Color25/32,Repair Subject23/32、Spatial11/32、Color9/32。九修复精确保持,官方对照容差1e-6；同次共享非前次缓存,仍慢于native。仅计时队列,不证明E0 parity或质量
+h100-same32-20261008.md[DRT8T]: F:同源计时实验 | R:configs/benchmarks/same32-20261008.json;docs/validation/h100-same32-20261008.json;scripts/prepare_speed32_inputs.py;scripts/summarize_speed32.py;docs/plans/2026-10-08-speed32-optimization.md | A:三十二视频十六维计时复现、版本验收与覆盖解释 | S:512记录每后端仅32个独立源,附加查询为Agent诊断标签；固定H100单卡顺序执行含启动/加载但不含下载,禁前次结果复用；首轮修复优化仍慢于原版单进程；失败保留null和完整分母,同次帧共享不算缓存重跑；精确等价限初轮九维,后续Subject仅数值容差；本队列不证明E0 parity或修复质量
+h100-same32-final-20261008.json[DRT8HL]: F:最终计时凭据 | R:scripts/summarize_speed32.py;docs/validation/h100-same32-final-20261008.md;configs/benchmarks/same32-20261008.json | A:same32-final-performance/1，三运行时钟身份、十六维结果、修复对照、加速误差、媒体与共享命中 | S:九维修复参考保留全部状态，Subject浮点微差与路径归一后的精确行分别记录；七维逐片及原生聚合全过，MUSIQ单片和总体尺度不同；ours和official因部分覆盖返回1，native虽缺Color仍返回0；单一原版PID证明常驻而非模型跨维共享；current-run特征命中不算前次评分缓存，单次墙钟不能证明统计显著加速
+h100-same32-final-20261008.md[DRT8S]: F:十六维加速验收 | R:docs/validation/h100-same32-final-20261008.json;docs/plans/2026-10-08-speed32-optimization.md;scripts/summarize_speed32.py;configs/benchmarks/same32-20261008.json | A:全命令时钟、十六维耗时覆盖、九修复与七加速验收、版本和复现指引 | S:同32原生源各2秒扩展512记录，Agent查询含负探针非人类真值；单卡单次测量且共享主机负载变化，仅能称近原版速度；ours459/512与原版505/512保留缺失，七加速224条全过；Subject仅1e-6数值容差而非逐位相等；无前次推理缓存但有同次GRiT和ViCLIP共享；原版API计时绕过文件名建库，不是整套论文复现
+h100-scene-batch32-20261008.json[DSC7HT]: F:场景批处理验收 | R:scripts/eval.py;docs/validation/h100-same32-20261008.md | A:固定32输入、双阶段耗时、源码和上游SHA及GPU等价性记录 | S:仅repair并禁用前次产物复用,32分数及原始证据诊断精确一致；evidence与repair计时分列,维度总时长不等同含启动的全命令墙钟
+h100-subject-batch16-20261008.json[DSU7HL]: F:主体批处理验收 | R:docs/validation/h100-subject-profile-20261008.json;docs/validation/h100-same32-20261008.md | A:32记录状态、定位裁剪一致性、逐字段浮点差与绝对容差 | S:仅23条成功且失败状态不变,不能删失败分母；定位裁剪精确而评分及诊断非逐位一致,最大误差分别约1.19e-7与2.98e-7,按1e-6绝对门槛验收；零前次缓存,组墙钟含额外启动
+h100-subject-profile-20261008.json[DSU5T]: F:主体耗时剖析 | R:docs/validation/h100-subject-batch16-20261008.json;docs/plans/2026-10-08-speed32-optimization.md | A:定位器/DINO加载、检测、SAM、隔离与token阶段调用及耗时 | S:阶段次数不同且只记录worker内部时间；outputs_equal不能替代带输入身份、失败分母与逐记录误差的验收报告
+h100-temporal-accelerated-20261008.json[DTS7HM]: F:时序加速验收 | R:scripts/benchmark_accelerated_dimension.py;docs/validation/h100-temporal-profile-20261008.json;docs/validation/h100-viclip-pair-20261008.json | A:32条参考/候选分数、容差与聚合检查及单卡耗时身份 | S:容差通过仍保留非零逐片误差,不声称精确一致；此独立worker未复用前次结果,不能用组内ViCLIP共享收益替换其wall_seconds或外推任意媒体速度
+h100-temporal-profile-20261008.json[DTS5T]: F:时序编码剖析 | R:docs/validation/h100-temporal-accelerated-20261008.json | A:权重加载、构造、文本/视觉编码耗时与outputs_equal | S:仅worker_body内部计时,未绑定源码、输入哈希或覆盖分母；不能从此profile推导全命令加速比
+h100-viclip-pair-20261008.json[DMD7HL]: F:视频特征共享验收 | R:docs/validation/h100-overall-standalone-20261008.json;docs/validation/h100-temporal-accelerated-20261008.json;scripts/benchmark_accelerated_dimension.py | A:Temporal/Overall各32条容差检查、独立时钟与共享推理命中计数 | S:Temporal先算八批,Overall组内复用八批；查询独立,无前次缓存。组计时不等于独立fresh前向或十六维墙钟
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/skills/vbench-eval/===
-SKILL.md[DPP7T]: F:评测代理规程 | R:configs/eval.yaml;docs/evaluation.md;configs/reproduction/paper-methods.json;scripts/eval.py | A:vbench-eval技能的配置、执行与验收步骤 | S:论文方法不能从legacy默认值推断；不得向共享或薄环境安装模型依赖；Subject需显式标注,Dynamic不得静默重采样；缓存不能称新推理,禁止改写冻结树；发布训练及论文结果改写须单独任务授权
+SKILL.md[DPP7T]: F:评测代理规程 | R:configs/eval.yaml;docs/evaluation.md;configs/reproduction/paper-methods.json;scripts/eval.py;scripts/benchmark_accelerated_dimension.py | A:vbench-eval技能的配置、执行、缓存与加速验收步骤 | S:9修复+7加速,both32；共享/薄环境禁装模型；no-reuse可共享本次证据；七维max(1%参考绝对值,1e-6),九维对修复参考；比原版单进程墙钟,冻结树禁改
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/aesthetic-quality/===
-README.md[DPP5T]: F:美学评分使用说明 | R:metrics/aesthetic-quality/src/aesthetic_quality/cli.py;docs/evaluation.md;scripts/restore_paper_runtime.py | A:uv run aesthetic-quality与--plan示例 | S:固定本维,无论文修复；沿用YAML控制器和恢复运行时共享依赖
-pyproject.toml[GWS7T]: F:美学包发布配置 | R:pyproject.toml;metrics/aesthetic-quality/src/aesthetic_quality/cli.py | A:aesthetic-quality发行包及命令入口 | S:src布局仅直接依赖audit-core；上游模型闭包由固定视觉环境承载
+README.md[DPP5T]: F:美学评分使用说明 | R:metrics/aesthetic-quality/src/aesthetic_quality/cli.py;docs/evaluation.md;docs/plans/2026-10-08-speed32-optimization.md | A:aesthetic-quality的YAML、--plan与官方模式示例 | S:命令固定美学单维，ours走加速实现且没有选定论文修复；沿用原生聚合，重型依赖和上游由恢复运行时提供
+pyproject.toml[PWS7T]: F:美学包依赖 | R:metrics/aesthetic-quality/src/aesthetic_quality/cli.py;packages/audit-core/pyproject.toml;packages/audit-models/pyproject.toml | A:aesthetic-quality发行包与同名命令 | S:src包直接依赖audit-core和audit-models；固定上游、模型权重及推理运行时不随该包安装
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/aesthetic-quality/src/aesthetic_quality/===
 __init__.py[MPP3T]: F:包版本标识 | R:metrics/aesthetic-quality/pyproject.toml | A:__version__ | S:导入不加载模型
-cli.py[XPP7T]: F:美学单维入口 | R:packages/audit-core/src/vbench_audit_core/eval_cli.py | A:main(argv);python -m aesthetic_quality.cli | S:将aesthetic_quality固定传给共用YAML控制器,repair回退官方
+cli.py[XPP7T]: F:美学单维入口 | R:packages/audit-core/src/vbench_audit_core/eval_cli.py;scripts/eval.py | A:main(argv);python -m aesthetic_quality.cli | S:固定aesthetic_quality并覆盖YAML维度范围；ours/repair选择本维accelerated，official/origin选择原版，both产生origin和accelerated两项；--plan校验输入并输出计划，不创建环境或加载模型
 official.py[MPP7T]: F:美学原版适配 | R:packages/audit-core/src/vbench_audit_core/upstream.py;scripts/paper_visual.py | A:compute(full_info,device,submodules) | S:核验固定源码再传入原始参数；上游原生aggregate与行结果原样返回
+accelerated.py[FPP7BT]: F:美学批量评分 | R:packages/audit-models/src/vbench_audit_models/clip_vision.py;packages/audit-core/src/vbench_audit_core/video_batches.py;vbench.aesthetic_quality | A:compute(rows,device,submodules,batch_size) | S:沿用原生解码和CLIP变换，图像特征先转float32再L2归一后送美学头并除10；跨视频打包仍先按视频平均，再等权平均视频，不按帧数加权
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/aesthetic-quality/tests/===
-test_official_entry.py[TPP7T]: F:美学入口合约 | R:metrics/aesthetic-quality/src/aesthetic_quality/cli.py;metrics/aesthetic-quality/src/aesthetic_quality/official.py | A:- | S:plan覆盖YAML全维范围且只保留官方单维；假上游检验实参身份与原生聚合不被改算
+test_official_entry.py[TPP7T]: F:美学入口合约 | R:metrics/aesthetic-quality/src/aesthetic_quality/cli.py;metrics/aesthetic-quality/src/aesthetic_quality/official.py | A:- | S:repair别名与全维YAML仍只计划本维accelerated且没有官方回退；plan不解码或建输出目录，假上游返回对象及不同尺度聚合原样保留
+test_accelerated.py[TPP7T]: F:美学批处理合约 | R:metrics/aesthetic-quality/src/aesthetic_quality/accelerated.py | A:- | S:用不同帧数与半精度假编码器核对跨视频满批和尾批、无梯度推理、特征归一及除10尺度；视频得分0.8和0.6须等权聚合为0.7
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/appearance-style/===
-README.md[DPP5T]: F:外观风格使用说明 | R:metrics/appearance-style/src/appearance_style/cli.py;docs/evaluation.md;scripts/restore_paper_runtime.py | A:uv run appearance-style与--plan示例 | S:固定外观风格维度,无论文修复；共用缓存及环境合同
+README.md[DPP5T]: F:外观风格使用说明 | R:metrics/appearance-style/src/appearance_style/cli.py;docs/evaluation.md;docs/plans/2026-10-08-speed32-optimization.md | A:appearance-style的配置、计划与官方模式示例 | S:维度命令不展开YAML的all；ours使用加速实现而非论文修复，原生聚合与共享缓存、外置视觉运行时合同继续适用
 pyproject.toml[GWS7T]: F:外观风格包配置 | R:pyproject.toml;metrics/appearance-style/src/appearance_style/cli.py | A:appearance-style发行包及命令入口 | S:src布局仅依赖audit-core；不在根轻量包安装视觉模型闭包
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/appearance-style/src/appearance_style/===
 __init__.py[MPP3T]: F:包版本标识 | R:metrics/appearance-style/pyproject.toml | A:__version__ | S:导入不加载模型
-cli.py[XPP7T]: F:外观风格单维入口 | R:packages/audit-core/src/vbench_audit_core/eval_cli.py | A:main(argv);python -m appearance_style.cli | S:固定appearance_style且沿用YAML其他参数,repair/both均只产生官方结果
+cli.py[XPP7T]: F:外观风格单维入口 | R:packages/audit-core/src/vbench_audit_core/eval_cli.py;scripts/eval.py | A:main(argv);python -m appearance_style.cli | S:YAML的all仍收窄为appearance_style；ours/repair走加速实现，official/origin走原版，both分别调度origin与accelerated；沿用统一配置、缓存和隔离进程，不将加速路线计作论文修复
 official.py[MPP7T]: F:外观风格原版适配 | R:packages/audit-core/src/vbench_audit_core/upstream.py;scripts/paper_visual.py | A:compute(full_info,device,submodules) | S:通过源码门禁调用官方函数,保持原始full-info、设备与子模型参数及返回聚合
+accelerated.py[FPP7BT]: F:外观风格批评分 | R:packages/audit-core/src/vbench_audit_core/video_batches.py;vbench.appearance_style | A:compute(rows,device,submodules,batch_size) | S:目标取嵌套appearance_style元数据，每个不同文本只编码一次；保留CLIP的exp(logit_scale)及除100尺度；返回逐帧值和末帧cur_sim，总聚合按全部帧加权而非视频均值
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/appearance-style/tests/===
-test_official_entry.py[TPP7T]: F:外观入口合约 | R:metrics/appearance-style/src/appearance_style/cli.py;metrics/appearance-style/src/appearance_style/official.py | A:- | S:只选本维官方回退；plan不解码媒体,假上游检查返回对象与聚合身份
+test_official_entry.py[TPP7T]: F:外观入口合约 | R:metrics/appearance-style/src/appearance_style/cli.py;metrics/appearance-style/src/appearance_style/official.py | A:- | S:只生成appearance_style/accelerated且官方回退为空；plan不解码媒体或创建输出，官方适配必须保持入参对象与原生返回对象身份
+test_accelerated.py[TPP7T]: F:外观加权合约 | R:metrics/appearance-style/src/appearance_style/accelerated.py | A:- | S:三个视频仅有两种文本，必须复用文本编码并保留输入及帧顺序；不等帧数例验证logit_scale与除100后聚合为2/7，不能改成等视频平均1/3
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/imaging-quality/===
-README.md[DPP5T]: F:成像质量使用说明 | R:metrics/imaging-quality/src/imaging_quality/cli.py;docs/evaluation.md;scripts/restore_paper_runtime.py | A:uv run imaging-quality与--plan示例 | S:无论文修复且固定单维；模型运行时依赖从恢复入口提供
+README.md[DPP5T]: F:成像质量使用说明 | R:metrics/imaging-quality/src/imaging_quality/cli.py;docs/evaluation.md;docs/plans/2026-10-08-speed32-optimization.md | A:imaging-quality的YAML计划与官方调用示例 | S:固定成像质量单维，默认加速路线没有选定论文修复；保留原生聚合，模型依赖与固定上游从外置恢复入口取得
 pyproject.toml[GWS7T]: F:成像包发布配置 | R:pyproject.toml;metrics/imaging-quality/src/imaging_quality/cli.py | A:imaging-quality发行包及命令入口 | S:src布局直接依赖audit-core,公式与模型调用留在本维适配器及锁定上游
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/imaging-quality/src/imaging_quality/===
 __init__.py[MPP3T]: F:包版本标识 | R:metrics/imaging-quality/pyproject.toml | A:__version__ | S:导入不加载模型
-cli.py[XPP7T]: F:成像质量单维入口 | R:packages/audit-core/src/vbench_audit_core/eval_cli.py | A:main(argv);python -m imaging_quality.cli | S:固定imaging_quality并共享YAML控制器,repair选择显式回退官方
+cli.py[XPP7T]: F:成像质量单维入口 | R:packages/audit-core/src/vbench_audit_core/eval_cli.py;scripts/eval.py | A:main(argv);python -m imaging_quality.cli | S:强制imaging_quality单维并共享其余YAML选项；ours/repair产生accelerated，official/origin产生origin，both生成这两项且无官方回退；--plan不执行模型推理或创建输出目录
 official.py[MPP7T]: F:成像原版适配 | R:packages/audit-core/src/vbench_audit_core/upstream.py;scripts/paper_visual.py | A:compute(full_info,device,submodules) | S:官方原生聚合和逐视频值可能不同尺度,须原样保留而不取逐行均值
+accelerated.py[FPP7BT]: F:成像批量评分 | R:packages/audit-core/src/vbench_audit_core/video_batches.py;vbench.imaging_quality | A:compute(rows,device,submodules,batch_size) | S:保持longer变换及上游仅设置model.training=False的行为，不递归改变子模块训练状态；模型输出必须逐帧覆盖；逐视频保留原始MUSIQ尺度，仅总体等视频均值除100
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/imaging-quality/tests/===
-test_official_entry.py[TPP7T]: F:成像入口合约 | R:metrics/imaging-quality/src/imaging_quality/cli.py;metrics/imaging-quality/src/imaging_quality/official.py | A:- | S:plan固定单维官方；假上游用不同尺度aggregate与逐行score验证不被改算
+test_official_entry.py[TPP7T]: F:成像入口合约 | R:metrics/imaging-quality/src/imaging_quality/cli.py;metrics/imaging-quality/src/imaging_quality/official.py | A:- | S:全维配置在repair模式下收窄为成像accelerated且无回退；假上游aggregate与逐行score故意不同尺度，适配器不得重算或复制返回值
+test_accelerated.py[TPP7T]: F:成像批处理合约 | R:metrics/imaging-quality/src/imaging_quality/accelerated.py | A:- | S:方形与宽帧、不同视频长度验证形状边界和尾批不丢帧；检查longer模式、禁用梯度及训练标志，逐视频100/50对应总体0.75而非帧加权结果
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/temporal-flickering/===
-README.md[DPP5T]: F:时序闪烁使用说明 | R:metrics/temporal-flickering/src/temporal_flickering/cli.py;docs/evaluation.md;scripts/restore_paper_runtime.py | A:uv run temporal-flickering与--plan示例 | S:固定闪烁维度且没有论文修复,复用统一控制器的设备、缓存及日志
+README.md[DPP5T]: F:时序闪烁使用说明 | R:metrics/temporal-flickering/src/temporal_flickering/cli.py;docs/evaluation.md;docs/plans/2026-10-08-speed32-optimization.md | A:temporal-flickering的计划和官方模式用法 | S:命令固定闪烁维度，ours采用加速实现且没有论文修复；数值验收范围由优化记录限定，沿用统一YAML、缓存与日志合同
 pyproject.toml[GWS7T]: F:闪烁包发布配置 | R:pyproject.toml;metrics/temporal-flickering/src/temporal_flickering/cli.py | A:temporal-flickering发行包及命令入口 | S:src布局只直接依赖audit-core；官方依赖使用恢复的视觉worker环境
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/temporal-flickering/src/temporal_flickering/===
 __init__.py[MPP3T]: F:包版本标识 | R:metrics/temporal-flickering/pyproject.toml | A:__version__ | S:导入不加载模型
-cli.py[XPP7T]: F:闪烁单维入口 | R:packages/audit-core/src/vbench_audit_core/eval_cli.py | A:main(argv);python -m temporal_flickering.cli | S:固定temporal_flickering,即使YAML写all也只调度该维官方任务
+cli.py[XPP7T]: F:闪烁单维入口 | R:packages/audit-core/src/vbench_audit_core/eval_cli.py;scripts/eval.py | A:main(argv);python -m temporal_flickering.cli | S:固定temporal_flickering，YAML的all不扩展为其他维度；默认ours及repair别名选择accelerated，official/origin选择原版，both保留origin和accelerated两个独立任务
 official.py[MPP7T]: F:闪烁原版适配 | R:packages/audit-core/src/vbench_audit_core/upstream.py;scripts/paper_visual.py | A:compute(full_info,device,submodules) | S:先验证官方源码位置与身份,上游输入和聚合逐行结果均不改写
+accelerated.py[FPP7T]: F:闪烁流式评分 | R:packages/audit-core/src/vbench_audit_core/video_batches.py;vbench.temporal_flickering | A:score_video;compute | S:CPU逐帧读取原生BGR并在float32上计算相邻绝对差，按(255-平均差)/255评分；空或不可解码视频省略，单帧拒绝；捕获句柄始终释放，不导入Torch或启动CUDA
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/metrics/temporal-flickering/tests/===
-test_official_entry.py[TPP7T]: F:闪烁入口合约 | R:metrics/temporal-flickering/src/temporal_flickering/cli.py;metrics/temporal-flickering/src/temporal_flickering/official.py | A:- | S:验证全维YAML被单维命令收窄、repair显式回退以及原生返回值保真
+test_official_entry.py[TPP7T]: F:闪烁入口合约 | R:metrics/temporal-flickering/src/temporal_flickering/cli.py;metrics/temporal-flickering/src/temporal_flickering/official.py | A:- | S:repair别名应选择闪烁accelerated并清空官方回退；plan限制单维且不解码，官方适配保留实参和原生aggregate/逐行结果的对象身份
+test_accelerated.py[TPP7T]: F:闪烁流式合约 | R:metrics/temporal-flickering/src/temporal_flickering/accelerated.py | A:- | S:不均匀像素序列核对全帧float32差分与原生公式；独立进程确认空视频路径不导入Torch，单帧失败仍关闭解码句柄
+
+===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/.github/workflows/===
+pages.yml[GRP7T]: F:项目页面部署 | R:scripts/site/build.py;site/app.js | A:winbeau路径限定push及workflow_dispatch | S:先做JavaScript语法与公开文件校验再上传_site；部署仅winbeau且仓库公开,私有仓库仍可构建；写Pages和OIDC权限仅给deploy,Action固定提交SHA,同组部署不取消在途任务
+
+===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/configs/benchmarks/===
+same32-20261008.json[PRT8HL]: F:同源计时查询 | R:scripts/prepare_speed32_inputs.py;docs/validation/h100-same32-20261008.md | A:speed32-queries/1、32源媒体哈希/协议、分维queries与auxiliary_info、subject_en及复核备注 | S:按文件名加盐哈希在评分前固定ModelScope动作源,原生256方帧16帧8FPS；Agent只查看0/7/15帧并保留负查询,不是官方标签或偏好真值；动作原prompt及文件名不能改,官方从文件名取动作；同源展开十六维仅512输入记录而非512独立视频；Scene辅助字段有嵌套协议,生成器逐源验证媒体后原样传递
+
+===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/scripts/site/===
+build.py[GRP7HT]: F:公开页面打包 | R:.github/workflows/pages.yml;site/index.html;site/data/asset-manifest.json | A:validate;CLI --output | S:验hash/大小/锚点,拒软链与根相对URL；白名单<50MB,视频须faststart及封面；输出新建且在site外
+export_scores.py[EPP7HT]: F:演示分数导出 | R:site/data/demo-scores.json;scripts/site/prepare_demo.py;scripts/eval.py | A:CLI --evidence --output;vbench-site-scores/1 | S:两run完整且逐端点/后端身份一致；Scene例按caption选取,保留ocean/sea控制；hash/状态/fresh留证,单源不估失败率
+prepare_demo.py[ECF7HT]: F:网页演示构造 | R:scripts/site/export_scores.py;site/data/construction.json | A:pixel_hashes;CLI --source --output;vbench-site-construction/1 | S:新目录无损RGB；镜像与前30帧顶部450行模糊逐帧验hash,未干预区/尾段不变；区域不供评分,展示编码不推分
+
+===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/site/===
+README.md[DRP7S]: F:展示页发布说明 | R:scripts/site/build.py;.github/workflows/pages.yml;site/data/demo-scores.json;site/data/asset-manifest.json | A:本地HTTP预览、独立公开仓库发布与展示证据边界 | S:三个案例共用一个LTX源,浏览器压缩副本不参与评分；Scene主查询在初轮描述后选择,非失败率估计；说明所列评分代码SHA与demo-scores.json的provenance不一致,须查原始记录确认
+app.js[XPP7M]: F:论文展示交互 | R:site/index.html;site/styles.css;site/data/demo-scores.json;site/data/paper-results.json | A:data-case演示挂载、冻结表格渲染、同步播放与引用复制 | S:null不补零,微小非零差保留；首视频作时钟、离屏暂停；减弱动态或节流时禁自动播放；只展示既有证据
+index.html[DPP7S]: F:论文展示页面 | R:site/app.js;site/styles.css;site/data/demo-scores.json;site/data/paper-results.json;site/assets/paper.pdf | A:论文资源、三机制演示、六维不变性与三维敏感性表及BibTeX入口 | S:Dynamic总体均值、LTX单源案例与自然偏好分别解释；Dynamic对齐不等于逐片不变,Object/Color有资格分母；提供无脚本资源回退,代码链接仍需私库访问权限
+styles.css[DPP5T]: F:展示页视觉样式 | R:site/index.html;site/app.js;site/assets/fonts/inter.woff2;site/assets/fonts/source-serif.woff2 | A:页面组件选择器、颜色字体变量与响应式断点 | S:字体从本站加载且允许交换显示；表格保留横向滚动,键盘焦点与跳转链接可见；减弱动态偏好移除动画、过渡和顺滑滚动
+.nojekyll[GRP7T]: F:静态发布标记 | R:scripts/site/build.py;.github/workflows/pages.yml | A:发布根的Jekyll旁路存在性协议 | S:构建白名单必须携带,即使零字节；当前Actions直接发布静态产物,不能推断其仍依赖Jekyll构建
+
+===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/site/assets/===
+favicon.svg[DPP3T]: F:展示页图标 | R:site/index.html | A:64×64 viewBox内嵌SVG | S:-
+paper.pdf[DPP8HL]: F:论文发布快照 | R:site/index.html;site/README.md;site/data/paper-results.json;site/data/asset-manifest.json | A:四页论文全文、九维方法、四张实验表与参考文献 | S:表格为完整配对,Spatial106、Objects505/980、Color3/5；Dynamic450源双种子,均值稳定非逐片不变。站点LTX演示仅一源,不替代论文总体；编译参考非人工真值,BMC标签为Agent复核；只支持有界改进,不证明普遍质量胜出
+
+===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/site/assets/fonts/===
+inter-OFL.txt[GRP5T]: F:Inter字体许可 | R:site/assets/fonts/inter.woff2;site/styles.css | A:SIL Open Font License 1.1 | S:再分发字体须携带版权与许可,字体不可单独售卖；修改版保留名称另需授权；字体生成的文档不因此继承OFL,不能把字体许可当整站许可
+sourceserif4-OFL.txt[GRP5T]: F:衬线字体许可 | R:site/assets/fonts/source-serif.woff2;site/assets/fonts/source-serif-italic.woff2;site/styles.css | A:Source Serif的SIL Open Font License 1.1 | S:许可允许字体捆绑及修改但要求保留版权许可,不可单独售卖字体；保留名称受修改版限制；所生成文档不必采用字体许可,不能扩大到整站素材
 
 #代码索引完毕
