@@ -45,6 +45,15 @@ def test_worker_import_paths_only_include_selected_metric():
     assert ROOT / "metrics/scene/src" not in paths
 
 
+def test_relative_runtime_launcher_preserves_virtual_environment(tmp_path):
+    launcher = tmp_path / "visual-env/bin/python"
+    launcher.parent.mkdir(parents=True)
+    launcher.symlink_to(sys.executable)
+    assets = tmp_path / "assets.json"
+    assets.write_text(json.dumps({"visual_python": "visual-env/bin/python"}))
+    assert runner.load_assets(assets)["visual_python"] == str(launcher)
+
+
 def test_output_symlink_cannot_reach_frozen_research(tmp_path):
     alias = tmp_path / "alias"
     alias.symlink_to(ROOT / "results", target_is_directory=True)

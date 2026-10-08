@@ -73,7 +73,12 @@ def load_assets(path):
     for key, value in raw.items():
         if isinstance(value, str) and key not in {"schema", "description"}:
             p = Path(value).expanduser()
-            result[key] = str((Path(path).resolve().parent / p).resolve()) if not p.is_absolute() else str(p)
+            if key in {"visual_python", "semantic_python"}:
+                # Resolving bin/python's symlink bypasses its venv and loses
+                # model dependencies. Absolutize the launcher, not its target.
+                result[key] = os.path.abspath(Path(path).resolve().parent / p)
+            else:
+                result[key] = str((Path(path).resolve().parent / p).resolve()) if not p.is_absolute() else str(p)
     return result
 
 

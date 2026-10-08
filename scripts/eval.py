@@ -71,7 +71,7 @@ def source_identity(assets):
     return identity({str(p): digest(p) for p in sorted(set(paths)) if p.is_file()})
 
 
-def validate_payload(payload, chosen):
+def validate_payload(payload, chosen, backend=None):
     rows = payload["rows"]
     expected = {r["id"]: r for r in chosen}
     if len(rows) != len(expected) or {r["id"] for r in rows} != expected.keys():
@@ -81,6 +81,8 @@ def validate_payload(payload, chosen):
         if any(row.get(k) != original[k] for k in ("video", "video_sha256", "prompt")):
             raise ValueError("Worker changed input identity")
     summary = summarize(rows)
+    if backend == "origin" and summary["complete"] and "official_aggregate" not in payload:
+        raise ValueError("Successful official worker must return its native aggregate")
     if "official_aggregate" in payload:
         value = payload["official_aggregate"]
         if not isinstance(value, (int, float)) or not math.isfinite(value):
@@ -112,6 +114,11 @@ class Workers:
                 if code:
                     raise RuntimeError(f"Worker exited {code}; see {log}")
             finally:
+                # A failed/finished leader may leave descendants in its group.
+                try:
+                    os.killpg(child.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
                 with self.lock:
                     self.processes.discard(child)
 
@@ -134,6 +141,11 @@ class Workers:
                 except ProcessLookupError:
                     pass
                 child.wait()
+            finally:
+                try:
+                    os.killpg(child.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
 
 
 def worker_env(dim, gpu, assets):
@@ -239,7 +251,7 @@ def evaluate(config, *, plan_only=False):
                                 worker_env(dim, gpu, assets), directory / "worker.log")
                     payload = json.loads(destination.read_text())
                     if final:
-                        return validate_payload(payload, chosen)["complete"]
+                        return validate_payload(payload, chosen, name)["complete"]
                     if name == "compile":
                         records = payload["records"]
                         prompts = {r["prompt"] for r in chosen}
@@ -271,7 +283,7 @@ def evaluate(config, *, plan_only=False):
                         path, receipt = stage(backend, "visual", "paper_visual.py", {"mode": backend}, final=True)
                     cache_records.append(receipt)
                     payload = json.loads(path.read_text())
-                    summary = validate_payload(payload, chosen)
+                    summary = validate_payload(payload, chosen, backend)
                     # Raw artifacts retain their historical inference provenance;
                     # this run's copy explicitly identifies cache reuse.
                     if receipt["reused"]:
@@ -324,7 +336,7 @@ def evaluate(config, *, plan_only=False):
                 chosen = [row for row in inputs if dim in row["dimensions"]]
                 if not path.is_file():
                     write_json(path, {"rows": [result(row, None, "interrupted" if interrupted else "failed") for row in chosen]})
-                report["dimensions"][key] = {**validate_payload(json.loads(path.read_text()), chosen),
+                report["dimensions"][key] = {**validate_payload(json.loads(path.read_text()), chosen, backend),
                                              "dimension": dim, "backend": backend}
         report["complete"] = all(r["complete"] for r in report["dimensions"].values()) and not interrupted
         report["elapsed_seconds"] = time.monotonic() - started
