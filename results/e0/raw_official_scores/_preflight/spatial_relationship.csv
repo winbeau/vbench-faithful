@@ -1,2 +1,0 @@
-video_uid,dimension,split,prompt_id,group_id,generator,relative_video_path,score,status,elapsed_s,error,official_video_boolean
-v_b46bb170024bffb79c94,spatial_relationship,test,"a banana on the bottom of an apple, front view",285,cogvideo,"cogvideo/spatial_relationship/a banana on the bottom of an apple, front view-0.gif",0.38585347642590767,success,9.776335,,

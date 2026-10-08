@@ -148,9 +148,9 @@ aesthetic_quality、imaging_quality 只完成源码定位，不在本轮范围�
 | overall_consistency | legacy 包保留；无本轮自然评分。 | NOT RUN | NOT RUN | out of scope；与 temporal_style 使用同一估计器且缺少人工条件。 |
 
 自然集原始快照还保留在
-[supplementary_main_table.csv](../figures/supplementary_main_table.csv)、
-[supplementary_official_metrics.csv](../figures/supplementary_official_metrics.csv)、
-[supplementary_repair_metrics.csv](../figures/supplementary_repair_metrics.csv)；
+[supplementary_main_table.csv](https://github.com/winbeau/vbench-faithful/blob/f57822e58bc2fdc18e590ffd06ead2c6a3d57ed6/figures/supplementary_main_table.csv)、
+[supplementary_official_metrics.csv](https://github.com/winbeau/vbench-faithful/blob/f57822e58bc2fdc18e590ffd06ead2c6a3d57ed6/figures/supplementary_official_metrics.csv)、
+[supplementary_repair_metrics.csv](https://github.com/winbeau/vbench-faithful/blob/f57822e58bc2fdc18e590ffd06ead2c6a3d57ed6/figures/supplementary_repair_metrics.csv)；
 这些是 2026-09-15 的补充快照，不覆盖后续 P1 报告。
 
 ## 4. 正式干预与受控 test 结果

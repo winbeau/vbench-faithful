@@ -1,5 +1,0 @@
-human_action expected=2000 success=2000 error=0 missing=0 runtime_s=332.895 mean_time_per_video_s=0.166
-subject_consistency expected=1440 success=1440 error=0 missing=0 runtime_s=305.663 mean_time_per_video_s=0.212
-dynamics_degree expected=1440 success=1440 error=0 missing=0 runtime_s=1148.767 mean_time_per_video_s=0.798
-spatial_relationship expected=2160 success=1680 error=480 missing=0 runtime_s=2434.999 mean_time_per_video_s=1.127
-total expected=7040 success=6560 error=480 missing=0

@@ -1,5 +1,0 @@
-dimension,pearson_r,n_models,supported_prompt_count,supported_pair_count
-dynamics_degree,0.8154527705606299,4,72,2160
-subject_consistency,0.9605798244940313,4,72,2160
-human_action,0.9042448144764513,4,100,3000
-spatial_relationship,0.7257362146534684,4,84,2520

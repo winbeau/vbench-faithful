@@ -21,7 +21,7 @@ uv run motion-smoothness --help
 
 ## 目录与数据
 
-新增 metric 使用 `metrics/<kebab-name>/pyproject.toml`、`src/<python_name>/` 和 `tests/`。直接 import 的科学库写入该包基础依赖，模型库写入 `models` extra；不得通过另一个 metric 间接提供依赖。禁止修改冻结的 `data/`、`results/`、`splits/`、`runs/` 内容，不提交权重或私人绝对路径。
+新增 metric 使用 `metrics/<kebab-name>/pyproject.toml`、`src/<python_name>/` 和 `tests/`。直接 import 的科学库写入该包基础依赖，模型库写入 `models` extra；不得通过另一个 metric 间接提供依赖。论文选定的方法、协议和发布哈希在 `configs/reproduction/`，复现证据在 `docs/`；修改时保留版本依据。新结果统一写入 `output/`，不提交权重或私人绝对路径。早期 E0 数据已清理，不再以根目录 `data/`、`results/`、`splits/`、`runs/` 作为必需输入。
 
 ## 提交与检查
 
@@ -49,7 +49,7 @@ check with `--no-verify`.
 
 ```bash
 mkdir -p .git/hooks
-cp .githooks/commit-msg .git/hooks/commit-msg
+cp scripts/hooks/commit-msg .git/hooks/commit-msg
 chmod +x .git/hooks/commit-msg
 ```
 

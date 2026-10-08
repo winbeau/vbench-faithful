@@ -10,7 +10,6 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SEMANTIC_ROOT = ROOT / "vendor/vbench_prompts_compile"
 PAPER = ("scene", "human_action", "object_class", "subject_consistency",
          "background_consistency", "dynamic_degree", "spatial_relationship", "multiple_objects", "color")
 OFFICIAL = PAPER + ("motion_smoothness", "temporal_flickering", "aesthetic_quality", "imaging_quality",
@@ -50,8 +49,8 @@ def python_paths(selected_dimension=None, *, upstream_only=False):
     selected_dimension = selected_dimension or os.environ.get("VBENCH_EVAL_DIMENSION")
     metrics = ([ROOT / "metrics" / dimension(selected_dimension).replace("_", "-") / "src"]
                if selected_dimension else sorted(ROOT.glob("metrics/*/src")))
-    return [ROOT, SEMANTIC_ROOT / "src", SEMANTIC_ROOT / "scripts",
-            *sorted(ROOT.glob("packages/*/src")), *([] if upstream_only else [p for p in metrics if p.is_dir()])]
+    return [ROOT, *sorted(ROOT.glob("packages/*/src")),
+            *([] if upstream_only else [p for p in metrics if p.is_dir()])]
 
 
 def configure_imports(assets):
@@ -163,8 +162,7 @@ def _asset_requirements(assets, dimensions, backend):
 
     source = json.loads((ROOT / "configs/reproduction/semantic-source.json").read_text())
     for entry in source["files"]:
-        relative = Path(entry["path"]).relative_to(source["prefix"])
-        yield pin(SEMANTIC_ROOT / relative, entry["sha256"])
+        yield pin(ROOT / entry["path"], entry["sha256"])
     if backend != "repair" and dimensions:
         official = json.loads((ROOT / "configs/reproduction/official-assets.json").read_text())
         selected = {name for dim in dimensions for name in official["requirements"][dim]}

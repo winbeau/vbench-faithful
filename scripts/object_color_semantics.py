@@ -224,7 +224,8 @@ def main():
     parser.add_argument("command", choices=["silver", "train", "compile"])
     parser.add_argument("--config", type=Path, default=Path("configs/four_dimension"))
     parser.add_argument("--output", type=Path, default=Path("output/object_color_20260920"))
-    parser.add_argument("--compile-root", type=Path, default=Path("../vbench-prompts-compile"))
+    parser.add_argument("--compile-root", type=Path,
+                        default=Path(__file__).resolve().parents[1] / "packages/prompt-compiler")
     parser.add_argument("--dimension", choices=["object_class", "color"])
     parser.add_argument("--base", type=Path)
     parser.add_argument("--extra-prompts", type=Path, help="optional dimension -> raw prompt list for frozen video query views")

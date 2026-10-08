@@ -1,0 +1,476 @@
+{
+  "source_commit": "f57822e58bc2fdc18e590ffd06ead2c6a3d57ed6",
+  "source_path": "vendor/vbench_prompts_compile/scripts/score_matrix.py",
+  "source_sha256": "57840be5df48268cd9ac94952a64c5d66d92a138ca831137d3c89d03f30b1491",
+  "scope": "CPU replay of frozen evidence; no new model inference",
+  "cases": {
+    "spatial-left-complete/Origin": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "aa48866b2dfacf9ebe2a3e1a97c6fb2d5996f99b3b7741e37f9d7ab0bdbb4495"
+    },
+    "spatial-left-complete/Repair-rule": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "aa48866b2dfacf9ebe2a3e1a97c6fb2d5996f99b3b7741e37f9d7ab0bdbb4495"
+    },
+    "spatial-left-complete/Repair-model": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "2b76d60239700d5325ae838891dff2e880796a2376909412396ae0b76e2e3bb8"
+    },
+    "spatial-left-partial/Origin": {
+      "score": 0.4375,
+      "status": "partial",
+      "coverage": 0.4375,
+      "result_sha256": "a730031bebc0fdf5da7535d51028f2363bec0beda151e2693e1dbc1c32862a5a"
+    },
+    "spatial-left-partial/Repair-rule": {
+      "score": 0.4375,
+      "status": "partial",
+      "coverage": 0.4375,
+      "result_sha256": "a730031bebc0fdf5da7535d51028f2363bec0beda151e2693e1dbc1c32862a5a"
+    },
+    "spatial-left-partial/Repair-model": {
+      "score": 0.4375,
+      "status": "partial",
+      "coverage": 0.4375,
+      "result_sha256": "3f86a2d4e0325e32b8db2c4c1ed3107a1d3fba5c4e775313c4e4b656f1092b20"
+    },
+    "spatial-left-missing/Origin": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "c75e36de890a0c653c31dde00cfc7da0cbd1cbffa356225b77bdbc87265fd7d4"
+    },
+    "spatial-left-missing/Repair-rule": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "c75e36de890a0c653c31dde00cfc7da0cbd1cbffa356225b77bdbc87265fd7d4"
+    },
+    "spatial-left-missing/Repair-model": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "d84ad18601dea0614b0daa760b56e6ed072f1a9c0dc3feeec6de30dfbaff00f5"
+    },
+    "spatial-left-empty/Origin": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "0d00bdba2699396af93e4ffd3a0d815b870843c9e40335601101fbcecc46e779"
+    },
+    "spatial-left-empty/Repair-rule": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "0d00bdba2699396af93e4ffd3a0d815b870843c9e40335601101fbcecc46e779"
+    },
+    "spatial-left-empty/Repair-model": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "56cb875d5c5b213cc4d72ab47790fdf2cf7a7708b821e7ba7c9bd1b44a6616df"
+    },
+    "spatial-left-invalid/Origin": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "0d00bdba2699396af93e4ffd3a0d815b870843c9e40335601101fbcecc46e779"
+    },
+    "spatial-left-invalid/Repair-rule": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "bbcb797874ab9791f4bc9c4a7ffbe0fcc91f92bc62dba058773d87872ddcf9fb"
+    },
+    "spatial-left-invalid/Repair-model": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "6857ff47509590efe87b785c220d1504361639199958e5a75faf464fe3f99929"
+    },
+    "spatial-right-complete/Origin": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "13084eddac4623de8a6914ac7ce3fdaf4af24ce9bc8ba2cb54d69693db481788"
+    },
+    "spatial-right-complete/Repair-rule": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "0264ad1168508d9b9a242458e44d778603f62cfc40c901fdea80d71f62bc1d2f"
+    },
+    "spatial-right-complete/Repair-model": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "a5ac1b989eff30cb1b1a8f9d5e4a84419c0776fbc78a3b47172e2d8f1ac1106d"
+    },
+    "spatial-right-partial/Origin": {
+      "score": 0.4375,
+      "status": "partial",
+      "coverage": 0.4375,
+      "result_sha256": "5214d2c2ce7e34380db5d4154a0c801da6e51662a9c2eece0359c41797e93a93"
+    },
+    "spatial-right-partial/Repair-rule": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.4375,
+      "result_sha256": "e31e5bb3d451ea279051307b3fac4b3d0ce9299c6abbf70db6fa372a9a5354c7"
+    },
+    "spatial-right-partial/Repair-model": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.4375,
+      "result_sha256": "83da9bc17d0e3785c6464676fe0b7da0d0e9256c1b1122b74411ef78f7a01897"
+    },
+    "spatial-right-missing/Origin": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "7606524970c19229d5f511aca9bc7da2c08cb1ab2a675aab4bf4e5330768f704"
+    },
+    "spatial-right-missing/Repair-rule": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "7606524970c19229d5f511aca9bc7da2c08cb1ab2a675aab4bf4e5330768f704"
+    },
+    "spatial-right-missing/Repair-model": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "99e6d3d11843a98871f3bf673f1759aafe47e39d88471e87b1ccab9021e22889"
+    },
+    "spatial-right-empty/Origin": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "0264ad1168508d9b9a242458e44d778603f62cfc40c901fdea80d71f62bc1d2f"
+    },
+    "spatial-right-empty/Repair-rule": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "0264ad1168508d9b9a242458e44d778603f62cfc40c901fdea80d71f62bc1d2f"
+    },
+    "spatial-right-empty/Repair-model": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "a5ac1b989eff30cb1b1a8f9d5e4a84419c0776fbc78a3b47172e2d8f1ac1106d"
+    },
+    "spatial-right-invalid/Origin": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "0264ad1168508d9b9a242458e44d778603f62cfc40c901fdea80d71f62bc1d2f"
+    },
+    "spatial-right-invalid/Repair-rule": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "cbc77a14e40a8dfb1f2678065d09bcdc8b36a88f1985fa1595fd189d3d156619"
+    },
+    "spatial-right-invalid/Repair-model": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "9b363c8a38e878613260635c8e041ca1792d2cba7601709217ef5ffe4daee9a8"
+    },
+    "objects-complete/Origin": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "3102a493e93f37b8eb79cc8569e436e63b4bcf3890a4588e358600c148c8ea99"
+    },
+    "objects-complete/Repair-rule": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "cec400371fe0a2e1d6aa7581eaaab6c2a69a4c3189078205dfa046bbd4277a9a"
+    },
+    "objects-complete/Repair-model": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "cec400371fe0a2e1d6aa7581eaaab6c2a69a4c3189078205dfa046bbd4277a9a"
+    },
+    "objects-isolated/Origin": {
+      "score": 0.0625,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "60b41601dac928dca0d651e07117866e3f195829c2177006f5a545b85a64546d"
+    },
+    "objects-isolated/Repair-rule": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "991a8ba7561909381fb5a10ce7701ecbdeb3990e1bdbeba77982136d66c8aafd"
+    },
+    "objects-isolated/Repair-model": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "991a8ba7561909381fb5a10ce7701ecbdeb3990e1bdbeba77982136d66c8aafd"
+    },
+    "objects-boundary/Origin": {
+      "score": 0.125,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "c8c9433c05294d08d79adc871e8ea18baef80f8cc0c80bd195677a22af7732b2"
+    },
+    "objects-boundary/Repair-rule": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "ecf222bb281e068e88929bb701c42352fa4529c7beaf9f91cc220558d6558e2c"
+    },
+    "objects-boundary/Repair-model": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "ecf222bb281e068e88929bb701c42352fa4529c7beaf9f91cc220558d6558e2c"
+    },
+    "objects-partial/Origin": {
+      "score": 0.125,
+      "status": "partial",
+      "coverage": 0.125,
+      "result_sha256": "6fbc69bfb2c8a633031339fb1cca7d2140e0a48be1a7b0de662eebf4669fb070"
+    },
+    "objects-partial/Repair-rule": {
+      "score": 0.125,
+      "status": "partial",
+      "coverage": 0.125,
+      "result_sha256": "2d6d8fce8f005cb45564386320fc72bb3184176858c5b13bea83815d2152c8f7"
+    },
+    "objects-partial/Repair-model": {
+      "score": 0.125,
+      "status": "partial",
+      "coverage": 0.125,
+      "result_sha256": "2d6d8fce8f005cb45564386320fc72bb3184176858c5b13bea83815d2152c8f7"
+    },
+    "objects-missing/Origin": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "f2b0e7d0704b43f38870b2441359c64519bdb6098894465cb1caa1b262127663"
+    },
+    "objects-missing/Repair-rule": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "8aa4ace06eabea5c113cd5d3a29b2da33153647031b87021190d486c6a284a07"
+    },
+    "objects-missing/Repair-model": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "8aa4ace06eabea5c113cd5d3a29b2da33153647031b87021190d486c6a284a07"
+    },
+    "action-playing violin-0.84994/Origin": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "431e194b8ef0a6b06b2dc6f508f0136164cabdc5c480b6b99f636758296ad6a5"
+    },
+    "action-playing violin-0.84994/Repair-rule": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "431e194b8ef0a6b06b2dc6f508f0136164cabdc5c480b6b99f636758296ad6a5"
+    },
+    "action-playing violin-0.84994/Repair-model": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "b449ff54de15f8c2fe7138c0b2b4ebb21895e647accff34b382e8bbaa056d185"
+    },
+    "action-playing violin-0.84996/Origin": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "6b29b364a1ebc2714b96a941663623e6c3c616f1fd2be7c578726bd140ca52eb"
+    },
+    "action-playing violin-0.84996/Repair-rule": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "6b29b364a1ebc2714b96a941663623e6c3c616f1fd2be7c578726bd140ca52eb"
+    },
+    "action-playing violin-0.84996/Repair-model": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "d20cba1a5f91e9660f431c3a4a32aa1c248caabf102b7b383b46ec1b9ed40c33"
+    },
+    "action-other-0.84994/Origin": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "431e194b8ef0a6b06b2dc6f508f0136164cabdc5c480b6b99f636758296ad6a5"
+    },
+    "action-other-0.84994/Repair-rule": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "431e194b8ef0a6b06b2dc6f508f0136164cabdc5c480b6b99f636758296ad6a5"
+    },
+    "action-other-0.84994/Repair-model": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "9f008c576c169ec8ab3a1e050e1d853930e26e6f348e92847acef4f4cc73baf7"
+    },
+    "action-other-0.84996/Origin": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "6b29b364a1ebc2714b96a941663623e6c3c616f1fd2be7c578726bd140ca52eb"
+    },
+    "action-other-0.84996/Repair-rule": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "6b29b364a1ebc2714b96a941663623e6c3c616f1fd2be7c578726bd140ca52eb"
+    },
+    "action-other-0.84996/Repair-model": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "0f0a043349a997a28851d7f347e78d5b1da2c1f5293d88b98148fbfbc682bf67"
+    },
+    "action-missing-0.84994/Origin": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "431e194b8ef0a6b06b2dc6f508f0136164cabdc5c480b6b99f636758296ad6a5"
+    },
+    "action-missing-0.84994/Repair-rule": {
+      "score": 0.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "431e194b8ef0a6b06b2dc6f508f0136164cabdc5c480b6b99f636758296ad6a5"
+    },
+    "action-missing-0.84994/Repair-model": {
+      "score": 0.0,
+      "status": "missing_parse",
+      "coverage": 0.0,
+      "result_sha256": "d18834da10043c7bedf5e82c2bbbc73c6df88a8d02200f1591bdef7db3b707cc"
+    },
+    "action-missing-0.84996/Origin": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "6b29b364a1ebc2714b96a941663623e6c3c616f1fd2be7c578726bd140ca52eb"
+    },
+    "action-missing-0.84996/Repair-rule": {
+      "score": 1.0,
+      "status": "ok",
+      "coverage": 1.0,
+      "result_sha256": "6b29b364a1ebc2714b96a941663623e6c3c616f1fd2be7c578726bd140ca52eb"
+    },
+    "action-missing-0.84996/Repair-model": {
+      "score": 0.0,
+      "status": "missing_parse",
+      "coverage": 0.0,
+      "result_sha256": "d18834da10043c7bedf5e82c2bbbc73c6df88a8d02200f1591bdef7db3b707cc"
+    },
+    "scene-supported/Origin": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "1843fb5c426c5df5bef729de3588bd8f5fca3e552d746375efcfc9434e44da67"
+    },
+    "scene-supported/Repair-rule": {
+      "score": 0.5,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "83feb40fc829a24ddf6708da4ec5c90d3e4a68509836b5b5bf4d8909a86140ec"
+    },
+    "scene-supported/Repair-model": {
+      "score": 0.5,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "83feb40fc829a24ddf6708da4ec5c90d3e4a68509836b5b5bf4d8909a86140ec"
+    },
+    "scene-contradicted/Origin": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "1843fb5c426c5df5bef729de3588bd8f5fca3e552d746375efcfc9434e44da67"
+    },
+    "scene-contradicted/Repair-rule": {
+      "score": 0.5,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "83feb40fc829a24ddf6708da4ec5c90d3e4a68509836b5b5bf4d8909a86140ec"
+    },
+    "scene-contradicted/Repair-model": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "1843fb5c426c5df5bef729de3588bd8f5fca3e552d746375efcfc9434e44da67"
+    },
+    "scene-insufficient/Origin": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "1843fb5c426c5df5bef729de3588bd8f5fca3e552d746375efcfc9434e44da67"
+    },
+    "scene-insufficient/Repair-rule": {
+      "score": 0.5,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "83feb40fc829a24ddf6708da4ec5c90d3e4a68509836b5b5bf4d8909a86140ec"
+    },
+    "scene-insufficient/Repair-model": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "9710690471918e194c847041185402aa0502672fbe338bad6b2223f39cadeb6b"
+    },
+    "scene-None/Origin": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "1843fb5c426c5df5bef729de3588bd8f5fca3e552d746375efcfc9434e44da67"
+    },
+    "scene-None/Repair-rule": {
+      "score": 0.5,
+      "status": "partial",
+      "coverage": 0.5,
+      "result_sha256": "83feb40fc829a24ddf6708da4ec5c90d3e4a68509836b5b5bf4d8909a86140ec"
+    },
+    "scene-None/Repair-model": {
+      "score": 0.0,
+      "status": "partial",
+      "coverage": 0.0,
+      "result_sha256": "ccfda7b501790686739fd7d24864d5b0671f158cc01555bda579690fe7ac5917"
+    },
+    "ineligible/Origin": {
+      "score": 0.0,
+      "status": "ineligible",
+      "coverage": 0.0,
+      "result_sha256": "6c81f58f45a60fec4bcc73602fe7755cc39abc0017c3ad0ca5b616f03bd6701e"
+    },
+    "ineligible/Repair-rule": {
+      "score": 0.0,
+      "status": "ineligible",
+      "coverage": 0.0,
+      "result_sha256": "6c81f58f45a60fec4bcc73602fe7755cc39abc0017c3ad0ca5b616f03bd6701e"
+    },
+    "ineligible/Repair-model": {
+      "score": 0.0,
+      "status": "ineligible",
+      "coverage": 0.0,
+      "result_sha256": "6c81f58f45a60fec4bcc73602fe7755cc39abc0017c3ad0ca5b616f03bd6701e"
+    }
+  }
+}

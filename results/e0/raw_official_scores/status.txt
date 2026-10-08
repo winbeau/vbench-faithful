@@ -1,4 +1,0 @@
-human_action PASS 2000/2000
-subject_consistency PASS 1440/1440
-dynamics_degree PASS 1440/1440
-spatial_relationship COMPLETE 1680/2160 error=480

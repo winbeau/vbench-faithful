@@ -1,9 +1,0 @@
-{
-  "model": "/data1/wenbiao_zhao/models/Qwen3-0.6B",
-  "adapters": {
-    "spatial": "runs/ablation-v1/0.6b/spatial",
-    "scene": "runs/ablation-v1/0.6b/scene",
-    "action": "runs/ablation-v1/0.6b/action",
-    "objects": "runs/ablation-v1/0.6b/objects"
-  }
-}

@@ -1,4 +1,3 @@
-import csv
 import json
 from pathlib import Path
 
@@ -42,26 +41,6 @@ def test_invalid_mapping_rejects_instead_of_zero_fill(x, scale):
         calibrated_intensity(x, scale)
 
 
-def test_calibration_selection_is_fixed_prompt_disjoint_balanced_and_score_blind():
-    directory = ROOT/'configs/dynamic-static-jitter'
-    excluded = [r for name in ('sources.v1.jsonl', 'sources.local-texture-dev32-mp4-v1.jsonl')
-                for r in map(json.loads, (directory/name).read_text().splitlines())]
-    with (ROOT/'data/processed/e0_scoring_manifest.csv').open() as handle:
-        pool = list(csv.DictReader(handle))
-    selected = select_calibration(pool, excluded)
-    assert selected == select_calibration(pool[::-1], excluded)
-    assert not {r['prompt_id'] for r in selected} & {r['prompt_id'] for r in excluded}
-    assert len(selected) == 63 and all(r['split'] == 'dev' for r in selected)
-    declared = list(map(json.loads, (directory/'sources.natural63-calibration-v1.jsonl').read_text().splitlines()))
-    assert selected == declared
-    rows = [dict(r, candidate_id=f'cal_{i}', protocol='natural-intensity-calibration-v1',
-                 family='original', seed=0, amplitude=0) for i, r in enumerate(selected)]
-    validate_calibration(rows, selected)
-    with pytest.raises(ValueError):
-        validate_calibration(rows[:-1], selected)
-    rows[0]['family'] = 'local_texture_alternating'
-    with pytest.raises(ValueError):
-        validate_calibration(rows, selected)
 
 
 def dev32_pairs():

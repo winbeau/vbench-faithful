@@ -3,7 +3,7 @@
   "selection": "current user-approved paper methods, no new training or test-set checkpoint selection",
   "methods": {
     "scene": {
-      "implementation": "vendor score_matrix + SceneVerifier",
+      "implementation": "vbench_prompts_compile.scoring + SceneVerifier",
       "version": "v8",
       "step": 300,
       "visual": "Tag2Text,16 frames",
@@ -11,21 +11,21 @@
       "batch_size": 8
     },
     "human_action": {
-      "implementation": "vendor score_matrix + AdapterRouter",
+      "implementation": "vbench_prompts_compile.scoring + AdapterRouter",
       "version": "v9",
       "step": 300,
       "visual": "UMT top5,16 frames",
       "interface": "repair-v2.1"
     },
     "spatial_relationship": {
-      "implementation": "vendor score_matrix + spatial_repair",
+      "implementation": "vbench_prompts_compile.scoring + spatial_repair",
       "version": "v8",
       "step": 600,
       "visual": "GRiT,16 frames",
       "interface": "four directions; signed repair-v2 geometry"
     },
     "multiple_objects": {
-      "implementation": "vendor score_matrix + objects_repair",
+      "implementation": "vbench_prompts_compile.scoring + objects_repair",
       "version": "v6",
       "step": 900,
       "visual": "GRiT,16 frames",

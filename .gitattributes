@@ -1,4 +1,5 @@
 # Preserve the archived CSV byte identities, including standard CRLF record endings.
 docs/reproduction/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # Keep the published semantic source byte-identical, including its existing final blank line.
-vendor/vbench_prompts_compile/** -text whitespace=-blank-at-eof linguist-vendored
+packages/prompt-compiler/src/** -text whitespace=-blank-at-eof
+packages/audit-models/src/vbench_audit_models/umt.py -text whitespace=-blank-at-eof

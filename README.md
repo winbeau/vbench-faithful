@@ -149,7 +149,21 @@ Historical negative results, rejected constructions, and paused experiments rema
 
 See the [evaluation configuration and cache guide](docs/evaluation.md), the [evaluation skill](skills/vbench-eval/SKILL.md), [CONTRIBUTING.md](CONTRIBUTING.md), the [workspace plan](docs/plans/2026-09-14-workspace-refactor.md), and the [architecture notes](docs/architecture.md). Each metric owns its scoring implementation; shared input, scheduling, output, and provenance infrastructure lives in `packages/audit-core/`, and shared model adapters live in `packages/audit-models/`.
 
-Use a new `output/` directory for experiments. `data/`, `results/`, `splits/`, and `runs/` preserve frozen research inputs and results. Model weights and external checkouts stay outside version control. Dynamic Degree and Motion Smoothness reuse official Subject Consistency video files, which does not imply shared formulas or human annotations.
+The working tree contains the evaluator and its paper reproduction evidence:
+
+| Directory | Purpose |
+|---|---|
+| `metrics/` | All 16 independent dimension packages |
+| `packages/` | Shared infrastructure, model adapters, and the integrated paper semantic compiler |
+| `scripts/` | Evaluation, reproduction, validation, and Git hooks |
+| `configs/` | YAML examples, selected paper methods, and pinned asset manifests |
+| `docs/` | Paper figures, reproduction protocols, and measured results |
+| `tests/`, `skills/` | Contract tests and the evaluation skill |
+| `output/` | Local downloads, environments, caches, and new results (ignored by Git) |
+
+The early E0 baseline, its data/splits, and superseded supplementary figures have been removed. They remain recoverable from Git history; see the [cleanup record](docs/reproduction/REPOSITORY_CLEANUP.md). The semantic compiler now lives in `packages/prompt-compiler/`, with no nested vendor repository or lockfile. AOCI state is local developer tooling and is not published.
+
+Use a new `output/` directory for experiments. Model weights and external checkouts stay outside version control. Dynamic Degree and Motion Smoothness reuse official Subject Consistency video files, which does not imply shared formulas or human annotations.
 
 ## Citation
 

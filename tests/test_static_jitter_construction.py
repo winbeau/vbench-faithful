@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from scripts.counterfactual.static_jitter import build, export_prepared, merge_builds, motion_ladder, perturb, select_sources, variants
+from scripts.counterfactual.static_jitter import build, export_prepared, merge_builds, motion_ladder, perturb, variants
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = json.loads((ROOT / "configs/dynamic-static-jitter/construction.dev-v1.json").read_text())
@@ -39,15 +39,6 @@ def test_motion_stationary_control_and_oscillation_are_real_geometric_changes():
     assert np.array_equal(still[0], moving[0])
 
 
-def test_sources_are_prompt_disjoint_balanced_and_deterministic():
-    rows = select_sources(ROOT / "data/processed/e0_scoring_manifest.csv", CONFIG)
-    assert len(rows) == 152
-    dev = [r for r in rows if r["split"] == "dev"]
-    test = [r for r in rows if r["split"] == "test"]
-    assert len(dev) == 32 and len(test) == 120
-    assert not {r["prompt_id"] for r in dev} & {r["prompt_id"] for r in test}
-    for prompt in {r["prompt_id"] for r in rows}:
-        assert len([r for r in rows if r["prompt_id"] == prompt]) == 4
 
 
 def test_every_motion_level_has_matched_interventions():

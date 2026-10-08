@@ -16,16 +16,15 @@ build/
 *.pt
 *.ckpt
 
-# External/raw VBench data
-data/raw/
+# Local research material; current release identities live in configs/reproduction.
+/data/
+/results/
+/splits/
+/runs/
 
-# Reproducible intermediate E0 outputs
-data/processed/pairs/
-data/processed/audit/*.csv
-
-# Keep selected frozen audit summaries
-!data/processed/audit/global_consistency.csv
-!data/processed/audit/main_dimension_coverage.csv
+# Local repository cognition and machine-specific tool state.
+.aoci/
+aoci.txt
 
 # AOCI agent host integration (machine-bound; do not commit)
 .codex/config.toml

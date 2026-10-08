@@ -43,7 +43,7 @@ def main():
     from vbench_prompts_compile.inference import AdapterRouter, SceneVerifier
     from vbench_prompts_compile.experiments import text_key
     from vbench_prompts_compile.sources import load_k400
-    from score_matrix import score_one, native_entity_codec
+    from vbench_prompts_compile.scoring import score_one, native_entity_codec
     task = TASKS[args.dimension]
     evidence_rows = json.loads(args.evidence.read_text())["rows"]
     evidence = {row["id"]: row for row in evidence_rows}
@@ -97,7 +97,7 @@ def main():
                               diagnostics=scored))
     write_json(args.output, {"rows": results, "predictions": records, "dimension": args.dimension,
                             "adapter_sha256": expected["sha256"], "fresh_semantic_inference": True,
-                            "scorer_sha256": digest(ROOT / "vendor/vbench_prompts_compile/scripts/score_matrix.py")})
+                            "scorer_sha256": digest(ROOT / "packages/prompt-compiler/src/vbench_prompts_compile/scoring.py")})
 
 
 if __name__ == "__main__":

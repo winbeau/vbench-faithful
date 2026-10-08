@@ -1,9 +1,0 @@
-{
-  "model": "/data1/wenbiao_zhao/models/Qwen3-8B",
-  "adapters": {
-    "spatial": "/data1/wenbiao_zhao/vbench-prompts-compile/runs/formal/v8-8b/spatial",
-    "scene": "/data1/wenbiao_zhao/vbench-prompts-compile/runs/formal/v8-8b/scene",
-    "action": "/data1/wenbiao_zhao/vbench-prompts-compile/runs/formal/v9-8b/action",
-    "objects": "/data1/wenbiao_zhao/vbench-prompts-compile/runs/formal/v6-8b/objects"
-  }
-}

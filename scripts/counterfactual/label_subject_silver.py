@@ -85,7 +85,7 @@ def annotate(rows: list[dict], *, client, config: dict, vocabulary: set[str], ou
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pool", type=Path, required=True)
-    parser.add_argument("--prompt-compile-root", type=Path, required=True)
+    parser.add_argument("--prompt-compile-root", type=Path, default=ROOT / "packages/prompt-compiler")
     parser.add_argument("--config", type=Path, default=ROOT / "configs/subject-repair/deepseek.json")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--workers", type=int, default=4)

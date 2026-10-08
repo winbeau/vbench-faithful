@@ -1,0 +1,577 @@
+{
+  "schema": "vbench-layout-validation/1",
+  "scope": "Four affected semantic dimensions, same 32 videos; fresh GPU inference after integration, no change to paper tables",
+  "tested_git_commit": "7be47cada975b5139d4bb511953d7dbd57eaa17d",
+  "tested_git_tree": "53bb478bcdb25a7488c1897e1b064642e5a74a7f",
+  "upstream_commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+  "gpu": "NVIDIA H100 80GB HBM3, GPU-c0af33a9-498c-ff7c-bb56-e9992ccded30",
+  "result": "/root/wenbiao_zhao/vbench-repair-eval-20261008/cleanup-20261008-result-v3",
+  "reference": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/ours-final",
+  "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+  "unique_media": 32,
+  "media": [
+    {
+      "index": 0,
+      "video": "modelscope/human_action/A person is driving car-0.mp4",
+      "video_sha256": "315d35c362c549ff07a6229e90d185b4d3e0bd389a1653f0b22592c1c76c2d9a",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 1,
+      "video": "modelscope/human_action/A person is riding or walking with horse-0.mp4",
+      "video_sha256": "595a0cff6fbaf79f377a750b50296ab26f04b4675d371acfa9c1bcedc74d0d7d",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 2,
+      "video": "modelscope/human_action/A person is ice skating-0.mp4",
+      "video_sha256": "9b9efb498505f2e9d14f0d9e7035ed244ec2141da0f3197cff7a1cd065d6decd",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 3,
+      "video": "modelscope/human_action/A person is clapping-0.mp4",
+      "video_sha256": "1e0fa20191afaa112b586444f10809ef5a4f09b5714d22a7feb58aeb14202c5c",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 4,
+      "video": "modelscope/human_action/A person is playing trumpet-0.mp4",
+      "video_sha256": "5a519089a4148dc5a28f9bba70d11c117094e4573fba368df2c2f5d90eeb0c28",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 5,
+      "video": "modelscope/human_action/A person is sweeping floor-0.mp4",
+      "video_sha256": "a69b2cd0ee314066b3939f2a0aada0c41fb09aa9309b4e1d9a4185a7dcffa86a",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 6,
+      "video": "modelscope/human_action/A person is shuffling cards-0.mp4",
+      "video_sha256": "c455f8e2213f2cd4715107e5cc0e7f3b509920c7e77256c0e57f6d5c42a8ca82",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 7,
+      "video": "modelscope/human_action/A person is rock climbing-0.mp4",
+      "video_sha256": "52be8c627b2d4c3eea39389be430123cd3cacfcc792f04be41d876ff6329fb68",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 8,
+      "video": "modelscope/human_action/A person is eating watermelon-0.mp4",
+      "video_sha256": "23abd17a0fca5e8c368fb5216a238c3ee684684cb3f77faf7c83fc6df559b02a",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 9,
+      "video": "modelscope/human_action/A person is brushing teeth-0.mp4",
+      "video_sha256": "299a8804ab3c157c2c59d0caa12eef33cbfd07b4f51ac9f72b2f7fc18acdfb3e",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 10,
+      "video": "modelscope/human_action/A person is jogging-0.mp4",
+      "video_sha256": "28adba13a35fe19c096fdb277de50444925e006b7bfdec16a232dc4e38b1a3fc",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 11,
+      "video": "modelscope/human_action/A person is sticking tongue out-0.mp4",
+      "video_sha256": "c81fd702525d64cc660673b1a0b2e7dbfa180a7ac5ee64a61ce86d4bf98e5b31",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 12,
+      "video": "modelscope/human_action/A person is bending back-0.mp4",
+      "video_sha256": "94f0d4b2b93e93b76e9d147a338047819c75a72694114734c16860397e8997ff",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 13,
+      "video": "modelscope/human_action/A person is running on treadmill-0.mp4",
+      "video_sha256": "a75628f8cb28518a481da584ca0d17d8587334793ad0f3c25cbe6ce13e7b86e6",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 14,
+      "video": "modelscope/human_action/A person is digging-0.mp4",
+      "video_sha256": "28c7c6d582171b92e854e2c414e79442b49e8b36ac8ca7d1e13f082cfc068f4b",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 15,
+      "video": "modelscope/human_action/A person is massaging legs-0.mp4",
+      "video_sha256": "a34b885ac71d17655c0f6677681932e89a0e61d8435363879a939159bf856988",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 16,
+      "video": "modelscope/human_action/A person is cleaning windows-0.mp4",
+      "video_sha256": "a650c2283e1fb9bcfcb3de9278cfc7ebb976a1f2500fe8497a3b5e8a7d31e627",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 17,
+      "video": "modelscope/human_action/A person is catching or throwing frisbee-0.mp4",
+      "video_sha256": "505979ef32e5d106b41dcd8b0aaa3ea4310da9f6b2f2fa7050c35efda079af39",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 18,
+      "video": "modelscope/human_action/A person is climbing a rope-0.mp4",
+      "video_sha256": "9e97169ef366574082645957f9a943e21547dbd1203263a8308baca70901612e",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 19,
+      "video": "modelscope/human_action/A person is using computer-0.mp4",
+      "video_sha256": "f93a2c3980e8fa9be3debe222beed01731a3a0fea932eb22b962cd1bfd5d0e10",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 20,
+      "video": "modelscope/human_action/A person is riding scooter-0.mp4",
+      "video_sha256": "34cb7fba7abdd04404ab7af3b4d41078ce3153b97e44ab6cf72dbf928a55618a",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 21,
+      "video": "modelscope/human_action/A person is sword fighting-0.mp4",
+      "video_sha256": "13913751235cb957c946b4ce388208fb47ef9056996cbb3fba80d7ba904709d2",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 22,
+      "video": "modelscope/human_action/A person is air drumming-0.mp4",
+      "video_sha256": "26259af67eb17464bd0460f18145fa84ea6f64bc6e2d9ee39a263f0244950d4f",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 23,
+      "video": "modelscope/human_action/A person is playing flute-0.mp4",
+      "video_sha256": "a3539eb5ffbae211874ae1243bb2b55c424e7ee0c3e57005778cbb8eb9ba46e9",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 24,
+      "video": "modelscope/human_action/A person is doing aerobics-0.mp4",
+      "video_sha256": "61638e71feace65e403dd384d8df0ed8a9f37c3900b4e534d4ea5a5ca48974a5",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 25,
+      "video": "modelscope/human_action/A person is dancing ballet-0.mp4",
+      "video_sha256": "a4ed01f1242cc0509f8e5eee3ae205ed8d1d48b9c215d31a2ec5cd6df942ba74",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 26,
+      "video": "modelscope/human_action/A person is hugging-0.mp4",
+      "video_sha256": "a35d9ab6b7fc3cbfcbb3fde7fa6c14e8d49980b7096a6a9106abf92949b7a9a5",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 27,
+      "video": "modelscope/human_action/A person is flying kite-0.mp4",
+      "video_sha256": "b78a0c69fb37dc9a5a72e8c58102145e17d59446866039e5720d26b1fbf95152",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 28,
+      "video": "modelscope/human_action/A person is peeling apples-0.mp4",
+      "video_sha256": "c4393c7042ed28394ebe73f797e2c8b29fe1c118113c3b420a2d3c862947acff",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 29,
+      "video": "modelscope/human_action/A person is giving or receiving award-0.mp4",
+      "video_sha256": "d98d942be8ec23fd2a5483318e3a810418d36769544d3f50a37b00cfe10c87ee",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 30,
+      "video": "modelscope/human_action/A person is laughing-0.mp4",
+      "video_sha256": "be7f107ae7c7883b573bdb066111f22dc2e19263fb36213db7ea4f3f33fc964f",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    },
+    {
+      "index": 31,
+      "video": "modelscope/human_action/A person is baby waking up-0.mp4",
+      "video_sha256": "03ea253e719c7b3ad83439f0d042d5d97ae314ca9df2ba6ea7fc7b2bc15e0623",
+      "media": {
+        "width": 256,
+        "height": 256,
+        "r_frame_rate": "8/1",
+        "duration": "2.000000",
+        "nb_frames": "16"
+      }
+    }
+  ],
+  "dimensions": {
+    "scene": {
+      "rows": 32,
+      "succeeded": 32,
+      "score_and_status_exact": 32,
+      "max_absolute_score_error": 0.0,
+      "entire_result_rows_exact": 32,
+      "predictions_exact": true,
+      "fresh_semantic_inference": true,
+      "result_sha256": "12cedfebece83790385bf1fbe816f4db2f96cca9258d461b42983c94f79f55bc"
+    },
+    "human_action": {
+      "rows": 32,
+      "succeeded": 32,
+      "score_and_status_exact": 32,
+      "max_absolute_score_error": 0.0,
+      "entire_result_rows_exact": 32,
+      "predictions_exact": true,
+      "fresh_semantic_inference": true,
+      "result_sha256": "d04a16b8bb8b5cce8ffc6ddb7078d8d306be88e3618b08ce318a04ffa42b20f7"
+    },
+    "spatial_relationship": {
+      "rows": 32,
+      "succeeded": 11,
+      "score_and_status_exact": 32,
+      "max_absolute_score_error": 0.0,
+      "entire_result_rows_exact": 32,
+      "predictions_exact": true,
+      "fresh_semantic_inference": true,
+      "result_sha256": "e767a99661e859bb3821d805a34715573321e3ffd48a92ee59156977f0914177"
+    },
+    "multiple_objects": {
+      "rows": 32,
+      "succeeded": 32,
+      "score_and_status_exact": 32,
+      "max_absolute_score_error": 0.0,
+      "entire_result_rows_exact": 32,
+      "predictions_exact": true,
+      "fresh_semantic_inference": true,
+      "result_sha256": "9b226a7552c10cf7e4483f6eb43c9202c1f87c3e5e768dda2e999f8658fcf80d"
+    }
+  },
+  "summary": {
+    "schema": "vbench-eval/1",
+    "complete": false,
+    "dimensions": {
+      "scene/repair": {
+        "input_count": 32,
+        "succeeded": 32,
+        "missing": 0,
+        "coverage": 1.0,
+        "complete": true,
+        "score": 0.546875,
+        "observed_subset_mean": 0.546875,
+        "aggregation": "equal_video",
+        "dimension": "scene",
+        "backend": "repair",
+        "gpu": "3",
+        "cached": false,
+        "elapsed_seconds": 94.57547269097995
+      },
+      "human_action/repair": {
+        "input_count": 32,
+        "succeeded": 32,
+        "missing": 0,
+        "coverage": 1.0,
+        "complete": true,
+        "score": 0.8125,
+        "observed_subset_mean": 0.8125,
+        "aggregation": "equal_video",
+        "dimension": "human_action",
+        "backend": "repair",
+        "gpu": "3",
+        "cached": false,
+        "elapsed_seconds": 27.470874075079337
+      },
+      "spatial_relationship/repair": {
+        "input_count": 32,
+        "succeeded": 11,
+        "missing": 21,
+        "coverage": 0.34375,
+        "complete": false,
+        "score": null,
+        "observed_subset_mean": 0.002042352808481841,
+        "aggregation": "equal_video",
+        "dimension": "spatial_relationship",
+        "backend": "repair",
+        "gpu": "3",
+        "cached": false,
+        "elapsed_seconds": 92.99481610697694
+      },
+      "multiple_objects/repair": {
+        "input_count": 32,
+        "succeeded": 32,
+        "missing": 0,
+        "coverage": 1.0,
+        "complete": true,
+        "score": 0.189453125,
+        "observed_subset_mean": 0.189453125,
+        "aggregation": "equal_video",
+        "dimension": "multiple_objects",
+        "backend": "repair",
+        "gpu": "3",
+        "cached": false,
+        "elapsed_seconds": 15.47023098997306
+      }
+    },
+    "requested_backend": "repair",
+    "official_fallback": [],
+    "accelerated_dimensions": [],
+    "timing_seconds": {
+      "inputs": 0.11604563205037266,
+      "asset_verification": 6.139540850999765,
+      "source_verification": 0.22366410004906356,
+      "gpu_probes": 1.850532352924347,
+      "total_before_dispatch": 8.33383285603486
+    },
+    "elapsed_seconds": 238.87092566594947
+  },
+  "plan_source_identity": "f1d2ed6db799d6663feced2cf5164be85c84a91b2825b3fbaa3123027595304c",
+  "assets_verified": true,
+  "all_scores_and_states_match": true,
+  "note": "The validation checkout is a temporary commit of the staged source tree. Final publication adds validation documentation and Git attributes only; model/scoring source bytes are identical.",
+  "cohort_reference": "h100-same32-final-20261008.json",
+  "cpu_tests": {
+    "passed": 1566,
+    "skipped": 3,
+    "seconds": 29.65
+  },
+  "cli_help_entries": [
+    "aesthetic-quality",
+    "appearance-style",
+    "background-consistency",
+    "color",
+    "dynamic-degree",
+    "human-action",
+    "imaging-quality",
+    "motion-smoothness",
+    "multiple-objects",
+    "object-class",
+    "overall-consistency",
+    "scene",
+    "spatial-relationship",
+    "subject-consistency",
+    "temporal-flickering",
+    "temporal-style"
+  ],
+  "source_parity": {
+    "byte_identical_modules": [
+      "__init__.py",
+      "action_lexicon.py",
+      "action_repair.py",
+      "experiments.py",
+      "inference.py",
+      "llm.py",
+      "metrics.py",
+      "objects_repair.py",
+      "official_replay.py",
+      "records.py",
+      "sources.py",
+      "spatial_repair.py",
+      "teacher.py",
+      "training.py"
+    ],
+    "ast_identical_scoring_functions": [
+      "native_entity_codec",
+      "backend_target",
+      "rule_target",
+      "origin_compiled",
+      "parsed_target",
+      "score_one"
+    ],
+    "golden_cases": 78,
+    "golden_passed": 78,
+    "ast_identical_visual_initializers": [
+      "initialize_umt"
+    ]
+  },
+  "cache_policy": "Fresh result computation (--no-reuse); compatible base runtimes and within-run ObjectDet evidence sharing retained."
+}

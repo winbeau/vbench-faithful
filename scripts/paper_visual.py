@@ -20,7 +20,7 @@ def evidence(rows, dim, assets):
     import torch
     import torchvision.transforms as tv
     from vbench.utils import load_video, tag2text_transform
-    from cache_backend_outputs import initialize_umt
+    from vbench_audit_models.umt import initialize_umt
     device = torch.device("cuda:0")
     task = TASKS[dim]
     if task == "scene":

@@ -34,6 +34,7 @@ members = [
     "temporal-flickering",
     "temporal-style",
     "vbench-audit",
+    "vbench-prompts-compile",
 ]
 
 [[package]]
@@ -2361,6 +2362,7 @@ dependencies = [
     { name = "subject-consistency" },
     { name = "temporal-flickering" },
     { name = "temporal-style" },
+    { name = "vbench-prompts-compile" },
 ]
 
 [package.optional-dependencies]
@@ -2425,6 +2427,7 @@ requires-dist = [
     { name = "temporal-flickering", editable = "metrics/temporal-flickering" },
     { name = "temporal-style", editable = "metrics/temporal-style" },
     { name = "temporal-style", extras = ["models"], marker = "extra == 'models'", editable = "metrics/temporal-style" },
+    { name = "vbench-prompts-compile", editable = "packages/prompt-compiler" },
 ]
 provides-extras = ["models"]
 
@@ -2436,6 +2439,11 @@ test = [
     { name = "pytest", specifier = ">=8,<9" },
     { name = "scipy" },
 ]
+
+[[package]]
+name = "vbench-prompts-compile"
+version = "0.1.0"
+source = { editable = "packages/prompt-compiler" }
 
 [[package]]
 name = "wcwidth"

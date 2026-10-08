@@ -5,6 +5,7 @@ requires-python = ">=3.10,<3.13"
 dependencies = [
   "audit-core",
   "audit-models",
+  "vbench-prompts-compile",
   "dynamic-degree",
   "motion-smoothness",
   "subject-consistency",
@@ -58,6 +59,7 @@ members = ["metrics/*", "packages/*"]
 [tool.uv.sources]
 audit-core = { workspace = true }
 audit-models = { workspace = true }
+vbench-prompts-compile = { workspace = true }
 dynamic-degree = { workspace = true }
 motion-smoothness = { workspace = true }
 subject-consistency = { workspace = true }

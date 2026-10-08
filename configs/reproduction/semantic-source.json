@@ -1,703 +1,136 @@
 {
+  "schema": "vbench-semantic-source/2",
   "model_repo": "xju-arlab/vbench-model",
   "revision": "5fe53c4c7eb1a8a4fcd5b6e22f748da1d073a78e",
-  "prefix": "code/vbench_prompts_compile",
+  "policy": "First-party runtime source pins. The complete published training snapshot remains pinned in release.json and is restored by prepare_reproduction.py.",
   "files": [
     {
-      "path": "code/vbench_prompts_compile/README.md",
-      "bytes": 602,
-      "sha256": "e09e9036c6f8e0be0f16c4247838912c54ba9ce987edc93c3db6160b7fb3d396"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/ablation/v1/action-qwen3-0.6b.json",
-      "bytes": 1012,
-      "sha256": "7d4e29f085737f3180c31bf696e85f7c0b048fd40fcf94a68b57b6a8345fbe32"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/ablation/v1/eval-0.6b.json",
-      "bytes": 261,
-      "sha256": "d88e0d0901214a0907c1bc0cd8e503985bd3ec67b79ad44df2f33b7a358ab193"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/ablation/v1/eval-8b.json",
-      "bytes": 415,
-      "sha256": "f8090b4268574cd1436ff5a6be48a030570e2ea7059f62c56d6e0434df7ddc27"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/ablation/v1/objects-qwen3-0.6b.json",
-      "bytes": 1018,
-      "sha256": "e459bb6f7db62f42c90abd6118780f0d83ea67d53ad67abea0053eaf4c87e1c4"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/ablation/v1/scene-qwen3-0.6b.json",
-      "bytes": 1008,
-      "sha256": "284183f60e8b186c6d8783bea9bd71487287c57ae02f7a9ab2f44840cfe4def3"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/ablation/v1/spatial-qwen3-0.6b.json",
-      "bytes": 1065,
-      "sha256": "402b2960d68f1308341ba47e94aebd2ed437f7f45bc6ed1d7da4e098ce3ac852"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/experiments/deterministic-v1.json",
-      "bytes": 3401,
-      "sha256": "a94a2d0c03a602273da0804f9695f70c30525209d4228454895a1768c837146a"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/action-qwen3-0.6b.json",
-      "bytes": 987,
-      "sha256": "d51a754a9619a1a77e954e15fb2d198867840a12632de0eae824edb3152fec77"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/action-qwen3-8b.json",
-      "bytes": 983,
-      "sha256": "ca92379dbf04d58709f6902b243fe3baef1a7505691522552e209cf3bdc857dc"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/objects-qwen3-0.6b.json",
-      "bytes": 993,
-      "sha256": "4d80ed0f53e850660f622e272ea6f80a8a75818aac6074ebfbb293c5eb6b4943"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/objects-qwen3-8b.json",
-      "bytes": 989,
-      "sha256": "94cd6d165422d263c5638ee0f00b30b266be54dcd757a7cc689ac5555adc3fe9"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/scene-qwen3-0.6b.json",
-      "bytes": 982,
-      "sha256": "d59eeb4ee37ef24ddc1b1c43be9821ee3c37eac3743ec5614b92d65233a1e114"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/scene-qwen3-8b.json",
-      "bytes": 978,
-      "sha256": "0b444bf0a0592a884507ba07b1e2ee48ee1b4ab7fb75e23abc111278f0820cfe"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/spatial-qwen3-0.6b.json",
-      "bytes": 993,
-      "sha256": "2ea09c45e6d651c2cab501614847c31f8d682f86e77c0429227ffaff21163db1"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/spatial-qwen3-8b.json",
-      "bytes": 989,
-      "sha256": "5d5a79a8a439e878da20e72cf9a2b2b2cc633853476bffb07aac2dc94e0de4dd"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v3/action-qwen3-8b.json",
-      "bytes": 986,
-      "sha256": "2b403f38d93ca21970e929c72555653410572b904fc40864d3e2af8ea4790eda"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v3/objects-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "d466d4c09b493caba9d5fa5b43226c8a14665a6f5e34a34336c76cbb1e46526c"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v3/scene-qwen3-8b.json",
-      "bytes": 981,
-      "sha256": "b102b19d6e09d612024ece6fafb73651e107f97d9295deee14e34b04fa525515"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v3/spatial-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "52fac2a76867d9f0f81c61f07f3fb964278f87cfcd8f7d9e82c466635d157604"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v4/action-qwen3-8b.json",
-      "bytes": 986,
-      "sha256": "527aa8b842446b78097ceaa60c11aa9c5bcd682f960c6a16a617b55fb3149513"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v4/objects-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "32ab2a952cd6945e7143e73690f60240689538f534088a209e5b374631c46aec"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v4/scene-qwen3-8b.json",
-      "bytes": 982,
-      "sha256": "cc4b9af5bb93699c672c4f21279cab583834f11d19d3d2fa36a130b31def79b6"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v4/spatial-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "6f4c92804edfdfd75a0cb3dadf50114fb4ceedb61821cc57541d3e3e0020dffc"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v5/action-qwen3-8b.json",
-      "bytes": 986,
-      "sha256": "f811bee49169ed877b96109257a9e06fb3c756373deb891ed2a28fd22c166ec7"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v5/objects-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "d86d820e65521f96049857ce9d95db4c8abef94686c4f961823ba44e4c7a2d4e"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v5/scene-qwen3-8b.json",
-      "bytes": 982,
-      "sha256": "399adfe8dd636d2c552d8db99d5c34c7c767d22d25c76d3f03dc8eccc29c235b"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v5/spatial-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "52113b3b0de83ea1447173102d78f9ca519e4a0df112a9cad333e2ed8901b8b6"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v6/action-qwen3-8b.json",
-      "bytes": 986,
-      "sha256": "1c3a5e520f6cc1b63e8cde69ae08ed05d259e15d6710327cbcaea87860745cbb"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v6/objects-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "e005e8d1643f43849d93c772e8515a575505f01f670dc39e41a9d97a23634093"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v6/scene-qwen3-8b.json",
-      "bytes": 982,
-      "sha256": "deb9488952ddd3bd58a35b1e4812c3f3ac330489db9d534e47b4251a5d3355b5"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v6/spatial-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "4edfd69c2b7e58f81323e6a630fa727d50afa99becc81d6af7ff6ce0cc0e38ab"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v7/action-qwen3-8b.json",
-      "bytes": 986,
-      "sha256": "c5a58fcf92a80455b96a77388d7358adc1233f74da8deb50e4ce7eb60f1e3496"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v7/objects-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "28c2548d9f51b901cd09009b0fe4934a220af777143f2b70381a3abc6b7d3902"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v7/scene-qwen3-8b.json",
-      "bytes": 982,
-      "sha256": "063123c3fdfd33d380775bd6e47e3b44af2de0a3b1ccaf8fe61366249810e41c"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v7/spatial-qwen3-8b.json",
-      "bytes": 992,
-      "sha256": "c706a305a05fba9b3bbcc3636156e4dceb96c8dee4adc234b9a46bc0471e8687"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v8/scene-qwen3-8b.json",
-      "bytes": 982,
-      "sha256": "ec6ad8f27166392a6b1943fe5893c89bb03c7ad2efe652eacc7b7e7d0cfea895"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v8/spatial-qwen3-8b.json",
-      "bytes": 1039,
-      "sha256": "17769871680257a27df76f266fbc7a9ffb9ae9fab431e8f0646d0bbf2e67f31f"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/formal/v9/action-qwen3-8b.json",
-      "bytes": 986,
-      "sha256": "ed87b336ee73f596510703eab7e6a27f4b195cbd7e59d73ca4a14bfc49f95b99"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/action-cpu-tiny.json",
-      "bytes": 708,
-      "sha256": "de93e4e5bb421a5c42d1fb43c85402b2958f2a4f459991bc975d90e154a149ae"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/action-qwen3-0.6b.json",
-      "bytes": 713,
-      "sha256": "12c37cfb10ab532a78f03c1442ed0dee5a5d69755ee49a8d538eb676726bd606"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/action-qwen3-8b.json",
-      "bytes": 773,
-      "sha256": "12f2a4af1503fa93efc975d296ecfc9b1b9c55a11c0564a8b431c33bba4b8b59"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/objects-cpu-tiny.json",
-      "bytes": 711,
-      "sha256": "d5040c322047137f871c375b71b142473fb53a173a461861c6f57b7378ea6556"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/objects-qwen3-0.6b.json",
-      "bytes": 716,
-      "sha256": "0fab1239ea226f283e7b827f5906b6f3a5d26f36432806c36a261abb5fb56888"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/objects-qwen3-8b.json",
-      "bytes": 776,
-      "sha256": "f9b1cb7e4ea2fe2285956d0b8c942ff1a45c7fc3d0b21057db6fdc45e7e63b8e"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/scene-cpu-memtest.json",
-      "bytes": 722,
-      "sha256": "ad892e608b2b900ed568b972aa6fb06ece1ac85e6124ade39dbc1cd59f689322"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/scene-cpu-tiny.json",
-      "bytes": 705,
-      "sha256": "611eb718c2d4c0251c4cb42eaf566ff71e2add86040c254481739c8d2d35ea95"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/scene-qwen3-0.6b.json",
-      "bytes": 710,
-      "sha256": "c5488288942fc6e2383fbbc884e67b9f9b15f975062f8704cd3b89e3b192c80e"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/scene-qwen3-8b.json",
-      "bytes": 770,
-      "sha256": "53a5e082dba78528a375c64be7e5a882bf67fb0cb63db630a2d2ddf5c6133e10"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/spatial-cpu-memtest.json",
-      "bytes": 728,
-      "sha256": "6f02c4b91879fac6e946f0f9ef328c0e745a49e42bef051583d32dbd191153ae"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/spatial-cpu-tiny.json",
-      "bytes": 711,
-      "sha256": "848a80a963ecda2865d3509cdefe5c66b695f6d64504ccfa1612e7f3906eb0db"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/spatial-qwen3-0.6b.json",
-      "bytes": 716,
-      "sha256": "cca6cb1746bd72dd50de82ffe6ca83b7cbe73d794288132468492934a2c11513"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/smoke/spatial-qwen3-8b.json",
-      "bytes": 776,
-      "sha256": "3a0ffb24d037a815a410b0503231af981c9115fdabceda71c16854afa6781972"
-    },
-    {
-      "path": "code/vbench_prompts_compile/configs/teacher/pilot-01.json",
-      "bytes": 4547,
-      "sha256": "aa729b5ce9308d2677b55cfcbb0f24a2c0f76b3bc71df033dea643a4fdd34996"
-    },
-    {
-      "path": "code/vbench_prompts_compile/docs/contracts.md",
-      "bytes": 6122,
-      "sha256": "f7b6716c52b4446cda87eee14ed30bfd2171bd4ac21de3102633cabb16c44773"
-    },
-    {
-      "path": "code/vbench_prompts_compile/docs/upstream.md",
-      "bytes": 1507,
-      "sha256": "8a35ff3bd4f143d0546ff1712f4be1ad3850a795e515a11fed860c29059acdc3"
-    },
-    {
-      "path": "code/vbench_prompts_compile/pyproject.toml",
-      "bytes": 1089,
-      "sha256": "1d6e7b6f419baa0c793069214fe49a3ca7306c59610b83936e0b8b5c9951f5ef"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/analyze_object_controls.py",
-      "bytes": 5987,
-      "sha256": "2058a7483d0ff822e9cc6afa626bed05b9338f9669dc596a4aa3e2d0e5ab6ac7"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/annotate_gold.py",
-      "bytes": 9783,
-      "sha256": "33492637291a85ed70ad13662fce43ef061a6c7a756474031056f364ed3a8c6f"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/annotate_object_visibility.py",
-      "bytes": 12148,
-      "sha256": "a4c7e2eb2bf44a519f824c422cfac7bc04c8273444375dcbda22668ba0a6865c"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/annotate_scene_vision.py",
-      "bytes": 16925,
-      "sha256": "df3d8d32ca2990d4e350bc84af0ab709b99f33bf31ac030b9803c27782222d3d"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/audit_ablation_sources.py",
-      "bytes": 3488,
-      "sha256": "4f1871cc86fc4e0ccf36c1f73f27110598fb8eafd1786b5cf507d364747f8ad6"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/audit_scene_sources.py",
-      "bytes": 3909,
-      "sha256": "32f9ef72a281626b1f688387175191b64561a2975e47a06dfcd12787e7ee6a91"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/audit_training_sources.py",
-      "bytes": 6716,
-      "sha256": "9a2d19d5ab068d05cf924cf6da32daadc265a79676935d5181a52de28c9e2bd0"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/batch_predict.py",
-      "bytes": 8848,
-      "sha256": "330c487bdde8886f8858c3f9b8096ac9208b2f3d9a563fc1de9a58dff980a1a0"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/build_ablation_eval.py",
-      "bytes": 11444,
-      "sha256": "c4b31cfb850f850f3e12ce8c1890a3024ac3f0074e1514cfb4a8c98e5030e470"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/build_deterministic_sets.py",
-      "bytes": 8989,
-      "sha256": "23debd0d0bd018473417642dcb708936b7efd57d5e0b09c403d354cce4aa7354"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/build_families.py",
-      "bytes": 9177,
-      "sha256": "e47f173aa9541613eb9cc4e9343ed714e69ee660c774869c3286eff42fb11e83"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/build_formal_sets.py",
-      "bytes": 7126,
-      "sha256": "3d5c2f13254e5c956216753bd80781f3479c3d4be904b4474fee3149599aeb4a"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/build_matrix_plan.py",
-      "bytes": 8686,
-      "sha256": "c3825a825f412c430869093b9502086ea7260634c2c7741999719eb0c80a4b52"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/build_scene_inputs.py",
-      "bytes": 2285,
-      "sha256": "5b6003dff3f38fd96915235c9c807cd0c0cfc7f96ae066933a3603c1519c1f22"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/build_smoke_mix.py",
-      "bytes": 5865,
-      "sha256": "818d898c0abe7573d75dab008cc14e77ad55ed79409f47ddc21c3c7663223149"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/cache_backend_outputs.py",
-      "bytes": 11986,
-      "sha256": "ca3e8db80a6cb833c7d457c89968de3716415ec7e5865beaec2c46fafe7a5c13"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/cache_matrix_transforms.py",
-      "bytes": 15434,
-      "sha256": "32401443bda3c6396ebbf64ff1834f0130d21849b295af030121e7004b473bf2"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/cache_occlusion_outputs.py",
-      "bytes": 8627,
-      "sha256": "32f74614b9ea477356677bd7796c70cdc64f6fca0af2977a250a840e23fff53c"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/caption_frames.py",
-      "bytes": 8790,
-      "sha256": "e154d87e20bb00cafa986587c2345954a06f4005d150439f633b5f3a1e11329a"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/check_official_parity.py",
-      "bytes": 4660,
-      "sha256": "996319304ed4fca521e9aecfad54d366145ae904604fba4552646f223f26fa54"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/check_training_stack.py",
-      "bytes": 1682,
-      "sha256": "16d68b3fec56b0bf54a66a95dcf9e025b02cb1fc1444af427fbf9d0cb174b756"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/check_umt_parity.py",
-      "bytes": 3141,
-      "sha256": "6574c3047047f2cf69d6a941d1a4017b1dd67e4f4ac8f34e1f0a39d9a002e801"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/evaluate_action_repair.py",
-      "bytes": 14151,
-      "sha256": "833f4b877b298f390668468b9f77a1ccb963d1dcde9eeb5cef31d8976c313dc7"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/evaluate_action_scope.py",
-      "bytes": 5576,
-      "sha256": "ca99dec17c35dd224e1962a84f1d4d75b5a55fa727fcee2acec7a308ac18c88c"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/evaluate_objects_repair.py",
-      "bytes": 19705,
-      "sha256": "1997760ff5319ec33e86dc7b7afcca8a07a963552bd6cb57584c2bc3c57175ef"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/evaluate_smoke.py",
-      "bytes": 9736,
-      "sha256": "c1199c538661bdcf1fe8bdd24137b82bb8694d8a60f04dbda4b7c8d825639c3c"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/evaluate_spatial_repair.py",
-      "bytes": 22070,
-      "sha256": "590f22b73b82905ca134a91667cb8b1bee55b043d7716eeb96b4046ff4f609ce"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/export_failure_frames.py",
-      "bytes": 6027,
-      "sha256": "7d3eed0eb1b56165cf4ca708cb4bb8e76de0d73536b12a6012ddcffa801b9ffb"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/inspect_k400.py",
-      "bytes": 2307,
-      "sha256": "9730606b67385392c2cd02e031b0d08838af100859a279d31ac9fab689e201f9"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/inspect_moviegen_flickr.py",
-      "bytes": 8888,
-      "sha256": "cc85dc8814db505bf8c60fe46bdbf20aa922d05c5b9e71c588bb5bf7c4693009"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/inspect_vg_regions.py",
-      "bytes": 5324,
-      "sha256": "9ae7f1a8a27649767ec4c2e649a7563830c3553fdab36f6806f2b93b5a72f7b5"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/inspect_vg_snli.py",
-      "bytes": 12685,
-      "sha256": "77afd5166366748c1b8de8c86a1f0ea648411f29477e2bc301ce3fed9cce2596"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/make_tiny_model.py",
-      "bytes": 5878,
-      "sha256": "9c5ff579b612bb24c066dbf4f8db2a0610a1945bcef09239b59fbe0f0fa13c2e"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/manage_visibility_shards.py",
-      "bytes": 5515,
-      "sha256": "90b8fa1ae5c5ae06e81cd1eee4a508f0a8afe4551ab294109b9948cd0de8e34b"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/plot_training_curves.py",
-      "bytes": 10609,
-      "sha256": "a7d89a97b6764590d23b3e7ca75e0ed02a47665b28e77a9e06eec08dd594a4df"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/predict.py",
-      "bytes": 4955,
-      "sha256": "21587b80b876f25e278cfe3fc0ff9401db50ca5ca8c1aa03252733f52db14066"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/predict_ablation.py",
-      "bytes": 11203,
-      "sha256": "d41fe9ee963cfbce671d61c7da1385a771d855674b896849fc767030fd595e1e"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/prepare_action_isolation.py",
-      "bytes": 5087,
-      "sha256": "a407c43644dd77b96c3a1a169b614a96aedba6380cbf4af7e27303cea4bc5785"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/prepare_data.py",
-      "bytes": 31764,
-      "sha256": "d3e2b71c2f1e7b0a4b8fd7d8d8db211648ab6b6d6c95af38f427fc9e86246121"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/prepare_repair_training.py",
-      "bytes": 8872,
-      "sha256": "32d2eec1f29fdecccfbaf976637d86a0e398772c75b1fb6b5454031a95b4be08"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/prepare_scene_matrix_gold.py",
-      "bytes": 3255,
-      "sha256": "0660c912615b78ebe15b06fb26e1cc2900dc4453d679bc8408fbd090c4eb7d62"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/prepare_visibility_contacts.py",
-      "bytes": 3474,
-      "sha256": "556570a519eee7f784dc699e6a5adf812b45013a34c51cf4e147e9e345ce097c"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/relabel_scene_evidence.py",
-      "bytes": 7002,
-      "sha256": "a12275b31bed7bbe77b22edd90fbf6f79b9fa97f30da840fd30625ac407ba7de"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/render_matrix_tables.py",
-      "bytes": 18864,
-      "sha256": "ddd0e335ad841f2d2c8c3309d6e1c92ad6b9d7f2a75a452cde9468ba6189896e"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/repair_action_gold.py",
-      "bytes": 5278,
-      "sha256": "099cce0ad894465f2d65c53b74d792b59c7058c17d09875bfbce0a40202b9651"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/repair_action_predictions.py",
-      "bytes": 4147,
-      "sha256": "4e168a4164c04905e12b1c27f10700ca44f58087372d94879e090da1e3016934"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/run_formal_training.sh",
-      "bytes": 2120,
-      "sha256": "f055986f51efe38c137ba74201232522a8bd4f3d28b845357197e572889fea03"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/run_teacher_pilot.py",
-      "bytes": 11780,
-      "sha256": "d7e482e67a2e36fb30a88d432e09e4918d4706dec541dd29d2b0b5b1c9852653"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/score_ablation.py",
-      "bytes": 10178,
-      "sha256": "3e7bbe485a012e901dd42f581d5994b61fdf5b88b27b5a33789497a400ba39e6"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/score_deterministic.py",
-      "bytes": 9905,
-      "sha256": "4083cc286745b5fbcbbb42585b4a50f9edbd02d068b5427cc81ca9d3124c4747"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/score_matrix.py",
-      "bytes": 29309,
-      "sha256": "57840be5df48268cd9ac94952a64c5d66d92a138ca831137d3c89d03f30b1491"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/score_origin_vs_repair.py",
-      "bytes": 12956,
-      "sha256": "64d14a8b05a0e9f06e03f98f4428b45ce8a502a712c8a8e327d4611bc82b0216"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/score_scene_metamorphic.py",
-      "bytes": 13157,
-      "sha256": "a652d6a6fed44aadf45a61092c67bcbc0884f29efbd9c3d5b381c4860a251813"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/score_spatial_mirror.py",
-      "bytes": 512,
-      "sha256": "a932fe0e2b5a32c4bcbbc5d078ebfd5faf353b939ea6101c64eb6d0452f4180a"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/select_evidence_cases.py",
-      "bytes": 9653,
-      "sha256": "fa8eddc4dd4cf97764597ec351f47d376839b2baaf5612eb7f0c7e58d998a5be"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/summarize_matrix_provenance.py",
-      "bytes": 9394,
-      "sha256": "e3954b6b40910448865453c431cef7c127c8c42debd03465e7b9e43937aa01b1"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/tmux_train_control.sh",
-      "bytes": 2751,
-      "sha256": "e9e43f2cd939555a221ead7acb57fbe16e8e360b013585af07e2bb65d742eee5"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/train_adapter.py",
-      "bytes": 5260,
-      "sha256": "6a5089fc1747d0c31623a4a65e2941d1640c9c9199b83b473b8313646ae2b3bb"
-    },
-    {
-      "path": "code/vbench_prompts_compile/scripts/train_scene.py",
-      "bytes": 4490,
-      "sha256": "cb3340d30d119bd9f8acd024a2a8a402ecd83870af2c3c84067ce716d5aab929"
-    },
-    {
-      "path": "code/vbench_prompts_compile/source-manifest.json",
-      "bytes": 20433,
-      "sha256": "60f351623f2d45f04ea5f55ca7a0967bddb0ebc358f0c4169e2294eab285186a"
-    },
-    {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/__init__.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/__init__.py",
       "bytes": 86,
-      "sha256": "7a6d78f307fbba80b018f967a973bdf43b93774700ae7704c5d43afaf9163970"
+      "sha256": "7a6d78f307fbba80b018f967a973bdf43b93774700ae7704c5d43afaf9163970",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/__init__.py",
+      "published_sha256": "7a6d78f307fbba80b018f967a973bdf43b93774700ae7704c5d43afaf9163970",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/action_lexicon.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/action_lexicon.py",
       "bytes": 2829,
-      "sha256": "0f721886d08196c4969eca10d21663fdd20a880ac182ee41fc48b2ea161940fd"
+      "sha256": "0f721886d08196c4969eca10d21663fdd20a880ac182ee41fc48b2ea161940fd",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/action_lexicon.py",
+      "published_sha256": "0f721886d08196c4969eca10d21663fdd20a880ac182ee41fc48b2ea161940fd",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/action_repair.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/action_repair.py",
       "bytes": 8441,
-      "sha256": "896cd39d5ecb195c6df13a1003b225c10dba66ffca1c6a03ebcf2c34bcdf14bb"
+      "sha256": "896cd39d5ecb195c6df13a1003b225c10dba66ffca1c6a03ebcf2c34bcdf14bb",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/action_repair.py",
+      "published_sha256": "896cd39d5ecb195c6df13a1003b225c10dba66ffca1c6a03ebcf2c34bcdf14bb",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/annotate.py",
-      "bytes": 26349,
-      "sha256": "823f8a4044fdafac8df4467c7585b45e2cb23af26dcc464f410e8aff0ba9e782"
-    },
-    {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/annotation_jobs.py",
-      "bytes": 6504,
-      "sha256": "a5d38370ec51ea52ee4f0a5294931c90026ec024e3af3a2d5dd935daeae36ad2"
-    },
-    {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/cli.py",
-      "bytes": 695,
-      "sha256": "63181ecee517e824ed3628709fa3dc3af5f0949a48d91cdcc603c6d4e0bd33e8"
-    },
-    {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/experiments.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/experiments.py",
       "bytes": 4708,
-      "sha256": "357a0dc77b93251879e87f95b96b3246f5ca772fe5e3851f73778c4bd390c8aa"
+      "sha256": "357a0dc77b93251879e87f95b96b3246f5ca772fe5e3851f73778c4bd390c8aa",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/experiments.py",
+      "published_sha256": "357a0dc77b93251879e87f95b96b3246f5ca772fe5e3851f73778c4bd390c8aa",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/generalization.py",
-      "bytes": 5314,
-      "sha256": "7df3ac5a458943f66c0482367f9c97bf13577ad52a543e121be414dfb392ba5b"
-    },
-    {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/inference.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/inference.py",
       "bytes": 18405,
-      "sha256": "0f372349783afc8a5f58fdd508a53869ed71076231f106bfd6195aecd526320d"
+      "sha256": "0f372349783afc8a5f58fdd508a53869ed71076231f106bfd6195aecd526320d",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/inference.py",
+      "published_sha256": "0f372349783afc8a5f58fdd508a53869ed71076231f106bfd6195aecd526320d",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/llm.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/llm.py",
       "bytes": 12611,
-      "sha256": "4f7e121c754d54f1e10bc0cd02d1d278981e80baa1f56b7ff8432837220ca895"
+      "sha256": "4f7e121c754d54f1e10bc0cd02d1d278981e80baa1f56b7ff8432837220ca895",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/llm.py",
+      "published_sha256": "4f7e121c754d54f1e10bc0cd02d1d278981e80baa1f56b7ff8432837220ca895",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/metrics.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/metrics.py",
       "bytes": 5097,
-      "sha256": "89cb8b8c560342cc580d8cb31cade876eaf5af058b2784335e68e91cd330a864"
+      "sha256": "89cb8b8c560342cc580d8cb31cade876eaf5af058b2784335e68e91cd330a864",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/metrics.py",
+      "published_sha256": "89cb8b8c560342cc580d8cb31cade876eaf5af058b2784335e68e91cd330a864",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/objects_repair.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/objects_repair.py",
       "bytes": 4945,
-      "sha256": "cb1ad8a80d062ebfb6643efc73c16525038e9679ed7c37154c32906fbb2ee3ba"
+      "sha256": "cb1ad8a80d062ebfb6643efc73c16525038e9679ed7c37154c32906fbb2ee3ba",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/objects_repair.py",
+      "published_sha256": "cb1ad8a80d062ebfb6643efc73c16525038e9679ed7c37154c32906fbb2ee3ba",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/official_replay.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/official_replay.py",
       "bytes": 2168,
-      "sha256": "3ffbf0ad2dab5554b190291bfa7169eeaeeb295b3fa932d0f3fc133f36928d22"
+      "sha256": "3ffbf0ad2dab5554b190291bfa7169eeaeeb295b3fa932d0f3fc133f36928d22",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/official_replay.py",
+      "published_sha256": "3ffbf0ad2dab5554b190291bfa7169eeaeeb295b3fa932d0f3fc133f36928d22",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/pilot.py",
-      "bytes": 8072,
-      "sha256": "80e34f700b7861f4d0098ebae2c535c5e88fe224a4dde560664aa216d43f4ca2"
-    },
-    {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/provenance.py",
-      "bytes": 2220,
-      "sha256": "602d8346cde9be06687b60d66004e41498510f0c1f690a96f2bd403d04e2d3fe"
-    },
-    {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/records.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/records.py",
       "bytes": 22706,
-      "sha256": "229b7621bda598f172ad25d55c9f15f995abdc3fc425476d384416de74b7b639"
+      "sha256": "229b7621bda598f172ad25d55c9f15f995abdc3fc425476d384416de74b7b639",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/records.py",
+      "published_sha256": "229b7621bda598f172ad25d55c9f15f995abdc3fc425476d384416de74b7b639",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/sources.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/scoring.py",
+      "bytes": 9773,
+      "sha256": "7bc139b3cee0a5fcc0bf94f9c62c4813e4f92e285e366facfde7f683c7486c77",
+      "published_path": "code/vbench_prompts_compile/scripts/score_matrix.py",
+      "published_sha256": "57840be5df48268cd9ac94952a64c5d66d92a138ca831137d3c89d03f30b1491",
+      "integration": "unchanged functions; package-relative imports"
+    },
+    {
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/sources.py",
       "bytes": 15286,
-      "sha256": "7d5b155e6f179f4fddcd56a504766218a03a54be8fe35af9364038616f73b7ae"
+      "sha256": "7d5b155e6f179f4fddcd56a504766218a03a54be8fe35af9364038616f73b7ae",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/sources.py",
+      "published_sha256": "7d5b155e6f179f4fddcd56a504766218a03a54be8fe35af9364038616f73b7ae",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/spatial_repair.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/spatial_repair.py",
       "bytes": 3177,
-      "sha256": "0adc119464fa9c3698327d9cbdb8f857ef916e7b237996db071d18bc779bfe4c"
+      "sha256": "0adc119464fa9c3698327d9cbdb8f857ef916e7b237996db071d18bc779bfe4c",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/spatial_repair.py",
+      "published_sha256": "0adc119464fa9c3698327d9cbdb8f857ef916e7b237996db071d18bc779bfe4c",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/teacher.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/teacher.py",
       "bytes": 16877,
-      "sha256": "a2f5c2a83719c69d10c108832a628725b75d89b2996e3f4498257d18ce91609c"
+      "sha256": "a2f5c2a83719c69d10c108832a628725b75d89b2996e3f4498257d18ce91609c",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/teacher.py",
+      "published_sha256": "a2f5c2a83719c69d10c108832a628725b75d89b2996e3f4498257d18ce91609c",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/training.py",
+      "path": "packages/prompt-compiler/src/vbench_prompts_compile/training.py",
       "bytes": 29155,
-      "sha256": "2c73eb965ffbc2a2ed43a6a254a1c0974851a68f3c5421e69564c33412f59fe4"
+      "sha256": "2c73eb965ffbc2a2ed43a6a254a1c0974851a68f3c5421e69564c33412f59fe4",
+      "published_path": "code/vbench_prompts_compile/src/vbench_prompts_compile/training.py",
+      "published_sha256": "2c73eb965ffbc2a2ed43a6a254a1c0974851a68f3c5421e69564c33412f59fe4",
+      "integration": "byte-identical"
     },
     {
-      "path": "code/vbench_prompts_compile/src/vbench_prompts_compile/visual_transforms.py",
-      "bytes": 5464,
-      "sha256": "87952aade796a791e8bd5d2617a3ea1d8b3916da5af13ced5372124bdad94583"
-    },
-    {
-      "path": "code/vbench_prompts_compile/uv.lock",
-      "bytes": 133897,
-      "sha256": "0ebe4906cb87ce69e4281ee1e54eb684f697e2de48c557bf4e3ab8894fde94ba"
+      "path": "packages/audit-models/src/vbench_audit_models/umt.py",
+      "bytes": 1163,
+      "sha256": "91df60d10577d959c66e9f159f06ac714cc2edefd758fc1d4e89dac54ddce997",
+      "published_path": "code/vbench_prompts_compile/scripts/cache_backend_outputs.py",
+      "published_sha256": "ca3e8db80a6cb833c7d457c89968de3716415ec7e5865beaec2c46fafe7a5c13",
+      "integration": "unchanged initialize_umt function; standard-library json import"
     }
-  ],
-  "policy": "Byte-preserved source used by the paper; repository integration imports this copy, not a sibling workspace."
+  ]
 }

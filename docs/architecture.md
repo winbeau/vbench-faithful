@@ -1,6 +1,6 @@
 # Architecture
 
-The root project owns the workspace contract and explicitly depends on every metric and `audit-core`. Each metric is an independent distribution under `metrics/<kebab-name>/src/<import_name>`; metrics never import one another. `audit-core` owns only shared input validation, metadata matching, device parsing, scheduling, result schemas, and output writing.
+The root project owns the workspace contract and explicitly depends on all 16 metrics, `audit-core`, `audit-models`, and `vbench-prompts-compile`. Each metric is an independent distribution under `metrics/<kebab-name>/src/<import_name>`; metrics never import one another. `audit-core` owns only shared input validation, metadata matching, device parsing, scheduling, result schemas, and output writing. `audit-models` supplies common model adapters. `packages/prompt-compiler/` owns the integrated semantic adapters and paper scorer; it retains the published formulas separately from infrastructure. All workspace packages share the root lockfile.
 
 ```text
 CLI -> audit-core.inputs -> audit-core.devices -> metric backend

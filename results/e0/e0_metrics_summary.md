@@ -1,6 +1,0 @@
-| Dimension | Pearson (n=4) | Test clip-pair accuracy | Tie-aware test accuracy | Kendall tau-b | Pair accuracy 95% CI | Coverage |
-|---|---:|---:|---:|---:|---:|---:|
-| Dynamic Degree | 0.815 | 0.684 | 0.684 | 0.461 | [0.634, 0.733] | 100.0% |
-| Subject Consistency | 0.961 | 0.584 | 0.585 | 0.383 | [0.550, 0.619] | 100.0% |
-| Human Action | 0.904 | 0.553 | 0.553 | 0.265 | [0.496, 0.616] | 100.0% |
-| Spatial Relationship | 0.726 | 0.505 | 0.525 | 0.292 | [0.462, 0.546] | 77.8% |

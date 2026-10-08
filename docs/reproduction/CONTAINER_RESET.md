@@ -61,7 +61,7 @@ Repair 允许误差为 `1e-6`。这是代表性端到端验收，不能称为全
 ```bash
 /absolute/path/vbench-runtime/semantic-env/bin/python scripts/reproduce_main_table.py \
   --bundle /absolute/path/vbench-runtime/selected/bundle \
-  --model-code vendor/vbench_prompts_compile \
+  --model-code /absolute/path/vbench-runtime/selected/model-code \
   --k400-labels configs/reproduction/k400-labels.json \
   --output output/paper-table
 ```

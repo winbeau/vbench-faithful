@@ -1,4 +1,3 @@
-import csv
 import json
 from pathlib import Path
 
@@ -12,18 +11,6 @@ from scripts.counterfactual.score_mp4_dev32 import evaluate_candidate, grid_quer
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_selection_keeps_24_and_excludes_holdout_without_scores():
-    original = [json.loads(s) for s in (ROOT / 'configs/dynamic-static-jitter/sources.v1.jsonl').read_text().splitlines()]
-    with (ROOT / 'data/processed/e0_scoring_manifest.csv').open() as f:
-        pool = list(csv.DictReader(f))
-    selected, replacements = select_mp4(original, pool)
-    assert len(selected) == 32 and len(replacements) == 8
-    assert sum(s['selection_role'] == 'retained_original_dev_mp4' for s in selected) == 24
-    assert not {s['video_uid'] for s in selected} & {s['video_uid'] for s in original if s['split'] == 'test'}
-    assert all(s['split'] == 'dev' and s['relative_video_path'].endswith('.mp4') for s in selected)
-    assert select_mp4(original, pool[::-1])[0] == selected
-    declared = [json.loads(s) for s in (ROOT / 'configs/dynamic-static-jitter/sources.local-texture-dev32-mp4-v1.jsonl').read_text().splitlines()]
-    assert selected == declared
 
 
 def test_boolean_uses_official_strict_threshold_and_time_count():

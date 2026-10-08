@@ -100,9 +100,11 @@ def test_changed_adapter_is_rejected_before_loading_any_model(tmp_path):
 
 
 def test_publication_semantic_source_is_byte_identical():
-    # This route needs no vision weights; it still verifies all 139 source files.
+    # This route needs no vision weights; all integrated runtime sources are pinned.
     checked = verify_assets({}, [], "origin")
-    assert len(checked) == 139
+    source = json.loads((ROOT / "configs/reproduction/semantic-source.json").read_text())
+    assert set(checked) == {str(ROOT / entry["path"]) for entry in source["files"]}
+    assert len(checked) == 16
 
 
 def test_parallel_verification_reads_all_bytes_even_if_stat_is_unchanged(tmp_path, monkeypatch):

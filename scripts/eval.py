@@ -64,7 +64,7 @@ def gpu_tokens(gpus, mask=None):
 
 def source_identity(assets):
     paths = [ROOT / "uv.lock", ROOT / "pyproject.toml"]
-    for folder in ("scripts", "metrics", "packages", "vendor/vbench_prompts_compile"):
+    for folder in ("scripts", "metrics", "packages"):
         paths.extend((ROOT / folder).rglob("*.py"))
     paths.extend((ROOT / "configs").rglob("*.json"))
     # External source changes invalidate hits, even when weights are unchanged.
