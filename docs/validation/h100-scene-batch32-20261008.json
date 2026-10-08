@@ -1,0 +1,69 @@
+{
+  "code_sha": "fed43db8ed11d7a320db9eaf8d82c7861d0661cb",
+  "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+  "clock": {
+    "returncode": 0,
+    "wall_seconds": 56.65704605495557,
+    "command": [
+      "/root/.local/bin/uv",
+      "run",
+      "--no-sync",
+      "python",
+      "scripts/eval.py",
+      "--config",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/benchmark.yaml",
+      "--backend",
+      "repair",
+      "--dimensions",
+      "scene",
+      "--output",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/scene-batch32",
+      "--no-reuse"
+    ],
+    "finished_utc": "2026-10-08T06:12:39.539961+00:00"
+  },
+  "dimensions": {
+    "scene": {
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0,
+      "diagnostics_equal": true,
+      "raw_evidence_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 54.193396235932596,
+      "new_seconds": 48.87545729498379,
+      "stages": [
+        {
+          "reused": false,
+          "key": "d19e5bf245b5a0700a2f94f324b9948425a2a3ee87345f05d26c6b18efa18c89",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/scene-batch32/scene/evidence",
+          "stage": "evidence",
+          "elapsed_seconds": 35.33876770804636,
+          "environment_seconds": 0.4009798950282857,
+          "worker_seconds": 34.93372512503993
+        },
+        {
+          "reused": false,
+          "key": "47fb5cdfab52177c0d2366e29e6763678fb420c1c29c7de41d699c0dfedfe0a6",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/scene-batch32/scene/repair",
+          "stage": "repair",
+          "elapsed_seconds": 13.531441078986973,
+          "environment_seconds": 0.26979267597198486,
+          "worker_seconds": 13.256384284002706
+        }
+      ]
+    }
+  },
+  "gpu_info": {
+    "3": {
+      "torch": "2.5.1+cu121",
+      "cuda": "12.1",
+      "name": "NVIDIA H100 80GB HBM3",
+      "capability": [
+        9,
+        0
+      ]
+    }
+  },
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+}

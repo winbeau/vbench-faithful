@@ -41,13 +41,17 @@ Profiled 64 frames per protocol on H100: ObjectDet takes 5.36 s, including 1.49 
 
 `6998024`: reuse an independently copied ObjectDet ROI output only within the same frame, when model identity, decoder settings and feature/proposal identities match. Both raw evidence heads remain present. CPU contracts: 109 passed, 1 skipped. Same-32 H100 acceptance passed: all 128 input records retain exact scores, statuses, semantic outputs and raw visual evidence. Object Class falls from 66.08 to 54.61 s (visual stage 50.95 to 39.11 s); the four sequential stages total 200.52 to 191.88 s. Standalone group wall time including setup is 198.60 s. No previous-run inference hits; 510 duplicate ROI/text forwards removed. Color retains both original heads. Coverage stays 32/11/32/9 in Object/Spatial/Multiple/Color order. [Receipt](../validation/h100-grit-roi-20261008.json).
 
-## Active item: Scene
+## Accepted: Scene
 
-Profile visual captioning and semantic verification separately, distinguishing imports/model loading from inference. Preserve the original captions, semantic generation settings and paper scoring. Other dimensions remain unchanged until this item is accepted.
+Profile: 129 distinct semantic requests, 17 batches at size 8; model loading 6.68 s, inference 13.22 s. Representative visual profiling (64 frames) finds caption decoding dominant; tag encoding itself is only 0.14 s. `fed43db` changes only semantic batch size to 32, keeping order, all requests, greedy decoding, token limits and newline stopping. CPU: 41 passed. H100 same-32: scores, diagnostics, captions and raw semantic outputs exact; 32/32 scored. Semantic stage 21.19 → 13.53 s; whole dimension 54.19 → 48.88 s (visual stage varied 33.00 → 35.34 s). Standalone run including setup 56.66 s. [Receipt](../validation/h100-scene-batch32-20261008.json).
+
+## Active item: Human Action
+
+Profile serial prompt parsing, retaining the selected repair-v2.1 compiler and all raw outputs. Other dimensions remain unchanged until acceptance.
 
 ## Subsequent queue
 
-After Scene acceptance, handle Human Action, Background Consistency and Subject Consistency individually, prioritizing shared model-load costs only when profiling justifies them. Dynamic already outperforms its original reference; retain its native protocol.
+After Human Action acceptance, handle Background Consistency and Subject Consistency individually, prioritizing shared model-load costs only when profiling justifies them. Dynamic already outperforms its original reference; retain its native protocol.
 
 For the seven accelerated dimensions, proceed individually in this order: Appearance Style, Imaging Quality, Aesthetic Quality, Temporal Style, Overall Consistency, Motion Smoothness, Temporal Flickering. Shared encoder work may be prepared when working on its first consumer, with other dimensions remaining unchanged until their own acceptance. Mode routing and final 16-dimensional end-to-end acceptance follow the validated implementations.
 
