@@ -1,7 +1,7 @@
 {
   "version": 1,
   "created_at": "2026-10-07T20:50:55Z",
-  "updated_at": "2026-10-08T11:39:07Z",
+  "updated_at": "2026-10-08T12:04:04Z",
   "files": {
     ".editorconfig": {
       "sha256": "29c033c3f6ae7b6fbf543bae7ddb4db67609a9db2a22ed3c15bc9fa071924e44",
@@ -39,14 +39,14 @@
       "normalized_sha256": "ad0ad3b23d82790cd22132e05dcf874476f8182063748eb6a7ac14252f3dd6e8"
     },
     "AGENTS.md": {
-      "sha256": "f2845c1259324917b3bb96f3bcf9a796e5a6dc30a74413bd5eb68ed3c65cd7d4",
-      "size": 22645,
-      "normalized_sha256": "f2845c1259324917b3bb96f3bcf9a796e5a6dc30a74413bd5eb68ed3c65cd7d4"
+      "sha256": "f972afd931714406bb73726da98f7f0f3246b1a2802896d3b443a9fe27c8880d",
+      "size": 23516,
+      "normalized_sha256": "f972afd931714406bb73726da98f7f0f3246b1a2802896d3b443a9fe27c8880d"
     },
     "CONTRIBUTING.md": {
-      "sha256": "777858c9c1a3e1a7b2debb54d1441ca6351df14cf103f8c5625bf33b79b00cd2",
-      "size": 2412,
-      "normalized_sha256": "777858c9c1a3e1a7b2debb54d1441ca6351df14cf103f8c5625bf33b79b00cd2"
+      "sha256": "da32a64a0fde9897820e0e2747343b87767d74f70a7924c3e46ee78304dfedab",
+      "size": 2911,
+      "normalized_sha256": "da32a64a0fde9897820e0e2747343b87767d74f70a7924c3e46ee78304dfedab"
     },
     "IMPLEMENTATION_PLAN.md": {
       "sha256": "4bb65bbbfb4b4292e2ed639e1e2cea5cfe7f809ffb0c7f082d585b7ce5c2ca4a",
@@ -64,9 +64,9 @@
       "normalized_sha256": "0607d85b8b3cca4f3e95bb6a8f98c7eaf41ff20cd2ae2960e57e466d7739b419"
     },
     "aoci.txt": {
-      "sha256": "61174cea8753c17ddafbe855f6ff87b06d20667e270a0b222ac05a5be0a5c9b0",
-      "size": 541296,
-      "normalized_sha256": "61174cea8753c17ddafbe855f6ff87b06d20667e270a0b222ac05a5be0a5c9b0"
+      "sha256": "01d5ce9fe32b6faa604cbe4b83ba9133e6f0134ab5b5e5ae262ed11144a428d0",
+      "size": 542071,
+      "normalized_sha256": "01d5ce9fe32b6faa604cbe4b83ba9133e6f0134ab5b5e5ae262ed11144a428d0"
     },
     "configs/background-repair/caption_relation_probe_v1.json": {
       "sha256": "2908260a3d795d38e6703483f106e1a0e847d7f6454a1aca630efc38616afa4d",
@@ -2054,6 +2054,11 @@
       "sha256": "b346083c16f5c3e759656b1b5f4dfe22ea3880d0c37322e1de98dae62c0c665a",
       "size": 1603,
       "normalized_sha256": "b346083c16f5c3e759656b1b5f4dfe22ea3880d0c37322e1de98dae62c0c665a"
+    },
+    "docs/reproduction/git-history-map.tsv": {
+      "sha256": "541f65291308fd54ef875b498d8ae0b365b8faf0d40768db987542d7f1ab0c42",
+      "size": 15192,
+      "normalized_sha256": "541f65291308fd54ef875b498d8ae0b365b8faf0d40768db987542d7f1ab0c42"
     },
     "docs/reproduction/h100-dynamic-aligned/download-receipt.json": {
       "sha256": "d12fc6491f50eb6f857d66a53b1c19b7b253370f94b991ffd6e96b573d6e9e24",
@@ -5244,9 +5249,9 @@
       "normalized_sha256": "a736c188e5549c7914a8d7e5654eddf288853809507737dc6eee8aae70a7d46d"
     },
     "scripts/check_commit_message.py": {
-      "sha256": "2f4f1fa3d40955de1b13285af32937bae7cdc7ceb22a0a055e51a45a730aa6ac",
-      "size": 1667,
-      "normalized_sha256": "2f4f1fa3d40955de1b13285af32937bae7cdc7ceb22a0a055e51a45a730aa6ac"
+      "sha256": "e43dc5a48bdf993c91263f9eb97cc27e4171a8be9204dd6a0b6299748d107c19",
+      "size": 1990,
+      "normalized_sha256": "e43dc5a48bdf993c91263f9eb97cc27e4171a8be9204dd6a0b6299748d107c19"
     },
     "scripts/check_environment.py": {
       "sha256": "8445d98a51b0cc69ddbd5b67a3f0af6e19af818cafca981ca29aaca300693288",
@@ -6657,9 +6662,9 @@
       "normalized_sha256": "bcecae4c01f3cbd36b5792c2a797ed5d39c03f18cb1aa25257ae0fc3a8510091"
     },
     "tests/test_commit_message.py": {
-      "sha256": "edfd9f586e254b86797d3a2626cfaa0a1cd76657edc3344288432283da94f3d4",
-      "size": 830,
-      "normalized_sha256": "edfd9f586e254b86797d3a2626cfaa0a1cd76657edc3344288432283da94f3d4"
+      "sha256": "4706440621b3441bf6ce39f67cfa237c03dbeba6853bb59d3dc6ea050500ba28",
+      "size": 2227,
+      "normalized_sha256": "4706440621b3441bf6ce39f67cfa237c03dbeba6853bb59d3dc6ea050500ba28"
     },
     "tests/test_core.py": {
       "sha256": "51781a7355a19b3681d1a71fd6a76acda52b53f156707ba939bc54a99bebb789",

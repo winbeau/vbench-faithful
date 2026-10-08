@@ -35,8 +35,8 @@
 .gitignore[GWS5T]: F:工作产物排除 | R:.aoci/config.json | A:Git 忽略规则 | S:根开发环境、逐维环境、模型产物与自动备份不入库；两个冻结审计CSV通过否定规则保留；项目MCP机器路径不提交
 .gitmessage[GWS3T]: F:提交说明模板 | R:CONTRIBUTING.md | A:提交消息模板 | S:-
 .python-version[GWS8T]: F:解释器固定 | R:pyproject.toml,uv.lock | A:Python 3.11.14 | S:工作区解释器补丁版本固定，包声明的兼容范围更宽
-AGENTS.md[GWS9M]: F:研发行为约束 | R:README.md,docs/plans/2026-09-14-workspace-refactor.md | A:仓库 Agent 工作规则 | S:冻结 data/results/splits/runs 不改写；视频共享不等于公式或标注共享；论文九维与研发十一维分别解释；AOCI 原始仓库约定保留在托管区外
-CONTRIBUTING.md[DWS7T]: F:开发贡献规范 | R:pyproject.toml,.githooks/commit-msg | A:环境安装、测试和提交约定 | S:CPU torch overlay 与模型环境分开；纯算法测试不能证明真实模型 parity
+AGENTS.md[GWS9M]: F:研发行为约束 | R:README.md;docs/plans/2026-09-14-workspace-refactor.md;scripts/check_commit_message.py;docs/reproduction/git-history-map.tsv | A:仓库Agent工作规则与英文提交要求 | S:冻结data/results/splits/runs不改写；视频共享不等于公式或标注共享；论文九维与研发十一维分别解释；提交标题、正文及trailers全部使用英文且禁止绕过钩子，历史中文示例不再授权中文提交；重写发布历史须用户授权；报告旧SHA通过身份映射定位，不冒充新评测；AOCI原始约定保留在托管区外
+CONTRIBUTING.md[DWS7T]: F:开发贡献规范 | R:pyproject.toml;scripts/check_commit_message.py;.githooks/commit-msg | A:环境安装、测试和提交约定 | S:CPU torch overlay与模型环境分开，纯算法测试不证明真实parity；提交全文须英文，历史中文示例不覆盖新规则；钩子仅安装于本仓库
 IMPLEMENTATION_PLAN.md[DWS5S]: F:初始架构规划 | R:docs/plans/2026-09-14-workspace-refactor.md | A:八维工程设计草案 | S:中文目录、未实现入口与旧 fork 路径是归档设计上下文，实际行为须查当前 README 和源码
 README.md[DWS9S]: F:项目使用导航 | R:scripts/eval.py;configs/eval.yaml;scripts/restore_paper_runtime.py;scripts/prepare_vbench_inputs.py;docs/evaluation.md;docs/reproduction/README.md;docs/assets/README.md;docs/validation/h100-same32-final-20261008.md | A:三步安装、输入准备、YAML十六维评测、论文方法与引用 | S:源码入口为公开vbench-faithful的main；默认ours为九修复加七加速，official使用固定原版且both全维32任务；YAML相对路径按配置文件目录解析；四个新增CLI固定本维，其余十二保留研究接口；根环境不混合视觉语义ABI；Dynamic限原生方形16帧8FPS；计时保留缺失分母，数值一致不等于感知质量，代表推理及缓存复用不冒充完整研究复现
 SCENE_AUDIT_PLAN.md[DSC5T]: F:场景机制审计 | R:metrics/scene/src/scene/backends/vbench.py,metrics/scene/src/scene/backends/audit.py | A:官方词汇匹配与区域聚合方案 | S:描述的是旧 fork 上的审计；Tag2Text 逐帧词汇匹配不等于环境语义认证，不能替代论文当前语义路线
@@ -239,7 +239,7 @@ test_runtime_parity.py[TBG5T]: F:推理设置接线测试 | R:background_consist
 analyze_object_color_lora_cf.py[EST7HS]: F:核验LoRA反事实 | R:scripts/complete_object_color_lora_cf.py;scripts/reproduce_main_table.py;object_class.algorithms;color.algorithms | A:analyze;CLI --run --historical-dimensions --vocabulary --output | S:逐query核对冻结身份、Origin历史parity和原始视觉证据公式重放;null不补值;语义预测是缓存LoRA,视觉证据才是新GRiT推理
 archive_counterfactuals.py[ERP8HM]: F:分片归档发布 | R:docs/publication/README.md | A:CLI --spec --work --repo-id --shard-mib --defer-commit | S:相对成员路径和逐文件哈希随归档保存;恢复时源码尺寸/mtime快照与分片大小必须不变;只删除已上传临时tar;延迟模式先LFS预上传再一次提交,不能改用普通模式恢复待提交状态
 benchmark_repair_group.py[ERT5PS]: F:四卡组计时 | R:scripts/run_official_dataset_compare_dimension.py;data/processed/e0_scoring_manifest.csv | A:CLI --group-id --data-root --output-root --upstream --gpus;timing.json | S:固定Subject四生成器各一张物理卡隔离运行;计时包含模型加载与单视频推理;共享视频维度名单不代表其他评分公式已执行
-check_commit_message.py[GWS5T]: F:提交标题校验 | R:.githooks/commit-msg;CONTRIBUTING.md | A:validate;main;CLI [MESSAGE或COMMIT_MSG_FILE] | S:scope必填、限定八种type、标题至多100字符;只校验首行;无参数读stdin
+check_commit_message.py[GWS5T]: F:提交信息校验 | R:.githooks/commit-msg;CONTRIBUTING.md | A:validate;main;CLI [MESSAGE或COMMIT_MSG_FILE] | S:scope必填、限定八种type、标题至多100字符；全文拒绝CJK汉字及〇，允许英文Unicode标点；无参数读stdin，文件参数读完整正文
 check_environment.py[GWS3T]: F:运行环境探测 | R:README.md | A:CLI | S:检测导入可见性和CUDA状态,不验证模型权重或真实推理
 combine_partial_repair_shards.py[ERT7BS]: F:恢复分片合并 | R:scripts/run_official_dataset_compare_dimension.py;data/processed/e0_scoring_manifest.csv | A:CLI --dimension --manifest --input-root可重复 --output-root | S:跨输入根按video_uid拒绝任何重复;实际身份集必须严格等于冻结manifest;按manifest顺序输出,失败与弃权记录仍保留
 complete_object_color_lora_cf.py[ECF8HS]: F:补齐LoRA端点评分 | R:scripts/object_color_experiments.py;scripts/analyze_object_color_lora_cf.py | A:select_endpoints;prepare;CLI --source --output --dimension --upstream --checkpoint | S:Object固定14对大小写端点、Color固定5对可见率端点,不得按分数筛选;原prompt不变且LoRA仅读prompt;权重/媒体/编译结果固定哈希;必须隔离单物理GPU,复用语义预测而新跑两后端GRiT;输出拒绝覆盖
@@ -730,6 +730,7 @@ restore-receipt.json[DRP5T]: F:八维轻量恢复凭据 | R:docs/reproduction/re
 training-input-verification.json[DRP7T]: F:训练输入隔离验收 | R:docs/reproduction/training-source-verification.json,docs/reproduction/README.md | A:六维记录数、schema、来源组隔离与共享记录哈希校验 | S:未执行新训练;Object/Color没有development-selected依据
 training-source-verification.json[DPV7T]: F:训练源文件哈希 | R:docs/reproduction/training-input-verification.json | A:四维train/dev相对路径SHA与Object/Color共享records SHA | S:字节一致只证明输入来源,不证明重训权重一致
 paper-dynamic-degree-stability.md[DDY8T]: F:动态论文口径 | R:docs/reproduction/DYNAMIC_ALIGNED.md;docs/counterfactual-reports/dynamic_static_jitter.md;configs/dynamic-static-jitter/vjepa-aligned450-v1.json | A:aligned-v1方法、450源8px扰动协议、源内种子平均及prompt聚类统计说明 | S:连续分数未标定物理强度,稳定性非鼓励静态高分;Origin复用光流证据不算重跑;历史构造拒绝标记保留,均值稳定不代表逐片不变;dev门槛失败与测试暴露不改写
+git-history-map.tsv[DRP7S]: F:提交身份映射 | R:AGENTS.md | A:TSV列old_commit与new_commit | S:包含未变SHA；重写仅调整说明及父链引用，同对文件树与作者时间不变；冻结报告保留旧SHA，映射不代表重跑
 
 ===/home/winbeau/Papers/ICASSP2027-VBench-Audit/vbench-repair/docs/reproduction/container-reset/===
 README.md[DRP7T]: F:容器恢复交接 | R:docs/reproduction/CONTAINER_RESET.md,docs/reproduction/container-reset/status.json,docs/reproduction/container-reset/local-validation.json | A:归档、代表性推理、跨机器检查与停止范围 | S:H200九维修复验收和Qwen下载未完成;Python3.12精确复算失败未放宽阈值;代表性检查不等于完整论文重跑
@@ -1478,7 +1479,7 @@ test_caption_relations.py[TMD5T]: F:关系从句主语测试 | R:vbench_audit_mo
 test_caption_union.py[TMD7T]: F:多描述掩码并集合约 | R:vbench_audit_models.caption_union | A:- | S:已有非空TV掩码不能阻止其他合格物体;全部合格实例保留,当前空描述不能复用上帧掩码;基础掩码须原生二值且不原地修改
 test_cli_contracts.py[TWS7T]: F:八入口参数合约 | R:vbench_audit_core.devices;dynamic_degree.cli;subject_consistency.cli;scene.cli;human_action.cli;spatial_relationship.cli;motion_smoothness.cli;overall_consistency.cli;multiple_objects.cli | A:- | S:模式必选且单视频与目录互斥;裸--gpu取0,重复/负数/非法GPU编号失败
 test_coco_vocabulary.py[TMD7T]: F:全类检测词表合约 | R:vbench_audit_models.coco_vocabulary;vbench_audit_models.foreground | A:- | S:扩类不放松置信度或接纳背景ID,冻结十九类词表不改;不支持类别须报错;异常后恢复确定性设置
-test_commit_message.py[TWS3T]: F:提交标题规则测试 | R:scripts/check_commit_message.py | A:- | S:-
+test_commit_message.py[TWS3T]: F:提交信息规则测试 | R:scripts/check_commit_message.py | A:- | S:英文标题不能掩盖中文正文或trailers
 test_core.py[TWS7T]: F:基础输入调度合约 | R:vbench_audit_core.devices;vbench_audit_core.inputs;vbench_audit_core.paths | A:- | S:视频按数值排序且目录混入非法MP4拒绝;metadata重名失败;默认输出与调用cwd无关而绑定工作区根
 test_cotracker3_adapter.py[TMD8HS]: F:跟踪器资产隔离合约 | R:vbench_audit_models.cotracker3 | A:- | S:假网络验证v3/offline/weights_only严格本地加载;缺失/多出/漂移源码与错误权重在导入前失败;缓存外来命名空间和软链逃逸拒绝;出画预测保留,非有限轨迹或非布尔可见度不强制转换成证据;无真实模型parity声明
 test_cotracker3_comparison_audit.py[TDY7T]: F:跟踪多相位核验合约 | R:scripts/counterfactual/audit_cotracker3_comparison.py | A:- | S:保留全部查询相位和真实线性运动;无可见支持的条件速度为null而非零,原始模型运动仍保留;query几何和可见dtype严格检查

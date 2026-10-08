@@ -122,6 +122,12 @@ directory to enforce the same check for `git commit`. Never use `--no-verify`
 to bypass this language rule. Rewriting published history requires explicit
 user authorization.
 
+Historical research receipts retain their original commit IDs. Use the
+[commit identity map](docs/reproduction/git-history-map.tsv) to locate the
+equivalent commits after the English-message history rewrite. Every mapped
+commit preserves its file tree, author, committer, timestamps, and parent
+relationships; the map is not evidence of a new evaluation run.
+
 <!-- aoci:begin -->
 ## AOCI 仓库认知
 
