@@ -81,9 +81,13 @@ Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s
 
 `8161f0c` uses the verified common ViCLIP encoder with this metric's own prompts, cosine scores and native mean. Independent fresh inference passes all 32 numerical gates, but its worker was 11.15 s versus 10.32 s official: standalone speedup is not established. A fresh pair test first computes Temporal Style, then Overall Consistency in separate workers sharing only that run's verified video features. The second worker has eight feature-batch hits (all 32 videos), zero misses and takes 6.79 s; both dimensions pass their own official comparisons. No previous-run result cache is used. [Standalone receipt](../validation/h100-overall-standalone-20261008.json), [fresh paired receipt](../validation/h100-viclip-pair-20261008.json). Full CPU suite: 1,469 passed, 3 skipped; locked uv sync and all 16 CLI helps passed.
 
-## Active item: Motion Smoothness
+## Accepted: Motion Smoothness
 
-Inspect native AMT interpolation, resizing, byte conversion and temporal reducer. Keep all native frame pairs and validate each of the same 32 video scores before advancing.
+`122c1fc` batches up to eight AMT interpolation pairs per video, retaining native RGB decode, FP32, resizing/padding, uint8 conversion and odd-frame errors. The native unpaired final odd frame is still excluded. Same-32: all pass; worker 6.31 → 5.30 s, standalone wall 9.93 s. CPU: 47 passed, including unequal lengths and unpaired-tail coverage. [Receipt](../validation/h100-motion-accelerated-20261008.json).
+
+## Active item: Temporal Flickering
+
+Verify the native all-frame pixel metric and implement bounded CPU decoding without unnecessary model/CUDA startup. Check all 32 scores before integrating the public modes.
 
 ## Subsequent queue
 
