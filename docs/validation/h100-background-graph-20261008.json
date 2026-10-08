@@ -1,0 +1,60 @@
+{
+  "code_sha": "fe5554c4ac4f1bfee152d2dd8d9d0f62f9e74d9d",
+  "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+  "clock": {
+    "returncode": 0,
+    "wall_seconds": 28.977988950908184,
+    "command": [
+      "/root/.local/bin/uv",
+      "run",
+      "--no-sync",
+      "python",
+      "scripts/eval.py",
+      "--config",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/benchmark.yaml",
+      "--backend",
+      "repair",
+      "--dimensions",
+      "background_consistency",
+      "--output",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/background-graph",
+      "--no-reuse"
+    ],
+    "finished_utc": "2026-10-08T06:30:34.930885+00:00"
+  },
+  "dimensions": {
+    "background_consistency": {
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0,
+      "diagnostics_equal": true,
+      "raw_evidence_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 26.031581184943207,
+      "new_seconds": 26.401910846005194,
+      "stages": [
+        {
+          "reused": false,
+          "key": "45c6901eda35709f55a9f821be7a07aac1b7637264e888faaf765daac28124e8",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/background-graph/background_consistency/repair",
+          "stage": "repair",
+          "elapsed_seconds": 26.388948971987702,
+          "environment_seconds": 0.4545833779266104,
+          "worker_seconds": 25.92487464705482
+        }
+      ]
+    }
+  },
+  "gpu_info": {
+    "3": {
+      "torch": "2.5.1+cu121",
+      "cuda": "12.1",
+      "name": "NVIDIA H100 80GB HBM3",
+      "capability": [
+        9,
+        0
+      ]
+    }
+  },
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+}

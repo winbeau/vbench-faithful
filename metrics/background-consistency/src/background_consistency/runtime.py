@@ -18,11 +18,7 @@ def build_foreground_provider(config, *, device):
     detector = CocoSubjectBoxDetector(Path(config["detector_checkpoint"]),
         expected_sha256=config["detector_sha256"], device=device,
         threshold=float(config.get("threshold", .8)), size=int(config.get("size", 512)))
-    predictor = load_mobile_sam_predictor(sam_path, device)
-    if config.get("cuda_graph", False):
-        from vbench_audit_models.cuda_image_graph import capture_image_encoder
-        capture_image_encoder(predictor.model.image_encoder)
-    return MobileSamForegroundProvider(detector, predictor,
+    return MobileSamForegroundProvider(detector, load_mobile_sam_predictor(sam_path, device),
                                        weights_sha256=config["sam_sha256"])
 
 

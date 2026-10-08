@@ -178,8 +178,7 @@ def repair(rows, dim, assets, output, compiled):
         from background_consistency.metric import evaluate_batch
         config = {"model": {"clip": {"checkpoint": assets["clip"], "sha256": digest(assets["clip"])},
                   "localizer": {"detector_checkpoint": assets["maskrcnn"], "detector_sha256": digest(assets["maskrcnn"]),
-                                "sam_checkpoint": assets["mobilesam"], "sam_sha256": digest(assets["mobilesam"]),
-                                "threshold": .8, "size": 512, "cuda_graph": True}},
+                                "sam_checkpoint": assets["mobilesam"], "sam_sha256": digest(assets["mobilesam"]), "threshold": .8, "size": 512}},
                   "runtime": {"audit_variant": "patch_frame_calibrated", "seed": 0}}
     else:
         module = importlib.import_module(dim + ".metric")

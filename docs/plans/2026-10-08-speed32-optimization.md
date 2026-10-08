@@ -49,13 +49,17 @@ Profile: 129 distinct semantic requests, 17 batches at size 8; model loading 6.6
 
 Profile: model loading 6.21 s, 32 serial prompt generations 10.87 s. `a1ba5a2` batches generation, then invokes the original router's prediction, repair-v2.1 compiler and scorer on each original request. CPU: 41 passed, 1 skipped. Same-32 H100 acceptance: 32/32, exact raw text, evidence, diagnostics and scores. Semantic stage 19.28 → 10.51 s; whole dimension 32.98 → 24.85 s. Standalone including setup 31.44 s. [Receipt](../validation/h100-action-batch32-20261008.json).
 
-## Active item: Background Consistency
+## Reviewed: Background Consistency
 
-Profile localization, image encoding and model loading before changing computation. Preserve masks, preprocessing and the selected patch-frame calibration.
+Profile: COCO boxes 4.63 s, 398 SAM image encodes 7.36 s, 461 SAM mask predictions 4.06 s, CLIP tokens 1.06 s. Candidate `fe5554c` captured the original SAM image-encoder CUDA kernels without precision/batch changes. All 32 scores and diagnostics match exactly. However, whole-dimension time was 26.40 s versus 26.03 s; a subsequent profile showed 398 graph replays and image-encoder time 6.52 s, only 0.84 s saved. The candidate is withdrawn because the end-to-end gain is unproven. Source/tests are archived in `/tmp/vbench-speed32/drafts-cuda-graph/` and remain recoverable from the commit. [Attempt receipt](../validation/h100-background-graph-20261008.json). Existing repair and thresholds remain unchanged.
+
+## Active item: Subject Consistency
+
+Inspect its localizer and feature-extraction costs independently. Preserve the direct-anchor masks, crop-before-encoding, exclusion policy and diagnostics.
 
 ## Subsequent queue
 
-After Background Consistency acceptance, handle Subject Consistency. Dynamic already outperforms its original reference; retain its native protocol. Revisit the GRiT group's semantic overhead with the validated generation helper before final acceptance if needed.
+Dynamic already outperforms its original reference; retain its native protocol. Revisit the GRiT group's semantic overhead with the validated generation helper before final acceptance if needed.
 
 For the seven accelerated dimensions, proceed individually in this order: Appearance Style, Imaging Quality, Aesthetic Quality, Temporal Style, Overall Consistency, Motion Smoothness, Temporal Flickering. Shared encoder work may be prepared when working on its first consumer, with other dimensions remaining unchanged until their own acceptance. Mode routing and final 16-dimensional end-to-end acceptance follow the validated implementations.
 
