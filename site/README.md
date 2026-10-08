@@ -19,25 +19,26 @@ requests for reliable video seeking; opening `index.html` as a file cannot
 load its JSON data. No JavaScript framework or build dependency is required.
 Fonts, figures, videos and data are served locally, with no runtime CDN.
 
-The live site is published from the standalone public repository
-`winbeau/vbench-repair-page`; the research repository stays private. The
-current account cannot enable Pages for a private repository. The public
-repository receives only this page's source, public assets, the packaging
-validator and the Pages workflow; it does not receive the research checkout.
+The research source is public at
+[winbeau/vbench-faithful](https://github.com/winbeau/vbench-faithful), on `main`.
+The existing live site is published separately from
+`winbeau/vbench-repair-page`, which receives the page source, public assets,
+packaging validator and Pages workflow.
 
 `.github/workflows/pages.yml` packages an explicit allowlist with
 `scripts/site/build.py`, then uses the official GitHub Pages artifact/deploy
-actions. Pushes to `winbeau` touching the page trigger deployment; manual
-dispatch is also supported. Set the public repository's Pages source to
-**GitHub Actions**. The private research copy runs build validation and skips
-deployment; the public page repository deploys its own `winbeau` branch.
+actions. The workflow runs on page changes on `winbeau` or manual dispatch,
+and deploys only from `winbeau` in a public repository. The source repository's
+`main` branch does not automatically deploy the page. The existing public page
+repository deploys its own `winbeau` branch with **GitHub Actions** as its Pages
+source.
 The workflow publishes only the 17.3 MB static site, excluding
-research inputs, weights, private source, README files and development tools.
+research inputs, weights, metric packages, README files and development tools.
 It does not change repository visibility. GitHub's plan must support Pages
 for the chosen repository visibility.
 
-All relative URLs work at a repository subpath such as `/vbench-repair/`.
-The GitHub code link requires access while the source repository is private.
+All relative URLs work at a repository subpath such as `/vbench-faithful/`.
+The GitHub code links point to the public research source.
 
 ## Demonstration provenance
 

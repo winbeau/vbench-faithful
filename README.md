@@ -13,7 +13,7 @@
 
 </div>
 
-**VBench Repair** accompanies our manuscript on the measurement validity of video evaluation. We audit nine VBench dimensions, trace unintended score responses to their implementation, and develop targeted repairs. The evaluator supports all **16 official VBench 1.0 dimensions**, with the **nine paper-selected repairs** available through one configuration.
+**VBench Faithful** accompanies our manuscript on the measurement validity of video evaluation. We audit nine VBench dimensions, trace unintended score responses to their implementation, and develop targeted repairs. The evaluator supports all **16 official VBench 1.0 dimensions**, with the **nine paper-selected repairs** available through one configuration.
 
 [![Overview of target–evidence misalignment and repair strategies](docs/assets/fig2.png)](docs/assets/fig2.pdf)
 
@@ -26,113 +26,67 @@
 - **Repairs at the responsible stage.** Semantic target parsing, subject/background isolation, a frozen V-JEPA 2.1 motion encoder with a learned readout, and signed spatial geometry address different parts of the scoring pipeline. Text parsing alone cannot recover direction discarded by an unsigned geometric backend.
 - **One evaluation command.** YAML configuration, automatic per-dimension environments, isolated model processes, shared model assets, and validated artifact reuse support repeatable evaluation without manually installing each dimension.
 
-## Installation
+## Quick Start
 
-The controller uses **Python 3.11.14** and the checked-in `uv.lock`. Model inference uses the separately restored, pinned **Python 3.10.20 visual** and **Python 3.11.14 semantic** runtimes.
+### 1. Install and restore the models
 
-Requirements: [uv](https://docs.astral.sh/uv/getting-started/installation/), Git, Linux x86_64 with Ubuntu 24.04-compatible system libraries, FFmpeg, and a working NVIDIA driver. Reserve approximately **100 GB** for runtime archives, extracted dependencies, model weights, and verification outputs. Qwen3-8B inference needs roughly **20–24 GB of free GPU memory** on the selected device.
+Requirements: [uv](https://docs.astral.sh/uv/getting-started/installation/), Git, FFmpeg, Linux x86_64 (Ubuntu 24.04-compatible libraries), and an NVIDIA GPU. Allow about **100 GB of disk space** and **20–24 GB of free GPU memory** for the semantic models.
 
 ```bash
-# Repository access is required.
-git clone -b winbeau git@github.com:winbeau/vbench-repair.git
-cd vbench-repair
+git clone https://github.com/winbeau/vbench-faithful.git
+cd vbench-faithful
 uv sync --locked
 
-# Ubuntu system dependencies; skip packages already installed.
-sudo apt-get update
-sudo apt-get install -y python3-venv ffmpeg libgl1 libglib2.0-0 libsm6 libxext6 libgomp1
-```
-
-Restore the inference runtimes and selected model assets once:
-
-```bash
-python3 -m venv output/bootstrap
-output/bootstrap/bin/pip install 'huggingface_hub==1.32.0' requests
+# One-time download of pinned models and isolated inference runtimes.
+uv venv output/bootstrap --python 3.11.14
+uv pip install --python output/bootstrap/bin/python 'huggingface_hub==1.32.0' requests
 output/bootstrap/bin/python scripts/restore_paper_runtime.py \
-  --output output/runtime \
-  --downloads output/runtime-downloads \
+  --output output/runtime --downloads output/runtime-downloads \
   --allow-official-fallback
 ```
 
-This creates `output/runtime/assets.json`, verifies the pinned archive and model hashes, and restores the selected LoRA adapters, Qwen3-8B base model, Dynamic scoring head, and visual assets. Downloads first use the configured HF mirror; the flag permits fallback to the official endpoint. If model downloads are interrupted after extraction, repeat the same command with `--resume`. Keep the runtime on an executable filesystem.
+The root uv environment uses Python **3.11.14**. The evaluator automatically prepares each dimension's environment and shares verified model assets and compatible dependencies. For system packages or interrupted downloads (`--resume`), see the [runtime recovery guide](docs/reproduction/CONTAINER_RESET.md).
 
-The evaluator then creates a small `uv` environment for each required dimension and runtime role automatically. These environments reuse the matching restored dependencies and shared weights; visual and semantic Python ABIs remain separate. Root `uv sync` prepares orchestration and development dependencies; the restoration step supplies the inference stack.
+### 2. Prepare your videos
 
-See the [runtime recovery guide](docs/reproduction/CONTAINER_RESET.md) for archive revisions, recovery details, and representative GPU installation checks.
-
-## Quick Start
-
-### 1. Prepare an input manifest
-
-For videos generated from the standard VBench prompts, use filenames `prompt-0.mp4` through `prompt-4.mp4` (original GIF inputs are also supported where the selected method permits them):
+For the standard VBench prompt suite, keep filenames such as `a white car-0.mp4` through `a white car-4.mp4`, then generate the input manifest:
 
 ```bash
 uv run python scripts/prepare_vbench_inputs.py \
-  --video-dir /absolute/path/generated-videos \
-  --output output/inputs.json
+  --video-dir /absolute/path/generated-videos --output output/inputs.json
 ```
 
-The command attaches official dimension metadata and frozen subject annotations. An incomplete standard suite is rejected by default. For an intentional partial run, add `--allow-missing` and select only the dimensions present in your inputs when evaluating.
+This attaches the official dimension metadata and subject annotations. For an intentional partial suite, add `--allow-missing` and evaluate only the dimensions present. Custom videos need explicit prompts and dimension metadata; see the [manifest format](docs/evaluation.md#configuration).
 
-Custom inputs can provide `id`, `video`, `prompt`, `dimensions`, and the dimension's required `auxiliary_info`. A one-line JSONL record looks like this:
+### 3. Configure and evaluate
 
-```json
-{"id":"sample-1","video":"clip.mp4","prompt":"a white car","dimensions":["color"],"auxiliary_info":{"color":{"color":"white","object":"car"}}}
-```
-
-Media paths are relative to the input manifest unless `video_root` is supplied. Subject Repair additionally requires an explicit `subject_en`; it does not infer the subject from an arbitrary prompt. Preserve standard filenames for official Human Action, whose original target lookup depends on the filename.
-
-### 2. Configure the evaluation
-
-Edit [`configs/eval.yaml`](configs/eval.yaml). A complete example is:
+The supplied [`configs/eval.yaml`](configs/eval.yaml) already points to the paths above. Its essential settings are:
 
 ```yaml
 version: 1
 input: ../output/inputs.json
 assets: ../output/runtime/assets.json
-output: ../output/eval/my-run
 backend: ours
 dimensions: all
 gpus: [0]
-cache_dir: ~/.cache/vbench-repair
-env_dir: ../.venvs/metrics
-reuse: true
 ```
 
-Paths in YAML are relative to the YAML file's directory; CLI path overrides are relative to your current directory. `~` and `${ENV_NAME}` are supported. Omit `output` to create a fresh timestamped directory under `output/eval/` when using the supplied configuration. Explicit output directories must be new.
-
-`gpus` accepts visible GPU indices or complete GPU/MIG UUIDs. For example, with `CUDA_VISIBLE_DEVICES=4,5`, `gpus: [0, 1]` selects those two visible devices. Each worker sees one device as `cuda:0`.
-
-### 3. Inspect and run
+YAML paths are relative to the YAML file. Change `gpus` to select visible GPUs; for example, `[0, 1]` uses two. Run from the repository root:
 
 ```bash
-# Validate input media and inspect the selected methods; no model inference.
-uv run python scripts/eval.py --config configs/eval.yaml --plan
-
-# Run the configured evaluation.
+# Default: all 16 dimensions = nine paper repairs + seven accelerators.
 uv run python scripts/eval.py --config configs/eval.yaml
 
-# Equivalent shell entry point.
-./scripts/eval.sh --config configs/eval.yaml
+# Original VBench, all 16 dimensions.
+./scripts/eval.sh --config configs/eval.yaml --backend official
+
+# Optional: inspect the input and execution plan without model inference.
+./scripts/eval.sh --config configs/eval.yaml --plan
 ```
 
-Useful overrides:
+Each command creates a new directory under `output/eval/`. Read `summary.json` for scores and coverage, `plan.json` for provenance, and the per-dimension `worker.log` files for model logs. Failed or unsupported scores remain `null`.
 
-```bash
-# All 16 official dimensions.
-./scripts/eval.sh --config configs/eval.yaml \
-  --backend official --dimensions all --output output/eval/origin
-
-# Compare Origin and Repair on the nine paper dimensions.
-./scripts/eval.sh --config configs/eval.yaml \
-  --backend both --dimensions paper --gpus 0 1 --output output/eval/paired
-
-# A selected dimension, forcing fresh computation instead of artifact reuse.
-./scripts/eval.sh --config configs/eval.yaml \
-  --dimensions color --no-reuse --output output/eval/color-fresh
-```
-
-By default, `backend: ours` runs the **nine selected repairs plus seven accelerated dimensions**. `backend: official` runs pinned original VBench in one process per selected GPU. `backend: both` compares all 16 dimensions (32 tasks). Legacy names `repair` and `origin` remain aliases for `ours` and `official`. Each result records its actual `repair`, `accelerated` or `origin` implementation.
+Useful options: `--dimensions paper` selects the nine repairs, `--dimensions color` selects one dimension, `--backend both` compares both modes, and `--no-reuse` forces fresh computation while allowing shared inference inside the current run. Repeated runs otherwise reuse verified cached artifacts. Legacy `repair` / `origin` names remain aliases for `ours` / `official`. Full configuration, environment and cache details are in the [evaluation guide](docs/evaluation.md).
 
 The seven accelerators passed same-32 per-video checks against official scores: absolute error must be at most `max(1e-6, 0.01 × abs(official_score))`. This measures numerical agreement on the tested cohort, not perceptual quality or a guarantee for arbitrary inputs. [Optimization records](docs/plans/2026-10-08-speed32-optimization.md).
 
@@ -209,6 +163,6 @@ Citation information for the current manuscript:
             Wang, Meng and Xue, Haiwei and Zheng, Panpan},
   year   = {2026},
   note   = {Manuscript},
-  url    = {https://github.com/winbeau/vbench-repair}
+  url    = {https://github.com/winbeau/vbench-faithful}
 }
 ```

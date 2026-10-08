@@ -30,3 +30,7 @@ data/processed/audit/*.csv
 # AOCI agent host integration (machine-bound; do not commit)
 .codex/config.toml
 .codex/config.toml.backup.*
+
+# Local editor and AOCI snapshots
+*.backup.*
+*.bak
