@@ -77,9 +77,13 @@ Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s
 
 `a60b1af` batches four original eight-middle-frame clips and distinct text queries; retains FP32 and native cosine/video-mean scoring. Batching alone passed numerical gates but did not reduce worker time. `af701f5` skips random initialization that strict native checkpoint loading overwrites and omits backward checkpoint wrappers in no-grad inference. `fa20644` avoids rehashing the 1.7 GB ViCLIP checkpoint after the controller has already fully verified it in this invocation, under the existing immutable-runtime contract; standalone calls without that receipt still hash it. Same-32: all pass; worker 11.07 → 8.77 s, standalone wall 13.44 s, no previous-run inference reuse. Video feature batches can be shared within the current run with actual transformed-input hashes and explicit hit/miss receipts. [Profile](../validation/h100-temporal-profile-20261008.json), [acceptance](../validation/h100-temporal-accelerated-20261008.json).
 
-## Active item: Overall Consistency
+## Accepted: Overall Consistency
 
-Verify its native ViCLIP protocol and reducer independently, then enable the common encoder without importing another metric. Validate all 32 scores before advancing; cross-dimension feature reuse will also be checked in the final integrated run.
+`8161f0c` uses the verified common ViCLIP encoder with this metric's own prompts, cosine scores and native mean. Independent fresh inference passes all 32 numerical gates, but its worker was 11.15 s versus 10.32 s official: standalone speedup is not established. A fresh pair test first computes Temporal Style, then Overall Consistency in separate workers sharing only that run's verified video features. The second worker has eight feature-batch hits (all 32 videos), zero misses and takes 6.79 s; both dimensions pass their own official comparisons. No previous-run result cache is used. [Standalone receipt](../validation/h100-overall-standalone-20261008.json), [fresh paired receipt](../validation/h100-viclip-pair-20261008.json). Full CPU suite: 1,469 passed, 3 skipped; locked uv sync and all 16 CLI helps passed.
+
+## Active item: Motion Smoothness
+
+Inspect native AMT interpolation, resizing, byte conversion and temporal reducer. Keep all native frame pairs and validate each of the same 32 video scores before advancing.
 
 ## Subsequent queue
 
