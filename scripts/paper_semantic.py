@@ -58,8 +58,10 @@ def main():
                 if isinstance(caption, str):
                     requests[text_key(task, row["prompt"], caption)] = (row["prompt"], caption)
         items = list(requests.items())
-        for start in range(0, len(items), 8):
-            batch = items[start:start + 8]
+        # A resource setting only: keep every unique request, its original
+        # order and the frozen verifier's greedy/newline generation contract.
+        for start in range(0, len(items), 32):
+            batch = items[start:start + 32]
             values = model.predict_batch([pair for _, pair in batch])
             if len(values) != len(batch):
                 raise ValueError("Scene prediction count mismatch")
