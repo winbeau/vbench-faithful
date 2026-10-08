@@ -73,9 +73,13 @@ Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s
 
 `da6e21c` packs original CLIP-L/14 frames across videos. Profiling then found loading took 5.65 s and all 512 frame encodes only 0.70 s. `4361696` constructs the original CLIP visual tower on meta, copies every original visual weight strictly, preserves mixed parameter dtypes, and omits unused text weights/random initialization. Original transforms, normalized features and aesthetic head remain unchanged. Same-32 H100: 32/32, **zero per-video and aggregate error**; worker 10.55 → 5.38 s, standalone wall 9.02 s. [Profile](../validation/h100-aesthetic-profile-20261008.json), [acceptance](../validation/h100-aesthetic-accelerated-20261008.json).
 
-## Active item: Temporal Style
+## Accepted: Temporal Style
 
-Inspect the native ViCLIP sampling, video/text encoders and reducer. Accelerate this dimension first, preserving the official protocol, then check all 32 scores before enabling any other consumer.
+`a60b1af` batches four original eight-middle-frame clips and distinct text queries; retains FP32 and native cosine/video-mean scoring. Batching alone passed numerical gates but did not reduce worker time. `af701f5` skips random initialization that strict native checkpoint loading overwrites and omits backward checkpoint wrappers in no-grad inference. `fa20644` avoids rehashing the 1.7 GB ViCLIP checkpoint after the controller has already fully verified it in this invocation, under the existing immutable-runtime contract; standalone calls without that receipt still hash it. Same-32: all pass; worker 11.07 → 8.77 s, standalone wall 13.44 s, no previous-run inference reuse. Video feature batches can be shared within the current run with actual transformed-input hashes and explicit hit/miss receipts. [Profile](../validation/h100-temporal-profile-20261008.json), [acceptance](../validation/h100-temporal-accelerated-20261008.json).
+
+## Active item: Overall Consistency
+
+Verify its native ViCLIP protocol and reducer independently, then enable the common encoder without importing another metric. Validate all 32 scores before advancing; cross-dimension feature reuse will also be checked in the final integrated run.
 
 ## Subsequent queue
 

@@ -1,0 +1,14 @@
+{
+  "torch_load_seconds": 1.3434536469867453,
+  "construct_load_seconds": 2.3421559650450945,
+  "encode_text": {
+    "calls": 1,
+    "seconds": 0.14908628002740443
+  },
+  "encode_vision": {
+    "calls": 8,
+    "seconds": 1.7603630089433864
+  },
+  "worker_body_seconds": 5.980963498936035,
+  "outputs_equal": true
+}
