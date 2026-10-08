@@ -57,13 +57,17 @@ Profile: COCO boxes 4.63 s, 398 SAM image encodes 7.36 s, 461 SAM mask predictio
 
 Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s, DINO patch encoding 3.64 s. The 26 videos entering DINO called it 416 times. `d1c8b4a` batches each video's 16 frames, keeping float32, transforms, all frames and scoring formulas. Legacy callers retain batch size 1. CPU: 104 passed. H100: coverage and failure states remain 23/32; localization/crop diagnostics exact. Scores differ by at most 1.1921e-7; all differing floating diagnostic fields are within 2.9803e-7, checked against a tight 1e-6 absolute numerical tolerance. This is **not bitwise equivalence**. Dimension 25.78 → 24.74 s, standalone with setup 27.27 s. [Profile](../validation/h100-subject-profile-20261008.json), [acceptance](../validation/h100-subject-batch16-20261008.json).
 
-## Active item: GRiT semantic batching
+## Accepted: GRiT semantic batching
 
-Use the generation batching mechanism validated for Human Action on Spatial and Multiple Objects, and equivalent prompt-only batching on Object Class and Color. Keep all frozen parsers/scorers, raw outputs, generation settings and evidence. Accept this four-dimensional group before starting the seven non-repair accelerators.
+`99a7e9f` uses the generation helper validated for Human Action on Spatial and Multiple Objects, and independent prompt-only batches on Object Class and Color. CPU: 119 passed, 1 skipped. All 128 input records retain exact scores/statuses, raw semantic text, compiled records and visual evidence. Four stage totals 200.52 → 168.33 s relative to the first full optimized run, or 191.88 → 168.33 s relative to the ROI-only group run. Current Object/Spatial/Multiple/Color: 53.64/17.87/15.55/81.27 s; coverage unchanged 32/11/32/9. Standalone group including setup 174.99 s. [Receipt](../validation/h100-grit-text-batch32-20261008.json).
+
+## Active item: Appearance Style
+
+First of the seven non-repair accelerators. Profile/remove repeated prompt encoding and batch all original frames, retaining official preprocessing and frame-weighted aggregation. Check all 32 video scores with the agreed 1%/1e-6 gate. Do not enable the other six accelerators before their own validation.
 
 ## Subsequent queue
 
-Dynamic already outperforms its original reference; retain its native protocol. Revisit the GRiT group's semantic overhead with the validated generation helper before final acceptance if needed.
+Dynamic already outperforms its original reference; retain its native protocol. Nine-repair pass is now complete except further changes justified by the final timing comparison. Background retains its existing implementation; Subject's tiny float differences are explicitly recorded above.
 
 For the seven accelerated dimensions, proceed individually in this order: Appearance Style, Imaging Quality, Aesthetic Quality, Temporal Style, Overall Consistency, Motion Smoothness, Temporal Flickering. Shared encoder work may be prepared when working on its first consumer, with other dimensions remaining unchanged until their own acceptance. Mode routing and final 16-dimensional end-to-end acceptance follow the validated implementations.
 

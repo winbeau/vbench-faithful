@@ -1,0 +1,162 @@
+{
+  "code_sha": "99a7e9fb9f76e5918ea539f7dbce6957e29b9cfa",
+  "input_sha256": "803e938bc5ac2c7deaedc4246870e94756510df27f91cf246a6b364729cbfa65",
+  "clock": {
+    "returncode": 1,
+    "wall_seconds": 174.99070756696165,
+    "command": [
+      "/root/.local/bin/uv",
+      "run",
+      "--no-sync",
+      "python",
+      "scripts/eval.py",
+      "--config",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/benchmark.yaml",
+      "--backend",
+      "repair",
+      "--dimensions",
+      "object_class",
+      "spatial_relationship",
+      "multiple_objects",
+      "color",
+      "--output",
+      "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-text-batch32",
+      "--no-reuse"
+    ],
+    "finished_utc": "2026-10-08T06:56:26.051395+00:00"
+  },
+  "dimensions": {
+    "object_class": {
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0,
+      "diagnostics_equal": true,
+      "raw_evidence_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 66.07904447009787,
+      "new_seconds": 53.6379990009591,
+      "stages": [
+        {
+          "reused": false,
+          "key": "75e46fee1713a18ac4ddb24a7394f40d8eea48e1137c85ebc12919f025ae0b03",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-text-batch32/object_class/compile",
+          "stage": "compile",
+          "elapsed_seconds": 14.098301704972982,
+          "environment_seconds": 0.2913960689911619,
+          "worker_seconds": 13.803188877995126
+        },
+        {
+          "reused": false,
+          "key": "84bd41283228dabc684754e5d4342d49b23eb65652be1542562f6967f44ff3c5",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-text-batch32/object_class/repair",
+          "stage": "repair",
+          "elapsed_seconds": 39.52840850094799,
+          "environment_seconds": 0.45734789792913944,
+          "worker_seconds": 39.06458848901093
+        }
+      ]
+    },
+    "spatial_relationship": {
+      "records": 32,
+      "succeeded": 11,
+      "max_score_error": 0,
+      "diagnostics_equal": true,
+      "raw_evidence_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 29.980722730979323,
+      "new_seconds": 17.872843294986524,
+      "stages": [
+        {
+          "reused": false,
+          "key": "f6418f3b039561f773719768c9ccc1a18dc8e06716b95d68aba29a67c19463c6",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-text-batch32/spatial_relationship/evidence",
+          "stage": "evidence",
+          "elapsed_seconds": 6.1037450899602845,
+          "environment_seconds": 0.4353180779144168,
+          "worker_seconds": 5.6594251620117575
+        },
+        {
+          "reused": false,
+          "key": "00858cce43338d7172b5402981bac976442efffccf711e81a0ab3d1851e1db24",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-text-batch32/spatial_relationship/repair",
+          "stage": "repair",
+          "elapsed_seconds": 11.765268342918716,
+          "environment_seconds": 0.3027388600166887,
+          "worker_seconds": 11.45552397298161
+        }
+      ]
+    },
+    "multiple_objects": {
+      "records": 32,
+      "succeeded": 32,
+      "max_score_error": 0,
+      "diagnostics_equal": true,
+      "raw_evidence_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 20.446415444021113,
+      "new_seconds": 15.551925987936556,
+      "stages": [
+        {
+          "reused": false,
+          "key": "5895f9b55accdd4c049a7366b3f2be3abd54bf7aa809896c826e3c9cd3d590f6",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-text-batch32/multiple_objects/evidence",
+          "stage": "evidence",
+          "elapsed_seconds": 5.614963939064182,
+          "environment_seconds": 0.45026405702810735,
+          "worker_seconds": 5.1561958260135725
+        },
+        {
+          "reused": false,
+          "key": "92d67713baa9134769b26ed35be7aa2d0352996a4ae54f6eac7bc2012a5bf77b",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-text-batch32/multiple_objects/repair",
+          "stage": "repair",
+          "elapsed_seconds": 9.930336061050184,
+          "environment_seconds": 0.3032741129864007,
+          "worker_seconds": 9.620176392956637
+        }
+      ]
+    },
+    "color": {
+      "records": 32,
+      "succeeded": 9,
+      "max_score_error": 0,
+      "diagnostics_equal": true,
+      "raw_evidence_equal": true,
+      "previous_run_cache_hits": 0,
+      "old_seconds": 84.01532299607061,
+      "new_seconds": 81.26959700300358,
+      "stages": [
+        {
+          "reused": false,
+          "key": "b0f2c7b395f4da61f363e049fbeee49cfdad2489b043c09a7bac9d12bbad81fb",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-text-batch32/color/compile",
+          "stage": "compile",
+          "elapsed_seconds": 14.075310710002668,
+          "environment_seconds": 0.3074348500231281,
+          "worker_seconds": 13.764252006076276
+        },
+        {
+          "reused": false,
+          "key": "eb4f5640e95a9540cbf3233ad2910e86199d1f9723eb1caeeb6a1dbfe2651559",
+          "artifacts": "/root/wenbiao_zhao/vbench-repair-eval-20261008/benchmark32-20261008/grit-text-batch32/color/repair",
+          "stage": "repair",
+          "elapsed_seconds": 67.18390453897882,
+          "environment_seconds": 0.4548221440054476,
+          "worker_seconds": 66.72091806610115
+        }
+      ]
+    }
+  },
+  "gpu_info": {
+    "3": {
+      "torch": "2.5.1+cu121",
+      "cuda": "12.1",
+      "name": "NVIDIA H100 80GB HBM3",
+      "capability": [
+        9,
+        0
+      ]
+    }
+  },
+  "upstream_sha": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+}
