@@ -112,3 +112,51 @@ def test_silver_labels_remain_silver_in_frozen_source_group():
     assert rows[0]["quality"] == "silver" and rows[0]["reviewed"] is False
     with pytest.raises(ValueError):
         validate_silver(seed, raw.replace('"navy"}', '"blue"}'), vocab, ["expanded_color"])
+
+
+def test_batch_generation_keeps_order_decoding_contract_and_restores_route():
+    class Tokenizer:
+        padding_side, pad_token, eos_token, eos_token_id = "right", None, "eos", 0
+        def apply_chat_template(self, messages, **kwargs):
+            assert kwargs == dict(tokenize=False, add_generation_prompt=True, enable_thinking=False)
+            return messages[0]["content"]
+        def __call__(self, texts, **kwargs):
+            assert kwargs == dict(return_tensors="pt", truncation=False, padding=True)
+            assert self.padding_side == "left" and self.pad_token == "eos"
+            width = max(map(len, texts))
+            return {"input_ids": torch.tensor([[0] * (width - len(t)) + list(t.encode()) for t in texts])}
+        def decode(self, values, **kwargs):
+            return bytes(v for v in values if v).decode()
+
+    class Model:
+        device, active_adapter = "cpu", "object_class"
+        calls = []
+        def set_adapter(self, route):
+            self.active_adapter = route
+        def generate(self, input_ids, **kwargs):
+            assert self.active_adapter == "color"
+            assert kwargs == dict(do_sample=False, max_new_tokens=96, pad_token_id=0)
+            self.calls.append(len(input_ids))
+            return torch.cat([input_ids, input_ids[:, -1:]], dim=1)
+
+    model, tokenizer = Model(), Tokenizer()
+    router = QwenPromptRouter(model, tokenizer, {"object_class": "object_class", "color": "color"}, {})
+    assert router.generate_many("color", ["a", "longer", "tail"], mode="lora", batch_size=2) == ["a", "r", "l"]
+    assert model.calls == [2, 1]
+    assert model.active_adapter == "object_class" and tokenizer.padding_side == "right" and tokenizer.pad_token is None
+    with pytest.raises(ValueError, match="no silent truncation"):
+        router.generate_many("color", ["a" * 4001], mode="lora")
+    assert model.active_adapter == "object_class" and tokenizer.padding_side == "right" and tokenizer.pad_token is None
+
+
+def test_batched_compilation_preserves_invalid_raw_outputs(monkeypatch):
+    vocabulary = LabelVocabulary({"objects": ["car"], "colors": ["red"]})
+    router = QwenPromptRouter(None, None, {}, {})
+    raws = ['{"object":"car","color":"red"}', 'not JSON', '{"object":"boat","color":"red"}']
+    prompts = ["red car", "invalid", "out of vocabulary"]
+    monkeypatch.setattr(router, "generate_many", lambda *a, **k: raws)
+    actual = router.compile_many("color", prompts, vocabulary, mode="base")
+    for i, prompt in enumerate(prompts):
+        monkeypatch.setattr(router, "generate", lambda *a, **k: raws[i])
+        assert actual[i] == router.compile("color", prompt, vocabulary, mode="base")
+    assert [r["status"] for r in actual] == ["succeeded", "invalid_output", "invalid_output"]

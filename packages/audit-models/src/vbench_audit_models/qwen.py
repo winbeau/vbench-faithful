@@ -6,7 +6,7 @@ to the constructor so adding routes does not create another backbone.
 """
 from __future__ import annotations
 
-from contextlib import nullcontext
+from contextlib import contextmanager, nullcontext
 from concurrent.futures import ThreadPoolExecutor
 import json
 from pathlib import Path
@@ -71,12 +71,12 @@ class QwenPromptRouter:
         model.eval()
         return cls(model, tokenizer, {d: d for d in adapters}, provenance)
 
-    def generate(self, dimension: str, user_text: str, *, mode: str, max_new_tokens=96) -> str:
+    @contextmanager
+    def _route(self, dimension, mode):
         if dimension not in ROUTES or mode not in {"base", "lora"}:
             raise ValueError("explicit known dimension and base/lora mode required")
         if mode == "lora" and dimension not in self.routes:
             raise ValueError("no adapter for requested dimension; no cross-head fallback")
-        import torch
         with self._lock:
             previous = getattr(self.model, "active_adapter", None)
             if isinstance(previous, (list, tuple)):
@@ -88,24 +88,71 @@ class QwenPromptRouter:
                 if mode == "lora":
                     self.model.set_adapter(self.routes[dimension])
                 with context:
-                    rendered = self.tokenizer.apply_chat_template(
-                        [{"role": "user", "content": user_text}], tokenize=False,
-                        add_generation_prompt=True, enable_thinking=False)
-                    inputs = self.tokenizer(rendered, return_tensors="pt", truncation=False)
-                    if inputs["input_ids"].shape[1] + max_new_tokens > 4096:
+                    yield
+            finally:
+                if previous is not None and self.routes:
+                    self.model.set_adapter(previous)
+
+    def _render(self, user_text):
+        return self.tokenizer.apply_chat_template(
+            [{"role": "user", "content": user_text}], tokenize=False,
+            add_generation_prompt=True, enable_thinking=False)
+
+    def generate(self, dimension: str, user_text: str, *, mode: str, max_new_tokens=96) -> str:
+        import torch
+        with self._route(dimension, mode):
+            inputs = self.tokenizer(self._render(user_text), return_tensors="pt", truncation=False)
+            if inputs["input_ids"].shape[1] + max_new_tokens > 4096:
+                raise ValueError("prompt exceeds frozen context bound; no silent truncation")
+            inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
+            with torch.inference_mode():
+                generated = self.model.generate(**inputs, do_sample=False,
+                    max_new_tokens=max_new_tokens, pad_token_id=self.tokenizer.eos_token_id)
+            return self.tokenizer.decode(generated[0, inputs["input_ids"].shape[1]:], skip_special_tokens=True).strip()
+
+    def generate_many(self, dimension, user_texts, *, mode, max_new_tokens=96, batch_size=32):
+        """Independent left-padded requests; same templates, precision and decoding."""
+        import torch
+        if batch_size < 1:
+            raise ValueError("batch size must be positive")
+        outputs = []
+        with self._route(dimension, mode):
+            padding, pad_token = self.tokenizer.padding_side, self.tokenizer.pad_token
+            try:
+                self.tokenizer.padding_side = "left"
+                if pad_token is None:
+                    self.tokenizer.pad_token = self.tokenizer.eos_token
+                for start in range(0, len(user_texts), batch_size):
+                    batch = user_texts[start:start + batch_size]
+                    inputs = self.tokenizer([self._render(text) for text in batch],
+                                            return_tensors="pt", truncation=False, padding=True)
+                    width = inputs["input_ids"].shape[1]
+                    if width + max_new_tokens > 4096:
                         raise ValueError("prompt exceeds frozen context bound; no silent truncation")
                     inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
                     with torch.inference_mode():
                         generated = self.model.generate(**inputs, do_sample=False,
                             max_new_tokens=max_new_tokens, pad_token_id=self.tokenizer.eos_token_id)
-                    return self.tokenizer.decode(generated[0, inputs["input_ids"].shape[1]:], skip_special_tokens=True).strip()
+                    if len(generated) != len(batch):
+                        raise ValueError("Model changed prompt coverage")
+                    outputs.extend(self.tokenizer.decode(row[width:], skip_special_tokens=True).strip()
+                                   for row in generated)
             finally:
-                if previous is not None and self.routes:
-                    self.model.set_adapter(previous)
+                self.tokenizer.padding_side, self.tokenizer.pad_token = padding, pad_token
+        return outputs
 
     def compile(self, dimension: str, prompt: str, vocabulary, *, mode: str) -> dict:
         request = compilation_request(dimension, prompt, vocabulary)
         raw = self.generate(dimension, request, mode=mode)
+        return self._compiled(dimension, prompt, vocabulary, raw)
+
+    def compile_many(self, dimension, prompts, vocabulary, *, mode, batch_size=32):
+        requests = [compilation_request(dimension, prompt, vocabulary) for prompt in prompts]
+        raws = self.generate_many(dimension, requests, mode=mode, batch_size=batch_size)
+        return [self._compiled(dimension, prompt, vocabulary, raw) for prompt, raw in zip(prompts, raws)]
+
+    @staticmethod
+    def _compiled(dimension, prompt, vocabulary, raw):
         try:
             value = validate_compilation(dimension, json.loads(raw), vocabulary)
             return {"prompt": prompt, "status": "succeeded", "output": value, "raw": raw}

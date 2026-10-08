@@ -34,7 +34,8 @@ def main():
         from vbench_audit_models.qwen import QwenPromptRouter
         vocabulary = LabelVocabulary.from_file(ROOT / "configs/four_dimension/object_color_vocabulary.json")
         router = QwenPromptRouter.from_local(Path(assets["base_model"]), {args.dimension: adapter})
-        records = [router.compile(args.dimension, prompt, vocabulary, mode="lora") for prompt in dict.fromkeys(row["prompt"] for row in rows)]
+        records = router.compile_many(args.dimension, list(dict.fromkeys(row["prompt"] for row in rows)),
+                                      vocabulary, mode="lora", batch_size=32)
         write_json(args.output, {"dimension": args.dimension, "mode": "lora", "input_fields": ["prompt"],
                                 "vocabulary_sha256": vocabulary.provenance["sha256"], "model": router.provenance,
                                 "records": records})
@@ -76,7 +77,7 @@ def main():
         prompts = list(dict.fromkeys(row["prompt"] for row in rows))
         users = [model.user_text({"task": task, "input": {"prompt": prompt}}) for prompt in prompts]
         generation = nullcontext()
-        if task == "action":
+        if task in {"action", "spatial", "objects"}:
             from vbench_audit_models.batched_text import prepared_router_generation
             generation = prepared_router_generation(model, task, users, max_new_tokens=96, batch_size=32)
         with generation:
