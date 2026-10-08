@@ -42,10 +42,14 @@ version = "0.1.0"
 source = { editable = "metrics/aesthetic-quality" }
 dependencies = [
     { name = "audit-core" },
+    { name = "audit-models" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "audit-core", editable = "packages/audit-core" }]
+requires-dist = [
+    { name = "audit-core", editable = "packages/audit-core" },
+    { name = "audit-models", editable = "packages/audit-models" },
+]
 
 [[package]]
 name = "antlr4-python3-runtime"

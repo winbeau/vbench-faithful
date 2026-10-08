@@ -25,6 +25,7 @@ def test_mixed_video_frame_batches_keep_original_normalization_and_reducer(monke
         clip=SimpleNamespace(load=lambda *a, **k: (encoder, None)),
         clip_transform=lambda size: lambda frames: frames, load_video=load)
     monkeypatch.setitem(sys.modules, "vbench.aesthetic_quality", module)
+    monkeypatch.setattr("vbench_audit_models.clip_vision.load_clip_vision", lambda *a: encoder)
     aggregate, returned = compute([{"video": "short"}, {"video": "long"}], "cpu", ["clip", "head"], batch_size=3)
     assert calls == [3, 2]
     assert [r["video_results"] for r in returned] == pytest.approx([.8, .6])

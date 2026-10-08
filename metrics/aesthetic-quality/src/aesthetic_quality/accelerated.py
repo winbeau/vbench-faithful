@@ -4,11 +4,11 @@
 def compute(rows, device, submodules, *, batch_size=32):
     import torch
     from torch.nn import functional as F
-    from vbench.aesthetic_quality import get_aesthetic_model, clip, clip_transform, load_video
+    from vbench.aesthetic_quality import get_aesthetic_model, clip_transform, load_video
     from vbench_audit_core.video_batches import prefetch, frame_batches
+    from vbench_audit_models.clip_vision import load_clip_vision
     predictor = get_aesthetic_model(submodules[1]).to(device).eval()
-    encoder, _ = clip.load(submodules[0], device=device)
-    encoder.eval()
+    encoder = load_clip_vision(submodules[0], device)
     transform = clip_transform(224)
     scores = [[] for _ in rows]
     decoded = prefetch(range(len(rows)), lambda i: transform(load_video(rows[i]["video"])))
