@@ -61,9 +61,13 @@ Profile: SAM image encoding 6.47 s, mask prediction 3.89 s, box detection 3.73 s
 
 `99a7e9f` uses the generation helper validated for Human Action on Spatial and Multiple Objects, and independent prompt-only batches on Object Class and Color. CPU: 119 passed, 1 skipped. All 128 input records retain exact scores/statuses, raw semantic text, compiled records and visual evidence. Four stage totals 200.52 → 168.33 s relative to the first full optimized run, or 191.88 → 168.33 s relative to the ROI-only group run. Current Object/Spatial/Multiple/Color: 53.64/17.87/15.55/81.27 s; coverage unchanged 32/11/32/9. Standalone group including setup 174.99 s. [Receipt](../validation/h100-grit-text-batch32-20261008.json).
 
-## Active item: Appearance Style
+## Accepted: Appearance Style
 
-First of the seven non-repair accelerators. Profile/remove repeated prompt encoding and batch all original frames, retaining official preprocessing and frame-weighted aggregation. Check all 32 video scores with the agreed 1%/1e-6 gate. Do not enable the other six accelerators before their own validation.
+`8744f4c`: cache each distinct style's CLIP text embedding within this invocation; batch all original PIL-transformed frames in groups of 32. Keep native logit scaling and frame-weighted aggregation. Same-32 H100: 32/32, **zero per-video score error**, aggregate error 1.94e-16; worker 14.00 → 6.80 s, standalone validation wall 9.77 s. No previous-run inference reuse. [Receipt](../validation/h100-appearance-accelerated-20261008.json). Full CPU suite 1,461 passed, 3 skipped; locked uv sync, CPU overlay and all 16 CLI helps passed. Internal worker `--mode accelerated` and `scripts/benchmark_accelerated_dimension.py` are available; public mode routing is intentionally deferred until the seven implementations pass.
+
+## Active item: Imaging Quality
+
+Batch native MUSIQ frame inference without changing preprocessing, frame coverage or its original output scale. Validate every video and the native aggregate against the fixed official reference before enabling the next accelerator.
 
 ## Subsequent queue
 
