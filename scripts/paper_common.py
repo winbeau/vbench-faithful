@@ -156,27 +156,21 @@ def process(python, script, arguments, assets, log):
         raise RuntimeError(f"Worker failed ({run.returncode}); see {log}")
 
 
-def verify_assets(assets, dimensions, backend):
-    """Bind selected weights and vendored algorithms before starting inference."""
-    checked = {}
-
-    def check(path, expected):
-        path = Path(path)
-        actual = digest(path)
-        if actual != expected:
-            raise ValueError(f"Asset differs from the frozen paper selection: {path}")
-        checked[str(path)] = actual
+def _asset_requirements(assets, dimensions, backend):
+    """Return the selected source/weight pins without reading model payloads."""
+    def pin(path, expected):
+        return str(Path(path)), expected
 
     source = json.loads((ROOT / "configs/reproduction/semantic-source.json").read_text())
     for entry in source["files"]:
         relative = Path(entry["path"]).relative_to(source["prefix"])
-        check(SEMANTIC_ROOT / relative, entry["sha256"])
+        yield pin(SEMANTIC_ROOT / relative, entry["sha256"])
     if backend != "repair" and dimensions:
         official = json.loads((ROOT / "configs/reproduction/official-assets.json").read_text())
         selected = {name for dim in dimensions for name in official["requirements"][dim]}
         for entry in official["files"]:
             if entry["path"] in selected:
-                check(Path(assets["vbench_cache"]) / entry["path"], entry["sha256"])
+                yield pin(Path(assets["vbench_cache"]) / entry["path"], entry["sha256"])
     required = set()
     vision = {"scene": {"tag2text"}, "human_action": {"umt"},
               "spatial_relationship": {"grit"}, "multiple_objects": {"grit"},
@@ -188,23 +182,37 @@ def verify_assets(assets, dimensions, backend):
             required.update(vision.get(dim, set()))
     pins = json.loads((ROOT / "docs/reproduction/external-assets.json").read_text())
     for key in sorted(required):
-        check(assets[key], pins[key]["sha256"])
+        yield pin(assets[key], pins[key]["sha256"])
     if required.intersection({"maskrcnn", "mobilesam"}):
         sam_sources = json.loads((ROOT / "configs/background-repair/scoring_coco80_sam_dev_v1.json").read_text())["external_source_sha256"]
         for name, expected in sam_sources.items():
             if "/MobileSAM-f706ad9/" in name:
-                check(Path(assets["mobilesam_source"]) / name.split("/MobileSAM-f706ad9/", 1)[1], expected)
+                yield pin(Path(assets["mobilesam_source"]) / name.split("/MobileSAM-f706ad9/", 1)[1], expected)
     release = json.loads((ROOT / "configs/reproduction/release.json").read_text())
     semantic = set(TASKS) | {"object_class", "color"}
     if backend != "origin":
         for entry in release["adapters"]:
             if entry["dimension"] in dimensions:
-                check(Path(assets["adapters"]) / entry["path"], entry["sha256"])
+                yield pin(Path(assets["adapters"]) / entry["path"], entry["sha256"])
         if semantic.intersection(dimensions):
             base = json.loads((ROOT / "configs/reproduction/qwen-base.json").read_text())
             for entry in base["files"]:
-                check(Path(assets["base_model"]) / entry["path"], entry["sha256"])
+                yield pin(Path(assets["base_model"]) / entry["path"], entry["sha256"])
         if "dynamic_degree" in dimensions:
             for entry in release["dynamic_weights"] + release["model_metadata_files"]:
-                check(Path(assets["dynamic_model"]) / Path(entry["path"]).relative_to("dynamic_degree"), entry["sha256"])
+                yield pin(Path(assets["dynamic_model"]) / Path(entry["path"]).relative_to("dynamic_degree"), entry["sha256"])
+
+
+def asset_requirements(assets, dimensions, backend):
+    """Select exactly the pins that affect a requested dimension/backend."""
+    return dict(_asset_requirements(assets, dimensions, backend))
+
+
+def verify_assets(assets, dimensions, backend):
+    """Bind selected weights and vendored algorithms before starting inference."""
+    checked = {}
+    for path, expected in _asset_requirements(assets, dimensions, backend):
+        if digest(path) != expected:
+            raise ValueError(f"Asset differs from the frozen paper selection: {path}")
+        checked[path] = expected
     return checked

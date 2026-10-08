@@ -116,7 +116,9 @@ def test_controller_cache_hit_and_metadata_change(tmp_path, monkeypatch):
     yaml.write_text("input: input.json\nassets: assets.json\ndimensions: [imaging_quality]\n"
                     "backend: both\noutput: first\ncache_dir: cache\nenv_dir: envs\n")
     config = load_config(yaml)
-    monkeypatch.setattr(runner, "verify_assets", lambda *a: {})
+    pins = lambda assets, dimensions, backend: {dim: "pin-" + dim for dim in dimensions}
+    monkeypatch.setattr(runner, "verify_assets", pins)
+    monkeypatch.setattr(runner, "asset_requirements", pins)
     monkeypatch.setattr(runner, "source_identity", lambda *a: "code")
     monkeypatch.setattr(runner, "probe_gpu", lambda *a: {"name": "fake CUDA test"})
     monkeypatch.setattr(runner, "prepare_environment", lambda *a: Path(sys.executable))
@@ -130,7 +132,8 @@ def test_controller_cache_hit_and_metadata_change(tmp_path, monkeypatch):
         runner.write_json(destination, {"rows": [runner.result(row, 70.0) for row in rows],
                                        "official_aggregate": .7})
         Path(log).write_text("fake worker\n")
-        assert env["CUDA_VISIBLE_DEVICES"] == "0" and env["VBENCH_EVAL_DIMENSION"] == "imaging_quality"
+        assert env["CUDA_VISIBLE_DEVICES"] == "0"
+        assert env["VBENCH_EVAL_DIMENSION"] in {"imaging_quality", "temporal_flickering"}
     monkeypatch.setattr(runner.Workers, "run", run)
     assert runner.evaluate(config) == 0
     assert runner.evaluate(replace(config, output=tmp_path / "second")) == 0
@@ -139,10 +142,21 @@ def test_controller_cache_hit_and_metadata_change(tmp_path, monkeypatch):
     assert report["official_fallback"] == ["imaging_quality"]
     summary = report["dimensions"]["imaging_quality/origin"]
     assert summary["score"] == .7 and summary["cached"]
+    # Adding another dimension changes the verified asset union, but must not
+    # invalidate an identical existing task's independently bound cache entry.
+    data = json.loads(manifest.read_text())
+    data.append({**data[0], "id": "other", "dimensions": ["temporal_flickering"]})
+    manifest.write_text(json.dumps(data))
+    assert runner.evaluate(replace(config, output=tmp_path / "expanded",
+                                   dimensions=("imaging_quality", "temporal_flickering"))) == 0
+    assert len(calls) == 2
+    expanded = json.loads((tmp_path / "expanded/summary.json").read_text())["dimensions"]
+    assert expanded["imaging_quality/origin"]["cached"]
+    assert not expanded["temporal_flickering/origin"]["cached"]
     data = json.loads(manifest.read_text()); data[0]["prompt"] = "blue car"
     manifest.write_text(json.dumps(data))
     assert runner.evaluate(replace(config, output=tmp_path / "third")) == 0
-    assert len(calls) == 2
+    assert len(calls) == 3
 
 
 def test_interrupted_worker_group_is_reaped(tmp_path):

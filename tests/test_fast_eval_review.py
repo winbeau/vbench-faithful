@@ -51,6 +51,7 @@ def test_origin_without_native_aggregate_cannot_succeed_or_cache(tmp_path, monke
     config = load_config(yaml)
     monkeypatch.delenv("CUDA_VISIBLE_DEVICES", raising=False)
     monkeypatch.setattr(runner, "verify_assets", lambda *a: {})
+    monkeypatch.setattr(runner, "asset_requirements", lambda *a: {})
     monkeypatch.setattr(runner, "source_identity", lambda *a: "review-fixture")
     monkeypatch.setattr(runner, "probe_gpu", lambda *a: {"name": "fake GPU"})
     monkeypatch.setattr(runner, "prepare_environment", lambda *a: Path(sys.executable))

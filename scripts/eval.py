@@ -14,7 +14,7 @@ import threading
 import time
 
 from paper_common import (ROOT, PAPER, OFFICIAL, TASKS, digest, load_assets, load_inputs,
-                          python_paths, result, summarize, verify_assets, write_json)
+                          asset_requirements, python_paths, result, summarize, verify_assets, write_json)
 from vbench_audit_core.eval_cache import ArtifactCache, identity
 from vbench_audit_core.eval_config import load_config
 from vbench_audit_core.eval_logging import EvalLogger
@@ -235,8 +235,10 @@ def evaluate(config, *, plan_only=False):
                     logger.event("environment", dimension=dim, message=f"Preparing {role} environment", gpu=gpu)
                     runtimes[role] = prepare_environment(dim, role, Path(assets[role + "_python"]), config.env_dir)
                 python = runtimes[role]
+                required = asset_requirements(assets, [dim], "origin" if name == "origin" else "repair")
+                selected_assets = {path: checked[path] for path in required}
                 specification = {"schema": 1, "dimension": dim, "stage": name, "inputs": chosen,
-                                 "assets": assets, "verified_assets": checked, "source": fingerprint,
+                                 "assets": assets, "verified_assets": selected_assets, "source": fingerprint,
                                  "environment": str(python), "gpu_runtime": gpu_info[gpu],
                                  "prerequisites": {k: digest(v) for k, v in extra.items() if k in {"evidence", "compiled"}}}
                 logger.event("running", dimension=dim, backend=name, message=f"GPU {gpu}", gpu=gpu)
