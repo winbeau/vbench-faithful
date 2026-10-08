@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import nullcontext
 import json
 from pathlib import Path
 
@@ -72,13 +73,19 @@ def main():
         model = AdapterRouter(base_model_path=assets["base_model"], adapters={task: str(adapter)}, local_files_only=True)
         # Use the committed exact K400 vocabulary, not a user-dependent cache path.
         model._action_vocabulary = vocabulary
-        for prompt in dict.fromkeys(row["prompt"] for row in rows):
-            key = text_key(task, prompt)
-            value = model.predict(task, model.user_text({"task": task, "input": {"prompt": prompt}}),
-                                  max_new_tokens=96, canonicalize_entity_output=task == "objects",
-                                  action_interface="repair-v2.1", action_prompt=prompt)
-            predictions[key] = value.value
-            records.append({"request_id": key, "prompt": prompt, **value.as_dict()})
+        prompts = list(dict.fromkeys(row["prompt"] for row in rows))
+        users = [model.user_text({"task": task, "input": {"prompt": prompt}}) for prompt in prompts]
+        generation = nullcontext()
+        if task == "action":
+            from vbench_audit_models.batched_text import prepared_router_generation
+            generation = prepared_router_generation(model, task, users, max_new_tokens=96, batch_size=32)
+        with generation:
+            for prompt, user in zip(prompts, users):
+                key = text_key(task, prompt)
+                value = model.predict(task, user, max_new_tokens=96, canonicalize_entity_output=task == "objects",
+                                      action_interface="repair-v2.1", action_prompt=prompt)
+                predictions[key] = value.value
+                records.append({"request_id": key, "prompt": prompt, **value.as_dict()})
     results = []
     for row in rows:
         item = {"task": task, "prompt": row["prompt"], "eligible": True, "official_target": None}
