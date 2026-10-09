@@ -42,5 +42,15 @@ foreground blur, identified on their counterfactuals. Selection details and
 H200 receipts are preserved in `data/refinement-20261009.json`; Human Action
 keeps its recorded scores while the alias issue is deferred.
 
+A subsequent row-timing check updates all five Subject counterfactuals to
+continuous background blur from 0.5 to 5 seconds. Dog and horse use tighter
+construction masks. Their VBench scores are 0.8215 and 0.8461; all five are
+below 0.9, with a maximum absolute Ours change of 0.01087. Slower Background
+variants were rejected because their VBench scores remained at least 0.9,
+so that row retains its previous videos and matching scores. Kyoto and desert
+remain weak examples. `data/row-timing-20261009.json` preserves all 142 fresh
+scores and the selection/rollback decisions; previous Subject scores remain
+in each case's history.
+
 The arXiv button points to the official homepage while the paper is processing.
 No model weights, caches, environments or raw worker logs are included in this branch.

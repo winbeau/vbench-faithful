@@ -1478,5 +1478,27 @@
       "28-background-terrace",
       "29-background-museum"
     ]
+  },
+  "row_timing_20261009": {
+    "report": "https://github.com/winbeau/vbench-faithful/blob/0b19e0b/docs/validation/showcase-row-timing-20261009.md",
+    "receipt": "data/row-timing-20261009.json",
+    "selected_cases": [
+      "06-subject",
+      "23-subject-cat",
+      "24-subject-horse",
+      "25-subject-parrot",
+      "26-subject-woman"
+    ],
+    "media_replacements": 5,
+    "subject_blur_seconds": [
+      0.5,
+      5.0
+    ],
+    "background_action": "Rejected all slower candidates with official scores >= 0.9; kept previous media and matching scores",
+    "unresolved_background_cases": [
+      "27-background-kyoto",
+      "30-background-desert"
+    ],
+    "scoring_methods_changed": false
   }
 }

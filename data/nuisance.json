@@ -1905,7 +1905,7 @@
           "preview": null
         },
         {
-          "image": "assets/videos/06-subject/counterfactual-poster.webp",
+          "image": "assets/videos/06-subject/counterfactual-poster.webp?v=19c895eba1b4",
           "layout": "diptych",
           "side": "right",
           "position": "center",
@@ -1923,11 +1923,11 @@
       "scores": {
         "vbench": [
           0.9410030040420404,
-          0.9098552971327004
+          0.8214895280719805
         ],
         "ours": [
           0.9678483009338379,
-          0.967145562171936
+          0.9683564901351929
         ]
       },
       "score_status": {
@@ -1946,11 +1946,11 @@
           ""
         ],
         "ours": [
-          null,
-          null
+          "",
+          ""
         ]
       },
-      "score_scope": "Complete displayed five-second video.",
+      "score_scope": "Complete displayed five-second video. Continuous background blur from 0.5 to 5 seconds.",
       "videos": {
         "original": {
           "src": "assets/videos/06-subject/original.mp4",
@@ -1966,10 +1966,10 @@
           ]
         },
         "counterfactual": {
-          "src": "assets/videos/06-subject/counterfactual.mp4",
-          "poster": "assets/videos/06-subject/counterfactual-poster.webp",
+          "src": "assets/videos/06-subject/counterfactual.mp4?v=24e5a33f62ab",
+          "poster": "assets/videos/06-subject/counterfactual-poster.webp?v=19c895eba1b4",
           "poster_time_seconds": 2.5,
-          "sha256": "c4de2f646190f2fc9e6918259fb912fd42dc08126aba7a4f89a1fcf2c05790ac",
+          "sha256": "24e5a33f62abb3cdd4395f0c570d9ad761583ece0ab9354894e8959bc873bea5",
           "duration_seconds": 5.0,
           "frames": 120,
           "fps": "24/1",
@@ -1987,16 +1987,20 @@
             "video_sha256": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
             "score": 0.9410030040420404,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/subject_consistency/origin.json",
+            "run": "evaluation/row-subject-dog/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "06-subject--counterfactual",
+            "id": "06-subject--tight-g7-blur90-end90",
             "prompt": "Use the reference image as the first frame. The dog lifts its head, turns toward a sound, then looks back toward the camera. Its ears twitch separately, it shifts its weight between its front paws and wags its curled tail. Keep the dog standing in the same small patch of ground. Nearby fern tips move slightly in a breeze; tree trunks and stones stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "c4de2f646190f2fc9e6918259fb912fd42dc08126aba7a4f89a1fcf2c05790ac",
-            "score": 0.9098552971327004,
+            "video_sha256": "24e5a33f62abb3cdd4395f0c570d9ad761583ece0ab9354894e8959bc873bea5",
+            "score": 0.8214895280719805,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/subject_consistency/origin.json",
+            "run": "evaluation/row-subject-dog/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           }
         ],
@@ -2007,16 +2011,20 @@
             "video_sha256": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
             "score": 0.9678483009338379,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/subject_consistency/repair.json",
+            "run": "evaluation/row-subject-dog/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "06-subject--counterfactual",
+            "id": "06-subject--tight-g7-blur90-end90",
             "prompt": "Use the reference image as the first frame. The dog lifts its head, turns toward a sound, then looks back toward the camera. Its ears twitch separately, it shifts its weight between its front paws and wags its curled tail. Keep the dog standing in the same small patch of ground. Nearby fern tips move slightly in a breeze; tree trunks and stones stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "c4de2f646190f2fc9e6918259fb912fd42dc08126aba7a4f89a1fcf2c05790ac",
-            "score": 0.967145562171936,
+            "video_sha256": "24e5a33f62abb3cdd4395f0c570d9ad761583ece0ab9354894e8959bc873bea5",
+            "score": 0.9683564901351929,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/subject_consistency/repair.json",
+            "run": "evaluation/row-subject-dog/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           }
         ]
@@ -2077,314 +2085,124 @@
         },
         "construction": {
           "case": "06-subject",
-          "attempt": "ltx25-seed2026100806",
-          "source_sha256": "b03d5335dc3fa87b24b7d2ada4f016d9abdea378b761d2cd169c9badd6e24c45",
-          "duration_seconds": 5,
-          "fps": 24,
-          "frames": 120,
-          "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
-          "physical_gpu": "6",
-          "source_kind": "LTX-2.5 generated native RGB master",
-          "scoring_localizers_receive_construction_masks": false,
-          "operation": "background_blur",
-          "window_indices": [
-            45,
-            46,
-            47,
-            48,
-            49,
-            50,
-            51,
-            52,
-            53,
-            54,
-            55,
-            56,
-            57,
-            58,
-            59,
-            60,
-            61,
-            62,
-            63,
-            64,
-            65,
-            66,
-            67,
-            68,
-            69,
-            70,
-            71,
-            72,
-            73,
-            74
-          ],
-          "sigma_native_pixels": 60,
-          "construction_box": [
-            310,
-            95,
-            670,
-            560
-          ],
-          "mask_sha256": "4455d5a0c1531761e951d3b11673cb8e6fd264458001cd1c45cc7f6492c9a1ff",
-          "mask_area_fraction_range": [
-            0.08455352783203125,
-            0.2129119873046875
-          ],
-          "protected_rgb_pixels_max_difference": 0,
-          "subject_guard_dilation_kernel": 7,
-          "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
-          "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
-          "status": "constructed; visual review pending",
-          "elapsed_seconds": 85.4796382393688,
-          "files": {
-            "original.mp4": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
-            "counterfactual.mp4": "c4de2f646190f2fc9e6918259fb912fd42dc08126aba7a4f89a1fcf2c05790ac",
-            "original-rgb.mp4": "715a37f3c17ac324467903f5ea7b45d6a2f8f376be562054cedbb3430cc8ca20",
-            "counterfactual-rgb.mp4": "bbacc215dc821060bb569232ee05043de15260d7caa76e3de5228d9ec73bd6ee"
-          },
-          "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
-        },
-        "reviews": [
-          {
-            "decision": "accepted",
-            "attempt": "ltx25-seed2026100806",
-            "duration_seconds": 5,
-            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
-            "observed_motion": "Dog lowers and turns its head, shifts stance and moves ears and tail.",
-            "first_frame": "cases/layer-02/06-subject/input/first-frame.png",
-            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
-          },
-          {
-            "decision": "accepted",
-            "pair_variant": "ltx25-seed2026100806",
-            "reviewer": "assistant visual review; not human ground truth",
-            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
-            "operation": "background_blur",
-            "limitations": [
-              "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
-            ]
-          }
-        ],
-        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
-      }
-    },
-    {
-      "id": "23-subject-cat",
-      "dimension": "Subject Consistency",
-      "scene": "The courtyard window",
-      "views": [
-        {
-          "image": "assets/videos/23-subject-cat/original-poster.webp",
-          "layout": "diptych",
-          "side": "left",
-          "position": "center",
-          "preview": null
-        },
-        {
-          "image": "assets/videos/23-subject-cat/counterfactual-poster.webp?v=c8bcb700662a",
-          "layout": "diptych",
-          "side": "right",
-          "position": "center",
-          "preview": null
-        }
-      ],
-      "excerpt": {
-        "before": "a ",
-        "focus": [
-          "cat",
-          "cat"
-        ],
-        "after": " in the courtyard light"
-      },
-      "scores": {
-        "vbench": [
-          0.97072756916535,
-          0.8496354748221004
-        ],
-        "ours": [
-          0.9762923717498779,
-          0.9730845093727112
-        ]
-      },
-      "score_status": {
-        "vbench": [
-          "succeeded",
-          "succeeded"
-        ],
-        "ours": [
-          "succeeded",
-          "succeeded"
-        ]
-      },
-      "score_reasons": {
-        "vbench": [
-          "",
-          ""
-        ],
-        "ours": [
-          "",
-          ""
-        ]
-      },
-      "score_scope": "Complete displayed five-second video.",
-      "videos": {
-        "original": {
-          "src": "assets/videos/23-subject-cat/original.mp4",
-          "poster": "assets/videos/23-subject-cat/original-poster.webp",
-          "poster_time_seconds": 2.5,
-          "sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
-          "duration_seconds": 5.0,
-          "frames": 120,
-          "fps": "24/1",
-          "resolution": [
-            1024,
-            640
-          ]
-        },
-        "counterfactual": {
-          "src": "assets/videos/23-subject-cat/counterfactual.mp4?v=4b93c31de085",
-          "poster": "assets/videos/23-subject-cat/counterfactual-poster.webp?v=c8bcb700662a",
-          "poster_time_seconds": 2.5,
-          "sha256": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134",
-          "duration_seconds": 5.0,
-          "frames": 120,
-          "fps": "24/1",
-          "resolution": [
-            1024,
-            640
-          ]
-        }
-      },
-      "score_records": {
-        "vbench": [
-          {
-            "id": "23-subject-cat--original",
-            "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
-            "score": 0.97072756916535,
-            "status": "succeeded",
-            "run": "evaluation/subject-round-02-run-01/results/subject_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          },
-          {
-            "id": "23-subject-cat--blur90-area100-after-first",
-            "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134",
-            "score": 0.8496354748221004,
-            "status": "succeeded",
-            "run": "evaluation/subject-round-02-run-01/results/subject_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          }
-        ],
-        "ours": [
-          {
-            "id": "23-subject-cat--original",
-            "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
-            "score": 0.9762923717498779,
-            "status": "succeeded",
-            "run": "evaluation/subject-round-02-run-01/results/subject_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          },
-          {
-            "id": "23-subject-cat--blur90-area100-after-first",
-            "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134",
-            "score": 0.9730845093727112,
-            "status": "succeeded",
-            "run": "evaluation/subject-round-02-run-01/results/subject_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          }
-        ]
-      },
-      "provenance": {
-        "first_frame": "assets/videos/23-subject-cat/first-frame.png",
-        "first_frame_sha256": "a52f6e8da593c12ffe55a7fdef2cdb7a5e6300a6bc2936e092daf8b3f2c2b0e7",
-        "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-        "generation": {
-          "case_id": "23-subject-cat",
-          "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-          "enhance_prompt": false,
-          "seed": 2026100823,
-          "first_frame": "cases/layer-02/23-subject-cat/input/first-frame.png",
-          "first_frame_sha256": "a52f6e8da593c12ffe55a7fdef2cdb7a5e6300a6bc2936e092daf8b3f2c2b0e7",
-          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
-          "source_status": "?? scripts/",
-          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
-          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
-          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
-          "physical_gpu": "6",
-          "logical_device": "cuda:0",
-          "width": 1024,
-          "height": 640,
-          "fps": 24,
-          "generated_frames": 121,
-          "delivery_frames": 120,
-          "delivery_seconds": 5,
-          "temporal_operation": "drop only the terminal generated frame; no resampling",
-          "precision": "bfloat16",
-          "quantization": null,
-          "pipeline": "DistilledPipeline",
-          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
-          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
-          "started_at_utc": "2026-10-09T04:40:37.641599+00:00",
-          "status": "succeeded",
-          "device_name": "NVIDIA H200 NVL",
-          "cuda_version": "12.8",
-          "versions": {
-            "torch": "2.9.1",
-            "torchvision": "0.24.1",
-            "torchaudio": "2.9.1",
-            "transformers": "5.14.1",
-            "ltx-core": "1.4.2",
-            "ltx-pipelines": "1.4.2"
-          },
-          "elapsed_seconds": 78.12562928907573,
-          "peak_cuda_allocated_bytes": 42069817856,
-          "media": {
-            "width": 1024,
-            "height": 640,
-            "r_frame_rate": "24/1",
-            "duration": "5.000000",
-            "nb_read_frames": "120"
-          },
-          "native_rgb_sha256": "6f2781cfee57d3707efc84d5f97c32eba7774eaccb6715fd369b536a80637e4b",
-          "video_sha256": "99358910c85cb0e71c854e4cdf25671f71b154854455d8a9a2c910e42cb01325"
-        },
-        "construction": {
-          "case": "23-subject-cat",
           "dimension": "subject_consistency",
-          "variant": "blur90-area100-after-first",
+          "variant": "tight-g7-blur90-end90",
           "spec": {
-            "name": "blur90-area100-after-first",
+            "name": "tight-g7-blur90-end90",
             "sigma": 90,
-            "spatial_fraction": 1.0,
-            "window": "after-first"
+            "guard_kernel": 7,
+            "indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ]
           },
-          "source_video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
-          "mask_source_sha256": "a1eb39b508af4963abb819be9bda6f7db63a3da34cc06d15b88f106e01b289b3",
-          "mask_role": "Independent SAM2 construction, not scoring localization or ground truth",
           "window_indices": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
             12,
             13,
             14,
@@ -2494,20 +2312,884 @@
             118,
             119
           ],
-          "duration_seconds": 4.958333333333333,
-          "edit_area_fraction_mean": 0.7988739013671875,
-          "allowed_area_fraction_mean": 0.7988739013671875,
-          "protected_region": "Temporal union with guard",
+          "schedule": [
+            {
+              "blurred": false,
+              "start": 0,
+              "end_exclusive": 12,
+              "frames": 12
+            },
+            {
+              "blurred": true,
+              "start": 12,
+              "end_exclusive": 120,
+              "frames": 108
+            }
+          ],
+          "minimum_segment_frames": 12,
+          "actual_minimum_segment_frames": 12,
+          "blurred_seconds": 4.5,
+          "source_video_sha256": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
+          "mask_source_sha256": "4455d5a0c1531761e951d3b11673cb8e6fd264458001cd1c45cc7f6492c9a1ff",
+          "mask_role": "Independent original SAM2 construction; not scoring localization or human ground truth",
+          "mask_area_range": [
+            0.08455352783203125,
+            0.2129119873046875
+          ],
+          "protected_region": "Per-frame foreground with small dilation",
+          "protected_fraction": 0.14270612080891928,
+          "foreground_internal_spatial_fraction": null,
           "preencode_protected_max_error": 0,
           "preencode_outside_window_max_error": 0,
-          "postencode_protected_mean_error": 1.9081606089063343,
+          "postencode_protected_mean_error": 2.032340445667785,
           "scoring_localizers_receive_construction_masks": false,
-          "scoring_media": "H.264 CRF18 yuv420p; raw original bytes retained; reencode control provided",
-          "script_sha256": "c8ebf0bc6edf7ad1fb340521935a1a5f809fcb04869441cf2791c6b307a96ca6",
-          "helpers_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+          "scoring_media": "H.264 CRF18 yuv420p, unchanged original bytes",
+          "script_sha256": "9458fb7e275e370447493281f88d647ad978e35fc8c99c29877b49bec9f0ca2a",
+          "helper_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
           "files": {
-            "counterfactual.mp4": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134",
-            "counterfactual-rgb.mp4": "991a49fc630693310ad16f0967b2bbb8962a36da7426d6af91ac4c406162b3f9"
+            "counterfactual.mp4": "24e5a33f62abb3cdd4395f0c570d9ad761583ece0ab9354894e8959bc873bea5",
+            "counterfactual-rgb.mp4": "1356ff86623946fcba1005f8369f1eab5ffdd08b9c411497b7c3cb4442cf9d54"
+          },
+          "review": "Pending visual inspection"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100806",
+            "duration_seconds": 5,
+            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
+            "observed_motion": "Dog lowers and turns its head, shifts stance and moves ears and tail.",
+            "first_frame": "cases/layer-02/06-subject/input/first-frame.png",
+            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100806",
+            "reviewer": "assistant visual review; not human ground truth",
+            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
+            "operation": "background_blur",
+            "limitations": [
+              "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+        "row_timing_20261009": {
+          "case": "06-subject",
+          "dimension": "subject_consistency",
+          "variant": "tight-g7-blur90-end90",
+          "official": [
+            0.9410030040420404,
+            0.8214895280719805
+          ],
+          "ours": [
+            0.9678483009338379,
+            0.9683564901351929
+          ],
+          "official_drop": 0.1195134759700599,
+          "ours_change": 0.0005081892013549805,
+          "original_sha256": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
+          "video_sha256": "24e5a33f62abb3cdd4395f0c570d9ad761583ece0ab9354894e8959bc873bea5",
+          "local_video": "candidates/subject-tight-followup-v1/06-subject/tight-g7-blur90-end90/counterfactual.mp4",
+          "run": "row-subject-dog",
+          "blur_seconds": [
+            0.5,
+            5.0
+          ],
+          "selection_reason": "Shared 0.5-5 second blur window; official below 0.9 and small Ours change; sigma 90 suffices for tight dog/horse masks",
+          "construction": {
+            "case": "06-subject",
+            "dimension": "subject_consistency",
+            "variant": "tight-g7-blur90-end90",
+            "spec": {
+              "name": "tight-g7-blur90-end90",
+              "sigma": 90,
+              "guard_kernel": 7,
+              "indices": [
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119
+              ]
+            },
+            "window_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ],
+            "schedule": [
+              {
+                "blurred": false,
+                "start": 0,
+                "end_exclusive": 12,
+                "frames": 12
+              },
+              {
+                "blurred": true,
+                "start": 12,
+                "end_exclusive": 120,
+                "frames": 108
+              }
+            ],
+            "minimum_segment_frames": 12,
+            "actual_minimum_segment_frames": 12,
+            "blurred_seconds": 4.5,
+            "source_video_sha256": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
+            "mask_source_sha256": "4455d5a0c1531761e951d3b11673cb8e6fd264458001cd1c45cc7f6492c9a1ff",
+            "mask_role": "Independent original SAM2 construction; not scoring localization or human ground truth",
+            "mask_area_range": [
+              0.08455352783203125,
+              0.2129119873046875
+            ],
+            "protected_region": "Per-frame foreground with small dilation",
+            "protected_fraction": 0.14270612080891928,
+            "foreground_internal_spatial_fraction": null,
+            "preencode_protected_max_error": 0,
+            "preencode_outside_window_max_error": 0,
+            "postencode_protected_mean_error": 2.032340445667785,
+            "scoring_localizers_receive_construction_masks": false,
+            "scoring_media": "H.264 CRF18 yuv420p, unchanged original bytes",
+            "script_sha256": "9458fb7e275e370447493281f88d647ad978e35fc8c99c29877b49bec9f0ca2a",
+            "helper_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+            "files": {
+              "counterfactual.mp4": "24e5a33f62abb3cdd4395f0c570d9ad761583ece0ab9354894e8959bc873bea5",
+              "counterfactual-rgb.mp4": "1356ff86623946fcba1005f8369f1eab5ffdd08b9c411497b7c3cb4442cf9d54"
+            },
+            "review": "Pending visual inspection"
+          },
+          "report": "https://github.com/winbeau/vbench-faithful/blob/0b19e0b/docs/validation/showcase-row-timing-20261009.md",
+          "receipt": "data/row-timing-20261009.json"
+        }
+      },
+      "score_history": {
+        "revisions": [
+          {
+            "reason": "Superseded by measured common Subject blur timing on 2026-10-09",
+            "scores": {
+              "vbench": [
+                0.9410030040420404,
+                0.9098552971327004
+              ],
+              "ours": [
+                0.9678483009338379,
+                0.967145562171936
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                null,
+                null
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "06-subject--original",
+                  "prompt": "Use the reference image as the first frame. The dog lifts its head, turns toward a sound, then looks back toward the camera. Its ears twitch separately, it shifts its weight between its front paws and wags its curled tail. Keep the dog standing in the same small patch of ground. Nearby fern tips move slightly in a breeze; tree trunks and stones stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
+                  "score": 0.9410030040420404,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/subject_consistency/origin.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "06-subject--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The dog lifts its head, turns toward a sound, then looks back toward the camera. Its ears twitch separately, it shifts its weight between its front paws and wags its curled tail. Keep the dog standing in the same small patch of ground. Nearby fern tips move slightly in a breeze; tree trunks and stones stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "c4de2f646190f2fc9e6918259fb912fd42dc08126aba7a4f89a1fcf2c05790ac",
+                  "score": 0.9098552971327004,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/subject_consistency/origin.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "06-subject--original",
+                  "prompt": "Use the reference image as the first frame. The dog lifts its head, turns toward a sound, then looks back toward the camera. Its ears twitch separately, it shifts its weight between its front paws and wags its curled tail. Keep the dog standing in the same small patch of ground. Nearby fern tips move slightly in a breeze; tree trunks and stones stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
+                  "score": 0.9678483009338379,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/subject_consistency/repair.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "06-subject--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The dog lifts its head, turns toward a sound, then looks back toward the camera. Its ears twitch separately, it shifts its weight between its front paws and wags its curled tail. Keep the dog standing in the same small patch of ground. Nearby fern tips move slightly in a breeze; tree trunks and stones stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "c4de2f646190f2fc9e6918259fb912fd42dc08126aba7a4f89a1fcf2c05790ac",
+                  "score": 0.967145562171936,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/subject_consistency/repair.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/06-subject/original.mp4",
+                "poster": "assets/videos/06-subject/original-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/06-subject/counterfactual.mp4",
+                "poster": "assets/videos/06-subject/counterfactual-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "c4de2f646190f2fc9e6918259fb912fd42dc08126aba7a4f89a1fcf2c05790ac",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "a ",
+              "focus": [
+                "Shiba",
+                "Shiba"
+              ],
+              "after": " in the green hush"
+            },
+            "construction": {
+              "case": "06-subject",
+              "attempt": "ltx25-seed2026100806",
+              "source_sha256": "b03d5335dc3fa87b24b7d2ada4f016d9abdea378b761d2cd169c9badd6e24c45",
+              "duration_seconds": 5,
+              "fps": 24,
+              "frames": 120,
+              "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
+              "physical_gpu": "6",
+              "source_kind": "LTX-2.5 generated native RGB master",
+              "scoring_localizers_receive_construction_masks": false,
+              "operation": "background_blur",
+              "window_indices": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74
+              ],
+              "sigma_native_pixels": 60,
+              "construction_box": [
+                310,
+                95,
+                670,
+                560
+              ],
+              "mask_sha256": "4455d5a0c1531761e951d3b11673cb8e6fd264458001cd1c45cc7f6492c9a1ff",
+              "mask_area_fraction_range": [
+                0.08455352783203125,
+                0.2129119873046875
+              ],
+              "protected_rgb_pixels_max_difference": 0,
+              "subject_guard_dilation_kernel": 7,
+              "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
+              "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+              "status": "constructed; visual review pending",
+              "elapsed_seconds": 85.4796382393688,
+              "files": {
+                "original.mp4": "6b8d349bd2a47c12c08d4085c38604792b185ed8e0fc3e25d6c391709e280f17",
+                "counterfactual.mp4": "c4de2f646190f2fc9e6918259fb912fd42dc08126aba7a4f89a1fcf2c05790ac",
+                "original-rgb.mp4": "715a37f3c17ac324467903f5ea7b45d6a2f8f376be562054cedbb3430cc8ca20",
+                "counterfactual-rgb.mp4": "bbacc215dc821060bb569232ee05043de15260d7caa76e3de5228d9ec73bd6ee"
+              },
+              "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
+            }
+          }
+        ]
+      },
+      "counterfactual_note": "Blur: 0.5–5 s",
+      "counterfactual_note_detail": "Continuous background blur from 0.5 to 5 seconds. The predicted subject region is protected before encoding."
+    },
+    {
+      "id": "23-subject-cat",
+      "dimension": "Subject Consistency",
+      "scene": "The courtyard window",
+      "views": [
+        {
+          "image": "assets/videos/23-subject-cat/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/23-subject-cat/counterfactual-poster.webp?v=763ec1dc8832",
+          "layout": "diptych",
+          "side": "right",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a ",
+        "focus": [
+          "cat",
+          "cat"
+        ],
+        "after": " in the courtyard light"
+      },
+      "scores": {
+        "vbench": [
+          0.97072756916535,
+          0.8601841082592973
+        ],
+        "ours": [
+          0.9762923717498779,
+          0.9728028178215027
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video. Continuous background blur from 0.5 to 5 seconds.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/23-subject-cat/original.mp4",
+          "poster": "assets/videos/23-subject-cat/original-poster.webp",
+          "poster_time_seconds": 2.5,
+          "sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/23-subject-cat/counterfactual.mp4?v=e75cb59390b6",
+          "poster": "assets/videos/23-subject-cat/counterfactual-poster.webp?v=763ec1dc8832",
+          "poster_time_seconds": 2.5,
+          "sha256": "e75cb59390b6a846f46748579cccadc12a60f15300f55cee7432488a9f97a74c",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "23-subject-cat--original",
+            "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+            "score": 0.97072756916535,
+            "status": "succeeded",
+            "run": "evaluation/row-subject-cat-parrot/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "23-subject-cat--union-g15-blur90-end90",
+            "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "e75cb59390b6a846f46748579cccadc12a60f15300f55cee7432488a9f97a74c",
+            "score": 0.8601841082592973,
+            "status": "succeeded",
+            "run": "evaluation/row-subject-cat-parrot/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "23-subject-cat--original",
+            "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+            "score": 0.9762923717498779,
+            "status": "succeeded",
+            "run": "evaluation/row-subject-cat-parrot/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "23-subject-cat--union-g15-blur90-end90",
+            "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "e75cb59390b6a846f46748579cccadc12a60f15300f55cee7432488a9f97a74c",
+            "score": 0.9728028178215027,
+            "status": "succeeded",
+            "run": "evaluation/row-subject-cat-parrot/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/23-subject-cat/first-frame.png",
+        "first_frame_sha256": "a52f6e8da593c12ffe55a7fdef2cdb7a5e6300a6bc2936e092daf8b3f2c2b0e7",
+        "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "generation": {
+          "case_id": "23-subject-cat",
+          "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "enhance_prompt": false,
+          "seed": 2026100823,
+          "first_frame": "cases/layer-02/23-subject-cat/input/first-frame.png",
+          "first_frame_sha256": "a52f6e8da593c12ffe55a7fdef2cdb7a5e6300a6bc2936e092daf8b3f2c2b0e7",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "6",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:40:37.641599+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 78.12562928907573,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "6f2781cfee57d3707efc84d5f97c32eba7774eaccb6715fd369b536a80637e4b",
+          "video_sha256": "99358910c85cb0e71c854e4cdf25671f71b154854455d8a9a2c910e42cb01325"
+        },
+        "construction": {
+          "case": "23-subject-cat",
+          "dimension": "subject_consistency",
+          "variant": "union-g15-blur90-end90",
+          "sigma": 90,
+          "window_indices": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119
+          ],
+          "schedule": [
+            {
+              "blurred": false,
+              "start": 0,
+              "end_exclusive": 12,
+              "frames": 12
+            },
+            {
+              "blurred": true,
+              "start": 12,
+              "end_exclusive": 120,
+              "frames": 108
+            }
+          ],
+          "source_video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+          "mask_source_sha256": "a1eb39b508af4963abb819be9bda6f7db63a3da34cc06d15b88f106e01b289b3",
+          "mask_role": "Existing independent SAM2 temporal union with 15x15 dilation; not scoring localization or human ground truth",
+          "preencode_protected_max_error": 0,
+          "preencode_outside_window_max_error": 0,
+          "scoring_localizers_receive_construction_masks": false,
+          "parent_construction_sha256": "4e348e00058c2c1651d5f43df3e7d7738802f6b886055487a99ee22608b54a86",
+          "parent_rgb_sha256": "991a49fc630693310ad16f0967b2bbb8962a36da7426d6af91ac4c406162b3f9",
+          "script_sha256": "b55d55a07ec4d3c5e0aee85139edd58267c14b1bb501b123d65997c3aaf53674",
+          "files": {
+            "counterfactual.mp4": "e75cb59390b6a846f46748579cccadc12a60f15300f55cee7432488a9f97a74c",
+            "counterfactual-rgb.mp4": "8c0835edfb78ebf4dc74ae5070479fd7f5ab0c975b32416e72fb20a877170e39"
           },
           "review": "Pending visual inspection"
         },
@@ -2557,6 +3239,176 @@
           "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee",
           "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
           "receipt": "data/refinement-20261009.json"
+        },
+        "row_timing_20261009": {
+          "case": "23-subject-cat",
+          "dimension": "subject_consistency",
+          "variant": "union-g15-blur90-end90",
+          "official": [
+            0.97072756916535,
+            0.8601841082592973
+          ],
+          "ours": [
+            0.9762923717498779,
+            0.9728028178215027
+          ],
+          "official_drop": 0.11054346090605272,
+          "ours_change": -0.003489553928375244,
+          "original_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+          "video_sha256": "e75cb59390b6a846f46748579cccadc12a60f15300f55cee7432488a9f97a74c",
+          "local_video": "candidates/subject-row-followup-v1/23-subject-cat/union-g15-blur90-end90/counterfactual.mp4",
+          "run": "row-subject-cat-parrot",
+          "blur_seconds": [
+            0.5,
+            5.0
+          ],
+          "selection_reason": "Shared 0.5-5 second blur window; official below 0.9 and small Ours change; sigma 90 suffices for tight dog/horse masks",
+          "construction": {
+            "case": "23-subject-cat",
+            "dimension": "subject_consistency",
+            "variant": "union-g15-blur90-end90",
+            "sigma": 90,
+            "window_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ],
+            "schedule": [
+              {
+                "blurred": false,
+                "start": 0,
+                "end_exclusive": 12,
+                "frames": 12
+              },
+              {
+                "blurred": true,
+                "start": 12,
+                "end_exclusive": 120,
+                "frames": 108
+              }
+            ],
+            "source_video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+            "mask_source_sha256": "a1eb39b508af4963abb819be9bda6f7db63a3da34cc06d15b88f106e01b289b3",
+            "mask_role": "Existing independent SAM2 temporal union with 15x15 dilation; not scoring localization or human ground truth",
+            "preencode_protected_max_error": 0,
+            "preencode_outside_window_max_error": 0,
+            "scoring_localizers_receive_construction_masks": false,
+            "parent_construction_sha256": "4e348e00058c2c1651d5f43df3e7d7738802f6b886055487a99ee22608b54a86",
+            "parent_rgb_sha256": "991a49fc630693310ad16f0967b2bbb8962a36da7426d6af91ac4c406162b3f9",
+            "script_sha256": "b55d55a07ec4d3c5e0aee85139edd58267c14b1bb501b123d65997c3aaf53674",
+            "files": {
+              "counterfactual.mp4": "e75cb59390b6a846f46748579cccadc12a60f15300f55cee7432488a9f97a74c",
+              "counterfactual-rgb.mp4": "8c0835edfb78ebf4dc74ae5070479fd7f5ab0c975b32416e72fb20a877170e39"
+            },
+            "review": "Pending visual inspection"
+          },
+          "report": "https://github.com/winbeau/vbench-faithful/blob/0b19e0b/docs/validation/showcase-row-timing-20261009.md",
+          "receipt": "data/row-timing-20261009.json"
         }
       },
       "score_history": {
@@ -2741,9 +3593,281 @@
               },
               "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
             }
+          },
+          {
+            "reason": "Superseded by measured common Subject blur timing on 2026-10-09",
+            "scores": {
+              "vbench": [
+                0.97072756916535,
+                0.8496354748221004
+              ],
+              "ours": [
+                0.9762923717498779,
+                0.9730845093727112
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                "",
+                ""
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "23-subject-cat--original",
+                  "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+                  "score": 0.97072756916535,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-02-run-01/results/subject_consistency/origin.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "23-subject-cat--blur90-area100-after-first",
+                  "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134",
+                  "score": 0.8496354748221004,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-02-run-01/results/subject_consistency/origin.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "23-subject-cat--original",
+                  "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+                  "score": 0.9762923717498779,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-02-run-01/results/subject_consistency/repair.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "23-subject-cat--blur90-area100-after-first",
+                  "prompt": "Use the reference image as the first frame. The cat turns its head toward the open courtyard, blinks slowly and then looks back at the camera. One ear twitches, its tail tip curls and uncurls, and its chest moves with quiet breathing. It remains seated on the same sill throughout. The window frame and buildings stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134",
+                  "score": 0.9730845093727112,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-02-run-01/results/subject_consistency/repair.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/23-subject-cat/original.mp4",
+                "poster": "assets/videos/23-subject-cat/original-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/23-subject-cat/counterfactual.mp4?v=4b93c31de085",
+                "poster": "assets/videos/23-subject-cat/counterfactual-poster.webp?v=c8bcb700662a",
+                "poster_time_seconds": 2.5,
+                "sha256": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "a ",
+              "focus": [
+                "cat",
+                "cat"
+              ],
+              "after": " in the courtyard light"
+            },
+            "construction": {
+              "case": "23-subject-cat",
+              "dimension": "subject_consistency",
+              "variant": "blur90-area100-after-first",
+              "spec": {
+                "name": "blur90-area100-after-first",
+                "sigma": 90,
+                "spatial_fraction": 1.0,
+                "window": "after-first"
+              },
+              "source_video_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+              "mask_source_sha256": "a1eb39b508af4963abb819be9bda6f7db63a3da34cc06d15b88f106e01b289b3",
+              "mask_role": "Independent SAM2 construction, not scoring localization or ground truth",
+              "window_indices": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119
+              ],
+              "duration_seconds": 4.958333333333333,
+              "edit_area_fraction_mean": 0.7988739013671875,
+              "allowed_area_fraction_mean": 0.7988739013671875,
+              "protected_region": "Temporal union with guard",
+              "preencode_protected_max_error": 0,
+              "preencode_outside_window_max_error": 0,
+              "postencode_protected_mean_error": 1.9081606089063343,
+              "scoring_localizers_receive_construction_masks": false,
+              "scoring_media": "H.264 CRF18 yuv420p; raw original bytes retained; reencode control provided",
+              "script_sha256": "c8ebf0bc6edf7ad1fb340521935a1a5f809fcb04869441cf2791c6b307a96ca6",
+              "helpers_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+              "files": {
+                "counterfactual.mp4": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134",
+                "counterfactual-rgb.mp4": "991a49fc630693310ad16f0967b2bbb8962a36da7426d6af91ac4c406162b3f9"
+              },
+              "review": "Pending visual inspection"
+            }
           }
         ]
-      }
+      },
+      "counterfactual_note": "Blur: 0.5–5 s",
+      "counterfactual_note_detail": "Continuous background blur from 0.5 to 5 seconds. The predicted subject region is protected before encoding."
     },
     {
       "id": "24-subject-horse",
@@ -2758,7 +3882,7 @@
           "preview": null
         },
         {
-          "image": "assets/videos/24-subject-horse/counterfactual-poster.webp",
+          "image": "assets/videos/24-subject-horse/counterfactual-poster.webp?v=24bd3c9d86a3",
           "layout": "diptych",
           "side": "right",
           "position": "center",
@@ -2776,11 +3900,11 @@
       "scores": {
         "vbench": [
           0.9535430003614986,
-          0.9218543079219946
+          0.846130937588315
         ],
         "ours": [
           0.9663639068603516,
-          0.9662118554115295
+          0.9668667912483215
         ]
       },
       "score_status": {
@@ -2799,11 +3923,11 @@
           ""
         ],
         "ours": [
-          null,
-          null
+          "",
+          ""
         ]
       },
-      "score_scope": "Complete displayed five-second video.",
+      "score_scope": "Complete displayed five-second video. Continuous background blur from 0.5 to 5 seconds.",
       "videos": {
         "original": {
           "src": "assets/videos/24-subject-horse/original.mp4",
@@ -2819,10 +3943,10 @@
           ]
         },
         "counterfactual": {
-          "src": "assets/videos/24-subject-horse/counterfactual.mp4",
-          "poster": "assets/videos/24-subject-horse/counterfactual-poster.webp",
+          "src": "assets/videos/24-subject-horse/counterfactual.mp4?v=ffa585e23e74",
+          "poster": "assets/videos/24-subject-horse/counterfactual-poster.webp?v=24bd3c9d86a3",
           "poster_time_seconds": 2.5,
-          "sha256": "dd1f5920e9b24a7bfb8a68285268a7cb6b749e2d40dd26073875d8ae0a991dbf",
+          "sha256": "ffa585e23e74cfa114d1523e0aafc6bf874b073f1c9cc1c80556d8c9bbb2cd9b",
           "duration_seconds": 5.0,
           "frames": 120,
           "fps": "24/1",
@@ -2840,16 +3964,20 @@
             "video_sha256": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
             "score": 0.9535430003614986,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/subject_consistency/origin.json",
+            "run": "evaluation/row-subject-horse/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "24-subject-horse--counterfactual",
+            "id": "24-subject-horse--tight-g7-blur90-end90",
             "prompt": "Use the reference image as the first frame. The horse turns its head slowly from the field toward the camera, flicks both ears independently and swishes its tail. It lifts one front hoof and gently sets it down in the same place. Lavender stems sway lightly. Keep its full body visible and the distant buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "dd1f5920e9b24a7bfb8a68285268a7cb6b749e2d40dd26073875d8ae0a991dbf",
-            "score": 0.9218543079219946,
+            "video_sha256": "ffa585e23e74cfa114d1523e0aafc6bf874b073f1c9cc1c80556d8c9bbb2cd9b",
+            "score": 0.846130937588315,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/subject_consistency/origin.json",
+            "run": "evaluation/row-subject-horse/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           }
         ],
@@ -2860,16 +3988,20 @@
             "video_sha256": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
             "score": 0.9663639068603516,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/subject_consistency/repair.json",
+            "run": "evaluation/row-subject-horse/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "24-subject-horse--counterfactual",
+            "id": "24-subject-horse--tight-g7-blur90-end90",
             "prompt": "Use the reference image as the first frame. The horse turns its head slowly from the field toward the camera, flicks both ears independently and swishes its tail. It lifts one front hoof and gently sets it down in the same place. Lavender stems sway lightly. Keep its full body visible and the distant buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "dd1f5920e9b24a7bfb8a68285268a7cb6b749e2d40dd26073875d8ae0a991dbf",
-            "score": 0.9662118554115295,
+            "video_sha256": "ffa585e23e74cfa114d1523e0aafc6bf874b073f1c9cc1c80556d8c9bbb2cd9b",
+            "score": 0.9668667912483215,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/subject_consistency/repair.json",
+            "run": "evaluation/row-subject-horse/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           }
         ]
@@ -2930,314 +4062,124 @@
         },
         "construction": {
           "case": "24-subject-horse",
-          "attempt": "ltx25-seed2026100824",
-          "source_sha256": "a557c4c982d8ca537f5fb84cf52a2adca59ca4b872e68d1f0565c904c90e4553",
-          "duration_seconds": 5,
-          "fps": 24,
-          "frames": 120,
-          "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
-          "physical_gpu": "4",
-          "source_kind": "LTX-2.5 generated native RGB master",
-          "scoring_localizers_receive_construction_masks": false,
-          "operation": "background_blur",
-          "window_indices": [
-            45,
-            46,
-            47,
-            48,
-            49,
-            50,
-            51,
-            52,
-            53,
-            54,
-            55,
-            56,
-            57,
-            58,
-            59,
-            60,
-            61,
-            62,
-            63,
-            64,
-            65,
-            66,
-            67,
-            68,
-            69,
-            70,
-            71,
-            72,
-            73,
-            74
-          ],
-          "sigma_native_pixels": 60,
-          "construction_box": [
-            285,
-            35,
-            720,
-            630
-          ],
-          "mask_sha256": "4dac7d5eb5c3ac717e4072b4459dbc369bd8a8b0e84dfff68bdd0b3697dcb0a7",
-          "mask_area_fraction_range": [
-            0.1296051025390625,
-            0.1645599365234375
-          ],
-          "protected_rgb_pixels_max_difference": 0,
-          "subject_guard_dilation_kernel": 7,
-          "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
-          "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
-          "status": "constructed; visual review pending",
-          "elapsed_seconds": 81.45102111808956,
-          "files": {
-            "original.mp4": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
-            "counterfactual.mp4": "dd1f5920e9b24a7bfb8a68285268a7cb6b749e2d40dd26073875d8ae0a991dbf",
-            "original-rgb.mp4": "5168a60af1631181d6e412b9f19e65c5e70fc777216f4c9a03aefc6f8642ee03",
-            "counterfactual-rgb.mp4": "1383a40b3e96621cd4fd3373f27e8ed6ce20371e565eca99f542bc87472fa135"
-          },
-          "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
-        },
-        "reviews": [
-          {
-            "decision": "accepted",
-            "attempt": "ltx25-seed2026100824",
-            "duration_seconds": 5,
-            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
-            "observed_motion": "Horse turns head and body, swishes tail and takes a small step.",
-            "first_frame": "cases/layer-02/24-subject-horse/input/first-frame.png",
-            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
-          },
-          {
-            "decision": "accepted",
-            "pair_variant": "ltx25-seed2026100824",
-            "reviewer": "assistant visual review; not human ground truth",
-            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
-            "operation": "background_blur",
-            "limitations": [
-              "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
-            ]
-          }
-        ],
-        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
-      }
-    },
-    {
-      "id": "25-subject-parrot",
-      "dimension": "Subject Consistency",
-      "scene": "The glasshouse perch",
-      "views": [
-        {
-          "image": "assets/videos/25-subject-parrot/original-poster.webp",
-          "layout": "diptych",
-          "side": "left",
-          "position": "center",
-          "preview": null
-        },
-        {
-          "image": "assets/videos/25-subject-parrot/counterfactual-poster.webp?v=e289601e89e5",
-          "layout": "diptych",
-          "side": "right",
-          "position": "center",
-          "preview": null
-        }
-      ],
-      "excerpt": {
-        "before": "a ",
-        "focus": [
-          "macaw",
-          "macaw"
-        ],
-        "after": " in the glasshouse"
-      },
-      "scores": {
-        "vbench": [
-          0.9584040849649605,
-          0.8597618283844796
-        ],
-        "ours": [
-          0.9206663966178894,
-          0.9090639352798462
-        ]
-      },
-      "score_status": {
-        "vbench": [
-          "succeeded",
-          "succeeded"
-        ],
-        "ours": [
-          "succeeded",
-          "succeeded"
-        ]
-      },
-      "score_reasons": {
-        "vbench": [
-          "",
-          ""
-        ],
-        "ours": [
-          "",
-          ""
-        ]
-      },
-      "score_scope": "Complete displayed five-second video.",
-      "videos": {
-        "original": {
-          "src": "assets/videos/25-subject-parrot/original.mp4",
-          "poster": "assets/videos/25-subject-parrot/original-poster.webp",
-          "poster_time_seconds": 2.5,
-          "sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
-          "duration_seconds": 5.0,
-          "frames": 120,
-          "fps": "24/1",
-          "resolution": [
-            1024,
-            640
-          ]
-        },
-        "counterfactual": {
-          "src": "assets/videos/25-subject-parrot/counterfactual.mp4?v=9a6e3fb30ea9",
-          "poster": "assets/videos/25-subject-parrot/counterfactual-poster.webp?v=e289601e89e5",
-          "poster_time_seconds": 2.5,
-          "sha256": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be",
-          "duration_seconds": 5.0,
-          "frames": 120,
-          "fps": "24/1",
-          "resolution": [
-            1024,
-            640
-          ]
-        }
-      },
-      "score_records": {
-        "vbench": [
-          {
-            "id": "25-subject-parrot--original",
-            "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
-            "score": 0.9584040849649605,
-            "status": "succeeded",
-            "run": "evaluation/subject-round-02-run-01/results/subject_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          },
-          {
-            "id": "25-subject-parrot--blur90-area100-after-first",
-            "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be",
-            "score": 0.8597618283844796,
-            "status": "succeeded",
-            "run": "evaluation/subject-round-02-run-01/results/subject_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          }
-        ],
-        "ours": [
-          {
-            "id": "25-subject-parrot--original",
-            "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
-            "score": 0.9206663966178894,
-            "status": "succeeded",
-            "run": "evaluation/subject-round-02-run-01/results/subject_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          },
-          {
-            "id": "25-subject-parrot--blur90-area100-after-first",
-            "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be",
-            "score": 0.9090639352798462,
-            "status": "succeeded",
-            "run": "evaluation/subject-round-02-run-01/results/subject_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          }
-        ]
-      },
-      "provenance": {
-        "first_frame": "assets/videos/25-subject-parrot/first-frame.png",
-        "first_frame_sha256": "f5a3a6630df7370a4267c0c46a7493c58de393f974d212a53354e2f098fd69e5",
-        "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-        "generation": {
-          "case_id": "25-subject-parrot",
-          "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-          "enhance_prompt": false,
-          "seed": 2026100825,
-          "first_frame": "cases/layer-02/25-subject-parrot/input/first-frame.png",
-          "first_frame_sha256": "f5a3a6630df7370a4267c0c46a7493c58de393f974d212a53354e2f098fd69e5",
-          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
-          "source_status": "?? scripts/",
-          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
-          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
-          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
-          "physical_gpu": "4",
-          "logical_device": "cuda:0",
-          "width": 1024,
-          "height": 640,
-          "fps": 24,
-          "generated_frames": 121,
-          "delivery_frames": 120,
-          "delivery_seconds": 5,
-          "temporal_operation": "drop only the terminal generated frame; no resampling",
-          "precision": "bfloat16",
-          "quantization": null,
-          "pipeline": "DistilledPipeline",
-          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
-          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
-          "started_at_utc": "2026-10-09T04:41:46.979863+00:00",
-          "status": "succeeded",
-          "device_name": "NVIDIA H200 NVL",
-          "cuda_version": "12.8",
-          "versions": {
-            "torch": "2.9.1",
-            "torchvision": "0.24.1",
-            "torchaudio": "2.9.1",
-            "transformers": "5.14.1",
-            "ltx-core": "1.4.2",
-            "ltx-pipelines": "1.4.2"
-          },
-          "elapsed_seconds": 98.53145580925047,
-          "peak_cuda_allocated_bytes": 42069817856,
-          "media": {
-            "width": 1024,
-            "height": 640,
-            "r_frame_rate": "24/1",
-            "duration": "5.000000",
-            "nb_read_frames": "120"
-          },
-          "native_rgb_sha256": "bd4c84e45a778cad6d1962d3ba37cc9c549cd4568d87a2ce1de6268185f9c70e",
-          "video_sha256": "2b3819713e33ed645d7259aa190dca28dcf2edd9ecdb8fdf902dff3dc1ccfea8"
-        },
-        "construction": {
-          "case": "25-subject-parrot",
           "dimension": "subject_consistency",
-          "variant": "blur90-area100-after-first",
+          "variant": "tight-g7-blur90-end90",
           "spec": {
-            "name": "blur90-area100-after-first",
+            "name": "tight-g7-blur90-end90",
             "sigma": 90,
-            "spatial_fraction": 1.0,
-            "window": "after-first"
+            "guard_kernel": 7,
+            "indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ]
           },
-          "source_video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
-          "mask_source_sha256": "c26228c7624de7d0723dc238bc0817986266a857e967bc498c7e8ba11dcdc216",
-          "mask_role": "Independent SAM2 construction, not scoring localization or ground truth",
           "window_indices": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
             12,
             13,
             14,
@@ -3347,20 +4289,884 @@
             118,
             119
           ],
-          "duration_seconds": 4.958333333333333,
-          "edit_area_fraction_mean": 0.7480239868164062,
-          "allowed_area_fraction_mean": 0.7480239868164062,
-          "protected_region": "Temporal union with guard",
+          "schedule": [
+            {
+              "blurred": false,
+              "start": 0,
+              "end_exclusive": 12,
+              "frames": 12
+            },
+            {
+              "blurred": true,
+              "start": 12,
+              "end_exclusive": 120,
+              "frames": 108
+            }
+          ],
+          "minimum_segment_frames": 12,
+          "actual_minimum_segment_frames": 12,
+          "blurred_seconds": 4.5,
+          "source_video_sha256": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
+          "mask_source_sha256": "4dac7d5eb5c3ac717e4072b4459dbc369bd8a8b0e84dfff68bdd0b3697dcb0a7",
+          "mask_role": "Independent original SAM2 construction; not scoring localization or human ground truth",
+          "mask_area_range": [
+            0.1296051025390625,
+            0.1645599365234375
+          ],
+          "protected_region": "Per-frame foreground with small dilation",
+          "protected_fraction": 0.16228651682535808,
+          "foreground_internal_spatial_fraction": null,
           "preencode_protected_max_error": 0,
           "preencode_outside_window_max_error": 0,
-          "postencode_protected_mean_error": 2.2431905174944293,
+          "postencode_protected_mean_error": 2.127484206312371,
           "scoring_localizers_receive_construction_masks": false,
-          "scoring_media": "H.264 CRF18 yuv420p; raw original bytes retained; reencode control provided",
-          "script_sha256": "c8ebf0bc6edf7ad1fb340521935a1a5f809fcb04869441cf2791c6b307a96ca6",
-          "helpers_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+          "scoring_media": "H.264 CRF18 yuv420p, unchanged original bytes",
+          "script_sha256": "9458fb7e275e370447493281f88d647ad978e35fc8c99c29877b49bec9f0ca2a",
+          "helper_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
           "files": {
-            "counterfactual.mp4": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be",
-            "counterfactual-rgb.mp4": "3ce783fa7a3f4099d9194e5398b5bdeb29bd43e11044c21aec530a25aab58f1d"
+            "counterfactual.mp4": "ffa585e23e74cfa114d1523e0aafc6bf874b073f1c9cc1c80556d8c9bbb2cd9b",
+            "counterfactual-rgb.mp4": "1026988f03665c7ef8d9037b6017002cc5da52f2cd29e421e014f27de12c7d46"
+          },
+          "review": "Pending visual inspection"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100824",
+            "duration_seconds": 5,
+            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
+            "observed_motion": "Horse turns head and body, swishes tail and takes a small step.",
+            "first_frame": "cases/layer-02/24-subject-horse/input/first-frame.png",
+            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100824",
+            "reviewer": "assistant visual review; not human ground truth",
+            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
+            "operation": "background_blur",
+            "limitations": [
+              "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+        "row_timing_20261009": {
+          "case": "24-subject-horse",
+          "dimension": "subject_consistency",
+          "variant": "tight-g7-blur90-end90",
+          "official": [
+            0.9535430003614986,
+            0.846130937588315
+          ],
+          "ours": [
+            0.9663639068603516,
+            0.9668667912483215
+          ],
+          "official_drop": 0.1074120627731836,
+          "ours_change": 0.0005028843879699707,
+          "original_sha256": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
+          "video_sha256": "ffa585e23e74cfa114d1523e0aafc6bf874b073f1c9cc1c80556d8c9bbb2cd9b",
+          "local_video": "candidates/subject-tight-followup-v1/24-subject-horse/tight-g7-blur90-end90/counterfactual.mp4",
+          "run": "row-subject-horse",
+          "blur_seconds": [
+            0.5,
+            5.0
+          ],
+          "selection_reason": "Shared 0.5-5 second blur window; official below 0.9 and small Ours change; sigma 90 suffices for tight dog/horse masks",
+          "construction": {
+            "case": "24-subject-horse",
+            "dimension": "subject_consistency",
+            "variant": "tight-g7-blur90-end90",
+            "spec": {
+              "name": "tight-g7-blur90-end90",
+              "sigma": 90,
+              "guard_kernel": 7,
+              "indices": [
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119
+              ]
+            },
+            "window_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ],
+            "schedule": [
+              {
+                "blurred": false,
+                "start": 0,
+                "end_exclusive": 12,
+                "frames": 12
+              },
+              {
+                "blurred": true,
+                "start": 12,
+                "end_exclusive": 120,
+                "frames": 108
+              }
+            ],
+            "minimum_segment_frames": 12,
+            "actual_minimum_segment_frames": 12,
+            "blurred_seconds": 4.5,
+            "source_video_sha256": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
+            "mask_source_sha256": "4dac7d5eb5c3ac717e4072b4459dbc369bd8a8b0e84dfff68bdd0b3697dcb0a7",
+            "mask_role": "Independent original SAM2 construction; not scoring localization or human ground truth",
+            "mask_area_range": [
+              0.1296051025390625,
+              0.1645599365234375
+            ],
+            "protected_region": "Per-frame foreground with small dilation",
+            "protected_fraction": 0.16228651682535808,
+            "foreground_internal_spatial_fraction": null,
+            "preencode_protected_max_error": 0,
+            "preencode_outside_window_max_error": 0,
+            "postencode_protected_mean_error": 2.127484206312371,
+            "scoring_localizers_receive_construction_masks": false,
+            "scoring_media": "H.264 CRF18 yuv420p, unchanged original bytes",
+            "script_sha256": "9458fb7e275e370447493281f88d647ad978e35fc8c99c29877b49bec9f0ca2a",
+            "helper_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+            "files": {
+              "counterfactual.mp4": "ffa585e23e74cfa114d1523e0aafc6bf874b073f1c9cc1c80556d8c9bbb2cd9b",
+              "counterfactual-rgb.mp4": "1026988f03665c7ef8d9037b6017002cc5da52f2cd29e421e014f27de12c7d46"
+            },
+            "review": "Pending visual inspection"
+          },
+          "report": "https://github.com/winbeau/vbench-faithful/blob/0b19e0b/docs/validation/showcase-row-timing-20261009.md",
+          "receipt": "data/row-timing-20261009.json"
+        }
+      },
+      "score_history": {
+        "revisions": [
+          {
+            "reason": "Superseded by measured common Subject blur timing on 2026-10-09",
+            "scores": {
+              "vbench": [
+                0.9535430003614986,
+                0.9218543079219946
+              ],
+              "ours": [
+                0.9663639068603516,
+                0.9662118554115295
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                null,
+                null
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "24-subject-horse--original",
+                  "prompt": "Use the reference image as the first frame. The horse turns its head slowly from the field toward the camera, flicks both ears independently and swishes its tail. It lifts one front hoof and gently sets it down in the same place. Lavender stems sway lightly. Keep its full body visible and the distant buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
+                  "score": 0.9535430003614986,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/subject_consistency/origin.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "24-subject-horse--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The horse turns its head slowly from the field toward the camera, flicks both ears independently and swishes its tail. It lifts one front hoof and gently sets it down in the same place. Lavender stems sway lightly. Keep its full body visible and the distant buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "dd1f5920e9b24a7bfb8a68285268a7cb6b749e2d40dd26073875d8ae0a991dbf",
+                  "score": 0.9218543079219946,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/subject_consistency/origin.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "24-subject-horse--original",
+                  "prompt": "Use the reference image as the first frame. The horse turns its head slowly from the field toward the camera, flicks both ears independently and swishes its tail. It lifts one front hoof and gently sets it down in the same place. Lavender stems sway lightly. Keep its full body visible and the distant buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
+                  "score": 0.9663639068603516,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/subject_consistency/repair.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "24-subject-horse--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The horse turns its head slowly from the field toward the camera, flicks both ears independently and swishes its tail. It lifts one front hoof and gently sets it down in the same place. Lavender stems sway lightly. Keep its full body visible and the distant buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "dd1f5920e9b24a7bfb8a68285268a7cb6b749e2d40dd26073875d8ae0a991dbf",
+                  "score": 0.9662118554115295,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/subject_consistency/repair.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/24-subject-horse/original.mp4",
+                "poster": "assets/videos/24-subject-horse/original-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/24-subject-horse/counterfactual.mp4",
+                "poster": "assets/videos/24-subject-horse/counterfactual-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "dd1f5920e9b24a7bfb8a68285268a7cb6b749e2d40dd26073875d8ae0a991dbf",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "a ",
+              "focus": [
+                "horse",
+                "horse"
+              ],
+              "after": " among lavender"
+            },
+            "construction": {
+              "case": "24-subject-horse",
+              "attempt": "ltx25-seed2026100824",
+              "source_sha256": "a557c4c982d8ca537f5fb84cf52a2adca59ca4b872e68d1f0565c904c90e4553",
+              "duration_seconds": 5,
+              "fps": 24,
+              "frames": 120,
+              "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
+              "physical_gpu": "4",
+              "source_kind": "LTX-2.5 generated native RGB master",
+              "scoring_localizers_receive_construction_masks": false,
+              "operation": "background_blur",
+              "window_indices": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74
+              ],
+              "sigma_native_pixels": 60,
+              "construction_box": [
+                285,
+                35,
+                720,
+                630
+              ],
+              "mask_sha256": "4dac7d5eb5c3ac717e4072b4459dbc369bd8a8b0e84dfff68bdd0b3697dcb0a7",
+              "mask_area_fraction_range": [
+                0.1296051025390625,
+                0.1645599365234375
+              ],
+              "protected_rgb_pixels_max_difference": 0,
+              "subject_guard_dilation_kernel": 7,
+              "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
+              "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+              "status": "constructed; visual review pending",
+              "elapsed_seconds": 81.45102111808956,
+              "files": {
+                "original.mp4": "1146119ca3dfc886e199b1d94e2b6582ff7b335ba9d0ea7d196f6f5b263ecb37",
+                "counterfactual.mp4": "dd1f5920e9b24a7bfb8a68285268a7cb6b749e2d40dd26073875d8ae0a991dbf",
+                "original-rgb.mp4": "5168a60af1631181d6e412b9f19e65c5e70fc777216f4c9a03aefc6f8642ee03",
+                "counterfactual-rgb.mp4": "1383a40b3e96621cd4fd3373f27e8ed6ce20371e565eca99f542bc87472fa135"
+              },
+              "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
+            }
+          }
+        ]
+      },
+      "counterfactual_note": "Blur: 0.5–5 s",
+      "counterfactual_note_detail": "Continuous background blur from 0.5 to 5 seconds. The predicted subject region is protected before encoding."
+    },
+    {
+      "id": "25-subject-parrot",
+      "dimension": "Subject Consistency",
+      "scene": "The glasshouse perch",
+      "views": [
+        {
+          "image": "assets/videos/25-subject-parrot/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/25-subject-parrot/counterfactual-poster.webp?v=e2e4bfaf3993",
+          "layout": "diptych",
+          "side": "right",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a ",
+        "focus": [
+          "macaw",
+          "macaw"
+        ],
+        "after": " in the glasshouse"
+      },
+      "scores": {
+        "vbench": [
+          0.9584040849649605,
+          0.8679926851216484
+        ],
+        "ours": [
+          0.9206663966178894,
+          0.9098008871078491
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video. Continuous background blur from 0.5 to 5 seconds.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/25-subject-parrot/original.mp4",
+          "poster": "assets/videos/25-subject-parrot/original-poster.webp",
+          "poster_time_seconds": 2.5,
+          "sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/25-subject-parrot/counterfactual.mp4?v=7cc39eca2c85",
+          "poster": "assets/videos/25-subject-parrot/counterfactual-poster.webp?v=e2e4bfaf3993",
+          "poster_time_seconds": 2.5,
+          "sha256": "7cc39eca2c8526ec3476919dd0df0630348ce9a6c6f87e5d608bd42bc1f53abc",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "25-subject-parrot--original",
+            "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+            "score": 0.9584040849649605,
+            "status": "succeeded",
+            "run": "evaluation/row-subject-cat-parrot/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "25-subject-parrot--union-g15-blur90-end90",
+            "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "7cc39eca2c8526ec3476919dd0df0630348ce9a6c6f87e5d608bd42bc1f53abc",
+            "score": 0.8679926851216484,
+            "status": "succeeded",
+            "run": "evaluation/row-subject-cat-parrot/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "25-subject-parrot--original",
+            "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+            "score": 0.9206663966178894,
+            "status": "succeeded",
+            "run": "evaluation/row-subject-cat-parrot/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "25-subject-parrot--union-g15-blur90-end90",
+            "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "7cc39eca2c8526ec3476919dd0df0630348ce9a6c6f87e5d608bd42bc1f53abc",
+            "score": 0.9098008871078491,
+            "status": "succeeded",
+            "run": "evaluation/row-subject-cat-parrot/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/25-subject-parrot/first-frame.png",
+        "first_frame_sha256": "f5a3a6630df7370a4267c0c46a7493c58de393f974d212a53354e2f098fd69e5",
+        "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "generation": {
+          "case_id": "25-subject-parrot",
+          "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "enhance_prompt": false,
+          "seed": 2026100825,
+          "first_frame": "cases/layer-02/25-subject-parrot/input/first-frame.png",
+          "first_frame_sha256": "f5a3a6630df7370a4267c0c46a7493c58de393f974d212a53354e2f098fd69e5",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "4",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:41:46.979863+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 98.53145580925047,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "bd4c84e45a778cad6d1962d3ba37cc9c549cd4568d87a2ce1de6268185f9c70e",
+          "video_sha256": "2b3819713e33ed645d7259aa190dca28dcf2edd9ecdb8fdf902dff3dc1ccfea8"
+        },
+        "construction": {
+          "case": "25-subject-parrot",
+          "dimension": "subject_consistency",
+          "variant": "union-g15-blur90-end90",
+          "sigma": 90,
+          "window_indices": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119
+          ],
+          "schedule": [
+            {
+              "blurred": false,
+              "start": 0,
+              "end_exclusive": 12,
+              "frames": 12
+            },
+            {
+              "blurred": true,
+              "start": 12,
+              "end_exclusive": 120,
+              "frames": 108
+            }
+          ],
+          "source_video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+          "mask_source_sha256": "c26228c7624de7d0723dc238bc0817986266a857e967bc498c7e8ba11dcdc216",
+          "mask_role": "Existing independent SAM2 temporal union with 15x15 dilation; not scoring localization or human ground truth",
+          "preencode_protected_max_error": 0,
+          "preencode_outside_window_max_error": 0,
+          "scoring_localizers_receive_construction_masks": false,
+          "parent_construction_sha256": "f0b9c996c4101a0bebb7a24ad4d1bb4cedf1368aa4167a95741601c32f32a86b",
+          "parent_rgb_sha256": "3ce783fa7a3f4099d9194e5398b5bdeb29bd43e11044c21aec530a25aab58f1d",
+          "script_sha256": "b55d55a07ec4d3c5e0aee85139edd58267c14b1bb501b123d65997c3aaf53674",
+          "files": {
+            "counterfactual.mp4": "7cc39eca2c8526ec3476919dd0df0630348ce9a6c6f87e5d608bd42bc1f53abc",
+            "counterfactual-rgb.mp4": "801e37caf8f079c809f15ca9fcc8b01f85a5b0e8f9cb35e3d2f60a04e104c4d5"
           },
           "review": "Pending visual inspection"
         },
@@ -3410,6 +5216,176 @@
           "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee",
           "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
           "receipt": "data/refinement-20261009.json"
+        },
+        "row_timing_20261009": {
+          "case": "25-subject-parrot",
+          "dimension": "subject_consistency",
+          "variant": "union-g15-blur90-end90",
+          "official": [
+            0.9584040849649605,
+            0.8679926851216484
+          ],
+          "ours": [
+            0.9206663966178894,
+            0.9098008871078491
+          ],
+          "official_drop": 0.09041139984331215,
+          "ours_change": -0.010865509510040283,
+          "original_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+          "video_sha256": "7cc39eca2c8526ec3476919dd0df0630348ce9a6c6f87e5d608bd42bc1f53abc",
+          "local_video": "candidates/subject-row-followup-v1/25-subject-parrot/union-g15-blur90-end90/counterfactual.mp4",
+          "run": "row-subject-cat-parrot",
+          "blur_seconds": [
+            0.5,
+            5.0
+          ],
+          "selection_reason": "Shared 0.5-5 second blur window; official below 0.9 and small Ours change; sigma 90 suffices for tight dog/horse masks",
+          "construction": {
+            "case": "25-subject-parrot",
+            "dimension": "subject_consistency",
+            "variant": "union-g15-blur90-end90",
+            "sigma": 90,
+            "window_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ],
+            "schedule": [
+              {
+                "blurred": false,
+                "start": 0,
+                "end_exclusive": 12,
+                "frames": 12
+              },
+              {
+                "blurred": true,
+                "start": 12,
+                "end_exclusive": 120,
+                "frames": 108
+              }
+            ],
+            "source_video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+            "mask_source_sha256": "c26228c7624de7d0723dc238bc0817986266a857e967bc498c7e8ba11dcdc216",
+            "mask_role": "Existing independent SAM2 temporal union with 15x15 dilation; not scoring localization or human ground truth",
+            "preencode_protected_max_error": 0,
+            "preencode_outside_window_max_error": 0,
+            "scoring_localizers_receive_construction_masks": false,
+            "parent_construction_sha256": "f0b9c996c4101a0bebb7a24ad4d1bb4cedf1368aa4167a95741601c32f32a86b",
+            "parent_rgb_sha256": "3ce783fa7a3f4099d9194e5398b5bdeb29bd43e11044c21aec530a25aab58f1d",
+            "script_sha256": "b55d55a07ec4d3c5e0aee85139edd58267c14b1bb501b123d65997c3aaf53674",
+            "files": {
+              "counterfactual.mp4": "7cc39eca2c8526ec3476919dd0df0630348ce9a6c6f87e5d608bd42bc1f53abc",
+              "counterfactual-rgb.mp4": "801e37caf8f079c809f15ca9fcc8b01f85a5b0e8f9cb35e3d2f60a04e104c4d5"
+            },
+            "review": "Pending visual inspection"
+          },
+          "report": "https://github.com/winbeau/vbench-faithful/blob/0b19e0b/docs/validation/showcase-row-timing-20261009.md",
+          "receipt": "data/row-timing-20261009.json"
         }
       },
       "score_history": {
@@ -3594,9 +5570,281 @@
               },
               "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
             }
+          },
+          {
+            "reason": "Superseded by measured common Subject blur timing on 2026-10-09",
+            "scores": {
+              "vbench": [
+                0.9584040849649605,
+                0.8597618283844796
+              ],
+              "ours": [
+                0.9206663966178894,
+                0.9090639352798462
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                "",
+                ""
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "25-subject-parrot--original",
+                  "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+                  "score": 0.9584040849649605,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-02-run-01/results/subject_consistency/origin.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "25-subject-parrot--blur90-area100-after-first",
+                  "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be",
+                  "score": 0.8597618283844796,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-02-run-01/results/subject_consistency/origin.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "25-subject-parrot--original",
+                  "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+                  "score": 0.9206663966178894,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-02-run-01/results/subject_consistency/repair.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "25-subject-parrot--blur90-area100-after-first",
+                  "prompt": "Use the reference image as the first frame. The parrot tilts its head, looks from one side to the other and briefly preens its shoulder feathers with its beak. It then straightens and gives one small wing stretch before folding the wing again. Its feet retain their grip on the same branch. Keep the whole bird and tail visible; greenhouse frames stay fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be",
+                  "score": 0.9090639352798462,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-02-run-01/results/subject_consistency/repair.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/25-subject-parrot/original.mp4",
+                "poster": "assets/videos/25-subject-parrot/original-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/25-subject-parrot/counterfactual.mp4?v=9a6e3fb30ea9",
+                "poster": "assets/videos/25-subject-parrot/counterfactual-poster.webp?v=e289601e89e5",
+                "poster_time_seconds": 2.5,
+                "sha256": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "a ",
+              "focus": [
+                "macaw",
+                "macaw"
+              ],
+              "after": " in the glasshouse"
+            },
+            "construction": {
+              "case": "25-subject-parrot",
+              "dimension": "subject_consistency",
+              "variant": "blur90-area100-after-first",
+              "spec": {
+                "name": "blur90-area100-after-first",
+                "sigma": 90,
+                "spatial_fraction": 1.0,
+                "window": "after-first"
+              },
+              "source_video_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+              "mask_source_sha256": "c26228c7624de7d0723dc238bc0817986266a857e967bc498c7e8ba11dcdc216",
+              "mask_role": "Independent SAM2 construction, not scoring localization or ground truth",
+              "window_indices": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119
+              ],
+              "duration_seconds": 4.958333333333333,
+              "edit_area_fraction_mean": 0.7480239868164062,
+              "allowed_area_fraction_mean": 0.7480239868164062,
+              "protected_region": "Temporal union with guard",
+              "preencode_protected_max_error": 0,
+              "preencode_outside_window_max_error": 0,
+              "postencode_protected_mean_error": 2.2431905174944293,
+              "scoring_localizers_receive_construction_masks": false,
+              "scoring_media": "H.264 CRF18 yuv420p; raw original bytes retained; reencode control provided",
+              "script_sha256": "c8ebf0bc6edf7ad1fb340521935a1a5f809fcb04869441cf2791c6b307a96ca6",
+              "helpers_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+              "files": {
+                "counterfactual.mp4": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be",
+                "counterfactual-rgb.mp4": "3ce783fa7a3f4099d9194e5398b5bdeb29bd43e11044c21aec530a25aab58f1d"
+              },
+              "review": "Pending visual inspection"
+            }
           }
         ]
-      }
+      },
+      "counterfactual_note": "Blur: 0.5–5 s",
+      "counterfactual_note_detail": "Continuous background blur from 0.5 to 5 seconds. The predicted subject region is protected before encoding."
     },
     {
       "id": "26-subject-woman",
@@ -3611,7 +5859,7 @@
           "preview": null
         },
         {
-          "image": "assets/videos/26-subject-woman/counterfactual-poster.webp?v=c267d15fbe64",
+          "image": "assets/videos/26-subject-woman/counterfactual-poster.webp?v=67062bb27b12",
           "layout": "diptych",
           "side": "right",
           "position": "center",
@@ -3629,11 +5877,11 @@
       "scores": {
         "vbench": [
           0.9694977720745471,
-          0.8962097551141467
+          0.896534054970541
         ],
         "ours": [
           0.9416400194168091,
-          0.9404569268226624
+          0.9403931498527527
         ]
       },
       "score_status": {
@@ -3656,7 +5904,7 @@
           ""
         ]
       },
-      "score_scope": "Complete displayed five-second video.",
+      "score_scope": "Complete displayed five-second video. Continuous background blur from 0.5 to 5 seconds.",
       "videos": {
         "original": {
           "src": "assets/videos/26-subject-woman/original.mp4",
@@ -3672,10 +5920,10 @@
           ]
         },
         "counterfactual": {
-          "src": "assets/videos/26-subject-woman/counterfactual.mp4?v=3ad997cb2e47",
-          "poster": "assets/videos/26-subject-woman/counterfactual-poster.webp?v=c267d15fbe64",
+          "src": "assets/videos/26-subject-woman/counterfactual.mp4?v=68d5b3b6f045",
+          "poster": "assets/videos/26-subject-woman/counterfactual-poster.webp?v=67062bb27b12",
           "poster_time_seconds": 2.5,
-          "sha256": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6",
+          "sha256": "68d5b3b6f045cb7741d2e00c134172ffe5db1f6573b4920f58783efe4f2f6468",
           "duration_seconds": 5.0,
           "frames": 120,
           "fps": "24/1",
@@ -3693,20 +5941,20 @@
             "video_sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
             "score": 0.9694977720745471,
             "status": "succeeded",
-            "run": "evaluation/subject-round-01-shard-3/results/subject_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
+            "run": "evaluation/row-subject-woman/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "26-subject-woman--blur160-middle90",
+            "id": "26-subject-woman--union-g15-blur160-end90",
             "prompt": "Use the reference image as the first frame. The woman turns her face toward the courtyard, takes one small step, then looks back. She raises a hand to tuck a loose strand of hair behind her ear and lowers it again. Her coat hem moves naturally with her step. Keep her identity and clothing stable and the surrounding columns fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6",
-            "score": 0.8962097551141467,
+            "video_sha256": "68d5b3b6f045cb7741d2e00c134172ffe5db1f6573b4920f58783efe4f2f6468",
+            "score": 0.896534054970541,
             "status": "succeeded",
-            "run": "evaluation/subject-round-01-shard-3/results/subject_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
+            "run": "evaluation/row-subject-woman/results/subject_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           }
         ],
@@ -3717,20 +5965,20 @@
             "video_sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
             "score": 0.9416400194168091,
             "status": "succeeded",
-            "run": "evaluation/subject-round-01-shard-3/results/subject_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
+            "run": "evaluation/row-subject-woman/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "26-subject-woman--blur160-middle90",
+            "id": "26-subject-woman--union-g15-blur160-end90",
             "prompt": "Use the reference image as the first frame. The woman turns her face toward the courtyard, takes one small step, then looks back. She raises a hand to tuck a loose strand of hair behind her ear and lowers it again. Her coat hem moves naturally with her step. Keep her identity and clothing stable and the surrounding columns fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6",
-            "score": 0.9404569268226624,
+            "video_sha256": "68d5b3b6f045cb7741d2e00c134172ffe5db1f6573b4920f58783efe4f2f6468",
+            "score": 0.9403931498527527,
             "status": "succeeded",
-            "run": "evaluation/subject-round-01-shard-3/results/subject_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
+            "run": "evaluation/row-subject-woman/results/subject_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/followup-rows",
+            "receipt": "data/row-timing-20261009.json",
             "media_seconds": 5
           }
         ]
@@ -3792,16 +6040,9 @@
         "construction": {
           "case": "26-subject-woman",
           "dimension": "subject_consistency",
-          "variant": "blur160-middle90",
-          "operation": "blur",
-          "strength": 160,
+          "variant": "union-g15-blur160-end90",
+          "sigma": 160,
           "window_indices": [
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
             12,
             13,
             14,
@@ -3903,23 +6144,42 @@
             110,
             111,
             112,
-            113
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119
+          ],
+          "schedule": [
+            {
+              "blurred": false,
+              "start": 0,
+              "end_exclusive": 12,
+              "frames": 12
+            },
+            {
+              "blurred": true,
+              "start": 12,
+              "end_exclusive": 120,
+              "frames": 108
+            }
           ],
           "source_video_sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
           "mask_source_sha256": "f931d978f96f267b8d7b8f8dfece888501aea1de855872347b1dcbe71bf10b82",
-          "mask_role": "Independent SAM2 construction; not scoring localization and not ground truth",
-          "protected_region": "Temporal mask union dilated by 15x15",
-          "protected_fraction": 0.359710693359375,
+          "mask_role": "Existing independent SAM2 temporal union with 15x15 dilation; not scoring localization or human ground truth",
           "preencode_protected_max_error": 0,
-          "postencode_protected_mean_error": 2.0034804115645293,
-          "scoring_media": "counterfactual.mp4 (H.264 CRF18, yuv420p); original bytes unchanged",
+          "preencode_outside_window_max_error": 0,
           "scoring_localizers_receive_construction_masks": false,
-          "script_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+          "parent_construction_sha256": "ce4c784286c13eeebbb65d45cb05449bdd7c4ca7c53059f74af353f6bf2e63b4",
+          "parent_rgb_sha256": "d1ad81cb8e15f777bd4e08ede348823a4a544f5ccc6f3f8dabca2ac38300eb1a",
+          "script_sha256": "b55d55a07ec4d3c5e0aee85139edd58267c14b1bb501b123d65997c3aaf53674",
           "files": {
-            "counterfactual.mp4": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6",
-            "counterfactual-rgb.mp4": "d1ad81cb8e15f777bd4e08ede348823a4a544f5ccc6f3f8dabca2ac38300eb1a"
+            "counterfactual.mp4": "68d5b3b6f045cb7741d2e00c134172ffe5db1f6573b4920f58783efe4f2f6468",
+            "counterfactual-rgb.mp4": "aac6e122392ebf5101903401f23a8839e4c1c042afbdb7aac46ae011a543f380"
           },
-          "review": "Pending visual inspection; no score-based eligibility decisions yet"
+          "review": "Pending visual inspection"
         },
         "reviews": [
           {
@@ -3967,6 +6227,176 @@
           "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee",
           "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
           "receipt": "data/refinement-20261009.json"
+        },
+        "row_timing_20261009": {
+          "case": "26-subject-woman",
+          "dimension": "subject_consistency",
+          "variant": "union-g15-blur160-end90",
+          "official": [
+            0.9694977720745471,
+            0.896534054970541
+          ],
+          "ours": [
+            0.9416400194168091,
+            0.9403931498527527
+          ],
+          "official_drop": 0.07296371710400618,
+          "ours_change": -0.0012468695640563965,
+          "original_sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
+          "video_sha256": "68d5b3b6f045cb7741d2e00c134172ffe5db1f6573b4920f58783efe4f2f6468",
+          "local_video": "candidates/subject-row-followup-v1/26-subject-woman/union-g15-blur160-end90/counterfactual.mp4",
+          "run": "row-subject-woman",
+          "blur_seconds": [
+            0.5,
+            5.0
+          ],
+          "selection_reason": "Shared 0.5-5 second blur window; official below 0.9 and small Ours change; sigma 90 suffices for tight dog/horse masks",
+          "construction": {
+            "case": "26-subject-woman",
+            "dimension": "subject_consistency",
+            "variant": "union-g15-blur160-end90",
+            "sigma": 160,
+            "window_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ],
+            "schedule": [
+              {
+                "blurred": false,
+                "start": 0,
+                "end_exclusive": 12,
+                "frames": 12
+              },
+              {
+                "blurred": true,
+                "start": 12,
+                "end_exclusive": 120,
+                "frames": 108
+              }
+            ],
+            "source_video_sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
+            "mask_source_sha256": "f931d978f96f267b8d7b8f8dfece888501aea1de855872347b1dcbe71bf10b82",
+            "mask_role": "Existing independent SAM2 temporal union with 15x15 dilation; not scoring localization or human ground truth",
+            "preencode_protected_max_error": 0,
+            "preencode_outside_window_max_error": 0,
+            "scoring_localizers_receive_construction_masks": false,
+            "parent_construction_sha256": "ce4c784286c13eeebbb65d45cb05449bdd7c4ca7c53059f74af353f6bf2e63b4",
+            "parent_rgb_sha256": "d1ad81cb8e15f777bd4e08ede348823a4a544f5ccc6f3f8dabca2ac38300eb1a",
+            "script_sha256": "b55d55a07ec4d3c5e0aee85139edd58267c14b1bb501b123d65997c3aaf53674",
+            "files": {
+              "counterfactual.mp4": "68d5b3b6f045cb7741d2e00c134172ffe5db1f6573b4920f58783efe4f2f6468",
+              "counterfactual-rgb.mp4": "aac6e122392ebf5101903401f23a8839e4c1c042afbdb7aac46ae011a543f380"
+            },
+            "review": "Pending visual inspection"
+          },
+          "report": "https://github.com/winbeau/vbench-faithful/blob/0b19e0b/docs/validation/showcase-row-timing-20261009.md",
+          "receipt": "data/row-timing-20261009.json"
         }
       },
       "score_history": {
@@ -4151,9 +6581,262 @@
               },
               "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
             }
+          },
+          {
+            "reason": "Superseded by measured common Subject blur timing on 2026-10-09",
+            "scores": {
+              "vbench": [
+                0.9694977720745471,
+                0.8962097551141467
+              ],
+              "ours": [
+                0.9416400194168091,
+                0.9404569268226624
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                "",
+                ""
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "26-subject-woman--original",
+                  "prompt": "Use the reference image as the first frame. The woman turns her face toward the courtyard, takes one small step, then looks back. She raises a hand to tuck a loose strand of hair behind her ear and lowers it again. Her coat hem moves naturally with her step. Keep her identity and clothing stable and the surrounding columns fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
+                  "score": 0.9694977720745471,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-01-shard-3/results/subject_consistency/origin.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "26-subject-woman--blur160-middle90",
+                  "prompt": "Use the reference image as the first frame. The woman turns her face toward the courtyard, takes one small step, then looks back. She raises a hand to tuck a loose strand of hair behind her ear and lowers it again. Her coat hem moves naturally with her step. Keep her identity and clothing stable and the surrounding columns fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6",
+                  "score": 0.8962097551141467,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-01-shard-3/results/subject_consistency/origin.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "26-subject-woman--original",
+                  "prompt": "Use the reference image as the first frame. The woman turns her face toward the courtyard, takes one small step, then looks back. She raises a hand to tuck a loose strand of hair behind her ear and lowers it again. Her coat hem moves naturally with her step. Keep her identity and clothing stable and the surrounding columns fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
+                  "score": 0.9416400194168091,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-01-shard-3/results/subject_consistency/repair.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "26-subject-woman--blur160-middle90",
+                  "prompt": "Use the reference image as the first frame. The woman turns her face toward the courtyard, takes one small step, then looks back. She raises a hand to tuck a loose strand of hair behind her ear and lowers it again. Her coat hem moves naturally with her step. Keep her identity and clothing stable and the surrounding columns fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6",
+                  "score": 0.9404569268226624,
+                  "status": "succeeded",
+                  "run": "evaluation/subject-round-01-shard-3/results/subject_consistency/repair.json",
+                  "experiment": "showcase-refine-20261009",
+                  "receipt": "data/refinement-20261009.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/26-subject-woman/original.mp4",
+                "poster": "assets/videos/26-subject-woman/original-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/26-subject-woman/counterfactual.mp4?v=3ad997cb2e47",
+                "poster": "assets/videos/26-subject-woman/counterfactual-poster.webp?v=c267d15fbe64",
+                "poster_time_seconds": 2.5,
+                "sha256": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "a ",
+              "focus": [
+                "woman",
+                "woman"
+              ],
+              "after": " in the cloister light"
+            },
+            "construction": {
+              "case": "26-subject-woman",
+              "dimension": "subject_consistency",
+              "variant": "blur160-middle90",
+              "operation": "blur",
+              "strength": 160,
+              "window_indices": [
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113
+              ],
+              "source_video_sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
+              "mask_source_sha256": "f931d978f96f267b8d7b8f8dfece888501aea1de855872347b1dcbe71bf10b82",
+              "mask_role": "Independent SAM2 construction; not scoring localization and not ground truth",
+              "protected_region": "Temporal mask union dilated by 15x15",
+              "protected_fraction": 0.359710693359375,
+              "preencode_protected_max_error": 0,
+              "postencode_protected_mean_error": 2.0034804115645293,
+              "scoring_media": "counterfactual.mp4 (H.264 CRF18, yuv420p); original bytes unchanged",
+              "scoring_localizers_receive_construction_masks": false,
+              "script_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+              "files": {
+                "counterfactual.mp4": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6",
+                "counterfactual-rgb.mp4": "d1ad81cb8e15f777bd4e08ede348823a4a544f5ccc6f3f8dabca2ac38300eb1a"
+              },
+              "review": "Pending visual inspection; no score-based eligibility decisions yet"
+            }
           }
         ]
-      }
+      },
+      "counterfactual_note": "Blur: 0.5–5 s",
+      "counterfactual_note_detail": "Continuous background blur from 0.5 to 5 seconds. The predicted subject region is protected before encoding."
     },
     {
       "id": "07-background",

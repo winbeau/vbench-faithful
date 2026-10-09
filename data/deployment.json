@@ -252,13 +252,13 @@
     },
     {
       "path": "assets/videos/06-subject/counterfactual-poster.webp",
-      "bytes": 9570,
-      "sha256": "d477be2f66af24f5411f9e593f8e2ca79e261a851b3f30fe4fa433f82564dc4d"
+      "bytes": 8624,
+      "sha256": "19c895eba1b4aa342e2697d6e442d1afe34829261d3dfff509fc64a32fbf783a"
     },
     {
       "path": "assets/videos/06-subject/counterfactual.mp4",
-      "bytes": 2319322,
-      "sha256": "c4de2f646190f2fc9e6918259fb912fd42dc08126aba7a4f89a1fcf2c05790ac"
+      "bytes": 1214553,
+      "sha256": "24e5a33f62abb3cdd4395f0c570d9ad761583ece0ab9354894e8959bc873bea5"
     },
     {
       "path": "assets/videos/06-subject/first-frame.png",
@@ -612,13 +612,13 @@
     },
     {
       "path": "assets/videos/23-subject-cat/counterfactual-poster.webp",
-      "bytes": 12636,
-      "sha256": "c8bcb700662a941554e5bafaa6d28d966ce8b333a7233f150dd78e0b0b98db0e"
+      "bytes": 12584,
+      "sha256": "763ec1dc88329ff7260becee6dfc37162631364719cdc15a52030cd818b9af6c"
     },
     {
       "path": "assets/videos/23-subject-cat/counterfactual.mp4",
-      "bytes": 716437,
-      "sha256": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134"
+      "bytes": 768709,
+      "sha256": "e75cb59390b6a846f46748579cccadc12a60f15300f55cee7432488a9f97a74c"
     },
     {
       "path": "assets/videos/23-subject-cat/first-frame.png",
@@ -642,13 +642,13 @@
     },
     {
       "path": "assets/videos/24-subject-horse/counterfactual-poster.webp",
-      "bytes": 11842,
-      "sha256": "187ef8e4d2cb7d2733695fadb07c2efbee99e67f2641835f26bb22406dac7d49"
+      "bytes": 11102,
+      "sha256": "24bd3c9d86a3b707ddf0c299745b70e7a308fdcb38cce3d433b33e1003ff4811"
     },
     {
       "path": "assets/videos/24-subject-horse/counterfactual.mp4",
-      "bytes": 2454119,
-      "sha256": "dd1f5920e9b24a7bfb8a68285268a7cb6b749e2d40dd26073875d8ae0a991dbf"
+      "bytes": 1206887,
+      "sha256": "ffa585e23e74cfa114d1523e0aafc6bf874b073f1c9cc1c80556d8c9bbb2cd9b"
     },
     {
       "path": "assets/videos/24-subject-horse/first-frame.png",
@@ -672,13 +672,13 @@
     },
     {
       "path": "assets/videos/25-subject-parrot/counterfactual-poster.webp",
-      "bytes": 20572,
-      "sha256": "e289601e89e5cd122b43e45e1bd6b1d0040d5778713259488ab1bc4b52af08a1"
+      "bytes": 20616,
+      "sha256": "e2e4bfaf399374f926c497a2156bd681c42afe7d4494866d5961344d09441a47"
     },
     {
       "path": "assets/videos/25-subject-parrot/counterfactual.mp4",
-      "bytes": 1574225,
-      "sha256": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be"
+      "bytes": 1662859,
+      "sha256": "7cc39eca2c8526ec3476919dd0df0630348ce9a6c6f87e5d608bd42bc1f53abc"
     },
     {
       "path": "assets/videos/25-subject-parrot/first-frame.png",
@@ -702,13 +702,13 @@
     },
     {
       "path": "assets/videos/26-subject-woman/counterfactual-poster.webp",
-      "bytes": 21994,
-      "sha256": "c267d15fbe646e2e37a17295249585765f9293d9bf705924882646462b7d3437"
+      "bytes": 21948,
+      "sha256": "67062bb27b12df04dc47600108f7e92f712a539135e455261c8f4cf2976b81e8"
     },
     {
       "path": "assets/videos/26-subject-woman/counterfactual.mp4",
-      "bytes": 1448303,
-      "sha256": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6"
+      "bytes": 1300660,
+      "sha256": "68d5b3b6f045cb7741d2e00c134172ffe5db1f6573b4920f58783efe4f2f6468"
     },
     {
       "path": "assets/videos/26-subject-woman/first-frame.png",
@@ -1097,23 +1097,28 @@
     },
     {
       "path": "data/cases.js",
-      "bytes": 391552,
-      "sha256": "03c68ebda9ff2b5530d6e995c86ad8549abaddc80e710fd7da8d88b972cb5c16"
+      "bytes": 439462,
+      "sha256": "7c1889632f24665afb7b7f86d2bd1b8700a487c0f1701c7a8ba8376c65307244"
     },
     {
       "path": "data/nuisance.json",
-      "bytes": 346042,
-      "sha256": "d4f4f6267c66c8bf5d1654cce688aef97f1a551a81bfafd93cea6a0ac54d6bca"
+      "bytes": 436117,
+      "sha256": "eb832ebbbce4e1ac2ef0242c9ff158b12aaf3a34f8f4d02516d92bf445e206c4"
     },
     {
       "path": "data/provenance.json",
-      "bytes": 41763,
-      "sha256": "7c043208028570cec665baf8b5f2d39b66b9ff5e44a6e2cce0ddc81a3bb4403b"
+      "bytes": 42471,
+      "sha256": "d476701929eefbdb509caf0667959715467af57e5c2447a0f599a0ec1f1fb7c4"
     },
     {
       "path": "data/refinement-20261009.json",
       "bytes": 48392,
       "sha256": "3f037691824376236167bbff61b76e8974fd81eb76ca56130192d22c99efc281"
+    },
+    {
+      "path": "data/row-timing-20261009.json",
+      "bytes": 120118,
+      "sha256": "0a74455bec225bfb77fd6dbed3d3b4a99b4bcd3bd402aa08cf26e1518915e228"
     },
     {
       "path": "data/semantic.json",
