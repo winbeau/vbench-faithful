@@ -7357,6 +7357,1053 @@
       "counterfactual_note_detail": "Synthetic stress test: foreground blur alternates every frame; the background is protected before encoding."
     },
     {
+      "id": "29-background-museum",
+      "dimension": "Background Consistency",
+      "scene": "The sunlit gallery",
+      "views": [
+        {
+          "image": "assets/videos/29-background-museum/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/29-background-museum/counterfactual-poster.webp?v=f7d325c883c1",
+          "layout": "diptych",
+          "side": "right",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a ",
+        "focus": [
+          "gallery",
+          "gallery"
+        ],
+        "after": " in the slanting sun"
+      },
+      "scores": {
+        "vbench": [
+          0.9487920168067226,
+          0.8770290342699579
+        ],
+        "ours": [
+          0.9836318072150736,
+          0.9782269646139706
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video. Synthetic alternating-frame foreground blur stress test.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/29-background-museum/original.mp4",
+          "poster": "assets/videos/29-background-museum/original-poster.webp",
+          "poster_time_seconds": 2.5,
+          "sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/29-background-museum/counterfactual.mp4?v=eaa7cc393a3c",
+          "poster": "assets/videos/29-background-museum/counterfactual-poster.webp?v=f7d325c883c1",
+          "poster_time_seconds": 2.4583333333333335,
+          "sha256": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "29-background-museum--original",
+            "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+            "score": 0.9487920168067226,
+            "status": "succeeded",
+            "run": "evaluation/background-round-03-shard-3/results/background_consistency/origin.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "29-background-museum--blur90-area75-pulse1-phase1",
+            "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
+            "score": 0.8770290342699579,
+            "status": "succeeded",
+            "run": "evaluation/background-round-03-shard-3/results/background_consistency/origin.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "29-background-museum--original",
+            "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+            "score": 0.9836318072150736,
+            "status": "succeeded",
+            "run": "evaluation/background-round-03-shard-3/results/background_consistency/repair.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "29-background-museum--blur90-area75-pulse1-phase1",
+            "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
+            "score": 0.9782269646139706,
+            "status": "succeeded",
+            "run": "evaluation/background-round-03-shard-3/results/background_consistency/repair.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/29-background-museum/first-frame.png",
+        "first_frame_sha256": "f0b1b688517f944a0f4f8b6f6f0c838bd148986f1e6a423332d01ec37a553344",
+        "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "generation": {
+          "case_id": "29-background-museum",
+          "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "enhance_prompt": false,
+          "seed": 2026100829,
+          "first_frame": "cases/layer-02/29-background-museum/input/first-frame.png",
+          "first_frame_sha256": "f0b1b688517f944a0f4f8b6f6f0c838bd148986f1e6a423332d01ec37a553344",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "4",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:43:28.400584+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 77.16467164829373,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "8caeb0b41a505c963f38ed9343c13597fa46f6c85bb5651c9c9113ea85f46cf5",
+          "video_sha256": "8259b36d32565e58e241d0bbfa46d4096d05d3e24c220f59d0fe7fd93d4beaae"
+        },
+        "construction": {
+          "case": "29-background-museum",
+          "dimension": "background_consistency",
+          "variant": "blur90-area75-pulse1-phase1",
+          "sigma": 90,
+          "spatial_fraction": 0.75,
+          "window_indices": [
+            1,
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            15,
+            17,
+            19,
+            21,
+            23,
+            25,
+            27,
+            29,
+            31,
+            33,
+            35,
+            37,
+            39,
+            41,
+            43,
+            45,
+            47,
+            49,
+            51,
+            53,
+            55,
+            57,
+            59,
+            61,
+            63,
+            65,
+            67,
+            69,
+            71,
+            73,
+            75,
+            77,
+            79,
+            81,
+            83,
+            85,
+            87,
+            89,
+            91,
+            93,
+            95,
+            97,
+            99,
+            101,
+            103,
+            105,
+            107,
+            109,
+            111,
+            113,
+            115,
+            117,
+            119
+          ],
+          "duration_seconds": 2.5,
+          "source_video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+          "mask_source_sha256": "eef481f42e1aa4e3a1165a12fa2537d4f951e1318e55af5050d5463d0a7c3ed4",
+          "mask_role": "Independent SAM2 construction, not scoring localization or ground truth",
+          "parent": {
+            "record_sha256": "05f1bbcfe23d0a8747044128a909d6307b5b48b6643cc13b6a9488f33f4c63de",
+            "rgb_sha256": "a72fa8f83eaf4f5411356225bd205670e5745aec3fd62b2de5042c3b7485f348",
+            "recomputed_frames": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ]
+          },
+          "preencode_protected_max_error": 0,
+          "preencode_outside_window_max_error": 0,
+          "scoring_localizers_receive_construction_masks": false,
+          "interpretation": "Exploratory temporal phase/range sweep, including synthetic intermittent blur",
+          "script_sha256": "9c45fa95bd0470dea26de8711f8f2264e02855b59103588601b0ea84e49955ba",
+          "helpers_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+          "files": {
+            "counterfactual.mp4": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
+            "counterfactual-rgb.mp4": "41b4336c4b7bb9ccb4199fae719d94248911d978609f3867a34eb1f7b6f9f3a3"
+          },
+          "review": "Pending visual inspection"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100829",
+            "duration_seconds": 5,
+            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
+            "observed_motion": "Visitor walks and turns in the gallery, with changing arm and coat positions.",
+            "first_frame": "cases/layer-02/29-background-museum/input/first-frame.png",
+            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100829",
+            "reviewer": "assistant visual review; not human ground truth",
+            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
+            "operation": "foreground_blur",
+            "limitations": [
+              "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+        "refinement_20261009": {
+          "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+          "case": "29-background-museum",
+          "dimension": "background_consistency",
+          "variant": "blur90-area75-pulse1-phase1",
+          "official": [
+            0.9487920168067226,
+            0.8770290342699579
+          ],
+          "ours": [
+            0.9836318072150736,
+            0.9782269646139706
+          ],
+          "official_drop": 0.07176298253676472,
+          "ours_change": -0.005404842601102966,
+          "original_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+          "counterfactual_sha256": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
+          "runs": [
+            "background-round-03-shard-3"
+          ],
+          "local_pair": "output/showcase-refine-20261009/selected/29-background-museum",
+          "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee",
+          "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
+          "receipt": "data/refinement-20261009.json"
+        }
+      },
+      "score_history": {
+        "revisions": [
+          {
+            "reason": "Superseded by selected refinement on 2026-10-09",
+            "scores": {
+              "vbench": [
+                0.9487920168067226,
+                0.9410820969012605
+              ],
+              "ours": [
+                0.9836318072150736,
+                0.9784803203507966
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                null,
+                null
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "29-background-museum--original",
+                  "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+                  "score": 0.9487920168067226,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "29-background-museum--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "aa2b1b9a77aa93e7040107e6240e851eabba812d8625f626ac4a1c232cbbd419",
+                  "score": 0.9410820969012605,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "29-background-museum--original",
+                  "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+                  "score": 0.9836318072150736,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "29-background-museum--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "aa2b1b9a77aa93e7040107e6240e851eabba812d8625f626ac4a1c232cbbd419",
+                  "score": 0.9784803203507966,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/29-background-museum/original.mp4",
+                "poster": "assets/videos/29-background-museum/original-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/29-background-museum/counterfactual.mp4",
+                "poster": "assets/videos/29-background-museum/counterfactual-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "aa2b1b9a77aa93e7040107e6240e851eabba812d8625f626ac4a1c232cbbd419",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "a ",
+              "focus": [
+                "gallery",
+                "gallery"
+              ],
+              "after": " in the slanting sun"
+            },
+            "construction": {
+              "case": "29-background-museum",
+              "attempt": "ltx25-seed2026100829",
+              "source_sha256": "8caeb0b41a505c963f38ed9343c13597fa46f6c85bb5651c9c9113ea85f46cf5",
+              "duration_seconds": 5,
+              "fps": 24,
+              "frames": 120,
+              "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
+              "physical_gpu": "5",
+              "source_kind": "LTX-2.5 generated native RGB master",
+              "scoring_localizers_receive_construction_masks": false,
+              "operation": "foreground_blur",
+              "window_indices": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74
+              ],
+              "sigma_native_pixels": 90,
+              "construction_box": [
+                320,
+                135,
+                560,
+                638
+              ],
+              "mask_sha256": "eef481f42e1aa4e3a1165a12fa2537d4f951e1318e55af5050d5463d0a7c3ed4",
+              "mask_area_fraction_range": [
+                0.0244384765625,
+                0.043756103515625
+              ],
+              "protected_rgb_pixels_max_difference": 0,
+              "subject_guard_dilation_kernel": null,
+              "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
+              "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+              "status": "constructed; visual review pending",
+              "elapsed_seconds": 76.28128559328616,
+              "files": {
+                "original.mp4": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+                "counterfactual.mp4": "aa2b1b9a77aa93e7040107e6240e851eabba812d8625f626ac4a1c232cbbd419",
+                "original-rgb.mp4": "f73c3132828372cd733ee32954be44f12e4ad454120c9292841b70feec339204",
+                "counterfactual-rgb.mp4": "388962174e285ee4a4a90ae5aa111f2344032faa219404683f7c01609895899d"
+              },
+              "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
+            }
+          }
+        ]
+      },
+      "counterfactual_note": "Alternating-frame blur",
+      "counterfactual_note_detail": "Synthetic stress test: foreground blur alternates every frame; the background is protected before encoding."
+    },
+    {
+      "id": "28-background-terrace",
+      "dimension": "Background Consistency",
+      "scene": "The harbor terrace",
+      "views": [
+        {
+          "image": "assets/videos/28-background-terrace/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/28-background-terrace/counterfactual-poster.webp?v=fd13880c72df",
+          "layout": "diptych",
+          "side": "right",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a ",
+        "focus": [
+          "harbor",
+          "harbor"
+        ],
+        "after": " in the afternoon light"
+      },
+      "scores": {
+        "vbench": [
+          0.971991530987395,
+          0.895819655987395
+        ],
+        "ours": [
+          0.9905135809206495,
+          0.9857388365502451
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video. Synthetic alternating-frame foreground blur stress test.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/28-background-terrace/original.mp4",
+          "poster": "assets/videos/28-background-terrace/original-poster.webp",
+          "poster_time_seconds": 2.5,
+          "sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/28-background-terrace/counterfactual.mp4?v=19e47ffebb48",
+          "poster": "assets/videos/28-background-terrace/counterfactual-poster.webp?v=fd13880c72df",
+          "poster_time_seconds": 2.5,
+          "sha256": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "28-background-terrace--original",
+            "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+            "score": 0.971991530987395,
+            "status": "succeeded",
+            "run": "evaluation/background-round-03-shard-2/results/background_consistency/origin.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "28-background-terrace--blur90-area100-pulse1-phase0",
+            "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
+            "score": 0.895819655987395,
+            "status": "succeeded",
+            "run": "evaluation/background-round-03-shard-2/results/background_consistency/origin.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "28-background-terrace--original",
+            "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+            "score": 0.9905135809206495,
+            "status": "succeeded",
+            "run": "evaluation/background-round-03-shard-2/results/background_consistency/repair.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "28-background-terrace--blur90-area100-pulse1-phase0",
+            "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
+            "score": 0.9857388365502451,
+            "status": "succeeded",
+            "run": "evaluation/background-round-03-shard-2/results/background_consistency/repair.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/28-background-terrace/first-frame.png",
+        "first_frame_sha256": "0afcbb08782e381f703d506299b2f8c53f867ac773ce75b012dfcbd56fb86028",
+        "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "generation": {
+          "case_id": "28-background-terrace",
+          "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "enhance_prompt": false,
+          "seed": 2026100828,
+          "first_frame": "cases/layer-02/28-background-terrace/input/first-frame.png",
+          "first_frame_sha256": "0afcbb08782e381f703d506299b2f8c53f867ac773ce75b012dfcbd56fb86028",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "6",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:43:28.372101+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 78.9242793135345,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "3e66e0a170250319aace9a99a3958d8c9ac3e5c9a785087e66f21ffb7f1f8008",
+          "video_sha256": "9df569b496010ec3f56a9c037a3f787e6972977de9b99628643d0a5b699baf99"
+        },
+        "construction": {
+          "case": "28-background-terrace",
+          "dimension": "background_consistency",
+          "variant": "blur90-area100-pulse1-phase0",
+          "sigma": 90,
+          "spatial_fraction": 1.0,
+          "window_indices": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38,
+            40,
+            42,
+            44,
+            46,
+            48,
+            50,
+            52,
+            54,
+            56,
+            58,
+            60,
+            62,
+            64,
+            66,
+            68,
+            70,
+            72,
+            74,
+            76,
+            78,
+            80,
+            82,
+            84,
+            86,
+            88,
+            90,
+            92,
+            94,
+            96,
+            98,
+            100,
+            102,
+            104,
+            106,
+            108,
+            110,
+            112,
+            114,
+            116,
+            118
+          ],
+          "duration_seconds": 2.5,
+          "source_video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+          "mask_source_sha256": "eb8eab655983e2a215d14f8bf68c380eb97e7aec264238055aba57cf5b20f1ed",
+          "mask_role": "Independent SAM2 construction, not scoring localization or ground truth",
+          "parent": {
+            "record_sha256": "44d5def002d16c5ff969480e0453577dc09f29f7598a0dd609755c331bdd8b3b",
+            "rgb_sha256": "0f42fac285a77e5f37a2d504df12ab75220a4eef32892ab791417dac6c84fd49",
+            "recomputed_frames": [
+              0
+            ]
+          },
+          "preencode_protected_max_error": 0,
+          "preencode_outside_window_max_error": 0,
+          "scoring_localizers_receive_construction_masks": false,
+          "interpretation": "Exploratory temporal phase/range sweep, including synthetic intermittent blur",
+          "script_sha256": "9c45fa95bd0470dea26de8711f8f2264e02855b59103588601b0ea84e49955ba",
+          "helpers_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+          "files": {
+            "counterfactual.mp4": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
+            "counterfactual-rgb.mp4": "bed181c6ac2c28aafb15a308bf83e68886d6a4c5577f8a92ede5a28c2d9aad29"
+          },
+          "review": "Pending visual inspection"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100828",
+            "duration_seconds": 5,
+            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
+            "observed_motion": "Visitor turns and shifts stance, then steps beside terrace railing.",
+            "first_frame": "cases/layer-02/28-background-terrace/input/first-frame.png",
+            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100828",
+            "reviewer": "assistant visual review; not human ground truth",
+            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
+            "operation": "foreground_blur",
+            "limitations": [
+              "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+        "refinement_20261009": {
+          "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+          "case": "28-background-terrace",
+          "dimension": "background_consistency",
+          "variant": "blur90-area100-pulse1-phase0",
+          "official": [
+            0.971991530987395,
+            0.895819655987395
+          ],
+          "ours": [
+            0.9905135809206495,
+            0.9857388365502451
+          ],
+          "official_drop": 0.076171875,
+          "ours_change": -0.004774744370404371,
+          "original_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+          "counterfactual_sha256": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
+          "runs": [
+            "background-round-03-shard-2"
+          ],
+          "local_pair": "output/showcase-refine-20261009/selected/28-background-terrace",
+          "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee",
+          "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
+          "receipt": "data/refinement-20261009.json"
+        }
+      },
+      "score_history": {
+        "revisions": [
+          {
+            "reason": "Superseded by selected refinement on 2026-10-09",
+            "scores": {
+              "vbench": [
+                0.971991530987395,
+                0.953217322085084
+              ],
+              "ours": [
+                0.9905135809206495,
+                0.9877491670496323
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                null,
+                null
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "28-background-terrace--original",
+                  "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+                  "score": 0.971991530987395,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "28-background-terrace--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "1f17e56a57b7c7d4b91efc549ab45222367c7669c07236a640efa876adfa9c72",
+                  "score": 0.953217322085084,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "28-background-terrace--original",
+                  "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+                  "score": 0.9905135809206495,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "28-background-terrace--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "1f17e56a57b7c7d4b91efc549ab45222367c7669c07236a640efa876adfa9c72",
+                  "score": 0.9877491670496323,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/28-background-terrace/original.mp4",
+                "poster": "assets/videos/28-background-terrace/original-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/28-background-terrace/counterfactual.mp4",
+                "poster": "assets/videos/28-background-terrace/counterfactual-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "1f17e56a57b7c7d4b91efc549ab45222367c7669c07236a640efa876adfa9c72",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "a ",
+              "focus": [
+                "harbor",
+                "harbor"
+              ],
+              "after": " in the afternoon light"
+            },
+            "construction": {
+              "case": "28-background-terrace",
+              "attempt": "ltx25-seed2026100828",
+              "source_sha256": "3e66e0a170250319aace9a99a3958d8c9ac3e5c9a785087e66f21ffb7f1f8008",
+              "duration_seconds": 5,
+              "fps": 24,
+              "frames": 120,
+              "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
+              "physical_gpu": "6",
+              "source_kind": "LTX-2.5 generated native RGB master",
+              "scoring_localizers_receive_construction_masks": false,
+              "operation": "foreground_blur",
+              "window_indices": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74
+              ],
+              "sigma_native_pixels": 90,
+              "construction_box": [
+                355,
+                140,
+                555,
+                638
+              ],
+              "mask_sha256": "eb8eab655983e2a215d14f8bf68c380eb97e7aec264238055aba57cf5b20f1ed",
+              "mask_area_fraction_range": [
+                0.0412078857421875,
+                0.0565673828125
+              ],
+              "protected_rgb_pixels_max_difference": 0,
+              "subject_guard_dilation_kernel": null,
+              "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
+              "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+              "status": "constructed; visual review pending",
+              "elapsed_seconds": 84.83796139992774,
+              "files": {
+                "original.mp4": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+                "counterfactual.mp4": "1f17e56a57b7c7d4b91efc549ab45222367c7669c07236a640efa876adfa9c72",
+                "original-rgb.mp4": "266dd0299cd0b1a5c02b932f61d4ed6d305454422ca49f8854adfc82cbc08cde",
+                "counterfactual-rgb.mp4": "fc8975006bc9a840c29b7025b25d72cd327d782660d195addd14aca004163f39"
+              },
+              "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
+            }
+          }
+        ]
+      },
+      "counterfactual_note": "Alternating-frame blur",
+      "counterfactual_note_detail": "Synthetic stress test: foreground blur alternates every frame; the background is protected before encoding."
+    },
+    {
       "id": "27-background-kyoto",
       "dimension": "Background Consistency",
       "scene": "The lantern lane",
@@ -8197,1053 +9244,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "28-background-terrace",
-      "dimension": "Background Consistency",
-      "scene": "The harbor terrace",
-      "views": [
-        {
-          "image": "assets/videos/28-background-terrace/original-poster.webp",
-          "layout": "diptych",
-          "side": "left",
-          "position": "center",
-          "preview": null
-        },
-        {
-          "image": "assets/videos/28-background-terrace/counterfactual-poster.webp?v=fd13880c72df",
-          "layout": "diptych",
-          "side": "right",
-          "position": "center",
-          "preview": null
-        }
-      ],
-      "excerpt": {
-        "before": "a ",
-        "focus": [
-          "harbor",
-          "harbor"
-        ],
-        "after": " in the afternoon light"
-      },
-      "scores": {
-        "vbench": [
-          0.971991530987395,
-          0.895819655987395
-        ],
-        "ours": [
-          0.9905135809206495,
-          0.9857388365502451
-        ]
-      },
-      "score_status": {
-        "vbench": [
-          "succeeded",
-          "succeeded"
-        ],
-        "ours": [
-          "succeeded",
-          "succeeded"
-        ]
-      },
-      "score_reasons": {
-        "vbench": [
-          "",
-          ""
-        ],
-        "ours": [
-          "",
-          ""
-        ]
-      },
-      "score_scope": "Complete displayed five-second video. Synthetic alternating-frame foreground blur stress test.",
-      "videos": {
-        "original": {
-          "src": "assets/videos/28-background-terrace/original.mp4",
-          "poster": "assets/videos/28-background-terrace/original-poster.webp",
-          "poster_time_seconds": 2.5,
-          "sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
-          "duration_seconds": 5.0,
-          "frames": 120,
-          "fps": "24/1",
-          "resolution": [
-            1024,
-            640
-          ]
-        },
-        "counterfactual": {
-          "src": "assets/videos/28-background-terrace/counterfactual.mp4?v=19e47ffebb48",
-          "poster": "assets/videos/28-background-terrace/counterfactual-poster.webp?v=fd13880c72df",
-          "poster_time_seconds": 2.5,
-          "sha256": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
-          "duration_seconds": 5.0,
-          "frames": 120,
-          "fps": "24/1",
-          "resolution": [
-            1024,
-            640
-          ]
-        }
-      },
-      "score_records": {
-        "vbench": [
-          {
-            "id": "28-background-terrace--original",
-            "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
-            "score": 0.971991530987395,
-            "status": "succeeded",
-            "run": "evaluation/background-round-03-shard-2/results/background_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          },
-          {
-            "id": "28-background-terrace--blur90-area100-pulse1-phase0",
-            "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
-            "score": 0.895819655987395,
-            "status": "succeeded",
-            "run": "evaluation/background-round-03-shard-2/results/background_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          }
-        ],
-        "ours": [
-          {
-            "id": "28-background-terrace--original",
-            "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
-            "score": 0.9905135809206495,
-            "status": "succeeded",
-            "run": "evaluation/background-round-03-shard-2/results/background_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          },
-          {
-            "id": "28-background-terrace--blur90-area100-pulse1-phase0",
-            "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
-            "score": 0.9857388365502451,
-            "status": "succeeded",
-            "run": "evaluation/background-round-03-shard-2/results/background_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          }
-        ]
-      },
-      "provenance": {
-        "first_frame": "assets/videos/28-background-terrace/first-frame.png",
-        "first_frame_sha256": "0afcbb08782e381f703d506299b2f8c53f867ac773ce75b012dfcbd56fb86028",
-        "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-        "generation": {
-          "case_id": "28-background-terrace",
-          "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-          "enhance_prompt": false,
-          "seed": 2026100828,
-          "first_frame": "cases/layer-02/28-background-terrace/input/first-frame.png",
-          "first_frame_sha256": "0afcbb08782e381f703d506299b2f8c53f867ac773ce75b012dfcbd56fb86028",
-          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
-          "source_status": "?? scripts/",
-          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
-          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
-          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
-          "physical_gpu": "6",
-          "logical_device": "cuda:0",
-          "width": 1024,
-          "height": 640,
-          "fps": 24,
-          "generated_frames": 121,
-          "delivery_frames": 120,
-          "delivery_seconds": 5,
-          "temporal_operation": "drop only the terminal generated frame; no resampling",
-          "precision": "bfloat16",
-          "quantization": null,
-          "pipeline": "DistilledPipeline",
-          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
-          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
-          "started_at_utc": "2026-10-09T04:43:28.372101+00:00",
-          "status": "succeeded",
-          "device_name": "NVIDIA H200 NVL",
-          "cuda_version": "12.8",
-          "versions": {
-            "torch": "2.9.1",
-            "torchvision": "0.24.1",
-            "torchaudio": "2.9.1",
-            "transformers": "5.14.1",
-            "ltx-core": "1.4.2",
-            "ltx-pipelines": "1.4.2"
-          },
-          "elapsed_seconds": 78.9242793135345,
-          "peak_cuda_allocated_bytes": 42069817856,
-          "media": {
-            "width": 1024,
-            "height": 640,
-            "r_frame_rate": "24/1",
-            "duration": "5.000000",
-            "nb_read_frames": "120"
-          },
-          "native_rgb_sha256": "3e66e0a170250319aace9a99a3958d8c9ac3e5c9a785087e66f21ffb7f1f8008",
-          "video_sha256": "9df569b496010ec3f56a9c037a3f787e6972977de9b99628643d0a5b699baf99"
-        },
-        "construction": {
-          "case": "28-background-terrace",
-          "dimension": "background_consistency",
-          "variant": "blur90-area100-pulse1-phase0",
-          "sigma": 90,
-          "spatial_fraction": 1.0,
-          "window_indices": [
-            0,
-            2,
-            4,
-            6,
-            8,
-            10,
-            12,
-            14,
-            16,
-            18,
-            20,
-            22,
-            24,
-            26,
-            28,
-            30,
-            32,
-            34,
-            36,
-            38,
-            40,
-            42,
-            44,
-            46,
-            48,
-            50,
-            52,
-            54,
-            56,
-            58,
-            60,
-            62,
-            64,
-            66,
-            68,
-            70,
-            72,
-            74,
-            76,
-            78,
-            80,
-            82,
-            84,
-            86,
-            88,
-            90,
-            92,
-            94,
-            96,
-            98,
-            100,
-            102,
-            104,
-            106,
-            108,
-            110,
-            112,
-            114,
-            116,
-            118
-          ],
-          "duration_seconds": 2.5,
-          "source_video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
-          "mask_source_sha256": "eb8eab655983e2a215d14f8bf68c380eb97e7aec264238055aba57cf5b20f1ed",
-          "mask_role": "Independent SAM2 construction, not scoring localization or ground truth",
-          "parent": {
-            "record_sha256": "44d5def002d16c5ff969480e0453577dc09f29f7598a0dd609755c331bdd8b3b",
-            "rgb_sha256": "0f42fac285a77e5f37a2d504df12ab75220a4eef32892ab791417dac6c84fd49",
-            "recomputed_frames": [
-              0
-            ]
-          },
-          "preencode_protected_max_error": 0,
-          "preencode_outside_window_max_error": 0,
-          "scoring_localizers_receive_construction_masks": false,
-          "interpretation": "Exploratory temporal phase/range sweep, including synthetic intermittent blur",
-          "script_sha256": "9c45fa95bd0470dea26de8711f8f2264e02855b59103588601b0ea84e49955ba",
-          "helpers_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
-          "files": {
-            "counterfactual.mp4": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
-            "counterfactual-rgb.mp4": "bed181c6ac2c28aafb15a308bf83e68886d6a4c5577f8a92ede5a28c2d9aad29"
-          },
-          "review": "Pending visual inspection"
-        },
-        "reviews": [
-          {
-            "decision": "accepted",
-            "attempt": "ltx25-seed2026100828",
-            "duration_seconds": 5,
-            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
-            "observed_motion": "Visitor turns and shifts stance, then steps beside terrace railing.",
-            "first_frame": "cases/layer-02/28-background-terrace/input/first-frame.png",
-            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
-          },
-          {
-            "decision": "accepted",
-            "pair_variant": "ltx25-seed2026100828",
-            "reviewer": "assistant visual review; not human ground truth",
-            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
-            "operation": "foreground_blur",
-            "limitations": [
-              "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
-            ]
-          }
-        ],
-        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
-        "refinement_20261009": {
-          "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
-          "case": "28-background-terrace",
-          "dimension": "background_consistency",
-          "variant": "blur90-area100-pulse1-phase0",
-          "official": [
-            0.971991530987395,
-            0.895819655987395
-          ],
-          "ours": [
-            0.9905135809206495,
-            0.9857388365502451
-          ],
-          "official_drop": 0.076171875,
-          "ours_change": -0.004774744370404371,
-          "original_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
-          "counterfactual_sha256": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
-          "runs": [
-            "background-round-03-shard-2"
-          ],
-          "local_pair": "output/showcase-refine-20261009/selected/28-background-terrace",
-          "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee",
-          "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
-          "receipt": "data/refinement-20261009.json"
-        }
-      },
-      "score_history": {
-        "revisions": [
-          {
-            "reason": "Superseded by selected refinement on 2026-10-09",
-            "scores": {
-              "vbench": [
-                0.971991530987395,
-                0.953217322085084
-              ],
-              "ours": [
-                0.9905135809206495,
-                0.9877491670496323
-              ]
-            },
-            "score_status": {
-              "vbench": [
-                "succeeded",
-                "succeeded"
-              ],
-              "ours": [
-                "succeeded",
-                "succeeded"
-              ]
-            },
-            "score_reasons": {
-              "vbench": [
-                "",
-                ""
-              ],
-              "ours": [
-                null,
-                null
-              ]
-            },
-            "score_records": {
-              "vbench": [
-                {
-                  "id": "28-background-terrace--original",
-                  "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-                  "video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
-                  "score": 0.971991530987395,
-                  "status": "succeeded",
-                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
-                  "media_seconds": 5
-                },
-                {
-                  "id": "28-background-terrace--counterfactual",
-                  "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-                  "video_sha256": "1f17e56a57b7c7d4b91efc549ab45222367c7669c07236a640efa876adfa9c72",
-                  "score": 0.953217322085084,
-                  "status": "succeeded",
-                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
-                  "media_seconds": 5
-                }
-              ],
-              "ours": [
-                {
-                  "id": "28-background-terrace--original",
-                  "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-                  "video_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
-                  "score": 0.9905135809206495,
-                  "status": "succeeded",
-                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
-                  "media_seconds": 5
-                },
-                {
-                  "id": "28-background-terrace--counterfactual",
-                  "prompt": "Use the reference image as the first frame. The visitor turns toward the harbor, shifts weight, rests one hand on the terrace wall and then looks along the waterfront. Their shirt moves lightly in the breeze. The flowers sway gently and small ripples move across the water. Keep the terrace, boats and buildings fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-                  "video_sha256": "1f17e56a57b7c7d4b91efc549ab45222367c7669c07236a640efa876adfa9c72",
-                  "score": 0.9877491670496323,
-                  "status": "succeeded",
-                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
-                  "media_seconds": 5
-                }
-              ]
-            },
-            "videos": {
-              "original": {
-                "src": "assets/videos/28-background-terrace/original.mp4",
-                "poster": "assets/videos/28-background-terrace/original-poster.webp",
-                "poster_time_seconds": 2.5,
-                "sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
-                "duration_seconds": 5.0,
-                "frames": 120,
-                "fps": "24/1",
-                "resolution": [
-                  1024,
-                  640
-                ]
-              },
-              "counterfactual": {
-                "src": "assets/videos/28-background-terrace/counterfactual.mp4",
-                "poster": "assets/videos/28-background-terrace/counterfactual-poster.webp",
-                "poster_time_seconds": 2.5,
-                "sha256": "1f17e56a57b7c7d4b91efc549ab45222367c7669c07236a640efa876adfa9c72",
-                "duration_seconds": 5.0,
-                "frames": 120,
-                "fps": "24/1",
-                "resolution": [
-                  1024,
-                  640
-                ]
-              }
-            },
-            "excerpt": {
-              "before": "a ",
-              "focus": [
-                "harbor",
-                "harbor"
-              ],
-              "after": " in the afternoon light"
-            },
-            "construction": {
-              "case": "28-background-terrace",
-              "attempt": "ltx25-seed2026100828",
-              "source_sha256": "3e66e0a170250319aace9a99a3958d8c9ac3e5c9a785087e66f21ffb7f1f8008",
-              "duration_seconds": 5,
-              "fps": 24,
-              "frames": 120,
-              "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
-              "physical_gpu": "6",
-              "source_kind": "LTX-2.5 generated native RGB master",
-              "scoring_localizers_receive_construction_masks": false,
-              "operation": "foreground_blur",
-              "window_indices": [
-                45,
-                46,
-                47,
-                48,
-                49,
-                50,
-                51,
-                52,
-                53,
-                54,
-                55,
-                56,
-                57,
-                58,
-                59,
-                60,
-                61,
-                62,
-                63,
-                64,
-                65,
-                66,
-                67,
-                68,
-                69,
-                70,
-                71,
-                72,
-                73,
-                74
-              ],
-              "sigma_native_pixels": 90,
-              "construction_box": [
-                355,
-                140,
-                555,
-                638
-              ],
-              "mask_sha256": "eb8eab655983e2a215d14f8bf68c380eb97e7aec264238055aba57cf5b20f1ed",
-              "mask_area_fraction_range": [
-                0.0412078857421875,
-                0.0565673828125
-              ],
-              "protected_rgb_pixels_max_difference": 0,
-              "subject_guard_dilation_kernel": null,
-              "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
-              "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
-              "status": "constructed; visual review pending",
-              "elapsed_seconds": 84.83796139992774,
-              "files": {
-                "original.mp4": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
-                "counterfactual.mp4": "1f17e56a57b7c7d4b91efc549ab45222367c7669c07236a640efa876adfa9c72",
-                "original-rgb.mp4": "266dd0299cd0b1a5c02b932f61d4ed6d305454422ca49f8854adfc82cbc08cde",
-                "counterfactual-rgb.mp4": "fc8975006bc9a840c29b7025b25d72cd327d782660d195addd14aca004163f39"
-              },
-              "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
-            }
-          }
-        ]
-      },
-      "counterfactual_note": "Alternating-frame blur",
-      "counterfactual_note_detail": "Synthetic stress test: foreground blur alternates every frame; the background is protected before encoding."
-    },
-    {
-      "id": "29-background-museum",
-      "dimension": "Background Consistency",
-      "scene": "The sunlit gallery",
-      "views": [
-        {
-          "image": "assets/videos/29-background-museum/original-poster.webp",
-          "layout": "diptych",
-          "side": "left",
-          "position": "center",
-          "preview": null
-        },
-        {
-          "image": "assets/videos/29-background-museum/counterfactual-poster.webp?v=f7d325c883c1",
-          "layout": "diptych",
-          "side": "right",
-          "position": "center",
-          "preview": null
-        }
-      ],
-      "excerpt": {
-        "before": "a ",
-        "focus": [
-          "gallery",
-          "gallery"
-        ],
-        "after": " in the slanting sun"
-      },
-      "scores": {
-        "vbench": [
-          0.9487920168067226,
-          0.8770290342699579
-        ],
-        "ours": [
-          0.9836318072150736,
-          0.9782269646139706
-        ]
-      },
-      "score_status": {
-        "vbench": [
-          "succeeded",
-          "succeeded"
-        ],
-        "ours": [
-          "succeeded",
-          "succeeded"
-        ]
-      },
-      "score_reasons": {
-        "vbench": [
-          "",
-          ""
-        ],
-        "ours": [
-          "",
-          ""
-        ]
-      },
-      "score_scope": "Complete displayed five-second video. Synthetic alternating-frame foreground blur stress test.",
-      "videos": {
-        "original": {
-          "src": "assets/videos/29-background-museum/original.mp4",
-          "poster": "assets/videos/29-background-museum/original-poster.webp",
-          "poster_time_seconds": 2.5,
-          "sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
-          "duration_seconds": 5.0,
-          "frames": 120,
-          "fps": "24/1",
-          "resolution": [
-            1024,
-            640
-          ]
-        },
-        "counterfactual": {
-          "src": "assets/videos/29-background-museum/counterfactual.mp4?v=eaa7cc393a3c",
-          "poster": "assets/videos/29-background-museum/counterfactual-poster.webp?v=f7d325c883c1",
-          "poster_time_seconds": 2.4583333333333335,
-          "sha256": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
-          "duration_seconds": 5.0,
-          "frames": 120,
-          "fps": "24/1",
-          "resolution": [
-            1024,
-            640
-          ]
-        }
-      },
-      "score_records": {
-        "vbench": [
-          {
-            "id": "29-background-museum--original",
-            "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
-            "score": 0.9487920168067226,
-            "status": "succeeded",
-            "run": "evaluation/background-round-03-shard-3/results/background_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          },
-          {
-            "id": "29-background-museum--blur90-area75-pulse1-phase1",
-            "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
-            "score": 0.8770290342699579,
-            "status": "succeeded",
-            "run": "evaluation/background-round-03-shard-3/results/background_consistency/origin.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          }
-        ],
-        "ours": [
-          {
-            "id": "29-background-museum--original",
-            "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
-            "score": 0.9836318072150736,
-            "status": "succeeded",
-            "run": "evaluation/background-round-03-shard-3/results/background_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          },
-          {
-            "id": "29-background-museum--blur90-area75-pulse1-phase1",
-            "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
-            "score": 0.9782269646139706,
-            "status": "succeeded",
-            "run": "evaluation/background-round-03-shard-3/results/background_consistency/repair.json",
-            "experiment": "showcase-refine-20261009",
-            "receipt": "data/refinement-20261009.json",
-            "media_seconds": 5
-          }
-        ]
-      },
-      "provenance": {
-        "first_frame": "assets/videos/29-background-museum/first-frame.png",
-        "first_frame_sha256": "f0b1b688517f944a0f4f8b6f6f0c838bd148986f1e6a423332d01ec37a553344",
-        "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-        "generation": {
-          "case_id": "29-background-museum",
-          "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-          "enhance_prompt": false,
-          "seed": 2026100829,
-          "first_frame": "cases/layer-02/29-background-museum/input/first-frame.png",
-          "first_frame_sha256": "f0b1b688517f944a0f4f8b6f6f0c838bd148986f1e6a423332d01ec37a553344",
-          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
-          "source_status": "?? scripts/",
-          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
-          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
-          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
-          "physical_gpu": "4",
-          "logical_device": "cuda:0",
-          "width": 1024,
-          "height": 640,
-          "fps": 24,
-          "generated_frames": 121,
-          "delivery_frames": 120,
-          "delivery_seconds": 5,
-          "temporal_operation": "drop only the terminal generated frame; no resampling",
-          "precision": "bfloat16",
-          "quantization": null,
-          "pipeline": "DistilledPipeline",
-          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
-          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
-          "started_at_utc": "2026-10-09T04:43:28.400584+00:00",
-          "status": "succeeded",
-          "device_name": "NVIDIA H200 NVL",
-          "cuda_version": "12.8",
-          "versions": {
-            "torch": "2.9.1",
-            "torchvision": "0.24.1",
-            "torchaudio": "2.9.1",
-            "transformers": "5.14.1",
-            "ltx-core": "1.4.2",
-            "ltx-pipelines": "1.4.2"
-          },
-          "elapsed_seconds": 77.16467164829373,
-          "peak_cuda_allocated_bytes": 42069817856,
-          "media": {
-            "width": 1024,
-            "height": 640,
-            "r_frame_rate": "24/1",
-            "duration": "5.000000",
-            "nb_read_frames": "120"
-          },
-          "native_rgb_sha256": "8caeb0b41a505c963f38ed9343c13597fa46f6c85bb5651c9c9113ea85f46cf5",
-          "video_sha256": "8259b36d32565e58e241d0bbfa46d4096d05d3e24c220f59d0fe7fd93d4beaae"
-        },
-        "construction": {
-          "case": "29-background-museum",
-          "dimension": "background_consistency",
-          "variant": "blur90-area75-pulse1-phase1",
-          "sigma": 90,
-          "spatial_fraction": 0.75,
-          "window_indices": [
-            1,
-            3,
-            5,
-            7,
-            9,
-            11,
-            13,
-            15,
-            17,
-            19,
-            21,
-            23,
-            25,
-            27,
-            29,
-            31,
-            33,
-            35,
-            37,
-            39,
-            41,
-            43,
-            45,
-            47,
-            49,
-            51,
-            53,
-            55,
-            57,
-            59,
-            61,
-            63,
-            65,
-            67,
-            69,
-            71,
-            73,
-            75,
-            77,
-            79,
-            81,
-            83,
-            85,
-            87,
-            89,
-            91,
-            93,
-            95,
-            97,
-            99,
-            101,
-            103,
-            105,
-            107,
-            109,
-            111,
-            113,
-            115,
-            117,
-            119
-          ],
-          "duration_seconds": 2.5,
-          "source_video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
-          "mask_source_sha256": "eef481f42e1aa4e3a1165a12fa2537d4f951e1318e55af5050d5463d0a7c3ed4",
-          "mask_role": "Independent SAM2 construction, not scoring localization or ground truth",
-          "parent": {
-            "record_sha256": "05f1bbcfe23d0a8747044128a909d6307b5b48b6643cc13b6a9488f33f4c63de",
-            "rgb_sha256": "a72fa8f83eaf4f5411356225bd205670e5745aec3fd62b2de5042c3b7485f348",
-            "recomputed_frames": [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5,
-              114,
-              115,
-              116,
-              117,
-              118,
-              119
-            ]
-          },
-          "preencode_protected_max_error": 0,
-          "preencode_outside_window_max_error": 0,
-          "scoring_localizers_receive_construction_masks": false,
-          "interpretation": "Exploratory temporal phase/range sweep, including synthetic intermittent blur",
-          "script_sha256": "9c45fa95bd0470dea26de8711f8f2264e02855b59103588601b0ea84e49955ba",
-          "helpers_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
-          "files": {
-            "counterfactual.mp4": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
-            "counterfactual-rgb.mp4": "41b4336c4b7bb9ccb4199fae719d94248911d978609f3867a34eb1f7b6f9f3a3"
-          },
-          "review": "Pending visual inspection"
-        },
-        "reviews": [
-          {
-            "decision": "accepted",
-            "attempt": "ltx25-seed2026100829",
-            "duration_seconds": 5,
-            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
-            "observed_motion": "Visitor walks and turns in the gallery, with changing arm and coat positions.",
-            "first_frame": "cases/layer-02/29-background-museum/input/first-frame.png",
-            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
-          },
-          {
-            "decision": "accepted",
-            "pair_variant": "ltx25-seed2026100829",
-            "reviewer": "assistant visual review; not human ground truth",
-            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
-            "operation": "foreground_blur",
-            "limitations": [
-              "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
-            ]
-          }
-        ],
-        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
-        "refinement_20261009": {
-          "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
-          "case": "29-background-museum",
-          "dimension": "background_consistency",
-          "variant": "blur90-area75-pulse1-phase1",
-          "official": [
-            0.9487920168067226,
-            0.8770290342699579
-          ],
-          "ours": [
-            0.9836318072150736,
-            0.9782269646139706
-          ],
-          "official_drop": 0.07176298253676472,
-          "ours_change": -0.005404842601102966,
-          "original_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
-          "counterfactual_sha256": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
-          "runs": [
-            "background-round-03-shard-3"
-          ],
-          "local_pair": "output/showcase-refine-20261009/selected/29-background-museum",
-          "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee",
-          "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
-          "receipt": "data/refinement-20261009.json"
-        }
-      },
-      "score_history": {
-        "revisions": [
-          {
-            "reason": "Superseded by selected refinement on 2026-10-09",
-            "scores": {
-              "vbench": [
-                0.9487920168067226,
-                0.9410820969012605
-              ],
-              "ours": [
-                0.9836318072150736,
-                0.9784803203507966
-              ]
-            },
-            "score_status": {
-              "vbench": [
-                "succeeded",
-                "succeeded"
-              ],
-              "ours": [
-                "succeeded",
-                "succeeded"
-              ]
-            },
-            "score_reasons": {
-              "vbench": [
-                "",
-                ""
-              ],
-              "ours": [
-                null,
-                null
-              ]
-            },
-            "score_records": {
-              "vbench": [
-                {
-                  "id": "29-background-museum--original",
-                  "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-                  "video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
-                  "score": 0.9487920168067226,
-                  "status": "succeeded",
-                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
-                  "media_seconds": 5
-                },
-                {
-                  "id": "29-background-museum--counterfactual",
-                  "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-                  "video_sha256": "aa2b1b9a77aa93e7040107e6240e851eabba812d8625f626ac4a1c232cbbd419",
-                  "score": 0.9410820969012605,
-                  "status": "succeeded",
-                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
-                  "media_seconds": 5
-                }
-              ],
-              "ours": [
-                {
-                  "id": "29-background-museum--original",
-                  "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-                  "video_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
-                  "score": 0.9836318072150736,
-                  "status": "succeeded",
-                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
-                  "media_seconds": 5
-                },
-                {
-                  "id": "29-background-museum--counterfactual",
-                  "prompt": "Use the reference image as the first frame. The visitor takes two slow steps across the gallery, turns to look toward an arch and gently raises a hand before lowering it. Their coat sways naturally with the steps. The marble floor, columns, arches and illumination remain steady, with the complete person visible throughout. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-                  "video_sha256": "aa2b1b9a77aa93e7040107e6240e851eabba812d8625f626ac4a1c232cbbd419",
-                  "score": 0.9784803203507966,
-                  "status": "succeeded",
-                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
-                  "media_seconds": 5
-                }
-              ]
-            },
-            "videos": {
-              "original": {
-                "src": "assets/videos/29-background-museum/original.mp4",
-                "poster": "assets/videos/29-background-museum/original-poster.webp",
-                "poster_time_seconds": 2.5,
-                "sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
-                "duration_seconds": 5.0,
-                "frames": 120,
-                "fps": "24/1",
-                "resolution": [
-                  1024,
-                  640
-                ]
-              },
-              "counterfactual": {
-                "src": "assets/videos/29-background-museum/counterfactual.mp4",
-                "poster": "assets/videos/29-background-museum/counterfactual-poster.webp",
-                "poster_time_seconds": 2.5,
-                "sha256": "aa2b1b9a77aa93e7040107e6240e851eabba812d8625f626ac4a1c232cbbd419",
-                "duration_seconds": 5.0,
-                "frames": 120,
-                "fps": "24/1",
-                "resolution": [
-                  1024,
-                  640
-                ]
-              }
-            },
-            "excerpt": {
-              "before": "a ",
-              "focus": [
-                "gallery",
-                "gallery"
-              ],
-              "after": " in the slanting sun"
-            },
-            "construction": {
-              "case": "29-background-museum",
-              "attempt": "ltx25-seed2026100829",
-              "source_sha256": "8caeb0b41a505c963f38ed9343c13597fa46f6c85bb5651c9c9113ea85f46cf5",
-              "duration_seconds": 5,
-              "fps": 24,
-              "frames": 120,
-              "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
-              "physical_gpu": "5",
-              "source_kind": "LTX-2.5 generated native RGB master",
-              "scoring_localizers_receive_construction_masks": false,
-              "operation": "foreground_blur",
-              "window_indices": [
-                45,
-                46,
-                47,
-                48,
-                49,
-                50,
-                51,
-                52,
-                53,
-                54,
-                55,
-                56,
-                57,
-                58,
-                59,
-                60,
-                61,
-                62,
-                63,
-                64,
-                65,
-                66,
-                67,
-                68,
-                69,
-                70,
-                71,
-                72,
-                73,
-                74
-              ],
-              "sigma_native_pixels": 90,
-              "construction_box": [
-                320,
-                135,
-                560,
-                638
-              ],
-              "mask_sha256": "eef481f42e1aa4e3a1165a12fa2537d4f951e1318e55af5050d5463d0a7c3ed4",
-              "mask_area_fraction_range": [
-                0.0244384765625,
-                0.043756103515625
-              ],
-              "protected_rgb_pixels_max_difference": 0,
-              "subject_guard_dilation_kernel": null,
-              "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
-              "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
-              "status": "constructed; visual review pending",
-              "elapsed_seconds": 76.28128559328616,
-              "files": {
-                "original.mp4": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
-                "counterfactual.mp4": "aa2b1b9a77aa93e7040107e6240e851eabba812d8625f626ac4a1c232cbbd419",
-                "original-rgb.mp4": "f73c3132828372cd733ee32954be44f12e4ad454120c9292841b70feec339204",
-                "counterfactual-rgb.mp4": "388962174e285ee4a4a90ae5aa111f2344032faa219404683f7c01609895899d"
-              },
-              "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
-            }
-          }
-        ]
-      },
-      "counterfactual_note": "Alternating-frame blur",
-      "counterfactual_note_detail": "Synthetic stress test: foreground blur alternates every frame; the background is protected before encoding."
     },
     {
       "id": "30-background-desert",
