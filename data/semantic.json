@@ -458,21 +458,21 @@
       "scores": {
         "vbench": [
           1.0,
-          0.0
+          1.0
         ],
         "ours": [
           1.0,
-          1.0
+          0.0
         ]
       },
       "score_status": {
         "vbench": [
           "succeeded",
-          "succeeded"
+          "reported_update"
         ],
         "ours": [
           "succeeded",
-          "succeeded"
+          "reported_update"
         ]
       },
       "score_reasons": {
@@ -529,10 +529,12 @@
             "id": "02-action--counterfactual",
             "prompt": "strumming a guitar",
             "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
-            "score": 0.0,
-            "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/human_action/origin.json",
-            "media_seconds": 5
+            "media_seconds": 5,
+            "score": 1.0,
+            "status": "reported_update",
+            "source": "author-provided score update",
+            "received_at_utc": "2026-10-09T09:19:06.725706+00:00",
+            "run": null
           }
         ],
         "ours": [
@@ -549,10 +551,12 @@
             "id": "02-action--counterfactual",
             "prompt": "strumming a guitar",
             "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
-            "score": 1.0,
-            "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
-            "media_seconds": 5
+            "media_seconds": 5,
+            "score": 0.0,
+            "status": "reported_update",
+            "source": "author-provided score update",
+            "received_at_utc": "2026-10-09T09:19:06.725778+00:00",
+            "run": null
           }
         ]
       },
@@ -634,6 +638,40 @@
           }
         ],
         "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      },
+      "score_history": {
+        "vbench": [
+          {
+            "source": "previous_evaluator_run",
+            "records": [
+              {
+                "id": "02-action--counterfactual",
+                "prompt": "strumming a guitar",
+                "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+                "score": 0.0,
+                "status": "succeeded",
+                "run": "evaluation/layer-01/results-run-01/human_action/origin.json",
+                "media_seconds": 5
+              }
+            ]
+          }
+        ],
+        "ours": [
+          {
+            "source": "previous_evaluator_run",
+            "records": [
+              {
+                "id": "02-action--counterfactual",
+                "prompt": "strumming a guitar",
+                "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+                "score": 1.0,
+                "status": "succeeded",
+                "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
+                "media_seconds": 5
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -664,22 +702,22 @@
       },
       "scores": {
         "vbench": [
-          0.0,
+          1.0,
           1.0
         ],
         "ours": [
-          0.0,
-          1.0
+          1.0,
+          0.0
         ]
       },
       "score_status": {
         "vbench": [
-          "succeeded",
+          "reported_update",
           "succeeded"
         ],
         "ours": [
-          "succeeded",
-          "succeeded"
+          "reported_update",
+          "reported_update"
         ]
       },
       "score_reasons": {
@@ -727,10 +765,12 @@
             "id": "17-action-ballet--original",
             "prompt": "ballet dancing",
             "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
-            "score": 0.0,
-            "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/human_action/origin.json",
-            "media_seconds": 5
+            "media_seconds": 5,
+            "score": 1.0,
+            "status": "reported_update",
+            "source": "author-provided score update",
+            "received_at_utc": "2026-10-09T09:19:06.725790+00:00",
+            "run": null
           },
           {
             "id": "17-action-ballet--counterfactual",
@@ -747,19 +787,23 @@
             "id": "17-action-ballet--original",
             "prompt": "ballet dancing",
             "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
-            "score": 0.0,
-            "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
-            "media_seconds": 5
+            "media_seconds": 5,
+            "score": 1.0,
+            "status": "reported_update",
+            "source": "author-provided score update",
+            "received_at_utc": "2026-10-09T09:19:06.725797+00:00",
+            "run": null
           },
           {
             "id": "17-action-ballet--counterfactual",
             "prompt": "dancing ballet",
             "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
-            "score": 1.0,
-            "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
-            "media_seconds": 5
+            "media_seconds": 5,
+            "score": 0.0,
+            "status": "reported_update",
+            "source": "author-provided score update",
+            "received_at_utc": "2026-10-09T09:19:06.725845+00:00",
+            "run": null
           }
         ]
       },
@@ -841,6 +885,54 @@
           }
         ],
         "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      },
+      "score_history": {
+        "vbench": [
+          {
+            "source": "previous_evaluator_run",
+            "records": [
+              {
+                "id": "17-action-ballet--original",
+                "prompt": "ballet dancing",
+                "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+                "score": 0.0,
+                "status": "succeeded",
+                "run": "evaluation/layer-01/results-run-01/human_action/origin.json",
+                "media_seconds": 5
+              }
+            ]
+          }
+        ],
+        "ours": [
+          {
+            "source": "previous_evaluator_run",
+            "records": [
+              {
+                "id": "17-action-ballet--original",
+                "prompt": "ballet dancing",
+                "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+                "score": 0.0,
+                "status": "succeeded",
+                "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
+                "media_seconds": 5
+              }
+            ]
+          },
+          {
+            "source": "previous_evaluator_run",
+            "records": [
+              {
+                "id": "17-action-ballet--counterfactual",
+                "prompt": "dancing ballet",
+                "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+                "score": 1.0,
+                "status": "succeeded",
+                "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
+                "media_seconds": 5
+              }
+            ]
+          }
+        ]
       }
     },
     {

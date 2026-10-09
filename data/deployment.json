@@ -1097,8 +1097,8 @@
     },
     {
       "path": "data/cases.js",
-      "bytes": 439462,
-      "sha256": "7c1889632f24665afb7b7f86d2bd1b8700a487c0f1701c7a8ba8376c65307244"
+      "bytes": 441345,
+      "sha256": "b1fb6732c927bef086fcb98e6fd37fe2a0dad748b0ea2fda46e2102c508ca5e6"
     },
     {
       "path": "data/nuisance.json",
@@ -1107,8 +1107,8 @@
     },
     {
       "path": "data/provenance.json",
-      "bytes": 42471,
-      "sha256": "d476701929eefbdb509caf0667959715467af57e5c2447a0f599a0ec1f1fb7c4"
+      "bytes": 43612,
+      "sha256": "504032881705f88f5662cea3e7f0653dc5cf90b6d81947e8d781c47d6a0d5199"
     },
     {
       "path": "data/refinement-20261009.json",
@@ -1122,8 +1122,8 @@
     },
     {
       "path": "data/semantic.json",
-      "bytes": 116660,
-      "sha256": "c28fce865a297125c8526c5937f32f65bf9c01d6d46d9b57dd5c897ad697ca9e"
+      "bytes": 119884,
+      "sha256": "99b164da4f8d958af2fc7be85c46d2592c95c4c42b959acf75aec786a670b8b3"
     },
     {
       "path": "data/spatial.json",
@@ -1137,8 +1137,8 @@
     },
     {
       "path": "fusion-studies.js",
-      "bytes": 9526,
-      "sha256": "2f8c1ed33a232f31fdd3dc0e2a58ef3cc4e30487d6ea6cdec04aa96042849707"
+      "bytes": 9590,
+      "sha256": "519897091967fde0fe30817e9d95498b6e50f7c1f746083dafb44f8cd516fec2"
     },
     {
       "path": "fusion-typography.css",

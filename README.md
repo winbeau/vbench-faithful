@@ -27,9 +27,10 @@ under ignored `output/`; this branch contains only the site and its small tools.
 
 The page displays 30 pairs across nine dimensions. Thirty LTX-2.5 originals and
 three exact static controls were produced on H200; three unselected cases remain
-in `archived_cases` in `data/nuisance.json`. The displayed selection has 117
+in `archived_cases` in `data/nuisance.json`. The displayed selection has 112
 scores linked to evaluator receipts and three retest values supplied by the
 author: both suitcase Color values and the jittered kayak Dynamic value.
+Five Human Action scores use subsequent author-provided updates.
 Earlier results remain in each case's score history.
 Both Dynamic backends score the same initial two seconds of each five-second
 clip. These are selected demonstrations, not a replay of the paper's frozen cohort.
@@ -39,8 +40,9 @@ videos with their measured scores, plus two Multiple Objects target queries.
 Multiple Objects explicitly labels the two VBench targets versus all three
 Ours targets. Lakeside, terrace and museum use synthetic alternating-frame
 foreground blur, documented in their case metadata. Selection details and
-H200 receipts are preserved in `data/refinement-20261009.json`; Human Action
-keeps its recorded scores while the alias issue is deferred.
+H200 receipts are preserved in `data/refinement-20261009.json`. Human Action's
+earlier evaluator scores remain in case history alongside the author's updates;
+these display updates do not change the scoring implementation.
 
 A subsequent row-timing check updates all five Subject counterfactuals to
 continuous background blur from 0.5 to 5 seconds. Dog and horse use tighter

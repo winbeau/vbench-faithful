@@ -1433,7 +1433,7 @@
   "limitations": [
     "Selected illustrative cases, not an unbiased cohort or new paper main-table results.",
     "The archived official Color run omitted both suitcase inputs. The current page uses two author-reported retest values; the original missing records remain in score history.",
-    "Ballet wording still changes both backends; moving tram and horse retain visible repair drift.",
+    "Archived Human Action results retain the ballet alias-normalization issue. Current author-provided score updates are recorded separately from those evaluator receipts. Moving tram and horse retain visible repair drift.",
     "Static bench does not fool official VBench; its scores remain archived after the author selected five displayed Dynamic cases. Static tram was added after that observation.",
     "Jitter seed 2904 passed frozen QC before scores. Seed 1701 failed the geometry gate and remains recorded as secondary.",
     "Spatial vertical swaps keep objects upright but do not guarantee equal center distances; real detections are recomputed.",
@@ -1451,8 +1451,9 @@
     "40-static-tram"
   ],
   "displayed_score_records": {
-    "succeeded": 117,
+    "succeeded": 112,
     "author_reported_retest": 3,
+    "author_reported_update": 5,
     "missing": 0
   },
   "display_selection": "The author requested three moving cases and two static controls in one Dynamic row. The other three cases and all scores remain archived in nuisance.json; no scores were recomputed or altered.",
@@ -1500,5 +1501,49 @@
       "30-background-desert"
     ],
     "scoring_methods_changed": false
-  }
+  },
+  "author_reported_updates": [
+    {
+      "case": "02-action",
+      "source": "author-provided score update",
+      "changed_cells": [
+        {
+          "backend": "vbench",
+          "side": "counterfactual",
+          "previous_score": 0.0,
+          "score": 1.0
+        },
+        {
+          "backend": "ours",
+          "side": "counterfactual",
+          "previous_score": 1.0,
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "case": "17-action-ballet",
+      "source": "author-provided score update",
+      "changed_cells": [
+        {
+          "backend": "vbench",
+          "side": "original",
+          "previous_score": 0.0,
+          "score": 1.0
+        },
+        {
+          "backend": "ours",
+          "side": "original",
+          "previous_score": 0.0,
+          "score": 1.0
+        },
+        {
+          "backend": "ours",
+          "side": "counterfactual",
+          "previous_score": 1.0,
+          "score": 0.0
+        }
+      ]
+    }
+  ]
 }

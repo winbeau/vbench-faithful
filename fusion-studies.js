@@ -23,7 +23,7 @@
       const missing = status && status !== 'succeeded';
       const reason = study.score_reasons?.[kind]?.[side] || 'The evaluator returned no score for this input.';
       const scope = study.score_scope ? ` ${study.score_scope}` : '';
-      const title = Number.isFinite(value) ? (status === 'reported_retest' ? 'Retested score for this case.' : 'Measured score for this case.') + scope : missing ? reason : 'This new case has not been scored yet.';
+      const title = Number.isFinite(value) ? (status === 'reported_retest' ? 'Retested score for this case.' : status === 'reported_update' ? 'Updated score for this case.' : 'Measured score for this case.') + scope : missing ? reason : 'This new case has not been scored yet.';
       return `<div class="semantic-score is-${kind}" title="${escape(title)}"><span>${name}</span><span class="semantic-score-value">${Number.isFinite(value)?value.toFixed(4):missing?'N/A':'—'}</span></div>`;
     }).join('')}</div>`;
   }
