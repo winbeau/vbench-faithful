@@ -1,0 +1,1 @@
+Constructed static control: repeat the reference tram frame exactly; no generated movement.

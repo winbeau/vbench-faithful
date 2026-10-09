@@ -1,0 +1,53 @@
+name: Deploy paper website
+
+on:
+  push:
+    branches: [gh-pages]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: paper-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Verify and assemble static files
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, shutil
+          from pathlib import Path
+          root = Path.cwd()
+          out = Path(os.environ['RUNNER_TEMP']) / 'paper-site'
+          manifest = json.loads((root / 'data/deployment.json').read_text())
+          for item in manifest['files']:
+              relative = Path(item['path'])
+              assert not relative.is_absolute() and '..' not in relative.parts
+              source = root / relative
+              assert source.is_file() and not source.is_symlink()
+              digest = hashlib.sha256(source.read_bytes()).hexdigest()
+              assert digest == item['sha256'], relative
+              destination = out / relative
+              destination.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copyfile(source, destination)
+          shutil.copyfile(root / 'data/deployment.json', out / 'data/deployment.json')
+          print(f"Verified {len(manifest['files'])} static files.")
+          PY
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: ${{ runner.temp }}/paper-site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
