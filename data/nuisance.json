@@ -7362,14 +7362,14 @@
       "scene": "The lantern lane",
       "views": [
         {
-          "image": "assets/videos/27-background-kyoto/original-poster.webp",
+          "image": "assets/videos/27-background-kyoto/original-poster.webp?v=c0fff6617985",
           "layout": "diptych",
           "side": "left",
           "position": "center",
           "preview": null
         },
         {
-          "image": "assets/videos/27-background-kyoto/counterfactual-poster.webp",
+          "image": "assets/videos/27-background-kyoto/counterfactual-poster.webp?v=dd9c4d4e447f",
           "layout": "diptych",
           "side": "right",
           "position": "center",
@@ -7386,12 +7386,12 @@
       },
       "scores": {
         "vbench": [
-          0.9885725774684874,
-          0.9804236147584033
+          0.9740123588497899,
+          0.8730899586397058
         ],
         "ours": [
-          0.9949139763327205,
-          0.9935095693550858
+          0.9778770297181372,
+          0.9696303423713235
         ]
       },
       "score_status": {
@@ -7410,17 +7410,17 @@
           ""
         ],
         "ours": [
-          null,
-          null
+          "",
+          ""
         ]
       },
-      "score_scope": "Complete displayed five-second video.",
+      "score_scope": "Complete displayed five-second video. Both sides use the same newly generated source; foreground blur protects the predicted background before encoding.",
       "videos": {
         "original": {
-          "src": "assets/videos/27-background-kyoto/original.mp4",
-          "poster": "assets/videos/27-background-kyoto/original-poster.webp",
+          "src": "assets/videos/27-background-kyoto/original.mp4?v=d174ed6bce77",
+          "poster": "assets/videos/27-background-kyoto/original-poster.webp?v=c0fff6617985",
           "poster_time_seconds": 2.5,
-          "sha256": "531bbf85ac4b7b798b27eb445b5e1ad756144284bdb4168383c82a8d2b11fc9c",
+          "sha256": "d174ed6bce77146235647088873ca41fa6b67d291f2f6aafd1010be9e129e8e5",
           "duration_seconds": 5.0,
           "frames": 120,
           "fps": "24/1",
@@ -7430,10 +7430,10 @@
           ]
         },
         "counterfactual": {
-          "src": "assets/videos/27-background-kyoto/counterfactual.mp4",
-          "poster": "assets/videos/27-background-kyoto/counterfactual-poster.webp",
+          "src": "assets/videos/27-background-kyoto/counterfactual.mp4?v=01ca9e3a06f3",
+          "poster": "assets/videos/27-background-kyoto/counterfactual-poster.webp?v=dd9c4d4e447f",
           "poster_time_seconds": 2.5,
-          "sha256": "2b5bcc41e2a69859df95f9cdaf6dd05011e7601e82d289e437b234967e293049",
+          "sha256": "01ca9e3a06f36c0245f80f938048fadc0c82e29db57e8a24b19dd589c62b53cd",
           "duration_seconds": 5.0,
           "frames": 120,
           "fps": "24/1",
@@ -7446,62 +7446,71 @@
       "score_records": {
         "vbench": [
           {
-            "id": "27-background-kyoto--original",
-            "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "531bbf85ac4b7b798b27eb445b5e1ad756144284bdb4168383c82a8d2b11fc9c",
-            "score": 0.9885725774684874,
+            "id": "27-background-kyoto-cat-v2--original",
+            "prompt": "Use the reference image as the first frame. The ginger-and-white cat slowly turns its head toward the lantern, twitches its ears, then looks back toward the camera. Its fluffy tail sways gently. It lifts one front paw and sets it down beside the other, staying in the same small patch of paving. Keep the entire cat and tail visible with stable anatomy. The wooden shopfronts, lanterns, wet paving and distant pagoda retain their exact positions and illumination. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "d174ed6bce77146235647088873ca41fa6b67d291f2f6aafd1010be9e129e8e5",
+            "score": 0.9740123588497899,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+            "run": "evaluation/replacement-background-cat-r2/results/background_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/replacements-20261009",
+            "receipt": "data/background-replacements-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "27-background-kyoto--counterfactual",
-            "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "2b5bcc41e2a69859df95f9cdaf6dd05011e7601e82d289e437b234967e293049",
-            "score": 0.9804236147584033,
+            "id": "27-background-kyoto-cat-v2--blur30-end95",
+            "prompt": "Use the reference image as the first frame. The ginger-and-white cat slowly turns its head toward the lantern, twitches its ears, then looks back toward the camera. Its fluffy tail sways gently. It lifts one front paw and sets it down beside the other, staying in the same small patch of paving. Keep the entire cat and tail visible with stable anatomy. The wooden shopfronts, lanterns, wet paving and distant pagoda retain their exact positions and illumination. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "01ca9e3a06f36c0245f80f938048fadc0c82e29db57e8a24b19dd589c62b53cd",
+            "score": 0.8730899586397058,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+            "run": "evaluation/replacement-background-cat-r2/results/background_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/replacements-20261009",
+            "receipt": "data/background-replacements-20261009.json",
             "media_seconds": 5
           }
         ],
         "ours": [
           {
-            "id": "27-background-kyoto--original",
-            "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "531bbf85ac4b7b798b27eb445b5e1ad756144284bdb4168383c82a8d2b11fc9c",
-            "score": 0.9949139763327205,
+            "id": "27-background-kyoto-cat-v2--original",
+            "prompt": "Use the reference image as the first frame. The ginger-and-white cat slowly turns its head toward the lantern, twitches its ears, then looks back toward the camera. Its fluffy tail sways gently. It lifts one front paw and sets it down beside the other, staying in the same small patch of paving. Keep the entire cat and tail visible with stable anatomy. The wooden shopfronts, lanterns, wet paving and distant pagoda retain their exact positions and illumination. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "d174ed6bce77146235647088873ca41fa6b67d291f2f6aafd1010be9e129e8e5",
+            "score": 0.9778770297181372,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+            "run": "evaluation/replacement-background-cat-r2/results/background_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/replacements-20261009",
+            "receipt": "data/background-replacements-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "27-background-kyoto--counterfactual",
-            "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "2b5bcc41e2a69859df95f9cdaf6dd05011e7601e82d289e437b234967e293049",
-            "score": 0.9935095693550858,
+            "id": "27-background-kyoto-cat-v2--blur30-end95",
+            "prompt": "Use the reference image as the first frame. The ginger-and-white cat slowly turns its head toward the lantern, twitches its ears, then looks back toward the camera. Its fluffy tail sways gently. It lifts one front paw and sets it down beside the other, staying in the same small patch of paving. Keep the entire cat and tail visible with stable anatomy. The wooden shopfronts, lanterns, wet paving and distant pagoda retain their exact positions and illumination. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "01ca9e3a06f36c0245f80f938048fadc0c82e29db57e8a24b19dd589c62b53cd",
+            "score": 0.9696303423713235,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+            "run": "evaluation/replacement-background-cat-r2/results/background_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/replacements-20261009",
+            "receipt": "data/background-replacements-20261009.json",
             "media_seconds": 5
           }
         ]
       },
       "provenance": {
         "first_frame": "assets/videos/27-background-kyoto/first-frame.png",
-        "first_frame_sha256": "472feee2410ae929525a6f1217b419bec141ee6b2e491d9580b117c3772f996e",
-        "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "first_frame_sha256": "a6d1886e940e53bf4769a57611dd3ba4c5f8591f868f771bb33d194d73e719a0",
+        "prompt": "Use the reference image as the first frame. The ginger-and-white cat slowly turns its head toward the lantern, twitches its ears, then looks back toward the camera. Its fluffy tail sways gently. It lifts one front paw and sets it down beside the other, staying in the same small patch of paving. Keep the entire cat and tail visible with stable anatomy. The wooden shopfronts, lanterns, wet paving and distant pagoda retain their exact positions and illumination. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
         "generation": {
-          "case_id": "27-background-kyoto",
-          "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "case_id": "27-background-kyoto-cat-v2",
+          "prompt": "Use the reference image as the first frame. The ginger-and-white cat slowly turns its head toward the lantern, twitches its ears, then looks back toward the camera. Its fluffy tail sways gently. It lifts one front paw and sets it down beside the other, staying in the same small patch of paving. Keep the entire cat and tail visible with stable anatomy. The wooden shopfronts, lanterns, wet paving and distant pagoda retain their exact positions and illumination. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
           "enhance_prompt": false,
-          "seed": 2026100827,
-          "first_frame": "cases/layer-02/27-background-kyoto/input/first-frame.png",
-          "first_frame_sha256": "472feee2410ae929525a6f1217b419bec141ee6b2e491d9580b117c3772f996e",
+          "seed": 2026100927,
+          "first_frame": "/data/chenjiayu/wenbiao_zhao/vbench-showcase-refine-20261009/replacements-20261009/sources/27-background-kyoto-cat-v2/input/first-frame.png",
+          "first_frame_sha256": "a6d1886e940e53bf4769a57611dd3ba4c5f8591f868f771bb33d194d73e719a0",
           "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_root": "/data/chenjiayu/wenbiao_zhao/vbench-showcase-20261008/ltx25-worktree",
           "source_status": "?? scripts/",
           "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
           "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
           "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
-          "physical_gpu": "7",
+          "physical_gpu": "4",
           "logical_device": "cuda:0",
           "width": 1024,
           "height": 640,
@@ -7515,9 +7524,10 @@
           "pipeline": "DistilledPipeline",
           "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
           "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
-          "started_at_utc": "2026-10-09T04:42:25.261185+00:00",
+          "started_at_utc": "2026-10-09T09:11:21.286739+00:00",
           "status": "succeeded",
           "device_name": "NVIDIA H200 NVL",
+          "gpu_identity": "GPU-490b4a76-6210-31b9-4e03-838a113cf5f4, NVIDIA H200 NVL, 580.126.20",
           "cuda_version": "12.8",
           "versions": {
             "torch": "2.9.1",
@@ -7527,7 +7537,7 @@
             "ltx-core": "1.4.2",
             "ltx-pipelines": "1.4.2"
           },
-          "elapsed_seconds": 70.98642465285957,
+          "elapsed_seconds": 139.0460971146822,
           "peak_cuda_allocated_bytes": 42069817856,
           "media": {
             "width": 1024,
@@ -7536,22 +7546,175 @@
             "duration": "5.000000",
             "nb_read_frames": "120"
           },
-          "native_rgb_sha256": "07a09b011d80176f29698b89fa1099e2e891997ea83b292fcd23975ee09f331f",
-          "video_sha256": "9b15af302af3106e81f505ab98aaf31bb7f4d5c48d2fdc265a927a968d983f4c"
+          "native_rgb_sha256": "f385e7cc72c646c395e906ba2172c526b95bd3ef20eb026565a6a74ed7d7dbe6",
+          "video_sha256": "d174ed6bce77146235647088873ca41fa6b67d291f2f6aafd1010be9e129e8e5"
         },
         "construction": {
-          "case": "27-background-kyoto",
-          "attempt": "ltx25-seed2026100827",
-          "source_sha256": "07a09b011d80176f29698b89fa1099e2e891997ea83b292fcd23975ee09f331f",
-          "duration_seconds": 5,
-          "fps": 24,
-          "frames": 120,
-          "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
-          "physical_gpu": "4",
-          "source_kind": "LTX-2.5 generated native RGB master",
-          "scoring_localizers_receive_construction_masks": false,
-          "operation": "foreground_blur",
+          "case": "27-background-kyoto-cat-v2",
+          "site_case": "27-background-kyoto",
+          "dimension": "background_consistency",
+          "spec": {
+            "name": "blur30-end95",
+            "sigma": 30,
+            "fraction": 1,
+            "indices": [
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ]
+          },
+          "variant": "blur30-end95",
           "window_indices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
             45,
             46,
             47,
@@ -7581,56 +7744,458 @@
             71,
             72,
             73,
-            74
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119
           ],
-          "sigma_native_pixels": 90,
-          "construction_box": [
-            265,
-            150,
-            475,
-            638
+          "schedule": [
+            {
+              "blurred": false,
+              "start": 0,
+              "end_exclusive": 6,
+              "frames": 6
+            },
+            {
+              "blurred": true,
+              "start": 6,
+              "end_exclusive": 120,
+              "frames": 114
+            }
           ],
-          "mask_sha256": "11ade71649682f766d784059adda0cdaf30c1505783ab12196c607957cd1851e",
-          "mask_area_fraction_range": [
-            0.01149444580078125,
-            0.0549652099609375
-          ],
-          "protected_rgb_pixels_max_difference": 0,
-          "subject_guard_dilation_kernel": null,
-          "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
-          "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
-          "status": "constructed; visual review pending",
-          "elapsed_seconds": 84.6792974062264,
+          "source_video_sha256": "d174ed6bce77146235647088873ca41fa6b67d291f2f6aafd1010be9e129e8e5",
+          "mask_source_sha256": "5808790f7ee1b7f9889545c95d499b50960407860332255e54c47cf49dfb3035",
+          "mask_role": "Independent SAM2 construction; not scoring localization or human ground truth",
+          "foreground": "cat",
+          "protected_region": "Every pixel outside the independent foreground mask",
+          "protected_fraction": 0.8615987269083659,
+          "preencode_protected_max_error": 0,
+          "preencode_outside_window_max_error": 0,
+          "postencode_protected_mean_error": 1.7495115624098276,
+          "scoring_localizers_receive_construction_masks": false,
+          "script_sha256": "5b98b9cd127e6655dd9cac18cebc3265f48f27673374b06b7682573f96c768ad",
+          "helper_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
           "files": {
-            "original.mp4": "531bbf85ac4b7b798b27eb445b5e1ad756144284bdb4168383c82a8d2b11fc9c",
-            "counterfactual.mp4": "2b5bcc41e2a69859df95f9cdaf6dd05011e7601e82d289e437b234967e293049",
-            "original-rgb.mp4": "91d8c3897e1ca669142e54de95e319e92582ec5447281d3d4c8e51f95689be98",
-            "counterfactual-rgb.mp4": "fff63c6330f421f479025a342b031cd5021789e728e3832c88b9097044ad1d1f"
-          },
-          "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
+            "counterfactual.mp4": "01ca9e3a06f36c0245f80f938048fadc0c82e29db57e8a24b19dd589c62b53cd",
+            "counterfactual-rgb.mp4": "f212dcec3a300542ef3cd0b7566d0f6cf0c8c69fc1abc33b3f772ada2b318748"
+          }
+        },
+        "first_frame_source": {
+          "id": "27-background-kyoto-cat-v2",
+          "site_case": "27-background-kyoto",
+          "seed": 2026100927,
+          "source_image": "source-image.png",
+          "foreground": "cat",
+          "image_prompt": "Use case: photorealistic-natural. Asset type: first frame for a five-second research showcase video, landscape 16:10 composition, no text. Create a beautiful realistic ground-level photograph of an empty traditional Kyoto lantern lane just after rain at blue hour. Warm paper lanterns on wooden machiya shopfronts, wet stone paving and a small distant pagoda remain clearly recognizable. A large full-body ginger-and-white longhaired cat stands in the immediate foreground, seen in three-quarter profile looking slightly toward the viewer. The entire cat including all four paws, ears and long curved tail is fully in frame with comfortable margins. The cat occupies roughly the central 65 percent of image width and 65 percent of image height; its silhouette should cover about 25 percent of all pixels, much larger than a distant pedestrian. Camera at cat shoulder height. Natural detailed fur and anatomy, crisp cat and crisply detailed architecture, photographic depth, warm lantern reflections, sophisticated cinematic lighting. No people, no other animals, no cars, no lettering, no watermark, no collage. The scene must look like a plausible natural photograph, suitable for a locked-off camera video.",
+          "motion": "The ginger-and-white cat slowly turns its head toward the lantern, twitches its ears, then looks back toward the camera. Its fluffy tail sways gently. It lifts one front paw and sets it down beside the other, staying in the same small patch of paving. Keep the entire cat and tail visible with stable anatomy. The wooden shopfronts, lanterns, wet paving and distant pagoda retain their exact positions and illumination.",
+          "first_frame": "first-frame.png",
+          "image_tool": "built-in image_gen",
+          "source_image_sha256": "bf2006da9487e9389fa7ad48d4579d9931644c81e3fb431d50a1906e0b0456a9",
+          "first_frame_sha256": "a6d1886e940e53bf4769a57611dd3ba4c5f8591f868f771bb33d194d73e719a0",
+          "first_frame_preparation": "Resize complete generated image to 1024x640 with Lanczos; no crop"
         },
         "reviews": [
           {
-            "decision": "accepted",
-            "attempt": "ltx25-seed2026100827",
-            "duration_seconds": 5,
-            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
-            "observed_motion": "Pedestrian takes repeated alternating steps down the lane, with arm and clothing movement.",
-            "first_frame": "cases/layer-02/27-background-kyoto/input/first-frame.png",
-            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
+            "decision": "accepted_for_exploration",
+            "reviewer": "Agent inspection, not human ground truth",
+            "frames": [
+              0,
+              11,
+              22,
+              32,
+              43,
+              54,
+              65,
+              76,
+              87,
+              97,
+              108,
+              119
+            ],
+            "mask_sha256": "5808790f7ee1b7f9889545c95d499b50960407860332255e54c47cf49dfb3035",
+            "observations": "Cat turns its head, steps forward, and settles into a crouch. The inspected masks cover its body, head, paws and tail without the previous lane-reflection leakage. The motion is more extensive than the requested paw shift; background architecture remains identifiable.",
+            "limitations": "Twelve sampled frames do not prove perfect segmentation or camera stability on every frame; actual paired background equality is asserted before encoding."
           },
           {
-            "decision": "accepted",
-            "pair_variant": "ltx25-seed2026100827",
-            "reviewer": "assistant visual review; not human ground truth",
-            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
-            "operation": "foreground_blur",
-            "limitations": [
-              "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
-            ]
+            "reviewer": "Agent contact-sheet inspection, not human segmentation ground truth",
+            "frames": [
+              0,
+              20,
+              59,
+              90,
+              119
+            ],
+            "review_sha256": "99648f48c0c0854244bbd05bd2d37eaceaac9a817a407d6dc9ad6ec37a8794c6",
+            "observations": "Full cat including paws and tail is blurred at the sampled edited frames; the surrounding lane remains identifiable.",
+            "limitations": "Sampled review does not prove perfect semantic isolation on every frame. Browser encoding can alter protected pixels."
           }
         ],
-        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+        "background_replacement_20261009": {
+          "site_case": "27-background-kyoto",
+          "source_case": "27-background-kyoto-cat-v2",
+          "variant_directory": "variants-r2",
+          "variant": "blur30-end95",
+          "run": "replacement-background-cat-r2",
+          "original_sha256": "d174ed6bce77146235647088873ca41fa6b67d291f2f6aafd1010be9e129e8e5",
+          "counterfactual_sha256": "01ca9e3a06f36c0245f80f938048fadc0c82e29db57e8a24b19dd589c62b53cd",
+          "official": [
+            0.9740123588497899,
+            0.8730899586397058
+          ],
+          "ours": [
+            0.9778770297181372,
+            0.9696303423713235
+          ],
+          "official_drop": 0.10092240021008403,
+          "ours_change": -0.008246687346813664,
+          "ours_empty_foreground_frames": [
+            0,
+            109
+          ],
+          "blur_window_seconds": [
+            0.25,
+            5.0
+          ],
+          "blur_frames": 114,
+          "sigma_pixels": 30,
+          "visual_review": {
+            "reviewer": "Agent contact-sheet inspection, not human segmentation ground truth",
+            "frames": [
+              0,
+              20,
+              59,
+              90,
+              119
+            ],
+            "review_sha256": "99648f48c0c0854244bbd05bd2d37eaceaac9a817a407d6dc9ad6ec37a8794c6",
+            "observations": "Full cat including paws and tail is blurred at the sampled edited frames; the surrounding lane remains identifiable.",
+            "limitations": "Sampled review does not prove perfect semantic isolation on every frame. Browser encoding can alter protected pixels."
+          },
+          "media_probes": {
+            "original": {
+              "width": 1024,
+              "height": 640,
+              "r_frame_rate": "24/1",
+              "duration": "5.000000",
+              "nb_read_frames": "120"
+            },
+            "counterfactual": {
+              "width": 1024,
+              "height": 640,
+              "r_frame_rate": "24/1",
+              "duration": "5.000000",
+              "nb_read_frames": "120"
+            }
+          },
+          "report": "https://github.com/winbeau/vbench-faithful/blob/0fef1e413ac696912d7dd49e78b21078c0781619/docs/validation/showcase-background-replacements-20261009.md",
+          "receipt": "data/background-replacements-20261009.json"
+        }
+      },
+      "score_history": {
+        "revisions": [
+          {
+            "reason": "Original and counterfactual replaced by a newly generated nonhuman source on 2026-10-09",
+            "scores": {
+              "vbench": [
+                0.9885725774684874,
+                0.9804236147584033
+              ],
+              "ours": [
+                0.9949139763327205,
+                0.9935095693550858
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                null,
+                null
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "27-background-kyoto--original",
+                  "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "531bbf85ac4b7b798b27eb445b5e1ad756144284bdb4168383c82a8d2b11fc9c",
+                  "score": 0.9885725774684874,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "27-background-kyoto--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "2b5bcc41e2a69859df95f9cdaf6dd05011e7601e82d289e437b234967e293049",
+                  "score": 0.9804236147584033,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "27-background-kyoto--original",
+                  "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "531bbf85ac4b7b798b27eb445b5e1ad756144284bdb4168383c82a8d2b11fc9c",
+                  "score": 0.9949139763327205,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "27-background-kyoto--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "2b5bcc41e2a69859df95f9cdaf6dd05011e7601e82d289e437b234967e293049",
+                  "score": 0.9935095693550858,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/27-background-kyoto/original.mp4",
+                "poster": "assets/videos/27-background-kyoto/original-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "531bbf85ac4b7b798b27eb445b5e1ad756144284bdb4168383c82a8d2b11fc9c",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/27-background-kyoto/counterfactual.mp4",
+                "poster": "assets/videos/27-background-kyoto/counterfactual-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "2b5bcc41e2a69859df95f9cdaf6dd05011e7601e82d289e437b234967e293049",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "a ",
+              "focus": [
+                "lantern lane",
+                "lantern lane"
+              ],
+              "after": " after the rain"
+            },
+            "provenance": {
+              "first_frame": "assets/videos/27-background-kyoto/first-frame.png",
+              "first_frame_sha256": "472feee2410ae929525a6f1217b419bec141ee6b2e491d9580b117c3772f996e",
+              "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+              "generation": {
+                "case_id": "27-background-kyoto",
+                "prompt": "Use the reference image as the first frame. The pedestrian walks slowly away along the lane, taking several clearly visible alternating steps. Their arms swing and clothing moves with the gait. Keep the complete person visible without leaving the frame. The lanterns, shopfronts and street retain their positions and lighting. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                "enhance_prompt": false,
+                "seed": 2026100827,
+                "first_frame": "cases/layer-02/27-background-kyoto/input/first-frame.png",
+                "first_frame_sha256": "472feee2410ae929525a6f1217b419bec141ee6b2e491d9580b117c3772f996e",
+                "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+                "source_status": "?? scripts/",
+                "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+                "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+                "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+                "physical_gpu": "7",
+                "logical_device": "cuda:0",
+                "width": 1024,
+                "height": 640,
+                "fps": 24,
+                "generated_frames": 121,
+                "delivery_frames": 120,
+                "delivery_seconds": 5,
+                "temporal_operation": "drop only the terminal generated frame; no resampling",
+                "precision": "bfloat16",
+                "quantization": null,
+                "pipeline": "DistilledPipeline",
+                "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+                "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+                "started_at_utc": "2026-10-09T04:42:25.261185+00:00",
+                "status": "succeeded",
+                "device_name": "NVIDIA H200 NVL",
+                "cuda_version": "12.8",
+                "versions": {
+                  "torch": "2.9.1",
+                  "torchvision": "0.24.1",
+                  "torchaudio": "2.9.1",
+                  "transformers": "5.14.1",
+                  "ltx-core": "1.4.2",
+                  "ltx-pipelines": "1.4.2"
+                },
+                "elapsed_seconds": 70.98642465285957,
+                "peak_cuda_allocated_bytes": 42069817856,
+                "media": {
+                  "width": 1024,
+                  "height": 640,
+                  "r_frame_rate": "24/1",
+                  "duration": "5.000000",
+                  "nb_read_frames": "120"
+                },
+                "native_rgb_sha256": "07a09b011d80176f29698b89fa1099e2e891997ea83b292fcd23975ee09f331f",
+                "video_sha256": "9b15af302af3106e81f505ab98aaf31bb7f4d5c48d2fdc265a927a968d983f4c"
+              },
+              "construction": {
+                "case": "27-background-kyoto",
+                "attempt": "ltx25-seed2026100827",
+                "source_sha256": "07a09b011d80176f29698b89fa1099e2e891997ea83b292fcd23975ee09f331f",
+                "duration_seconds": 5,
+                "fps": 24,
+                "frames": 120,
+                "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
+                "physical_gpu": "4",
+                "source_kind": "LTX-2.5 generated native RGB master",
+                "scoring_localizers_receive_construction_masks": false,
+                "operation": "foreground_blur",
+                "window_indices": [
+                  45,
+                  46,
+                  47,
+                  48,
+                  49,
+                  50,
+                  51,
+                  52,
+                  53,
+                  54,
+                  55,
+                  56,
+                  57,
+                  58,
+                  59,
+                  60,
+                  61,
+                  62,
+                  63,
+                  64,
+                  65,
+                  66,
+                  67,
+                  68,
+                  69,
+                  70,
+                  71,
+                  72,
+                  73,
+                  74
+                ],
+                "sigma_native_pixels": 90,
+                "construction_box": [
+                  265,
+                  150,
+                  475,
+                  638
+                ],
+                "mask_sha256": "11ade71649682f766d784059adda0cdaf30c1505783ab12196c607957cd1851e",
+                "mask_area_fraction_range": [
+                  0.01149444580078125,
+                  0.0549652099609375
+                ],
+                "protected_rgb_pixels_max_difference": 0,
+                "subject_guard_dilation_kernel": null,
+                "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
+                "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+                "status": "constructed; visual review pending",
+                "elapsed_seconds": 84.6792974062264,
+                "files": {
+                  "original.mp4": "531bbf85ac4b7b798b27eb445b5e1ad756144284bdb4168383c82a8d2b11fc9c",
+                  "counterfactual.mp4": "2b5bcc41e2a69859df95f9cdaf6dd05011e7601e82d289e437b234967e293049",
+                  "original-rgb.mp4": "91d8c3897e1ca669142e54de95e319e92582ec5447281d3d4c8e51f95689be98",
+                  "counterfactual-rgb.mp4": "fff63c6330f421f479025a342b031cd5021789e728e3832c88b9097044ad1d1f"
+                },
+                "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
+              },
+              "reviews": [
+                {
+                  "decision": "accepted",
+                  "attempt": "ltx25-seed2026100827",
+                  "duration_seconds": 5,
+                  "reviewer": "assistant inspection of six temporal frames, not human ground truth",
+                  "observed_motion": "Pedestrian takes repeated alternating steps down the lane, with arm and clothing movement.",
+                  "first_frame": "cases/layer-02/27-background-kyoto/input/first-frame.png",
+                  "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
+                },
+                {
+                  "decision": "accepted",
+                  "pair_variant": "ltx25-seed2026100827",
+                  "reviewer": "assistant visual review; not human ground truth",
+                  "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
+                  "operation": "foreground_blur",
+                  "limitations": [
+                    "Construction masks are not ground truth; protected pixel identity applies before lossy browser encoding."
+                  ]
+                }
+              ],
+              "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+            },
+            "previous_site_commit": "3a6980be12ded502b2b9100ca905aa31438bd5a9"
+          }
+        ]
       }
     },
     {
@@ -8686,14 +9251,14 @@
       "scene": "The sandstone overlook",
       "views": [
         {
-          "image": "assets/videos/30-background-desert/original-poster.webp",
+          "image": "assets/videos/30-background-desert/original-poster.webp?v=66eb1b439b9c",
           "layout": "diptych",
           "side": "left",
           "position": "center",
           "preview": null
         },
         {
-          "image": "assets/videos/30-background-desert/counterfactual-poster.webp",
+          "image": "assets/videos/30-background-desert/counterfactual-poster.webp?v=df8ab6696035",
           "layout": "diptych",
           "side": "right",
           "position": "center",
@@ -8710,12 +9275,12 @@
       },
       "scores": {
         "vbench": [
-          0.9762978433560925,
-          0.9656315651260504
+          0.9752720424107143,
+          0.850434118960084
         ],
         "ours": [
-          0.9880367503446692,
-          0.9859939874387255
+          0.9861312567018995,
+          0.9752647250306373
         ]
       },
       "score_status": {
@@ -8734,17 +9299,17 @@
           ""
         ],
         "ours": [
-          null,
-          null
+          "",
+          ""
         ]
       },
-      "score_scope": "Complete displayed five-second video.",
+      "score_scope": "Complete displayed five-second video. Both sides use the same newly generated source; foreground blur protects the predicted background before encoding.",
       "videos": {
         "original": {
-          "src": "assets/videos/30-background-desert/original.mp4",
-          "poster": "assets/videos/30-background-desert/original-poster.webp",
+          "src": "assets/videos/30-background-desert/original.mp4?v=ab702fe268d6",
+          "poster": "assets/videos/30-background-desert/original-poster.webp?v=66eb1b439b9c",
           "poster_time_seconds": 2.5,
-          "sha256": "fd4e9f67f5604566b3e991bf32c73423e2b32614bfd02e48b5d7c1670a9948fd",
+          "sha256": "ab702fe268d624be55ab840f10fa150504d70afe8dfb08e138e3b0cd7a5f4dfa",
           "duration_seconds": 5.0,
           "frames": 120,
           "fps": "24/1",
@@ -8754,10 +9319,10 @@
           ]
         },
         "counterfactual": {
-          "src": "assets/videos/30-background-desert/counterfactual.mp4",
-          "poster": "assets/videos/30-background-desert/counterfactual-poster.webp",
+          "src": "assets/videos/30-background-desert/counterfactual.mp4?v=32387746e9d7",
+          "poster": "assets/videos/30-background-desert/counterfactual-poster.webp?v=df8ab6696035",
           "poster_time_seconds": 2.5,
-          "sha256": "ffb9cb852f537ec18215fbac34715cf5670a20735bb0eb0e25726bebed0514ca",
+          "sha256": "32387746e9d71534b438fa79902e8d9cd89aad06c523db94f6b3b82df63f2132",
           "duration_seconds": 5.0,
           "frames": 120,
           "fps": "24/1",
@@ -8770,57 +9335,66 @@
       "score_records": {
         "vbench": [
           {
-            "id": "30-background-desert--original",
-            "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "fd4e9f67f5604566b3e991bf32c73423e2b32614bfd02e48b5d7c1670a9948fd",
-            "score": 0.9762978433560925,
+            "id": "30-background-desert-suv-v2--original",
+            "prompt": "Use the reference image as the first frame. The red off-road SUV creeps very slowly forward only a short distance, less than one wheel diameter, and gently stops. The tires turn slightly and the suspension rocks subtly as it crosses a small stone. Keep the entire vehicle fully visible throughout with its rigid body, roof rack and wheels unchanged. The sandstone arch, canyon walls, foreground ground, distant mountains and sunset illumination remain fixed. No dust cloud, no people or animals. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "ab702fe268d624be55ab840f10fa150504d70afe8dfb08e138e3b0cd7a5f4dfa",
+            "score": 0.9752720424107143,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+            "run": "evaluation/replacement-background-suv-r3/results/background_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/replacements-20261009",
+            "receipt": "data/background-replacements-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "30-background-desert--counterfactual",
-            "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "ffb9cb852f537ec18215fbac34715cf5670a20735bb0eb0e25726bebed0514ca",
-            "score": 0.9656315651260504,
+            "id": "30-background-desert-suv-v2--blur20-end95",
+            "prompt": "Use the reference image as the first frame. The red off-road SUV creeps very slowly forward only a short distance, less than one wheel diameter, and gently stops. The tires turn slightly and the suspension rocks subtly as it crosses a small stone. Keep the entire vehicle fully visible throughout with its rigid body, roof rack and wheels unchanged. The sandstone arch, canyon walls, foreground ground, distant mountains and sunset illumination remain fixed. No dust cloud, no people or animals. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "32387746e9d71534b438fa79902e8d9cd89aad06c523db94f6b3b82df63f2132",
+            "score": 0.850434118960084,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+            "run": "evaluation/replacement-background-suv-r3/results/background_consistency/origin.json",
+            "experiment": "showcase-refine-20261009/replacements-20261009",
+            "receipt": "data/background-replacements-20261009.json",
             "media_seconds": 5
           }
         ],
         "ours": [
           {
-            "id": "30-background-desert--original",
-            "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "fd4e9f67f5604566b3e991bf32c73423e2b32614bfd02e48b5d7c1670a9948fd",
-            "score": 0.9880367503446692,
+            "id": "30-background-desert-suv-v2--original",
+            "prompt": "Use the reference image as the first frame. The red off-road SUV creeps very slowly forward only a short distance, less than one wheel diameter, and gently stops. The tires turn slightly and the suspension rocks subtly as it crosses a small stone. Keep the entire vehicle fully visible throughout with its rigid body, roof rack and wheels unchanged. The sandstone arch, canyon walls, foreground ground, distant mountains and sunset illumination remain fixed. No dust cloud, no people or animals. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "ab702fe268d624be55ab840f10fa150504d70afe8dfb08e138e3b0cd7a5f4dfa",
+            "score": 0.9861312567018995,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+            "run": "evaluation/replacement-background-suv-r3/results/background_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/replacements-20261009",
+            "receipt": "data/background-replacements-20261009.json",
             "media_seconds": 5
           },
           {
-            "id": "30-background-desert--counterfactual",
-            "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
-            "video_sha256": "ffb9cb852f537ec18215fbac34715cf5670a20735bb0eb0e25726bebed0514ca",
-            "score": 0.9859939874387255,
+            "id": "30-background-desert-suv-v2--blur20-end95",
+            "prompt": "Use the reference image as the first frame. The red off-road SUV creeps very slowly forward only a short distance, less than one wheel diameter, and gently stops. The tires turn slightly and the suspension rocks subtly as it crosses a small stone. Keep the entire vehicle fully visible throughout with its rigid body, roof rack and wheels unchanged. The sandstone arch, canyon walls, foreground ground, distant mountains and sunset illumination remain fixed. No dust cloud, no people or animals. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
+            "video_sha256": "32387746e9d71534b438fa79902e8d9cd89aad06c523db94f6b3b82df63f2132",
+            "score": 0.9752647250306373,
             "status": "succeeded",
-            "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+            "run": "evaluation/replacement-background-suv-r3/results/background_consistency/repair.json",
+            "experiment": "showcase-refine-20261009/replacements-20261009",
+            "receipt": "data/background-replacements-20261009.json",
             "media_seconds": 5
           }
         ]
       },
       "provenance": {
         "first_frame": "assets/videos/30-background-desert/first-frame.png",
-        "first_frame_sha256": "b4b2573383b56b362f816c962d90fd663b92f04a8ea6c9f2bb90284aad51790e",
-        "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "first_frame_sha256": "a1b4b93d1eb6b282ced6fb586589c5540e4846a9a3c5c6c2e64c8e44bcba2422",
+        "prompt": "Use the reference image as the first frame. The red off-road SUV creeps very slowly forward only a short distance, less than one wheel diameter, and gently stops. The tires turn slightly and the suspension rocks subtly as it crosses a small stone. Keep the entire vehicle fully visible throughout with its rigid body, roof rack and wheels unchanged. The sandstone arch, canyon walls, foreground ground, distant mountains and sunset illumination remain fixed. No dust cloud, no people or animals. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
         "generation": {
-          "case_id": "30-background-desert",
-          "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "case_id": "30-background-desert-suv-v2",
+          "prompt": "Use the reference image as the first frame. The red off-road SUV creeps very slowly forward only a short distance, less than one wheel diameter, and gently stops. The tires turn slightly and the suspension rocks subtly as it crosses a small stone. Keep the entire vehicle fully visible throughout with its rigid body, roof rack and wheels unchanged. The sandstone arch, canyon walls, foreground ground, distant mountains and sunset illumination remain fixed. No dust cloud, no people or animals. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous natural movement. No camera tracking, zoom, pan, cuts or simulated image scaling. No speech.",
           "enhance_prompt": false,
-          "seed": 2026100830,
-          "first_frame": "cases/layer-02/30-background-desert/input/first-frame.png",
-          "first_frame_sha256": "b4b2573383b56b362f816c962d90fd663b92f04a8ea6c9f2bb90284aad51790e",
+          "seed": 2026100930,
+          "first_frame": "/data/chenjiayu/wenbiao_zhao/vbench-showcase-refine-20261009/replacements-20261009/sources/30-background-desert-suv-v2/input/first-frame.png",
+          "first_frame_sha256": "a1b4b93d1eb6b282ced6fb586589c5540e4846a9a3c5c6c2e64c8e44bcba2422",
           "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_root": "/data/chenjiayu/wenbiao_zhao/vbench-showcase-20261008/ltx25-worktree",
           "source_status": "?? scripts/",
           "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
           "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
@@ -8839,9 +9413,10 @@
           "pipeline": "DistilledPipeline",
           "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
           "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
-          "started_at_utc": "2026-10-09T04:43:38.507772+00:00",
+          "started_at_utc": "2026-10-09T09:11:21.290413+00:00",
           "status": "succeeded",
           "device_name": "NVIDIA H200 NVL",
+          "gpu_identity": "GPU-7d459912-b567-59fb-8abf-57c18713cb84, NVIDIA H200 NVL, 580.126.20",
           "cuda_version": "12.8",
           "versions": {
             "torch": "2.9.1",
@@ -8851,7 +9426,7 @@
             "ltx-core": "1.4.2",
             "ltx-pipelines": "1.4.2"
           },
-          "elapsed_seconds": 65.91683884896338,
+          "elapsed_seconds": 138.3908235374838,
           "peak_cuda_allocated_bytes": 42069817856,
           "media": {
             "width": 1024,
@@ -8860,22 +9435,175 @@
             "duration": "5.000000",
             "nb_read_frames": "120"
           },
-          "native_rgb_sha256": "a0418af3150f72eacb4de42ba47b8bd628e1db6de5bdf95b19516716a6868bd8",
-          "video_sha256": "50d59fc1bb5e58f71902919187247d939e65818b804206e77f99ea5ca75ba9fb"
+          "native_rgb_sha256": "fa5e114658e0f8ace85878e8b20956ae3c24f4f69c4d2773d784cec15eb85ee0",
+          "video_sha256": "ab702fe268d624be55ab840f10fa150504d70afe8dfb08e138e3b0cd7a5f4dfa"
         },
         "construction": {
-          "case": "30-background-desert",
-          "attempt": "ltx25-seed2026100830",
-          "source_sha256": "a0418af3150f72eacb4de42ba47b8bd628e1db6de5bdf95b19516716a6868bd8",
-          "duration_seconds": 5,
-          "fps": 24,
-          "frames": 120,
-          "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
-          "physical_gpu": "7",
-          "source_kind": "LTX-2.5 generated native RGB master",
-          "scoring_localizers_receive_construction_masks": false,
-          "operation": "foreground_blur",
+          "case": "30-background-desert-suv-v2",
+          "site_case": "30-background-desert",
+          "dimension": "background_consistency",
+          "spec": {
+            "name": "blur20-end95",
+            "sigma": 20,
+            "fraction": 1,
+            "indices": [
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119
+            ]
+          },
+          "variant": "blur20-end95",
           "window_indices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
             45,
             46,
             47,
@@ -8905,58 +9633,460 @@
             71,
             72,
             73,
-            74
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119
           ],
-          "sigma_native_pixels": 90,
-          "construction_box": [
-            360,
-            150,
-            580,
-            638
+          "schedule": [
+            {
+              "blurred": false,
+              "start": 0,
+              "end_exclusive": 6,
+              "frames": 6
+            },
+            {
+              "blurred": true,
+              "start": 6,
+              "end_exclusive": 120,
+              "frames": 114
+            }
           ],
-          "mask_sha256": "8c6ebeafee9c2f199c04e43675c723a0dc23e89947dde066f884e67275e852fb",
-          "mask_area_fraction_range": [
-            0.0222747802734375,
-            0.03504791259765625
-          ],
-          "protected_rgb_pixels_max_difference": 0,
-          "subject_guard_dilation_kernel": null,
-          "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
-          "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
-          "status": "constructed; visual review pending",
-          "elapsed_seconds": 80.1095058619976,
+          "source_video_sha256": "ab702fe268d624be55ab840f10fa150504d70afe8dfb08e138e3b0cd7a5f4dfa",
+          "mask_source_sha256": "e6bfd88e991f3e6b9086e7e2c7445625815bb13eb603d6f77d788c0fbcc302c9",
+          "mask_role": "Independent SAM2 construction; not scoring localization or human ground truth",
+          "foreground": "car",
+          "protected_region": "Every pixel outside the independent foreground mask",
+          "protected_fraction": 0.7411228052775065,
+          "preencode_protected_max_error": 0,
+          "preencode_outside_window_max_error": 0,
+          "postencode_protected_mean_error": 1.8318036236674389,
+          "scoring_localizers_receive_construction_masks": false,
+          "script_sha256": "cba78597ffb9c894b82e7b89600d753ee53ff39078f9ff4df2c584a073f9278d",
+          "helper_sha256": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
           "files": {
-            "original.mp4": "fd4e9f67f5604566b3e991bf32c73423e2b32614bfd02e48b5d7c1670a9948fd",
-            "counterfactual.mp4": "ffb9cb852f537ec18215fbac34715cf5670a20735bb0eb0e25726bebed0514ca",
-            "original-rgb.mp4": "0f4ec562dbe5989aeb5f676109f827cd916de8eb8b36b0c945633c859a606ebb",
-            "counterfactual-rgb.mp4": "cc5b52e7ea3e05dd09e66c3ba02e282eb2b87110716d001674ab11cf3fb3bc4e"
-          },
-          "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
+            "counterfactual.mp4": "32387746e9d71534b438fa79902e8d9cd89aad06c523db94f6b3b82df63f2132",
+            "counterfactual-rgb.mp4": "e921cd837f59e90d6455e1173bdd65e7ed9e7befceb103d1bb085fb77cf03822"
+          }
+        },
+        "first_frame_source": {
+          "id": "30-background-desert-suv-v2",
+          "site_case": "30-background-desert",
+          "seed": 2026100930,
+          "source_image": "source-image.png",
+          "foreground": "car",
+          "image_prompt": "Use case: photorealistic-natural. Asset type: first frame for a five-second research showcase video, landscape 16:10 composition, no text. A photorealistic cinematic photograph at a Utah sandstone overlook at golden sunset. A dramatic natural red sandstone arch, layered desert mesas, distant mountains and warm sky are clearly visible in the upper background. In the immediate lower foreground is one unbranded vintage red off-road SUV, three-quarter side view, the whole rigid vehicle visible including all wheels, bumpers and roof, taking roughly 70 percent of frame width and 55 percent of frame height, silhouette covering about 30 percent of all pixels. Keep generous margins around the whole vehicle and a clear rock path beneath its tires. Classic boxy body, realistic slightly dusty painted metal, dark windows, simple roof rack, detailed rubber tires. No visible people or animals. The arch remains visible above and beside the SUV. Camera is low and completely stationary. Everything is sharp: richly detailed desert rocks, natural restrained colors, beautiful warm rim light, realistic perspective and proportions. No dramatic dust clouds, no motion blur, no text, no brands, no watermark, no borders or collage.",
+          "motion": "The red off-road SUV creeps very slowly forward only a short distance, less than one wheel diameter, and gently stops. The tires turn slightly and the suspension rocks subtly as it crosses a small stone. Keep the entire vehicle fully visible throughout with its rigid body, roof rack and wheels unchanged. The sandstone arch, canyon walls, foreground ground, distant mountains and sunset illumination remain fixed. No dust cloud, no people or animals.",
+          "first_frame": "first-frame.png",
+          "image_tool": "built-in image_gen",
+          "source_image_sha256": "33a372ed18dadf81543080f9a49ae66987b7e6c6c039d57fcf2c4cf5d987a111",
+          "first_frame_sha256": "a1b4b93d1eb6b282ced6fb586589c5540e4846a9a3c5c6c2e64c8e44bcba2422",
+          "first_frame_preparation": "Resize complete generated image to 1024x640 with Lanczos; no crop"
         },
         "reviews": [
           {
-            "decision": "accepted",
-            "attempt": "ltx25-seed2026100830",
-            "duration_seconds": 5,
-            "reviewer": "assistant inspection of six temporal frames, not human ground truth",
-            "observed_motion": "Hiker shades eyes and turns; generated scene also has camera/illumination drift.",
-            "first_frame": "cases/layer-02/30-background-desert/input/first-frame.png",
-            "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
+            "decision": "accepted_for_exploration",
+            "reviewer": "Agent inspection, not human ground truth",
+            "frames": [
+              0,
+              11,
+              22,
+              32,
+              43,
+              54,
+              65,
+              76,
+              87,
+              97,
+              108,
+              119
+            ],
+            "mask_sha256": "e6bfd88e991f3e6b9086e7e2c7445625815bb13eb603d6f77d788c0fbcc302c9",
+            "observations": "SUV creeps forward and stops while remaining fully visible. Inspected masks include the body, windows, tires and roof rack. The arch and surrounding terrain remain identifiable, with some generated illumination evolution.",
+            "limitations": "Twelve sampled frames do not prove perfect segmentation or camera stability on every frame; actual paired background equality is asserted before encoding."
           },
           {
-            "decision": "accepted",
-            "pair_variant": "ltx25-seed2026100830",
-            "reviewer": "assistant visual review; not human ground truth",
-            "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
-            "operation": "foreground_blur",
-            "limitations": [
-              "SAM2 construction masks are automatic propagation from hand-declared first-frame boxes, not ground truth.",
-              "The desert backpack is segmented separately from the person on some frames and remains sharp; do not claim that every foreground object is blurred.",
-              "Protected pixel identity applies before lossy browser encoding."
-            ]
+            "reviewer": "Agent contact-sheet inspection, not human segmentation ground truth",
+            "frames": [
+              0,
+              20,
+              59,
+              90,
+              119
+            ],
+            "review_sha256": "c1a0393c05b4e2a3b0b598b1a7ef9191ebcee89c601285e5274c9ec755d6115c",
+            "observations": "The vehicle body, roof rack, windows and wheels are blurred at sampled edited frames; the arch and terrain remain identifiable.",
+            "limitations": "Sampled review does not prove perfect semantic isolation on every frame. Browser encoding can alter protected pixels."
           }
         ],
-        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+        "background_replacement_20261009": {
+          "site_case": "30-background-desert",
+          "source_case": "30-background-desert-suv-v2",
+          "variant_directory": "variants-r3",
+          "variant": "blur20-end95",
+          "run": "replacement-background-suv-r3",
+          "original_sha256": "ab702fe268d624be55ab840f10fa150504d70afe8dfb08e138e3b0cd7a5f4dfa",
+          "counterfactual_sha256": "32387746e9d71534b438fa79902e8d9cd89aad06c523db94f6b3b82df63f2132",
+          "official": [
+            0.9752720424107143,
+            0.850434118960084
+          ],
+          "ours": [
+            0.9861312567018995,
+            0.9752647250306373
+          ],
+          "official_drop": 0.12483792345063027,
+          "ours_change": -0.01086653167126217,
+          "ours_empty_foreground_frames": [
+            0,
+            0
+          ],
+          "blur_window_seconds": [
+            0.25,
+            5.0
+          ],
+          "blur_frames": 114,
+          "sigma_pixels": 20,
+          "visual_review": {
+            "reviewer": "Agent contact-sheet inspection, not human segmentation ground truth",
+            "frames": [
+              0,
+              20,
+              59,
+              90,
+              119
+            ],
+            "review_sha256": "c1a0393c05b4e2a3b0b598b1a7ef9191ebcee89c601285e5274c9ec755d6115c",
+            "observations": "The vehicle body, roof rack, windows and wheels are blurred at sampled edited frames; the arch and terrain remain identifiable.",
+            "limitations": "Sampled review does not prove perfect semantic isolation on every frame. Browser encoding can alter protected pixels."
+          },
+          "media_probes": {
+            "original": {
+              "width": 1024,
+              "height": 640,
+              "r_frame_rate": "24/1",
+              "duration": "5.000000",
+              "nb_read_frames": "120"
+            },
+            "counterfactual": {
+              "width": 1024,
+              "height": 640,
+              "r_frame_rate": "24/1",
+              "duration": "5.000000",
+              "nb_read_frames": "120"
+            }
+          },
+          "report": "https://github.com/winbeau/vbench-faithful/blob/0fef1e413ac696912d7dd49e78b21078c0781619/docs/validation/showcase-background-replacements-20261009.md",
+          "receipt": "data/background-replacements-20261009.json"
+        }
+      },
+      "score_history": {
+        "revisions": [
+          {
+            "reason": "Original and counterfactual replaced by a newly generated nonhuman source on 2026-10-09",
+            "scores": {
+              "vbench": [
+                0.9762978433560925,
+                0.9656315651260504
+              ],
+              "ours": [
+                0.9880367503446692,
+                0.9859939874387255
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                null,
+                null
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "30-background-desert--original",
+                  "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "fd4e9f67f5604566b3e991bf32c73423e2b32614bfd02e48b5d7c1670a9948fd",
+                  "score": 0.9762978433560925,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "30-background-desert--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "ffb9cb852f537ec18215fbac34715cf5670a20735bb0eb0e25726bebed0514ca",
+                  "score": 0.9656315651260504,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/origin.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "30-background-desert--original",
+                  "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "fd4e9f67f5604566b3e991bf32c73423e2b32614bfd02e48b5d7c1670a9948fd",
+                  "score": 0.9880367503446692,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "30-background-desert--counterfactual",
+                  "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                  "video_sha256": "ffb9cb852f537ec18215fbac34715cf5670a20735bb0eb0e25726bebed0514ca",
+                  "score": 0.9859939874387255,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-02/results-run-01/background_consistency/repair.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/30-background-desert/original.mp4",
+                "poster": "assets/videos/30-background-desert/original-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "fd4e9f67f5604566b3e991bf32c73423e2b32614bfd02e48b5d7c1670a9948fd",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/30-background-desert/counterfactual.mp4",
+                "poster": "assets/videos/30-background-desert/counterfactual-poster.webp",
+                "poster_time_seconds": 2.5,
+                "sha256": "ffb9cb852f537ec18215fbac34715cf5670a20735bb0eb0e25726bebed0514ca",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "a ",
+              "focus": [
+                "desert arch",
+                "desert arch"
+              ],
+              "after": " at last light"
+            },
+            "provenance": {
+              "first_frame": "assets/videos/30-background-desert/first-frame.png",
+              "first_frame_sha256": "b4b2573383b56b362f816c962d90fd663b92f04a8ea6c9f2bb90284aad51790e",
+              "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+              "generation": {
+                "case_id": "30-background-desert",
+                "prompt": "Use the reference image as the first frame. The hiker shifts weight, turns their upper body to look across the canyon, lifts a hand to shade their eyes and takes one small step along the overlook. Their clothing moves slightly in the breeze. Keep the canyon, foreground rocks, horizon and sunset illumination fixed. Hold the camera completely still. One uninterrupted five-second live-action shot with continuous real movement, stable identities and natural anatomy. No zoom, pan, cuts or simulated image scaling. No speech.",
+                "enhance_prompt": false,
+                "seed": 2026100830,
+                "first_frame": "cases/layer-02/30-background-desert/input/first-frame.png",
+                "first_frame_sha256": "b4b2573383b56b362f816c962d90fd663b92f04a8ea6c9f2bb90284aad51790e",
+                "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+                "source_status": "?? scripts/",
+                "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+                "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+                "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+                "physical_gpu": "5",
+                "logical_device": "cuda:0",
+                "width": 1024,
+                "height": 640,
+                "fps": 24,
+                "generated_frames": 121,
+                "delivery_frames": 120,
+                "delivery_seconds": 5,
+                "temporal_operation": "drop only the terminal generated frame; no resampling",
+                "precision": "bfloat16",
+                "quantization": null,
+                "pipeline": "DistilledPipeline",
+                "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+                "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+                "started_at_utc": "2026-10-09T04:43:38.507772+00:00",
+                "status": "succeeded",
+                "device_name": "NVIDIA H200 NVL",
+                "cuda_version": "12.8",
+                "versions": {
+                  "torch": "2.9.1",
+                  "torchvision": "0.24.1",
+                  "torchaudio": "2.9.1",
+                  "transformers": "5.14.1",
+                  "ltx-core": "1.4.2",
+                  "ltx-pipelines": "1.4.2"
+                },
+                "elapsed_seconds": 65.91683884896338,
+                "peak_cuda_allocated_bytes": 42069817856,
+                "media": {
+                  "width": 1024,
+                  "height": 640,
+                  "r_frame_rate": "24/1",
+                  "duration": "5.000000",
+                  "nb_read_frames": "120"
+                },
+                "native_rgb_sha256": "a0418af3150f72eacb4de42ba47b8bd628e1db6de5bdf95b19516716a6868bd8",
+                "video_sha256": "50d59fc1bb5e58f71902919187247d939e65818b804206e77f99ea5ca75ba9fb"
+              },
+              "construction": {
+                "case": "30-background-desert",
+                "attempt": "ltx25-seed2026100830",
+                "source_sha256": "a0418af3150f72eacb4de42ba47b8bd628e1db6de5bdf95b19516716a6868bd8",
+                "duration_seconds": 5,
+                "fps": 24,
+                "frames": 120,
+                "script_sha256": "029b282bd063aed56094dec4d17ab65a39892f900ca41a6d0622ba9d118284da",
+                "physical_gpu": "7",
+                "source_kind": "LTX-2.5 generated native RGB master",
+                "scoring_localizers_receive_construction_masks": false,
+                "operation": "foreground_blur",
+                "window_indices": [
+                  45,
+                  46,
+                  47,
+                  48,
+                  49,
+                  50,
+                  51,
+                  52,
+                  53,
+                  54,
+                  55,
+                  56,
+                  57,
+                  58,
+                  59,
+                  60,
+                  61,
+                  62,
+                  63,
+                  64,
+                  65,
+                  66,
+                  67,
+                  68,
+                  69,
+                  70,
+                  71,
+                  72,
+                  73,
+                  74
+                ],
+                "sigma_native_pixels": 90,
+                "construction_box": [
+                  360,
+                  150,
+                  580,
+                  638
+                ],
+                "mask_sha256": "8c6ebeafee9c2f199c04e43675c723a0dc23e89947dde066f884e67275e852fb",
+                "mask_area_fraction_range": [
+                  0.0222747802734375,
+                  0.03504791259765625
+                ],
+                "protected_rgb_pixels_max_difference": 0,
+                "subject_guard_dilation_kernel": null,
+                "mask_role": "SAM2.1 manual first-frame box and automatic propagation; independent of scoring MaskRCNN/MobileSAM; not ground truth",
+                "sam2_weights_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+                "status": "constructed; visual review pending",
+                "elapsed_seconds": 80.1095058619976,
+                "files": {
+                  "original.mp4": "fd4e9f67f5604566b3e991bf32c73423e2b32614bfd02e48b5d7c1670a9948fd",
+                  "counterfactual.mp4": "ffb9cb852f537ec18215fbac34715cf5670a20735bb0eb0e25726bebed0514ca",
+                  "original-rgb.mp4": "0f4ec562dbe5989aeb5f676109f827cd916de8eb8b36b0c945633c859a606ebb",
+                  "counterfactual-rgb.mp4": "cc5b52e7ea3e05dd09e66c3ba02e282eb2b87110716d001674ab11cf3fb3bc4e"
+                },
+                "encoding_note": "Original and counterfactual use matched encoding. Exact protected-pixel checks refer to retained pre-encode RGB; lossy delivery can alter pixels outside the edit support."
+              },
+              "reviews": [
+                {
+                  "decision": "accepted",
+                  "attempt": "ltx25-seed2026100830",
+                  "duration_seconds": 5,
+                  "reviewer": "assistant inspection of six temporal frames, not human ground truth",
+                  "observed_motion": "Hiker shades eyes and turns; generated scene also has camera/illumination drift.",
+                  "first_frame": "cases/layer-02/30-background-desert/input/first-frame.png",
+                  "limitations": "Generated motion does not follow every camera and action constraint exactly. Counterfactuals are derived from this same output; no independent takes are compared."
+                },
+                {
+                  "decision": "accepted",
+                  "pair_variant": "ltx25-seed2026100830",
+                  "reviewer": "assistant visual review; not human ground truth",
+                  "evidence": "Paired views at 2.00 and 2.75 seconds inspected; source temporal sheets and, where present, six-frame construction mask sheets inspected. All delivered clips are five seconds. Blur is confined to the intended region during frames 45–74; pre-encode protected pixel differences are exactly zero.",
+                  "operation": "foreground_blur",
+                  "limitations": [
+                    "SAM2 construction masks are automatic propagation from hand-declared first-frame boxes, not ground truth.",
+                    "The desert backpack is segmented separately from the person on some frames and remains sharp; do not claim that every foreground object is blurred.",
+                    "Protected pixel identity applies before lossy browser encoding."
+                  ]
+                }
+              ],
+              "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+            },
+            "previous_site_commit": "3a6980be12ded502b2b9100ca905aa31438bd5a9"
+          }
+        ]
       }
     }
   ],

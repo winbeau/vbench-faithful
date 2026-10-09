@@ -1545,5 +1545,21 @@
         }
       ]
     }
-  ]
+  ],
+  "background_replacements_20261009": {
+    "report": "https://github.com/winbeau/vbench-faithful/blob/0fef1e413ac696912d7dd49e78b21078c0781619/docs/validation/showcase-background-replacements-20261009.md",
+    "receipt": "data/background-replacements-20261009.json",
+    "replaced_cases": [
+      "27-background-kyoto",
+      "30-background-desert"
+    ],
+    "new_originals": 2,
+    "new_counterfactuals": 2,
+    "foreground_types": [
+      "cat",
+      "car"
+    ],
+    "scoring_methods_changed": false,
+    "scope": "Outcome-guided selected illustrations, not held-out evidence; both backends freshly score each displayed file"
+  }
 }

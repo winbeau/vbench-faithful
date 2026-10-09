@@ -25,7 +25,7 @@ under ignored `output/`; this branch contains only the site and its small tools.
 - `data/` contains case descriptions, full-precision measured scores and provenance.
 - `data/deployment.json` identifies every served file by SHA-256. Actions checks it before deployment.
 
-The page displays 30 pairs across nine dimensions. Thirty LTX-2.5 originals and
+The page displays 30 pairs across nine dimensions. Thirty-two LTX-2.5 originals and
 three exact static controls were produced on H200; three unselected cases remain
 in `archived_cases` in `data/nuisance.json`. The displayed selection has 112
 scores linked to evaluator receipts and three retest values supplied by the
@@ -49,10 +49,24 @@ continuous background blur from 0.5 to 5 seconds. Dog and horse use tighter
 construction masks. Their VBench scores are 0.8215 and 0.8461; all five are
 below 0.9, with a maximum absolute Ours change of 0.01087. Slower Background
 variants were rejected because their VBench scores remained at least 0.9,
-so that row retains its previous videos and matching scores. Kyoto and desert
-remain weak examples. `data/row-timing-20261009.json` preserves all 142 fresh
+so that check retained the previous Background videos and matching scores.
+Kyoto and desert were still weak examples at that stage.
+`data/row-timing-20261009.json` preserves all 142 fresh
 scores and the selection/rollback decisions; previous Subject scores remain
 in each case's history.
+
+Kyoto and desert were subsequently replaced with newly inferred LTX-2.5 cat
+and SUV videos, using built-in imagegen first frames. Their counterfactuals
+use continuous foreground blur from 0.25 to 5 seconds. Fresh VBench scores
+are 0.974012 → 0.873090 and 0.975272 → 0.850434; Ours scores are
+0.977877 → 0.969630 and 0.986131 → 0.975265. Both originals and both
+counterfactuals were replaced and rescored together; their former pairs
+remain in case history and Git. `data/background-replacements-20261009.json`
+retains all 33 candidates and 80 fresh score rows (74 unique scores), exact
+generation prompts, media hashes and selection limits. The cat's scoring
+foreground is absent in 109/120 blurred-video frames, so its score stability
+does not establish successful foreground detection. The SUV retains detected
+foreground on all frames. These are outcome-guided illustrative selections.
 
 The arXiv button points to the official homepage while the paper is processing.
 No model weights, caches, environments or raw worker logs are included in this branch.

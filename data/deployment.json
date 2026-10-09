@@ -732,33 +732,33 @@
     },
     {
       "path": "assets/videos/27-background-kyoto/counterfactual-poster.webp",
-      "bytes": 69674,
-      "sha256": "645b069dc4c79cff5837cbe58967cb83fac8e45eb44b3242a3aaed8bd40ce720"
+      "bytes": 50592,
+      "sha256": "dd9c4d4e447f79ef08f5e99866633cb2d747d274fd7e1c9a71ab0dfdcaf6ec1a"
     },
     {
       "path": "assets/videos/27-background-kyoto/counterfactual.mp4",
-      "bytes": 1595607,
-      "sha256": "2b5bcc41e2a69859df95f9cdaf6dd05011e7601e82d289e437b234967e293049"
+      "bytes": 1933193,
+      "sha256": "01ca9e3a06f36c0245f80f938048fadc0c82e29db57e8a24b19dd589c62b53cd"
     },
     {
       "path": "assets/videos/27-background-kyoto/first-frame.png",
-      "bytes": 1738880,
-      "sha256": "472feee2410ae929525a6f1217b419bec141ee6b2e491d9580b117c3772f996e"
+      "bytes": 1732822,
+      "sha256": "a6d1886e940e53bf4769a57611dd3ba4c5f8591f868f771bb33d194d73e719a0"
     },
     {
       "path": "assets/videos/27-background-kyoto/original-poster.webp",
-      "bytes": 71024,
-      "sha256": "ce93b5f23306ec3e6e8878822bdf6448f7bc7e368d292ec0682ab7170225c4a8"
+      "bytes": 57308,
+      "sha256": "c0fff66179853e72363cc4708ae8c457f7920323d6c813cdb478ef89f2a6eac4"
     },
     {
       "path": "assets/videos/27-background-kyoto/original.mp4",
-      "bytes": 1598699,
-      "sha256": "531bbf85ac4b7b798b27eb445b5e1ad756144284bdb4168383c82a8d2b11fc9c"
+      "bytes": 2228063,
+      "sha256": "d174ed6bce77146235647088873ca41fa6b67d291f2f6aafd1010be9e129e8e5"
     },
     {
       "path": "assets/videos/27-background-kyoto/prompt.txt",
-      "bytes": 536,
-      "sha256": "3ca7a71fd6f1ccdde2f73b0a228a3cff2c6599ef5482e689fc6ed9f144792c39"
+      "bytes": 654,
+      "sha256": "ba94cffb56eeee0509ee5e464a8783f2c45cc6da7cea45433f9f4d42884117e1"
     },
     {
       "path": "assets/videos/28-background-terrace/counterfactual-poster.webp",
@@ -822,33 +822,33 @@
     },
     {
       "path": "assets/videos/30-background-desert/counterfactual-poster.webp",
-      "bytes": 54932,
-      "sha256": "5e865676e624f50b704a537edb9e0922b1f83a072b2b07f5433dd8175088a8d0"
+      "bytes": 47048,
+      "sha256": "df8ab669603500eaa150ed281f02523f5aa79365f8b728e3a82f8bcd0696cf41"
     },
     {
       "path": "assets/videos/30-background-desert/counterfactual.mp4",
-      "bytes": 1565501,
-      "sha256": "ffb9cb852f537ec18215fbac34715cf5670a20735bb0eb0e25726bebed0514ca"
+      "bytes": 1820368,
+      "sha256": "32387746e9d71534b438fa79902e8d9cd89aad06c523db94f6b3b82df63f2132"
     },
     {
       "path": "assets/videos/30-background-desert/first-frame.png",
-      "bytes": 1677249,
-      "sha256": "b4b2573383b56b362f816c962d90fd663b92f04a8ea6c9f2bb90284aad51790e"
+      "bytes": 1704005,
+      "sha256": "a1b4b93d1eb6b282ced6fb586589c5540e4846a9a3c5c6c2e64c8e44bcba2422"
     },
     {
       "path": "assets/videos/30-background-desert/original-poster.webp",
-      "bytes": 55572,
-      "sha256": "8e8a0c0d0dc21538ef9659b2b4c1677c8d2b69cf57f7f6e050928dd2fd1136be"
+      "bytes": 58814,
+      "sha256": "66eb1b439b9c6d95eb124eb0d6d8b3d0ea19744d445e4ee222df65105e33c570"
     },
     {
       "path": "assets/videos/30-background-desert/original.mp4",
-      "bytes": 1598598,
-      "sha256": "fd4e9f67f5604566b3e991bf32c73423e2b32614bfd02e48b5d7c1670a9948fd"
+      "bytes": 2359174,
+      "sha256": "ab702fe268d624be55ab840f10fa150504d70afe8dfb08e138e3b0cd7a5f4dfa"
     },
     {
       "path": "assets/videos/30-background-desert/prompt.txt",
-      "bytes": 525,
-      "sha256": "2cb5711ed04498926b31c2714fd8bdd853e44608a034c0ebc94a212da2ddb02c"
+      "bytes": 686,
+      "sha256": "31d5c11c45232e51a22ebd98dc7ad5e144558d3a3a09aa050cb8d73bd8b6b06c"
     },
     {
       "path": "assets/videos/31-spatial-coast/counterfactual-poster.webp",
@@ -1096,19 +1096,24 @@
       "sha256": "25cfcdba2b958b4e3ae258144eca24237820728d105ed018951db1380cf8148c"
     },
     {
+      "path": "data/background-replacements-20261009.json",
+      "bytes": 617857,
+      "sha256": "b011cfd2a88702f695021daf9f6f57d7a8d6cfd8c63d96159fcad7d9047a3446"
+    },
+    {
       "path": "data/cases.js",
-      "bytes": 441345,
-      "sha256": "b1fb6732c927bef086fcb98e6fd37fe2a0dad748b0ea2fda46e2102c508ca5e6"
+      "bytes": 473858,
+      "sha256": "9ec87d8a9651a6e9ade40e4382e2bf9d35245de1c468585deb18d0d0ad406f57"
     },
     {
       "path": "data/nuisance.json",
-      "bytes": 436117,
-      "sha256": "eb832ebbbce4e1ac2ef0242c9ff158b12aaf3a34f8f4d02516d92bf445e206c4"
+      "bytes": 486364,
+      "sha256": "bdd580b66f03daee8b06e55a5f7b9eb7a79e8bf3418508d25c8f8afabc544941"
     },
     {
       "path": "data/provenance.json",
-      "bytes": 43612,
-      "sha256": "504032881705f88f5662cea3e7f0653dc5cf90b6d81947e8d781c47d6a0d5199"
+      "bytes": 44249,
+      "sha256": "5e87507cd6e972049af7b32a95ebf2a39ffa719afb93d4d572d19dd2210b408b"
     },
     {
       "path": "data/refinement-20261009.json",
