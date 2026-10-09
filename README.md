@@ -122,7 +122,7 @@ Each command fixes its own dimension; YAML `dimensions: all` does not expand a d
 | Background Consistency | `background_consistency` | **Repair:** independent foreground localization, CLIP background patch pooling, and the selected calibrated frame-pair score |
 | Dynamic Degree | `dynamic_degree` | **Repair:** frozen V-JEPA 2.1 ViT-B encoder and the 51,393-parameter aligned-v1 continuous scoring head |
 | Spatial Relationship | `spatial_relationship` | **Repair:** ordered relation targets and direction-aware signed geometry |
-| Multiple Objects | `multiple_objects` | **Repair:** variable-length entity parsing and adjacent-frame detection confirmation |
+| Multiple Objects | `multiple_objects` | **Repair:** all parsed entities, including three or more targets, with adjacent-frame detection confirmation |
 | Color | `color` | **Repair:** target-instance color binding with all sampled frames in the denominator |
 | Motion Smoothness | `motion_smoothness` | **Accelerated:** Batched AMT interpolation |
 | Temporal Flickering | `temporal_flickering` | **Accelerated:** Streaming CPU frame differences |

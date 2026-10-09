@@ -53,6 +53,33 @@ Use the original metadata schema for official prompt-conditioned dimensions. For
 
 Each accelerator passed per-video checks on the fixed same-32 cohort with `abs(candidate - official) <= max(1e-6, 0.01 * abs(official))`, complete input identity and native-aggregate checks. This is numerical agreement on the tested cohort, not perceptual quality or universal equivalence. See the [sequential optimization record](plans/2026-10-08-speed32-optimization.md).
 
+### Multiple Objects: three or more targets
+
+The default repair parses and checks the **complete entity list**, including
+three or more objects. It never truncates this list to the original benchmark's
+two-object metadata. Every required object must be detected in the current
+frame and confirmed by a matching box in an immediately adjacent sampled frame.
+The 16-frame denominator, missing evidence and unconfirmed detections keep their
+published meanings. This is the selected repair, not a showcase-specific rule.
+
+For example, an `ours` input can use:
+
+```json
+[{"id":"three-objects","video":"videos/three-objects.mp4",
+  "prompt":"A cup, a dining table, and a vase are visible.",
+  "dimensions":["multiple_objects"]}]
+```
+
+Original VBench only accepts an object pair. To demonstrate that interface
+limit with `both`, explicitly add
+`"auxiliary_info":{"multiple_objects":{"object":"cup and dining table"}}`.
+Original then checks cup + table, while the repair also requires the vase.
+Removing the vase can leave Original at 1 and change the repair from 1 to 0;
+actual results depend on detection and parsing. Label the different target
+sets in any comparison: this is a multi-target extension demonstration, not
+a comparison with identical target sets or a new result on the official suite.
+Generation prompts and evaluation queries must also remain separately identified.
+
 ## Environments and reuse
 
 Root uv manages the lightweight controller, shared infrastructure, configuration and logging. Each project dimension gets its own uv-created environment at `.venvs/metrics/<dimension>/<visual|semantic>/<fingerprint>`. Model dependencies are shared read-only from the existing pinned visual Python 3.10 and semantic Python 3.11 runtimes. Mixing these ABIs in the root environment would break compiled dependencies. The thin environments have distinct prefixes and do not inherit other metric source paths; this is dependency/process isolation, not a filesystem security sandbox.
