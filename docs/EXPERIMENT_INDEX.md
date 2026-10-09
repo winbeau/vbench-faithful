@@ -10,6 +10,7 @@ The working tree retains the selected paper pipeline and its evidence.
 - [Interpretation limits and rejected experiments](reproduction/REJECTED_EXPERIMENTS.md).
 
 Separate exploratory evidence: [showcase target, blur range and timing checks](validation/showcase-refinement-20261009.md)
+and the [row timing follow-up with rejected Background schedules](validation/showcase-row-timing-20261009.md)
 retain every measured candidate and do not replace the frozen paper cohorts.
 
 Superseded plans, candidate implementations, old tables and the project website
