@@ -11,7 +11,8 @@ The working tree retains the selected paper pipeline and its evidence.
 
 Separate exploratory evidence: [showcase target, blur range and timing checks](validation/showcase-refinement-20261009.md),
 the [row timing follow-up with rejected Background schedules](validation/showcase-row-timing-20261009.md),
-and [newly generated cat/SUV Background replacements](validation/showcase-background-replacements-20261009.md)
+[newly generated cat/SUV Background replacements](validation/showcase-background-replacements-20261009.md),
+and [tighter per-frame Subject boundaries](validation/showcase-subject-boundaries-20261009.md)
 retain every measured candidate and do not replace the frozen paper cohorts.
 
 Superseded plans, candidate implementations, old tables and the project website
