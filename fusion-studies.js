@@ -23,7 +23,7 @@
       const missing = status && status !== 'succeeded';
       const reason = study.score_reasons?.[kind]?.[side] || 'The evaluator returned no score for this input.';
       const scope = study.score_scope ? ` ${study.score_scope}` : '';
-      const title = Number.isFinite(value) ? 'Measured score for this case.' + scope : missing ? reason : 'This new case has not been scored yet.';
+      const title = Number.isFinite(value) ? (status === 'reported_retest' ? 'Retested score for this case.' : 'Measured score for this case.') + scope : missing ? reason : 'This new case has not been scored yet.';
       return `<div class="semantic-score is-${kind}" title="${escape(title)}"><span>${name}</span><span class="semantic-score-value">${Number.isFinite(value)?value.toFixed(4):missing?'N/A':'—'}</span></div>`;
     }).join('')}</div>`;
   }
@@ -33,7 +33,7 @@
       const label = i?'Counterfactual':'Original';
       const value = (study.video || study.videos)?.[i?'counterfactual':'original'];
       const media = typeof value === 'string' ? {src:value} : value;
-      const overlay = `${!media?.src && view.preview==='jitter'?`<canvas class="nuisance-jitter" data-jitter-source="${escape(view.image)}" data-ready="false" aria-label="Still-image illustration of 8 pixel local jitter: ${escape(study.scene)}" hidden></canvas>`:''}<span class="semantic-condition">${label}</span>`;
+      const overlay = `${!media?.src && view.preview==='jitter'?`<canvas class="nuisance-jitter" data-jitter-source="${escape(view.image)}" data-ready="false" aria-label="Still-image illustration of 8 pixel local jitter: ${escape(study.scene)}" hidden></canvas>`:''}<span class="semantic-condition">${label}</span>${i && study.counterfactual_note ? `<span class="semantic-perturbation" title="${escape(study.counterfactual_note_detail || study.counterfactual_note)}">${escape(study.counterfactual_note)}</span>` : ''}`;
       return `<figure class="semantic-view" aria-label="${label}: ${escape(study.scene)}">${visual(view.image,view.side,Boolean(view.mirrored),`${label}: ${study.scene}`,overlay + (study.guide ? spatialGuide(study,view) : ''),view.layout==='single',view.position,media)}${semanticScores(study,i)}<figcaption class="semantic-prompt">… ${escape(excerpt.before)}<mark>${escape(excerpt.focus[i])}</mark>${escape(excerpt.after)} …</figcaption></figure>`;
     }).join('')}</div>`;
   }
@@ -43,7 +43,10 @@
     <section class="study-chapter study-spatial" id="layer-3"><div class="wrap">${chapterHead('c','Evidence Collapse')}<div id="spatial-study"></div></div></section>`;
 
   function renderSemantic() {
-    $('#semantic-study').innerHTML = semanticDimensions.map((dimension,i)=>`<section class="semantic-column" aria-labelledby="semantic-dimension-${i}"><header class="semantic-dimension"><h3 id="semantic-dimension-${i}">${escape(dimension)}</h3><span aria-hidden="true">${String(i+1).padStart(2,'0')}</span></header>${semantics.filter(study=>study.dimension===dimension).map(study=>`<article class="semantic-case" id="case-${study.id}" aria-label="${escape(study.scene)}">${semanticPair(study)}</article>`).join('')}</section>`).join('');
+    $('#semantic-study').innerHTML = semanticDimensions.map((dimension,i)=>{
+      const note = window.SEMANTIC_CASE_PLAN.dimension_notes?.[dimension];
+      return `<section class="semantic-column" aria-labelledby="semantic-dimension-${i}"><header class="semantic-dimension"><div class="semantic-dimension-title"><h3 id="semantic-dimension-${i}">${escape(dimension)}</h3><span aria-hidden="true">${String(i+1).padStart(2,'0')}</span></div>${note ? `<p class="semantic-dimension-note">${escape(note)}</p>` : ''}</header>${semantics.filter(study=>study.dimension===dimension).map(study=>`<article class="semantic-case" id="case-${study.id}" aria-label="${escape(study.scene)}">${semanticPair(study)}</article>`).join('')}</section>`;
+    }).join('');
   }
   function renderNuisance() {
     const card = study => `<article class="semantic-case nuisance-case" id="case-${study.id}" aria-label="${escape(study.scene)}">${semanticPair(study)}</article>`;

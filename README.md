@@ -27,10 +27,20 @@ under ignored `output/`; this branch contains only the site and its small tools.
 
 The page displays 30 pairs across nine dimensions. Thirty LTX-2.5 originals and
 three exact static controls were produced on H200; three unselected cases remain
-in `archived_cases` in `data/nuisance.json`. The displayed selection has 118
-measured scores and two explicit N/A results from original VBench Color.
+in `archived_cases` in `data/nuisance.json`. The displayed selection has 117
+scores linked to evaluator receipts and three retest values supplied by the
+author: both suitcase Color values and the jittered kayak Dynamic value.
+Earlier results remain in each case's score history.
 Both Dynamic backends score the same initial two seconds of each five-second
 clip. These are selected demonstrations, not a replay of the paper's frozen cohort.
+
+The 2026-10-09 refinement updates eight selected pairs: six counterfactual
+videos with their measured scores, plus two Multiple Objects target queries.
+Multiple Objects explicitly labels the two VBench targets versus all three
+Ours targets. Lakeside, terrace and museum use synthetic alternating-frame
+foreground blur, identified on their counterfactuals. Selection details and
+H200 receipts are preserved in `data/refinement-20261009.json`; Human Action
+keeps its recorded scores while the alias issue is deferred.
 
 The arXiv button points to the official homepage while the paper is processing.
 No model weights, caches, environments or raw worker logs are included in this branch.

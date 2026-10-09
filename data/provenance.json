@@ -1432,13 +1432,14 @@
   ],
   "limitations": [
     "Selected illustrative cases, not an unbiased cohort or new paper main-table results.",
-    "Official Color omitted both suitcase inputs; these remain N/A, not zero.",
+    "The archived official Color run omitted both suitcase inputs. The current page uses two author-reported retest values; the original missing records remain in score history.",
     "Ballet wording still changes both backends; moving tram and horse retain visible repair drift.",
     "Static bench does not fool official VBench; its scores remain archived after the author selected five displayed Dynamic cases. Static tram was added after that observation.",
     "Jitter seed 2904 passed frozen QC before scores. Seed 1701 failed the geometry gate and remains recorded as secondary.",
     "Spatial vertical swaps keep objects upright but do not guarantee equal center distances; real detections are recomputed.",
     "SAM2 construction masks and assistant visual review are not human ground truth. Exact protected-pixel identities refer to pre-encode RGB.",
-    "Dynamic initial repair run failed source verification; a separate clean checkout of the same pinned V-JEPA source enabled the recorded retry. No scoring formula or source check was bypassed."
+    "Dynamic initial repair run failed source verification; a separate clean checkout of the same pinned V-JEPA source enabled the recorded retry. No scoring formula or source check was bypassed.",
+    "The jittered kayak VBench score uses the author-provided second retest value; the earlier evaluation receipt remains in score history."
   ],
   "generated_pairs": 33,
   "displayed_pairs": 30,
@@ -1450,8 +1451,32 @@
     "40-static-tram"
   ],
   "displayed_score_records": {
-    "succeeded": 118,
-    "missing": 2
+    "succeeded": 117,
+    "author_reported_retest": 3,
+    "missing": 0
   },
-  "display_selection": "The author requested three moving cases and two static controls in one Dynamic row. The other three cases and all scores remain archived in nuisance.json; no scores were recomputed or altered."
+  "display_selection": "The author requested three moving cases and two static controls in one Dynamic row. The other three cases and all scores remain archived in nuisance.json; no scores were recomputed or altered.",
+  "refinement_20261009": {
+    "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
+    "receipt": "data/refinement-20261009.json",
+    "selected_cases": [
+      "03-objects",
+      "19-objects-vineyard",
+      "23-subject-cat",
+      "25-subject-parrot",
+      "26-subject-woman",
+      "07-background",
+      "28-background-terrace",
+      "29-background-museum"
+    ],
+    "media_replacements": 6,
+    "scoring_methods_changed": false,
+    "selection_scope": "Exploratory showcase selection; every measured attempt retained; numerical gates alone do not establish valid edit support",
+    "multiple_objects": "VBench checks two declared targets; Ours checks all three. This is target-set capacity, not identical-target accuracy.",
+    "background_stress_cases": [
+      "07-background",
+      "28-background-terrace",
+      "29-background-museum"
+    ]
+  }
 }

@@ -1282,15 +1282,15 @@
       "excerpt": {
         "before": "",
         "focus": [
-          "a cup and a vase",
-          "a cup and a vase"
+          "cup, table & vase",
+          "cup, table & vase"
         ],
         "after": " in soft light"
       },
       "scores": {
         "vbench": [
           1.0,
-          0.0
+          1.0
         ],
         "ours": [
           1.0,
@@ -1317,7 +1317,7 @@
           ""
         ]
       },
-      "score_scope": "Complete displayed five-second video.",
+      "score_scope": "Complete displayed five-second video. Target-set capacity comparison: VBench checks cup and dining table; Ours also checks vase.",
       "videos": {
         "original": {
           "src": "assets/videos/03-objects/original.mp4",
@@ -1350,40 +1350,48 @@
         "vbench": [
           {
             "id": "03-objects--original",
-            "prompt": "a cup and a vase",
+            "prompt": "A cup, a dining table, and a vase are visible.",
             "video_sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
             "score": 1.0,
             "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+            "run": "evaluation/objects-three-run-01/results/multiple_objects/origin.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
             "media_seconds": 5
           },
           {
             "id": "03-objects--counterfactual",
-            "prompt": "a cup and a vase",
+            "prompt": "A cup, a dining table, and a vase are visible.",
             "video_sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
-            "score": 0.0,
+            "score": 1.0,
             "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+            "run": "evaluation/objects-three-run-01/results/multiple_objects/origin.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
             "media_seconds": 5
           }
         ],
         "ours": [
           {
             "id": "03-objects--original",
-            "prompt": "a cup and a vase",
+            "prompt": "A cup, a dining table, and a vase are visible.",
             "video_sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
             "score": 1.0,
             "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+            "run": "evaluation/objects-three-run-01/results/multiple_objects/repair.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
             "media_seconds": 5
           },
           {
             "id": "03-objects--counterfactual",
-            "prompt": "a cup and a vase",
+            "prompt": "A cup, a dining table, and a vase are visible.",
             "video_sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
             "score": 0.0,
             "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+            "run": "evaluation/objects-three-run-01/results/multiple_objects/repair.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
             "media_seconds": 5
           }
         ]
@@ -1545,7 +1553,240 @@
             }
           }
         ],
-        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+        "refinement_20261009": {
+          "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+          "case": "03-objects",
+          "dimension": "multiple_objects",
+          "variant": "counterfactual",
+          "official": [
+            1.0,
+            1.0
+          ],
+          "ours": [
+            1.0,
+            0.0
+          ],
+          "official_drop": 0.0,
+          "ours_change": -1.0,
+          "original_sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+          "counterfactual_sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+          "runs": [
+            "objects-three-run-01"
+          ],
+          "local_pair": "output/showcase-refine-20261009/selected/03-objects",
+          "selection_note": "Approved two-versus-three target scope; unchanged video bytes",
+          "official_targets": [
+            "cup",
+            "dining table"
+          ],
+          "ours_targets": [
+            "cup",
+            "dining table",
+            "vase"
+          ],
+          "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
+          "receipt": "data/refinement-20261009.json"
+        }
+      },
+      "score_history": {
+        "revisions": [
+          {
+            "reason": "Superseded by selected refinement on 2026-10-09",
+            "scores": {
+              "vbench": [
+                1.0,
+                0.0
+              ],
+              "ours": [
+                1.0,
+                0.0
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                "",
+                ""
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "03-objects--original",
+                  "prompt": "a cup and a vase",
+                  "video_sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+                  "score": 1.0,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "03-objects--counterfactual",
+                  "prompt": "a cup and a vase",
+                  "video_sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+                  "score": 0.0,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "03-objects--original",
+                  "prompt": "a cup and a vase",
+                  "video_sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+                  "score": 1.0,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "03-objects--counterfactual",
+                  "prompt": "a cup and a vase",
+                  "video_sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+                  "score": 0.0,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/03-objects/original.mp4",
+                "poster": "assets/videos/03-objects/original-poster.webp",
+                "poster_time_seconds": 0,
+                "sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/03-objects/counterfactual.mp4",
+                "poster": "assets/videos/03-objects/counterfactual-poster.webp",
+                "poster_time_seconds": 0,
+                "sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "",
+              "focus": [
+                "a cup and a vase",
+                "a cup and a vase"
+              ],
+              "after": " in soft light"
+            },
+            "construction": {
+              "case": "03-objects",
+              "attempt": "ltx25-seed2026100803",
+              "recipe": {
+                "kind": "remove",
+                "box": [
+                  390,
+                  0,
+                  795,
+                  610
+                ],
+                "points": [
+                  [
+                    580,
+                    420
+                  ],
+                  [
+                    580,
+                    90
+                  ],
+                  [
+                    540,
+                    12
+                  ],
+                  [
+                    680,
+                    20
+                  ]
+                ],
+                "labels": [
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "role": "construction only; independent of all scoring localizers",
+              "source_native_sha256": "c7c948ae75b1e191b9fca195069991df18cbccd7af307b344e146d721a09d081",
+              "mask_sha256": "055ceb992ca103de508adc060b2a03273d05a27799b4296ecac7ff0f8450e28c",
+              "sam2_source_sha": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+              "sam2_weight_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+              "segmentation_input": "native RGB frames converted to JPEG quality 100 for SAM 2 input only",
+              "masks_are_ground_truth": false,
+              "area_fraction_range": [
+                0.1335235595703125,
+                0.149609375
+              ],
+              "pair_variant": "ltx25-seed2026100803-v2",
+              "additional_edit_support": {
+                "reason": "remove vase reflection on tabletop",
+                "rectangle_xyxy": [
+                  430,
+                  585,
+                  720,
+                  640
+                ]
+              },
+              "status": "constructed; visual review pending",
+              "duration_seconds": 5,
+              "frames": 120,
+              "fps": 24,
+              "elapsed_seconds": 33.84194057434797,
+              "preencode_protected_pixels_max_difference": 0,
+              "scoring_media": "The browser original.mp4 and counterfactual.mp4; matched H.264 CRF18 encoding. Lossless RGB controls are retained.",
+              "encoding_note": "Lossy display encoding can introduce small differences outside the edit support; strict pixel identity applies to the saved RGB controls.",
+              "files": {
+                "original.mp4": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+                "counterfactual.mp4": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+                "original-rgb.mp4": "94f8d47270120847ce3381edc6bb6def97c919e9c0e43cf64fe18895fdc1db28",
+                "counterfactual-rgb.mp4": "db853f7644ccd60dbf31a220ec94affe1e8f721486d2c05674334596542fc6d2"
+              },
+              "lama_weight_sha256": "344c77bbcb158f17dd143070d1e789f38a66c04202311ae3a258ef66667a9ea9"
+            }
+          }
+        ]
+      },
+      "score_targets": {
+        "vbench": [
+          "cup",
+          "dining table"
+        ],
+        "ours": [
+          "cup",
+          "dining table",
+          "vase"
+        ]
       }
     },
     {
@@ -1569,15 +1810,15 @@
       "excerpt": {
         "before": "",
         "focus": [
-          "a bottle and a wine glass",
-          "a bottle and a wine glass"
+          "bottle, table & wine glass",
+          "bottle, table & wine glass"
         ],
         "after": " at dusk"
       },
       "scores": {
         "vbench": [
           1.0,
-          0.0
+          1.0
         ],
         "ours": [
           1.0,
@@ -1604,7 +1845,7 @@
           ""
         ]
       },
-      "score_scope": "Complete displayed five-second video.",
+      "score_scope": "Complete displayed five-second video. Target-set capacity comparison: VBench checks bottle and dining table; Ours also checks wine glass.",
       "videos": {
         "original": {
           "src": "assets/videos/19-objects-vineyard/original.mp4",
@@ -1637,40 +1878,48 @@
         "vbench": [
           {
             "id": "19-objects-vineyard--original",
-            "prompt": "a bottle and a wine glass",
+            "prompt": "A bottle, a dining table, and a wine glass are visible.",
             "video_sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
             "score": 1.0,
             "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+            "run": "evaluation/objects-three-run-01/results/multiple_objects/origin.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
             "media_seconds": 5
           },
           {
             "id": "19-objects-vineyard--counterfactual",
-            "prompt": "a bottle and a wine glass",
+            "prompt": "A bottle, a dining table, and a wine glass are visible.",
             "video_sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
-            "score": 0.0,
+            "score": 1.0,
             "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+            "run": "evaluation/objects-three-run-01/results/multiple_objects/origin.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
             "media_seconds": 5
           }
         ],
         "ours": [
           {
             "id": "19-objects-vineyard--original",
-            "prompt": "a bottle and a wine glass",
+            "prompt": "A bottle, a dining table, and a wine glass are visible.",
             "video_sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
             "score": 1.0,
             "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+            "run": "evaluation/objects-three-run-01/results/multiple_objects/repair.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
             "media_seconds": 5
           },
           {
             "id": "19-objects-vineyard--counterfactual",
-            "prompt": "a bottle and a wine glass",
+            "prompt": "A bottle, a dining table, and a wine glass are visible.",
             "video_sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
             "score": 0.0,
             "status": "succeeded",
-            "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+            "run": "evaluation/objects-three-run-01/results/multiple_objects/repair.json",
+            "experiment": "showcase-refine-20261009",
+            "receipt": "data/refinement-20261009.json",
             "media_seconds": 5
           }
         ]
@@ -1796,7 +2045,206 @@
             }
           }
         ],
-        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+        "refinement_20261009": {
+          "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+          "case": "19-objects-vineyard",
+          "dimension": "multiple_objects",
+          "variant": "counterfactual",
+          "official": [
+            1.0,
+            1.0
+          ],
+          "ours": [
+            1.0,
+            0.0
+          ],
+          "official_drop": 0.0,
+          "ours_change": -1.0,
+          "original_sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+          "counterfactual_sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+          "runs": [
+            "objects-three-run-01"
+          ],
+          "local_pair": "output/showcase-refine-20261009/selected/19-objects-vineyard",
+          "selection_note": "Approved two-versus-three target scope; unchanged video bytes",
+          "official_targets": [
+            "bottle",
+            "dining table"
+          ],
+          "ours_targets": [
+            "bottle",
+            "dining table",
+            "wine glass"
+          ],
+          "report": "https://github.com/winbeau/vbench-faithful/blob/36bee44/docs/validation/showcase-refinement-20261009.md",
+          "receipt": "data/refinement-20261009.json"
+        }
+      },
+      "score_history": {
+        "revisions": [
+          {
+            "reason": "Superseded by selected refinement on 2026-10-09",
+            "scores": {
+              "vbench": [
+                1.0,
+                0.0
+              ],
+              "ours": [
+                1.0,
+                0.0
+              ]
+            },
+            "score_status": {
+              "vbench": [
+                "succeeded",
+                "succeeded"
+              ],
+              "ours": [
+                "succeeded",
+                "succeeded"
+              ]
+            },
+            "score_reasons": {
+              "vbench": [
+                "",
+                ""
+              ],
+              "ours": [
+                "",
+                ""
+              ]
+            },
+            "score_records": {
+              "vbench": [
+                {
+                  "id": "19-objects-vineyard--original",
+                  "prompt": "a bottle and a wine glass",
+                  "video_sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+                  "score": 1.0,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "19-objects-vineyard--counterfactual",
+                  "prompt": "a bottle and a wine glass",
+                  "video_sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+                  "score": 0.0,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+                  "media_seconds": 5
+                }
+              ],
+              "ours": [
+                {
+                  "id": "19-objects-vineyard--original",
+                  "prompt": "a bottle and a wine glass",
+                  "video_sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+                  "score": 1.0,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+                  "media_seconds": 5
+                },
+                {
+                  "id": "19-objects-vineyard--counterfactual",
+                  "prompt": "a bottle and a wine glass",
+                  "video_sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+                  "score": 0.0,
+                  "status": "succeeded",
+                  "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+                  "media_seconds": 5
+                }
+              ]
+            },
+            "videos": {
+              "original": {
+                "src": "assets/videos/19-objects-vineyard/original.mp4",
+                "poster": "assets/videos/19-objects-vineyard/original-poster.webp",
+                "poster_time_seconds": 0,
+                "sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              },
+              "counterfactual": {
+                "src": "assets/videos/19-objects-vineyard/counterfactual.mp4",
+                "poster": "assets/videos/19-objects-vineyard/counterfactual-poster.webp",
+                "poster_time_seconds": 0,
+                "sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+                "duration_seconds": 5.0,
+                "frames": 120,
+                "fps": "24/1",
+                "resolution": [
+                  1024,
+                  640
+                ]
+              }
+            },
+            "excerpt": {
+              "before": "",
+              "focus": [
+                "a bottle and a wine glass",
+                "a bottle and a wine glass"
+              ],
+              "after": " at dusk"
+            },
+            "construction": {
+              "case": "19-objects-vineyard",
+              "attempt": "ltx25-seed2026101819",
+              "recipe": {
+                "kind": "remove",
+                "box": [
+                  536,
+                  175,
+                  718,
+                  581
+                ]
+              },
+              "role": "construction only; independent of all scoring localizers",
+              "source_native_sha256": "f92fe1c8a6141ee0be482513fc8017c734997ad1cf6bfdaf31003c9f426d6f8a",
+              "mask_sha256": "992ff0ebfc13f91ef4f88047d725a745f1f6e1c7a66c7f0394d1d362b75f647c",
+              "sam2_source_sha": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+              "sam2_weight_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+              "segmentation_input": "native RGB frames converted to JPEG quality 100 for SAM 2 input only",
+              "masks_are_ground_truth": false,
+              "area_fraction_range": [
+                0.0480682373046875,
+                0.04867095947265625
+              ],
+              "status": "constructed; visual review pending",
+              "duration_seconds": 5,
+              "frames": 120,
+              "fps": 24,
+              "elapsed_seconds": 41.74504613876343,
+              "preencode_protected_pixels_max_difference": 0,
+              "scoring_media": "The browser original.mp4 and counterfactual.mp4; matched H.264 CRF18 encoding. Lossless RGB controls are retained.",
+              "encoding_note": "Lossy display encoding can introduce small differences outside the edit support; strict pixel identity applies to the saved RGB controls.",
+              "files": {
+                "original.mp4": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+                "counterfactual.mp4": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+                "original-rgb.mp4": "0884ec23ce21f14e9aa154d28bc730d3266da7b24f5c18c009e68d4eb82f3f3f",
+                "counterfactual-rgb.mp4": "e954e12f665e484deea3bec388c8e079f638efe6d99e9e5940ecbfd831f5ef73"
+              },
+              "lama_weight_sha256": "344c77bbcb158f17dd143070d1e789f38a66c04202311ae3a258ef66667a9ea9"
+            }
+          }
+        ]
+      },
+      "score_targets": {
+        "vbench": [
+          "bottle",
+          "dining table"
+        ],
+        "ours": [
+          "bottle",
+          "dining table",
+          "wine glass"
+        ]
       }
     },
     {
@@ -2079,8 +2527,8 @@
       },
       "scores": {
         "vbench": [
-          null,
-          null
+          1.0,
+          1.0
         ],
         "ours": [
           0.75,
@@ -2089,8 +2537,8 @@
       },
       "score_status": {
         "vbench": [
-          "dropped_by_official",
-          "dropped_by_official"
+          "reported_retest",
+          "reported_retest"
         ],
         "ours": [
           "succeeded",
@@ -2099,8 +2547,8 @@
       },
       "score_reasons": {
         "vbench": [
-          "upstream omitted input",
-          "upstream omitted input"
+          "",
+          ""
         ],
         "ours": [
           "",
@@ -2142,20 +2590,22 @@
             "id": "20-color-suitcase--original",
             "prompt": "a yellow suitcase",
             "video_sha256": "c3196c76c2a43c2bc8f7f6ea9dc6e225fdf369e75a5c41f0ef6f6b27e0187ad6",
-            "score": null,
-            "status": "dropped_by_official",
-            "reason": "upstream omitted input",
-            "run": "evaluation/layer-01/results-run-01/color/origin.json",
+            "score": 1.0,
+            "status": "reported_retest",
+            "source": "author-provided retest result",
+            "received_at_utc": "2026-10-09T06:48:53.067411+00:00",
+            "run": null,
             "media_seconds": 5
           },
           {
             "id": "20-color-suitcase--counterfactual",
             "prompt": "a yellow suitcase",
             "video_sha256": "e9c7b8fcb8a36d15070246649af287078285c450af266f7af59de7c75500ceb0",
-            "score": null,
-            "status": "dropped_by_official",
-            "reason": "upstream omitted input",
-            "run": "evaluation/layer-01/results-run-01/color/origin.json",
+            "score": 1.0,
+            "status": "reported_retest",
+            "source": "author-provided retest result",
+            "received_at_utc": "2026-10-09T06:48:53.067411+00:00",
+            "run": null,
             "media_seconds": 5
           }
         ],
@@ -2301,7 +2751,39 @@
           }
         ],
         "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      },
+      "score_history": {
+        "vbench": [
+          {
+            "source": "previous_evaluator_run",
+            "records": [
+              {
+                "id": "20-color-suitcase--original",
+                "prompt": "a yellow suitcase",
+                "video_sha256": "c3196c76c2a43c2bc8f7f6ea9dc6e225fdf369e75a5c41f0ef6f6b27e0187ad6",
+                "score": null,
+                "status": "dropped_by_official",
+                "reason": "upstream omitted input",
+                "run": "evaluation/layer-01/results-run-01/color/origin.json",
+                "media_seconds": 5
+              },
+              {
+                "id": "20-color-suitcase--counterfactual",
+                "prompt": "a yellow suitcase",
+                "video_sha256": "e9c7b8fcb8a36d15070246649af287078285c450af266f7af59de7c75500ceb0",
+                "score": null,
+                "status": "dropped_by_official",
+                "reason": "upstream omitted input",
+                "run": "evaluation/layer-01/results-run-01/color/origin.json",
+                "media_seconds": 5
+              }
+            ]
+          }
+        ]
       }
     }
-  ]
+  ],
+  "dimension_notes": {
+    "Multiple Objects": "VBench: 2 objects · Ours: all 3"
+  }
 }
