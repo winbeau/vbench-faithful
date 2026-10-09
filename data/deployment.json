@@ -1132,13 +1132,13 @@
     },
     {
       "path": "fusion-studies.css",
-      "bytes": 20923,
-      "sha256": "77c63fb683edfbbf8535ba03d3483bd5bab6876328277ec1302301e04f8b1632"
+      "bytes": 20668,
+      "sha256": "fa13d4d969678d25dde517e3bfe28aa7f8a5178e054a35e13d3e0127df3a66d9"
     },
     {
       "path": "fusion-studies.js",
-      "bytes": 9729,
-      "sha256": "d38ec8d780ba32c22a73f3090403b3a2ef85a7624730a5f2fd966c55263614f4"
+      "bytes": 9526,
+      "sha256": "2f8c1ed33a232f31fdd3dc0e2a58ef3cc4e30487d6ea6cdec04aa96042849707"
     },
     {
       "path": "fusion-typography.css",

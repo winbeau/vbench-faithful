@@ -33,7 +33,7 @@
       const label = i?'Counterfactual':'Original';
       const value = (study.video || study.videos)?.[i?'counterfactual':'original'];
       const media = typeof value === 'string' ? {src:value} : value;
-      const overlay = `${!media?.src && view.preview==='jitter'?`<canvas class="nuisance-jitter" data-jitter-source="${escape(view.image)}" data-ready="false" aria-label="Still-image illustration of 8 pixel local jitter: ${escape(study.scene)}" hidden></canvas>`:''}<span class="semantic-condition">${label}</span>${i && study.counterfactual_note ? `<span class="semantic-perturbation" title="${escape(study.counterfactual_note_detail || study.counterfactual_note)}">${escape(study.counterfactual_note)}</span>` : ''}`;
+      const overlay = `${!media?.src && view.preview==='jitter'?`<canvas class="nuisance-jitter" data-jitter-source="${escape(view.image)}" data-ready="false" aria-label="Still-image illustration of 8 pixel local jitter: ${escape(study.scene)}" hidden></canvas>`:''}<span class="semantic-condition">${label}</span>`;
       return `<figure class="semantic-view" aria-label="${label}: ${escape(study.scene)}">${visual(view.image,view.side,Boolean(view.mirrored),`${label}: ${study.scene}`,overlay + (study.guide ? spatialGuide(study,view) : ''),view.layout==='single',view.position,media)}${semanticScores(study,i)}<figcaption class="semantic-prompt">… ${escape(excerpt.before)}<mark>${escape(excerpt.focus[i])}</mark>${escape(excerpt.after)} …</figcaption></figure>`;
     }).join('')}</div>`;
   }

@@ -38,7 +38,7 @@ The 2026-10-09 refinement updates eight selected pairs: six counterfactual
 videos with their measured scores, plus two Multiple Objects target queries.
 Multiple Objects explicitly labels the two VBench targets versus all three
 Ours targets. Lakeside, terrace and museum use synthetic alternating-frame
-foreground blur, identified on their counterfactuals. Selection details and
+foreground blur, documented in their case metadata. Selection details and
 H200 receipts are preserved in `data/refinement-20261009.json`; Human Action
 keeps its recorded scores while the alias issue is deferred.
 
