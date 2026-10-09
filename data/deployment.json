@@ -56,6 +56,31 @@
       "sha256": "0fd8b796c1c6220a559a5682cfd00d1c8488b428369f7cb70deb671888cef85f"
     },
     {
+      "path": "assets/hero/21-kayak-hd/first-frame.png",
+      "bytes": 2264320,
+      "sha256": "ec78d5d7800fa36c2512892d82e4f83ff1bb9e565dc9a20106d4453b30ef403c"
+    },
+    {
+      "path": "assets/hero/21-kayak-hd/generation.json",
+      "bytes": 4309,
+      "sha256": "5db0889b5ebe0a0a0d8811f743a0f1f1fd596ad015ab9403c8d8fccb1a732b38"
+    },
+    {
+      "path": "assets/hero/21-kayak-hd/poster.webp",
+      "bytes": 149692,
+      "sha256": "1229f568881f4e2f30bc086e325f508a7640e893487dd32633b7d795cfd1b1c5"
+    },
+    {
+      "path": "assets/hero/21-kayak-hd/prompt.txt",
+      "bytes": 895,
+      "sha256": "72a93a163b0f4bb68fc5e9590df62a33d300daa3fef38ece55983bc3f437f5eb"
+    },
+    {
+      "path": "assets/hero/21-kayak-hd/video.mp4",
+      "bytes": 2963394,
+      "sha256": "6591b17999ff35a3bc5b56062f46b81c46dc0e81548a93bc5d341f80af8e15f4"
+    },
+    {
       "path": "assets/icons/arxiv.svg",
       "bytes": 874,
       "sha256": "fc8d1a95690fc912bc61e7b8b391a67f8206264b1b2430f2524e706229238e10"
@@ -1122,8 +1147,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6625,
-      "sha256": "316b4753016d3ebd2db584996549acdfa1178595b92c29c2b53842ecf978fc7a"
+      "bytes": 6599,
+      "sha256": "e74e5bdb491c56f7c8cd5ed8180cec1df0576901d05ebc00fccac1cdf6ac927f"
     },
     {
       "path": "paper-ui.js",

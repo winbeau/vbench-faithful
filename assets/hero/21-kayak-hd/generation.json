@@ -1,0 +1,80 @@
+{
+  "case_id": "21-kayak-hd",
+  "prompt": "Use the reference image as the first frame. The kayaker paddles forward with two or three steady alternating strokes. Each blade enters the water beside the hull, pulls backward, then lifts out with a few falling droplets before the other blade enters. The kayak glides smoothly to the right while remaining fully visible near the middle of the shot. Small bow ripples spread outward and a narrow wake trails behind; the reflections break and reform naturally as the hull passes. The forest, mountains and shoreline stay fixed and sharply defined. Hold the camera completely still. Five seconds of continuous natural movement at normal speed, one uninterrupted shot. Keep the single paddler, the two-bladed paddle and the kayak coherent. Preserve fine water detail and natural daylight from the reference. No zoom, pan, camera shake, artificial blur, cuts or simulated image scaling. No speech.",
+  "enhance_prompt": false,
+  "seed": 2026102121,
+  "first_frame": "assets/hero/21-kayak-hd/first-frame.png",
+  "first_frame_sha256": "ec78d5d7800fa36c2512892d82e4f83ff1bb9e565dc9a20106d4453b30ef403c",
+  "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+  "source_status": "?? scripts/",
+  "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+  "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+  "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+  "physical_gpu": "4",
+  "logical_device": "cuda:0",
+  "width": 1024,
+  "height": 1024,
+  "fps": 24,
+  "generated_frames": 121,
+  "delivery_frames": 120,
+  "delivery_seconds": 5,
+  "temporal_operation": "drop only the terminal generated frame; no resampling",
+  "precision": "bfloat16",
+  "quantization": null,
+  "pipeline": "DistilledPipeline",
+  "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+  "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+  "started_at_utc": "2026-10-09T06:17:42.984253+00:00",
+  "status": "succeeded",
+  "device_name": "NVIDIA H200 NVL",
+  "cuda_version": "12.8",
+  "versions": {
+    "torch": "2.9.1",
+    "torchvision": "0.24.1",
+    "torchaudio": "2.9.1",
+    "transformers": "5.14.1",
+    "ltx-core": "1.4.2",
+    "ltx-pipelines": "1.4.2"
+  },
+  "elapsed_seconds": 78.21596041880548,
+  "peak_cuda_allocated_bytes": 42174164480,
+  "media": {
+    "width": 1024,
+    "height": 1024,
+    "r_frame_rate": "24/1",
+    "duration": "5.000000",
+    "nb_read_frames": "120"
+  },
+  "native_rgb_sha256": "abaf0fa01707ff10b3cc4a6ef9a715c2dad859164494fbd2c7c3f35420c72b55",
+  "video_sha256": "6591b17999ff35a3bc5b56062f46b81c46dc0e81548a93bc5d341f80af8e15f4",
+  "purpose": "Decorative cover video, separately generated from the original high-resolution imagegen first frame; no benchmark score is assigned.",
+  "review": {
+    "decision": "accepted",
+    "attempt": "ltx25-seed2026102121",
+    "reviewer": "assistant six-frame temporal inspection; not human ground truth",
+    "observations": [
+      "A complete single kayak and paddler remain visible while the kayak translates smoothly rightward.",
+      "Alternating paddle positions, droplets and the changing wake show independent scene movement.",
+      "Mountain peaks, pine tree silhouettes and the horizon stay fixed; no image scaling observed.",
+      "Native 1024-square output retains visibly finer mountain, forest and water detail than the previous 384-square hero source."
+    ],
+    "media": {
+      "width": 1024,
+      "height": 1024,
+      "fps": 24,
+      "frames": 120,
+      "duration_seconds": 5
+    },
+    "scope": "Decorative cover video, separately generated from the original high-resolution imagegen first frame; no benchmark score is assigned."
+  },
+  "first_frame_source": {
+    "source": "cases/layer-02/21-dynamic-kayak/input/source-square-v2.png",
+    "source_sha256": "e41f85996d7db5fcaa0d6a3041c9670d0f63ca043f2ccf098cc2d7f2bed219e9",
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "preparation": "Resize the original high-resolution imagegen reference to 1024 square; no upscale from the 384-square scoring video.",
+    "scope": "New decorative hero clip; five seconds at 24 FPS."
+  }
+}
