@@ -1,0 +1,3918 @@
+{
+  "title": "Evidence Collapse",
+  "note": "Change the position; keep the query fixed",
+  "cases": [
+    {
+      "id": "31-spatial-coast",
+      "dimension": "Spatial Relationship",
+      "scene": "The seaside promenade",
+      "views": [
+        {
+          "image": "assets/videos/31-spatial-coast/original-poster.webp",
+          "layout": "single",
+          "side": "left",
+          "position": "center",
+          "mirrored": false,
+          "preview": null
+        },
+        {
+          "image": "assets/videos/31-spatial-coast/counterfactual-poster.webp",
+          "layout": "single",
+          "side": "left",
+          "position": "center",
+          "mirrored": true,
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a car ",
+        "focus": [
+          "left of",
+          "left of"
+        ],
+        "after": " a bicycle"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          1.0
+        ],
+        "ours": [
+          1.0,
+          0.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "target": {
+        "subject": "car",
+        "relationship": "on the left of",
+        "object": "bicycle"
+      },
+      "guide": {
+        "subject_x": 28,
+        "object_x": 81,
+        "y": 91,
+        "note": "Hand-placed schematic anchors, not model detections. The arrow represents x_subject - x_object.",
+        "axis": "x"
+      },
+      "videos": {
+        "original": {
+          "src": "assets/videos/31-spatial-coast/original.mp4",
+          "poster": "assets/videos/31-spatial-coast/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "f4ebccf09ab7555587e8f729009e46dc43d0c1f15ee8e8d117386576cc932342",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/31-spatial-coast/counterfactual.mp4",
+          "poster": "assets/videos/31-spatial-coast/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "1aa182a0a0215f70f238da79dc0b5ab2ef0ca2a23a2e0d08806593d142100025",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "31-spatial-coast--original",
+            "prompt": "A car on the left of a bicycle.",
+            "video_sha256": "f4ebccf09ab7555587e8f729009e46dc43d0c1f15ee8e8d117386576cc932342",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "31-spatial-coast--counterfactual",
+            "prompt": "A car on the left of a bicycle.",
+            "video_sha256": "1aa182a0a0215f70f238da79dc0b5ab2ef0ca2a23a2e0d08806593d142100025",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "31-spatial-coast--original",
+            "prompt": "A car on the left of a bicycle.",
+            "video_sha256": "f4ebccf09ab7555587e8f729009e46dc43d0c1f15ee8e8d117386576cc932342",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "31-spatial-coast--counterfactual",
+            "prompt": "A car on the left of a bicycle.",
+            "video_sha256": "1aa182a0a0215f70f238da79dc0b5ab2ef0ca2a23a2e0d08806593d142100025",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/31-spatial-coast/first-frame.png",
+        "first_frame_sha256": "82b2cb73804e0c48dc79ab5112ab1dee4280ed0c45315216c73134c15c8ccc4b",
+        "prompt": "Use the reference image as the first frame. Small waves roll across the sea and splash lightly against the shoreline. The flower branches sway back and forth in the breeze and their shadows shift naturally. The car and bicycle stay parked in exactly their initial positions, with the car to the left of the bicycle. Keep both complete vehicles and both bicycle wheels visible. Hold the camera completely still. One uninterrupted five-second live-action shot, with continuous natural movement and stable object identities. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "generation": {
+          "case_id": "31-spatial-coast",
+          "prompt": "Use the reference image as the first frame. Small waves roll across the sea and splash lightly against the shoreline. The flower branches sway back and forth in the breeze and their shadows shift naturally. The car and bicycle stay parked in exactly their initial positions, with the car to the left of the bicycle. Keep both complete vehicles and both bicycle wheels visible. Hold the camera completely still. One uninterrupted five-second live-action shot, with continuous natural movement and stable object identities. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "enhance_prompt": false,
+          "seed": 2026100831,
+          "first_frame": "cases/layer-03/31-spatial-coast/input/first-frame.png",
+          "first_frame_sha256": "82b2cb73804e0c48dc79ab5112ab1dee4280ed0c45315216c73134c15c8ccc4b",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "4",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T05:09:12.658999+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 84.32474574074149,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "bf89851d4d79ac331ff3b17df97cd6e809c0e2add8f56e7e3e3c41442f121d81",
+          "video_sha256": "bcba54ea3c77ef8fbce77f0d34d67b5c21b0d064e063e37949980a4e60c06d17"
+        },
+        "construction": {
+          "case": "31-spatial-coast",
+          "attempt": "ltx25-seed2026100831",
+          "source_native_sha256": "bf89851d4d79ac331ff3b17df97cd6e809c0e2add8f56e7e3e3c41442f121d81",
+          "duration_seconds": 5,
+          "frames": 120,
+          "fps": 24,
+          "script_sha256": "43b07d3b4a17b20f810def992915730397d9e2a07f54655d198eb7d0b3a0e288",
+          "physical_gpu": "1",
+          "query_unchanged": true,
+          "independent_counterfactual_generation": false,
+          "operation": "exact horizontal reflection",
+          "preencode_inverse_reflection_max_difference": 0,
+          "geometric_identity": "x maps to W-1-x; distances and upright orientation retained before encoding",
+          "status": "constructed; visual review pending",
+          "elapsed_seconds": 26.300553251057863,
+          "files": {
+            "original.mp4": "f4ebccf09ab7555587e8f729009e46dc43d0c1f15ee8e8d117386576cc932342",
+            "counterfactual.mp4": "1aa182a0a0215f70f238da79dc0b5ab2ef0ca2a23a2e0d08806593d142100025",
+            "original-rgb.mp4": "8889ec026a324fac5c01208887a2de0de3fcec152ffa7d7d54109ddeff0214ab",
+            "counterfactual-rgb.mp4": "1a22bbc99ce999c7de9ff5f8a205eb2de51a6d8ec2ef07fc6017ff9fa4070feb"
+          },
+          "encoding": "matched H264 CRF18 browser inputs; exact RGB proofs apply before lossy encoding"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100831",
+            "reviewer": "assistant six-frame temporal inspection, not human ground truth",
+            "observed_motion": "Car rolls a little while waves and foliage evolve; car stays left of the bicycle throughout. Both objects remain recognizable.",
+            "duration_seconds": 5
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100831",
+            "reviewer": "assistant six-frame visual inspection, not human ground truth",
+            "evidence": "Horizontal relationship reverses consistently. The same original motion and objects are retained. Pre-encode inverse-reflection pixel check is exact.",
+            "limitations": [
+              "Independent GRiT detections may vary under reflection; final scores include this detector effect."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "32-spatial-cat",
+      "dimension": "Spatial Relationship",
+      "scene": "The blue-vase window",
+      "views": [
+        {
+          "image": "assets/videos/32-spatial-cat/original-poster.webp",
+          "layout": "single",
+          "side": "left",
+          "position": "center",
+          "mirrored": true,
+          "preview": null
+        },
+        {
+          "image": "assets/videos/32-spatial-cat/counterfactual-poster.webp",
+          "layout": "single",
+          "side": "left",
+          "position": "center",
+          "mirrored": false,
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a cat ",
+        "focus": [
+          "right of",
+          "right of"
+        ],
+        "after": " a blue vase"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          1.0
+        ],
+        "ours": [
+          1.0,
+          0.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "target": {
+        "subject": "cat",
+        "relationship": "on the right of",
+        "object": "vase"
+      },
+      "guide": {
+        "subject_x": 31,
+        "object_x": 68,
+        "y": 91,
+        "note": "Hand-placed schematic anchors, not model detections. The arrow represents x_subject - x_object.",
+        "axis": "x"
+      },
+      "videos": {
+        "original": {
+          "src": "assets/videos/32-spatial-cat/original.mp4",
+          "poster": "assets/videos/32-spatial-cat/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "be8fe02b7f2059f3c7326ad4073f1e83b2558df8b7d4612b501e4ba84b8706a5",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/32-spatial-cat/counterfactual.mp4",
+          "poster": "assets/videos/32-spatial-cat/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "8ddc900ed5433dd1ac74ebe773ea2e01d088f32bc4773f30f14b66d793184a0c",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "32-spatial-cat--original",
+            "prompt": "A cat on the right of a vase.",
+            "video_sha256": "be8fe02b7f2059f3c7326ad4073f1e83b2558df8b7d4612b501e4ba84b8706a5",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "32-spatial-cat--counterfactual",
+            "prompt": "A cat on the right of a vase.",
+            "video_sha256": "8ddc900ed5433dd1ac74ebe773ea2e01d088f32bc4773f30f14b66d793184a0c",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "32-spatial-cat--original",
+            "prompt": "A cat on the right of a vase.",
+            "video_sha256": "be8fe02b7f2059f3c7326ad4073f1e83b2558df8b7d4612b501e4ba84b8706a5",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "32-spatial-cat--counterfactual",
+            "prompt": "A cat on the right of a vase.",
+            "video_sha256": "8ddc900ed5433dd1ac74ebe773ea2e01d088f32bc4773f30f14b66d793184a0c",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/32-spatial-cat/first-frame.png",
+        "first_frame_sha256": "bcda529d4e6d51a62d56b78ba2d49133b2edf450fdfb3fe72dad025e4beff365",
+        "prompt": "Use the reference image as the first frame. The cat turns its head toward the window, blinks, then looks toward the vase. Its ears twitch and its tail tip curls once. The slender leaves in the vase sway gently and independently. The cat remains seated to the right of the vase throughout; the vase stays fixed on the sill. Keep both complete objects visible. Hold the camera completely still. One uninterrupted five-second live-action shot, with continuous natural movement and stable object identities. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "generation": {
+          "case_id": "32-spatial-cat",
+          "prompt": "Use the reference image as the first frame. The cat turns its head toward the window, blinks, then looks toward the vase. Its ears twitch and its tail tip curls once. The slender leaves in the vase sway gently and independently. The cat remains seated to the right of the vase throughout; the vase stays fixed on the sill. Keep both complete objects visible. Hold the camera completely still. One uninterrupted five-second live-action shot, with continuous natural movement and stable object identities. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "enhance_prompt": false,
+          "seed": 2026100832,
+          "first_frame": "cases/layer-03/32-spatial-cat/input/first-frame.png",
+          "first_frame_sha256": "bcda529d4e6d51a62d56b78ba2d49133b2edf450fdfb3fe72dad025e4beff365",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "5",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T05:09:12.632811+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 82.04938843660057,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "a0a79d51b99a726362037e2094c2dcc48c7528133ddac0ed4b698157deea6e27",
+          "video_sha256": "d654f58e1185e17a5122b0cb36305d5b7493b15484a5963c43107da44471a7b6"
+        },
+        "construction": {
+          "case": "32-spatial-cat",
+          "attempt": "ltx25-seed2026100832",
+          "source_native_sha256": "a0a79d51b99a726362037e2094c2dcc48c7528133ddac0ed4b698157deea6e27",
+          "duration_seconds": 5,
+          "frames": 120,
+          "fps": 24,
+          "script_sha256": "43b07d3b4a17b20f810def992915730397d9e2a07f54655d198eb7d0b3a0e288",
+          "physical_gpu": "2",
+          "query_unchanged": true,
+          "independent_counterfactual_generation": false,
+          "operation": "exact horizontal reflection",
+          "preencode_inverse_reflection_max_difference": 0,
+          "geometric_identity": "x maps to W-1-x; distances and upright orientation retained before encoding",
+          "status": "constructed; visual review pending",
+          "elapsed_seconds": 17.71876670792699,
+          "files": {
+            "original.mp4": "be8fe02b7f2059f3c7326ad4073f1e83b2558df8b7d4612b501e4ba84b8706a5",
+            "counterfactual.mp4": "8ddc900ed5433dd1ac74ebe773ea2e01d088f32bc4773f30f14b66d793184a0c",
+            "original-rgb.mp4": "303dc35b278b0581452f3644dd839106a5da87e234de08df9eb662e8a60031cf",
+            "counterfactual-rgb.mp4": "38a8fd841945030f3224e0c4b013f81a3c1bf281c585fbe9812cec6588d019be"
+          },
+          "encoding": "matched H264 CRF18 browser inputs; exact RGB proofs apply before lossy encoding"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100832",
+            "reviewer": "assistant six-frame temporal inspection, not human ground truth",
+            "observed_motion": "Cat head turns, blinks and moves tail; the vase and cat maintain the intended order.",
+            "duration_seconds": 5
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100832",
+            "reviewer": "assistant six-frame visual inspection, not human ground truth",
+            "evidence": "Horizontal relationship reverses consistently. The same original motion and objects are retained. Pre-encode inverse-reflection pixel check is exact.",
+            "limitations": [
+              "Independent GRiT detections may vary under reflection; final scores include this detector effect."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "36-spatial-above",
+      "dimension": "Spatial Relationship",
+      "scene": "The cobalt shelf",
+      "views": [
+        {
+          "image": "assets/videos/36-spatial-above/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "center",
+          "mirrored": false,
+          "preview": null
+        },
+        {
+          "image": "assets/videos/36-spatial-above/counterfactual-poster.webp",
+          "layout": "diptych",
+          "side": "right",
+          "position": "center",
+          "mirrored": false,
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a vase ",
+        "focus": [
+          "above",
+          "above"
+        ],
+        "after": " a red cup"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          1.0
+        ],
+        "ours": [
+          1.0,
+          0.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "target": {
+        "subject": "vase",
+        "relationship": "above",
+        "object": "cup"
+      },
+      "guide": {
+        "axis": "y",
+        "x": 82,
+        "subject_y": 25,
+        "object_y": 70,
+        "note": "Hand-placed schematic direction guide, not model detections."
+      },
+      "videos": {
+        "original": {
+          "src": "assets/videos/36-spatial-above/original.mp4",
+          "poster": "assets/videos/36-spatial-above/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "733e26185d8e0adc9c91eda96e6c93efa01161949afef2a1fb6c205a7c6dc62f",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/36-spatial-above/counterfactual.mp4",
+          "poster": "assets/videos/36-spatial-above/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "4a60a5d8d3ed98a24fdbcb7c38c41cde7eecbf16e7b605224dc7d3f51febd7f9",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "36-spatial-above--original",
+            "prompt": "A vase above a cup.",
+            "video_sha256": "733e26185d8e0adc9c91eda96e6c93efa01161949afef2a1fb6c205a7c6dc62f",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "36-spatial-above--counterfactual",
+            "prompt": "A vase above a cup.",
+            "video_sha256": "4a60a5d8d3ed98a24fdbcb7c38c41cde7eecbf16e7b605224dc7d3f51febd7f9",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "36-spatial-above--original",
+            "prompt": "A vase above a cup.",
+            "video_sha256": "733e26185d8e0adc9c91eda96e6c93efa01161949afef2a1fb6c205a7c6dc62f",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "36-spatial-above--counterfactual",
+            "prompt": "A vase above a cup.",
+            "video_sha256": "4a60a5d8d3ed98a24fdbcb7c38c41cde7eecbf16e7b605224dc7d3f51febd7f9",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/36-spatial-above/first-frame.png",
+        "first_frame_sha256": "979be6b0928de35f16720f0996d264343f5be46c9072c423926095726e63539b",
+        "prompt": "Use the reference image as the first frame. The soft leaf shadows cast by a tree outside the frame sway distinctly across the wall and wooden shelves as a breeze moves the branches. Different leaf shadows drift and overlap naturally. The blue vase stays on the upper shelf, above the red cup on the lower shelf. Both objects remain stationary and upright, retaining their shapes and colors. Do not move the objects or shelves. Hold the camera completely still. One uninterrupted five-second live-action shot, with continuous natural movement and stable object identities. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "generation": {
+          "case_id": "36-spatial-above",
+          "prompt": "Use the reference image as the first frame. The soft leaf shadows cast by a tree outside the frame sway distinctly across the wall and wooden shelves as a breeze moves the branches. Different leaf shadows drift and overlap naturally. The blue vase stays on the upper shelf, above the red cup on the lower shelf. Both objects remain stationary and upright, retaining their shapes and colors. Do not move the objects or shelves. Hold the camera completely still. One uninterrupted five-second live-action shot, with continuous natural movement and stable object identities. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "enhance_prompt": false,
+          "seed": 2026100836,
+          "first_frame": "cases/layer-03/36-spatial-above/input/first-frame.png",
+          "first_frame_sha256": "979be6b0928de35f16720f0996d264343f5be46c9072c423926095726e63539b",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "6",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T05:09:12.666177+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 80.32664911448956,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "41aeacc5c1bc75be26974a8c683ba2140d4c85b88f30fb67471b77d6fd380d3e",
+          "video_sha256": "57b0bd7f3e9e0302cb2a9751790a14fd28472583e899fdae53eb7ff3a9306975"
+        },
+        "construction": {
+          "case": "36-spatial-above",
+          "attempt": "ltx25-seed2026100836",
+          "source_native_sha256": "41aeacc5c1bc75be26974a8c683ba2140d4c85b88f30fb67471b77d6fd380d3e",
+          "duration_seconds": 5,
+          "frames": 120,
+          "fps": 24,
+          "script_sha256": "43b07d3b4a17b20f810def992915730397d9e2a07f54655d198eb7d0b3a0e288",
+          "physical_gpu": "4",
+          "query_unchanged": true,
+          "independent_counterfactual_generation": false,
+          "operation": "upright vertical translation between the two shelf anchors",
+          "construction_boxes": [
+            [
+              405,
+              75,
+              620,
+              230
+            ],
+            [
+              432,
+              385,
+              623,
+              511
+            ]
+          ],
+          "first_frame_shelf_anchor_gap_pixels": 284,
+          "translations_y_pixels": "Each frame uses [+gap, -gap] from its tracked shelf anchors.",
+          "counterfactual_mask_centroids": [
+            [
+              [
+                510.84602117283214,
+                447.2042940406804
+              ],
+              [
+                517.455550138144,
+                161.57987973346334
+              ]
+            ],
+            [
+              [
+                510.6402771198484,
+                447.26758645191853
+              ],
+              [
+                517.3285210401116,
+                161.8047740136166
+              ]
+            ],
+            [
+              [
+                510.98960004754264,
+                447.3221608129791
+              ],
+              [
+                517.3308202900926,
+                161.80258952716545
+              ]
+            ],
+            [
+              [
+                510.7150844634785,
+                447.20515108256006
+              ],
+              [
+                517.3588524590164,
+                161.79909836065573
+              ]
+            ],
+            [
+              [
+                510.71945270672217,
+                447.1957763236169
+              ],
+              [
+                517.3518321173867,
+                161.78899909828675
+              ]
+            ],
+            [
+              [
+                510.71955280685063,
+                447.1883920076118
+              ],
+              [
+                517.3597770857236,
+                161.7971643992788
+              ]
+            ],
+            [
+              [
+                510.72114870087404,
+                447.19055829716393
+              ],
+              [
+                517.3649623074402,
+                161.7938380858735
+              ]
+            ],
+            [
+              [
+                510.7318668252081,
+                447.19030915576695
+              ],
+              [
+                517.3487494874948,
+                161.79229192291922
+              ]
+            ],
+            [
+              [
+                510.7190770694577,
+                447.16793529971454
+              ],
+              [
+                517.3727146019513,
+                161.77371484791342
+              ]
+            ],
+            [
+              [
+                510.7236458766871,
+                447.1830667697247
+              ],
+              [
+                517.3699909858232,
+                161.79029746783579
+              ]
+            ],
+            [
+              [
+                510.7010940658818,
+                447.18307765489357
+              ],
+              [
+                517.3778397441155,
+                161.76929385713115
+              ]
+            ],
+            [
+              [
+                510.6868200463706,
+                447.1668152904108
+              ],
+              [
+                517.4142365661861,
+                161.776376146789
+              ]
+            ],
+            [
+              [
+                510.6956676769478,
+                447.187318000832
+              ],
+              [
+                517.3860728346457,
+                161.7829724409449
+              ]
+            ],
+            [
+              [
+                510.6664092664093,
+                447.1709533709534
+              ],
+              [
+                517.398375984252,
+                161.777969160105
+              ]
+            ],
+            [
+              [
+                510.7014615019011,
+                447.1702115019011
+              ],
+              [
+                517.3761686075119,
+                161.78481220272266
+              ]
+            ],
+            [
+              [
+                510.67799429657794,
+                447.18001425855516
+              ],
+              [
+                517.4040163934426,
+                161.77434426229507
+              ]
+            ],
+            [
+              [
+                510.6776147769793,
+                447.16861673694837
+              ],
+              [
+                517.400327734535,
+                161.796640721016
+              ]
+            ],
+            [
+              [
+                510.69452038511827,
+                447.1451325329847
+              ],
+              [
+                517.367125984252,
+                161.8028215223097
+              ]
+            ],
+            [
+              [
+                510.6794369208838,
+                447.1914944167261
+              ],
+              [
+                517.400983203605,
+                161.80024580090128
+              ]
+            ],
+            [
+              [
+                510.699994055757,
+                447.1846281876003
+              ],
+              [
+                517.4189609963946,
+                161.79924614880366
+              ]
+            ],
+            [
+              [
+                510.7062247564742,
+                447.18395105725824
+              ],
+              [
+                517.4405835108998,
+                161.7873299459105
+              ]
+            ],
+            [
+              [
+                510.7050924000238,
+                447.18390872897976
+              ],
+              [
+                517.4156907706166,
+                161.82622225861928
+              ]
+            ],
+            [
+              [
+                510.711671024483,
+                447.1630615640599
+              ],
+              [
+                517.767307379052,
+                161.84052777325297
+              ]
+            ],
+            [
+              [
+                510.7044914448669,
+                447.1782319391635
+              ],
+              [
+                517.7535452322738,
+                161.8443357783211
+              ]
+            ],
+            [
+              [
+                510.71659437941895,
+                447.16897391717663
+              ],
+              [
+                517.7410124724871,
+                161.83826526453086
+              ]
+            ],
+            [
+              [
+                510.71762119771864,
+                447.1772813688213
+              ],
+              [
+                517.7570123939987,
+                161.85200587084148
+              ]
+            ],
+            [
+              [
+                510.9249035322054,
+                447.27658058771146
+              ],
+              [
+                517.7723232487972,
+                161.8593329527848
+              ]
+            ],
+            [
+              [
+                510.9286308039425,
+                447.26837667735424
+              ],
+              [
+                517.8011753183154,
+                161.88116225922298
+              ]
+            ],
+            [
+              [
+                510.6866611236489,
+                447.1769806390308
+              ],
+              [
+                517.5544237246365,
+                161.85196746898873
+              ]
+            ],
+            [
+              [
+                510.67458573380054,
+                447.16107382550337
+              ],
+              [
+                517.8548795426705,
+                161.88681094324215
+              ]
+            ],
+            [
+              [
+                510.9262426509888,
+                447.2732347526575
+              ],
+              [
+                517.8783198496363,
+                161.89760562229304
+              ]
+            ],
+            [
+              [
+                510.7355543678366,
+                447.1846903022745
+              ],
+              [
+                517.8776560967636,
+                161.8758581235698
+              ]
+            ],
+            [
+              [
+                510.96846418814584,
+                447.26606485330797
+              ],
+              [
+                517.8814917804858,
+                161.9025926228838
+              ]
+            ],
+            [
+              [
+                510.9939991682015,
+                447.2551244726992
+              ],
+              [
+                517.8691527641479,
+                161.88215570821066
+              ]
+            ],
+            [
+              [
+                510.96560940841056,
+                447.25985982418626
+              ],
+              [
+                517.8788771585237,
+                161.90310172681887
+              ]
+            ],
+            [
+              [
+                510.9910894618035,
+                447.2479505762148
+              ],
+              [
+                517.8678334832747,
+                161.87862926310623
+              ]
+            ],
+            [
+              [
+                511.00172331827906,
+                447.26004278583315
+              ],
+              [
+                517.8659195026178,
+                161.89160667539267
+              ]
+            ],
+            [
+              [
+                511.0090930702484,
+                447.26245096873885
+              ],
+              [
+                517.8536026825877,
+                161.89343256726914
+              ]
+            ],
+            [
+              [
+                511.0294187566861,
+                447.24218471413286
+              ],
+              [
+                517.58782336464,
+                161.8713132311748
+              ]
+            ],
+            [
+              [
+                511.0448169281978,
+                447.2529719448407
+              ],
+              [
+                517.5909090909091,
+                161.8935276679842
+              ]
+            ],
+            [
+              [
+                511.0750059481323,
+                447.27064001903403
+              ],
+              [
+                517.5899736582154,
+                161.85824827132038
+              ]
+            ],
+            [
+              [
+                511.11807744928916,
+                447.2667896020463
+              ],
+              [
+                517.5307869608166,
+                161.86368126440567
+              ]
+            ],
+            [
+              [
+                511.1297619047619,
+                447.26696428571427
+              ],
+              [
+                517.8135011441648,
+                161.90969271003596
+              ]
+            ],
+            [
+              [
+                511.16798571853616,
+                447.2621243677477
+              ],
+              [
+                517.8058188950638,
+                161.90053939195815
+              ]
+            ],
+            [
+              [
+                511.1788521076447,
+                447.2747678018576
+              ],
+              [
+                517.503538512179,
+                161.85220539828833
+              ]
+            ],
+            [
+              [
+                511.2060400285919,
+                447.29652132475576
+              ],
+              [
+                517.7914862325354,
+                161.89296511152872
+              ]
+            ],
+            [
+              [
+                511.1796321647521,
+                447.282423665258
+              ],
+              [
+                517.5214602861372,
+                161.89236967604012
+              ]
+            ],
+            [
+              [
+                511.2660348116357,
+                447.30209823557465
+              ],
+              [
+                517.8149419650156,
+                161.9119666503188
+              ]
+            ],
+            [
+              [
+                511.29401240458014,
+                447.3023020038168
+              ],
+              [
+                517.8137310993053,
+                161.9190028606457
+              ]
+            ],
+            [
+              [
+                511.3417502387775,
+                447.3348256924546
+              ],
+              [
+                517.864190460607,
+                161.96105702364395
+              ]
+            ],
+            [
+              [
+                511.412017680086,
+                447.3420140962848
+              ],
+              [
+                517.8855949553681,
+                161.94496765211696
+              ]
+            ],
+            [
+              [
+                511.5710779912611,
+                447.3548811875262
+              ],
+              [
+                517.9156843483955,
+                161.96046168958742
+              ]
+            ],
+            [
+              [
+                511.6870691205563,
+                447.39188298063664
+              ],
+              [
+                517.9374129597771,
+                161.95854837388384
+              ]
+            ],
+            [
+              [
+                511.3823494263862,
+                447.32283699808795
+              ],
+              [
+                517.9536103598066,
+                161.9667240390132
+              ]
+            ],
+            [
+              [
+                511.8093665565896,
+                447.3722005403783
+              ],
+              [
+                518.0281424351822,
+                161.9995897604201
+              ]
+            ],
+            [
+              [
+                511.86564114890035,
+                447.3870328085567
+              ],
+              [
+                518.0335112936345,
+                162.00657084188913
+              ]
+            ],
+            [
+              [
+                511.89970536949073,
+                447.3978714448921
+              ],
+              [
+                518.2098155467721,
+                162.05566534914362
+              ]
+            ],
+            [
+              [
+                511.9391660148023,
+                447.425296347554
+              ],
+              [
+                518.2380677602836,
+                162.0596818069409
+              ]
+            ],
+            [
+              [
+                511.91365824308065,
+                447.43098676293624
+              ],
+              [
+                518.1732400164677,
+                162.05302593659943
+              ]
+            ],
+            [
+              [
+                511.9001023048685,
+                447.4568815068905
+              ],
+              [
+                518.0111823713205,
+                162.0387271830291
+              ]
+            ],
+            [
+              [
+                511.91987719720686,
+                447.4596677100891
+              ],
+              [
+                518.0162855732851,
+                162.02368810659647
+              ]
+            ],
+            [
+              [
+                511.8470283926853,
+                447.46198267564966
+              ],
+              [
+                517.9833895238878,
+                162.00361812350957
+              ]
+            ],
+            [
+              [
+                511.79284640817554,
+                447.4322813345356
+              ],
+              [
+                517.9621261912587,
+                162.00443641143607
+              ]
+            ],
+            [
+              [
+                511.4395900755124,
+                447.4103440009589
+              ],
+              [
+                517.9808498397305,
+                162.0232596367223
+              ]
+            ],
+            [
+              [
+                511.4183581821448,
+                447.38237231303515
+              ],
+              [
+                517.8971832142564,
+                162.01141496263446
+              ]
+            ],
+            [
+              [
+                511.3640663353888,
+                447.37184936837696
+              ],
+              [
+                517.8912632530615,
+                162.04043724829458
+              ]
+            ],
+            [
+              [
+                511.3105244252874,
+                447.3993654214559
+              ],
+              [
+                517.9100772645077,
+                162.0614828209765
+              ]
+            ],
+            [
+              [
+                511.3235945638508,
+                447.3996886786805
+              ],
+              [
+                517.4962468035965,
+                161.9432483708653
+              ]
+            ],
+            [
+              [
+                511.64963065281364,
+                447.43576962344605
+              ],
+              [
+                517.4570273837018,
+                161.93541735400856
+              ]
+            ],
+            [
+              [
+                511.2587249326549,
+                447.41322957198446
+              ],
+              [
+                517.4432904714804,
+                161.95095614902738
+              ]
+            ],
+            [
+              [
+                511.5750240269101,
+                447.4921912542047
+              ],
+              [
+                517.39490603363,
+                161.9407352456314
+              ]
+            ],
+            [
+              [
+                511.2720033528919,
+                447.4253981559095
+              ],
+              [
+                517.3823650597445,
+                161.96711990111248
+              ]
+            ],
+            [
+              [
+                511.58571772060594,
+                447.4895407549892
+              ],
+              [
+                517.365539983512,
+                161.96496290189611
+              ]
+            ],
+            [
+              [
+                511.2959813140085,
+                446.42259088459
+              ],
+              [
+                517.2782960455709,
+                162.96970197308676
+              ]
+            ],
+            [
+              [
+                511.5330287912484,
+                447.51012802788966
+              ],
+              [
+                517.2115511551156,
+                161.9851485148515
+              ]
+            ],
+            [
+              [
+                511.2371775689748,
+                446.43102519600217
+              ],
+              [
+                517.185243198681,
+                162.95210222588622
+              ]
+            ],
+            [
+              [
+                511.4933589759,
+                447.4929382775407
+              ],
+              [
+                517.1632855022266,
+                161.995959096157
+              ]
+            ],
+            [
+              [
+                511.45101807916393,
+                447.474442909484
+              ],
+              [
+                517.1375299067734,
+                162.0420757363254
+              ]
+            ],
+            [
+              [
+                511.4484684684685,
+                447.4786786786787
+              ],
+              [
+                517.1046800066149,
+                162.10310897965934
+              ]
+            ],
+            [
+              [
+                511.47014343155496,
+                447.473264118106
+              ],
+              [
+                517.0286210604681,
+                162.10571594011085
+              ]
+            ],
+            [
+              [
+                511.27269469660774,
+                446.4005016722408
+              ],
+              [
+                516.9187531089372,
+                163.14616149892223
+              ]
+            ],
+            [
+              [
+                511.0796779233265,
+                447.3998317509915
+              ],
+              [
+                516.8854037009377,
+                162.184880922745
+              ]
+            ],
+            [
+              [
+                511.0589507842077,
+                447.3853734751517
+              ],
+              [
+                516.8733809365659,
+                162.16854865493193
+              ]
+            ],
+            [
+              [
+                511.0177486312496,
+                447.38343059984356
+              ],
+              [
+                516.907632191553,
+                162.18074492850016
+              ]
+            ],
+            [
+              [
+                511.13982109623583,
+                447.42492645734524
+              ],
+              [
+                516.8672433871236,
+                162.18108467809017
+              ]
+            ],
+            [
+              [
+                511.1508017536484,
+                447.4471202930755
+              ],
+              [
+                516.8719507118475,
+                162.2116393306136
+              ]
+            ],
+            [
+              [
+                511.1089215980775,
+                447.4382697506759
+              ],
+              [
+                516.8615602600433,
+                162.23678946491083
+              ]
+            ],
+            [
+              [
+                511.1430631496725,
+                447.42690620681367
+              ],
+              [
+                516.9144714904968,
+                162.24016338779595
+              ]
+            ],
+            [
+              [
+                511.1247746123332,
+                447.4119485515086
+              ],
+              [
+                516.9414410662224,
+                162.2374843815077
+              ]
+            ],
+            [
+              [
+                510.8743446031459,
+                447.31766407521246
+              ],
+              [
+                516.9606863235049,
+                162.24137931034483
+              ]
+            ],
+            [
+              [
+                511.04557190033023,
+                447.4354848393876
+              ],
+              [
+                516.8691627751834,
+                162.24691460973983
+              ]
+            ],
+            [
+              [
+                510.9395455367368,
+                447.3371104815864
+              ],
+              [
+                516.8597281294304,
+                162.27553998832457
+              ]
+            ],
+            [
+              [
+                511.02754275427543,
+                447.4198619861986
+              ],
+              [
+                516.7930832846044,
+                162.31292289700107
+              ]
+            ],
+            [
+              [
+                511.0819032761311,
+                447.4472578903156
+              ],
+              [
+                516.7625135790089,
+                162.3131946185343
+              ]
+            ],
+            [
+              [
+                511.067502700108,
+                447.441257650306
+              ],
+              [
+                516.7616818523782,
+                162.31672657360193
+              ]
+            ],
+            [
+              [
+                510.8899386207727,
+                447.32494885064386
+              ],
+              [
+                516.788369955719,
+                162.3082128832818
+              ]
+            ],
+            [
+              [
+                510.8438120450033,
+                447.28722700198546
+              ],
+              [
+                516.8163520962084,
+                162.27893769834643
+              ]
+            ],
+            [
+              [
+                510.84459418807535,
+                447.28235364899825
+              ],
+              [
+                516.7868003341688,
+                162.28947368421052
+              ]
+            ],
+            [
+              [
+                510.8549182299182,
+                447.26352813852816
+              ],
+              [
+                517.372342192691,
+                162.33662790697673
+              ]
+            ],
+            [
+              [
+                510.8823953823954,
+                447.24392736892736
+              ],
+              [
+                517.3757475083056,
+                162.34817275747508
+              ]
+            ],
+            [
+              [
+                510.88291862002643,
+                447.2378290659935
+              ],
+              [
+                517.0185658882746,
+                162.2187474214044
+              ]
+            ],
+            [
+              [
+                510.89612887713395,
+                447.2449507093051
+              ],
+              [
+                517.3603124480638,
+                162.33662954960943
+              ]
+            ],
+            [
+              [
+                510.8434908041832,
+                447.2261690106984
+              ],
+              [
+                517.3597307628386,
+                162.34103373774306
+              ]
+            ],
+            [
+              [
+                510.7947808309783,
+                447.2247008598401
+              ],
+              [
+                516.8164186590872,
+                162.30697207824778
+              ]
+            ],
+            [
+              [
+                510.79417604235607,
+                447.23073220624514
+              ],
+              [
+                516.8433372345762,
+                162.31165356963717
+              ]
+            ],
+            [
+              [
+                510.72045728038506,
+                447.21636582430807
+              ],
+              [
+                517.2770303936223,
+                162.3196312904833
+              ]
+            ],
+            [
+              [
+                510.72648544623524,
+                447.2130141929276
+              ],
+              [
+                517.2211234834635,
+                162.30978893136114
+              ]
+            ],
+            [
+              [
+                510.69464500601686,
+                447.19867629362216
+              ],
+              [
+                517.2945330674643,
+                162.32535726154867
+              ]
+            ],
+            [
+              [
+                510.6725227122315,
+                447.1808555441911
+              ],
+              [
+                516.9496986943421,
+                162.34750585872112
+              ]
+            ],
+            [
+              [
+                510.85169212339025,
+                447.2897274633124
+              ],
+              [
+                517.3305317466921,
+                162.38686860281268
+              ]
+            ],
+            [
+              [
+                510.6756512845196,
+                447.2084712111185
+              ],
+              [
+                517.378949118723,
+                162.3951612903226
+              ]
+            ],
+            [
+              [
+                510.65214513508636,
+                447.2138516156207
+              ],
+              [
+                517.4560732113144,
+                162.42379367720466
+              ]
+            ],
+            [
+              [
+                510.6644800192585,
+                447.1989046701974
+              ],
+              [
+                517.4361021036002,
+                162.43211108339568
+              ]
+            ],
+            [
+              [
+                510.6498916445943,
+                447.20400915001204
+              ],
+              [
+                516.9817603748327,
+                162.41507697456493
+              ]
+            ],
+            [
+              [
+                510.8752471687938,
+                447.2873149979028
+              ],
+              [
+                517.4377342773844,
+                162.48046647230322
+              ]
+            ],
+            [
+              [
+                510.7093533834586,
+                447.2326015037594
+              ],
+              [
+                517.5170402466462,
+                162.45721189900843
+              ]
+            ],
+            [
+              [
+                510.6782362848893,
+                447.21787776708373
+              ],
+              [
+                517.0769939678285,
+                162.38362935656838
+              ]
+            ],
+            [
+              [
+                510.6582019496931,
+                447.2146467685642
+              ],
+              [
+                517.450348721355,
+                162.40949850547992
+              ]
+            ],
+            [
+              [
+                510.88651207382105,
+                447.3191323626341
+              ],
+              [
+                517.4899975097535,
+                162.4069892919399
+              ]
+            ],
+            [
+              [
+                510.7104439898929,
+                447.2386596077488
+              ],
+              [
+                517.4494064912426,
+                162.3721258404582
+              ]
+            ]
+          ],
+          "mask_sha256": "efb2119c6d20b143663870be78bf622bee920ec9419ef12ea114b5674b2a43be",
+          "sam2_weight_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+          "lama_weight_sha256": "344c77bbcb158f17dd143070d1e789f38a66c04202311ae3a258ef66667a9ea9",
+          "preencode_protected_pixels_max_difference": 0,
+          "limitations": [
+            "Unequal object heights mean center separation need not have identical magnitude after swapping shelf anchors.",
+            "SAM2 construction masks and LaMa clean plates are not ground truth and are independent of GRiT scoring.",
+            "The edited regions include local object shadows and shelf contact areas."
+          ],
+          "tracked_shelf_anchor_gap_by_frame": [
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            283,
+            284,
+            283,
+            284,
+            284,
+            284,
+            284,
+            283,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284,
+            284
+          ],
+          "status": "constructed; visual review pending",
+          "elapsed_seconds": 41.65727177448571,
+          "files": {
+            "original.mp4": "733e26185d8e0adc9c91eda96e6c93efa01161949afef2a1fb6c205a7c6dc62f",
+            "counterfactual.mp4": "4a60a5d8d3ed98a24fdbcb7c38c41cde7eecbf16e7b605224dc7d3f51febd7f9",
+            "original-rgb.mp4": "0274f65bada2d2c18db8a5a50ab0b01d3aafb1d04825a8c4301fb2107fd68b12",
+            "counterfactual-rgb.mp4": "ddeeef3b559498a6a3f9a8afeeffa3d38ead43543936fed471f35358d4c2a42a"
+          },
+          "encoding": "matched H264 CRF18 browser inputs; exact RGB proofs apply before lossy encoding"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100836",
+            "reviewer": "assistant six-frame temporal inspection, not human ground truth",
+            "observed_motion": "Leaf shadows visibly sweep across the wall and shelves while the vase stays above the cup. Some generated camera drift is retained.",
+            "duration_seconds": 5
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100836",
+            "reviewer": "assistant six-frame visual inspection",
+            "evidence": "Cup is on the upper shelf and vase on the lower shelf, both upright; changing illumination and shadows remain continuous. Original video has the opposite order.",
+            "limitations": [
+              "Small clean-plate/contact-shadow variations remain within the recorded edited region.",
+              "Shelf-anchor swapping does not guarantee equal object-center separation.",
+              "Construction masks are not human ground truth."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "37-spatial-below",
+      "dimension": "Spatial Relationship",
+      "scene": "The fern and the clock",
+      "views": [
+        {
+          "image": "assets/videos/37-spatial-below/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "top",
+          "mirrored": false,
+          "preview": null
+        },
+        {
+          "image": "assets/videos/37-spatial-below/counterfactual-poster.webp",
+          "layout": "diptych",
+          "side": "right",
+          "position": "top",
+          "mirrored": false,
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a clock ",
+        "focus": [
+          "below",
+          "below"
+        ],
+        "after": " a fern"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          1.0
+        ],
+        "ours": [
+          1.0,
+          0.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "target": {
+        "subject": "clock",
+        "relationship": "below",
+        "object": "potted plant"
+      },
+      "guide": {
+        "axis": "y",
+        "x": 82,
+        "subject_y": 73,
+        "object_y": 26,
+        "note": "Hand-placed schematic direction guide, not model detections."
+      },
+      "videos": {
+        "original": {
+          "src": "assets/videos/37-spatial-below/original.mp4",
+          "poster": "assets/videos/37-spatial-below/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "0030b0835c2e6d3205b724e2a3edc6ffdea813257eefd3789a10632b2eeec71a",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/37-spatial-below/counterfactual.mp4",
+          "poster": "assets/videos/37-spatial-below/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "62e83508f30317d619b259b43cd45d991c64350487393ce4bdc9e55f2b6661d6",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "37-spatial-below--original",
+            "prompt": "A clock below a potted plant.",
+            "video_sha256": "0030b0835c2e6d3205b724e2a3edc6ffdea813257eefd3789a10632b2eeec71a",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "37-spatial-below--counterfactual",
+            "prompt": "A clock below a potted plant.",
+            "video_sha256": "62e83508f30317d619b259b43cd45d991c64350487393ce4bdc9e55f2b6661d6",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "37-spatial-below--original",
+            "prompt": "A clock below a potted plant.",
+            "video_sha256": "0030b0835c2e6d3205b724e2a3edc6ffdea813257eefd3789a10632b2eeec71a",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "37-spatial-below--counterfactual",
+            "prompt": "A clock below a potted plant.",
+            "video_sha256": "62e83508f30317d619b259b43cd45d991c64350487393ce4bdc9e55f2b6661d6",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/37-spatial-below/first-frame.png",
+        "first_frame_sha256": "086a3e8cbf0ff1787e9a709be4b97e71b9f0c6fe68e89e796e3c5575eae03402",
+        "prompt": "Use the reference image as the first frame. Fixed tripod view: the shelf edges, plant pot and clock stay in exactly the same screen positions and sizes for the whole shot. The fern is already moving in a strong intermittent breeze. Long green fronds sweep noticeably to the left, bend back to the right, then spring back independently, with several leaf tips visibly fluttering the entire time. All motion is in the flexible fern leaves; the terracotta pot stays planted on the upper shelf. The clock stays below on the lower shelf and its second hand ticks. Keep both entire objects and both shelves inside the frame. Show five seconds of continuous real leaf movement at normal speed. No camera motion, zoom, dolly, reframing, image scaling or cuts. No speech.",
+        "generation": {
+          "case_id": "37-spatial-below",
+          "prompt": "Use the reference image as the first frame. Fixed tripod view: the shelf edges, plant pot and clock stay in exactly the same screen positions and sizes for the whole shot. The fern is already moving in a strong intermittent breeze. Long green fronds sweep noticeably to the left, bend back to the right, then spring back independently, with several leaf tips visibly fluttering the entire time. All motion is in the flexible fern leaves; the terracotta pot stays planted on the upper shelf. The clock stays below on the lower shelf and its second hand ticks. Keep both entire objects and both shelves inside the frame. Show five seconds of continuous real leaf movement at normal speed. No camera motion, zoom, dolly, reframing, image scaling or cuts. No speech.",
+          "enhance_prompt": false,
+          "seed": 2026101837,
+          "first_frame": "cases/layer-03/37-spatial-below/input/first-frame.png",
+          "first_frame_sha256": "086a3e8cbf0ff1787e9a709be4b97e71b9f0c6fe68e89e796e3c5575eae03402",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "0",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T05:20:38.421065+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 64.07146509364247,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "407a066abf0eb753f0e62d7265253073fb0abac2a2d229eb346397df7d8ccaf2",
+          "video_sha256": "5e18d51867f05cd466079fb0edb8c8b360a1e377bbe8906daaa0c2eaa064079d"
+        },
+        "construction": {
+          "case": "37-spatial-below",
+          "attempt": "ltx25-seed2026101837",
+          "source_native_sha256": "407a066abf0eb753f0e62d7265253073fb0abac2a2d229eb346397df7d8ccaf2",
+          "duration_seconds": 5,
+          "frames": 120,
+          "fps": 24,
+          "script_sha256": "43b07d3b4a17b20f810def992915730397d9e2a07f54655d198eb7d0b3a0e288",
+          "physical_gpu": "4",
+          "query_unchanged": true,
+          "independent_counterfactual_generation": false,
+          "operation": "upright vertical translation between the two shelf anchors",
+          "construction_boxes": [
+            [
+              285,
+              1,
+              740,
+              285
+            ],
+            [
+              420,
+              395,
+              608,
+              583
+            ]
+          ],
+          "first_frame_shelf_anchor_gap_pixels": 302,
+          "translations_y_pixels": "Each frame uses [+gap, -gap] from its tracked shelf anchors.",
+          "counterfactual_mask_centroids": [
+            [
+              [
+                507.81248490216603,
+                454.3971736854819
+              ],
+              [
+                511.0653041825095,
+                188.00817490494296
+              ]
+            ],
+            [
+              [
+                507.9957631372864,
+                454.3081464227626
+              ],
+              [
+                510.9775496498129,
+                187.84586971121558
+              ]
+            ],
+            [
+              [
+                508.4180659987502,
+                454.2650835567561
+              ],
+              [
+                510.9743946295852,
+                187.83922320786382
+              ]
+            ],
+            [
+              [
+                508.77678031067177,
+                454.44740770627396
+              ],
+              [
+                510.98120535072155,
+                187.8500743155775
+              ]
+            ],
+            [
+              [
+                508.79283287493934,
+                455.61027746319365
+              ],
+              [
+                511.15538322470144,
+                187.22712783671915
+              ]
+            ],
+            [
+              [
+                508.5277553002104,
+                455.26895533257806
+              ],
+              [
+                511.1502829695154,
+                187.22081133780378
+              ]
+            ],
+            [
+              [
+                508.69156014355417,
+                454.77529335860316
+              ],
+              [
+                511.1591665873846,
+                187.2015983255637
+              ]
+            ],
+            [
+              [
+                508.72105590935575,
+                454.2976475078852
+              ],
+              [
+                511.11677928999717,
+                187.21214428476253
+              ]
+            ],
+            [
+              [
+                508.69366556589614,
+                453.93301310917644
+              ],
+              [
+                511.1282246549262,
+                187.19690623512614
+              ]
+            ],
+            [
+              [
+                509.040559216456,
+                453.72660083722235
+              ],
+              [
+                511.1368005329273,
+                187.20336886181957
+              ]
+            ],
+            [
+              [
+                509.1951963400686,
+                453.74553042919916
+              ],
+              [
+                511.1232694229031,
+                187.210143203768
+              ]
+            ],
+            [
+              [
+                509.3896935877032,
+                453.91111827393786
+              ],
+              [
+                511.12950975725846,
+                187.19909566872917
+              ]
+            ],
+            [
+              [
+                509.22955708701085,
+                453.8982791278765
+              ],
+              [
+                511.1248810656518,
+                187.19671741198857
+              ]
+            ],
+            [
+              [
+                508.51247712694294,
+                454.12847117492106
+              ],
+              [
+                511.14317652095326,
+                187.2119107644009
+              ]
+            ],
+            [
+              [
+                508.3525854248564,
+                454.6657595000504
+              ],
+              [
+                511.12891405729516,
+                187.1952031978681
+              ]
+            ],
+            [
+              [
+                508.6945890968267,
+                455.6020341741253
+              ],
+              [
+                511.12761805026656,
+                187.179122239147
+              ]
+            ],
+            [
+              [
+                509.5702251808021,
+                456.7256328073636
+              ],
+              [
+                511.12695163747145,
+                187.1868335872049
+              ]
+            ],
+            [
+              [
+                510.3187011051782,
+                457.69286808228816
+              ],
+              [
+                511.1423814280957,
+                187.21464250035677
+              ]
+            ],
+            [
+              [
+                510.4749751819987,
+                458.1391048974189
+              ],
+              [
+                511.12090476190474,
+                187.1792380952381
+              ]
+            ],
+            [
+              [
+                510.4520814367293,
+                458.4293428784242
+              ],
+              [
+                511.1222507854899,
+                187.18937446443874
+              ]
+            ],
+            [
+              [
+                509.9835502642239,
+                458.89307671745524
+              ],
+              [
+                511.1272865853659,
+                187.17220846036585
+              ]
+            ],
+            [
+              [
+                509.23500917279904,
+                459.1223795683631
+              ],
+              [
+                511.1355778846612,
+                187.1840563836373
+              ]
+            ],
+            [
+              [
+                508.21396712645577,
+                459.8595440654167
+              ],
+              [
+                511.1538424911913,
+                187.1968383963432
+              ]
+            ],
+            [
+              [
+                508.60175182481754,
+                460.4578310740354
+              ],
+              [
+                511.16488120744657,
+                187.19454363662334
+              ]
+            ],
+            [
+              [
+                508.95535977743117,
+                461.7098385533027
+              ],
+              [
+                511.17529406162197,
+                187.18486594599742
+              ]
+            ],
+            [
+              [
+                509.5138105074856,
+                462.66520433588175
+              ],
+              [
+                511.17188690022846,
+                187.1891660319878
+              ]
+            ],
+            [
+              [
+                509.72045542096475,
+                463.43737961734365
+              ],
+              [
+                511.1552380952381,
+                187.2102857142857
+              ]
+            ],
+            [
+              [
+                509.7903274515725,
+                463.71668320462487
+              ],
+              [
+                511.1763893518739,
+                187.21220058098004
+              ]
+            ],
+            [
+              [
+                509.56809855382966,
+                463.0231601499732
+              ],
+              [
+                511.1865714285714,
+                187.2162857142857
+              ]
+            ],
+            [
+              [
+                509.2895170838972,
+                462.2578019282815
+              ],
+              [
+                511.1841165547779,
+                187.23625196400513
+              ]
+            ],
+            [
+              [
+                509.4893418654914,
+                461.8495995253634
+              ],
+              [
+                511.1806322605218,
+                187.24047800418967
+              ]
+            ],
+            [
+              [
+                509.52715480026114,
+                460.97475098447995
+              ],
+              [
+                511.176246487928,
+                187.2340587647031
+              ]
+            ],
+            [
+              [
+                509.74709174369616,
+                461.5355383680228
+              ],
+              [
+                511.19800095192767,
+                187.24140885292718
+              ]
+            ],
+            [
+              [
+                509.59815906203795,
+                462.25104646077597
+              ],
+              [
+                511.1973433631689,
+                187.22781374976196
+              ]
+            ],
+            [
+              [
+                510.49346412063665,
+                463.0218350657771
+              ],
+              [
+                511.20001903583494,
+                187.25936325132062
+              ]
+            ],
+            [
+              [
+                510.99553402148723,
+                463.57067621655784
+              ],
+              [
+                511.1919432407981,
+                187.25694014570735
+              ]
+            ],
+            [
+              [
+                511.6645848483552,
+                464.0564657569406
+              ],
+              [
+                511.1998096144693,
+                187.24388386482627
+              ]
+            ],
+            [
+              [
+                511.06107963655796,
+                464.6067129877071
+              ],
+              [
+                511.2135173726797,
+                187.26673012851023
+              ]
+            ],
+            [
+              [
+                510.5543538311164,
+                464.4393990905614
+              ],
+              [
+                511.1952020562616,
+                187.2575562854015
+              ]
+            ],
+            [
+              [
+                509.6976269890166,
+                463.2184997131992
+              ],
+              [
+                511.2125107112254,
+                187.26525754546321
+              ]
+            ],
+            [
+              [
+                509.09244862797834,
+                461.886141110224
+              ],
+              [
+                511.2171616219303,
+                187.24343232438608
+              ]
+            ],
+            [
+              [
+                508.07902163687675,
+                460.4212187728651
+              ],
+              [
+                511.17808871121264,
+                187.25513992004568
+              ]
+            ],
+            [
+              [
+                506.9582899504394,
+                459.81300237391196
+              ],
+              [
+                511.2011135963451,
+                187.2702612668348
+              ]
+            ],
+            [
+              [
+                507.035609175729,
+                459.9058840718863
+              ],
+              [
+                511.187360205587,
+                187.25317660495884
+              ]
+            ],
+            [
+              [
+                506.91967374667144,
+                460.7696097959868
+              ],
+              [
+                511.19842062699206,
+                187.27610484753342
+              ]
+            ],
+            [
+              [
+                507.7049452861953,
+                461.4782407407407
+              ],
+              [
+                511.20205577234225,
+                187.27557818597126
+              ]
+            ],
+            [
+              [
+                508.4171615897141,
+                462.70836792472915
+              ],
+              [
+                511.22306265163405,
+                187.26606726606727
+              ]
+            ],
+            [
+              [
+                510.1933950196145,
+                463.1559142077435
+              ],
+              [
+                511.20858516156665,
+                187.28287250749537
+              ]
+            ],
+            [
+              [
+                511.6708105100993,
+                463.03288685381716
+              ],
+              [
+                511.2111925383078,
+                187.26444275245075
+              ]
+            ],
+            [
+              [
+                512.3769968051118,
+                462.3570126723417
+              ],
+              [
+                511.21237505949546,
+                187.2713469776297
+              ]
+            ],
+            [
+              [
+                512.6671174652241,
+                461.91181521552465
+              ],
+              [
+                511.22274024738346,
+                187.25761179828734
+              ]
+            ],
+            [
+              [
+                511.3953563228257,
+                461.6155876483337
+              ],
+              [
+                511.21997525694707,
+                187.27464788732394
+              ]
+            ],
+            [
+              [
+                509.87095669299765,
+                461.87859910517415
+              ],
+              [
+                511.2283565751273,
+                187.27395173956498
+              ]
+            ],
+            [
+              [
+                508.53099969693034,
+                462.6981642637572
+              ],
+              [
+                511.21207651313284,
+                187.28687666539778
+              ]
+            ],
+            [
+              [
+                507.2440525557641,
+                463.7418700074207
+              ],
+              [
+                511.21425851894156,
+                187.28536074624026
+              ]
+            ],
+            [
+              [
+                507.42764465608,
+                464.2272776916188
+              ],
+              [
+                511.19937160811196,
+                187.27487384556792
+              ]
+            ],
+            [
+              [
+                508.60205010402217,
+                463.6029386269071
+              ],
+              [
+                511.2306886868783,
+                187.2766646042549
+              ]
+            ],
+            [
+              [
+                510.6909595474437,
+                462.28325328210053
+              ],
+              [
+                511.21275886693644,
+                187.2782194715544
+              ]
+            ],
+            [
+              [
+                510.6816416611846,
+                461.0676102964582
+              ],
+              [
+                511.2016374714394,
+                187.28655750190404
+              ]
+            ],
+            [
+              [
+                510.3431941465876,
+                460.2876666246163
+              ],
+              [
+                511.21140108581767,
+                187.27516906372034
+              ]
+            ],
+            [
+              [
+                509.74761794585953,
+                459.81446269692697
+              ],
+              [
+                511.2169317207885,
+                187.27006951718883
+              ]
+            ],
+            [
+              [
+                510.26584388185654,
+                458.88820675105484
+              ],
+              [
+                511.2245869637671,
+                187.2639146788554
+              ]
+            ],
+            [
+              [
+                510.077142552965,
+                458.4945810710103
+              ],
+              [
+                511.2074779709455,
+                187.26930221481305
+              ]
+            ],
+            [
+              [
+                511.04052555242725,
+                457.84943690811366
+              ],
+              [
+                511.2176232436294,
+                187.26396761133603
+              ]
+            ],
+            [
+              [
+                512.0787723564987,
+                458.15896519811463
+              ],
+              [
+                511.1961129900443,
+                187.26951841089888
+              ]
+            ],
+            [
+              [
+                513.3875869843266,
+                458.25014632877367
+              ],
+              [
+                511.2185222238102,
+                187.25563336668097
+              ]
+            ],
+            [
+              [
+                513.775684008538,
+                458.0745995127315
+              ],
+              [
+                511.2367255583599,
+                187.24339254250202
+              ]
+            ],
+            [
+              [
+                514.0593657107419,
+                458.06327922841683
+              ],
+              [
+                511.20756334539914,
+                187.2520480091446
+              ]
+            ],
+            [
+              [
+                514.4510292801432,
+                457.86843114691214
+              ],
+              [
+                511.2071479628306,
+                187.25613533476292
+              ]
+            ],
+            [
+              [
+                513.8823579849947,
+                457.7908467309754
+              ],
+              [
+                511.2139829499452,
+                187.25536981473545
+              ]
+            ],
+            [
+              [
+                514.3796923208777,
+                458.0911681522112
+              ],
+              [
+                511.23675063092236,
+                187.25522594162183
+              ]
+            ],
+            [
+              [
+                515.6581159917639,
+                458.70103380233354
+              ],
+              [
+                511.19316125345273,
+                187.25173826078674
+              ]
+            ],
+            [
+              [
+                515.928038688877,
+                460.36552391187536
+              ],
+              [
+                511.2149626172675,
+                187.26177437020812
+              ]
+            ],
+            [
+              [
+                517.374770307069,
+                463.7461533352521
+              ],
+              [
+                511.19965691413324,
+                187.25626608215
+              ]
+            ],
+            [
+              [
+                518.8006566711822,
+                465.88535806947857
+              ],
+              [
+                511.23521006001715,
+                187.24978565304372
+              ]
+            ],
+            [
+              [
+                519.8518707167995,
+                466.84742544915724
+              ],
+              [
+                511.21984092965664,
+                187.24946420917274
+              ]
+            ],
+            [
+              [
+                520.3527037933818,
+                467.35874553211113
+              ],
+              [
+                511.2595150764541,
+                187.2508455199352
+              ]
+            ],
+            [
+              [
+                519.8839372036279,
+                467.3502140785415
+              ],
+              [
+                511.23131875982284,
+                187.2374624946421
+              ]
+            ],
+            [
+              [
+                519.9170739469437,
+                466.52158396035554
+              ],
+              [
+                511.23480952380953,
+                187.24833333333333
+              ]
+            ],
+            [
+              [
+                518.8153983485829,
+                464.2769471100201
+              ],
+              [
+                511.25778645585297,
+                187.23940375273835
+              ]
+            ],
+            [
+              [
+                516.8140591550526,
+                462.06885403468914
+              ],
+              [
+                511.2551205106221,
+                187.25154806135086
+              ]
+            ],
+            [
+              [
+                514.989294982699,
+                461.20101643598616
+              ],
+              [
+                511.2362718483593,
+                187.2407010525313
+              ]
+            ],
+            [
+              [
+                512.5685027487334,
+                460.12956774819446
+              ],
+              [
+                511.2582166333238,
+                187.23020863103744
+              ]
+            ],
+            [
+              [
+                511.5088258031266,
+                459.6144777529634
+              ],
+              [
+                511.27387078330474,
+                187.22341337907375
+              ]
+            ],
+            [
+              [
+                511.39749525292825,
+                460.13970258795416
+              ],
+              [
+                511.27591957308937,
+                187.2227463312369
+              ]
+            ],
+            [
+              [
+                511.36318355009684,
+                461.2909172183316
+              ],
+              [
+                511.262849521269,
+                187.2334587719716
+              ]
+            ],
+            [
+              [
+                511.60507518393786,
+                462.3965550526609
+              ],
+              [
+                511.3012628067667,
+                187.21991898975458
+              ]
+            ],
+            [
+              [
+                512.9740090273173,
+                462.85214024429376
+              ],
+              [
+                511.27932907652723,
+                187.2358238825884
+              ]
+            ],
+            [
+              [
+                513.4147618633756,
+                463.3787806361898
+              ],
+              [
+                511.2867626036405,
+                187.23225007147622
+              ]
+            ],
+            [
+              [
+                515.8422527751418,
+                463.17674839450046
+              ],
+              [
+                511.28495878793655,
+                187.24360379246272
+              ]
+            ],
+            [
+              [
+                516.443933600053,
+                463.36276828540485
+              ],
+              [
+                511.28255692102505,
+                187.25688291892922
+              ]
+            ],
+            [
+              [
+                515.452543227192,
+                463.27923999035744
+              ],
+              [
+                511.2926051140422,
+                187.24051235655446
+              ]
+            ],
+            [
+              [
+                513.552803718208,
+                462.62613504325
+              ],
+              [
+                511.29090476190476,
+                187.24266666666668
+              ]
+            ],
+            [
+              [
+                511.27779075446455,
+                461.58853757458644
+              ],
+              [
+                511.2890412916131,
+                187.25036910034765
+              ]
+            ],
+            [
+              [
+                510.87469011547836,
+                460.12405975209236
+              ],
+              [
+                511.277648179005,
+                187.2599381099738
+              ]
+            ],
+            [
+              [
+                511.12269311820177,
+                459.3131824857915
+              ],
+              [
+                511.29866235064503,
+                187.25315371066787
+              ]
+            ],
+            [
+              [
+                510.66469128407,
+                458.88199050104834
+              ],
+              [
+                511.2951147509761,
+                187.27025997524046
+              ]
+            ],
+            [
+              [
+                509.1467023554604,
+                459.10428265524627
+              ],
+              [
+                511.2945013092121,
+                187.27112592239942
+              ]
+            ],
+            [
+              [
+                509.0346493737682,
+                459.357047491894
+              ],
+              [
+                511.28656446391165,
+                187.28489811464482
+              ]
+            ],
+            [
+              [
+                508.7220615858678,
+                459.82009666321943
+              ],
+              [
+                511.28695279378843,
+                187.26256371171343
+              ]
+            ],
+            [
+              [
+                509.06077091767884,
+                460.04719129554655
+              ],
+              [
+                511.2772277227723,
+                187.2768945163747
+              ]
+            ],
+            [
+              [
+                509.1298906516655,
+                460.1274255736047
+              ],
+              [
+                511.2862106716169,
+                187.26536246370603
+              ]
+            ],
+            [
+              [
+                509.9888415797974,
+                460.04295572288527
+              ],
+              [
+                511.3008091385055,
+                187.28305568776773
+              ]
+            ],
+            [
+              [
+                511.25150892649145,
+                460.7348313179017
+              ],
+              [
+                511.2990623066305,
+                187.2666476272074
+              ]
+            ],
+            [
+              [
+                511.29879600521804,
+                462.17957272085715
+              ],
+              [
+                511.2893647394718,
+                187.2847489888175
+              ]
+            ],
+            [
+              [
+                511.1183822738518,
+                463.2373884048618
+              ],
+              [
+                511.2861153406928,
+                187.27331556909022
+              ]
+            ],
+            [
+              [
+                511.25545632759747,
+                463.548638640819
+              ],
+              [
+                511.29687425662496,
+                187.27974689566582
+              ]
+            ],
+            [
+              [
+                510.6403762029746,
+                463.57244094488186
+              ],
+              [
+                511.31123905595734,
+                187.30619527978683
+              ]
+            ],
+            [
+              [
+                509.2574449531284,
+                463.5967952910399
+              ],
+              [
+                511.31268141803474,
+                187.2871282417321
+              ]
+            ],
+            [
+              [
+                507.87383397518187,
+                463.00248181429185
+              ],
+              [
+                511.30248822493934,
+                187.29516152052904
+              ]
+            ],
+            [
+              [
+                508.27758261637814,
+                461.94034371778963
+              ],
+              [
+                511.3045484822533,
+                187.2953182986012
+              ]
+            ],
+            [
+              [
+                508.0373070771276,
+                460.4829978604516
+              ],
+              [
+                511.2851501165723,
+                187.29537993053242
+              ]
+            ],
+            [
+              [
+                507.7121867787669,
+                458.9350684141114
+              ],
+              [
+                511.30296398496597,
+                187.30477187306724
+              ]
+            ],
+            [
+              [
+                507.5132823052679,
+                457.4842822643363
+              ],
+              [
+                511.2929787841309,
+                187.32813243268956
+              ]
+            ],
+            [
+              [
+                507.58743353095775,
+                456.74954668622536
+              ],
+              [
+                511.3034253092293,
+                187.30656517602284
+              ]
+            ],
+            [
+              [
+                507.5903656106389,
+                456.6113506039286
+              ],
+              [
+                511.3189667475382,
+                187.30421958993387
+              ]
+            ],
+            [
+              [
+                507.8466650457898,
+                456.6781748926169
+              ],
+              [
+                511.2880582108717,
+                187.3183050363818
+              ]
+            ],
+            [
+              [
+                507.5539001054083,
+                457.01216249087815
+              ],
+              [
+                511.27502378686967,
+                187.315271170314
+              ]
+            ],
+            [
+              [
+                507.2617396593674,
+                457.1903892944039
+              ],
+              [
+                511.27933970791116,
+                187.30683602112174
+              ]
+            ],
+            [
+              [
+                507.51134238555983,
+                457.6379380437434
+              ],
+              [
+                511.31408182683157,
+                187.3115128449096
+              ]
+            ]
+          ],
+          "mask_sha256": "75817fd6314e1d7e0900fa74e185f9563f4f5787b25376444ef31545848853fd",
+          "sam2_weight_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+          "lama_weight_sha256": "344c77bbcb158f17dd143070d1e789f38a66c04202311ae3a258ef66667a9ea9",
+          "preencode_protected_pixels_max_difference": 0,
+          "limitations": [
+            "Unequal object heights mean center separation need not have identical magnitude after swapping shelf anchors.",
+            "SAM2 construction masks and LaMa clean plates are not ground truth and are independent of GRiT scoring.",
+            "The edited regions include local object shadows and shelf contact areas."
+          ],
+          "tracked_shelf_anchor_gap_by_frame": [
+            302,
+            302,
+            302,
+            302,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303,
+            303
+          ],
+          "status": "constructed; visual review pending",
+          "elapsed_seconds": 42.60130967386067,
+          "files": {
+            "original.mp4": "0030b0835c2e6d3205b724e2a3edc6ffdea813257eefd3789a10632b2eeec71a",
+            "counterfactual.mp4": "62e83508f30317d619b259b43cd45d991c64350487393ce4bdc9e55f2b6661d6",
+            "original-rgb.mp4": "6b9eb7ff55e3e5700249d136bd235ad5343eb9645e0333529e5fdc5a32852e39",
+            "counterfactual-rgb.mp4": "5f3c75d068b88a06a37e26bc31061b027fdc5883730f5fff65ce44af15b5f69b"
+          },
+          "encoding": "matched H264 CRF18 browser inputs; exact RGB proofs apply before lossy encoding"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026101837",
+            "reviewer": "assistant six-frame inspection, not human ground truth",
+            "observed_motion": "Revised clip keeps shelf and clock sizes substantially steadier; fern fronds change shape and position independently. Both full objects remain inside the frame.",
+            "duration_seconds": 5,
+            "previous_attempt": "ltx25-seed2026100837 rejected for zoom-dominated motion",
+            "limitations": [
+              "Leaf motion is gentle; this is a spatial relation example, not a high-dynamic example."
+            ]
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026101837",
+            "reviewer": "assistant six-frame visual inspection",
+            "evidence": "Clock remains upright on the upper shelf; fern moves on the lower shelf with independent leaf movement. Both objects remain complete across six sampled times. The original has the reverse order.",
+            "limitations": [
+              "Small clean-plate and contact-shadow variations within recorded edited regions.",
+              "Shelf-anchor swapping does not guarantee equal object-center separation.",
+              "Construction masks and assistant review are not human ground truth."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "33-spatial-dog",
+      "dimension": "Spatial Relationship",
+      "scene": "The conservatory chair",
+      "views": [
+        {
+          "image": "assets/videos/33-spatial-dog/original-poster.webp",
+          "layout": "single",
+          "side": "left",
+          "position": "center",
+          "mirrored": true,
+          "preview": null
+        },
+        {
+          "image": "assets/videos/33-spatial-dog/counterfactual-poster.webp",
+          "layout": "single",
+          "side": "left",
+          "position": "center",
+          "mirrored": false,
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a dog ",
+        "focus": [
+          "right of",
+          "right of"
+        ],
+        "after": " an armchair"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          1.0
+        ],
+        "ours": [
+          1.0,
+          0.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "target": {
+        "subject": "dog",
+        "relationship": "on the right of",
+        "object": "chair"
+      },
+      "guide": {
+        "subject_x": 24,
+        "object_x": 70,
+        "y": 91,
+        "note": "Hand-placed schematic anchors, not model detections. The arrow represents x_subject - x_object.",
+        "axis": "x"
+      },
+      "videos": {
+        "original": {
+          "src": "assets/videos/33-spatial-dog/original.mp4",
+          "poster": "assets/videos/33-spatial-dog/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "6153c7d362d748b0858fba953dc8f2368729f13d26a62b2e6dc06795a38a8598",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/33-spatial-dog/counterfactual.mp4",
+          "poster": "assets/videos/33-spatial-dog/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "bb43070b390f49db920f1d893617d2fe2d75eb7e24716330eaf6ca4322d21df5",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "33-spatial-dog--original",
+            "prompt": "A dog on the right of a chair.",
+            "video_sha256": "6153c7d362d748b0858fba953dc8f2368729f13d26a62b2e6dc06795a38a8598",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "33-spatial-dog--counterfactual",
+            "prompt": "A dog on the right of a chair.",
+            "video_sha256": "bb43070b390f49db920f1d893617d2fe2d75eb7e24716330eaf6ca4322d21df5",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "33-spatial-dog--original",
+            "prompt": "A dog on the right of a chair.",
+            "video_sha256": "6153c7d362d748b0858fba953dc8f2368729f13d26a62b2e6dc06795a38a8598",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "33-spatial-dog--counterfactual",
+            "prompt": "A dog on the right of a chair.",
+            "video_sha256": "bb43070b390f49db920f1d893617d2fe2d75eb7e24716330eaf6ca4322d21df5",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-03/results-run-01/spatial_relationship/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/33-spatial-dog/first-frame.png",
+        "first_frame_sha256": "9c23fce685650af8df95227c34ccf6a0006a272216dfa83852d9ce7d2704394c",
+        "prompt": "Use the reference image as the first frame. The dog turns its head toward the chair, then back toward the camera, blinking and moving its ears. It lifts one front paw briefly and sets it back down, remaining seated to the right of the armchair. Its tail swishes along the floor. Leaves in the conservatory flutter lightly. The chair stays fixed and both complete objects remain visible. Hold the camera completely still. One uninterrupted five-second live-action shot, with continuous natural movement and stable object identities. No zoom, pan, cuts or simulated image scaling. No speech.",
+        "generation": {
+          "case_id": "33-spatial-dog",
+          "prompt": "Use the reference image as the first frame. The dog turns its head toward the chair, then back toward the camera, blinking and moving its ears. It lifts one front paw briefly and sets it back down, remaining seated to the right of the armchair. Its tail swishes along the floor. Leaves in the conservatory flutter lightly. The chair stays fixed and both complete objects remain visible. Hold the camera completely still. One uninterrupted five-second live-action shot, with continuous natural movement and stable object identities. No zoom, pan, cuts or simulated image scaling. No speech.",
+          "enhance_prompt": false,
+          "seed": 2026100833,
+          "first_frame": "cases/layer-03/33-spatial-dog/input/first-frame.png",
+          "first_frame_sha256": "9c23fce685650af8df95227c34ccf6a0006a272216dfa83852d9ce7d2704394c",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "7",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T05:10:34.942224+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 63.69971743412316,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "d63bc993e85748c2c8673f74b7488213d47a7455db2a05d465032c35fcc28322",
+          "video_sha256": "41aa5f3a3446ab7370ba41bc908a6157f2a649623219b6ef368f56d12bd20145"
+        },
+        "construction": {
+          "case": "33-spatial-dog",
+          "attempt": "ltx25-seed2026100833",
+          "source_native_sha256": "d63bc993e85748c2c8673f74b7488213d47a7455db2a05d465032c35fcc28322",
+          "duration_seconds": 5,
+          "frames": 120,
+          "fps": 24,
+          "script_sha256": "43b07d3b4a17b20f810def992915730397d9e2a07f54655d198eb7d0b3a0e288",
+          "physical_gpu": "3",
+          "query_unchanged": true,
+          "independent_counterfactual_generation": false,
+          "operation": "exact horizontal reflection",
+          "preencode_inverse_reflection_max_difference": 0,
+          "geometric_identity": "x maps to W-1-x; distances and upright orientation retained before encoding",
+          "status": "constructed; visual review pending",
+          "elapsed_seconds": 23.009988659992814,
+          "files": {
+            "original.mp4": "6153c7d362d748b0858fba953dc8f2368729f13d26a62b2e6dc06795a38a8598",
+            "counterfactual.mp4": "bb43070b390f49db920f1d893617d2fe2d75eb7e24716330eaf6ca4322d21df5",
+            "original-rgb.mp4": "161e5d4b262eac1aadba880b02d63ac707d39e32527298f39a5c09cda41daa3f",
+            "counterfactual-rgb.mp4": "b954620df00f6b56fe3c3687cf85456276ba676e0cda997923f630813df4bda1"
+          },
+          "encoding": "matched H264 CRF18 browser inputs; exact RGB proofs apply before lossy encoding"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100833",
+            "reviewer": "assistant six-frame temporal inspection, not human ground truth",
+            "observed_motion": "Dog changes head and paw poses and wags tail; chair stays to its left.",
+            "duration_seconds": 5
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100833",
+            "reviewer": "assistant six-frame visual inspection, not human ground truth",
+            "evidence": "Horizontal relationship reverses consistently. The same original motion and objects are retained. Pre-encode inverse-reflection pixel check is exact.",
+            "limitations": [
+              "Independent GRiT detections may vary under reflection; final scores include this detector effect."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    }
+  ]
+}

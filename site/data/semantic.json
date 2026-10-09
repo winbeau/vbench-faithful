@@ -1,0 +1,2307 @@
+{
+  "cases": [
+    {
+      "id": "01-scene",
+      "dimension": "Scene",
+      "scene": "The coastal road",
+      "views": [
+        {
+          "image": "assets/videos/01-scene/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "64%",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/01-scene/counterfactual-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "64%",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a coastal ",
+        "focus": [
+          "street",
+          "road"
+        ],
+        "after": " at golden hour"
+      },
+      "scores": {
+        "vbench": [
+          0.0,
+          1.0
+        ],
+        "ours": [
+          1.0,
+          1.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/01-scene/original.mp4",
+          "poster": "assets/videos/01-scene/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "63b7bfe36e95a6412aeb3b0fa454809daf4d9c0b85683b6487f204d38812fb4b",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/01-scene/counterfactual.mp4",
+          "poster": "assets/videos/01-scene/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "63b7bfe36e95a6412aeb3b0fa454809daf4d9c0b85683b6487f204d38812fb4b",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "01-scene--original",
+            "prompt": "a street",
+            "video_sha256": "63b7bfe36e95a6412aeb3b0fa454809daf4d9c0b85683b6487f204d38812fb4b",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/scene/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "01-scene--counterfactual",
+            "prompt": "a road",
+            "video_sha256": "63b7bfe36e95a6412aeb3b0fa454809daf4d9c0b85683b6487f204d38812fb4b",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/scene/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "01-scene--original",
+            "prompt": "a street",
+            "video_sha256": "63b7bfe36e95a6412aeb3b0fa454809daf4d9c0b85683b6487f204d38812fb4b",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/scene/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "01-scene--counterfactual",
+            "prompt": "a road",
+            "video_sha256": "63b7bfe36e95a6412aeb3b0fa454809daf4d9c0b85683b6487f204d38812fb4b",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/scene/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/01-scene/first-frame.png",
+        "first_frame_sha256": "48ddf245619202dab19817cc178acbba9e398adff137f8763bbc2984393b0363",
+        "prompt": "Use the reference image as the first frame. The red car starts rolling forward along the road toward the foreground left, its wheels visibly turning. It advances slowly and continuously during the shot, approaching and beginning to pass the lower-left edge. Sunlight glides across its curved body as its position changes. Small waves travel across the water and the moored sailboats rock gently. The bicycle and stone walls stay fixed. Hold the camera completely still: no zoom, pan, dolly or simulated image scaling. One continuous five-second live-action shot with coherent object movement, steady lighting and stable geometry. A quiet engine and soft waves, no speech.",
+        "generation": {
+          "case_id": "01-scene",
+          "prompt": "Use the reference image as the first frame. The red car starts rolling forward along the road toward the foreground left, its wheels visibly turning. It advances slowly and continuously during the shot, approaching and beginning to pass the lower-left edge. Sunlight glides across its curved body as its position changes. Small waves travel across the water and the moored sailboats rock gently. The bicycle and stone walls stay fixed. Hold the camera completely still: no zoom, pan, dolly or simulated image scaling. One continuous five-second live-action shot with coherent object movement, steady lighting and stable geometry. A quiet engine and soft waves, no speech.",
+          "enhance_prompt": false,
+          "seed": 2026100801,
+          "first_frame": "cases/layer-01/01-scene/input/first-frame.png",
+          "first_frame_sha256": "48ddf245619202dab19817cc178acbba9e398adff137f8763bbc2984393b0363",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "4",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T03:55:33.892757+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 66.05340883135796,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "159db0b0ef55ceb0201ef6f6959ccbf50c1c5c026bc7f48c273ac7c4fb403931",
+          "video_sha256": "63b7bfe36e95a6412aeb3b0fa454809daf4d9c0b85683b6487f204d38812fb4b"
+        },
+        "construction": {
+          "case": "01-scene",
+          "operation": "query_only",
+          "queries": [
+            "a street",
+            "a road"
+          ],
+          "video_sha256": "63b7bfe36e95a6412aeb3b0fa454809daf4d9c0b85683b6487f204d38812fb4b",
+          "identical_encoded_media": true
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "reviewer": "Codex visual and temporal diagnostics; not human ground truth",
+            "attempt": "ltx25-seed2026100801-attempt2",
+            "video_sha256": "63b7bfe36e95a6412aeb3b0fa454809daf4d9c0b85683b6487f204d38812fb4b",
+            "duration_seconds": 5,
+            "first_frame_source": "Previous imagegen coastal-road panel, as archived in input/source.json",
+            "observations": [
+              "Decoded opening matches the referenced coastal composition and objects; model reconstruction is not pixel-identical.",
+              "Red car translates continuously toward the foreground left and passes out of frame.",
+              "Stone facade, road, bicycle and camera framing remain fixed while water ripples evolve.",
+              "No scene cuts or still-image scaling observed in the six-frame temporal inspection."
+            ],
+            "diagnostics": {
+              "car_median_feature_travel_px": 229.01359523832798,
+              "background_median_feature_travel_px": 0.44341647289547836
+            },
+            "limitations": [
+              "Automated feature tracking is supporting evidence, not a calibrated quality score.",
+              "The showcase illustrates a newly generated scene, not the frozen paper cohort."
+            ]
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "16-scene-forest",
+      "dimension": "Scene",
+      "scene": "The forest at dawn",
+      "views": [
+        {
+          "image": "assets/videos/16-scene-forest/original-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/16-scene-forest/counterfactual-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a ",
+        "focus": [
+          "forest",
+          "woodland"
+        ],
+        "after": " in the first light"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          0.0
+        ],
+        "ours": [
+          1.0,
+          1.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/16-scene-forest/original.mp4",
+          "poster": "assets/videos/16-scene-forest/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "0d7be73f99ef0bc443c1fd9fc1d4e72d10cbbabc4e24bf736d8bbad1aee800bb",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/16-scene-forest/counterfactual.mp4",
+          "poster": "assets/videos/16-scene-forest/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "0d7be73f99ef0bc443c1fd9fc1d4e72d10cbbabc4e24bf736d8bbad1aee800bb",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "16-scene-forest--original",
+            "prompt": "a forest",
+            "video_sha256": "0d7be73f99ef0bc443c1fd9fc1d4e72d10cbbabc4e24bf736d8bbad1aee800bb",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/scene/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "16-scene-forest--counterfactual",
+            "prompt": "a woodland",
+            "video_sha256": "0d7be73f99ef0bc443c1fd9fc1d4e72d10cbbabc4e24bf736d8bbad1aee800bb",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/scene/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "16-scene-forest--original",
+            "prompt": "a forest",
+            "video_sha256": "0d7be73f99ef0bc443c1fd9fc1d4e72d10cbbabc4e24bf736d8bbad1aee800bb",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/scene/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "16-scene-forest--counterfactual",
+            "prompt": "a woodland",
+            "video_sha256": "0d7be73f99ef0bc443c1fd9fc1d4e72d10cbbabc4e24bf736d8bbad1aee800bb",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/scene/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/16-scene-forest/first-frame.png",
+        "first_frame_sha256": "36e380cedcbecb7002e00198dfd806e0736c030a32308b9ffb03248e6040ada0",
+        "prompt": "Use the reference image as the first frame. A breeze passes through the forest in successive gusts: foreground fern fronds bend and spring back, small leaves tremble independently, and higher branches sway more slowly. A thin ribbon of mist drifts sideways between the trunks, briefly revealing the sunlit path behind it. The trunks and ground remain fixed. Hold the camera still, with no zoom, pan or image scaling. Show continuous natural movement at several depths in one uninterrupted five-second shot. Soft wind and rustling leaves, no speech.",
+        "generation": {
+          "case_id": "16-scene-forest",
+          "prompt": "Use the reference image as the first frame. A breeze passes through the forest in successive gusts: foreground fern fronds bend and spring back, small leaves tremble independently, and higher branches sway more slowly. A thin ribbon of mist drifts sideways between the trunks, briefly revealing the sunlit path behind it. The trunks and ground remain fixed. Hold the camera still, with no zoom, pan or image scaling. Show continuous natural movement at several depths in one uninterrupted five-second shot. Soft wind and rustling leaves, no speech.",
+          "enhance_prompt": false,
+          "seed": 2026100816,
+          "first_frame": "cases/layer-01/16-scene-forest/input/first-frame.png",
+          "first_frame_sha256": "36e380cedcbecb7002e00198dfd806e0736c030a32308b9ffb03248e6040ada0",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "4",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T03:59:20.085446+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 81.85600367560983,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "186fad4385f8bba016e86a85ed0b9eb9285203c1fb1580a882a4e570b7a3d68d",
+          "video_sha256": "0d7be73f99ef0bc443c1fd9fc1d4e72d10cbbabc4e24bf736d8bbad1aee800bb"
+        },
+        "construction": {
+          "case": "16-scene-forest",
+          "operation": "query_only",
+          "queries": [
+            "a forest",
+            "a woodland"
+          ],
+          "video_sha256": "0d7be73f99ef0bc443c1fd9fc1d4e72d10cbbabc4e24bf736d8bbad1aee800bb",
+          "identical_encoded_media": true
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100816",
+            "video_sha256": "0d7be73f99ef0bc443c1fd9fc1d4e72d10cbbabc4e24bf736d8bbad1aee800bb",
+            "duration_seconds": 5,
+            "reviewer": "Codex inspection of six temporal frames and video metadata; not human ground truth",
+            "observations": [
+              "Leaves and ferns move at different depths; mist evolves; rooted trunks and path stay fixed."
+            ],
+            "scope": "Showcase illustration; not a frozen paper example or numerical result."
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "02-action",
+      "dimension": "Human Action",
+      "scene": "The music studio",
+      "views": [
+        {
+          "image": "assets/videos/02-action/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "18%",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/02-action/counterfactual-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "18%",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "",
+        "focus": [
+          "playing guitar",
+          "strumming a guitar"
+        ],
+        "after": " in warm light"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          0.0
+        ],
+        "ours": [
+          1.0,
+          1.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/02-action/original.mp4",
+          "poster": "assets/videos/02-action/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/02-action/counterfactual.mp4",
+          "poster": "assets/videos/02-action/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "02-action--original",
+            "prompt": "playing guitar",
+            "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/human_action/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "02-action--counterfactual",
+            "prompt": "strumming a guitar",
+            "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/human_action/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "02-action--original",
+            "prompt": "playing guitar",
+            "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "02-action--counterfactual",
+            "prompt": "strumming a guitar",
+            "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/02-action/first-frame.png",
+        "first_frame_sha256": "ffb26eed785a8d0553a6e2999923ff5caa094ec5a3f4dd03afabe8994db4869b",
+        "prompt": "Use the reference image as the first frame. For the entire five seconds the seated musician plays a continuous, gentle acoustic guitar rhythm. His right hand stays directly above the sound hole and makes compact alternating downstrokes and upstrokes across the strings, without pausing or lifting away from the guitar. His left fingertips change between two chord shapes on the fretboard. The guitar rests firmly on his thigh and keeps the same angle. He keeps his gaze on the strings, with only a slight rhythmic nod. A locked tripod shot, steady room and lighting, no zoom or cuts. Continuous acoustic strumming, no singing or speech.",
+        "generation": {
+          "case_id": "02-action",
+          "prompt": "Use the reference image as the first frame. For the entire five seconds the seated musician plays a continuous, gentle acoustic guitar rhythm. His right hand stays directly above the sound hole and makes compact alternating downstrokes and upstrokes across the strings, without pausing or lifting away from the guitar. His left fingertips change between two chord shapes on the fretboard. The guitar rests firmly on his thigh and keeps the same angle. He keeps his gaze on the strings, with only a slight rhythmic nod. A locked tripod shot, steady room and lighting, no zoom or cuts. Continuous acoustic strumming, no singing or speech.",
+          "enhance_prompt": false,
+          "seed": 2026101802,
+          "first_frame": "cases/layer-01/02-action/input/first-frame.png",
+          "first_frame_sha256": "ffb26eed785a8d0553a6e2999923ff5caa094ec5a3f4dd03afabe8994db4869b",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "4",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:07:14.953540+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 69.26172096841037,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "8e09cbf788559449f647d08c2bd7597905ed6bcde1d76ebc5a252e56f6849683",
+          "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055"
+        },
+        "construction": {
+          "case": "02-action",
+          "operation": "query_only",
+          "queries": [
+            "playing guitar",
+            "strumming a guitar"
+          ],
+          "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+          "identical_encoded_media": true
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026101802",
+            "video_sha256": "fb3e40ef0e12510e1f7617d2437834dc1776d4dd08c0395161ff9c1b138b3055",
+            "duration_seconds": 5,
+            "reviewer": "Codex inspection of six temporal frames and video metadata; not human ground truth",
+            "observations": [
+              "Refined take sustains compact strumming over the sound hole while fingers change chord shapes."
+            ],
+            "scope": "Showcase illustration; not a frozen paper example or numerical result."
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "17-action-ballet",
+      "dimension": "Human Action",
+      "scene": "The morning rehearsal",
+      "views": [
+        {
+          "image": "assets/videos/17-action-ballet/original-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/17-action-ballet/counterfactual-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "",
+        "focus": [
+          "ballet dancing",
+          "dancing ballet"
+        ],
+        "after": " in morning light"
+      },
+      "scores": {
+        "vbench": [
+          0.0,
+          1.0
+        ],
+        "ours": [
+          0.0,
+          1.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/17-action-ballet/original.mp4",
+          "poster": "assets/videos/17-action-ballet/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/17-action-ballet/counterfactual.mp4",
+          "poster": "assets/videos/17-action-ballet/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "17-action-ballet--original",
+            "prompt": "ballet dancing",
+            "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/human_action/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "17-action-ballet--counterfactual",
+            "prompt": "dancing ballet",
+            "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/human_action/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "17-action-ballet--original",
+            "prompt": "ballet dancing",
+            "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "17-action-ballet--counterfactual",
+            "prompt": "dancing ballet",
+            "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/human_action/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/17-action-ballet/first-frame.png",
+        "first_frame_sha256": "afb8f996dcce52505fe01aa3c88eedfd3f6cd0fb48481f2f2af53e926b8a3b69",
+        "prompt": "Use the reference image as the first frame. The dancer lowers her raised leg into a small plie, draws her arms inward and performs one controlled pirouette. She opens her arms as she finishes the turn, steps lightly to the side and extends one leg again into a balanced ballet pose. Her skirt swings naturally after the rotation and settles. Show continuous full-body dancing at a natural pace, with both feet and hands always inside the frame. Keep the camera locked and the room steady. One uninterrupted five-second take, believable balance and anatomy, no cuts or slow motion. Soft footfalls on the wooden floor, no speech.",
+        "generation": {
+          "case_id": "17-action-ballet",
+          "prompt": "Use the reference image as the first frame. The dancer lowers her raised leg into a small plie, draws her arms inward and performs one controlled pirouette. She opens her arms as she finishes the turn, steps lightly to the side and extends one leg again into a balanced ballet pose. Her skirt swings naturally after the rotation and settles. Show continuous full-body dancing at a natural pace, with both feet and hands always inside the frame. Keep the camera locked and the room steady. One uninterrupted five-second take, believable balance and anatomy, no cuts or slow motion. Soft footfalls on the wooden floor, no speech.",
+          "enhance_prompt": false,
+          "seed": 2026100817,
+          "first_frame": "cases/layer-01/17-action-ballet/input/first-frame.png",
+          "first_frame_sha256": "afb8f996dcce52505fe01aa3c88eedfd3f6cd0fb48481f2f2af53e926b8a3b69",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "6",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T03:59:20.093412+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 80.7349082864821,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "f906e7abaec2a24a0ca7b547e41d201ad83eef55f96658044f0b956fe60fc006",
+          "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842"
+        },
+        "construction": {
+          "case": "17-action-ballet",
+          "operation": "query_only",
+          "queries": [
+            "ballet dancing",
+            "dancing ballet"
+          ],
+          "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+          "identical_encoded_media": true
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100817",
+            "video_sha256": "87a7ccb099f81c2a2d6337e90c5dba1e429e96509a63079a73f3abceb78b5842",
+            "duration_seconds": 5,
+            "reviewer": "Codex inspection of six temporal frames and video metadata; not human ground truth",
+            "observations": [
+              "The dancer moves through distinct balanced ballet poses with visible limb and skirt motion."
+            ],
+            "scope": "Showcase illustration; not a frozen paper example or numerical result."
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "04-class",
+      "dimension": "Object Class",
+      "scene": "The velvet-sofa portrait",
+      "views": [
+        {
+          "image": "assets/videos/04-class/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "42%",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/04-class/counterfactual-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "42%",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a ",
+        "focus": [
+          "dog",
+          "canine"
+        ],
+        "after": " in soft window light"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          0.0
+        ],
+        "ours": [
+          1.0,
+          1.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/04-class/original.mp4",
+          "poster": "assets/videos/04-class/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "bc0c14dac9c1fa1571a6cde283cb94db3a9b9a2e36d109850e85723134e57440",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/04-class/counterfactual.mp4",
+          "poster": "assets/videos/04-class/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "bc0c14dac9c1fa1571a6cde283cb94db3a9b9a2e36d109850e85723134e57440",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "04-class--original",
+            "prompt": "a dog",
+            "video_sha256": "bc0c14dac9c1fa1571a6cde283cb94db3a9b9a2e36d109850e85723134e57440",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/object_class/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "04-class--counterfactual",
+            "prompt": "a canine",
+            "video_sha256": "bc0c14dac9c1fa1571a6cde283cb94db3a9b9a2e36d109850e85723134e57440",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/object_class/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "04-class--original",
+            "prompt": "a dog",
+            "video_sha256": "bc0c14dac9c1fa1571a6cde283cb94db3a9b9a2e36d109850e85723134e57440",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/object_class/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "04-class--counterfactual",
+            "prompt": "a canine",
+            "video_sha256": "bc0c14dac9c1fa1571a6cde283cb94db3a9b9a2e36d109850e85723134e57440",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/object_class/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/04-class/first-frame.png",
+        "first_frame_sha256": "767c0a1a617e922ea79b76795712a35508c8498e9d948f6e60712c79e2c18b1d",
+        "prompt": "Use the reference image as the first frame. The dog notices something just off camera, lifts its head and turns it toward the window, with its ears moving independently. It shifts a front paw forward on the cushion, sniffs twice, then turns its face back toward the camera and blinks. Its chest continues to rise and fall with breathing and its tail gives two gentle wags. Keep the sofa and room fixed and preserve the same dog. A locked camera, one continuous five-second live-action take, natural animal motion, no zoom or image scaling. Quiet room ambience, no speech.",
+        "generation": {
+          "case_id": "04-class",
+          "prompt": "Use the reference image as the first frame. The dog notices something just off camera, lifts its head and turns it toward the window, with its ears moving independently. It shifts a front paw forward on the cushion, sniffs twice, then turns its face back toward the camera and blinks. Its chest continues to rise and fall with breathing and its tail gives two gentle wags. Keep the sofa and room fixed and preserve the same dog. A locked camera, one continuous five-second live-action take, natural animal motion, no zoom or image scaling. Quiet room ambience, no speech.",
+          "enhance_prompt": false,
+          "seed": 2026100804,
+          "first_frame": "cases/layer-01/04-class/input/first-frame.png",
+          "first_frame_sha256": "767c0a1a617e922ea79b76795712a35508c8498e9d948f6e60712c79e2c18b1d",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "7",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T03:59:20.062922+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 81.47400451265275,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "d099aaef137e07be575200f9afb334d21c19a8f752b310f737f004d61173218c",
+          "video_sha256": "bc0c14dac9c1fa1571a6cde283cb94db3a9b9a2e36d109850e85723134e57440"
+        },
+        "construction": {
+          "case": "04-class",
+          "operation": "query_only",
+          "queries": [
+            "a dog",
+            "a canine"
+          ],
+          "video_sha256": "bc0c14dac9c1fa1571a6cde283cb94db3a9b9a2e36d109850e85723134e57440",
+          "identical_encoded_media": true
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100804",
+            "video_sha256": "bc0c14dac9c1fa1571a6cde283cb94db3a9b9a2e36d109850e85723134e57440",
+            "duration_seconds": 5,
+            "reviewer": "Codex inspection of six temporal frames and video metadata; not human ground truth",
+            "observations": [
+              "The dog lowers and turns its head, shifts its body, then looks back; room remains fixed."
+            ],
+            "scope": "Showcase illustration; not a frozen paper example or numerical result."
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "18-class-bicycle",
+      "dimension": "Object Class",
+      "scene": "The canal-side bicycle",
+      "views": [
+        {
+          "image": "assets/videos/18-class-bicycle/original-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/18-class-bicycle/counterfactual-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "a ",
+        "focus": [
+          "bicycle",
+          "bike"
+        ],
+        "after": " by the evening canal"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          0.0
+        ],
+        "ours": [
+          1.0,
+          1.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/18-class-bicycle/original.mp4",
+          "poster": "assets/videos/18-class-bicycle/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "f708ace61c6540599e41f3461775e8bfc1cc1a5a1406fee85e55e7e4a42cbe0f",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/18-class-bicycle/counterfactual.mp4",
+          "poster": "assets/videos/18-class-bicycle/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "f708ace61c6540599e41f3461775e8bfc1cc1a5a1406fee85e55e7e4a42cbe0f",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "18-class-bicycle--original",
+            "prompt": "a bicycle",
+            "video_sha256": "f708ace61c6540599e41f3461775e8bfc1cc1a5a1406fee85e55e7e4a42cbe0f",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/object_class/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "18-class-bicycle--counterfactual",
+            "prompt": "a bike",
+            "video_sha256": "f708ace61c6540599e41f3461775e8bfc1cc1a5a1406fee85e55e7e4a42cbe0f",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/object_class/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "18-class-bicycle--original",
+            "prompt": "a bicycle",
+            "video_sha256": "f708ace61c6540599e41f3461775e8bfc1cc1a5a1406fee85e55e7e4a42cbe0f",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/object_class/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "18-class-bicycle--counterfactual",
+            "prompt": "a bike",
+            "video_sha256": "f708ace61c6540599e41f3461775e8bfc1cc1a5a1406fee85e55e7e4a42cbe0f",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/object_class/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/18-class-bicycle/first-frame.png",
+        "first_frame_sha256": "4a8a9813c8c4eef684447e23057288fe352ee4c1ad1a242ccb074773da9f00aa",
+        "prompt": "Use the reference image as the first frame. A breeze moves through the basket of flowers: stems bow together, then individual blossoms sway and settle at different times. Loose leaves flutter against the bicycle frame. Behind it, small ripples travel continuously down the canal and distort the reflected buildings, while a fallen petal drifts along the water. The bicycle remains leaning securely in its original position. Keep the camera absolutely still, with no zoom or simulated picture movement. One uninterrupted five-second shot with visible flower motion and moving water. Breeze and quiet water, no speech.",
+        "generation": {
+          "case_id": "18-class-bicycle",
+          "prompt": "Use the reference image as the first frame. A breeze moves through the basket of flowers: stems bow together, then individual blossoms sway and settle at different times. Loose leaves flutter against the bicycle frame. Behind it, small ripples travel continuously down the canal and distort the reflected buildings, while a fallen petal drifts along the water. The bicycle remains leaning securely in its original position. Keep the camera absolutely still, with no zoom or simulated picture movement. One uninterrupted five-second shot with visible flower motion and moving water. Breeze and quiet water, no speech.",
+          "enhance_prompt": false,
+          "seed": 2026100818,
+          "first_frame": "cases/layer-01/18-class-bicycle/input/first-frame.png",
+          "first_frame_sha256": "4a8a9813c8c4eef684447e23057288fe352ee4c1ad1a242ccb074773da9f00aa",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "5",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:00:41.015494+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 81.2796457130462,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "c0f4b5a774420ab4513fc66492b9a2da362aafb704b8688de64ca49a76d36f7c",
+          "video_sha256": "f708ace61c6540599e41f3461775e8bfc1cc1a5a1406fee85e55e7e4a42cbe0f"
+        },
+        "construction": {
+          "case": "18-class-bicycle",
+          "operation": "query_only",
+          "queries": [
+            "a bicycle",
+            "a bike"
+          ],
+          "video_sha256": "f708ace61c6540599e41f3461775e8bfc1cc1a5a1406fee85e55e7e4a42cbe0f",
+          "identical_encoded_media": true
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100818",
+            "video_sha256": "f708ace61c6540599e41f3461775e8bfc1cc1a5a1406fee85e55e7e4a42cbe0f",
+            "duration_seconds": 5,
+            "reviewer": "Codex inspection of six temporal frames and video metadata; not human ground truth",
+            "observations": [
+              "Flower clusters sway and canal reflections move around the stationary bicycle."
+            ],
+            "scope": "Showcase illustration; not a frozen paper example or numerical result."
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "03-objects",
+      "dimension": "Multiple Objects",
+      "scene": "The blue still life",
+      "views": [
+        {
+          "image": "assets/videos/03-objects/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "68%",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/03-objects/counterfactual-poster.webp",
+          "layout": "diptych",
+          "side": "right",
+          "position": "68%",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "",
+        "focus": [
+          "a cup and a vase",
+          "a cup and a vase"
+        ],
+        "after": " in soft light"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          0.0
+        ],
+        "ours": [
+          1.0,
+          0.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/03-objects/original.mp4",
+          "poster": "assets/videos/03-objects/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/03-objects/counterfactual.mp4",
+          "poster": "assets/videos/03-objects/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "03-objects--original",
+            "prompt": "a cup and a vase",
+            "video_sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "03-objects--counterfactual",
+            "prompt": "a cup and a vase",
+            "video_sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "03-objects--original",
+            "prompt": "a cup and a vase",
+            "video_sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "03-objects--counterfactual",
+            "prompt": "a cup and a vase",
+            "video_sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/03-objects/first-frame.png",
+        "first_frame_sha256": "fb2b99c2c4f4079aba8963fa0164291c55b562549e29df63d828dfab524a033b",
+        "prompt": "Use the reference image as the first frame. A warm curl of steam rises from the cup, twists sideways and disperses. The leaves on the branch in the blue vase flutter in a light breeze, and the branch nods gently before settling. Keep the cup, vase and pear in their original places, with steady lighting and fixed shadows on the table. The camera remains locked. Show actual evolving steam and independent leaf movement, with no zoom, pan or image scaling. One continuous five-second shot, no extra objects or cuts. Quiet room ambience, no speech.",
+        "generation": {
+          "case_id": "03-objects",
+          "prompt": "Use the reference image as the first frame. A warm curl of steam rises from the cup, twists sideways and disperses. The leaves on the branch in the blue vase flutter in a light breeze, and the branch nods gently before settling. Keep the cup, vase and pear in their original places, with steady lighting and fixed shadows on the table. The camera remains locked. Show actual evolving steam and independent leaf movement, with no zoom, pan or image scaling. One continuous five-second shot, no extra objects or cuts. Quiet room ambience, no speech.",
+          "enhance_prompt": false,
+          "seed": 2026100803,
+          "first_frame": "cases/layer-01/03-objects/input/first-frame.png",
+          "first_frame_sha256": "fb2b99c2c4f4079aba8963fa0164291c55b562549e29df63d828dfab524a033b",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "6",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:00:42.786241+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 75.76191858388484,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "c7c948ae75b1e191b9fca195069991df18cbccd7af307b344e146d721a09d081",
+          "video_sha256": "1affa3c3a7e1c03088666bb9dac9f3ba86a1a4ab27a4fb6cb9c36c2363b4c0c1"
+        },
+        "construction": {
+          "case": "03-objects",
+          "attempt": "ltx25-seed2026100803",
+          "recipe": {
+            "kind": "remove",
+            "box": [
+              390,
+              0,
+              795,
+              610
+            ],
+            "points": [
+              [
+                580,
+                420
+              ],
+              [
+                580,
+                90
+              ],
+              [
+                540,
+                12
+              ],
+              [
+                680,
+                20
+              ]
+            ],
+            "labels": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "role": "construction only; independent of all scoring localizers",
+          "source_native_sha256": "c7c948ae75b1e191b9fca195069991df18cbccd7af307b344e146d721a09d081",
+          "mask_sha256": "055ceb992ca103de508adc060b2a03273d05a27799b4296ecac7ff0f8450e28c",
+          "sam2_source_sha": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+          "sam2_weight_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+          "segmentation_input": "native RGB frames converted to JPEG quality 100 for SAM 2 input only",
+          "masks_are_ground_truth": false,
+          "area_fraction_range": [
+            0.1335235595703125,
+            0.149609375
+          ],
+          "pair_variant": "ltx25-seed2026100803-v2",
+          "additional_edit_support": {
+            "reason": "remove vase reflection on tabletop",
+            "rectangle_xyxy": [
+              430,
+              585,
+              720,
+              640
+            ]
+          },
+          "status": "constructed; visual review pending",
+          "duration_seconds": 5,
+          "frames": 120,
+          "fps": 24,
+          "elapsed_seconds": 33.84194057434797,
+          "preencode_protected_pixels_max_difference": 0,
+          "scoring_media": "The browser original.mp4 and counterfactual.mp4; matched H.264 CRF18 encoding. Lossless RGB controls are retained.",
+          "encoding_note": "Lossy display encoding can introduce small differences outside the edit support; strict pixel identity applies to the saved RGB controls.",
+          "files": {
+            "original.mp4": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+            "counterfactual.mp4": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+            "original-rgb.mp4": "94f8d47270120847ce3381edc6bb6def97c919e9c0e43cf64fe18895fdc1db28",
+            "counterfactual-rgb.mp4": "db853f7644ccd60dbf31a220ec94affe1e8f721486d2c05674334596542fc6d2"
+          },
+          "lama_weight_sha256": "344c77bbcb158f17dd143070d1e789f38a66c04202311ae3a258ef66667a9ea9"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100803",
+            "video_sha256": "1affa3c3a7e1c03088666bb9dac9f3ba86a1a4ab27a4fb6cb9c36c2363b4c0c1",
+            "duration_seconds": 5,
+            "reviewer": "Codex inspection of six temporal frames and video metadata; not human ground truth",
+            "observations": [
+              "Steam rises and curls while leaves sway; cup, pear and vase stay in position."
+            ],
+            "scope": "Showcase illustration; not a frozen paper example or numerical result."
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100803-v2",
+            "reviewer": "Codex temporal contact-sheet inspection; not human ground truth",
+            "observations": [
+              "Vase and its branch are removed throughout the video.",
+              "Extended support removes the visible reflection beneath the original vase.",
+              "Cup steam and pear remain present, with surrounding pixels preserved before matched lossy delivery encoding."
+            ],
+            "controlled_rgb_protected_difference": 0,
+            "files": {
+              "original.mp4": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+              "counterfactual.mp4": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+              "original-rgb.mp4": "94f8d47270120847ce3381edc6bb6def97c919e9c0e43cf64fe18895fdc1db28",
+              "counterfactual-rgb.mp4": "db853f7644ccd60dbf31a220ec94affe1e8f721486d2c05674334596542fc6d2"
+            }
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "19-objects-vineyard",
+      "dimension": "Multiple Objects",
+      "scene": "The vineyard table",
+      "views": [
+        {
+          "image": "assets/videos/19-objects-vineyard/original-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/19-objects-vineyard/counterfactual-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "",
+        "focus": [
+          "a bottle and a wine glass",
+          "a bottle and a wine glass"
+        ],
+        "after": " at dusk"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          0.0
+        ],
+        "ours": [
+          1.0,
+          0.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/19-objects-vineyard/original.mp4",
+          "poster": "assets/videos/19-objects-vineyard/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/19-objects-vineyard/counterfactual.mp4",
+          "poster": "assets/videos/19-objects-vineyard/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "19-objects-vineyard--original",
+            "prompt": "a bottle and a wine glass",
+            "video_sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "19-objects-vineyard--counterfactual",
+            "prompt": "a bottle and a wine glass",
+            "video_sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/multiple_objects/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "19-objects-vineyard--original",
+            "prompt": "a bottle and a wine glass",
+            "video_sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "19-objects-vineyard--counterfactual",
+            "prompt": "a bottle and a wine glass",
+            "video_sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/multiple_objects/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/19-objects-vineyard/first-frame.png",
+        "first_frame_sha256": "c5ab09b806330fe23913f057538fb731f6734397cd2fd9c9ef84c5f825b58b58",
+        "prompt": "Use the reference image as the first frame. A steady breeze moves the olive branches along the left edge of the frame: their stems bend back and forth and clusters of leaves turn and flutter visibly. Smaller vineyard leaves sway at different speeds in the distance. Keep the green bottle and the empty wine glass completely still and upright on the flat table. The tablecloth remains flat and motionless for the entire shot. The glass stays empty. Hold the camera absolutely still, with steady sunset light, no zoom and no cuts. One continuous five-second take with natural wind-driven foliage movement. Soft rustling leaves, no speech.",
+        "generation": {
+          "case_id": "19-objects-vineyard",
+          "prompt": "Use the reference image as the first frame. A steady breeze moves the olive branches along the left edge of the frame: their stems bend back and forth and clusters of leaves turn and flutter visibly. Smaller vineyard leaves sway at different speeds in the distance. Keep the green bottle and the empty wine glass completely still and upright on the flat table. The tablecloth remains flat and motionless for the entire shot. The glass stays empty. Hold the camera absolutely still, with steady sunset light, no zoom and no cuts. One continuous five-second take with natural wind-driven foliage movement. Soft rustling leaves, no speech.",
+          "enhance_prompt": false,
+          "seed": 2026101819,
+          "first_frame": "cases/layer-01/19-objects-vineyard/input/first-frame.png",
+          "first_frame_sha256": "c5ab09b806330fe23913f057538fb731f6734397cd2fd9c9ef84c5f825b58b58",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "5",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:07:15.856047+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 68.93240311183035,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "f92fe1c8a6141ee0be482513fc8017c734997ad1cf6bfdaf31003c9f426d6f8a",
+          "video_sha256": "d9ba96daa7a9faec3da9abdc2026a3961343169ce8838af29d3d2c20cdf7e152"
+        },
+        "construction": {
+          "case": "19-objects-vineyard",
+          "attempt": "ltx25-seed2026101819",
+          "recipe": {
+            "kind": "remove",
+            "box": [
+              536,
+              175,
+              718,
+              581
+            ]
+          },
+          "role": "construction only; independent of all scoring localizers",
+          "source_native_sha256": "f92fe1c8a6141ee0be482513fc8017c734997ad1cf6bfdaf31003c9f426d6f8a",
+          "mask_sha256": "992ff0ebfc13f91ef4f88047d725a745f1f6e1c7a66c7f0394d1d362b75f647c",
+          "sam2_source_sha": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+          "sam2_weight_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+          "segmentation_input": "native RGB frames converted to JPEG quality 100 for SAM 2 input only",
+          "masks_are_ground_truth": false,
+          "area_fraction_range": [
+            0.0480682373046875,
+            0.04867095947265625
+          ],
+          "status": "constructed; visual review pending",
+          "duration_seconds": 5,
+          "frames": 120,
+          "fps": 24,
+          "elapsed_seconds": 41.74504613876343,
+          "preencode_protected_pixels_max_difference": 0,
+          "scoring_media": "The browser original.mp4 and counterfactual.mp4; matched H.264 CRF18 encoding. Lossless RGB controls are retained.",
+          "encoding_note": "Lossy display encoding can introduce small differences outside the edit support; strict pixel identity applies to the saved RGB controls.",
+          "files": {
+            "original.mp4": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+            "counterfactual.mp4": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+            "original-rgb.mp4": "0884ec23ce21f14e9aa154d28bc730d3266da7b24f5c18c009e68d4eb82f3f3f",
+            "counterfactual-rgb.mp4": "e954e12f665e484deea3bec388c8e079f638efe6d99e9e5940ecbfd831f5ef73"
+          },
+          "lama_weight_sha256": "344c77bbcb158f17dd143070d1e789f38a66c04202311ae3a258ef66667a9ea9"
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026101819",
+            "video_sha256": "d9ba96daa7a9faec3da9abdc2026a3961343169ce8838af29d3d2c20cdf7e152",
+            "duration_seconds": 5,
+            "reviewer": "Codex inspection of six temporal frames and video metadata; not human ground truth",
+            "observations": [
+              "Refined take moves olive foliage while the bottle, empty glass and cloth remain steady."
+            ],
+            "scope": "Showcase illustration; not a frozen paper example or numerical result."
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026101819",
+            "reviewer": "Codex temporal contact-sheet inspection; not human ground truth",
+            "observations": [
+              "Glass removed; bottle and surrounding foliage are preserved. Inpainting leaves small texture variation in the filled region."
+            ],
+            "controlled_rgb_protected_difference": 0,
+            "files": {
+              "original.mp4": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+              "counterfactual.mp4": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+              "original-rgb.mp4": "0884ec23ce21f14e9aa154d28bc730d3266da7b24f5c18c009e68d4eb82f3f3f",
+              "counterfactual-rgb.mp4": "e954e12f665e484deea3bec388c8e079f638efe6d99e9e5940ecbfd831f5ef73"
+            }
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "05-color",
+      "dimension": "Color",
+      "scene": "Blue hour in the city",
+      "views": [
+        {
+          "image": "assets/videos/05-color/original-poster.webp",
+          "layout": "diptych",
+          "side": "left",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/05-color/counterfactual-poster.webp",
+          "layout": "diptych",
+          "side": "right",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "",
+        "focus": [
+          "a red car",
+          "a red car"
+        ],
+        "after": " beneath a red light"
+      },
+      "scores": {
+        "vbench": [
+          1.0,
+          0.9333333333333333
+        ],
+        "ours": [
+          1.0,
+          0.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "succeeded",
+          "succeeded"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "",
+          ""
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/05-color/original.mp4",
+          "poster": "assets/videos/05-color/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "75b78eec332744e49b535e209e861edfa503c4e508b6c47cdac00a730411bb5e",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/05-color/counterfactual.mp4",
+          "poster": "assets/videos/05-color/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "b9e44cc36f3b109f2fa6491e970b56fa817130fb2e0d1f753cec286298c7ce45",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "05-color--original",
+            "prompt": "a red car",
+            "video_sha256": "75b78eec332744e49b535e209e861edfa503c4e508b6c47cdac00a730411bb5e",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/color/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "05-color--counterfactual",
+            "prompt": "a red car",
+            "video_sha256": "b9e44cc36f3b109f2fa6491e970b56fa817130fb2e0d1f753cec286298c7ce45",
+            "score": 0.9333333333333333,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/color/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "05-color--original",
+            "prompt": "a red car",
+            "video_sha256": "75b78eec332744e49b535e209e861edfa503c4e508b6c47cdac00a730411bb5e",
+            "score": 1.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/color/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "05-color--counterfactual",
+            "prompt": "a red car",
+            "video_sha256": "b9e44cc36f3b109f2fa6491e970b56fa817130fb2e0d1f753cec286298c7ce45",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/color/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/05-color/first-frame.png",
+        "first_frame_sha256": "5d355b3aa370d52f5086d3aec4cd1f0f6fabae78d25d42a01299808f286103db",
+        "prompt": "Use the reference image as the first frame. The red car creeps a short distance forward along the wet street, its wheels visibly rotating, then eases to a stop at the red traffic signal. Its body reflections shift as it moves and a small ripple spreads through a shallow puddle beside the front wheel. The traffic light stays red throughout. Keep the car's identity and red paint stable and hold the camera completely still. One uninterrupted five-second take with coherent vehicle movement, no zoom, cuts or image scaling. A quiet idling engine and wet road ambience, no speech.",
+        "generation": {
+          "case_id": "05-color",
+          "prompt": "Use the reference image as the first frame. The red car creeps a short distance forward along the wet street, its wheels visibly rotating, then eases to a stop at the red traffic signal. Its body reflections shift as it moves and a small ripple spreads through a shallow puddle beside the front wheel. The traffic light stays red throughout. Keep the car's identity and red paint stable and hold the camera completely still. One uninterrupted five-second take with coherent vehicle movement, no zoom, cuts or image scaling. A quiet idling engine and wet road ambience, no speech.",
+          "enhance_prompt": false,
+          "seed": 2026100805,
+          "first_frame": "cases/layer-01/05-color/input/first-frame.png",
+          "first_frame_sha256": "5d355b3aa370d52f5086d3aec4cd1f0f6fabae78d25d42a01299808f286103db",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "4",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:00:46.526178+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 78.19008282758296,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "61b203b893fa611f97653b2440a9a382807bc303c19c53247e643f328ef68bb5",
+          "video_sha256": "ddfb10ea5e4c26fff238e1b82c4526e9976ae62d1db857911f5d8df83e82cf1a"
+        },
+        "construction": {
+          "case": "05-color",
+          "attempt": "ltx25-seed2026100805",
+          "recipe": {
+            "kind": "desaturate_red",
+            "box": [
+              235,
+              248,
+              836,
+              584
+            ]
+          },
+          "role": "construction only; independent of all scoring localizers",
+          "source_native_sha256": "61b203b893fa611f97653b2440a9a382807bc303c19c53247e643f328ef68bb5",
+          "mask_sha256": "ae2ee60e480f817394558e26c75f90fcddc2d050fb618dad44a391730ce7b2ea",
+          "sam2_source_sha": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+          "sam2_weight_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+          "segmentation_input": "native RGB frames converted to JPEG quality 100 for SAM 2 input only",
+          "masks_are_ground_truth": false,
+          "area_fraction_range": [
+            0.1896820068359375,
+            0.25281829833984376
+          ],
+          "status": "constructed; visual review pending",
+          "duration_seconds": 5,
+          "frames": 120,
+          "fps": 24,
+          "elapsed_seconds": 37.392649844288826,
+          "preencode_protected_pixels_max_difference": 0,
+          "scoring_media": "The browser original.mp4 and counterfactual.mp4; matched H.264 CRF18 encoding. Lossless RGB controls are retained.",
+          "encoding_note": "Lossy display encoding can introduce small differences outside the edit support; strict pixel identity applies to the saved RGB controls.",
+          "files": {
+            "original.mp4": "75b78eec332744e49b535e209e861edfa503c4e508b6c47cdac00a730411bb5e",
+            "counterfactual.mp4": "b9e44cc36f3b109f2fa6491e970b56fa817130fb2e0d1f753cec286298c7ce45",
+            "original-rgb.mp4": "0ff7a8d3d48598268cbb4bb0098546aac490f4eee8fe6351689f378f435ab540",
+            "counterfactual-rgb.mp4": "714e7c3d7a15b635bd3154583019df7e2bd2b9cc1a3684b4685b0b6153b433d0"
+          }
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100805",
+            "video_sha256": "ddfb10ea5e4c26fff238e1b82c4526e9976ae62d1db857911f5d8df83e82cf1a",
+            "duration_seconds": 5,
+            "reviewer": "Codex inspection of six temporal frames and video metadata; not human ground truth",
+            "observations": [
+              "The car creeps forward and stops; the red signal and urban setting persist."
+            ],
+            "scope": "Showcase illustration; not a frozen paper example or numerical result."
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100805",
+            "reviewer": "Codex temporal contact-sheet inspection; not human ground truth",
+            "observations": [
+              "Car paint becomes gray while the red signal, lighting and car motion persist. Colored illumination highlights are retained."
+            ],
+            "controlled_rgb_protected_difference": 0,
+            "files": {
+              "original.mp4": "75b78eec332744e49b535e209e861edfa503c4e508b6c47cdac00a730411bb5e",
+              "counterfactual.mp4": "b9e44cc36f3b109f2fa6491e970b56fa817130fb2e0d1f753cec286298c7ce45",
+              "original-rgb.mp4": "0ff7a8d3d48598268cbb4bb0098546aac490f4eee8fe6351689f378f435ab540",
+              "counterfactual-rgb.mp4": "714e7c3d7a15b635bd3154583019df7e2bd2b9cc1a3684b4685b0b6153b433d0"
+            }
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    },
+    {
+      "id": "20-color-suitcase",
+      "dimension": "Color",
+      "scene": "The golden platform",
+      "views": [
+        {
+          "image": "assets/videos/20-color-suitcase/original-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        },
+        {
+          "image": "assets/videos/20-color-suitcase/counterfactual-poster.webp",
+          "layout": "single",
+          "position": "center",
+          "preview": null
+        }
+      ],
+      "excerpt": {
+        "before": "",
+        "focus": [
+          "a yellow suitcase",
+          "a yellow suitcase"
+        ],
+        "after": " at daybreak"
+      },
+      "scores": {
+        "vbench": [
+          null,
+          null
+        ],
+        "ours": [
+          0.75,
+          0.0
+        ]
+      },
+      "score_status": {
+        "vbench": [
+          "dropped_by_official",
+          "dropped_by_official"
+        ],
+        "ours": [
+          "succeeded",
+          "succeeded"
+        ]
+      },
+      "score_reasons": {
+        "vbench": [
+          "upstream omitted input",
+          "upstream omitted input"
+        ],
+        "ours": [
+          "",
+          ""
+        ]
+      },
+      "score_scope": "Complete displayed five-second video.",
+      "videos": {
+        "original": {
+          "src": "assets/videos/20-color-suitcase/original.mp4",
+          "poster": "assets/videos/20-color-suitcase/original-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "c3196c76c2a43c2bc8f7f6ea9dc6e225fdf369e75a5c41f0ef6f6b27e0187ad6",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        },
+        "counterfactual": {
+          "src": "assets/videos/20-color-suitcase/counterfactual.mp4",
+          "poster": "assets/videos/20-color-suitcase/counterfactual-poster.webp",
+          "poster_time_seconds": 0,
+          "sha256": "e9c7b8fcb8a36d15070246649af287078285c450af266f7af59de7c75500ceb0",
+          "duration_seconds": 5.0,
+          "frames": 120,
+          "fps": "24/1",
+          "resolution": [
+            1024,
+            640
+          ]
+        }
+      },
+      "score_records": {
+        "vbench": [
+          {
+            "id": "20-color-suitcase--original",
+            "prompt": "a yellow suitcase",
+            "video_sha256": "c3196c76c2a43c2bc8f7f6ea9dc6e225fdf369e75a5c41f0ef6f6b27e0187ad6",
+            "score": null,
+            "status": "dropped_by_official",
+            "reason": "upstream omitted input",
+            "run": "evaluation/layer-01/results-run-01/color/origin.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "20-color-suitcase--counterfactual",
+            "prompt": "a yellow suitcase",
+            "video_sha256": "e9c7b8fcb8a36d15070246649af287078285c450af266f7af59de7c75500ceb0",
+            "score": null,
+            "status": "dropped_by_official",
+            "reason": "upstream omitted input",
+            "run": "evaluation/layer-01/results-run-01/color/origin.json",
+            "media_seconds": 5
+          }
+        ],
+        "ours": [
+          {
+            "id": "20-color-suitcase--original",
+            "prompt": "a yellow suitcase",
+            "video_sha256": "c3196c76c2a43c2bc8f7f6ea9dc6e225fdf369e75a5c41f0ef6f6b27e0187ad6",
+            "score": 0.75,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/color/repair.json",
+            "media_seconds": 5
+          },
+          {
+            "id": "20-color-suitcase--counterfactual",
+            "prompt": "a yellow suitcase",
+            "video_sha256": "e9c7b8fcb8a36d15070246649af287078285c450af266f7af59de7c75500ceb0",
+            "score": 0.0,
+            "status": "succeeded",
+            "run": "evaluation/layer-01/results-run-01/color/repair.json",
+            "media_seconds": 5
+          }
+        ]
+      },
+      "provenance": {
+        "first_frame": "assets/videos/20-color-suitcase/first-frame.png",
+        "first_frame_sha256": "049e01db260e801541db9d574ff89e04208bffe75d1b06835eb37585483f909b",
+        "prompt": "Use the reference image as the first frame. A train enters the distant track from the side and glides smoothly behind the platform, its windows passing in sequence. A breeze briefly moves a loose strap on the suitcase before it settles. Keep the yellow suitcase upright in exactly the same place, with its handle, wheels and ridged shell unchanged; the separate yellow bench also remains fixed. Hold the camera still, with no zoom or picture scaling. One uninterrupted five-second shot with visible passing-train movement behind the stable foreground. A soft rolling train sound, no speech.",
+        "generation": {
+          "case_id": "20-color-suitcase",
+          "prompt": "Use the reference image as the first frame. A train enters the distant track from the side and glides smoothly behind the platform, its windows passing in sequence. A breeze briefly moves a loose strap on the suitcase before it settles. Keep the yellow suitcase upright in exactly the same place, with its handle, wheels and ridged shell unchanged; the separate yellow bench also remains fixed. Hold the camera still, with no zoom or picture scaling. One uninterrupted five-second shot with visible passing-train movement behind the stable foreground. A soft rolling train sound, no speech.",
+          "enhance_prompt": false,
+          "seed": 2026100820,
+          "first_frame": "cases/layer-01/20-color-suitcase/input/first-frame.png",
+          "first_frame_sha256": "049e01db260e801541db9d574ff89e04208bffe75d1b06835eb37585483f909b",
+          "upstream_sha": "9ec55f9f22798a3198d9c923856824821bc3317e",
+          "source_status": "?? scripts/",
+          "wrapper_sha256": "4dbea38aaf0f3c8a0210523b0105c5ce4edf852f99d9d191746a6bb23bd2f525",
+          "weights_receipt_sha256": "56a008d9faffd582aca3a6f6c1ae4463d9607885376f4b765b460f2d78039747",
+          "model_revision": "2356ce76915d6c48d313d7e8b25900e1dd3abaa8",
+          "physical_gpu": "6",
+          "logical_device": "cuda:0",
+          "width": 1024,
+          "height": 640,
+          "fps": 24,
+          "generated_frames": 121,
+          "delivery_frames": 120,
+          "delivery_seconds": 5,
+          "temporal_operation": "drop only the terminal generated frame; no resampling",
+          "precision": "bfloat16",
+          "quantization": null,
+          "pipeline": "DistilledPipeline",
+          "ffmpeg_version": "ffmpeg version 4.4-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2021 the FFmpeg developers",
+          "ffprobe_version": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers",
+          "started_at_utc": "2026-10-09T04:02:00.709009+00:00",
+          "status": "succeeded",
+          "device_name": "NVIDIA H200 NVL",
+          "cuda_version": "12.8",
+          "versions": {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "torchaudio": "2.9.1",
+            "transformers": "5.14.1",
+            "ltx-core": "1.4.2",
+            "ltx-pipelines": "1.4.2"
+          },
+          "elapsed_seconds": 64.76883791200817,
+          "peak_cuda_allocated_bytes": 42069817856,
+          "media": {
+            "width": 1024,
+            "height": 640,
+            "r_frame_rate": "24/1",
+            "duration": "5.000000",
+            "nb_read_frames": "120"
+          },
+          "native_rgb_sha256": "163814d9c7e4b5dfaace5cda851bb64ff0468d82ab47f085280daee0a100e7d3",
+          "video_sha256": "9c3534c40fb01152562be5e72af52611aad10c3846a2caecb03fd4db3b1a19ce"
+        },
+        "construction": {
+          "case": "20-color-suitcase",
+          "attempt": "ltx25-seed2026100820",
+          "recipe": {
+            "kind": "desaturate_yellow",
+            "box": [
+              385,
+              130,
+              585,
+              539
+            ]
+          },
+          "role": "construction only; independent of all scoring localizers",
+          "source_native_sha256": "163814d9c7e4b5dfaace5cda851bb64ff0468d82ab47f085280daee0a100e7d3",
+          "mask_sha256": "1be4bc21b2265c2927ffff989822165f373bbbe663fe1e57634412eefbb85326",
+          "sam2_source_sha": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+          "sam2_weight_sha256": "6d1aa6f30de5c92224f8172114de081d104bbd23dd9dc5c58996f0cad5dc4d38",
+          "segmentation_input": "native RGB frames converted to JPEG quality 100 for SAM 2 input only",
+          "masks_are_ground_truth": false,
+          "area_fraction_range": [
+            0.0714691162109375,
+            0.0749969482421875
+          ],
+          "status": "constructed; visual review pending",
+          "duration_seconds": 5,
+          "frames": 120,
+          "fps": 24,
+          "elapsed_seconds": 37.32056859508157,
+          "preencode_protected_pixels_max_difference": 0,
+          "scoring_media": "The browser original.mp4 and counterfactual.mp4; matched H.264 CRF18 encoding. Lossless RGB controls are retained.",
+          "encoding_note": "Lossy display encoding can introduce small differences outside the edit support; strict pixel identity applies to the saved RGB controls.",
+          "files": {
+            "original.mp4": "c3196c76c2a43c2bc8f7f6ea9dc6e225fdf369e75a5c41f0ef6f6b27e0187ad6",
+            "counterfactual.mp4": "e9c7b8fcb8a36d15070246649af287078285c450af266f7af59de7c75500ceb0",
+            "original-rgb.mp4": "96625c9d618022528a0f5b112b24fb4cd8b43332e61dd0d4c014d2ea968c8451",
+            "counterfactual-rgb.mp4": "520af4bae4687f184ba9d53f8c9337a7de1f32fa3a59390d8f40acd5223e40e1"
+          }
+        },
+        "reviews": [
+          {
+            "decision": "accepted",
+            "attempt": "ltx25-seed2026100820",
+            "video_sha256": "9c3534c40fb01152562be5e72af52611aad10c3846a2caecb03fd4db3b1a19ce",
+            "duration_seconds": 5,
+            "reviewer": "Codex inspection of six temporal frames and video metadata; not human ground truth",
+            "observations": [
+              "A train passes behind the stationary suitcase and bench with coherent lighting changes."
+            ],
+            "scope": "Showcase illustration; not a frozen paper example or numerical result."
+          },
+          {
+            "decision": "accepted",
+            "pair_variant": "ltx25-seed2026100820",
+            "reviewer": "Codex temporal contact-sheet inspection; not human ground truth",
+            "observations": [
+              "Suitcase shell becomes gray; yellow bench, passing train, handle and wheels are preserved."
+            ],
+            "controlled_rgb_protected_difference": 0,
+            "files": {
+              "original.mp4": "c3196c76c2a43c2bc8f7f6ea9dc6e225fdf369e75a5c41f0ef6f6b27e0187ad6",
+              "counterfactual.mp4": "e9c7b8fcb8a36d15070246649af287078285c450af266f7af59de7c75500ceb0",
+              "original-rgb.mp4": "96625c9d618022528a0f5b112b24fb4cd8b43332e61dd0d4c014d2ea968c8451",
+              "counterfactual-rgb.mp4": "520af4bae4687f184ba9d53f8c9337a7de1f32fa3a59390d8f40acd5223e40e1"
+            }
+          }
+        ],
+        "evaluation_code_sha": "d7a2423038f54d946c81307b0613e81398d3091c"
+      }
+    }
+  ]
+}

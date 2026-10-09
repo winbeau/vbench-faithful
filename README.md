@@ -9,7 +9,7 @@
 
 <sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Corresponding author
 
-[Data](https://huggingface.co/datasets/xju-arlab/vbench-repair) · [Models](https://huggingface.co/winbeau/vbench-faithful) · [Quick Start](#quick-start) · [Reproduction](docs/reproduction/README.md) · [Training & Data](docs/training.md)
+[Project Page](https://winbeau.github.io/vbench-faithful/) · [Data](https://huggingface.co/datasets/xju-arlab/vbench-repair) · [Models](https://huggingface.co/winbeau/vbench-faithful) · [Quick Start](#quick-start) · [Reproduction](docs/reproduction/README.md) · [Training & Data](docs/training.md)
 
 </div>
 

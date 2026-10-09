@@ -1,0 +1,18 @@
+{
+  "arxiv.svg": {
+    "source": "https://raw.githubusercontent.com/arXiv/arxiv-docs/develop/source/assets/arxiv-logomark-small-ORIG-COLORS.svg",
+    "brand_page": "https://info.arxiv.org/brand/logos.html",
+    "sha256": "fc8d1a95690fc912bc61e7b8b391a67f8206264b1b2430f2524e706229238e10"
+  },
+  "github.svg": {
+    "source": "https://brand.github.com/GitHub_Logos.zip",
+    "archive_member": "GitHub Logos/SVG/GitHub_Invertocat_White.svg",
+    "brand_page": "https://brand.github.com/foundations/logo",
+    "sha256": "ccd84c89b1056345608fc3489357f8acc7397e49a3cdc2d418b6c8016911d47b"
+  },
+  "hugging-face.svg": {
+    "source": "https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg",
+    "brand_page": "https://huggingface.co/brand",
+    "sha256": "942cad1ccda905ac5a659dfd2d78b344fccfb84a8a3ac3721e08f488205638a0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "vbench-faithful-paper-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 build.py",
+    "dev": "python3 build.py && pnpm dlx vite@8.3.4 ../output/paper-site --host 0.0.0.0 --port 5173 --strictPort"
+  }
+}
