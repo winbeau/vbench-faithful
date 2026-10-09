@@ -1561,5 +1561,17 @@
     ],
     "scoring_methods_changed": false,
     "scope": "Outcome-guided selected illustrations, not held-out evidence; both backends freshly score each displayed file"
+  },
+  "subject_boundaries_20261009": {
+    "report": "https://github.com/winbeau/vbench-faithful/blob/26a030a4d4335c5bfe7dcf8e984809ea97beb066/docs/validation/showcase-subject-boundaries-20261009.md",
+    "receipt": "data/subject-boundaries-20261009.json",
+    "updated_cases": [
+      "23-subject-cat",
+      "25-subject-parrot",
+      "26-subject-woman"
+    ],
+    "originals_unchanged": true,
+    "scoring_methods_changed": false,
+    "scope": "Exploratory boundary refinement with fresh scoring of actual displayed videos; not frozen paper evidence"
   }
 }

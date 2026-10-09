@@ -44,7 +44,7 @@ H200 receipts are preserved in `data/refinement-20261009.json`. Human Action's
 earlier evaluator scores remain in case history alongside the author's updates;
 these display updates do not change the scoring implementation.
 
-A subsequent row-timing check updates all five Subject counterfactuals to
+A subsequent row-timing check updated all five Subject counterfactuals to
 continuous background blur from 0.5 to 5 seconds. Dog and horse use tighter
 construction masks. Their VBench scores are 0.8215 and 0.8461; all five are
 below 0.9, with a maximum absolute Ours change of 0.01087. Slower Background
@@ -54,6 +54,15 @@ Kyoto and desert were still weak examples at that stage.
 `data/row-timing-20261009.json` preserves all 142 fresh
 scores and the selection/rollback decisions; previous Subject scores remain
 in each case's history.
+
+The cat, macaw and woman were then refined to use per-frame subject masks
+with a small guard instead of a broad temporal union. Their new VBench
+counterfactual scores are 0.846956, 0.818317 and 0.768834; absolute Ours
+changes are at most 0.003779. The user chose to retain the woman's stronger
+blur after seeing its score. Blur strength and the 0.5–5 second interval
+remain unchanged. `data/subject-boundaries-20261009.json` records all 18
+fresh scores, exact reproduction of the 12 previous scores, media hashes
+and construction limits. The originals and other cases are preserved.
 
 Kyoto and desert were subsequently replaced with newly inferred LTX-2.5 cat
 and SUV videos, using built-in imagegen first frames. Their counterfactuals

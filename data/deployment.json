@@ -612,13 +612,13 @@
     },
     {
       "path": "assets/videos/23-subject-cat/counterfactual-poster.webp",
-      "bytes": 12584,
-      "sha256": "763ec1dc88329ff7260becee6dfc37162631364719cdc15a52030cd818b9af6c"
+      "bytes": 7946,
+      "sha256": "2a39146d371a505b963cc4da08bd18dbce174c9e469a6a4c138d66395c322b28"
     },
     {
       "path": "assets/videos/23-subject-cat/counterfactual.mp4",
-      "bytes": 768709,
-      "sha256": "e75cb59390b6a846f46748579cccadc12a60f15300f55cee7432488a9f97a74c"
+      "bytes": 700144,
+      "sha256": "310bc0e522bf767e8c5918a7ccc5bbe7b25cc2af52335395b57de7839db19948"
     },
     {
       "path": "assets/videos/23-subject-cat/first-frame.png",
@@ -672,13 +672,13 @@
     },
     {
       "path": "assets/videos/25-subject-parrot/counterfactual-poster.webp",
-      "bytes": 20616,
-      "sha256": "e2e4bfaf399374f926c497a2156bd681c42afe7d4494866d5961344d09441a47"
+      "bytes": 7808,
+      "sha256": "7fe4f41ccb0d372ab927431e27b719d23465f5a04a0039e56c881afbc0dbdd14"
     },
     {
       "path": "assets/videos/25-subject-parrot/counterfactual.mp4",
-      "bytes": 1662859,
-      "sha256": "7cc39eca2c8526ec3476919dd0df0630348ce9a6c6f87e5d608bd42bc1f53abc"
+      "bytes": 1342686,
+      "sha256": "dc152a569975498a66cbcf3fea5da5fa1ee262e8c1207d7b8266bce3f10ccebb"
     },
     {
       "path": "assets/videos/25-subject-parrot/first-frame.png",
@@ -702,13 +702,13 @@
     },
     {
       "path": "assets/videos/26-subject-woman/counterfactual-poster.webp",
-      "bytes": 21948,
-      "sha256": "67062bb27b12df04dc47600108f7e92f712a539135e455261c8f4cf2976b81e8"
+      "bytes": 7638,
+      "sha256": "a7720bfe793673feeeda2f0768db5b852c54032455d21fce3c0b6e198f043aa3"
     },
     {
       "path": "assets/videos/26-subject-woman/counterfactual.mp4",
-      "bytes": 1300660,
-      "sha256": "68d5b3b6f045cb7741d2e00c134172ffe5db1f6573b4920f58783efe4f2f6468"
+      "bytes": 1194806,
+      "sha256": "f66586bff711e1b1cf706f20d073867c6c4a4e29e2d6fd19b47a985b32fe382c"
     },
     {
       "path": "assets/videos/26-subject-woman/first-frame.png",
@@ -1102,18 +1102,18 @@
     },
     {
       "path": "data/cases.js",
-      "bytes": 473858,
-      "sha256": "d8e7c3f13dfaf2f90500995cccb795366e47ff7fd6707a93ff041142bd1a0cb6"
+      "bytes": 527043,
+      "sha256": "a1c56cf06d4059e1badeb6dadfa481e9b955af9c25341c2d14718be543dee64f"
     },
     {
       "path": "data/nuisance.json",
-      "bytes": 486364,
-      "sha256": "edc2c421b5349cbb6fd74113e54372e10a4ba7f1c9b789975a9a67cb9d0d9806"
+      "bytes": 575090,
+      "sha256": "cdedb3e248496a602c3519da2af2ef15302c0b3f6ba7779bceb20e822ae82285"
     },
     {
       "path": "data/provenance.json",
-      "bytes": 44249,
-      "sha256": "5e87507cd6e972049af7b32a95ebf2a39ffa719afb93d4d572d19dd2210b408b"
+      "bytes": 44804,
+      "sha256": "0c357b9453dcf0dd6ae05f86101d4707e47f5745e3f4ce1ff09a8a1c70c23d3f"
     },
     {
       "path": "data/refinement-20261009.json",
@@ -1134,6 +1134,11 @@
       "path": "data/spatial.json",
       "bytes": 115572,
       "sha256": "4d90e8cb96dd697d4512197cf9e81b375581fc34ac5795b49c703372adcfcb60"
+    },
+    {
+      "path": "data/subject-boundaries-20261009.json",
+      "bytes": 53207,
+      "sha256": "20f7bb05f12722b591bfc9dd8da69433325b12f763392bcc9f41c8c27ae9b3e3"
     },
     {
       "path": "fusion-studies.css",
