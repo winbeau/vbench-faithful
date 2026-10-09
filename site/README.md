@@ -1,7 +1,7 @@
 # Paper website
 
-The public website is published by [GitHub Actions](../.github/workflows/pages.yml)
-at <https://winbeau.github.io/vbench-faithful/>. It displays 30 paired case studies selected from 33 generated pairs
+The public website is published by [GitHub Actions](pages.yml)
+from the `gh-pages` branch at <https://winbeau.github.io/vbench-faithful/>. It displays 30 paired case studies selected from 33 generated pairs
 across the nine audited dimensions. Every displayed clip is exactly five seconds.
 Thirty originals were generated with LTX-2.5 from the prepared imagegen first
 frames; three additional originals repeat a still frame to isolate jitter.
