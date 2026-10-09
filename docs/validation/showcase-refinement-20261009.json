@@ -1,0 +1,1240 @@
+{
+  "schema": "showcase-refinement/1",
+  "scope": "Exploratory showcase selection; every measured attempt retained; numerical gates alone do not establish valid edit support",
+  "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+  "cohort": {
+    "background_consistency": 77,
+    "multiple_objects": 4,
+    "subject_consistency": 36
+  },
+  "unique_scored_rows": 234,
+  "all_measured_trials_retained": true,
+  "screen_note": "The user accepts an Ours decline around 0.01, explicitly including the observed ~0.013. The 0.015 screen is a working selection aid, not a user-imposed error contract. The original 0.01 screen is retained separately.",
+  "protocol": {
+    "scope": "Exploratory showcase selection, separate from frozen paper evidence",
+    "code": "d7a2423038f54d946c81307b0613e81398d3091c",
+    "unchanged_scorers": true,
+    "all_attempts_retained": true,
+    "multiple_objects": {
+      "approved_interface_scope": "Official checks two declared objects; ours checks all three",
+      "cases": {
+        "03-objects": {
+          "official": [
+            "cup",
+            "dining table"
+          ],
+          "ours": [
+            "cup",
+            "dining table",
+            "vase"
+          ],
+          "removed": "vase"
+        },
+        "19-objects-vineyard": {
+          "official": [
+            "bottle",
+            "dining table"
+          ],
+          "ours": [
+            "bottle",
+            "dining table",
+            "wine glass"
+          ],
+          "removed": "wine glass"
+        }
+      }
+    },
+    "consistency": {
+      "desired_official_absolute_drop": 0.1,
+      "preferred_ours_absolute_change": 0.005,
+      "eligibility": "Fresh complete scores; independently reviewed edit support; no construction masks in scoring; compare exact video identities",
+      "selection_disclosure": "These parameters and clips are explored for illustrative contrast, not an unbiased cohort estimate",
+      "user_update": "An Ours decline around 0.01, specifically the observed ~0.013 for the parrot, is acceptable. This is separate from the seven accelerated dimensions relative-error gate.",
+      "original_maximum_ours_absolute_change": 0.01
+    },
+    "subject_round_01": {
+      "cases": [
+        "06-subject",
+        "23-subject-cat",
+        "24-subject-horse",
+        "25-subject-parrot",
+        "26-subject-woman"
+      ],
+      "variants": [
+        [
+          90,
+          0.5
+        ],
+        [
+          90,
+          0.75
+        ],
+        [
+          160,
+          0.75
+        ],
+        [
+          160,
+          0.9
+        ]
+      ],
+      "operator": "Gaussian blur on background",
+      "guard": "Temporal union of original independent SAM2 masks, 15x15 dilation",
+      "control": "Reencoded unchanged original, plus existing raw original"
+    },
+    "human_action": "Diagnosed from recorded parser output and declared synonym resolution; deferred without model or source changes",
+    "subject_round_02": {
+      "round": "subject-round-02",
+      "dimension": "subject_consistency",
+      "cases": [
+        "23-subject-cat",
+        "25-subject-parrot"
+      ],
+      "variants": [
+        {
+          "name": "blur90-area100-middle90",
+          "sigma": 90,
+          "spatial_fraction": 1.0,
+          "window": "middle",
+          "duration_fraction": 0.9
+        },
+        {
+          "name": "blur90-area100-after-first",
+          "sigma": 90,
+          "spatial_fraction": 1.0,
+          "window": "after-first"
+        }
+      ]
+    },
+    "background_round_01": {
+      "round": "background-round-01",
+      "dimension": "background_consistency",
+      "cases": [
+        "07-background",
+        "27-background-kyoto",
+        "28-background-terrace",
+        "29-background-museum",
+        "30-background-desert"
+      ],
+      "variants": [
+        {
+          "name": "blur90-area100-middle25",
+          "sigma": 90,
+          "spatial_fraction": 1.0,
+          "window": "middle",
+          "duration_fraction": 0.25
+        },
+        {
+          "name": "blur90-area100-middle50",
+          "sigma": 90,
+          "spatial_fraction": 1.0,
+          "window": "middle",
+          "duration_fraction": 0.5
+        },
+        {
+          "name": "blur90-area100-middle75",
+          "sigma": 90,
+          "spatial_fraction": 1.0,
+          "window": "middle",
+          "duration_fraction": 0.75
+        },
+        {
+          "name": "blur90-area100-middle90",
+          "sigma": 90,
+          "spatial_fraction": 1.0,
+          "window": "middle",
+          "duration_fraction": 0.9
+        },
+        {
+          "name": "blur90-area50-middle90",
+          "sigma": 90,
+          "spatial_fraction": 0.5,
+          "window": "middle",
+          "duration_fraction": 0.9
+        },
+        {
+          "name": "blur90-area75-middle90",
+          "sigma": 90,
+          "spatial_fraction": 0.75,
+          "window": "middle",
+          "duration_fraction": 0.9
+        },
+        {
+          "name": "blur90-area100-after-first",
+          "sigma": 90,
+          "spatial_fraction": 1.0,
+          "window": "after-first"
+        }
+      ]
+    },
+    "background_round_02": {
+      "cases": [
+        "07-background",
+        "28-background-terrace",
+        "29-background-museum"
+      ],
+      "selection": "Selected after the range/duration sweep, exploratory, all scored outcomes retained",
+      "operator": "Same sigma-90 foreground blur; reuse verified lossless RGB frames, no changed background pixels before encoding",
+      "timing": [
+        "Alternating every 1 frame",
+        "6-frame blocks",
+        "12-frame blocks",
+        "9 blurred frames out of each 10"
+      ],
+      "note": "Synthetic intermittent blur, not natural video"
+    },
+    "background_round_03": {
+      "cases": [
+        "07-background",
+        "28-background-terrace",
+        "29-background-museum"
+      ],
+      "selection": "Final exploratory phase/range follow-up after round 02, all measured outcomes retained",
+      "sigma": 90,
+      "variants": [
+        "area100-first-only",
+        "area100-start50",
+        "area100-pulse1-phase0",
+        "area75-pulse1-phase0",
+        "area75-pulse1-phase1"
+      ],
+      "scope": "Only temporal position and foreground-internal blur range change; background is protected before encoding"
+    }
+  },
+  "original_runtime_identity": {
+    "compared_files": 504,
+    "mismatches": 0,
+    "audit_sha256": "2bd405474989aed4fc7653f05bda9155b53889dd826b7db5cf90853e7c29c1a1"
+  },
+  "baseline_reproduction": {
+    "exact_score_matches": 34,
+    "receipt_sha256": "af8ddb4e9f326d3da5a4211de148f1c78bbf8735c776c688abf66c1f78e65e59"
+  },
+  "original_records_note": "The archived evaluator had no own .git and its plan inherited an ancestor HEAD. The fresh isolated checkout uses the actual d7a2423 source; 504 runtime/script/config files match the archive byte for byte.",
+  "selected": [
+    {
+      "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+      "case": "03-objects",
+      "dimension": "multiple_objects",
+      "variant": "counterfactual",
+      "official": [
+        1.0,
+        1.0
+      ],
+      "ours": [
+        1.0,
+        0.0
+      ],
+      "official_drop": 0.0,
+      "ours_change": -1.0,
+      "original_sha256": "4e8cc0522447a6f1fcdf1b042d678e5d7cac8bf914a3f4c6685d726822a5950b",
+      "counterfactual_sha256": "ab2fac7330e3685e7c79b153e2f6fe377d15556f0604dfe3475a818536ed1360",
+      "runs": [
+        "objects-three-run-01"
+      ],
+      "local_pair": "output/showcase-refine-20261009/selected/03-objects",
+      "selection_note": "Approved two-versus-three target scope; unchanged video bytes",
+      "official_targets": [
+        "cup",
+        "dining table"
+      ],
+      "ours_targets": [
+        "cup",
+        "dining table",
+        "vase"
+      ]
+    },
+    {
+      "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+      "case": "19-objects-vineyard",
+      "dimension": "multiple_objects",
+      "variant": "counterfactual",
+      "official": [
+        1.0,
+        1.0
+      ],
+      "ours": [
+        1.0,
+        0.0
+      ],
+      "official_drop": 0.0,
+      "ours_change": -1.0,
+      "original_sha256": "e78270af9dc2900d77efef4866bdd3bd1e7cd9aeb092436f9ac2cddb0a88b6af",
+      "counterfactual_sha256": "9c107288ef108656cf3e3806e26381ef021033b06de0a5c2ebd6717d200542cf",
+      "runs": [
+        "objects-three-run-01"
+      ],
+      "local_pair": "output/showcase-refine-20261009/selected/19-objects-vineyard",
+      "selection_note": "Approved two-versus-three target scope; unchanged video bytes",
+      "official_targets": [
+        "bottle",
+        "dining table"
+      ],
+      "ours_targets": [
+        "bottle",
+        "dining table",
+        "wine glass"
+      ]
+    },
+    {
+      "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+      "case": "23-subject-cat",
+      "dimension": "subject_consistency",
+      "variant": "blur90-area100-after-first",
+      "official": [
+        0.97072756916535,
+        0.8496354748221004
+      ],
+      "ours": [
+        0.9762923717498779,
+        0.9730845093727112
+      ],
+      "official_drop": 0.12109209434324952,
+      "ours_change": -0.003207862377166748,
+      "original_sha256": "e1dd64ed91fd6d6a525cc3fc336ac46bfe9b655bc723014461247db42f727c3c",
+      "counterfactual_sha256": "4b93c31de085b7ee131e33e3c0b974353b7161fa792e725f9cd4586c5f7f0134",
+      "runs": [
+        "subject-round-02-run-01"
+      ],
+      "local_pair": "output/showcase-refine-20261009/selected/23-subject-cat",
+      "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee"
+    },
+    {
+      "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+      "case": "25-subject-parrot",
+      "dimension": "subject_consistency",
+      "variant": "blur90-area100-after-first",
+      "official": [
+        0.9584040849649605,
+        0.8597618283844796
+      ],
+      "ours": [
+        0.9206663966178894,
+        0.9090639352798462
+      ],
+      "official_drop": 0.09864225658048098,
+      "ours_change": -0.011602461338043213,
+      "original_sha256": "e5be1f49b20646b9e773d94300e290f666495c233d168d4b41629ddf2a825224",
+      "counterfactual_sha256": "9a6e3fb30ea99e042b888fc036c7d99b8f79753b5f9d44c2b6375cb45d2504be",
+      "runs": [
+        "subject-round-02-run-01"
+      ],
+      "local_pair": "output/showcase-refine-20261009/selected/25-subject-parrot",
+      "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee"
+    },
+    {
+      "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+      "case": "26-subject-woman",
+      "dimension": "subject_consistency",
+      "variant": "blur160-middle90",
+      "official": [
+        0.9694977720745471,
+        0.8962097551141467
+      ],
+      "ours": [
+        0.9416400194168091,
+        0.9404569268226624
+      ],
+      "official_drop": 0.07328801696040044,
+      "ours_change": -0.0011830925941467285,
+      "original_sha256": "c2f3d593650c4b00008c07b8ad8471624ee54f077d6c15c8be7866513baf064a",
+      "counterfactual_sha256": "3ad997cb2e478c67cf98dc343fcf3f298b15a8633ae64e8e91bbe43b8a94ddb6",
+      "runs": [
+        "subject-round-01-shard-3"
+      ],
+      "local_pair": "output/showcase-refine-20261009/selected/26-subject-woman",
+      "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee"
+    },
+    {
+      "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+      "case": "07-background",
+      "dimension": "background_consistency",
+      "variant": "blur90-area100-pulse1-phase0",
+      "official": [
+        0.9809016379989496,
+        0.869864840467437
+      ],
+      "ours": [
+        0.9919081744025735,
+        0.9881460152420344
+      ],
+      "official_drop": 0.11103679753151263,
+      "ours_change": -0.0037621591605391247,
+      "original_sha256": "0d093d9e25c7d0a762b385042abd8de6a9ba8f96fb7805a882245dbe827bbe25",
+      "counterfactual_sha256": "89f1b1840946f0ee1f419b95a24e8c22d147410fed5681b1b0a7e1e1cf68a652",
+      "runs": [
+        "background-round-03-shard-1"
+      ],
+      "local_pair": "output/showcase-refine-20261009/selected/07-background",
+      "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee"
+    },
+    {
+      "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+      "case": "28-background-terrace",
+      "dimension": "background_consistency",
+      "variant": "blur90-area100-pulse1-phase0",
+      "official": [
+        0.971991530987395,
+        0.895819655987395
+      ],
+      "ours": [
+        0.9905135809206495,
+        0.9857388365502451
+      ],
+      "official_drop": 0.076171875,
+      "ours_change": -0.004774744370404371,
+      "original_sha256": "71bf845a9e6158dd0e495a606adac5bc52892108260be86b6b84d4cd612ad910",
+      "counterfactual_sha256": "19e47ffebb481c8fa7ccc2cc361e1671c200301c5aadcc16daffc64398450ccb",
+      "runs": [
+        "background-round-03-shard-2"
+      ],
+      "local_pair": "output/showcase-refine-20261009/selected/28-background-terrace",
+      "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee"
+    },
+    {
+      "scope": "Exploratory showcase choice, not an unbiased paper cohort estimate",
+      "case": "29-background-museum",
+      "dimension": "background_consistency",
+      "variant": "blur90-area75-pulse1-phase1",
+      "official": [
+        0.9487920168067226,
+        0.8770290342699579
+      ],
+      "ours": [
+        0.9836318072150736,
+        0.9782269646139706
+      ],
+      "official_drop": 0.07176298253676472,
+      "ours_change": -0.005404842601102966,
+      "original_sha256": "210e0bf32eac6393f35ee21c04fc87a6ea75affa4b420fedbafb806b0e5a6ed5",
+      "counterfactual_sha256": "eaa7cc393a3c395556a1a388fe62f03686e516a5ef257066ab3e8e946ed78c0c",
+      "runs": [
+        "background-round-03-shard-3"
+      ],
+      "local_pair": "output/showcase-refine-20261009/selected/29-background-museum",
+      "selection_note": "Largest official drop among measured variants with absolute Ours change <=0.015; a working interpretation of the user accepting ~0.013, not a universal error guarantee"
+    }
+  ],
+  "runs": [
+    {
+      "name": "background-round-01-shard-1",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:31:50.958926+00:00",
+      "finished_utc": "2026-10-09T07:34:14.044861+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "ad02a6aea7b57a90f02dd0a593071660e221c322ab04389e1ad3f27204031fc4",
+      "input_count": 10,
+      "physical_gpu": 4,
+      "gpu": "GPU-490b4a76-6210-31b9-4e03-838a113cf5f4, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 140.03154556453228,
+      "complete": true,
+      "result_rows": 20,
+      "receipt_sha256": "bef3f78159dee4c5ae7cf8552c35b90235d0530f6521783146ade4f385d51e71",
+      "plan_sha256": "de9b274bdc6961adcd2108a2342962b55e5b4490c42de7451a9e3642461124e6",
+      "result_sha256": {
+        "origin.json": "ed7b5d01327c00f21325b31027f0007d872edd7b6687eda6b253523a44725f9b",
+        "repair.json": "05131b30d0b6cfe98a17552c48ef3ed5452af37d2687fdaaabaec297cf406700"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-01-shard-1/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "background-round-01-shard-2",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:31:50.958937+00:00",
+      "finished_utc": "2026-10-09T07:34:05.120149+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "a10974cfe1b419ce5df0d600a95d1b6357ca8c0e3ecf42f6eaed749d82beea07",
+      "input_count": 10,
+      "physical_gpu": 5,
+      "gpu": "GPU-7d459912-b567-59fb-8abf-57c18713cb84, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 131.13223778642714,
+      "complete": true,
+      "result_rows": 20,
+      "receipt_sha256": "f3921f9eeace4fd3317b513e518b30fdd8c766641648db0b1acaa6312991970f",
+      "plan_sha256": "f8cb51fa4e7f42189a2b37d67e13ac5a3f394838c618cf521632a90a04f4d326",
+      "result_sha256": {
+        "origin.json": "3f7dad9949a98609c106f572e42e99ad7483c23d2336fe7c0ec8e81a1a1c1dd6",
+        "repair.json": "ff32c4f5e144af5928750a38d84fd03932535349b084b057c7b4196cbd9df246"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-01-shard-2/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "background-round-01-shard-3",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:31:50.959073+00:00",
+      "finished_utc": "2026-10-09T07:34:24.245838+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "8baf4d24103f868b25b062c2c79b2e21cc899acbab81eb7dd576fa5a37adffd3",
+      "input_count": 10,
+      "physical_gpu": 6,
+      "gpu": "GPU-8cf0627c-5919-bace-1c42-e5d627c36cb5, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 150.29795910790563,
+      "complete": true,
+      "result_rows": 20,
+      "receipt_sha256": "b9b7b022cf83d2ada7541a8a16b2ba646f2dba0c29e25a921da50fa100ae4a96",
+      "plan_sha256": "9b045ec9b61f225c6ba4f93dd425928d068f846ca181694f946613f16ea7dd29",
+      "result_sha256": {
+        "origin.json": "8c65278197829ba0b0f077fc87611635d66571eaf157cc57116a032b359fece3",
+        "repair.json": "e13fcadf716a54d333fdcdcb63339e6623a98310412fa06a134dfc22cf93b5bd"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-01-shard-3/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "background-round-01-shard-4",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:33:22.135982+00:00",
+      "finished_utc": "2026-10-09T07:37:19.887397+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "1751d013c1ddd74236fd4f4d5d7ed000bc830b7f22cfe2dbb05c165cb2f1b2fe",
+      "input_count": 20,
+      "physical_gpu": 7,
+      "gpu": "GPU-5e07f671-a7e1-b38d-4d14-30316dfd9ce8, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 236.13014189712703,
+      "complete": true,
+      "result_rows": 40,
+      "receipt_sha256": "b82773b1bf73b6b2d5226b0d825f405615ddf14bde7d23e5b8450a40e7705e99",
+      "plan_sha256": "b3a316e2038584e45f73cb94b93cc9d686bcce28b939281c20dae4b42037af72",
+      "result_sha256": {
+        "origin.json": "672d25ae887869cfc7924da04683c1846fb3985052dc1a888c82511e7cc65559",
+        "repair.json": "f9cf4bb23c6d210b46c127e5ea52af35f67cce4de0613a01ac057fe92e45a6d0"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-01-shard-4/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "background-round-02-shard-1",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:40:09.043540+00:00",
+      "finished_utc": "2026-10-09T07:41:45.097919+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "b9a949f79aaacb2f2379c335a79c3dc019cc8bdddc1d81c97e56c3ba02758735",
+      "input_count": 5,
+      "physical_gpu": 4,
+      "gpu": "GPU-490b4a76-6210-31b9-4e03-838a113cf5f4, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 93.16456449963152,
+      "complete": true,
+      "result_rows": 10,
+      "receipt_sha256": "4e5e4ca4fee8c46f4882da85ae491b6b17bb42deab36d252662d656b67dd7f6a",
+      "plan_sha256": "5da4d63d11399e8ecab3581969dcb93b9b4b37432dd331532c05f51aa50f1929",
+      "result_sha256": {
+        "origin.json": "44101be71cae420a69a03ba3d0858c438593d5e0ed8f52d09335c7bdc14c2602",
+        "repair.json": "06c743d9288131965f50713db2bc52fd8e695c71fd2472ba140dcd875f41ed3c"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-02-shard-1/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "background-round-02-shard-2",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:40:09.048254+00:00",
+      "finished_utc": "2026-10-09T07:41:47.390646+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "5fb9ac501b10c709f5f3af7e0d2bb3ab62d1bef2a0a8bbb5c0670781028ce79a",
+      "input_count": 5,
+      "physical_gpu": 5,
+      "gpu": "GPU-7d459912-b567-59fb-8abf-57c18713cb84, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 95.48448866792023,
+      "complete": true,
+      "result_rows": 10,
+      "receipt_sha256": "fe88dd0414727cb9c633c0eb6ce1debc5b20d9e68ee84b7850ab26cbe0ecc78c",
+      "plan_sha256": "00787a8304cd4adcc48f4bd1edaad090993caa52bc87c87f29b2e651dcc7b904",
+      "result_sha256": {
+        "origin.json": "ab8baa1be8af970a176a83e73d27fdf8af6c42eafd4bc8b50029323859a2bc23",
+        "repair.json": "f2c8092ef2b165ae80287aaeab8116596e50e5dae496ded64f4d37177786e7c9"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-02-shard-2/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "background-round-02-shard-3",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:40:09.062306+00:00",
+      "finished_utc": "2026-10-09T07:41:40.129988+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "f7c2626adc5ef6431880a3a3a98873e89d4cf2d279757728bf1dd3127a6572e0",
+      "input_count": 5,
+      "physical_gpu": 6,
+      "gpu": "GPU-8cf0627c-5919-bace-1c42-e5d627c36cb5, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 88.25403312034905,
+      "complete": true,
+      "result_rows": 10,
+      "receipt_sha256": "e8c83270efc25a434ed5822ee4c46079d28df56b2a9efc99eb25ccfc4262eb38",
+      "plan_sha256": "eaaee0637390e1d71360e63374b30ddc1be504c93270b78bd5350ded4476b6e8",
+      "result_sha256": {
+        "origin.json": "84e7dfaa4e3325f0e05be9d51b1b51fb713e15a9529f6c6c64fc5c3027a99db8",
+        "repair.json": "80ce11aef34c69a85ee1948c3446a108be7f2b1e627a8366de93000e4191fca2"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-02-shard-3/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "background-round-03-shard-1",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:47:13.553271+00:00",
+      "finished_utc": "2026-10-09T07:49:00.717718+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "79102cbe9ae03efc4acb9141217dbfe8cce9299e18bc52618242eee938fc4704",
+      "input_count": 6,
+      "physical_gpu": 4,
+      "gpu": "GPU-490b4a76-6210-31b9-4e03-838a113cf5f4, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 104.1715948805213,
+      "complete": true,
+      "result_rows": 12,
+      "receipt_sha256": "abf77b6d65c9cd2a64b469a69ce6c71bde9bd5a19da60d5b97df6a4c67d731e6",
+      "plan_sha256": "b173470c688ff7ea3e6698347e0e0ffe1c9c94f4aafafd265abf185b122f9f29",
+      "result_sha256": {
+        "origin.json": "177372a3bdb99485725b13e7a36077e6e7314279f072e59b33351c84efd93eec",
+        "repair.json": "b9dc61f1e3a76efa36a023368e278f0ba91465b5e6c440a4bcbe6dc7a4068560"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-03-shard-1/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "background-round-03-shard-2",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:47:13.556902+00:00",
+      "finished_utc": "2026-10-09T07:48:59.688803+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "13a4761265b49d887e0b78c81611c84380f944f757e79a0fa78c8a1e39a17321",
+      "input_count": 6,
+      "physical_gpu": 5,
+      "gpu": "GPU-7d459912-b567-59fb-8abf-57c18713cb84, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 103.16803102381527,
+      "complete": true,
+      "result_rows": 12,
+      "receipt_sha256": "ff01b3779033099df9fde3c413d8e275258faa30cef43ec1288574be5471b3b9",
+      "plan_sha256": "711e563027b5c3ba26271cc70c17eea37094c5e674a9aed9acd01925c41858cf",
+      "result_sha256": {
+        "origin.json": "36c80ea59ba83fabfb31e731d9f42a35746c936bb95b14fe9c581a6125f9111c",
+        "repair.json": "a2350f50dd190b97c01a11af1ee3b0600f46eccc7121ab9910856015d4cad9af"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-03-shard-2/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "background-round-03-shard-3",
+      "dimension": "background_consistency",
+      "started_utc": "2026-10-09T07:47:13.552326+00:00",
+      "finished_utc": "2026-10-09T07:48:55.686188+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "e9e89218029ba7267f2368a894f7cb34a8e19ccf40c997b935ac33a78b32cd00",
+      "input_count": 6,
+      "physical_gpu": 6,
+      "gpu": "GPU-8cf0627c-5919-bace-1c42-e5d627c36cb5, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 99.20709782652557,
+      "complete": true,
+      "result_rows": 12,
+      "receipt_sha256": "6f94ada30834e1002c0a217126829a02d478dbfd7a746a0f741495e4ef2e73d7",
+      "plan_sha256": "1193084c40f234c56fb0192dcdaf4803487ed3a836cfa1c36cbd316fb2988e2b",
+      "result_sha256": {
+        "origin.json": "813c573db8e5aa6b51b4e0ab8ccc99fdb5b6ebb42801b5d3ad4b17265b3aa47a",
+        "repair.json": "e681bea68281e16a61bf54b010c372533f846b6e0d869e44953176d8b7c1fee4"
+      },
+      "methods": {
+        "background_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "background_consistency/repair": {
+          "implementation": "background_consistency patch_frame_calibrated",
+          "interface": "area-weighted background patches, all-pairs",
+          "gain": 1.75,
+          "detector_threshold": 0.8
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/background-round-03-shard-3/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "objects-three-run-01",
+      "dimension": "multiple_objects",
+      "started_utc": "2026-10-09T07:04:49.073708+00:00",
+      "finished_utc": "2026-10-09T07:05:50.075514+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "373e0b5eb33b2f68fb2eb61d8eb32dee862afd7064ff2493b19dc275f8d7fee6",
+      "input_count": 4,
+      "physical_gpu": 4,
+      "gpu": "GPU-490b4a76-6210-31b9-4e03-838a113cf5f4, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 59.958497328683734,
+      "complete": true,
+      "result_rows": 8,
+      "receipt_sha256": "d2bc324bb464bc24728b02a1ef02848ab927d9b9f33b783286b74e433e03d5d8",
+      "plan_sha256": "9a7c39cde4d6fca69de1db9300c62d9a11e6cc2ee6a0c109be81d7168548eb80",
+      "result_sha256": {
+        "origin.json": "64d62be34414e3ef12e053a255f61c68afcccaddc8faf7982f68ed44db0daee8",
+        "repair.json": "9c4983a7cb7a5920d5843c431a7825500e5bb689199831dfd3cb166d956e07c3"
+      },
+      "methods": {
+        "multiple_objects/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "multiple_objects/repair": {
+          "implementation": "vbench_prompts_compile.scoring + objects_repair",
+          "version": "v6",
+          "step": 900,
+          "visual": "GRiT,16 frames",
+          "interface": "repair-v2 adjacent-frame confirmation"
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/objects-three-run-01/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "subject-audit-run-01",
+      "dimension": "subject_consistency",
+      "started_utc": "2026-10-09T07:07:00.358314+00:00",
+      "finished_utc": "2026-10-09T07:08:40.247378+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "563ee58fa73febd75e98a69160ccec353fe6cf9035a52615ee992c36c009fd01",
+      "input_count": 7,
+      "physical_gpu": 4,
+      "gpu": "GPU-490b4a76-6210-31b9-4e03-838a113cf5f4, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 98.60209581069648,
+      "complete": true,
+      "result_rows": 14,
+      "receipt_sha256": "53fb870445d857eb0fa04d4a81997621af3685494293b144a9cdcecb3ba81ed9",
+      "plan_sha256": "a38338e59e55dd047fdf56d16f969ac8dea6120b9db8d42d9c9db02993b7b1be",
+      "result_sha256": {
+        "origin.json": "fdbe2c519dc110b61973265c816fcdfbef454fefb2b54623300339d2f4b8a02e",
+        "repair.json": "5723e341416b0cb0cc7a1874d0eeaa0721c44bf077e8253f46ef731d59c42c00"
+      },
+      "methods": {
+        "subject_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "subject_consistency/repair": {
+          "implementation": "subject_consistency hybrid",
+          "version": "frozen-v5/evaluated-v9",
+          "interface": "direct_anchor; preencode_crop; union; exclude; all_pairs",
+          "detector_threshold": 0.5,
+          "crop_margin": 0.1,
+          "crop_side": 224
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/subject-audit-run-01/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "subject-pilot-run-01",
+      "dimension": "subject_consistency",
+      "started_utc": "2026-10-09T07:12:06.806013+00:00",
+      "finished_utc": "2026-10-09T07:14:00.433388+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "84f8f46110b11d6218cd2a02bef23327fc028b9e055ddc84981469d57e447f12",
+      "input_count": 8,
+      "physical_gpu": 4,
+      "gpu": "GPU-490b4a76-6210-31b9-4e03-838a113cf5f4, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 112.39656450413167,
+      "complete": true,
+      "result_rows": 16,
+      "receipt_sha256": "3ec640d006718034a5d8524d364b1cd65c9433374d7c251bfb69660711d93c7c",
+      "plan_sha256": "4a89010c8dee8b455ed3b4644da68bd097e78f12a491da972456c07b7a5d7880",
+      "result_sha256": {
+        "origin.json": "273b562449289c5cf80e96c40d73c54325033dee2cd3f95966eaaecef22b361d",
+        "repair.json": "575cdc13750ca9e175d88b58cb1cf7acc88969cb7790d36545a787974084fd0e"
+      },
+      "methods": {
+        "subject_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "subject_consistency/repair": {
+          "implementation": "subject_consistency hybrid",
+          "version": "frozen-v5/evaluated-v9",
+          "interface": "direct_anchor; preencode_crop; union; exclude; all_pairs",
+          "detector_threshold": 0.5,
+          "crop_margin": 0.1,
+          "crop_side": 224
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/subject-pilot-run-01/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "subject-round-01-shard-1",
+      "dimension": "subject_consistency",
+      "started_utc": "2026-10-09T07:24:49.033379+00:00",
+      "finished_utc": "2026-10-09T07:27:27.339176+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "afb42d60a14a9f3e30b9c4e9481ebb9c0b3c2ea0c4a3037ff9c5e6d5b0f079f3",
+      "input_count": 9,
+      "physical_gpu": 4,
+      "gpu": "GPU-490b4a76-6210-31b9-4e03-838a113cf5f4, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 155.16475138254464,
+      "complete": true,
+      "result_rows": 18,
+      "receipt_sha256": "64ae7d693ac885eb73db8bc91e2aeb6830bdf274af3aaf7688a91f15dc8f1a16",
+      "plan_sha256": "6da8f2b05a7235f70013233f2e91588e895c46cf621e70c343ad7ded73b93b04",
+      "result_sha256": {
+        "origin.json": "8fc15517aa6d4f47990ea1f50aac4616b215d6eb87d57331cb01094e15e71c0b",
+        "repair.json": "a833a4f498943a6586d1418f741c55aeec30fc7d89e85d85ed207f4564bb54d1"
+      },
+      "methods": {
+        "subject_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "subject_consistency/repair": {
+          "implementation": "subject_consistency hybrid",
+          "version": "frozen-v5/evaluated-v9",
+          "interface": "direct_anchor; preencode_crop; union; exclude; all_pairs",
+          "detector_threshold": 0.5,
+          "crop_margin": 0.1,
+          "crop_side": 224
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/subject-round-01-shard-1/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "subject-round-01-shard-2",
+      "dimension": "subject_consistency",
+      "started_utc": "2026-10-09T07:24:49.038610+00:00",
+      "finished_utc": "2026-10-09T07:27:18.510370+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "3a1a4f8c2a1e19a6efbac4ae48b57c254d5b65078817d745a945a5e7050da64a",
+      "input_count": 9,
+      "physical_gpu": 5,
+      "gpu": "GPU-7d459912-b567-59fb-8abf-57c18713cb84, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 146.3443274050951,
+      "complete": true,
+      "result_rows": 18,
+      "receipt_sha256": "acafbcc26329fcc0ea586297993720610e5dcf11f3871bbe2b2016ad49596a27",
+      "plan_sha256": "d8a933acdb9088274ba1b6eb86cefd84d5433a883e5378f7f7e3606118d38f1b",
+      "result_sha256": {
+        "origin.json": "cd5ff8d2759b1dfbe2ed8c8fce3cd7af698502836663026e142155fd0dcbca42",
+        "repair.json": "b72163c716401800c3c54b5d0fc26032a10c9a28ea8f682aad4c9d1b93bb236c"
+      },
+      "methods": {
+        "subject_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "subject_consistency/repair": {
+          "implementation": "subject_consistency hybrid",
+          "version": "frozen-v5/evaluated-v9",
+          "interface": "direct_anchor; preencode_crop; union; exclude; all_pairs",
+          "detector_threshold": 0.5,
+          "crop_margin": 0.1,
+          "crop_side": 224
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/subject-round-01-shard-2/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "subject-round-01-shard-3",
+      "dimension": "subject_consistency",
+      "started_utc": "2026-10-09T07:24:49.036043+00:00",
+      "finished_utc": "2026-10-09T07:26:37.329205+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "40fc06484b81301957f62d7eabe10b494f09d42939fb4620f57d5763e4af004b",
+      "input_count": 6,
+      "physical_gpu": 6,
+      "gpu": "GPU-8cf0627c-5919-bace-1c42-e5d627c36cb5, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 105.28687002323568,
+      "complete": true,
+      "result_rows": 12,
+      "receipt_sha256": "6015d321bcffee90bcd29fdb3a4b236a06cc93426210433bb5923b909f03b9ff",
+      "plan_sha256": "8c59bf205df48720ab3fb41a06a9869c1d1d541bd357866bc9a95ab04bfbffa3",
+      "result_sha256": {
+        "origin.json": "a2c915fbced9c5be6309edac61a0eab8227306cdeb14588e68db1c3c3d75c4e4",
+        "repair.json": "26941a391c2d3c13fee794d986cab935c4b21c10c58c82aa05596d30b96b2913"
+      },
+      "methods": {
+        "subject_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "subject_consistency/repair": {
+          "implementation": "subject_consistency hybrid",
+          "version": "frozen-v5/evaluated-v9",
+          "interface": "direct_anchor; preencode_crop; union; exclude; all_pairs",
+          "detector_threshold": 0.5,
+          "crop_margin": 0.1,
+          "crop_side": 224
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/subject-round-01-shard-3/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "name": "subject-round-02-run-01",
+      "dimension": "subject_consistency",
+      "started_utc": "2026-10-09T07:38:25.083049+00:00",
+      "finished_utc": "2026-10-09T07:39:49.439669+00:00",
+      "code_sha": "d7a2423038f54d946c81307b0613e81398d3091c",
+      "upstream": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490",
+      "input_manifest_sha256": "3d1de2a3977551a244a45d5e8e88ad7f6a376f705f92e139516c52a5fcaceb7a",
+      "input_count": 6,
+      "physical_gpu": 4,
+      "gpu": "GPU-490b4a76-6210-31b9-4e03-838a113cf5f4, NVIDIA H200 NVL, 580.126.20",
+      "cache_reuse": false,
+      "scorer_changes": false,
+      "wall_seconds": 83.18228076212108,
+      "complete": true,
+      "result_rows": 12,
+      "receipt_sha256": "0b172ddd2a2a5b09a27a07649c3b7639de6300ba9bf50daf4e007100f44dd193",
+      "plan_sha256": "f12c2ca8ff718fe7e6de59aca5af537e4364d168a7fccbe97959757da6777bd4",
+      "result_sha256": {
+        "origin.json": "0b97cb14b1b32857703a370f3bef0a361b9c6f39487cd5f21795f181fb7d761f",
+        "repair.json": "7c4544ab2d35b42da89d4425c25ae093dd66e334dc0cdad0252b303ec4e943f6"
+      },
+      "methods": {
+        "subject_consistency/origin": {
+          "implementation": "official VBench 1.0",
+          "commit": "fd18b3d055cb0fc6f066ca90fe2c3c8cbb698490"
+        },
+        "subject_consistency/repair": {
+          "implementation": "subject_consistency hybrid",
+          "version": "frozen-v5/evaluated-v9",
+          "interface": "direct_anchor; preencode_crop; union; exclude; all_pairs",
+          "detector_threshold": 0.5,
+          "crop_margin": 0.1,
+          "crop_side": 224
+        }
+      },
+      "assets_sha256": "27a63580d01d7ff26a99b4b097b40b3ec60288c4752886580946d152726867f7",
+      "output": "output/showcase-refine-20261009/evaluation/subject-round-02-run-01/results",
+      "media_duration_seconds": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    }
+  ],
+  "construction_script_sha256": {
+    "construct_blur_grid.py": "c8ebf0bc6edf7ad1fb340521935a1a5f809fcb04869441cf2791c6b307a96ca6",
+    "construct_consistency.py": "e4dceb79323da03d190e85e2b3669b1fcdf92a0b7cd00b04c8314fa4105a59bf",
+    "construct_blur_timing.py": "d7d0460ee8c1aeca1144eab73966e6fc3d22e8866b2d833ca9f866c14be8429b",
+    "construct_consistency_v2.py": "de49ed6a33392dfd083b0fff611df9f126c969d03065f0ac7b864b1b2e2337cc",
+    "construct_blur_phase.py": "9c45fa95bd0470dea26de8711f8f2264e02855b59103588601b0ea84e49955ba"
+  },
+  "visual_review": {
+    "kind": "agent visual inspection, not human ground truth",
+    "selected_consistency_contact_sheets_reviewed": 6,
+    "receipt_sha256": "8a97d7d9320dba1a522548b5728e5623e81af07c1d499b8ce3f1cafb7b903cb7"
+  }
+}
