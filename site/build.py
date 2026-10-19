@@ -64,7 +64,7 @@ def main():
     for folder in ('assets', 'data'):
         shutil.copytree(ROOT / folder, out / folder, dirs_exist_ok=True)
     for path in ROOT.iterdir():
-        if path.suffix in {'.html', '.css', '.js'}:
+        if path.suffix in {'.html', '.css', '.js', '.pdf'}:
             shutil.copy2(path, out / path.name)
     browser = '\n'.join(f'window.{name.upper()}_CASE_PLAN = '
                         + json.dumps(plan, ensure_ascii=False, separators=(',', ':')) + ';'
