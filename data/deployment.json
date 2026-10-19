@@ -1179,6 +1179,11 @@
       "path": "shared.css",
       "bytes": 13423,
       "sha256": "9f1574dd9e7faa52350964bdab39742479fd3aa99503d4022982799757f5934d"
+    },
+    {
+      "path": "vbench-faithful-paper.pdf",
+      "bytes": 4871267,
+      "sha256": "106ac0755de98170af3ab48b0521f2b827f3db40f1ae1f171c435b445918bf82"
     }
   ]
 }
