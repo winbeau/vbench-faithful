@@ -9,7 +9,7 @@
 
 <sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Corresponding author
 
-[Website](https://winbeau.github.io/vbench-faithful/) · [Model](https://huggingface.co/winbeau/vbench-faithful) · [Space](https://huggingface.co/spaces/winbeau/vbench-faithful) · [Paper](https://arxiv.org/ "Paper forthcoming")
+[Website](https://winbeau.github.io/vbench-faithful/) · [Model](https://huggingface.co/winbeau/vbench-faithful) · [Space](https://huggingface.co/spaces/winbeau/vbench-faithful) · [Paper](docs/paper/vbench-faithful-paper.pdf)
 
 </div>
 
