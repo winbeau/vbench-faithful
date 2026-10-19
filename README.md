@@ -4,7 +4,7 @@
 
 **Wenbiao Zhao<sup>1,*</sup>, Zichao Nie<sup>2,*</sup>, Shuyuan Meng<sup>1</sup>,<br>Meng Wang<sup>2</sup>, Haiwei Xue<sup>3</sup>, Panpan Zheng<sup>1,†</sup>**
 
-<sup>1</sup> Xinjiang University &nbsp; <sup>2</sup> Tsinghua University<br>
+<sup>1</sup> Xinjiang University &nbsp; <sup>2</sup> Tsinghua University 
 <sup>3</sup> The Hong Kong University of Science and Technology
 
 <sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Corresponding author
