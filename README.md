@@ -2,7 +2,7 @@
 
 # Aligning VBench Scores with Their Intended Targets:<br>Toward Faithful Video Evaluation
 
-**Wenbiao Zhao<sup>1,*</sup>, Zichao Nie<sup>2,*</sup>, Shuyuan Meng<sup>1</sup>,<br>Meng Wang<sup>2</sup>, Haiwei Xue<sup>3</sup>, Panpan Zheng<sup>1,†</sup>**
+**Wenbiao Zhao<sup>1,*</sup>, Zichao Nie<sup>2,*</sup>, Shuyuan Meng<sup>1</sup>, Meng Wang<sup>2</sup>, Haiwei Xue<sup>3</sup>, Panpan Zheng<sup>1,†</sup>**
 
 <sup>1</sup> Xinjiang University &nbsp; <sup>2</sup> Tsinghua University 
 <sup>3</sup> The Hong Kong University of Science and Technology
